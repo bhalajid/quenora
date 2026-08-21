@@ -1,0 +1,26 @@
+# secrets — never commit
+*.key
+*.pem
+*.crt
+*.cer
+*.pfx
+*.p12
+.env
+.env.*
+
+# dependencies
+node_modules/
+test/node_modules/
+
+# python
+__pycache__/
+*.pyc
+
+# build scratch
+_strings.json
+_untranslated.json
+_keys.json
+
+# misc
+.DS_Store
+*.log

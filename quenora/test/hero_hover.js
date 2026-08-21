@@ -31,13 +31,30 @@ const B = [Math.min(...ARC.map(c => c.x - c.r)), Math.max(...ARC.map(c => c.x + 
 const BW = B[1] - B[0], BH = B[3] - B[2];
 const CXA = (B[0] + B[1]) / 2, CYA = (B[2] + B[3]) / 2;
 
+const WRAP = parseFloat(src.match(/--wrap:(\d+)px/)[1]);
+const SP4  = parseFloat(src.match(/--sp4:(\d+)px/)[1]);
+const LH   = parseFloat(src.match(/h1,h2,h3\{[^}]*line-height:([\d.]+)/)[1]);
+
+/* Settled node positions. Desktop follows the grid construction; narrow
+   screens follow the centred fallback. Selection has to be exact on both. */
 function place(W, H) {
-  const wide = W >= 900;
-  const fx0 = W * (wide ? 0.50 : 0.06), fx1 = W * (wide ? 0.985 : 0.94);
-  const fy0 = H * (wide ? 0.05 : 0.52), fy1 = H * (wide ? 0.95 : 0.97);
-  const SC = Math.min((fx1 - fx0) / (BW + PAD * 2), (fy1 - fy0) / (BH + PAD * 2));
-  const OX = (fx0 + fx1) / 2 - CXA * SC, OY = (fy0 + fy1) / 2 - CYA * SC;
-  /* settled state: birth complete, so rr === r*SC */
+  let SC, OX, OY;
+  if (W >= 900) {
+    const wrapW = Math.min(W - SP4, WRAP), wrapL = (W - wrapW) / 2;
+    const fs = Math.min(Math.max(2.6 * 16, 0.082 * W), 9 * 16);
+    const h1H = fs * LH * 3, h1Bot = (H - h1H) / 2 + h1H;
+    SC = h1H / BH;
+    OX = (wrapL + wrapW) - B[1] * SC;
+    OY = h1Bot - B[3] * SC;
+  } else {
+    const fx0 = W * 0.06, fx1 = W * 0.94, fy0 = H * 0.52, fy1 = H * 0.97;
+    SC = Math.min((fx1 - fx0) / (BW + PAD * 2), (fy1 - fy0) / (BH + PAD * 2));
+    OX = (fx0 + fx1) / 2 - CXA * SC;
+    OY = (fy0 + fy1) / 2 - CYA * SC;
+  }
+  if (OX + B[1] * SC > W - 2) OX = W - 2 - B[1] * SC;
+  if (OY + B[3] * SC > H - 2) OY = H - 2 - B[3] * SC;
+  if (OY + B[2] * SC < 2)     OY = 2 - B[2] * SC;
   return ARC.map(a => ({ x: OX + a.x * SC, y: OY + a.y * SC, rr: a.r * SC }));
 }
 

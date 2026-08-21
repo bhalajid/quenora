@@ -228,7 +228,12 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .eyebrow{color:var(--copper-lt);margin-bottom:var(--sp4);display:flex;
   align-items:center;gap:15px;opacity:0;animation:fu .9s var(--e) 1.5s forwards}
 .eyebrow::before{content:'';width:68px;height:1.5px;background:currentColor}
-.hook h1{font-size:clamp(3rem,12vw,13rem);max-width:12ch}
+/* 12vw put the longest line across ~80% of the width, which left no column
+   for the constellation and forced it on top of the type. At 8.2vw the
+   headline occupies roughly four of the six grid columns and the arc gets
+   the last two — which is what makes the two read as composed rather than
+   collided. */
+.hook h1{font-size:clamp(2.6rem,8.2vw,9rem);max-width:12ch}
 .hook h1 .ln{display:block;overflow:hidden;padding-bottom:.08em}
 .hook h1 .w{display:inline-block;transform:translateY(112%);
   animation:wordUp 1.15s var(--e) forwards}
@@ -1036,17 +1041,19 @@ and what we would not build. Yours to take to your board, or to another firm.</s
        inside the fit, in arc units — is what keeps the field on screen without
        the clamp-and-hope correction the previous build needed. */
     var HALO = 2.4, PAD = 27 * HALO;
-    /* The constellation moves as ONE RIGID BODY — a slow sway about the arc's
-       centroid plus a gentle bob. Nothing else.
+    /* THE MARK DOES NOT MOVE.
 
-       The previous build gave every sphere its own orbit, with a different
-       radius, phase and speed per node. That is fatal here: the nine circles
-       are the logo, and the logo IS the spacing. Independent orbits pull the
-       gaps apart every frame, so what you see on the page stops being the
-       mark. A rigid transform preserves every gap exactly, at every instant,
-       while still reading as alive. */
-    var SWAY = 0.035;                  /* ±2° about the centroid */
-    var BOB  = 7;                      /* px, vertical drift */
+       Two rounds of this: first every sphere had its own orbit — different
+       radius, phase and speed each — which pulled the gaps apart every frame,
+       so what the hero drew stopped being the logo. That was replaced with a
+       rigid sway of the whole arc, which fixed the spacing but then drifted
+       the arc off the grid lines it is now constructed on.
+
+       So: no sway, no bob, no orbits. The arc sits exactly where the grid
+       puts it. Life comes from the dust, the pulses running the wires, the
+       hover, and a parallax that returns to zero the moment the pointer
+       stops — none of which touch the geometry at rest. */
+    var SWAY = 0, BOB = 0;
 
     var W=0,H=0,SC=1,OX=0,OY=0,DPR=1,narrow=false;
     var nodes=[], dust=[], pulses=[], t0=0, hraf=null, seen=true, ready=false;
@@ -1060,6 +1067,24 @@ and what we would not build. Yours to take to your board, or to another firm.</s
        neighbours lit at once. That is the clumsiness. */
     var px=-9e9, py=-9e9, gx=-9e9, gy=-9e9, nx=0, ny=0, cnx=0, cny=0, over=false;
 
+    /* widest actual ink in the headline — not the max-width box, which is far
+       wider than the words that land in it */
+    function inkRight(h1, originX){
+      var best = 0;
+      var lines = h1.querySelectorAll('.ln');
+      for(var i=0;i<lines.length;i++){
+        var rr;
+        if(d.createRange){
+          var rg=d.createRange(); rg.selectNodeContents(lines[i]);
+          rr = rg.getBoundingClientRect();
+          /* the words animate in on a transform; measure where they land */
+          if(!rr || rr.width < 2) rr = lines[i].getBoundingClientRect();
+        } else rr = lines[i].getBoundingClientRect();
+        if(rr && rr.right - originX > best) best = rr.right - originX;
+      }
+      return best;
+    }
+
     function fit(){
       var r = cv.getBoundingClientRect();
       if(r.width < 2 || r.height < 2) return false;      /* not laid out yet */
@@ -1068,21 +1093,68 @@ and what we would not build. Yours to take to your board, or to another firm.</s
       g.setTransform(DPR,0,0,DPR,0,0);
       narrow = W < 900;
 
-      /* The hero is two columns: headline left, constellation right. Give the
-         field an explicit box instead of a centre point and a fudge factor, so
-         it can never wander into the type. */
-      var fx0, fx1, fy0, fy1;
-      if(narrow){
-        fx0 = W*0.06; fx1 = W*0.94; fy0 = H*0.52; fy1 = H*0.97;
-      } else {
-        fx0 = W*0.50; fx1 = W*0.985; fy0 = H*0.05; fy1 = H*0.95;
-      }
-      var fw = fx1-fx0, fh = fy1-fy0;
+      /* ── the field is constructed on the page's own grid ──
+         The previous box was arbitrary viewport fractions (0.50, 0.985) with
+         nothing aligned to anything, which is why the arc read as floating
+         next to the headline rather than composed with it.
 
-      /* halo is part of the footprint, so it is part of the fit */
-      SC = Math.min(fw/(BW+PAD*2), fh/(BH+PAD*2));
-      OX = (fx0+fx1)/2 - CXA*SC;
-      OY = (fy0+fy1)/2 - CYA*SC;
+         The page already draws a six-column grid (.vgrid) at exactly the
+         wrap's width — those are the faint vertical rules behind the type.
+         The constellation is now built on them:
+
+           right edge  → a grid column line
+           bottom edge → the headline's own bottom
+           left edge   → the first grid line clear of the widest line of type
+
+         so both ends of the arc land on lines the eye can actually verify. */
+      var wrapEl = d.querySelector('.hook .wrap');
+      var h1El   = d.querySelector('.hook h1');
+      var fx0, fx1, fy0, fy1, snapped = false;
+
+      if(wrapEl && h1El && !narrow){
+        var wr = wrapEl.getBoundingClientRect();
+        var hr = h1El.getBoundingClientRect();
+        if(wr.width > 2 && hr.height > 2){
+          var wl = wr.left - r.left, ww = wr.width, col = ww/6;
+          var line = function(i){ return wl + col*i; };
+
+          /* The arc is exactly as tall as the headline block. That single
+             decision is what ties them together: both objects occupy the
+             same horizontal band and the same height, so the eye reads one
+             composition instead of two things placed near each other. */
+          fy0 = hr.top - r.top; fy1 = hr.bottom - r.top;
+          SC = (fy1-fy0)/BH;
+
+          /* Right edge on the wrap's own right grid line — the same vertical
+             the nav CTA and the hook-foot rule sit on.
+
+             An earlier version pulled this edge inward a column at a time so
+             the hover glow would fit on screen, which dragged the mark into
+             the type on 1280–1512 displays. Wrong trade: the glow is a soft
+             gradient that has already fallen to about 14% alpha by the time
+             it reaches the edge, so letting it bleed costs nothing, whereas
+             moving the mark off the grid costs the whole point. */
+          fx1 = line(6); fx0 = fx1 - BW*SC;
+          OX = fx1 - B[1]*SC;
+          OY = fy1 - B[3]*SC;
+          snapped = true;
+        }
+      }
+
+      if(!snapped){
+        /* narrow screens, or the headline not measurable yet: centre under
+           the type with the halo budgeted inside the fit */
+        fx0 = W*0.06; fx1 = W*0.94; fy0 = H*0.52; fy1 = H*0.97;
+        SC = Math.min((fx1-fx0)/(BW+PAD*2), (fy1-fy0)/(BH+PAD*2));
+        OX = (fx0+fx1)/2 - CXA*SC;
+        OY = (fy0+fy1)/2 - CYA*SC;
+      }
+
+      /* last resort: never let the mark itself leave the canvas */
+      if(OX + B[1]*SC > W-2) OX = W-2 - B[1]*SC;
+      if(OY + B[3]*SC > H-2) OY = H-2 - B[3]*SC;
+      if(OY + B[2]*SC < 2)   OY = 2 - B[2]*SC;
+
       ready = true; return true;
     }
 

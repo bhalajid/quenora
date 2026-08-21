@@ -4,8 +4,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Quenora — Most enterprise AI never leaves the lab</title>
-<meta content="Quenora engineers AI into the platforms, workflows and decisions enterprises already run — then hands the running of it to your team." name="description"/>
+<!-- The <title> carries the category, because nobody searches a brand new
+     name. The hook lives in og:title, where it is read rather than matched. -->
+<title>Quenora — Enterprise AI Consulting &amp; Engineering</title>
+<meta content="Quenora is an enterprise AI consultancy in Heilbronn. We engineer AI into the platforms and workflows you already run, then hand your team the keys." name="description"/>
 <meta content="#07070A" name="theme-color"/>
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
@@ -13,7 +15,31 @@
 <meta content="Quenora — Most enterprise AI never leaves the lab" property="og:title"/>
 <meta content="We engineer AI into what you already run, then hand you the keys." property="og:description"/>
 <meta content="https://quenora.ai/" property="og:url"/>
+<meta content="https://quenora.ai/assets/og-quenora.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Quenora — most enterprise AI never leaves the lab." property="og:image:alt"/>
 <meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://quenora.ai/assets/og-quenora.png" name="twitter:image"/>
+<meta content="Quenora — most enterprise AI never leaves the lab." name="twitter:image:alt"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","@id":"https://quenora.ai/#org",
+  "name":"Quenora Technology Consulting","url":"https://quenora.ai/",
+  "logo":"https://quenora.ai/assets/og-quenora.png",
+  "image":"https://quenora.ai/assets/og-quenora.png",
+  "description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.",
+  "founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},
+  "address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},
+  "areaServed":[{"@type":"Place","name":"Europe"}],
+  "knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations"]},
+ {"@type":"WebSite","@id":"https://quenora.ai/#site",
+  "url":"https://quenora.ai/","name":"Quenora",
+  "publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},
+ {"@type":"WebPage","@id":"https://quenora.ai/#page",
+  "url":"https://quenora.ai/","isPartOf":{"@id":"https://quenora.ai/#site"},
+  "about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"}]}
+</script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,500;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
@@ -204,7 +230,7 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 
 /* ── chapter heads ── */
 .chead{display:grid;grid-template-columns:auto 1fr;gap:var(--sp5);
-  align-items:start;padding:var(--sp7) 0 var(--sp4)}
+  align-items:start;padding:var(--sp6) 0 var(--sp4)}
 @media(max-width:900px){.chead{grid-template-columns:1fr;gap:var(--sp2)}}
 .cnum{font-family:'Playfair Display',serif;font-style:italic;
   font-size:clamp(4rem,10vw,10rem);line-height:.76;color:transparent;
@@ -214,7 +240,7 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .chead .lede{margin-top:var(--sp3);max-width:56ch;color:var(--t2);font-size:1.1rem}
 
 /* ── PIN 1: sticky scrub stage ── */
-.pinwrap{height:280vh;position:relative}
+.pinwrap{height:170vh;position:relative}
 .pin{position:sticky;top:0;height:100svh;display:grid;place-items:center;
   overflow:hidden;border-block:1px solid var(--line);
   background:linear-gradient(180deg,var(--sf1),var(--void))}
@@ -239,9 +265,9 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
   border-block:1px solid var(--line);
   background:linear-gradient(180deg,var(--sf2),var(--sf1))}
 .htrack{display:flex;height:100%;will-change:transform}
-.phase{flex:0 0 clamp(300px,44vw,600px);height:100%;padding:var(--sp6) var(--sp4);
+.phase{flex:0 0 clamp(300px,42vw,560px);height:100%;padding:var(--sp7) var(--sp4) var(--sp5);
   border-right:1px solid var(--line);display:flex;flex-direction:column;
-  justify-content:center;position:relative;overflow:hidden}
+  justify-content:flex-start;position:relative;overflow:hidden}
 .phase::before{content:attr(data-n);position:absolute;right:-2vw;bottom:-4vw;
   font-family:'Playfair Display',serif;font-style:italic;font-size:22vw;
   line-height:.7;color:rgba(242,239,232,.03);user-select:none;pointer-events:none}
@@ -251,8 +277,19 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .phase h3 em{color:var(--ember)}
 .phase p{color:var(--t2);max-width:42ch;font-size:1.02rem;position:relative;
   will-change:transform,opacity}
-.phase .dur{margin-top:auto;padding-top:var(--sp3);border-top:1px solid var(--line);
-  color:var(--copper-lt)}
+.phase .dur{margin-top:var(--sp3);padding-top:var(--sp3);
+  border-top:1px solid var(--line);color:var(--copper-lt)}
+/* what each phase actually hands over — fills the card and answers the
+   buyer's real question, which is "what do I get?" */
+.phase ul{list-style:none;margin:var(--sp3) 0 0;padding:0}
+.phase li{font-size:.92rem;color:var(--t2);padding:7px 0 7px 20px;position:relative}
+.phase li::before{content:'';position:absolute;left:0;top:calc(50% - 2px);
+  width:4px;height:4px;border-radius:50%;background:var(--copper)}
+.phase .exit{margin-top:var(--sp3);padding:12px 14px;border-left:2px solid var(--ember);
+  background:rgba(255,112,67,.06);font-size:.88rem;color:var(--t2)}
+.phase .exit b{color:var(--t1);font-weight:600;display:block;margin-bottom:3px;
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
+  text-transform:uppercase}
 
 /* ── the nine ── */
 .nine{border-top:1px solid var(--line2)}
@@ -325,6 +362,68 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 .ph{color:#E5B14F;border-bottom:1px dashed currentColor}
 
 /* ── scroll reveal (IntersectionObserver adds .in) ── */
+/* ── who it is for: three self-identification cards ── */
+.fit{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp2);margin-top:var(--sp4)}
+@media(max-width:900px){.fit{grid-template-columns:1fr}}
+.fit article{padding:var(--sp4);border:1px solid var(--line);border-radius:3px;
+  background:linear-gradient(158deg,var(--sf1),transparent);position:relative;
+  transition:border-color .45s var(--e),transform .45s var(--e)}
+.fit article:hover{border-color:var(--line2);transform:translateY(-4px)}
+.fit .tick{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--copper-lt);display:block;margin-bottom:var(--sp3)}
+.fit h3{font-size:1.35rem;margin-bottom:10px}
+.fit p{color:var(--t2);font-size:.96rem;margin:0}
+
+/* ── objections: the questions a buyer asks a small firm ── */
+.obj{border-top:1px solid var(--line2);margin-top:var(--sp4)}
+.obj details{border-bottom:1px solid var(--line)}
+.obj summary{display:grid;grid-template-columns:1fr auto;gap:var(--sp3);
+  align-items:center;padding:var(--sp3) var(--sp2);cursor:pointer;list-style:none;
+  font-size:clamp(1.1rem,2.3vw,1.6rem);font-weight:700;letter-spacing:-.03em;
+  transition:color .35s var(--e),padding-left .45s var(--e)}
+.obj summary::-webkit-details-marker{display:none}
+.obj summary:hover{color:var(--ember);padding-left:var(--sp3)}
+.obj summary .pm{width:22px;height:22px;position:relative;flex:none;opacity:.6}
+.obj summary .pm::before,.obj summary .pm::after{content:'';position:absolute;
+  background:currentColor;transition:transform .4s var(--e)}
+.obj summary .pm::before{left:0;right:0;top:50%;height:1.5px}
+.obj summary .pm::after{top:0;bottom:0;left:50%;width:1.5px}
+.obj details[open] summary .pm::after{transform:scaleY(0)}
+.obj details[open] summary{color:var(--ember)}
+.obj .ans{padding:0 var(--sp2) var(--sp4) var(--sp2);max-width:70ch;
+  color:var(--t2);font-size:1rem}
+
+/* ── commercial posture ── */
+.money{display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--line2);border-radius:3px;overflow:hidden;margin-top:var(--sp4)}
+/* stacked: the divider has to turn with the axis, or it draws a stray
+   vertical rule down the right edge of every card */
+@media(max-width:900px){.money{grid-template-columns:1fr}
+  .money div{border-right:0;border-bottom:1px solid var(--line)}
+  .money div:last-child{border-bottom:0}}
+.money div{padding:var(--sp4);border-right:1px solid var(--line);
+  background:linear-gradient(180deg,var(--sf1),transparent)}
+.money div:last-child{border-right:0}
+.money b{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--copper-lt);
+  margin-bottom:var(--sp2)}
+.money strong{display:block;font-size:1.5rem;letter-spacing:-.03em;margin-bottom:8px;
+  font-weight:700}
+.money p{color:var(--t2);font-size:.94rem;margin:0}
+
+/* ── what happens next ── */
+.steps{counter-reset:st;margin-top:var(--sp4);max-width:74ch}
+.steps li{counter-increment:st;list-style:none;position:relative;
+  padding:0 0 var(--sp4) var(--sp5);border-left:1px solid var(--line)}
+.steps li:last-child{border-left-color:transparent;padding-bottom:0}
+.steps li::before{content:counter(st,decimal-leading-zero);position:absolute;
+  left:-15px;top:-2px;width:30px;height:30px;border-radius:50%;
+  background:var(--void);border:1px solid var(--copper);color:var(--copper-lt);
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;display:grid;
+  place-items:center}
+.steps b{display:block;font-size:1.15rem;letter-spacing:-.02em;margin-bottom:6px}
+.steps span{color:var(--t2);font-size:.96rem}
+
 .rv{opacity:0;transform:translateY(26px);
   transition:opacity .9s var(--e),transform .9s var(--e)}
 .rv.in{opacity:1;transform:none}
@@ -429,7 +528,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="cnum">01</div>
 <div>
 <h2>The demo was never <em>the hard part</em>.</h2>
-<p class="lede">Nobody's AI programme fails because the model was weak.
+<p class="lede">Nobody’s AI programme fails because the model was weak.
              It fails in the gap between a notebook and a Tuesday afternoon — where
              the data will not join, the permissions do not exist, and nobody owns
              the result.</p>
@@ -451,10 +550,37 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 </div>
 </div>
 </section>
-<section id="journey">
+<section id="fit">
 <div class="wrap">
 <div class="chead rv">
 <div class="cnum">02</div>
+<div>
+<h2>Three situations we are <em>actually</em> called into.</h2>
+<p class="lede">Not a market segment. The three shapes of problem that land on
+us most weeks. If none of them describe you, we are probably not the right
+firm — and we would rather you knew that now.</p>
+</div>
+</div>
+<div class="fit">
+<article class="rv"><span class="tick">Situation 01</span>
+<h3>The pilot that stalled</h3>
+<p>It worked in the demo. Six months later it is still a demo, because the
+platform underneath it was never built and nobody owns the gap.</p></article>
+<article class="rv" data-d="1"><span class="tick">Situation 02</span>
+<h3>Retrieval that lies</h3>
+<p>The assistant answers confidently and is wrong often enough that people
+stopped trusting it. The model is fine. The data contract is not.</p></article>
+<article class="rv" data-d="2"><span class="tick">Situation 03</span>
+<h3>Governance arriving late</h3>
+<p>Something is live, procurement or risk is now asking questions, and the
+evidence to answer them was never captured.</p></article>
+</div>
+</div>
+</section>
+<section id="journey">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">03</div>
 <div>
 <h2>Six phases. Designed to <em>end</em>.</h2>
 <p class="lede">Most consultancies are structured to extend the engagement.
@@ -471,32 +597,44 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <p>We spend the first weeks understanding what actually happens, not what
                the process documentation says happens. Almost every engagement uncovers
                something that was never in the brief.</p>
-<p class="dur mono">Weeks 1–2</p></article>
+<ul><li>Process walkthrough with the people doing the work</li><li>Data and systems inventory</li><li>The constraint nobody mentioned</li></ul>
+            <div class="exit"><b>Exit condition</b>A written position on what to build first — or a recommendation to build nothing.</div>
+            <p class="dur mono">Weeks 1–2</p></article>
 <article class="phase" data-n="02"><p class="mono">Phase 02 · Foundation</p>
 <h3>The <em>unglamorous</em> layer</h3>
 <p>Environments, data contracts, access model, evaluation harness. The work
                that decides whether anything after it survives contact with production.</p>
-<p class="dur mono">Weeks 3–6</p></article>
+<ul><li>Environments and access model</li><li>Data contracts, with owners named</li><li>Evaluation harness and baseline scores</li></ul>
+            <div class="exit"><b>Exit condition</b>Baseline evaluation scores you can hold every later change against.</div>
+            <p class="dur mono">Weeks 3–6</p></article>
 <article class="phase" data-n="03"><p class="mono">Phase 03 · Integrate</p>
 <h3>Into what you <em>already run</em></h3>
 <p>Connected to the systems that hold the data and run the work, with the
                failure paths designed rather than discovered in production.</p>
-<p class="dur mono">Weeks 4–10</p></article>
+<ul><li>Connectors into ERP, CRM, service desk</li><li>Permission model and audit trail</li><li>Designed failure and rollback paths</li></ul>
+            <div class="exit"><b>Exit condition</b>A staged rollout running against real data in a non-production environment.</div>
+            <p class="dur mono">Weeks 4–10</p></article>
 <article class="phase" data-n="04"><p class="mono">Phase 04 · Ship</p>
 <h3>Under <em>real</em> change control</h3>
 <p>Into production behind the same governance as everything else you run.
                No parallel universe. No permanent pilot.</p>
-<p class="dur mono">Continuous</p></article>
+<ul><li>Release behind your existing change control</li><li>Monitoring, alerting, cost ceilings</li><li>Rollback rehearsed, not theorised</li></ul>
+            <div class="exit"><b>Exit condition</b>In production, under the same governance as everything else you run.</div>
+            <p class="dur mono">Continuous</p></article>
 <article class="phase" data-n="05"><p class="mono">Phase 05 · Prove</p>
 <h3>Against the <em>agreed</em> number</h3>
 <p>Measured against the figure set in Frame. If it did not move, we say so,
                and we say why. That conversation is the product.</p>
-<p class="dur mono">Weeks 9–12</p></article>
+<ul><li>Measurement against the Frame number</li><li>What moved, what did not, and why</li><li>Honest recommendation on continuing</li></ul>
+            <div class="exit"><b>Exit condition</b>A written result — including the uncomfortable version if that is the truth.</div>
+            <p class="dur mono">Weeks 9–12</p></article>
 <article class="phase" data-n="06"><p class="mono">Phase 06 · Hand over</p>
 <h3>And then we <em>leave</em></h3>
 <p>Runbooks, monitoring, paired operation, and a date after which your team
                runs it without us. The engagement is designed to end.</p>
-<p class="dur mono">Weeks 12–14</p></article>
+<ul><li>Runbooks and architecture decision records</li><li>Paired operation with your engineers</li><li>Named owner and a handover date</li></ul>
+            <div class="exit"><b>Exit condition</b>Your team runs it without us. That is the definition of done.</div>
+            <p class="dur mono">Weeks 12–14</p></article>
 </div>
 </div>
 </div>
@@ -504,7 +642,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <section id="solution">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">03</div>
+<div class="cnum">04</div>
 <div>
 <h2>Nine capabilities. <em>One</em> team.</h2>
 <p class="lede">Three are core, because almost every engagement runs through
@@ -524,15 +662,94 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="nrow rv"><span class="i">09</span><h3>Change Management &amp; Enablement</h3><span></span></div>
 </div>
 <div class="counters">
-<div class="rv"><b data-count="9">0</b>
+<div class="rv"><b data-count="9">9</b>
 <span>capabilities, three of them core — because almost every engagement
                 runs through those three.</span></div>
-<div class="rv" data-d="1"><b data-count="6">0</b>
+<div class="rv" data-d="1"><b data-count="6">6</b>
 <span>phases from framing to handover, each with an exit condition written
                 into the statement of work.</span></div>
 <div class="rv" data-d="2"><b data-count="0">0</b>
 <span>engagements without an end date. An extension is a decision, never
                 the default.</span></div>
+</div>
+</div>
+</section>
+<section id="honest">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">05</div>
+<div>
+<h2>The questions you are <em>already</em> thinking.</h2>
+<p class="lede">We are a small firm selling into organisations that usually buy
+from large ones. These are the objections that come up in every first call,
+answered here so the call can start further along.</p>
+</div>
+</div>
+<div class="obj rv">
+<details><summary>Why not a large consultancy?<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">You should use one for a multi-year, multi-country programme with
+a thousand stakeholders — they are built for that and we are not. For a single
+system that needs to reach production this year, their engagement model costs
+more than the problem and moves slower than your business does. The people who
+sell it are also rarely the people who build it.</div></details>
+<details><summary>Why not build it in-house?<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">Often you should, and we will say so. Bring us in when your team
+has the domain knowledge but not the platform experience, or when they are
+already fully committed to the systems that keep the business running. The
+handover phase exists precisely so that in-house becomes the answer at the end.</div></details>
+<details><summary>Why not just buy a vendor platform?<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">If a product genuinely covers your case, buy it — that is cheaper
+than anything we would build. The work we get called for is what remains:
+connecting that product to systems it was never designed to meet, and producing
+the governance evidence the vendor does not.</div></details>
+<details><summary>You have no published case studies.<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">Correct, and we will not invent them. Quenora is a founder-led
+firm in its early chapter. What we will do is arrange a direct conversation with
+a reference before you commit, and show you the actual architecture and
+evaluation approach in the first meeting rather than a capability deck.</div></details>
+<details><summary>What happens if it does not work?<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">Phase 05 exists to answer that in writing, measured against the
+number agreed in Phase 01. If it did not move we say so. You keep the code, the
+documentation and the evaluation harness regardless — there is no scenario where
+you end an engagement with nothing to show for it.</div></details>
+</div>
+</div>
+</section>
+<section id="commercial">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">06</div>
+<div>
+<h2>How this is <em>priced</em>.</h2>
+<p class="lede">Stated here rather than after three meetings, because finding
+out late wastes your quarter and ours.</p>
+</div>
+</div>
+<div class="money rv">
+<div><b>Phase 01 · Frame</b><strong>Fixed fee</strong>
+<p>Two to three weeks, agreed before we start. You keep the written position
+whether or not you engage us for anything after it.</p></div>
+<div><b>Phases 02–05 · Build</b><strong>Fixed scope</strong>
+<p>Priced against a written scope with an explicit list of what is excluded.
+Changes are re-scoped in the open, not absorbed quietly into the timeline.</p></div>
+<div><b>Phase 06 · Handover</b><strong>Included</strong>
+<p>Never a separate line item. An engagement that ends without a working handover
+is not finished, so we do not charge you twice to finish it.</p></div>
+</div>
+<div class="rv" style="margin-top:var(--sp6)">
+<p class="mono" style="color:var(--copper-lt);margin-bottom:var(--sp3)">What happens when you get in touch</p>
+<ol class="steps">
+<li><b>You write two paragraphs</b><span>What is not working, and what you have
+already tried. No brief required, no NDA needed to have the first conversation.</span></li>
+<li><b>We reply within one working day</b><span>Either with a time, or with an
+honest note that this is not our problem to solve and a pointer to someone
+better placed.</span></li>
+<li><b>Forty-five minutes, no deck</b><span>Your systems, your constraint, our
+read on it. You will get a technical opinion in that call, not a follow-up
+proposal.</span></li>
+<li><b>A written position</b><span>What we would build first, what it would cost,
+and what we would not build. Yours to take to your board, or to another firm.</span></li>
+</ol>
 </div>
 </div>
 </section>
@@ -753,9 +970,19 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
       });
       var bw=b[1]-b[0], bh=b[3]-b[2];
       /* fill the hero properly — big on desktop, centred on mobile */
-      SC = Math.min(W/bw, H/bh) * (W<900 ? 0.80 : 1.18);
-      OX = W*(W<900 ? 0.50 : 0.70) - ((b[0]+b[1])/2)*SC;
-      OY = H*(W<900 ? 0.42 : 0.50) - ((b[2]+b[3])/2)*SC;
+      /* Fit inside a safe box so the largest sphere cannot clip the edge.
+         The orbit wobble and the halo both extend past the node radius, so
+         the margin has to cover r*3.4 at the current scale, not just r. */
+      var pad = 0.16;                                   /* 16% breathing room */
+      var availW = W*(1-pad*2), availH = H*(1-pad*2);
+      SC = Math.min(availW/bw, availH/bh) * (W<900 ? 0.62 : 0.78);
+      /* keep the field clear of the headline column on desktop */
+      OX = W*(W<900 ? 0.50 : 0.71) - ((b[0]+b[1])/2)*SC;
+      OY = H*(W<900 ? 0.40 : 0.50) - ((b[2]+b[3])/2)*SC;
+      /* hard clamp: pull back inside if the outermost halo still escapes */
+      var big = 27*SC*3.4;
+      if (OX + b[1]*SC + big > W) OX = W - b[1]*SC - big;
+      if (OX + b[0]*SC - big < 0) OX = big - b[0]*SC;
       ready = true; return true;
     }
 
@@ -787,7 +1014,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
         var st=stars[i];
         var sx=st.x*W + cmx*26*st.z, sy=st.y*H + cmy*26*st.z;
         var tw=0.30+0.45*Math.abs(Math.sin(el*0.7+st.ph));
-        g.fillStyle='rgba(242,239,232,'+(tw*st.z*0.42).toFixed(3)+')';
+        g.fillStyle='rgba(242,239,232,'+(tw*st.z*0.26).toFixed(3)+')';
         g.beginPath(); g.arc(sx,sy,st.r*st.z,0,6.2832); g.fill();
       }
 
@@ -801,7 +1028,8 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
         n.y = OY + n.hy*SC + Math.sin(n.ang)*n.orb*0.6 + py;
         n.rr = n.r*SC*(0.4+n.b*0.6);
         var hx=(cmx*0.5+0.5)*W, hy=(cmy*0.5+0.5)*H;
-        n.near += (((Math.hypot(n.x-hx,n.y-hy) < 150)?1:0)-n.near)*0.1;
+        var reach = Math.max(120, n.rr*3.2);
+        n.near += (((Math.hypot(n.x-hx,n.y-hy) < reach)?1:0)-n.near)*0.09;
       });
 
       /* ── wires ── */
@@ -809,8 +1037,8 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
         var a=nodes[k], b2=nodes[k+1], s2=Math.min(a.b,b2.b);
         if(s2<=0.02) continue;
         var lg=g.createLinearGradient(a.x,a.y,b2.x,b2.y);
-        lg.addColorStop(0,'rgba(201,122,60,'+(0.50*s2).toFixed(3)+')');
-        lg.addColorStop(1,'rgba(201,122,60,'+(0.16*s2).toFixed(3)+')');
+        lg.addColorStop(0,'rgba(201,122,60,'+(0.22*s2).toFixed(3)+')');
+        lg.addColorStop(1,'rgba(201,122,60,'+(0.06*s2).toFixed(3)+')');
         g.strokeStyle=lg; g.lineWidth=1.2;
         g.beginPath(); g.moveTo(a.x,a.y); g.lineTo(b2.x,b2.y); g.stroke();
       }
@@ -841,23 +1069,31 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
       nodes.forEach(function(n,i){
         if(n.b<=0.01) return;
         var r=n.rr, lift=n.near;
-        var h=g.createRadialGradient(n.x,n.y,r*0.35,n.x,n.y,r*(2.9+lift*1.4));
-        h.addColorStop(0,'rgba(201,122,60,'+(0.34*n.b+lift*0.24).toFixed(3)+')');
-        h.addColorStop(1,'rgba(201,122,60,0)');
-        g.fillStyle=h; g.beginPath(); g.arc(n.x,n.y,r*(2.9+lift*1.4),0,6.2832); g.fill();
+        /* At rest the spheres sit back in the dark. The halo is driven almost
+           entirely by pointer proximity, so the field only lights where you
+           are actually looking. */
+        var glow = lift;                                  /* 0 → 1 on approach */
+        if(glow > 0.01){
+          var hr = r*(1.6 + glow*2.2);
+          var h=g.createRadialGradient(n.x,n.y,r*0.35,n.x,n.y,hr);
+          h.addColorStop(0,'rgba(201,122,60,'+(0.30*glow*n.b).toFixed(3)+')');
+          h.addColorStop(1,'rgba(201,122,60,0)');
+          g.fillStyle=h; g.beginPath(); g.arc(n.x,n.y,hr,0,6.2832); g.fill();
+        }
 
+        var lum = 0.42 + glow*0.58;                       /* dim → full */
         var bd=g.createRadialGradient(n.x-r*0.36,n.y-r*0.40,r*0.05,n.x,n.y,r);
-        bd.addColorStop(0,'rgba(250,196,144,'+n.b.toFixed(3)+')');
-        bd.addColorStop(0.46,'rgba(201,122,60,'+n.b.toFixed(3)+')');
-        bd.addColorStop(1,'rgba(88,46,16,'+n.b.toFixed(3)+')');
+        bd.addColorStop(0,'rgba(212,158,110,'+(n.b*lum).toFixed(3)+')');
+        bd.addColorStop(0.46,'rgba(150,90,44,'+(n.b*lum).toFixed(3)+')');
+        bd.addColorStop(1,'rgba(52,28,10,'+(n.b*lum).toFixed(3)+')');
         g.fillStyle=bd; g.beginPath(); g.arc(n.x,n.y,r,0,6.2832); g.fill();
 
-        g.strokeStyle='rgba(250,196,144,'+(0.55*n.b+lift*0.4).toFixed(3)+')';
-        g.lineWidth=Math.max(0.6,r*0.05);
+        g.strokeStyle='rgba(201,122,60,'+(0.26*n.b+glow*0.5).toFixed(3)+')';
+        g.lineWidth=Math.max(0.6,r*0.045);
         g.beginPath(); g.arc(n.x,n.y,r*0.97,0,6.2832); g.stroke();
 
-        g.fillStyle='rgba(255,232,205,'+(0.6*n.b).toFixed(3)+')';
-        g.beginPath(); g.arc(n.x-r*0.34,n.y-r*0.38,Math.max(0.7,r*0.14),0,6.2832); g.fill();
+        g.fillStyle='rgba(255,232,205,'+(0.14*n.b+glow*0.5).toFixed(3)+')';
+        g.beginPath(); g.arc(n.x-r*0.34,n.y-r*0.38,Math.max(0.7,r*0.13),0,6.2832); g.fill();
 
         if(lift>0.06 && r>7){
           g.font='500 12px "JetBrains Mono",monospace'; g.textAlign='center';

@@ -1,0 +1,28 @@
+TRANSLATIONS FROZEN
+===================
+
+The German, French, Spanish and Italian builds under de/ fr/ es/ it/ were
+generated from an earlier revision of the English site. The English homepage
+has since been redesigned and rewritten, so those pages are now STALE: they
+are structurally valid and grammatically clean, but they no longer say what
+index.html says.
+
+They are deliberately left in place rather than deleted, so the URLs and the
+translated string files in this directory survive the English rewrite.
+
+While this file exists, the release gate holds stage 6 instead of failing it.
+
+To unfreeze, once the English page is signed off:
+
+    rm i18n/FROZEN
+    python3 build_i18n.py
+    cd test && bash release.sh ..
+
+The gate will then fail until every localised page matches the new English
+structure — which is the point.
+
+Still outstanding before any of these go live:
+  · native-speaker review of all four languages
+    (every file in i18n/ carries "reviewed_by_native_speaker": false)
+  · a German Impressum, which is a legal requirement, not an option
+  · a privacy notice

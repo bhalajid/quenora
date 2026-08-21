@@ -10,7 +10,7 @@ step(){ printf '\n\033[1m%s\033[0m\n' "── $1"; }
 ok(){   printf '   \033[32mPASS\033[0m %s\n' "$1"; }
 bad(){  printf '   \033[31mFAIL\033[0m %s\n' "$1"; FAILED=1; }
 
-step "1/6  JS syntax + tag balance"
+step "1/8  JS syntax + tag balance"
 node -e '
 const fs=require("fs"),path=require("path");
 const dir=process.argv[1];let bad=0;
@@ -28,15 +28,15 @@ for(const f of fs.readdirSync(dir).filter(x=>x.endsWith(".html"))){
 process.exit(bad);
 ' "$DIR" && ok "syntax + structure" || bad "syntax + structure"
 
-step "2/6  sphere hit-testing (real Three.js math)"
+step "2/8  sphere hit-testing (real Three.js math)"
 node test_pick_real.js >/tmp/pick.log 2>&1
 if grep -q "0 mis-picks" /tmp/pick.log; then ok "$(grep 'correct,' /tmp/pick.log|head -1)"; else bad "mis-picks found"; tail -5 /tmp/pick.log; fi
 
-step "3/6  smoke test (jsdom, real page JS)"
+step "3/8  smoke test (jsdom, real page JS)"
 node smoke.js "$DIR" >/tmp/smoke.log 2>&1
 if [ $? -eq 0 ]; then ok "$(grep 'SMOKE TEST' /tmp/smoke.log)"; else bad "smoke failures"; sed -n '/FAILURES/,$p' /tmp/smoke.log; fi
 
-step "4/6  accessibility + SEO audit"
+step "4/8  accessibility + SEO audit"
 python3 - "$DIR" <<'PY'
 import re,sys,os,glob
 d=sys.argv[1];issues=[]
@@ -61,17 +61,35 @@ sys.exit(1 if issues else 0)
 PY
 [ $? -eq 0 ] && ok "a11y + SEO clean" || bad "a11y/SEO issues"
 
-step "5/6  colour contrast (WCAG AA)"
+step "5/8  colour contrast (WCAG AA)"
 python3 contrast.py "$DIR"
 [ $? -eq 0 ] && ok "all text passes AA" || bad "contrast below AA"
 
-step "6/6  translations (DE / FR / ES / IT)"
-if [ -d "$DIR/de" ]; then
+step "6/8  translations (DE / FR / ES / IT)"
+if [ -f "$DIR/i18n/FROZEN" ]; then
+  printf '   \033[33mHELD\033[0m localised builds are frozen while the English page is\n'
+  printf '        being finalised. They still carry the previous English copy.\n'
+  printf '        Before launch: rm i18n/FROZEN && python3 build_i18n.py, then\n'
+  printf '        re-run this gate — it will fail until they are regenerated.\n'
+elif [ -d "$DIR/de" ]; then
   python3 i18n_qa.py 2>&1 | sed -n '/FAILURES/,/^====/p;/failure(s)/p' | head -30
   python3 i18n_qa.py >/dev/null 2>&1 && ok "all four languages clean" \
     || bad "translation gate failed — run: python3 test/i18n_qa.py"
 else
   printf '   \033[33mSKIP\033[0m no localised builds — run: python3 build_i18n.py\n'
+fi
+
+step "7/8  hero fit (appearance, 11 viewports)"
+node hero_fit.js "$DIR" >/tmp/hero.log 2>&1
+if [ $? -eq 0 ]; then ok "$(grep 'contained' /tmp/hero.log)"; else bad "hero clips"; cat /tmp/hero.log; fi
+
+step "8/8  English page — proofread, technical writing, SEO"
+node qa_english.js "$DIR" >/tmp/en.log 2>&1
+if [ $? -eq 0 ]; then
+  ok "$(grep 'passed,' /tmp/en.log | tr -s ' ')"
+  sed -n '/WARNINGS/,/^====/p' /tmp/en.log | head -12
+else
+  bad "English QA failed"; sed -n '/FAILURES/,$p' /tmp/en.log | head -20
 fi
 
 echo

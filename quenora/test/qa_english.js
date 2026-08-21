@@ -147,6 +147,32 @@ ok(pins.every(v => v <= 200), 'pinned scroll height sane', pins.join(', ') + 'vh
 [900, 820, 760].forEach(bp =>
   soft(new RegExp('max-width:' + bp + 'px').test(src), 'breakpoint ' + bp + 'px present'));
 
+/* ═══ 6b · PINNED STAGES MUST NEVER BE BLANK ═══
+   A position:sticky stage occupies the whole viewport for as long as its
+   wrapper scrolls past. Whatever it renders at progress 0 is what the visitor
+   stares at on arrival. The first build faded the headline in from opacity 0
+   across the first 45% of a 170vh wrapper — three quarters of a screen of
+   scrolling against nothing at all. Every element driven by pin progress now
+   has to carry a visible floor. */
+/* lastIndexOf, not indexOf — "PIN 1" also names the CSS block further up */
+const pinBlock = src.slice(src.lastIndexOf('PIN 1'), src.lastIndexOf('PIN 2'));
+const opacityAssignments = [...pinBlock.matchAll(/\.style\.opacity\s*=\s*([^;]+);/g)]
+  .map(m => m[1].trim());
+ok(opacityAssignments.length > 0, 'pin stage drives opacity');
+const blankAtZero = opacityAssignments.filter(expr => {
+  if (/^1$/.test(expr)) return false;                 // constant, always visible
+  // a floor looks like "0.35 + b * 0.65" — a leading non-zero constant
+  return !/^0*\.[0-9]+\s*\+/.test(expr);
+});
+ok(blankAtZero.length === 0,
+   'no pinned element starts fully transparent', blankAtZero.join(' | '));
+
+/* Cards inside a pinned horizontal track must be sized by their content.
+   Forcing height:100% made each card a full viewport tall while its copy
+   stopped part-way down — a half-screen of nothing under every phase. */
+ok(!/\.phase\{[^}]*height:100%/.test(src),
+   'phase cards are not forced to viewport height');
+
 /* ═══ 7 · CONTENT COMPLETENESS (what a buyer needs) ═══ */
 const need = {
   'states the problem': /never leaves the lab|fail at the seams/i,

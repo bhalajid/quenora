@@ -145,11 +145,56 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .nav.stuck{background:rgba(7,7,10,.74);backdrop-filter:blur(20px) saturate(160%);
   border-bottom-color:var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:var(--sp3);height:84px}
-.brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:1.32rem;
-  letter-spacing:-.055em}
-.brand svg{width:27px;height:27px;color:var(--copper);
-  transition:transform .8s var(--e)}
-.brand:hover svg{transform:rotate(-14deg) scale(1.1)}
+/* ── the lockup ───────────────────────────────────────────────
+   The mark carries the colour; the wordmark stays neutral. Two competing
+   accents in a 200px space is what made the old version read as a UI label
+   rather than an identity.
+
+   Tracking: -.055em was too tight for Inter at this size — the r and the n
+   collided. -.018em keeps it deliberate without the collision. The word is
+   lowercase on purpose; the mark supplies the capital gesture. */
+.brand{display:inline-flex;align-items:center;gap:15px;
+  font-weight:500;font-size:1.36rem;letter-spacing:-.008em;
+  color:var(--t1);line-height:1}
+/* The mark is the identity; the wordmark is the caption. Setting the word at
+   700 made it shout over nine small circles and the whole lockup read as a UI
+   label. At 500 the two balance and the mark can be larger. */
+.brand .mk{width:40px;height:37px;flex:none;color:var(--copper);overflow:visible}
+.brand .mk circle{transition:opacity .5s var(--e),transform .7s var(--e);
+  transform-origin:center}
+/* at rest the arc reads as a ramp — small and quiet through to large and
+   present, which is the whole idea of the mark */
+.brand .mk circle:nth-child(1){opacity:.45}
+.brand .mk circle:nth-child(2){opacity:.51}
+.brand .mk circle:nth-child(3){opacity:.57}
+.brand .mk circle:nth-child(4){opacity:.64}
+.brand .mk circle:nth-child(5){opacity:.71}
+.brand .mk circle:nth-child(6){opacity:.79}
+.brand .mk circle:nth-child(7){opacity:.86}
+.brand .mk circle:nth-child(8){opacity:.93}
+.brand .mk circle:nth-child(9){opacity:1}
+/* hover: a charge travels up the arc rather than the whole mark tilting.
+   The old rotate-and-scale read as a toy. */
+.brand:hover .mk circle{opacity:1}
+.brand:hover .mk circle:nth-child(1){transition-delay:0ms}
+.brand:hover .mk circle:nth-child(2){transition-delay:35ms}
+.brand:hover .mk circle:nth-child(3){transition-delay:70ms}
+.brand:hover .mk circle:nth-child(4){transition-delay:105ms}
+.brand:hover .mk circle:nth-child(5){transition-delay:140ms}
+.brand:hover .mk circle:nth-child(6){transition-delay:175ms}
+.brand:hover .mk circle:nth-child(7){transition-delay:210ms}
+.brand:hover .mk circle:nth-child(8){transition-delay:245ms}
+.brand:hover .mk circle:nth-child(9){transition-delay:280ms;transform:scale(1.09)}
+@media(prefers-reduced-motion:reduce){
+  .brand .mk circle{transition:none}
+  .brand:hover .mk circle:nth-child(9){transform:none}
+}
+/* footer gets the full lockup: mark, word, and the line that says what we do */
+.brand.lg{font-size:1.85rem;gap:19px}
+.brand.lg .mk{width:54px;height:50px}
+.lockup{display:flex;flex-direction:column;gap:10px}
+.lockup .desc{font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--t3)}
 .navlinks{margin-left:auto;display:flex;gap:var(--sp3);align-items:center}
 .navlinks>a{font-size:.86rem;font-weight:500;color:var(--t2);position:relative;
   padding:7px 0;transition:color .3s}
@@ -264,15 +309,24 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .hpin{position:sticky;top:0;height:100svh;overflow:hidden;
   border-block:1px solid var(--line);
   background:linear-gradient(180deg,var(--sf2),var(--sf1))}
-.htrack{display:flex;height:100%;will-change:transform}
-.phase{flex:0 0 clamp(300px,42vw,560px);height:100%;padding:var(--sp7) var(--sp4) var(--sp5);
-  border-right:1px solid var(--line);display:flex;flex-direction:column;
-  justify-content:flex-start;position:relative;overflow:hidden}
-.phase::before{content:attr(data-n);position:absolute;right:-2vw;bottom:-4vw;
-  font-family:'Playfair Display',serif;font-style:italic;font-size:22vw;
-  line-height:.7;color:rgba(242,239,232,.03);user-select:none;pointer-events:none}
+/* The track is a row of cards, vertically centred in the stage.
+   Forcing .phase to height:100% made every card a full viewport tall while
+   its content stopped around 45% down — which is the empty half-screen under
+   the phases. Cards are now sized by their content and centred. */
+.htrack{display:flex;align-items:center;height:100%;gap:var(--sp3);
+  padding:0 var(--sp4);will-change:transform}
+.phase{flex:0 0 clamp(300px,38vw,480px);align-self:center;
+  padding:var(--sp5) var(--sp4);border:1px solid var(--line);border-radius:4px;
+  background:linear-gradient(180deg,rgba(20,22,30,.62),rgba(13,14,19,.28));
+  display:flex;flex-direction:column;justify-content:flex-start;
+  position:relative;overflow:hidden;
+  max-height:82svh;transition:border-color .5s var(--e)}
+.phase:hover{border-color:var(--line2)}
+.phase::before{content:attr(data-n);position:absolute;right:-1vw;bottom:-2.5vw;
+  font-family:'Playfair Display',serif;font-style:italic;font-size:11rem;
+  line-height:.7;color:rgba(242,239,232,.035);user-select:none;pointer-events:none}
 .phase .mono{color:var(--copper-lt);margin-bottom:var(--sp3)}
-.phase h3{font-size:clamp(2rem,5vw,3.6rem);margin-bottom:var(--sp2);
+.phase h3{font-size:clamp(1.8rem,3.4vw,2.9rem);margin-bottom:var(--sp2);
   position:relative;will-change:transform,opacity}
 .phase h3 em{color:var(--ember)}
 .phase p{color:var(--t2);max-width:42ch;font-size:1.02rem;position:relative;
@@ -446,8 +500,8 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   .pin .big,.pin .sub,.seams div,.phase h3,.phase p{
     opacity:1!important;transform:none!important}
   .hpin{position:static;height:auto;overflow:visible}
-  .htrack{flex-wrap:wrap;transform:none!important}
-  .phase{flex:1 1 100%;height:auto;padding:var(--sp5) var(--sp4)}
+  .htrack{flex-wrap:wrap;transform:none!important;padding:0}
+  .phase{flex:1 1 100%;height:auto;max-height:none;padding:var(--sp5) var(--sp4)}
 }
 
 .langsel{position:relative;margin-left:14px}
@@ -481,7 +535,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <header class="nav" id="nav">
 <div class="wrap">
 <a aria-label="Quenora home" class="brand" href="index.html">
-<svg aria-hidden="true" fill="currentColor" viewbox="0 0 187.71 174.29">
+<svg aria-hidden="true" class="mk" fill="currentColor" viewbox="9 9 169.71 155.71">
 <circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
 <circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
 <circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
@@ -770,14 +824,16 @@ and what we would not build. Yours to take to your board, or to another firm.</s
 <div class="wrap">
 <div class="fgrid">
 <div>
-<div class="brand" style="margin-bottom:var(--sp2)">
-<svg aria-hidden="true" fill="var(--copper)" viewbox="0 0 187.71 174.29">
+<div class="lockup" style="margin-bottom:var(--sp3)">
+<span class="brand lg">
+<svg aria-hidden="true" class="mk" fill="currentColor" viewbox="9 9 169.71 155.71">
 <circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
 <circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
 <circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
 <circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
 <circle cx="151.71" cy="36" r="27"></circle>
-</svg>quenora
+</svg>quenora</span>
+<span class="desc">Technology Consulting</span>
         </div>
 <p style="max-width:35ch;color:var(--t2);font-size:.96rem">
           Enterprise AI, engineered to operate. Built into what you already run,
@@ -953,9 +1009,29 @@ and what we would not build. Yours to take to your board, or to another firm.</s
     var NAMES = ['Trustworthy','Human','Confident','Elegant','Timeless',
                  'Enterprise','Premium','Innovative','Intelligent'];
 
-    var W=0,H=0,SC=1,OX=0,OY=0,DPR=1;
-    var nodes=[], stars=[], pulses=[], t0=0, hraf=null, seen=true, ready=false;
-    var tmx=0,tmy=0,cmx=0,cmy=0;
+    /* bounding box of the mark, in arc units — computed once */
+    var B=[1e9,-1e9,1e9,-1e9];
+    ARC.forEach(function(a){
+      B[0]=Math.min(B[0],a[0]-a[2]); B[1]=Math.max(B[1],a[0]+a[2]);
+      B[2]=Math.min(B[2],a[1]-a[2]); B[3]=Math.max(B[3],a[1]+a[2]);
+    });
+    var BW=B[1]-B[0], BH=B[3]-B[2], CXA=(B[0]+B[1])/2, CYA=(B[2]+B[3])/2;
+    /* A lit sphere's halo reaches 2.4× its radius. Budgeting for that here —
+       inside the fit, in arc units — is what keeps the field on screen without
+       the clamp-and-hope correction the previous build needed. */
+    var HALO = 2.4, PAD = 27 * HALO;
+
+    var W=0,H=0,SC=1,OX=0,OY=0,DPR=1,narrow=false;
+    var nodes=[], dust=[], pulses=[], t0=0, hraf=null, seen=true, ready=false;
+    /* Pointer state. Two different things, previously conflated into one:
+         px,py   real pointer position in canvas pixels — drives hit-testing
+         gx,gy   the same, smoothed — drives dust displacement
+         nx,ny   normalised −1..1 — drives parallax only
+       The old build hit-tested against (nx*0.5+0.5)*W, which squeezes the
+       whole pointer range into the middle half of the canvas. The cursor and
+       the sphere it lit were never in the same place, and near the seam two
+       neighbours lit at once. That is the clumsiness. */
+    var px=-9e9, py=-9e9, gx=-9e9, gy=-9e9, nx=0, ny=0, cnx=0, cny=0, over=false;
 
     function fit(){
       var r = cv.getBoundingClientRect();
@@ -963,40 +1039,43 @@ and what we would not build. Yours to take to your board, or to another firm.</s
       W=r.width; H=r.height; DPR=Math.min(devicePixelRatio||1,2);
       cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
       g.setTransform(DPR,0,0,DPR,0,0);
-      var b=[1e9,-1e9,1e9,-1e9];
-      ARC.forEach(function(a){
-        b[0]=Math.min(b[0],a[0]-a[2]); b[1]=Math.max(b[1],a[0]+a[2]);
-        b[2]=Math.min(b[2],a[1]-a[2]); b[3]=Math.max(b[3],a[1]+a[2]);
-      });
-      var bw=b[1]-b[0], bh=b[3]-b[2];
-      /* fill the hero properly — big on desktop, centred on mobile */
-      /* Fit inside a safe box so the largest sphere cannot clip the edge.
-         The orbit wobble and the halo both extend past the node radius, so
-         the margin has to cover r*3.4 at the current scale, not just r. */
-      var pad = 0.16;                                   /* 16% breathing room */
-      var availW = W*(1-pad*2), availH = H*(1-pad*2);
-      SC = Math.min(availW/bw, availH/bh) * (W<900 ? 0.62 : 0.78);
-      /* keep the field clear of the headline column on desktop */
-      OX = W*(W<900 ? 0.50 : 0.71) - ((b[0]+b[1])/2)*SC;
-      OY = H*(W<900 ? 0.40 : 0.50) - ((b[2]+b[3])/2)*SC;
-      /* hard clamp: pull back inside if the outermost halo still escapes */
-      var big = 27*SC*3.4;
-      if (OX + b[1]*SC + big > W) OX = W - b[1]*SC - big;
-      if (OX + b[0]*SC - big < 0) OX = big - b[0]*SC;
+      narrow = W < 900;
+
+      /* The hero is two columns: headline left, constellation right. Give the
+         field an explicit box instead of a centre point and a fudge factor, so
+         it can never wander into the type. */
+      var fx0, fx1, fy0, fy1;
+      if(narrow){
+        fx0 = W*0.06; fx1 = W*0.94; fy0 = H*0.52; fy1 = H*0.97;
+      } else {
+        fx0 = W*0.50; fx1 = W*0.985; fy0 = H*0.05; fy1 = H*0.95;
+      }
+      var fw = fx1-fx0, fh = fy1-fy0;
+
+      /* halo is part of the footprint, so it is part of the fit */
+      SC = Math.min(fw/(BW+PAD*2), fh/(BH+PAD*2));
+      OX = (fx0+fx1)/2 - CXA*SC;
+      OY = (fy0+fy1)/2 - CYA*SC;
       ready = true; return true;
     }
 
     function seed(){
       nodes = ARC.map(function(a,i){
         return {hx:a[0],hy:a[1],r:a[2],ang:Math.random()*6.2832,
-                orb:6+i*1.9, spd:(0.09+i*0.014)*(i%2?1:-1),
+                orb:4+i*1.2, spd:(0.09+i*0.014)*(i%2?1:-1),
                 born:0.10+i*0.075, x:0,y:0,rr:0,b:0,near:0};
       });
-      stars = [];
-      for(var i=0;i<130;i++){
-        stars.push({x:Math.random(),y:Math.random(),
-                    z:0.25+Math.random()*0.9, r:0.4+Math.random()*1.5,
-                    ph:Math.random()*6.2832});
+      /* cosmos dust — normalised coords so a resize never strands a mote */
+      dust = [];
+      for(var i=0;i<170;i++){
+        var z = 0.18 + Math.random()*0.92;               /* depth */
+        dust.push({x:Math.random(), y:Math.random(), z:z,
+                   r:0.35+z*1.5,
+                   /* slow constant drift, faster when nearer the viewer */
+                   vx:(Math.random()-0.5)*0.00016*z,
+                   vy:(Math.random()-0.5)*0.00016*z,
+                   ox:0, oy:0,                            /* cursor push-off */
+                   ph:Math.random()*6.2832});
       }
       pulses = [];
     }
@@ -1007,60 +1086,109 @@ and what we would not build. Yours to take to your board, or to another firm.</s
       var el=(now-t0)/1000;
       g.clearRect(0,0,W,H);
 
-      cmx += (tmx-cmx)*0.05; cmy += (tmy-cmy)*0.05;
+      cnx += (nx-cnx)*0.05; cny += (ny-cny)*0.05;
+      if(over){
+        gx = gx < -1e8 ? px : gx + (px-gx)*0.18;
+        gy = gy < -1e8 ? py : gy + (py-gy)*0.18;
+      }
 
-      /* ── starfield, parallaxed by depth ── */
-      for(var i=0;i<stars.length;i++){
-        var st=stars[i];
-        var sx=st.x*W + cmx*26*st.z, sy=st.y*H + cmy*26*st.z;
-        var tw=0.30+0.45*Math.abs(Math.sin(el*0.7+st.ph));
-        g.fillStyle='rgba(242,239,232,'+(tw*st.z*0.26).toFixed(3)+')';
-        g.beginPath(); g.arc(sx,sy,st.r*st.z,0,6.2832); g.fill();
+      /* ── cosmos dust: drifts always, scatters from the cursor ──
+         Each mote carries its own displacement that eases back to zero, so
+         the wake persists for a moment after the pointer has gone by rather
+         than snapping back the instant it leaves. */
+      var DR = Math.min(W,H)*0.22, DR2 = DR*DR;
+      for(var i=0;i<dust.length;i++){
+        var m=dust[i];
+        if(!reduced){
+          m.x += m.vx; m.y += m.vy;
+          if(m.x<-0.02) m.x=1.02; else if(m.x>1.02) m.x=-0.02;
+          if(m.y<-0.02) m.y=1.02; else if(m.y>1.02) m.y=-0.02;
+        }
+        var bx = m.x*W + cnx*30*m.z, by = m.y*H + cny*30*m.z;
+        var boost = 0;
+        if(over && !reduced){
+          var dx=bx-gx, dy=by-gy, d2=dx*dx+dy*dy;
+          if(d2 < DR2 && d2 > 0.01){
+            var dd = Math.sqrt(d2);
+            var f = (1-dd/DR);                            /* 0 at rim, 1 at cursor */
+            f = f*f;                                      /* soften the falloff */
+            m.ox += ((dx/dd)*f*46*m.z - m.ox)*0.10;
+            m.oy += ((dy/dd)*f*46*m.z - m.oy)*0.10;
+            boost = f;
+          }
+        }
+        m.ox *= 0.94; m.oy *= 0.94;                       /* ease home */
+        var tw = 0.30 + 0.45*Math.abs(Math.sin(el*0.7+m.ph));
+        var a  = tw*m.z*0.24 + boost*0.45;
+        /* motes caught in the wake warm towards copper */
+        g.fillStyle = boost > 0.02
+          ? 'rgba('+Math.round(242-41*boost)+','+Math.round(239-117*boost)+','+
+            Math.round(232-172*boost)+','+a.toFixed(3)+')'
+          : 'rgba(242,239,232,'+a.toFixed(3)+')';
+        g.beginPath();
+        g.arc(bx+m.ox, by+m.oy, m.r*m.z*(1+boost*0.9), 0, 6.2832);
+        g.fill();
       }
 
       /* ── node positions ── */
-      var px=cmx*20, py=cmy*20;
-      nodes.forEach(function(n,i){
+      var ppx=cnx*20, ppy=cny*20;
+      nodes.forEach(function(n){
         var t=reduced?1:Math.max(0,Math.min(1,(el-n.born)/1.25));
         n.b = 1-Math.pow(1-t,3);
         if(!reduced) n.ang += n.spd*0.016;
-        n.x = OX + n.hx*SC + Math.cos(n.ang)*n.orb + px;
-        n.y = OY + n.hy*SC + Math.sin(n.ang)*n.orb*0.6 + py;
+        n.x = OX + n.hx*SC + Math.cos(n.ang)*n.orb + ppx;
+        n.y = OY + n.hy*SC + Math.sin(n.ang)*n.orb*0.6 + ppy;
         n.rr = n.r*SC*(0.4+n.b*0.6);
-        var hx=(cmx*0.5+0.5)*W, hy=(cmy*0.5+0.5)*H;
-        var reach = Math.max(120, n.rr*3.2);
-        n.near += (((Math.hypot(n.x-hx,n.y-hy) < reach)?1:0)-n.near)*0.09;
       });
+
+      /* ── exactly one sphere may be lit ──
+         Score by distance relative to each sphere's own reach, so a small
+         sphere you are sitting on beats a large one you are merely near.
+         Everything else is driven to zero. No more two-at-once. */
+      var hot=-1, best=1;
+      if(over){
+        for(var q=0;q<nodes.length;q++){
+          var nq=nodes[q];
+          var reach = nq.rr + Math.max(46, nq.rr*1.15);
+          var score = Math.hypot(nq.x-px, nq.y-py)/reach;
+          if(score < best){ best=score; hot=q; }
+        }
+      }
+      for(var s=0;s<nodes.length;s++){
+        var ns=nodes[s];
+        ns.near += ((s===hot?1:0) - ns.near) * (s===hot ? 0.16 : 0.10);
+      }
 
       /* ── wires ── */
       for(var k=0;k<nodes.length-1;k++){
-        var a=nodes[k], b2=nodes[k+1], s2=Math.min(a.b,b2.b);
+        var a2=nodes[k], b2=nodes[k+1], s2=Math.min(a2.b,b2.b);
         if(s2<=0.02) continue;
-        var lg=g.createLinearGradient(a.x,a.y,b2.x,b2.y);
-        lg.addColorStop(0,'rgba(201,122,60,'+(0.22*s2).toFixed(3)+')');
-        lg.addColorStop(1,'rgba(201,122,60,'+(0.06*s2).toFixed(3)+')');
-        g.strokeStyle=lg; g.lineWidth=1.2;
-        g.beginPath(); g.moveTo(a.x,a.y); g.lineTo(b2.x,b2.y); g.stroke();
+        var live = Math.max(a2.near,b2.near);
+        var lg=g.createLinearGradient(a2.x,a2.y,b2.x,b2.y);
+        lg.addColorStop(0,'rgba(201,122,60,'+((0.22+live*0.5)*s2).toFixed(3)+')');
+        lg.addColorStop(1,'rgba(201,122,60,'+((0.06+live*0.3)*s2).toFixed(3)+')');
+        g.strokeStyle=lg; g.lineWidth=1.2+live*0.8;
+        g.beginPath(); g.moveTo(a2.x,a2.y); g.lineTo(b2.x,b2.y); g.stroke();
       }
 
       /* ── signal pulses ── */
       if(!reduced){
         if(el>1.4 && Math.random()<0.03){
-          var q=Math.floor(Math.random()*(nodes.length-1));
-          pulses.push({i:q,t:0,sp:0.009+Math.random()*0.012});
+          var qq=Math.floor(Math.random()*(nodes.length-1));
+          pulses.push({i:qq,t:0,sp:0.009+Math.random()*0.012});
           if(pulses.length>16) pulses.shift();
         }
         for(var pI=pulses.length-1;pI>=0;pI--){
           var pu=pulses[pI]; pu.t+=pu.sp;
           if(pu.t>=1){ pulses.splice(pI,1); continue; }
-          var A=nodes[pu.i], B=nodes[pu.i+1];
-          var x=A.x+(B.x-A.x)*pu.t, y=A.y+(B.y-A.y)*pu.t;
-          var f=Math.sin(pu.t*Math.PI);
+          var A=nodes[pu.i], C=nodes[pu.i+1];
+          var x=A.x+(C.x-A.x)*pu.t, y=A.y+(C.y-A.y)*pu.t;
+          var f2=Math.sin(pu.t*Math.PI);
           var rg=g.createRadialGradient(x,y,0,x,y,18);
-          rg.addColorStop(0,'rgba(91,215,245,'+(0.9*f).toFixed(3)+')');
+          rg.addColorStop(0,'rgba(91,215,245,'+(0.9*f2).toFixed(3)+')');
           rg.addColorStop(1,'rgba(91,215,245,0)');
           g.fillStyle=rg; g.beginPath(); g.arc(x,y,18,0,6.2832); g.fill();
-          g.fillStyle='rgba(160,238,255,'+f.toFixed(3)+')';
+          g.fillStyle='rgba(160,238,255,'+f2.toFixed(3)+')';
           g.beginPath(); g.arc(x,y,2.2,0,6.2832); g.fill();
         }
       }
@@ -1068,13 +1196,11 @@ and what we would not build. Yours to take to your board, or to another firm.</s
       /* ── the nine ── */
       nodes.forEach(function(n,i){
         if(n.b<=0.01) return;
-        var r=n.rr, lift=n.near;
-        /* At rest the spheres sit back in the dark. The halo is driven almost
-           entirely by pointer proximity, so the field only lights where you
-           are actually looking. */
-        var glow = lift;                                  /* 0 → 1 on approach */
+        var r=n.rr, glow=n.near;
+        /* At rest the spheres sit back in the dark. The halo is driven purely
+           by the pointer, so the field only lights where you actually are. */
         if(glow > 0.01){
-          var hr = r*(1.6 + glow*2.2);
+          var hr = r*(1 + glow*(HALO-1));
           var h=g.createRadialGradient(n.x,n.y,r*0.35,n.x,n.y,hr);
           h.addColorStop(0,'rgba(201,122,60,'+(0.30*glow*n.b).toFixed(3)+')');
           h.addColorStop(1,'rgba(201,122,60,0)');
@@ -1095,10 +1221,22 @@ and what we would not build. Yours to take to your board, or to another firm.</s
         g.fillStyle='rgba(255,232,205,'+(0.14*n.b+glow*0.5).toFixed(3)+')';
         g.beginPath(); g.arc(n.x-r*0.34,n.y-r*0.38,Math.max(0.7,r*0.13),0,6.2832); g.fill();
 
-        if(lift>0.06 && r>7){
-          g.font='500 12px "JetBrains Mono",monospace'; g.textAlign='center';
-          g.fillStyle='rgba(242,239,232,'+(lift*0.95).toFixed(3)+')';
-          g.fillText(NAMES[i].toUpperCase(), n.x, n.y-r-16);
+        /* One label, on the lit sphere only, on a rule that draws itself out
+           of the sphere — so it reads as a callout rather than floating text. */
+        if(glow>0.10){
+          var lab=NAMES[i].toUpperCase(), ease=Math.min(1,(glow-0.10)/0.55);
+          g.save();
+          g.globalAlpha = ease;
+          g.font='500 11px "JetBrains Mono",monospace';
+          g.textAlign='left'; g.textBaseline='middle';
+          var lx=n.x+r*0.72, ly=n.y-r*0.72;
+          var run=18+14*ease;
+          g.strokeStyle='rgba(201,122,60,.75)'; g.lineWidth=1;
+          g.beginPath(); g.moveTo(lx,ly); g.lineTo(lx+run,ly-run*0.55);
+          g.lineTo(lx+run+g.measureText(lab).width+16, ly-run*0.55); g.stroke();
+          g.fillStyle='rgba(242,239,232,.96)';
+          g.fillText(lab, lx+run+8, ly-run*0.55-8);
+          g.restore();
         }
       });
 
@@ -1119,12 +1257,24 @@ and what we would not build. Yours to take to your board, or to another firm.</s
     if(d.fonts && d.fonts.ready) d.fonts.ready.then(fit);
 
     var hero = cv.parentNode;
-    hero.addEventListener('mousemove', function(e){
+    function track(cx, cy){
       var r=cv.getBoundingClientRect();
-      tmx=((e.clientX-r.left)/r.width)*2-1;
-      tmy=((e.clientY-r.top)/r.height)*2-1;
+      px = cx-r.left; py = cy-r.top;
+      nx = (px/r.width)*2-1; ny = (py/r.height)*2-1;
+      over = true;
+    }
+    hero.addEventListener('mousemove', function(e){ track(e.clientX,e.clientY); },{passive:true});
+    hero.addEventListener('mouseleave', function(){
+      over=false; nx=0; ny=0; px=-9e9; py=-9e9;
+    });
+    /* touch: a tap lights the nearest sphere and the dust scatters once */
+    hero.addEventListener('touchstart', function(e){
+      if(e.touches[0]) track(e.touches[0].clientX, e.touches[0].clientY);
     },{passive:true});
-    hero.addEventListener('mouseleave',function(){ tmx=0; tmy=0; });
+    hero.addEventListener('touchmove', function(e){
+      if(e.touches[0]) track(e.touches[0].clientX, e.touches[0].clientY);
+    },{passive:true});
+    hero.addEventListener('touchend', function(){ over=false; nx=0; ny=0; });
 
     if('IntersectionObserver' in w){
       new IntersectionObserver(function(es){
@@ -1185,17 +1335,24 @@ and what we would not build. Yours to take to your board, or to another firm.</s
     if (pinwrap) {
       var r = pinwrap.getBoundingClientRect();
       var p = clamp(-r.top / (pinwrap.offsetHeight - vh), 0, 1);
-      /* headline settles over the first 45% */
-      var a = ease(clamp(p / 0.45, 0, 1));
-      pBig.style.opacity = a;
-      pBig.style.transform = 'translate3d(0,' + (1 - a) * 70 + 'px,0) scale(' + (0.94 + a * 0.06) + ')';
-      var b = ease(clamp((p - 0.2) / 0.35, 0, 1));
-      pSub.style.opacity = b;
-      pSub.style.transform = 'translate3d(0,' + (1 - b) * 40 + 'px,0)';
+      /* The stage is stuck to the viewport for the whole of pinwrap, so
+         whatever it shows at p=0 is what the visitor stares at on arrival.
+         The previous choreography started the headline at opacity 0 and only
+         finished it at p=0.45 — which meant three quarters of a screen of
+         scrolling against a completely empty stage. That was the blank.
+
+         The headline is now present the moment the stage is, and scroll is
+         spent on the reveal *below* it rather than on the reveal *of* it. */
+      var a = ease(clamp(p / 0.22, 0, 1));
+      pBig.style.opacity = 1;
+      pBig.style.transform = 'scale(' + (0.985 + a * 0.015) + ')';
+      var b = ease(clamp(p / 0.16, 0, 1));
+      pSub.style.opacity = 0.35 + b * 0.65;
+      pSub.style.transform = 'translate3d(0,' + (1 - b) * 18 + 'px,0)';
       seams.forEach(function (s, i) {
-        var c = ease(clamp((p - 0.4 - i * 0.13) / 0.3, 0, 1));
-        s.style.opacity = c;
-        s.style.transform = 'translate3d(0,' + (1 - c) * 52 + 'px,0)';
+        var c = ease(clamp((p - 0.18 - i * 0.14) / 0.30, 0, 1));
+        s.style.opacity = 0.12 + c * 0.88;
+        s.style.transform = 'translate3d(0,' + (1 - c) * 34 + 'px,0)';
       });
     }
 

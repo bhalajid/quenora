@@ -79,9 +79,11 @@ else
   printf '   \033[33mSKIP\033[0m no localised builds — run: python3 build_i18n.py\n'
 fi
 
-step "7/8  hero fit (appearance, 11 viewports)"
+step "7/8  hero fit + hover (appearance and interaction)"
 node hero_fit.js "$DIR" >/tmp/hero.log 2>&1
 if [ $? -eq 0 ]; then ok "$(grep 'contained' /tmp/hero.log)"; else bad "hero clips"; cat /tmp/hero.log; fi
+node hero_hover.js "$DIR" >/tmp/hover.log 2>&1
+if [ $? -eq 0 ]; then ok "$(grep 'one sphere' /tmp/hover.log)"; else bad "hover mis-picks"; cat /tmp/hover.log; fi
 
 step "8/8  English page — proofread, technical writing, SEO"
 node qa_english.js "$DIR" >/tmp/en.log 2>&1

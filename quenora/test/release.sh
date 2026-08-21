@@ -84,6 +84,8 @@ node hero_fit.js "$DIR" >/tmp/hero.log 2>&1
 if [ $? -eq 0 ]; then ok "$(grep 'contained' /tmp/hero.log)"; else bad "hero clips"; cat /tmp/hero.log; fi
 node hero_hover.js "$DIR" >/tmp/hover.log 2>&1
 if [ $? -eq 0 ]; then ok "$(grep 'one sphere' /tmp/hover.log)"; else bad "hover mis-picks"; cat /tmp/hover.log; fi
+node hero_geometry.js "$DIR" >/tmp/geo.log 2>&1
+if [ $? -eq 0 ]; then ok "$(grep 'every gap' /tmp/geo.log)"; else bad "hero spacing no longer matches the logo"; cat /tmp/geo.log; fi
 
 step "8/8  English page — proofread, technical writing, SEO"
 node qa_english.js "$DIR" >/tmp/en.log 2>&1

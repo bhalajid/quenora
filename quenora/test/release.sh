@@ -62,25 +62,7 @@ PY
 [ $? -eq 0 ] && ok "a11y + SEO clean" || bad "a11y/SEO issues"
 
 step "5/6  colour contrast (WCAG AA)"
-python3 - "$DIR" <<'PY'
-import re,sys,os
-def lum(x):
-    x=x.lstrip('#');r,g,b=[int(x[i:i+2],16)/255 for i in(0,2,4)]
-    f=lambda c:c/12.92 if c<=0.03928 else ((c+0.055)/1.055)**2.4
-    return .2126*f(r)+.7152*f(g)+.0722*f(b)
-def cr(a,b):
-    l=sorted([lum(a),lum(b)],reverse=True);return (l[0]+.05)/(l[1]+.05)
-h=open(os.path.join(sys.argv[1],'index.html'),encoding='utf-8').read()
-ink=re.search(r'--ink:(#[0-9A-Fa-f]{6})',h).group(1)
-bad=[]
-for tok in['white','grey','grey-d','copper','copper-lt']:
-    m=re.search(r'--%s:(#[0-9A-Fa-f]{6})'%tok,h)
-    if m:
-        c=cr(m.group(1),ink)
-        print(f"   --{tok:10} {m.group(1)}  {c:5.2f}:1")
-        if c<4.5: bad.append(tok)
-sys.exit(1 if bad else 0)
-PY
+python3 contrast.py "$DIR"
 [ $? -eq 0 ] && ok "all text passes AA" || bad "contrast below AA"
 
 step "6/6  translations (DE / FR / ES / IT)"

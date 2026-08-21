@@ -120,8 +120,11 @@ for lang in LANGS:
 
         # ---- 3 placeholders preserved --------------------------------
         raw = open(dst, encoding="utf-8").read()
+        en_raw = open(src, encoding="utf-8").read()
         for k in KEEP:
-            if k not in raw:
+            # only require a term where the English page actually uses it —
+            # the two homepage layouts do not share the same vocabulary
+            if k in en_raw and k not in raw:
                 fail(lang, "placeholder", "%s: '%s' lost in translation"
                      % (page, k))
 

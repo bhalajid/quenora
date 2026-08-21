@@ -110,9 +110,10 @@ def switcher(lang, page):
     """Header language menu. Current language first, marked."""
     items = []
     for code in ["en"] + LANGS:
-        href = (("../" + page) if code == "en" else
-                (("../" + code + "/" + page) if lang != "en"
-                 else (code + "/" + page)))
+        if code == "en":
+            href = page if lang == "en" else "../" + page
+        else:
+            href = (code + "/" + page) if lang == "en" else "../" + code + "/" + page
         cur = ' aria-current="true"' if code == lang else ""
         items.append(
             '<li><a hreflang="%s" lang="%s" href="%s"%s>%s</a></li>'
@@ -270,11 +271,17 @@ def build_en_switcher():
     for page in PAGES:
         p = os.path.join(ROOT, page)
         soup = BeautifulSoup(open(p, encoding="utf-8").read(), "html.parser")
-        if soup.find(class_="langsel"):
-            continue
+        old = soup.find(class_="langsel")
+        if old:
+            old.decompose()          # always rebuild: hrefs may have changed
         st = soup.find("style")
         if st and "langsel" not in st.text:
             st.string = st.text + LANG_CSS
+        # drop any previously appended switcher script before re-adding it,
+        # otherwise every rebuild leaves another copy behind
+        for sc in soup.find_all("script"):
+            if sc.string and "getElementById('langBtn')" in sc.string:
+                sc.decompose()
         nav = soup.find(class_="navlinks")
         if nav:
             nav.insert_after(BeautifulSoup(switcher("en", page), "html.parser"))

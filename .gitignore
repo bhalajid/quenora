@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+._*
+
+# Never commit private keys or secrets. A key was once committed to the
+# AIBoosters repo and had to be revoked; this repo starts clean and stays clean.
+*.key
+*.pem
+*.crt
+*.cer
+*.pfx
+*.p12
+.env
+.env.*
+
+# Dependencies and tooling output
+node_modules/
+.vercel/

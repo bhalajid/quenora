@@ -289,6 +289,60 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .chead h2 em{color:var(--ember)}
 .chead .lede{margin-top:var(--sp3);max-width:56ch;color:var(--t2);font-size:1.1rem}
 
+/* ── chapter 07: the mark explained ──
+   The dot on each row is the mark's OWN radius for that circle, scaled by a
+   single factor. So the list itself grows ninefold down the page — the rows
+   are a reading of the mark, not an illustration next to one. */
+.nine{display:grid;grid-template-columns:minmax(260px,.85fr) 1.15fr;
+  gap:var(--sp5);margin-top:var(--sp5);align-items:start}
+@media(max-width:1000px){.nine{grid-template-columns:1fr;gap:var(--sp4)}}
+.ninemark{position:sticky;top:120px}
+@media(max-width:1000px){.ninemark{position:static;max-width:340px}}
+#nineArc{width:100%;height:auto;color:var(--copper);overflow:visible}
+#nineArc circle{transition:opacity .45s var(--e),transform .45s var(--e);
+  transform-origin:center;transform-box:fill-box}
+#nineArc circle:nth-of-type(1){opacity:.40}
+#nineArc circle:nth-of-type(2){opacity:.47}
+#nineArc circle:nth-of-type(3){opacity:.54}
+#nineArc circle:nth-of-type(4){opacity:.61}
+#nineArc circle:nth-of-type(5){opacity:.68}
+#nineArc circle:nth-of-type(6){opacity:.76}
+#nineArc circle:nth-of-type(7){opacity:.84}
+#nineArc circle:nth-of-type(8){opacity:.92}
+#nineArc circle:nth-of-type(9){opacity:1}
+/* one lit at a time — same rule as the hero */
+#nineArc.live circle{opacity:.16}
+#nineArc.live circle.on{opacity:1;transform:scale(1.06)}
+#nineArc .wires line{stroke:var(--copper);stroke-opacity:.22;stroke-width:.9}
+.ninefoot{margin-top:var(--sp3);color:var(--t3)}
+
+.ninelist{list-style:none;margin:0;padding:0;
+  border-top:1px solid var(--line2)}
+.ninelist li{display:grid;grid-template-columns:auto 62px 1fr;gap:var(--sp3);
+  align-items:center;padding:var(--sp3) var(--sp2);
+  border-bottom:1px solid var(--line);
+  transition:background .35s var(--e),padding-left .35s var(--e)}
+.ninelist li:hover,.ninelist li.on{background:rgba(201,122,60,.05);
+  padding-left:calc(var(--sp2) + 10px)}
+.ninelist .n{font-family:'JetBrains Mono',monospace;font-size:.66rem;
+  letter-spacing:.2em;color:var(--t3);transition:color .35s var(--e)}
+.ninelist li:hover .n,.ninelist li.on .n{color:var(--copper-lt)}
+/* --r is the mark's own radius; 1.05 is the only scale factor in play */
+.ninelist .d{justify-self:center;width:calc(var(--r) * 2 * 1.05px);
+  height:calc(var(--r) * 2 * 1.05px);border-radius:50%;
+  background:radial-gradient(circle at 34% 32%,#d49e6e,#965a2c 52%,#341c0a);
+  box-shadow:0 0 0 1px rgba(201,122,60,.3);
+  transition:box-shadow .35s var(--e),transform .35s var(--e)}
+.ninelist li:hover .d,.ninelist li.on .d{transform:scale(1.08);
+  box-shadow:0 0 0 1px rgba(201,122,60,.7),0 0 26px rgba(201,122,60,.35)}
+.ninelist h3{font-size:1.32rem;letter-spacing:-.02em}
+.ninelist p{margin:4px 0 0;color:var(--t2);font-size:.95rem}
+@media(max-width:520px){
+  .ninelist li{grid-template-columns:auto 40px 1fr;gap:var(--sp2)}
+  .ninelist .d{width:calc(var(--r) * 2 * .68px);height:calc(var(--r) * 2 * .68px)}
+  .ninelist h3{font-size:1.12rem}
+}
+
 /* ── "the gap": the chapter 01 diagram ── */
 .gapfig{margin:var(--sp5) 0 0;padding:0}
 .gapfig canvas{display:block;width:100%;height:clamp(300px,24vw,340px)}
@@ -824,6 +878,52 @@ read on it. You will get a technical opinion in that call, not a follow-up
 proposal.</span></li>
 <li><b>A written position</b><span>What we would build first, what it would cost,
 and what we would not build. Yours to take to your board, or to another firm.</span></li>
+</ol>
+</div>
+</div>
+</section>
+<!-- Chapter 07 — the mark explained. This is where the nine circles in the
+     hero, the nav and the favicon finally say what they are. For a
+     founder-led firm with no published case studies, the principles are the
+     credibility, so they sit immediately before the call to action. -->
+<section id="principles">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">07</div>
+<div>
+<h2>The principles behind <em>the mark</em>.</h2>
+<p class="lede">Nine circles on a single arc, each growing ninefold from the
+first to the last. Every circle carries a principle this firm was built on —
+written down before a line of the brand was drawn, and the standard we hold
+the work to.</p>
+</div>
+</div>
+<div class="nine">
+<div class="ninemark">
+<svg aria-hidden="true" fill="currentColor" id="nineArc" viewbox="9 9 169.71 155.71">
+<g class="wires" id="nineWires"></g>
+<circle cx="12" cy="161.71" data-i="0" r="3"></circle>
+<circle cx="21.64" cy="161.34" data-i="1" r="3.95"></circle>
+<circle cx="33.39" cy="159.88" data-i="2" r="5.2"></circle>
+<circle cx="47.73" cy="156.52" data-i="3" r="6.84"></circle>
+<circle cx="65.05" cy="149.97" data-i="4" r="9"></circle>
+<circle cx="85.34" cy="138.1" data-i="5" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" data-i="6" r="15.59"></circle>
+<circle cx="127.81" cy="84.89" data-i="7" r="20.52"></circle>
+<circle cx="151.71" cy="36" data-i="8" r="27"></circle>
+</svg>
+<p class="mono ninefoot">9 circles · 90° arc · ×9 growth · ratio 1.3161</p>
+</div>
+<ol class="ninelist" id="nineList">
+<li data-i="0"><span class="n">01</span><span aria-hidden="true" class="d" style="--r:3"></span><div><h3>Trustworthy</h3><p>The foundation everything else stands on.</p></div></li>
+<li data-i="1"><span class="n">02</span><span aria-hidden="true" class="d" style="--r:3.95"></span><div><h3>Human</h3><p>People-first, even inside an automated system.</p></div></li>
+<li data-i="2"><span class="n">03</span><span aria-hidden="true" class="d" style="--r:5.2"></span><div><h3>Confident</h3><p>Assurance that comes from engineering, not marketing.</p></div></li>
+<li data-i="3"><span class="n">04</span><span aria-hidden="true" class="d" style="--r:6.84"></span><div><h3>Elegant</h3><p>Refinement in what we ship, not just how it looks.</p></div></li>
+<li data-i="4"><span class="n">05</span><span aria-hidden="true" class="d" style="--r:9"></span><div><h3>Timeless</h3><p>The exact midpoint of the climb — built to last, not to trend.</p></div></li>
+<li data-i="5"><span class="n">06</span><span aria-hidden="true" class="d" style="--r:11.84"></span><div><h3>Enterprise</h3><p>Scale that survives real production traffic.</p></div></li>
+<li data-i="6"><span class="n">07</span><span aria-hidden="true" class="d" style="--r:15.59"></span><div><h3>Premium</h3><p>Judged by outcome, not by the size of the deck.</p></div></li>
+<li data-i="7"><span class="n">08</span><span aria-hidden="true" class="d" style="--r:20.52"></span><div><h3>Innovative</h3><p>The leap beyond what the trend alone would predict.</p></div></li>
+<li data-i="8"><span class="n">09</span><span aria-hidden="true" class="d" style="--r:27"></span><div><h3>Intelligent</h3><p>Where every prior principle arrives.</p></div></li>
 </ol>
 </div>
 </div>
@@ -1384,6 +1484,47 @@ and what we would not build. Yours to take to your board, or to another firm.</s
         if(seen && !reduced) go(); else halt();
       },{threshold:0.01}).observe(cv);
     }
+  })();
+
+  /* ─────────── CHAPTER 07 · the mark explained ───────────
+     Rows and circles are the same nine things, so pointing at either lights
+     both. The SVG is aria-hidden and the list carries every word, so none of
+     this is load-bearing for assistive tech — it is a reading aid. */
+  (function(){
+    var arc=d.getElementById('nineArc'), list=d.getElementById('nineList');
+    if(!arc||!list) return;
+    var circles=arc.querySelectorAll('circle');
+    var rows=list.querySelectorAll('li');
+
+    /* draw the wires between consecutive circles, from the geometry itself */
+    var wires=d.getElementById('nineWires');
+    if(wires){
+      for(var i=0;i<circles.length-1;i++){
+        var a=circles[i], b=circles[i+1];
+        var ln=d.createElementNS('http://www.w3.org/2000/svg','line');
+        ln.setAttribute('x1',a.getAttribute('cx')); ln.setAttribute('y1',a.getAttribute('cy'));
+        ln.setAttribute('x2',b.getAttribute('cx')); ln.setAttribute('y2',b.getAttribute('cy'));
+        wires.appendChild(ln);
+      }
+    }
+
+    function light(i){
+      if(i<0){ arc.classList.remove('live'); }
+      else arc.classList.add('live');
+      for(var k=0;k<circles.length;k++) circles[k].classList.toggle('on', k===i);
+      for(var j=0;j<rows.length;j++)    rows[j].classList.toggle('on', j===i);
+    }
+    function bind(el,i){
+      el.addEventListener('mouseenter',function(){ light(i); });
+      el.addEventListener('focusin',   function(){ light(i); });
+    }
+    for(var r=0;r<rows.length;r++) bind(rows[r], r);
+    for(var c=0;c<circles.length;c++){
+      circles[c].style.cursor='pointer';
+      bind(circles[c], c);
+    }
+    list.addEventListener('mouseleave', function(){ light(-1); });
+    arc.addEventListener('mouseleave',  function(){ light(-1); });
   })();
 
   /* ═══════════════════════════════════════════════════════════════

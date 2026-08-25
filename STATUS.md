@@ -44,20 +44,25 @@ hook · ticker · 01 problem (+ "the gap" diagram) · 02 fit · 03 journey
   category and the hook moved to `og:title`.
 - `vercel.json` — CSP, HSTS, X-Frame-Options, Permissions-Policy, asset
   immutable caching.
+- **Rendered in a real browser at last** (local static server, in-app browser).
+  Swept 375 / 430 / 710 / 768 / 1280 / 1366 / 1440 / 1512 / 1920 / 2560.
+  Hero spacing at 1280–1512 was the open worry — it is correct, the grid
+  construction holds proportionally, no overflow at any width. Two genuine
+  defects that only rendering could reveal were found and fixed:
+  - the nav CTA wrapped to two lines below ~560px and pushed the header out of
+    its band; it now swaps to a short "Contact" label
+  - the constellation lay across the hook-foot paragraph on every phone and
+    tablet. The `narrow` threshold dropped 900 → 700 so tablets take the
+    grid-snapped path, and the phone fallback now sits in the empty band
+    between the nav and the eyebrow instead of centred low over the type.
 
 ## Open — next session starts here
 
-1. **Hero spacing on small laptops.** Owner's note: the nine circles read as
-   "way more away" and the page "not quite aligned for small screen laptops".
-   The grid construction is correct at ≥1920 but 1280–1512 has not been
-   verified visually.
-2. **Full device sweep.** Smoke + appearance across every device category —
-   phone, phablet, tablet portrait/landscape, small laptop, desktop,
-   ultrawide. Currently modelled numerically, never rendered in a real
-   browser (no browser binary in the sandbox).
-3. **Chapter 07 integration.** Section is in and passing, but has not been
+1. **Chapter 07 integration.** Section is in and passing, but has not been
    reviewed on screen at any width.
-4. Inner pages still carry the old design.
+2. Inner pages still carry the old design — and they still hard-code the long
+   nav CTA label, so they show the same overflowing header on phones that the
+   homepage just had.
 5. Translations: `rm i18n/FROZEN && python3 build_i18n.py`, then re-run the
    gate — it will fail until every localised page matches the new structure.
 

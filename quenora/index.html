@@ -210,7 +210,12 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
   transform:translateY(101%);transition:transform .5s var(--e)}
 .navcta:hover{color:var(--void);border-color:var(--ember)}
 .navcta:hover::after{transform:translateY(0)}
+.navcta{white-space:nowrap}
+.cta-short{display:none}
 @media(max-width:880px){.navlinks>a:not(.navcta){display:none}}
+/* Below ~560px the row cannot hold brand + full CTA + language button, so the
+   CTA wraps to two lines and pushes the header out of its band. */
+@media(max-width:560px){.cta-long{display:none}.cta-short{display:inline}}
 
 /* ── hook: pure CSS word reveal, fires on load, no JS needed ── */
 .hook{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
@@ -612,7 +617,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <a href="services.html">Capabilities</a>
 <a href="approach.html">Approach</a>
 <a href="work.html">Work</a>
-<a class="navcta" href="contact.html">Start a conversation</a>
+<a class="navcta" href="contact.html"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="index.html" hreflang="en" lang="en">English</a></li><li><a href="de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/index.html" hreflang="fr" lang="fr">Français</a></li><li><a href="es/index.html" hreflang="es" lang="es">Español</a></li><li><a href="it/index.html" hreflang="it" lang="it">Italiano</a></li></ul></div>
 </div>
 </header>
@@ -1191,7 +1196,11 @@ the work to.</p>
       W=r.width; H=r.height; DPR=Math.min(devicePixelRatio||1,2);
       cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
       g.setTransform(DPR,0,0,DPR,0,0);
-      narrow = W < 900;
+      /* Below this the headline fills the column and the grid-snapped arc would
+         land on top of the type; above it there is clear space to its right.
+         At the old 900 threshold tablets took the centred fallback, which puts
+         the arc across the hook-foot paragraph. */
+      narrow = W < 700;
 
       /* ── the field is constructed on the page's own grid ──
          The previous box was arbitrary viewport fractions (0.50, 0.985) with
@@ -1242,8 +1251,32 @@ the work to.</p>
       }
 
       if(!snapped){
-        /* narrow screens, or the headline not measurable yet: centre under
-           the type with the halo budgeted inside the fit */
+        /* Narrow screens: the headline fills the column, so there is no clear
+           space beside it. The one genuinely empty band is between the nav and
+           the eyebrow — putting the arc there keeps it off the type entirely.
+           The old fallback centred it low, which laid it across the hook-foot
+           paragraph on every phone and tablet. */
+        var navEl = d.getElementById('nav');
+        var eyeEl = d.querySelector('.hook .eyebrow');
+        var wrapN = d.querySelector('.hook .wrap');
+        if(navEl && eyeEl && wrapN){
+          var nb = navEl.getBoundingClientRect().bottom - r.top;
+          var et = eyeEl.getBoundingClientRect().top - r.top;
+          var wrn = wrapN.getBoundingClientRect();
+          var band = et - nb;
+          if(band > 60){
+            fy0 = nb + band*0.12; fy1 = et - band*0.12;
+            SC = (fy1-fy0)/BH;
+            OX = (wrn.right - r.left) - B[1]*SC;
+            OY = fy1 - B[3]*SC;
+            snapped = true;
+          }
+        }
+      }
+
+      if(!snapped){
+        /* last-resort: nothing measurable yet — centre under the type with the
+           halo budgeted inside the fit */
         fx0 = W*0.06; fx1 = W*0.94; fy0 = H*0.52; fy1 = H*0.97;
         SC = Math.min((fx1-fx0)/(BW+PAD*2), (fy1-fy0)/(BH+PAD*2));
         OX = (fx0+fx1)/2 - CXA*SC;

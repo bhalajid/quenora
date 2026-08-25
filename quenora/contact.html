@@ -316,6 +316,11 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 .qr-mini img{width:92px;height:92px;background:#fff;padding:7px;border-radius:9px;flex:none}
 .qr-mini p{font-size:12.5px;color:var(--grey-d);font-weight:300;line-height:1.65}
 .form-note{margin-top:16px;font-size:12.5px;color:var(--grey-d)}
+/* GDPR Art. 13 asks for this at the point of collection, so it sits with
+   the Send button rather than in the footer. */
+.form-privacy{margin:20px 0 14px;font-size:12.5px;line-height:1.6;color:var(--grey)}
+.form-privacy a{color:var(--copper);border-bottom:1px solid var(--copper-dim)}
+.form-privacy a:hover{border-bottom-color:var(--copper)}
 
 .langsel{position:relative;margin-left:14px}
 .langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
@@ -402,6 +407,9 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 </select></div>
 <div class="field"><label for="f-msg">What does the problem look like?</label>
 <textarea autocomplete="off" id="f-msg" name="message" placeholder="A few sentences is plenty."></textarea></div>
+<p class="form-privacy">We use these details only to reply to your enquiry — never for a
+          mailing list, and never passed to anyone else. How they are stored and for how long
+          is set out in the <a href="privacy.html">privacy notice</a>.</p>
 <button class="btn btn-primary" id="submitBtn" type="submit">Send →</button>
 <p class="form-note" id="formNote">This prototype form is not yet wired to a backend —
           it will open your email client instead.</p>

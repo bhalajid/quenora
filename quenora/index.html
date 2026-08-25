@@ -369,8 +369,12 @@ body.clg .cur::after{opacity:1}
 /* ── "the gap": the chapter 01 diagram ── */
 .gapfig{margin:var(--sp5) 0 0;padding:0}
 .gapfig canvas{display:block;width:100%;height:clamp(300px,24vw,340px)}
-.gapfig figcaption{margin-top:var(--sp3);padding-top:var(--sp3);
+.gapfig figcaption,.autofig figcaption{margin-top:var(--sp3);padding-top:var(--sp3);
   border-top:1px solid var(--line);color:var(--t3);font-size:.92rem;max-width:62ch}
+/* ── capability 02, illustrated: the automation figure ── */
+.autofig{margin:var(--sp5) 0 0;padding:0}
+.autofig canvas{display:block;width:100%;height:clamp(260px,20vw,300px)}
+.autofig .autolab{color:var(--copper-lt);margin-bottom:var(--sp3)}
 
 /* ── PIN 1: sticky scrub stage ── */
 .pinwrap{height:170vh;position:relative}
@@ -836,6 +840,14 @@ evidence to answer them was never captured.</p></article>
 <div class="nrow rv"><span class="i">08</span><h3>Managed AI Operations</h3><span></span></div>
 <div class="nrow rv"><span class="i">09</span><h3>Change Management &amp; Enablement</h3><span></span></div>
 </div>
+<figure class="autofig rv">
+<p class="mono autolab">Capability 02 · what automation actually looks like</p>
+<canvas aria-hidden="true" id="autoCanvas"></canvas>
+<figcaption>Illustrative, not measured. Work arrives, and most of it completes
+without anyone touching it. The rest is routed to a person on purpose — an
+automation is only trustworthy if it knows which cases it should not decide,
+and drawing that line is most of the work.</figcaption>
+</figure>
 <div class="counters">
 <div class="rv"><b data-count="9">9</b>
 <span>capabilities, three of them core — because almost every engagement
@@ -1649,9 +1661,14 @@ the work to.</p>
     });
     var MW=MB[1]-MB[0], MH=MB[3]-MB[2];
 
-    /* beat timing, in seconds from the moment the figure comes into view */
+    /* Beat timing, in seconds. The figure loops: the argument is worth making
+       more than once, and the mark rebuilding in the gap on every pass is the
+       point at which the brand and the argument are the same object. */
     var T_HOLD=5.4,      /* how long the wall wins */
-        T_BUILD=2.2;     /* how long the mark takes to build */
+        T_BUILD=2.2,     /* how long the mark takes to build */
+        T_SHOW=8.0,      /* how long the work keeps landing once it is open */
+        CYCLE=T_HOLD+T_BUILD+T_SHOW;
+    var lastLoop=-1;
     function easeOut(x){ return 1-Math.pow(1-x,3); }
     function clamp01(x){ return x<0?0:x>1?1:x; }
 
@@ -1710,8 +1727,19 @@ the work to.</p>
       var step = room/(lanes-1+(tight?0.9:0));
       var wall = x0 + span*WALL;
 
-      /* ── where we are in the three beats ── */
-      var bridge = reduced ? 1 : easeOut(clamp01((el-T_HOLD)/T_BUILD));
+      /* ── where we are in the three beats ──
+         cyc is the position inside one cycle. Crossing into a new cycle puts
+         the wall back up and clears the terminals, so the argument restarts
+         rather than half-dissolving. */
+      var cyc = el % CYCLE, loopIdx = Math.floor(el/CYCLE);
+      if(!reduced && loopIdx!==lastLoop){
+        lastLoop = loopIdx;
+        if(loopIdx>0){
+          LANES.forEach(function(L){ L.lit=0; L.p=-Math.random()*0.35; });
+          sparks.length=0; rings.length=0; flares.length=0; lands.length=0;
+        }
+      }
+      var bridge = reduced ? 1 : easeOut(clamp01((cyc-T_HOLD)/T_BUILD));
       var open   = bridge > 0.02;
 
       /* ── headers ── */
@@ -1895,6 +1923,145 @@ the work to.</p>
           g.lineWidth=1.4*ld.l+0.3;
           g.beginPath(); g.arc(ld.x,ld.y,lr,-Math.PI*0.5,Math.PI*0.5); g.stroke();
         }
+      }
+
+      raf=requestAnimationFrame(paint);
+    }
+
+    function go(){ if(!raf && seen) raf=requestAnimationFrame(paint); }
+    function halt(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
+
+    fit();
+    if('ResizeObserver' in w) new ResizeObserver(function(){ fit(); }).observe(cv);
+    w.addEventListener('resize', fit, {passive:true});
+    if(d.fonts && d.fonts.ready) d.fonts.ready.then(fit);
+
+    if(reduced){ paint(performance.now()); halt(); }
+    else if('IntersectionObserver' in w){
+      new IntersectionObserver(function(es){
+        seen=es[0].isIntersecting; if(seen) go(); else halt();
+      },{threshold:0.05}).observe(cv);
+    } else { seen=true; go(); }
+  })();
+
+  /* ═══════════════════════════════════════════════════════════════
+     CAPABILITY 02 — the automation figure.
+
+     Work arrives on the left at a steady rate and runs a single automated
+     spine. At the decision point most of it continues to DONE on its own.
+     A minority is routed down to a person, on purpose.
+
+     That split is the argument. Automation that claims to handle everything
+     is either lying or unsupervised; the figure that sells honestly is the
+     one that shows a deliberate human branch. It runs continuously — there
+     is no beginning or end to it, which is the point.
+     ═══════════════════════════════════════════════════════════════ */
+  (function(){
+    var cv=d.getElementById('autoCanvas'); if(!cv) return;
+    var g=cv.getContext && cv.getContext('2d'); if(!g) return;
+    var W=0,H=0,DPR=1,raf=null,seen=false,ready=false,t0=0;
+    var items=[], done=[], spawn=0;
+
+    var EX_EVERY=5;          /* one in five is routed to a person */
+    var made=0;
+
+    function fit(){
+      var r=cv.getBoundingClientRect();
+      if(r.width<2||r.height<2) return false;
+      W=r.width; H=r.height; DPR=Math.min(devicePixelRatio||1,2);
+      cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+      g.setTransform(DPR,0,0,DPR,0,0);
+      ready=true; return true;
+    }
+    function lab(t,x,y,a,c){
+      g.font='500 10px "JetBrains Mono",monospace';
+      g.textAlign=a; g.textBaseline='alphabetic'; g.fillStyle=c; g.fillText(t,x,y);
+    }
+    function cl(x){ return x<0?0:x>1?1:x; }
+
+    function paint(now){
+      if(!ready && !fit()){ raf=requestAnimationFrame(paint); return; }
+      if(!t0) t0=now;
+      g.clearRect(0,0,W,H);
+
+      var tight=W<640;
+      var padL=2, padR=Math.max(10,W*0.01);
+      var x0=padL+(tight?0:Math.min(150,W*0.15));
+      var x1=W-padR-(tight?0:Math.min(150,W*0.15));
+      var xd=x0+(x1-x0)*0.54;                 /* the decision point */
+      var mid=H*0.44, top=H*0.26, bot=H*0.78;
+
+      /* ── the spine everything runs ── */
+      g.strokeStyle='rgba(201,122,60,.42)'; g.lineWidth=1.3;
+      g.beginPath(); g.moveTo(x0,mid); g.lineTo(xd,mid); g.stroke();
+      /* ── the two outcomes ── */
+      g.strokeStyle='rgba(201,122,60,.42)';
+      g.beginPath(); g.moveTo(xd,mid); g.lineTo(x1,top); g.stroke();
+      g.save(); g.setLineDash([3,5]); g.lineWidth=1.1;
+      g.strokeStyle='rgba(148,156,176,.34)';
+      g.beginPath(); g.moveTo(xd,mid); g.lineTo(x1,bot); g.stroke(); g.restore();
+
+      /* ── the decision point itself ── */
+      g.strokeStyle='rgba(233,160,99,.75)'; g.lineWidth=1.2;
+      g.beginPath(); g.arc(xd,mid,5.5,0,6.2832); g.stroke();
+      lab(tight?'DECIDE':'HANDLE OR ESCALATE', xd, mid-16, 'center', 'rgba(233,160,99,.8)');
+
+      /* ── labels ── */
+      lab('WORK ARRIVES', padL, mid-14, 'left', 'rgba(233,160,99,.95)');
+      lab(tight?'DONE':'DONE, UNATTENDED', W-padR, top-13, 'right', 'rgba(233,160,99,.95)');
+      lab(tight?'TO A PERSON':'ROUTED TO A PERSON', W-padR, bot+19, 'right', 'rgba(148,156,176,.9)');
+
+      /* ── intake and the two terminals ── */
+      g.fillStyle='rgba(201,122,60,.92)';
+      g.beginPath(); g.arc(x0,mid,3.5,0,6.2832); g.fill();
+      g.strokeStyle='rgba(201,122,60,.55)'; g.lineWidth=1.1;
+      g.beginPath(); g.arc(x1,top,4.5,0,6.2832); g.stroke();
+      g.strokeStyle='rgba(148,156,176,.45)';
+      g.beginPath(); g.arc(x1,bot,4.5,0,6.2832); g.stroke();
+
+      /* ── work arriving ── */
+      if(!reduced){
+        if(--spawn<=0){
+          spawn=22+Math.round(Math.random()*10);
+          made++;
+          items.push({p:0, ex:(made%EX_EVERY===0), sp:0.0055+Math.random()*0.0022});
+        }
+        for(var i=items.length-1;i>=0;i--){
+          var it=items[i]; it.p+=it.sp;
+          if(it.p>=1){
+            done.push({x:x1, y:it.ex?bot:top, ex:it.ex, l:1});
+            items.splice(i,1); continue;
+          }
+          var ix,iy;
+          if(it.p<0.54){                       /* on the shared spine */
+            ix=x0+(xd-x0)*(it.p/0.54); iy=mid;
+          } else {                             /* past the decision */
+            var q=(it.p-0.54)/0.46;
+            ix=xd+(x1-xd)*q; iy=mid+((it.ex?bot:top)-mid)*q;
+          }
+          var col=it.ex?'148,176,196':'255,226,190';
+          var gg=g.createRadialGradient(ix,iy,0,ix,iy,8);
+          gg.addColorStop(0,'rgba('+col+',.55)');
+          gg.addColorStop(1,'rgba('+col+',0)');
+          g.fillStyle=gg; g.beginPath(); g.arc(ix,iy,8,0,6.2832); g.fill();
+          g.fillStyle='rgba('+col+',.95)';
+          g.beginPath(); g.arc(ix,iy,2.4,0,6.2832); g.fill();
+        }
+        /* ── arrivals ── */
+        for(var j=done.length-1;j>=0;j--){
+          var dn=done[j]; dn.l-=0.032;
+          if(dn.l<=0){ done.splice(j,1); continue; }
+          var rr=(1-dn.l)*17+3;
+          g.strokeStyle=(dn.ex?'rgba(148,176,196,':'rgba(233,178,120,')+(dn.l*0.7).toFixed(3)+')';
+          g.lineWidth=1.3*dn.l+0.3;
+          g.beginPath(); g.arc(dn.x,dn.y,rr,-Math.PI*0.5,Math.PI*0.5); g.stroke();
+        }
+      } else {
+        /* reduced motion: one of each, at rest, so the split still reads */
+        g.fillStyle='rgba(255,226,190,.95)';
+        g.beginPath(); g.arc(xd+(x1-xd)*0.55, mid+(top-mid)*0.55, 2.4,0,6.2832); g.fill();
+        g.fillStyle='rgba(148,176,196,.95)';
+        g.beginPath(); g.arc(xd+(x1-xd)*0.55, mid+(bot-mid)*0.55, 2.4,0,6.2832); g.fill();
       }
 
       raf=requestAnimationFrame(paint);

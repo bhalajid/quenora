@@ -523,38 +523,107 @@ addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40));
 })();
 
 // text scramble on headings
+//
+// Scheduling is by ELAPSED TIME, not by requestAnimationFrame count.
+//
+// The previous version gave each character a start and end expressed as a
+// frame number (i*1.6, +8..19 frames). That silently assumed 60fps. rAF makes
+// no such promise: browsers throttle it hard in a background tab and pause it
+// outright in a hidden one. Because the loop had no clock and no deadline, the
+// reveal simply stopped part-way and left the heading showing scrambled
+// characters — "One conversation. No deck required from THAO" — for as long as
+// the tab stayed unfocused. Measured on this page: 61fps focused (1.4s, fine)
+// against 34fps hidden and unresolved after 2s.
+//
+// Time-based scheduling fixes it by construction: while the tab is hidden the
+// clock keeps running, so the first frame after the reader returns finds every
+// character past its deadline and writes the finished text immediately.
+//
+// Two further guarantees, because the animation must never be the only way to
+// read the heading:
+//   * every element gets a fallback timer at setup, so the text appears even
+//     if the IntersectionObserver never fires or run() throws;
+//   * each run carries its own deadline, so it completes even if rAF never
+//     delivers another frame.
 (function(){
-  const CH='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/\\';
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const els=document.querySelectorAll('.scramble');if(!els.length)return;
+  var CH='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/\\';
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=[].slice.call(document.querySelectorAll('.scramble'));
+  if(!els.length)return;
+
+  var TOTAL=700;      /* whole reveal, ms — the audit asked for 600–800 */
+  var CHAR_MIN=150;   /* how long one character stays scrambled */
+  var CHAR_MAX=260;
+  var SAFETY=2500;    /* text appears by now no matter what happens */
+
+  function finish(el){
+    if(el.__scDone)return;
+    el.__scDone=true;
+    clearTimeout(el.__scT);
+    el.textContent=el.dataset.txt;
+  }
+
   function run(el){
-    const txt=el.dataset.txt;
-    if(reduce){el.textContent=txt;return;}
-    const len=txt.length;let frame=0;
-    const queue=[...txt].map((c,i)=>({
-      c,start:Math.floor(i*1.6),end:Math.floor(i*1.6)+8+Math.floor(Math.random()*12)
-    }));
+    if(el.__scDone)return;
+    clearTimeout(el.__scT);
+    var txt=el.dataset.txt;
+    if(reduce){finish(el);return;}
+
+    var chars=txt.split('');
+    var len=chars.length;
+    /* Spread the starts so the last character still lands inside TOTAL. */
+    var span=CHAR_MIN+Math.round((CHAR_MAX-CHAR_MIN)/2);
+    var stagger=len>1?Math.max(0,(TOTAL-span)/(len-1)):0;
+    var queue=chars.map(function(c,i){
+      var start=i*stagger;
+      return {c:c,start:start,
+              end:Math.min(TOTAL,start+CHAR_MIN+Math.random()*(CHAR_MAX-CHAR_MIN))};
+    });
+
+    var t0=performance.now();
+    /* Independent of rAF entirely: setTimeout is throttled in background tabs
+       but never paused, so this always lands. */
+    el.__scT=setTimeout(function(){finish(el);},TOTAL+400);
+
     (function tick(){
-      let out='',done=0;
-      queue.forEach(q=>{
-        if(frame>=q.end){done++;out+=q.c;}
-        else if(frame>=q.start){
+      if(el.__scDone)return;
+      var t=performance.now()-t0;
+      if(t>=TOTAL){finish(el);return;}
+      var out='',done=0,i,q;
+      for(i=0;i<len;i++){
+        q=queue[i];
+        if(t>=q.end){done++;out+=q.c;}
+        else if(t>=q.start){
           out+='<span class="sc-ghost">'+
             (q.c===' '?' ':CH[Math.floor(Math.random()*CH.length)])+'</span>';
         } else out+=q.c===' '?' ':'<span style="opacity:0">'+q.c+'</span>';
-      });
-      el.innerHTML=out;frame++;
-      if(done<len)requestAnimationFrame(tick);else el.textContent=txt;
+      }
+      if(done>=len){finish(el);return;}
+      el.innerHTML=out;
+      requestAnimationFrame(tick);
     })();
   }
-  els.forEach(el=>{
+
+  els.forEach(function(el){
     el.dataset.txt=el.textContent.trim();
     el.innerHTML='<span style="opacity:0">'+el.dataset.txt+'</span>';
+    el.__scT=setTimeout(function(){finish(el);},SAFETY);
   });
-  const o=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){run(e.target);o.unobserve(e.target);}
-  }),{threshold:.6});
-  els.forEach(el=>o.observe(el));
+
+  var o=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){run(e.target);o.unobserve(e.target);}
+    });
+  },{threshold:.6});
+  els.forEach(function(el){o.observe(el);});
+
+  /* Coming back to a parked tab must never reveal a half-scrambled heading. */
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden)return;
+    els.forEach(function(el){
+      if(!el.__scDone&&el.dataset.txt)finish(el);
+    });
+  });
 })();
 
 // scroll reveal

@@ -118,13 +118,29 @@ main,header,footer{position:relative;z-index:2}
 /* ── cursor ── */
 .cur,.cdot{position:fixed;top:0;left:0;z-index:9998;pointer-events:none;
   border-radius:50%;opacity:0;transition:opacity .3s}
-.cur{width:40px;height:40px;border:1.5px solid var(--copper);margin:-20px 0 0 -20px;
+.cur{width:40px;height:40px;margin:-20px 0 0 -20px;
   transition:width .38s var(--e),height .38s var(--e),margin .38s var(--e),
-  background .38s var(--e),border-color .38s var(--e),opacity .3s}
+  opacity .3s}
+/* The ring is drawn as a rotating dashed arc rather than a plain circle, so it
+   reads as the mark's arc and not as a default custom cursor. The dashes are a
+   conic mask on a ring, which stays one element and costs nothing. */
+.cur::before{content:'';position:absolute;inset:0;border-radius:50%;
+  border:1.5px solid var(--copper);
+  -webkit-mask:repeating-conic-gradient(#000 0 14deg,transparent 14deg 22deg);
+          mask:repeating-conic-gradient(#000 0 14deg,transparent 14deg 22deg);
+  animation:curspin 5.5s linear infinite}
+.cur::after{content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,112,67,.16),transparent 70%);
+  opacity:0;transition:opacity .38s var(--e)}
+@keyframes curspin{to{transform:rotate(360deg)}}
 .cdot{width:5px;height:5px;background:var(--ember);margin:-2.5px 0 0 -2.5px}
 body.con .cur,body.con .cdot{opacity:1}
-body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
-  background:rgba(255,112,67,.13);border-color:var(--ember)}
+body.clg .cur{width:76px;height:76px;margin:-38px 0 0 -38px}
+body.clg .cur::before{border-color:var(--ember);animation-duration:2.2s;
+  -webkit-mask:repeating-conic-gradient(#000 0 26deg,transparent 26deg 34deg);
+          mask:repeating-conic-gradient(#000 0 26deg,transparent 26deg 34deg)}
+body.clg .cur::after{opacity:1}
+@media(prefers-reduced-motion:reduce){.cur::before{animation:none}}
 @media(hover:none),(pointer:coarse){.cur,.cdot{display:none}}
 
 /* ── loader ── */
@@ -210,7 +226,12 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
   transform:translateY(101%);transition:transform .5s var(--e)}
 .navcta:hover{color:var(--void);border-color:var(--ember)}
 .navcta:hover::after{transform:translateY(0)}
+.navcta{white-space:nowrap}
+.cta-short{display:none}
 @media(max-width:880px){.navlinks>a:not(.navcta){display:none}}
+/* Below ~560px the row cannot hold brand + full CTA + language button, so the
+   CTA wraps to two lines and pushes the header out of its band. */
+@media(max-width:560px){.cta-long{display:none}.cta-short{display:inline}}
 
 /* ── hook: pure CSS word reveal, fires on load, no JS needed ── */
 .hook{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
@@ -262,19 +283,21 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
   100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* ── ticker: CSS keyframes, JS only nudges the speed ── */
-.ticker{border-block:1px solid var(--line);padding:var(--sp3) 0;overflow:hidden;
+.ticker{border-block:1px solid var(--line);padding:var(--sp2) 0;overflow:hidden;
   background:rgba(20,22,30,.5);position:relative}
 .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;
-  width:170px;z-index:2;pointer-events:none}
+  width:120px;z-index:2;pointer-events:none}
 .ticker::before{left:0;background:linear-gradient(90deg,var(--void),transparent)}
 .ticker::after{right:0;background:linear-gradient(270deg,var(--void),transparent)}
 .tt{display:flex;width:max-content;animation:slide 38s linear infinite;
   will-change:transform}
 @keyframes slide{to{transform:translateX(-50%)}}
-.tt b{font-size:clamp(1.5rem,3.6vw,3rem);font-weight:800;letter-spacing:-.045em;
-  white-space:nowrap;padding-right:var(--sp4);display:flex;align-items:center;
-  gap:var(--sp4);color:var(--t3);transition:color .4s}
-.tt b::after{content:'';width:10px;height:10px;border-radius:50%;
+/* Sized as a running label, not a headline. At the old clamp it topped out at
+   3rem and read louder than the h1 it sits under. */
+.tt b{font-size:clamp(.9rem,1.3vw,1.35rem);font-weight:700;letter-spacing:-.02em;
+  white-space:nowrap;padding-right:var(--sp3);display:flex;align-items:center;
+  gap:var(--sp3);color:var(--t3);transition:color .4s}
+.tt b::after{content:'';width:5px;height:5px;border-radius:50%;
   background:var(--copper);flex:none}
 .ticker:hover .tt b{color:var(--t2)}
 
@@ -346,8 +369,12 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 /* ── "the gap": the chapter 01 diagram ── */
 .gapfig{margin:var(--sp5) 0 0;padding:0}
 .gapfig canvas{display:block;width:100%;height:clamp(300px,24vw,340px)}
-.gapfig figcaption{margin-top:var(--sp3);padding-top:var(--sp3);
+.gapfig figcaption,.autofig figcaption{margin-top:var(--sp3);padding-top:var(--sp3);
   border-top:1px solid var(--line);color:var(--t3);font-size:.92rem;max-width:62ch}
+/* ── capability 02, illustrated: the automation figure ── */
+.autofig{margin:var(--sp5) 0 0;padding:0}
+.autofig canvas{display:block;width:100%;height:clamp(260px,20vw,300px)}
+.autofig .autolab{color:var(--copper-lt);margin-bottom:var(--sp3)}
 
 /* ── PIN 1: sticky scrub stage ── */
 .pinwrap{height:170vh;position:relative}
@@ -373,19 +400,27 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .hwrap{position:relative}
 .hpin{position:sticky;top:0;height:100svh;overflow:hidden;
   border-block:1px solid var(--line);
+  display:flex;align-items:center;
   background:linear-gradient(180deg,var(--sf2),var(--sf1))}
 /* The track is a row of cards, vertically centred in the stage.
    Forcing .phase to height:100% made every card a full viewport tall while
    its content stopped around 45% down — which is the empty half-screen under
    the phases. Cards are now sized by their content and centred. */
-.htrack{display:flex;align-items:center;height:100%;gap:var(--sp3);
-  padding:0 var(--sp4);will-change:transform}
-.phase{flex:0 0 clamp(300px,38vw,480px);align-self:center;
+/* The stage centres the track, and the track stretches every card to the
+   tallest one. Cards were previously centred individually and sized by their
+   own content, so the row read as a ragged set of different-sized boxes. */
+.htrack{display:flex;align-items:stretch;height:auto;max-height:96svh;
+  gap:var(--sp3);padding:0 var(--sp4);will-change:transform}
+.phase{flex:0 0 clamp(300px,38vw,480px);
   padding:var(--sp5) var(--sp4);border:1px solid var(--line);border-radius:4px;
   background:linear-gradient(180deg,rgba(20,22,30,.62),rgba(13,14,19,.28));
   display:flex;flex-direction:column;justify-content:flex-start;
   position:relative;overflow:hidden;
-  max-height:82svh;transition:border-color .5s var(--e)}
+  transition:border-color .5s var(--e)}
+/* The card is a flex column, so its children default to flex-shrink:1 and get
+   squeezed instead of setting the card's height — which is how the duration
+   line ended up outside the card's own box. Nothing in the card shrinks. */
+.phase>*{flex:0 0 auto}
 .phase:hover{border-color:var(--line2)}
 .phase::before{content:attr(data-n);position:absolute;right:-1vw;bottom:-2.5vw;
   font-family:'Playfair Display',serif;font-style:italic;font-size:11rem;
@@ -409,6 +444,20 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .phase .exit b{color:var(--t1);font-weight:600;display:block;margin-bottom:3px;
   font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
   text-transform:uppercase}
+/* Laptops in the 13-inch band have roughly 720px of viewport height. The card
+   is now the same height as the tallest one in the row, and at that height the
+   tallest card does not fit inside 86svh — the duration line fell off the
+   bottom. Tighten the card rather than clip it. */
+@media(max-height:1000px){
+  .phase{padding:var(--sp4) var(--sp4)}
+  .phase h3{font-size:clamp(1.5rem,2.4vw,2rem)}
+  .phase p{font-size:.95rem}
+  .phase .mono{margin-bottom:var(--sp2)}
+  .phase ul{margin-top:var(--sp2)}
+  .phase li{font-size:.86rem;padding:4px 0 4px 20px}
+  .phase .exit{margin-top:var(--sp2);padding:9px 12px;font-size:.83rem}
+  .phase .dur{margin-top:var(--sp2);padding-top:var(--sp2)}
+}
 
 /* ── the nine ── */
 .nine{border-top:1px solid var(--line2)}
@@ -612,7 +661,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <a href="services.html">Capabilities</a>
 <a href="approach.html">Approach</a>
 <a href="work.html">Work</a>
-<a class="navcta" href="contact.html">Start a conversation</a>
+<a class="navcta" href="contact.html"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="index.html" hreflang="en" lang="en">English</a></li><li><a href="de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/index.html" hreflang="fr" lang="fr">Français</a></li><li><a href="es/index.html" hreflang="es" lang="es">Español</a></li><li><a href="it/index.html" hreflang="it" lang="it">Italiano</a></li></ul></div>
 </div>
 </header>
@@ -636,7 +685,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 </section>
 <div aria-hidden="true" class="ticker">
 <div class="tt" id="tt">
-<b>Platform Engineering</b><b>AI Integration</b><b>Deployment &amp; Development</b>
+<b>Platform &amp; Deployment</b><b>Process Automation</b><b>AI Integration</b>
 <b>AI Strategy</b><b>Data Engineering</b><b>Custom Agents</b>
 <b>AI Governance</b><b>Managed Operations</b><b>Change Enablement</b>
 </div>
@@ -661,7 +710,8 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <canvas aria-hidden="true" id="gapCanvas"></canvas>
 <figcaption>Illustrative, not a client portfolio. Every pulse is a proof of
 concept that worked. They stop at the same wall — and the wall is never the
-model. It is the distance between the model and the work.</figcaption>
+model. It is the distance between the model and the work. Closing that
+distance is the whole job, and it is what the six phases below describe.</figcaption>
 </figure>
 </div>
 <div class="pinwrap" id="pinwrap">
@@ -780,9 +830,9 @@ evidence to answer them was never captured.</p></article>
 </div>
 </div>
 <div class="nine">
-<div class="nrow rv"><span class="i">01</span><h3>Platform Engineering</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">02</span><h3>AI Integration</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">03</span><h3>Deployment &amp; Development</h3><span class="tag">Core</span></div>
+<div class="nrow rv"><span class="i">01</span><h3>Platform &amp; Deployment Engineering</h3><span class="tag">Core</span></div>
+<div class="nrow rv"><span class="i">02</span><h3>Process &amp; Workflow Automation</h3><span class="tag">Core</span></div>
+<div class="nrow rv"><span class="i">03</span><h3>AI Integration</h3><span class="tag">Core</span></div>
 <div class="nrow rv"><span class="i">04</span><h3>AI Strategy &amp; Advisory</h3><span></span></div>
 <div class="nrow rv"><span class="i">05</span><h3>Data Engineering &amp; Analytics</h3><span></span></div>
 <div class="nrow rv"><span class="i">06</span><h3>Custom AI Agents &amp; Copilots</h3><span></span></div>
@@ -790,6 +840,14 @@ evidence to answer them was never captured.</p></article>
 <div class="nrow rv"><span class="i">08</span><h3>Managed AI Operations</h3><span></span></div>
 <div class="nrow rv"><span class="i">09</span><h3>Change Management &amp; Enablement</h3><span></span></div>
 </div>
+<figure class="autofig rv">
+<p class="mono autolab">Capability 02 · what automation actually looks like</p>
+<canvas aria-hidden="true" id="autoCanvas"></canvas>
+<figcaption>Illustrative, not measured. Work arrives, and most of it completes
+without anyone touching it. The rest is routed to a person on purpose — an
+automation is only trustworthy if it knows which cases it should not decide,
+and drawing that line is most of the work.</figcaption>
+</figure>
 <div class="counters">
 <div class="rv"><b data-count="9">9</b>
 <span>capabilities, three of them core — because almost every engagement
@@ -959,7 +1017,7 @@ the work to.</p>
 <p style="max-width:35ch;color:var(--t2);font-size:.96rem">
           Enterprise AI, engineered to operate. Built into what you already run,
           then handed over.</p>
-<p class="mono" style="color:var(--t3)">Heilbronn, Germany · Working internationally</p>
+<p class="mono" style="color:var(--t3)">Working internationally</p>
 </div>
 <div><h3>Site</h3><nav aria-label="Footer">
 <a href="index.html">Home</a><a href="services.html">Capabilities</a>
@@ -1025,9 +1083,21 @@ the work to.</p>
       body.classList.add('con');
       cdot.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0)';
     }, { passive: true });
+    /* The ring lags, and the lag is the input: the further it is behind the
+       pointer the more it stretches along the direction of travel and the
+       thinner it goes across it. Standing still it is a circle; moving fast it
+       is a comet. That is the whole difference between this and a ring that
+       merely follows. */
+    var sq = 0;
     (function ring() {
+      var dx = mx - rx, dy = my - ry;
       rx = lerp(rx, mx, 0.16); ry = lerp(ry, my, 0.16);
-      cur.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0)';
+      var sp = Math.sqrt(dx * dx + dy * dy);
+      sq = lerp(sq, Math.min(sp / 46, 1), 0.2);
+      var ang = sp > 0.6 ? Math.atan2(dy, dx) * 57.2958 : 0;
+      cur.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0)'
+        + ' rotate(' + ang + 'deg)'
+        + ' scale(' + (1 + sq * 0.5) + ',' + (1 - sq * 0.34) + ')';
       requestAnimationFrame(ring);
     })();
     d.addEventListener('mouseover', function (e) {
@@ -1191,7 +1261,11 @@ the work to.</p>
       W=r.width; H=r.height; DPR=Math.min(devicePixelRatio||1,2);
       cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
       g.setTransform(DPR,0,0,DPR,0,0);
-      narrow = W < 900;
+      /* Below this the headline fills the column and the grid-snapped arc would
+         land on top of the type; above it there is clear space to its right.
+         At the old 900 threshold tablets took the centred fallback, which puts
+         the arc across the hook-foot paragraph. */
+      narrow = W < 700;
 
       /* ── the field is constructed on the page's own grid ──
          The previous box was arbitrary viewport fractions (0.50, 0.985) with
@@ -1242,8 +1316,32 @@ the work to.</p>
       }
 
       if(!snapped){
-        /* narrow screens, or the headline not measurable yet: centre under
-           the type with the halo budgeted inside the fit */
+        /* Narrow screens: the headline fills the column, so there is no clear
+           space beside it. The one genuinely empty band is between the nav and
+           the eyebrow — putting the arc there keeps it off the type entirely.
+           The old fallback centred it low, which laid it across the hook-foot
+           paragraph on every phone and tablet. */
+        var navEl = d.getElementById('nav');
+        var eyeEl = d.querySelector('.hook .eyebrow');
+        var wrapN = d.querySelector('.hook .wrap');
+        if(navEl && eyeEl && wrapN){
+          var nb = navEl.getBoundingClientRect().bottom - r.top;
+          var et = eyeEl.getBoundingClientRect().top - r.top;
+          var wrn = wrapN.getBoundingClientRect();
+          var band = et - nb;
+          if(band > 60){
+            fy0 = nb + band*0.12; fy1 = et - band*0.12;
+            SC = (fy1-fy0)/BH;
+            OX = (wrn.right - r.left) - B[1]*SC;
+            OY = fy1 - B[3]*SC;
+            snapped = true;
+          }
+        }
+      }
+
+      if(!snapped){
+        /* last-resort: nothing measurable yet — centre under the type with the
+           halo budgeted inside the fit */
         fx0 = W*0.06; fx1 = W*0.94; fy0 = H*0.52; fy1 = H*0.97;
         SC = Math.min((fx1-fx0)/(BW+PAD*2), (fy1-fy0)/(BH+PAD*2));
         OX = (fx0+fx1)/2 - CXA*SC;
@@ -1528,20 +1626,51 @@ the work to.</p>
   })();
 
   /* ═══════════════════════════════════════════════════════════════
-     "THE GAP" — the chapter 01 diagram.
+     "THE GAP" — the chapter 01 diagram, in three beats.
 
-     A rail runs from the notebook on the left to Tuesday on the right, with
-     a break in the middle. Pulses leave the notebook at a steady rate, reach
-     the near edge of the break, and scatter. None of them cross.
+     BEAT 1 · the problem.  A rail runs from the notebook on the left to
+     production on the right, broken in the middle. Pulses leave the notebook,
+     reach the wall, and are thrown back. None of them cross. This is the
+     chapter's argument, and it has to land before anything answers it.
 
-     That is not decoration: it is the argument the chapter is making. The
-     six phases further down are the answer to it.
+     BEAT 2 · the answer arrives.  The mark builds in the gap, circle by
+     circle, in its own order. The wall stops being a blockade and becomes a
+     crossing. The label under it changes from THE GAP to QUENORA.
+
+     BEAT 3 · the work lands.  Pulses now run the whole rail, pass through the
+     mark, and arrive. The production terminals fill as they do, and stay
+     filled. The diagram ends on the outcome, not on the problem.
+
+     The nine circles are the brand mark's own coordinates, unchanged — the
+     same nine triples the nav, the footer and the hero use.
      ═══════════════════════════════════════════════════════════════ */
   (function(){
     var cv=d.getElementById('gapCanvas'); if(!cv) return;
     var g=cv.getContext && cv.getContext('2d'); if(!g) return;
     var W=0,H=0,DPR=1,raf=null,seen=false,t0=0,ready=false;
-    var sparks=[];
+    var sparks=[], rings=[], flares=[], lands=[];
+
+    /* the mark, in arc units — identical to every other place it is drawn */
+    var MARK=[[12,161.71,3],[21.64,161.34,3.95],[33.39,159.88,5.2],
+              [47.73,156.52,6.84],[65.05,149.97,9],[85.34,138.1,11.84],
+              [107.49,117.76,15.59],[127.81,84.89,20.52],[151.71,36,27]];
+    var MB=[1e9,-1e9,1e9,-1e9];
+    MARK.forEach(function(a){
+      MB[0]=Math.min(MB[0],a[0]-a[2]); MB[1]=Math.max(MB[1],a[0]+a[2]);
+      MB[2]=Math.min(MB[2],a[1]-a[2]); MB[3]=Math.max(MB[3],a[1]+a[2]);
+    });
+    var MW=MB[1]-MB[0], MH=MB[3]-MB[2];
+
+    /* Beat timing, in seconds. The figure loops: the argument is worth making
+       more than once, and the mark rebuilding in the gap on every pass is the
+       point at which the brand and the argument are the same object. */
+    var T_HOLD=5.4,      /* how long the wall wins */
+        T_BUILD=2.2,     /* how long the mark takes to build */
+        T_SHOW=8.0,      /* how long the work keeps landing once it is open */
+        CYCLE=T_HOLD+T_BUILD+T_SHOW;
+    var lastLoop=-1;
+    function easeOut(x){ return 1-Math.pow(1-x,3); }
+    function clamp01(x){ return x<0?0:x>1?1:x; }
 
     /* Five lanes, because one rail was a thin line across an empty box — it
        created exactly the kind of dead space this page has been fighting.
@@ -1550,13 +1679,18 @@ the work to.</p>
 
        These are generic use cases, not client work. The caption says so. */
     var LANES=[
-      {n:'RETRIEVAL ASSISTANT',  p:Math.random()},
-      {n:'DEMAND FORECAST',      p:Math.random()},
-      {n:'DOCUMENT CLASSIFIER',  p:Math.random()},
-      {n:'SERVICE COPILOT',      p:Math.random()},
-      {n:'ANOMALY DETECTION',    p:Math.random()}
+      {n:'RETRIEVAL ASSISTANT',  p:Math.random()*0.5},
+      {n:'DEMAND FORECAST',      p:Math.random()*0.5},
+      {n:'DOCUMENT CLASSIFIER',  p:Math.random()*0.5},
+      {n:'SERVICE COPILOT',      p:Math.random()*0.5},
+      {n:'ANOMALY DETECTION',    p:Math.random()*0.5}
     ];
-    LANES.forEach(function(L){ L.sp=0.0034+Math.random()*0.0030; });
+    /* Reduced motion never runs the beats, so it is shown the answer rather
+       than a frozen problem: bridged, and every terminal lit. */
+    LANES.forEach(function(L){
+      L.sp=0.0034+Math.random()*0.0030;
+      L.lit=reduced?1:0;
+    });
 
     var WALL=0.52;                     /* where the wall sits along the rail */
 
@@ -1593,9 +1727,26 @@ the work to.</p>
       var step = room/(lanes-1+(tight?0.9:0));
       var wall = x0 + span*WALL;
 
+      /* ── where we are in the three beats ──
+         cyc is the position inside one cycle. Crossing into a new cycle puts
+         the wall back up and clears the terminals, so the argument restarts
+         rather than half-dissolving. */
+      var cyc = el % CYCLE, loopIdx = Math.floor(el/CYCLE);
+      if(!reduced && loopIdx!==lastLoop){
+        lastLoop = loopIdx;
+        if(loopIdx>0){
+          LANES.forEach(function(L){ L.lit=0; L.p=-Math.random()*0.35; });
+          sparks.length=0; rings.length=0; flares.length=0; lands.length=0;
+        }
+      }
+      var bridge = reduced ? 1 : easeOut(clamp01((cyc-T_HOLD)/T_BUILD));
+      var open   = bridge > 0.02;
+
       /* ── headers ── */
       label('A TYPICAL PILOT PORTFOLIO', padL, head-14, 'left', 'rgba(233,160,99,.95)');
-      if(!tight) label('IN PRODUCTION', x1, head-14, 'right', 'rgba(148,156,176,.85)');
+      if(!tight) label('IN PRODUCTION', x1, head-14, 'right',
+        'rgba('+Math.round(148+85*bridge)+','+Math.round(156+70*bridge)+','
+        +Math.round(176+40*bridge)+','+(0.85+0.15*bridge).toFixed(2)+')');
 
       /* ── lanes ── */
       for(var i=0;i<lanes;i++){
@@ -1603,64 +1754,314 @@ the work to.</p>
         if(tight) label(L.n, x0, y-9, 'left', 'rgba(140,146,160,.9)');
         else      label(L.n, padL, y+3.5, 'left', 'rgba(140,146,160,.9)');
 
-        /* the live half */
+        /* the half that always worked */
         g.strokeStyle='rgba(201,122,60,.47)'; g.lineWidth=1.3;
         g.beginPath(); g.moveTo(x0,y); g.lineTo(wall,y); g.stroke();
-        /* the half that never happens */
+
+        /* the half that did not — dashed and dead until the mark bridges it,
+           then it is drawn in, left to right, as real track */
         g.save(); g.setLineDash([2,8]); g.lineWidth=1;
-        g.strokeStyle='rgba(148,156,176,.16)';
+        g.strokeStyle='rgba(148,156,176,'+(0.16*(1-bridge)).toFixed(3)+')';
         g.beginPath(); g.moveTo(wall+7,y); g.lineTo(x1,y); g.stroke();
         g.restore();
-        /* origin, and the terminus nothing ever reaches */
+        if(bridge>0){
+          g.strokeStyle='rgba(201,122,60,'+(0.47*bridge).toFixed(3)+')';
+          g.lineWidth=1.3;
+          g.beginPath(); g.moveTo(wall,y); g.lineTo(wall+(x1-wall)*bridge,y); g.stroke();
+        }
+
+        /* origin, and the terminus — dark until something actually arrives */
         g.fillStyle='rgba(201,122,60,.92)';
         g.beginPath(); g.arc(x0,y,3.5,0,6.2832); g.fill();
-        g.strokeStyle='rgba(148,156,176,.28)'; g.lineWidth=1;
+        var lit = L.lit||0;
+        g.strokeStyle='rgba('+Math.round(148+53*lit)+','+Math.round(156-34*lit)+','
+          +Math.round(176-116*lit)+','+(0.28+0.67*lit).toFixed(2)+')';
+        g.lineWidth=1+lit*0.8;
         g.beginPath(); g.arc(x1,y,4,0,6.2832); g.stroke();
+        if(lit>0){
+          g.fillStyle='rgba(233,160,99,'+(lit*0.9).toFixed(3)+')';
+          g.beginPath(); g.arc(x1,y,2.1*lit,0,6.2832); g.fill();
+        }
 
-        /* the pulse */
+        /* ── the pulse ──
+           p runs 0..1 across the WHOLE rail. WALL is the fraction of it the
+           wall sits at, so "blocked" and "crossing" are the same journey with
+           a different stopping point, not two different animations. */
         if(!reduced){
           L.p += L.sp;
-          if(L.p>=1){
-            for(var k=0;k<8;k++){
-              var a=(-0.5+Math.random())*2.6;
+          if(!open && L.p>=WALL){
+            /* BEAT 1. The impact is the argument, so it is staged as one: the
+               wall flares where it was struck, a shockwave leaves the contact
+               point, and the run scatters *backwards*. It does not leak
+               through and it does not fade politely — it is turned back. */
+            flares.push({y:y, l:1});
+            rings.push({x:wall, y:y, l:1});
+            for(var k=0;k<20;k++){
+              var a=Math.PI+(Math.random()-0.5)*2.3;   /* rejected, not dispersed */
+              var sp0=0.7+Math.random()*2.6;
               sparks.push({x:wall, y:y,
-                           vx:Math.cos(a)*(0.4+Math.random()*1.4),
-                           vy:Math.sin(a)*(0.4+Math.random()*1.4), l:1});
+                           vx:Math.cos(a)*sp0,
+                           vy:Math.sin(a)*sp0*0.8, l:1});
             }
             L.p = -(0.12+Math.random()*0.5);         /* pause, then try again */
+          } else if(L.p>=1){
+            /* BEAT 3. It arrives. The terminal lights and stays lit. */
+            L.lit = 1;
+            lands.push({x:x1, y:y, l:1});
+            L.p = -(0.10+Math.random()*0.42);
           }
         }
         if(L.p>0){
-          var px=x0+(wall-x0)*L.p, fade=Math.min(1,L.p*7);
-          var tr=g.createLinearGradient(px-30,0,px,0);
+          var px=x0+span*L.p, fade=Math.min(1,L.p*9);
+          /* the run tightens as it closes on whatever it is heading for */
+          var goal = open ? 1 : WALL;
+          var near=clamp01((L.p-goal*0.6)/(goal*0.4));
+          var tail=34+near*26;
+          var tr=g.createLinearGradient(px-tail,0,px,0);
           tr.addColorStop(0,'rgba(233,160,99,0)');
-          tr.addColorStop(1,'rgba(233,160,99,'+(0.55*fade).toFixed(3)+')');
-          g.strokeStyle=tr; g.lineWidth=1.7;
-          g.beginPath(); g.moveTo(px-30,y); g.lineTo(px,y); g.stroke();
-          g.fillStyle='rgba(255,214,170,'+fade.toFixed(3)+')';
-          g.beginPath(); g.arc(px,y,2.3,0,6.2832); g.fill();
+          tr.addColorStop(1,'rgba(233,160,99,'+(0.62*fade).toFixed(3)+')');
+          g.strokeStyle=tr; g.lineWidth=1.7+near*0.9;
+          g.beginPath(); g.moveTo(px-tail,y); g.lineTo(px,y); g.stroke();
+          var hg=g.createRadialGradient(px,y,0,px,y,7+near*5);
+          hg.addColorStop(0,'rgba(255,226,190,'+fade.toFixed(3)+')');
+          hg.addColorStop(1,'rgba(255,180,120,0)');
+          g.fillStyle=hg;
+          g.beginPath(); g.arc(px,y,7+near*5,0,6.2832); g.fill();
+          g.fillStyle='rgba(255,236,214,'+fade.toFixed(3)+')';
+          g.beginPath(); g.arc(px,y,2.3+near*0.9,0,6.2832); g.fill();
         }
       }
 
-      /* ── the wall every one of them stops at ── */
+      /* ── the wall, which stops being a wall ──
+         It fades as the mark takes its place: the same vertical, no longer a
+         blockade. */
       var wy0=head-18, wy1=head+(lanes-1)*step+(tight?12:0)+18;
+      var wOp=1-bridge*0.72;
       var wg=g.createLinearGradient(0,wy0,0,wy1);
-      wg.addColorStop(0,'rgba(255,112,67,.25)');
-      wg.addColorStop(0.5,'rgba(255,112,67,.95)');
-      wg.addColorStop(1,'rgba(255,112,67,.25)');
+      wg.addColorStop(0,'rgba(255,112,67,'+(0.25*wOp).toFixed(3)+')');
+      wg.addColorStop(0.5,'rgba(255,112,67,'+(0.95*wOp).toFixed(3)+')');
+      wg.addColorStop(1,'rgba(255,112,67,'+(0.25*wOp).toFixed(3)+')');
       g.strokeStyle=wg; g.lineWidth=1.8;
       g.beginPath(); g.moveTo(wall,wy0); g.lineTo(wall,wy1); g.stroke();
-      label('THE GAP', wall, wy1+24, 'center', 'rgba(255,112,67,.95)');
+
+      /* ── BEAT 2 · the mark builds in the gap ──
+         Nine circles in their own order, smallest first, sitting on the wall
+         line and scaled to the lane band. This is the answer occupying exactly
+         the space the problem occupied. */
+      if(bridge>0){
+        var mh=(wy1-wy0)*0.92, ms=mh/MH, mw=MW*ms;
+        var mx=wall-(MB[0]+MW/2)*ms, my=(wy0+wy1)/2-(MB[2]+MH/2)*ms;
+        for(var q=0;q<9;q++){
+          /* each circle has its own slice of the build */
+          var cq=clamp01((bridge-q*0.055)/0.34);
+          if(cq<=0) continue;
+          var cx=mx+MARK[q][0]*ms, cy=my+MARK[q][1]*ms, cr=MARK[q][2]*ms*cq;
+          var gg=g.createRadialGradient(cx,cy,0,cx,cy,cr*2.4+2);
+          gg.addColorStop(0,'rgba(233,160,99,'+(0.30*cq).toFixed(3)+')');
+          gg.addColorStop(1,'rgba(233,160,99,0)');
+          g.fillStyle=gg;
+          g.beginPath(); g.arc(cx,cy,cr*2.4+2,0,6.2832); g.fill();
+          g.fillStyle='rgba(233,160,99,'+(0.92*cq).toFixed(3)+')';
+          g.beginPath(); g.arc(cx,cy,cr,0,6.2832); g.fill();
+        }
+      }
+
+      /* ── the label under it changes with what it is ── */
+      if(bridge<1)
+        label('THE GAP', wall, wy1+24, 'center',
+              'rgba(255,112,67,'+(0.95*(1-bridge)).toFixed(3)+')');
+      if(bridge>0)
+        label('QUENORA', wall, wy1+24, 'center',
+              'rgba(233,160,99,'+(0.95*bridge).toFixed(3)+')');
+
+      /* ── the wall lights where it was struck, then cools ── */
+      if(!reduced){
+        for(var f=flares.length-1;f>=0;f--){
+          var fl=flares[f]; fl.l-=0.022;
+          if(fl.l<=0){ flares.splice(f,1); continue; }
+          var ext=52*fl.l+14;
+          var fg=g.createLinearGradient(0,fl.y-ext,0,fl.y+ext);
+          fg.addColorStop(0,'rgba(255,140,90,0)');
+          fg.addColorStop(0.5,'rgba(255,190,150,'+(fl.l*0.95).toFixed(3)+')');
+          fg.addColorStop(1,'rgba(255,140,90,0)');
+          g.strokeStyle=fg; g.lineWidth=1.8+fl.l*2.6;
+          g.beginPath(); g.moveTo(wall,fl.y-ext); g.lineTo(wall,fl.y+ext); g.stroke();
+        }
+        /* ── the shockwave leaving the contact point ── */
+        for(var n=rings.length-1;n>=0;n--){
+          var rg2=rings[n]; rg2.l-=0.035;
+          if(rg2.l<=0){ rings.splice(n,1); continue; }
+          var rr=(1-rg2.l)*26+3;
+          g.strokeStyle='rgba(255,150,100,'+(rg2.l*0.55).toFixed(3)+')';
+          g.lineWidth=1.3*rg2.l+0.3;
+          g.beginPath();
+          /* only the half that bounces back — nothing radiates past the wall */
+          g.arc(rg2.x,rg2.y,rr,Math.PI*0.5,Math.PI*1.5); g.stroke();
+        }
+      }
 
       /* ── the scatter dies ── */
       if(!reduced){
         for(var j=sparks.length-1;j>=0;j--){
           var sp=sparks[j];
-          sp.x+=sp.vx; sp.y+=sp.vy; sp.vx*=0.94; sp.vy*=0.94; sp.l-=0.028;
+          sp.x+=sp.vx; sp.y+=sp.vy; sp.vx*=0.945; sp.vy*=0.945;
+          sp.vy+=0.012;                      /* they fall, they do not float */
+          sp.l-=0.020;
           if(sp.l<=0){ sparks.splice(j,1); continue; }
-          g.fillStyle='rgba(255,112,67,'+(sp.l*0.7).toFixed(3)+')';
-          g.beginPath(); g.arc(sp.x,sp.y,1.4*sp.l+0.4,0,6.2832); g.fill();
+          if(sp.x>wall) sp.x=wall;           /* never past the wall */
+          g.fillStyle='rgba(255,130,85,'+(sp.l*0.8).toFixed(3)+')';
+          g.beginPath(); g.arc(sp.x,sp.y,1.7*sp.l+0.4,0,6.2832); g.fill();
         }
+
+        /* ── BEAT 3 · arrival. A ring opening forwards, into production —
+           the mirror of the shockwave that used to bounce back. ── */
+        for(var m=lands.length-1;m>=0;m--){
+          var ld=lands[m]; ld.l-=0.030;
+          if(ld.l<=0){ lands.splice(m,1); continue; }
+          var lr=(1-ld.l)*22+3;
+          g.strokeStyle='rgba(233,178,120,'+(ld.l*0.7).toFixed(3)+')';
+          g.lineWidth=1.4*ld.l+0.3;
+          g.beginPath(); g.arc(ld.x,ld.y,lr,-Math.PI*0.5,Math.PI*0.5); g.stroke();
+        }
+      }
+
+      raf=requestAnimationFrame(paint);
+    }
+
+    function go(){ if(!raf && seen) raf=requestAnimationFrame(paint); }
+    function halt(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
+
+    fit();
+    if('ResizeObserver' in w) new ResizeObserver(function(){ fit(); }).observe(cv);
+    w.addEventListener('resize', fit, {passive:true});
+    if(d.fonts && d.fonts.ready) d.fonts.ready.then(fit);
+
+    if(reduced){ paint(performance.now()); halt(); }
+    else if('IntersectionObserver' in w){
+      new IntersectionObserver(function(es){
+        seen=es[0].isIntersecting; if(seen) go(); else halt();
+      },{threshold:0.05}).observe(cv);
+    } else { seen=true; go(); }
+  })();
+
+  /* ═══════════════════════════════════════════════════════════════
+     CAPABILITY 02 — the automation figure.
+
+     Work arrives on the left at a steady rate and runs a single automated
+     spine. At the decision point most of it continues to DONE on its own.
+     A minority is routed down to a person, on purpose.
+
+     That split is the argument. Automation that claims to handle everything
+     is either lying or unsupervised; the figure that sells honestly is the
+     one that shows a deliberate human branch. It runs continuously — there
+     is no beginning or end to it, which is the point.
+     ═══════════════════════════════════════════════════════════════ */
+  (function(){
+    var cv=d.getElementById('autoCanvas'); if(!cv) return;
+    var g=cv.getContext && cv.getContext('2d'); if(!g) return;
+    var W=0,H=0,DPR=1,raf=null,seen=false,ready=false,t0=0;
+    var items=[], done=[], spawn=0;
+
+    var EX_EVERY=5;          /* one in five is routed to a person */
+    var made=0;
+
+    function fit(){
+      var r=cv.getBoundingClientRect();
+      if(r.width<2||r.height<2) return false;
+      W=r.width; H=r.height; DPR=Math.min(devicePixelRatio||1,2);
+      cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+      g.setTransform(DPR,0,0,DPR,0,0);
+      ready=true; return true;
+    }
+    function lab(t,x,y,a,c){
+      g.font='500 10px "JetBrains Mono",monospace';
+      g.textAlign=a; g.textBaseline='alphabetic'; g.fillStyle=c; g.fillText(t,x,y);
+    }
+    function cl(x){ return x<0?0:x>1?1:x; }
+
+    function paint(now){
+      if(!ready && !fit()){ raf=requestAnimationFrame(paint); return; }
+      if(!t0) t0=now;
+      g.clearRect(0,0,W,H);
+
+      var tight=W<640;
+      var padL=2, padR=Math.max(10,W*0.01);
+      var x0=padL+(tight?0:Math.min(150,W*0.15));
+      var x1=W-padR-(tight?0:Math.min(150,W*0.15));
+      var xd=x0+(x1-x0)*0.54;                 /* the decision point */
+      var mid=H*0.44, top=H*0.26, bot=H*0.78;
+
+      /* ── the spine everything runs ── */
+      g.strokeStyle='rgba(201,122,60,.42)'; g.lineWidth=1.3;
+      g.beginPath(); g.moveTo(x0,mid); g.lineTo(xd,mid); g.stroke();
+      /* ── the two outcomes ── */
+      g.strokeStyle='rgba(201,122,60,.42)';
+      g.beginPath(); g.moveTo(xd,mid); g.lineTo(x1,top); g.stroke();
+      g.save(); g.setLineDash([3,5]); g.lineWidth=1.1;
+      g.strokeStyle='rgba(148,156,176,.34)';
+      g.beginPath(); g.moveTo(xd,mid); g.lineTo(x1,bot); g.stroke(); g.restore();
+
+      /* ── the decision point itself ── */
+      g.strokeStyle='rgba(233,160,99,.75)'; g.lineWidth=1.2;
+      g.beginPath(); g.arc(xd,mid,5.5,0,6.2832); g.stroke();
+      lab(tight?'DECIDE':'HANDLE OR ESCALATE', xd, mid-16, 'center', 'rgba(233,160,99,.8)');
+
+      /* ── labels ── */
+      lab('WORK ARRIVES', padL, mid-14, 'left', 'rgba(233,160,99,.95)');
+      lab(tight?'DONE':'DONE, UNATTENDED', W-padR, top-13, 'right', 'rgba(233,160,99,.95)');
+      lab(tight?'TO A PERSON':'ROUTED TO A PERSON', W-padR, bot+19, 'right', 'rgba(148,156,176,.9)');
+
+      /* ── intake and the two terminals ── */
+      g.fillStyle='rgba(201,122,60,.92)';
+      g.beginPath(); g.arc(x0,mid,3.5,0,6.2832); g.fill();
+      g.strokeStyle='rgba(201,122,60,.55)'; g.lineWidth=1.1;
+      g.beginPath(); g.arc(x1,top,4.5,0,6.2832); g.stroke();
+      g.strokeStyle='rgba(148,156,176,.45)';
+      g.beginPath(); g.arc(x1,bot,4.5,0,6.2832); g.stroke();
+
+      /* ── work arriving ── */
+      if(!reduced){
+        if(--spawn<=0){
+          spawn=22+Math.round(Math.random()*10);
+          made++;
+          items.push({p:0, ex:(made%EX_EVERY===0), sp:0.0055+Math.random()*0.0022});
+        }
+        for(var i=items.length-1;i>=0;i--){
+          var it=items[i]; it.p+=it.sp;
+          if(it.p>=1){
+            done.push({x:x1, y:it.ex?bot:top, ex:it.ex, l:1});
+            items.splice(i,1); continue;
+          }
+          var ix,iy;
+          if(it.p<0.54){                       /* on the shared spine */
+            ix=x0+(xd-x0)*(it.p/0.54); iy=mid;
+          } else {                             /* past the decision */
+            var q=(it.p-0.54)/0.46;
+            ix=xd+(x1-xd)*q; iy=mid+((it.ex?bot:top)-mid)*q;
+          }
+          var col=it.ex?'148,176,196':'255,226,190';
+          var gg=g.createRadialGradient(ix,iy,0,ix,iy,8);
+          gg.addColorStop(0,'rgba('+col+',.55)');
+          gg.addColorStop(1,'rgba('+col+',0)');
+          g.fillStyle=gg; g.beginPath(); g.arc(ix,iy,8,0,6.2832); g.fill();
+          g.fillStyle='rgba('+col+',.95)';
+          g.beginPath(); g.arc(ix,iy,2.4,0,6.2832); g.fill();
+        }
+        /* ── arrivals ── */
+        for(var j=done.length-1;j>=0;j--){
+          var dn=done[j]; dn.l-=0.032;
+          if(dn.l<=0){ done.splice(j,1); continue; }
+          var rr=(1-dn.l)*17+3;
+          g.strokeStyle=(dn.ex?'rgba(148,176,196,':'rgba(233,178,120,')+(dn.l*0.7).toFixed(3)+')';
+          g.lineWidth=1.3*dn.l+0.3;
+          g.beginPath(); g.arc(dn.x,dn.y,rr,-Math.PI*0.5,Math.PI*0.5); g.stroke();
+        }
+      } else {
+        /* reduced motion: one of each, at rest, so the split still reads */
+        g.fillStyle='rgba(255,226,190,.95)';
+        g.beginPath(); g.arc(xd+(x1-xd)*0.55, mid+(top-mid)*0.55, 2.4,0,6.2832); g.fill();
+        g.fillStyle='rgba(148,176,196,.95)';
+        g.beginPath(); g.arc(xd+(x1-xd)*0.55, mid+(bot-mid)*0.55, 2.4,0,6.2832); g.fill();
       }
 
       raf=requestAnimationFrame(paint);
@@ -1696,7 +2097,14 @@ the work to.</p>
   function measure() {
     vw = w.innerWidth; vh = w.innerHeight;
     if (htrack && hwrap) {
-      trackW = htrack.scrollWidth;
+      /* scrollWidth on a flex row omits the container's trailing padding, so
+         the track was measured short by one gutter and the last card could
+         never be scrolled fully into view. Measure the real right edge. */
+      var lastPh = phases[phases.length - 1];
+      var padR = parseFloat(getComputedStyle(htrack).paddingRight) || 0;
+      trackW = lastPh
+        ? lastPh.offsetLeft + lastPh.offsetWidth + padR
+        : htrack.scrollWidth;
       /* the wrapper is as tall as the horizontal distance plus one screen.
          Guard the floor: if the track is narrower than the viewport there is
          nothing to scrub, and a negative height would collapse the section. */
@@ -1763,7 +2171,12 @@ the work to.</p>
       /* per-phase parallax, driven by horizontal position not page scroll */
       phases.forEach(function (ph) {
         var left = ph.offsetLeft - shift;
-        var t = clamp(1 - (left - vw * 0.15) / (vw * 0.7), 0, 1);
+        /* Reveal on the card's own entry, not on an absolute viewport band.
+           The old band only completed for cards that travelled near the left
+           edge — the last two never do, so phases 05 and 06 stayed greyed out
+           however far you scrolled. A card is fully revealed once it is fully
+           on screen, which every card reaches. */
+        var t = clamp((vw - left) / (ph.offsetWidth * 0.9), 0, 1);
         var e2 = ease(t);
         var h3 = ph.querySelector('h3'), pp = ph.querySelector('p:not(.dur)');
         if (h3) { h3.style.opacity = e2; h3.style.transform = 'translate3d(' + (1 - e2) * 80 + 'px,0,0)'; }

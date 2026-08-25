@@ -118,13 +118,29 @@ main,header,footer{position:relative;z-index:2}
 /* ── cursor ── */
 .cur,.cdot{position:fixed;top:0;left:0;z-index:9998;pointer-events:none;
   border-radius:50%;opacity:0;transition:opacity .3s}
-.cur{width:40px;height:40px;border:1.5px solid var(--copper);margin:-20px 0 0 -20px;
+.cur{width:40px;height:40px;margin:-20px 0 0 -20px;
   transition:width .38s var(--e),height .38s var(--e),margin .38s var(--e),
-  background .38s var(--e),border-color .38s var(--e),opacity .3s}
+  opacity .3s}
+/* The ring is drawn as a rotating dashed arc rather than a plain circle, so it
+   reads as the mark's arc and not as a default custom cursor. The dashes are a
+   conic mask on a ring, which stays one element and costs nothing. */
+.cur::before{content:'';position:absolute;inset:0;border-radius:50%;
+  border:1.5px solid var(--copper);
+  -webkit-mask:repeating-conic-gradient(#000 0 14deg,transparent 14deg 22deg);
+          mask:repeating-conic-gradient(#000 0 14deg,transparent 14deg 22deg);
+  animation:curspin 5.5s linear infinite}
+.cur::after{content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,112,67,.16),transparent 70%);
+  opacity:0;transition:opacity .38s var(--e)}
+@keyframes curspin{to{transform:rotate(360deg)}}
 .cdot{width:5px;height:5px;background:var(--ember);margin:-2.5px 0 0 -2.5px}
 body.con .cur,body.con .cdot{opacity:1}
-body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
-  background:rgba(255,112,67,.13);border-color:var(--ember)}
+body.clg .cur{width:76px;height:76px;margin:-38px 0 0 -38px}
+body.clg .cur::before{border-color:var(--ember);animation-duration:2.2s;
+  -webkit-mask:repeating-conic-gradient(#000 0 26deg,transparent 26deg 34deg);
+          mask:repeating-conic-gradient(#000 0 26deg,transparent 26deg 34deg)}
+body.clg .cur::after{opacity:1}
+@media(prefers-reduced-motion:reduce){.cur::before{animation:none}}
 @media(hover:none),(pointer:coarse){.cur,.cdot{display:none}}
 
 /* ── loader ── */
@@ -267,19 +283,21 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
   100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* ── ticker: CSS keyframes, JS only nudges the speed ── */
-.ticker{border-block:1px solid var(--line);padding:var(--sp3) 0;overflow:hidden;
+.ticker{border-block:1px solid var(--line);padding:var(--sp2) 0;overflow:hidden;
   background:rgba(20,22,30,.5);position:relative}
 .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;
-  width:170px;z-index:2;pointer-events:none}
+  width:120px;z-index:2;pointer-events:none}
 .ticker::before{left:0;background:linear-gradient(90deg,var(--void),transparent)}
 .ticker::after{right:0;background:linear-gradient(270deg,var(--void),transparent)}
 .tt{display:flex;width:max-content;animation:slide 38s linear infinite;
   will-change:transform}
 @keyframes slide{to{transform:translateX(-50%)}}
-.tt b{font-size:clamp(1.5rem,3.6vw,3rem);font-weight:800;letter-spacing:-.045em;
-  white-space:nowrap;padding-right:var(--sp4);display:flex;align-items:center;
-  gap:var(--sp4);color:var(--t3);transition:color .4s}
-.tt b::after{content:'';width:10px;height:10px;border-radius:50%;
+/* Sized as a running label, not a headline. At the old clamp it topped out at
+   3rem and read louder than the h1 it sits under. */
+.tt b{font-size:clamp(.9rem,1.3vw,1.35rem);font-weight:700;letter-spacing:-.02em;
+  white-space:nowrap;padding-right:var(--sp3);display:flex;align-items:center;
+  gap:var(--sp3);color:var(--t3);transition:color .4s}
+.tt b::after{content:'';width:5px;height:5px;border-radius:50%;
   background:var(--copper);flex:none}
 .ticker:hover .tt b{color:var(--t2)}
 
@@ -378,19 +396,27 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .hwrap{position:relative}
 .hpin{position:sticky;top:0;height:100svh;overflow:hidden;
   border-block:1px solid var(--line);
+  display:flex;align-items:center;
   background:linear-gradient(180deg,var(--sf2),var(--sf1))}
 /* The track is a row of cards, vertically centred in the stage.
    Forcing .phase to height:100% made every card a full viewport tall while
    its content stopped around 45% down — which is the empty half-screen under
    the phases. Cards are now sized by their content and centred. */
-.htrack{display:flex;align-items:center;height:100%;gap:var(--sp3);
-  padding:0 var(--sp4);will-change:transform}
-.phase{flex:0 0 clamp(300px,38vw,480px);align-self:center;
+/* The stage centres the track, and the track stretches every card to the
+   tallest one. Cards were previously centred individually and sized by their
+   own content, so the row read as a ragged set of different-sized boxes. */
+.htrack{display:flex;align-items:stretch;height:auto;max-height:96svh;
+  gap:var(--sp3);padding:0 var(--sp4);will-change:transform}
+.phase{flex:0 0 clamp(300px,38vw,480px);
   padding:var(--sp5) var(--sp4);border:1px solid var(--line);border-radius:4px;
   background:linear-gradient(180deg,rgba(20,22,30,.62),rgba(13,14,19,.28));
   display:flex;flex-direction:column;justify-content:flex-start;
   position:relative;overflow:hidden;
-  max-height:82svh;transition:border-color .5s var(--e)}
+  transition:border-color .5s var(--e)}
+/* The card is a flex column, so its children default to flex-shrink:1 and get
+   squeezed instead of setting the card's height — which is how the duration
+   line ended up outside the card's own box. Nothing in the card shrinks. */
+.phase>*{flex:0 0 auto}
 .phase:hover{border-color:var(--line2)}
 .phase::before{content:attr(data-n);position:absolute;right:-1vw;bottom:-2.5vw;
   font-family:'Playfair Display',serif;font-style:italic;font-size:11rem;
@@ -414,6 +440,20 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .phase .exit b{color:var(--t1);font-weight:600;display:block;margin-bottom:3px;
   font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
   text-transform:uppercase}
+/* Laptops in the 13-inch band have roughly 720px of viewport height. The card
+   is now the same height as the tallest one in the row, and at that height the
+   tallest card does not fit inside 86svh — the duration line fell off the
+   bottom. Tighten the card rather than clip it. */
+@media(max-height:1000px){
+  .phase{padding:var(--sp4) var(--sp4)}
+  .phase h3{font-size:clamp(1.5rem,2.4vw,2rem)}
+  .phase p{font-size:.95rem}
+  .phase .mono{margin-bottom:var(--sp2)}
+  .phase ul{margin-top:var(--sp2)}
+  .phase li{font-size:.86rem;padding:4px 0 4px 20px}
+  .phase .exit{margin-top:var(--sp2);padding:9px 12px;font-size:.83rem}
+  .phase .dur{margin-top:var(--sp2);padding-top:var(--sp2)}
+}
 
 /* ── the nine ── */
 .nine{border-top:1px solid var(--line2)}
@@ -964,7 +1004,7 @@ the work to.</p>
 <p style="max-width:35ch;color:var(--t2);font-size:.96rem">
           Enterprise AI, engineered to operate. Built into what you already run,
           then handed over.</p>
-<p class="mono" style="color:var(--t3)">Heilbronn, Germany · Working internationally</p>
+<p class="mono" style="color:var(--t3)">Working internationally</p>
 </div>
 <div><h3>Site</h3><nav aria-label="Footer">
 <a href="index.html">Home</a><a href="services.html">Capabilities</a>
@@ -1030,9 +1070,21 @@ the work to.</p>
       body.classList.add('con');
       cdot.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0)';
     }, { passive: true });
+    /* The ring lags, and the lag is the input: the further it is behind the
+       pointer the more it stretches along the direction of travel and the
+       thinner it goes across it. Standing still it is a circle; moving fast it
+       is a comet. That is the whole difference between this and a ring that
+       merely follows. */
+    var sq = 0;
     (function ring() {
+      var dx = mx - rx, dy = my - ry;
       rx = lerp(rx, mx, 0.16); ry = lerp(ry, my, 0.16);
-      cur.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0)';
+      var sp = Math.sqrt(dx * dx + dy * dy);
+      sq = lerp(sq, Math.min(sp / 46, 1), 0.2);
+      var ang = sp > 0.6 ? Math.atan2(dy, dx) * 57.2958 : 0;
+      cur.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0)'
+        + ' rotate(' + ang + 'deg)'
+        + ' scale(' + (1 + sq * 0.5) + ',' + (1 - sq * 0.34) + ')';
       requestAnimationFrame(ring);
     })();
     d.addEventListener('mouseover', function (e) {
@@ -1574,7 +1626,7 @@ the work to.</p>
     var cv=d.getElementById('gapCanvas'); if(!cv) return;
     var g=cv.getContext && cv.getContext('2d'); if(!g) return;
     var W=0,H=0,DPR=1,raf=null,seen=false,t0=0,ready=false;
-    var sparks=[];
+    var sparks=[], rings=[], flares=[];
 
     /* Five lanes, because one rail was a thin line across an empty box — it
        created exactly the kind of dead space this page has been fighting.
@@ -1654,24 +1706,40 @@ the work to.</p>
         if(!reduced){
           L.p += L.sp;
           if(L.p>=1){
-            for(var k=0;k<8;k++){
-              var a=(-0.5+Math.random())*2.6;
+            /* The impact is the point of the whole figure, so it is staged as
+               one: the wall flares where it was struck, a shockwave leaves the
+               contact point, and the run scatters *backwards*. It does not
+               leak through and it does not fade politely — it is turned back. */
+            flares.push({y:y, l:1});
+            rings.push({x:wall, y:y, l:1});
+            for(var k=0;k<20;k++){
+              /* biased into the left half: rejected, not dispersed */
+              var a=Math.PI+(Math.random()-0.5)*2.3;
+              var sp0=0.7+Math.random()*2.6;
               sparks.push({x:wall, y:y,
-                           vx:Math.cos(a)*(0.4+Math.random()*1.4),
-                           vy:Math.sin(a)*(0.4+Math.random()*1.4), l:1});
+                           vx:Math.cos(a)*sp0,
+                           vy:Math.sin(a)*sp0*0.8, l:1});
             }
             L.p = -(0.12+Math.random()*0.5);         /* pause, then try again */
           }
         }
         if(L.p>0){
           var px=x0+(wall-x0)*L.p, fade=Math.min(1,L.p*7);
-          var tr=g.createLinearGradient(px-30,0,px,0);
+          /* the run tightens as it nears the wall — it is going somewhere */
+          var near=Math.min(1,Math.max(0,(L.p-0.55)/0.45));
+          var tail=34+near*26;
+          var tr=g.createLinearGradient(px-tail,0,px,0);
           tr.addColorStop(0,'rgba(233,160,99,0)');
-          tr.addColorStop(1,'rgba(233,160,99,'+(0.55*fade).toFixed(3)+')');
-          g.strokeStyle=tr; g.lineWidth=1.7;
-          g.beginPath(); g.moveTo(px-30,y); g.lineTo(px,y); g.stroke();
-          g.fillStyle='rgba(255,214,170,'+fade.toFixed(3)+')';
-          g.beginPath(); g.arc(px,y,2.3,0,6.2832); g.fill();
+          tr.addColorStop(1,'rgba(233,160,99,'+(0.62*fade).toFixed(3)+')');
+          g.strokeStyle=tr; g.lineWidth=1.7+near*0.9;
+          g.beginPath(); g.moveTo(px-tail,y); g.lineTo(px,y); g.stroke();
+          var hg=g.createRadialGradient(px,y,0,px,y,7+near*5);
+          hg.addColorStop(0,'rgba(255,226,190,'+fade.toFixed(3)+')');
+          hg.addColorStop(1,'rgba(255,180,120,0)');
+          g.fillStyle=hg;
+          g.beginPath(); g.arc(px,y,7+near*5,0,6.2832); g.fill();
+          g.fillStyle='rgba(255,236,214,'+fade.toFixed(3)+')';
+          g.beginPath(); g.arc(px,y,2.3+near*0.9,0,6.2832); g.fill();
         }
       }
 
@@ -1685,14 +1753,43 @@ the work to.</p>
       g.beginPath(); g.moveTo(wall,wy0); g.lineTo(wall,wy1); g.stroke();
       label('THE GAP', wall, wy1+24, 'center', 'rgba(255,112,67,.95)');
 
+      /* ── the wall lights where it was struck, then cools ── */
+      if(!reduced){
+        for(var f=flares.length-1;f>=0;f--){
+          var fl=flares[f]; fl.l-=0.022;
+          if(fl.l<=0){ flares.splice(f,1); continue; }
+          var ext=52*fl.l+14;
+          var fg=g.createLinearGradient(0,fl.y-ext,0,fl.y+ext);
+          fg.addColorStop(0,'rgba(255,140,90,0)');
+          fg.addColorStop(0.5,'rgba(255,190,150,'+(fl.l*0.95).toFixed(3)+')');
+          fg.addColorStop(1,'rgba(255,140,90,0)');
+          g.strokeStyle=fg; g.lineWidth=1.8+fl.l*2.6;
+          g.beginPath(); g.moveTo(wall,fl.y-ext); g.lineTo(wall,fl.y+ext); g.stroke();
+        }
+        /* ── the shockwave leaving the contact point ── */
+        for(var n=rings.length-1;n>=0;n--){
+          var rg2=rings[n]; rg2.l-=0.035;
+          if(rg2.l<=0){ rings.splice(n,1); continue; }
+          var rr=(1-rg2.l)*26+3;
+          g.strokeStyle='rgba(255,150,100,'+(rg2.l*0.55).toFixed(3)+')';
+          g.lineWidth=1.3*rg2.l+0.3;
+          g.beginPath();
+          /* only the half that bounces back — nothing radiates past the wall */
+          g.arc(rg2.x,rg2.y,rr,Math.PI*0.5,Math.PI*1.5); g.stroke();
+        }
+      }
+
       /* ── the scatter dies ── */
       if(!reduced){
         for(var j=sparks.length-1;j>=0;j--){
           var sp=sparks[j];
-          sp.x+=sp.vx; sp.y+=sp.vy; sp.vx*=0.94; sp.vy*=0.94; sp.l-=0.028;
+          sp.x+=sp.vx; sp.y+=sp.vy; sp.vx*=0.945; sp.vy*=0.945;
+          sp.vy+=0.012;                      /* they fall, they do not float */
+          sp.l-=0.020;
           if(sp.l<=0){ sparks.splice(j,1); continue; }
-          g.fillStyle='rgba(255,112,67,'+(sp.l*0.7).toFixed(3)+')';
-          g.beginPath(); g.arc(sp.x,sp.y,1.4*sp.l+0.4,0,6.2832); g.fill();
+          if(sp.x>wall) sp.x=wall;           /* never past the wall */
+          g.fillStyle='rgba(255,130,85,'+(sp.l*0.8).toFixed(3)+')';
+          g.beginPath(); g.arc(sp.x,sp.y,1.7*sp.l+0.4,0,6.2832); g.fill();
         }
       }
 
@@ -1729,7 +1826,14 @@ the work to.</p>
   function measure() {
     vw = w.innerWidth; vh = w.innerHeight;
     if (htrack && hwrap) {
-      trackW = htrack.scrollWidth;
+      /* scrollWidth on a flex row omits the container's trailing padding, so
+         the track was measured short by one gutter and the last card could
+         never be scrolled fully into view. Measure the real right edge. */
+      var lastPh = phases[phases.length - 1];
+      var padR = parseFloat(getComputedStyle(htrack).paddingRight) || 0;
+      trackW = lastPh
+        ? lastPh.offsetLeft + lastPh.offsetWidth + padR
+        : htrack.scrollWidth;
       /* the wrapper is as tall as the horizontal distance plus one screen.
          Guard the floor: if the track is narrower than the viewport there is
          nothing to scrub, and a negative height would collapse the section. */
@@ -1796,7 +1900,12 @@ the work to.</p>
       /* per-phase parallax, driven by horizontal position not page scroll */
       phases.forEach(function (ph) {
         var left = ph.offsetLeft - shift;
-        var t = clamp(1 - (left - vw * 0.15) / (vw * 0.7), 0, 1);
+        /* Reveal on the card's own entry, not on an absolute viewport band.
+           The old band only completed for cards that travelled near the left
+           edge — the last two never do, so phases 05 and 06 stayed greyed out
+           however far you scrolled. A card is fully revealed once it is fully
+           on screen, which every card reaches. */
+        var t = clamp((vw - left) / (ph.offsetWidth * 0.9), 0, 1);
         var e2 = ease(t);
         var h3 = ph.querySelector('h3'), pp = ph.querySelector('p:not(.dur)');
         if (h3) { h3.style.opacity = e2; h3.style.transform = 'translate3d(' + (1 - e2) * 80 + 'px,0,0)'; }

@@ -322,7 +322,9 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 .fbot{margin-top:var(--sp5);padding-top:var(--sp2);border-top:1px solid var(--line);
   display:flex;flex-wrap:wrap;gap:var(--sp2);justify-content:space-between;
   font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--t3)}
-.ph{color:#E5B14F;border-bottom:1px dashed currentColor}
+.fbot a{color:var(--t2);border-bottom:1px solid rgba(168,174,187,.28);
+  transition:color .3s,border-color .3s}
+.fbot a:hover{color:var(--ember);border-bottom-color:var(--ember)}
 
 /* ── scroll reveal (IntersectionObserver adds .in) ── */
 .rv{opacity:0;transform:translateY(26px);
@@ -573,15 +575,14 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <a href="products.html">Produkte</a><a href="contact.html">Contact</a>
 </nav></div>
 <div><h3>Contact</h3><nav aria-label="Contact">
-<a href="mailto:hello@quenora.ai"><span class="ph">hello@quenora.ai</span></a>
-<a href="#"><span class="ph">[LinkedIn]</span></a>
-<a href="#"><span class="ph">[Impressum]</span></a>
-<a href="#"><span class="ph">[Privacy notice]</span></a>
+<a href="mailto:hello@quenora.ai">hello@quenora.ai</a>
+<a href="../impressum.html" hreflang="en" lang="en">Impressum</a>
+<a href="../privacy.html" hreflang="en" lang="en">Datenschutzerklärung</a>
 </nav></div>
 </div>
 <div class="fbot">
 <span>© 2026 Quenora Technology Consulting</span>
-<span>Reg / VAT <span class="ph">[PLACEHOLDER]</span></span>
+<span>Heilbronn, Deutschland · <a href="../impressum.html" hreflang="en" lang="en">Impressum</a></span>
 </div>
 </div>
 </footer>

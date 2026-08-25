@@ -26,6 +26,9 @@ from bs4 import BeautifulSoup, Comment, NavigableString
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PAGES = ["index.html", "services.html", "products.html",
          "approach.html", "work.html", "contact.html"]
+# Pages that exist in English only. Links to these must climb out of the
+# language directory instead of resolving to a /de/... file that is not there.
+EN_ONLY_PAGES = {"impressum.html", "privacy.html"}
 LANGS = ["de", "fr", "es", "it"]
 LANG_NAMES = {"en": "English", "de": "Deutsch", "fr": "Français",
               "es": "Español", "it": "Italiano"}
@@ -184,6 +187,9 @@ def localise_paths(soup, lang):
             el["href"] = "../" + el["href"]
     for a in soup.find_all("a", href=True):
         h = a["href"]
+        if h in EN_ONLY_PAGES:
+            a["href"] = "../" + h          # legal pages are English-only
+            continue
         if h.endswith(".html") and "/" not in h:
             continue                       # already relative, stays in-language
         if h.startswith("assets/"):
@@ -303,6 +309,12 @@ def sitemap():
             urls.append(
                 '  <url>\n    <loc>%s%s</loc>%s\n    <priority>%s</priority>\n  </url>'
                 % (base, slug, alts, "1.0" if page == "index.html" else "0.8"))
+    # English-only pages: no hreflang alternates, low priority, but they must be
+    # indexable — an Impressum that search engines cannot find is not published.
+    for page in sorted(EN_ONLY_PAGES):
+        urls.append(
+            '  <url>\n    <loc>%s/%s</loc>\n    <priority>0.3</priority>\n  </url>'
+            % (DOMAIN, page))
     open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'

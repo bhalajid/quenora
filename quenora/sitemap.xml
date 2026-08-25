@@ -271,4 +271,12 @@
     <xhtml:link rel="alternate" hreflang="it" href="https://quenora.ai/it/contact.html"/>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://quenora.ai/impressum.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://quenora.ai/privacy.html</loc>
+    <priority>0.3</priority>
+  </url>
 </urlset>

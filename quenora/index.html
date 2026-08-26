@@ -391,6 +391,75 @@ body.clg .cur::after{opacity:1}
 .shapes-note{margin-top:var(--sp3);padding-top:var(--sp3);
   border-top:1px solid var(--line);color:var(--t3);font-size:.92rem;max-width:62ch}
 
+/* screen-reader-only: the assistant input needs a real label, not a
+   placeholder, but the panel has no room to show one */
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ── the assistant ──────────────────────────────────────────────────────
+   Ported from the inner pages, which had suggestion chips but no way to type.
+   It runs entirely in the page: keyword match over a written answer set, no
+   network call, no key, nothing to leak. The footer says what it is. */
+.ai-fab{position:fixed;bottom:26px;right:26px;z-index:400;width:56px;height:56px;
+  border-radius:50%;background:var(--copper);display:flex;align-items:center;
+  justify-content:center;cursor:pointer;border:none;
+  box-shadow:0 12px 36px -8px rgba(201,122,60,.45);transition:transform .25s var(--e)}
+.ai-fab:hover{transform:scale(1.07) rotate(90deg)}
+.ai-fab svg{width:23px;height:23px}
+.ai-fab::before{content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1px solid var(--copper);opacity:.5;animation:aipulse 2.6s ease-out infinite}
+@keyframes aipulse{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.35);opacity:0}}
+.ai-panel{position:fixed;bottom:96px;right:26px;z-index:400;width:370px;
+  max-width:calc(100vw - 36px);background:rgba(20,22,30,.97);
+  backdrop-filter:blur(20px);border:1px solid var(--line2);border-radius:14px;
+  overflow:hidden;box-shadow:0 30px 70px -12px rgba(0,0,0,.75);
+  opacity:0;transform:translateY(14px) scale(.97);pointer-events:none;
+  transition:.28s var(--e)}
+.ai-panel.open{opacity:1;transform:none;pointer-events:auto}
+.ai-head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;gap:11px}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--copper);flex:none;
+  box-shadow:0 0 10px var(--copper);animation:aibreathe 2s ease-in-out infinite}
+@keyframes aibreathe{0%,100%{opacity:1}50%{opacity:.35}}
+.ai-head b{font-size:.85rem;font-weight:600;display:block;color:var(--t1)}
+.ai-head span{font-family:'JetBrains Mono',monospace;font-size:.58rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--t3)}
+.ai-body{padding:16px 18px;max-height:280px;overflow-y:auto;display:flex;
+  flex-direction:column;gap:10px}
+.ai-body::-webkit-scrollbar{width:4px}
+.ai-body::-webkit-scrollbar-thumb{background:var(--line2);border-radius:2px}
+.ai-msg{font-size:.85rem;line-height:1.6;max-width:88%}
+.ai-msg.bot{color:var(--t1);background:rgba(242,239,232,.05);padding:10px 13px;
+  border-radius:11px 11px 11px 3px;align-self:flex-start}
+.ai-msg.user{color:var(--void);background:var(--copper);padding:10px 13px;
+  border-radius:11px 11px 3px 11px;align-self:flex-end;font-weight:500}
+.ai-suggest{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 12px}
+.ai-chip{font-size:.72rem;padding:6px 12px;border-radius:20px;
+  border:1px solid var(--line);color:var(--t2);cursor:pointer;
+  background:none;font-family:inherit;transition:.2s}
+.ai-chip:hover{border-color:var(--copper);color:var(--t1);background:rgba(201,122,60,.13)}
+.ai-form{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--line)}
+.ai-form input{flex:1;background:rgba(242,239,232,.05);border:1px solid var(--line);
+  border-radius:9px;padding:9px 12px;color:var(--t1);font-family:inherit;
+  font-size:.85rem;min-width:0}
+.ai-form input::placeholder{color:var(--t3)}
+.ai-form input:focus{outline:none;border-color:var(--copper)}
+.ai-form button{flex:none;background:var(--copper);color:var(--void);border:none;
+  border-radius:9px;padding:0 14px;font-family:inherit;font-weight:600;
+  font-size:.85rem;cursor:pointer;transition:background .2s}
+.ai-form button:hover{background:var(--copper-lt)}
+.ai-foot{padding:10px 18px;border-top:1px solid var(--line);
+  font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--t3);text-align:center}
+.ai-typing{display:inline-flex;gap:4px;padding:10px 13px}
+.ai-typing i{width:5px;height:5px;border-radius:50%;background:var(--t3);
+  animation:aiblink 1.3s infinite}
+.ai-typing i:nth-child(2){animation-delay:.18s}
+.ai-typing i:nth-child(3){animation-delay:.36s}
+@keyframes aiblink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+@media(max-width:560px){.ai-fab{bottom:18px;right:18px}.ai-panel{bottom:84px;right:18px}}
+@media(prefers-reduced-motion:reduce){.ai-fab::before,.ai-dot,.ai-typing i{animation:none}}
+
 /* ── chapter 07: who you are hiring ── */
 .whogrid{display:grid;grid-template-columns:1.55fr 1fr;gap:var(--sp5);
   margin-top:var(--sp5);align-items:start}
@@ -1174,6 +1243,28 @@ the work to.</p>
 </div>
 </div>
 </footer>
+<button aria-controls="aiPanel" aria-expanded="false" aria-label="Open the assistant" class="ai-fab" id="aiFab" type="button">
+<svg aria-hidden="true" fill="none" viewbox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" stroke="#07070A" stroke-linecap="round" stroke-width="2"></path><circle cx="12" cy="12" fill="#07070A" r="3.2"></circle></svg>
+</button>
+<div aria-label="Quenora assistant" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
+<div class="ai-head"><div aria-hidden="true" class="ai-dot"></div>
+<div><b>Ask about Quenora</b><span>Answers written by us, not generated</span></div>
+</div>
+<div aria-live="polite" class="ai-body" id="aiBody" role="log"></div>
+<div class="ai-suggest" id="aiSuggest">
+<button class="ai-chip" data-q="What do you actually do?" type="button">What do you actually do?</button>
+<button class="ai-chip" data-q="What is automation here?" type="button">Automation?</button>
+<button class="ai-chip" data-q="How long does an engagement take?" type="button">How long?</button>
+<button class="ai-chip" data-q="What does it cost?" type="button">What does it cost?</button>
+<button class="ai-chip" data-q="Who are you?" type="button">Who are you?</button>
+</div>
+<form class="ai-form" id="aiForm">
+<label class="vh" for="aiInput">Ask a question</label>
+<input autocomplete="off" id="aiInput" placeholder="Ask a question…" type="text"/>
+<button type="submit">Ask</button>
+</form>
+<div class="ai-foot">Written answers, matched by keyword · not a live model</div>
+</div>
 <script>
 /* ═══════════════════════════════════════════════════════════════════
    All motion, hand-written. No library, no CDN, nothing to block.
@@ -2454,6 +2545,116 @@ the work to.</p>
   document.addEventListener('keydown',function(e){
     if(e.key==='Escape'){m.classList.remove('open');
       b.setAttribute('aria-expanded','false');}
+  });
+})();
+</script>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   THE ASSISTANT
+
+   Every answer below is written. There is no model behind this and no
+   network call — the CSP is connect-src 'self' and there is no key in this
+   repo, by policy. It matches keywords against written answers and says so
+   in its own footer, because a box that looks like a chatbot and quietly
+   is not is the kind of small dishonesty this site is built to avoid.
+
+   To make it a real assistant you need a same-origin endpoint (a Vercel
+   function at /api/chat) holding the key as an environment variable. The
+   CSP already allows that; nothing else here would change.
+   ═══════════════════════════════════════════════════════════════════ */
+(function(){
+  var fab=document.getElementById('aiFab'), panel=document.getElementById('aiPanel'),
+      body=document.getElementById('aiBody'), form=document.getElementById('aiForm'),
+      input=document.getElementById('aiInput'), sug=document.getElementById('aiSuggest');
+  if(!fab||!panel||!body) return;
+  var opened=false;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function add(t,who){
+    var m=document.createElement('div');
+    m.className='ai-msg '+who; m.textContent=t;
+    body.appendChild(m); body.scrollTop=body.scrollHeight;
+  }
+  function bot(t){
+    if(reduce){ add(t,'bot'); return; }
+    var w=document.createElement('div');
+    w.className='ai-msg bot';
+    w.innerHTML='<span class="ai-typing"><i></i><i></i><i></i></span>';
+    body.appendChild(w); body.scrollTop=body.scrollHeight;
+    setTimeout(function(){ w.remove(); add(t,'bot'); }, 520+Math.random()*380);
+  }
+
+  var A=[
+    [['automation','automate','workflow','process','unattended','rpa'],
+     "Automation is capability 02 and one of the three core ones. We automate the processes a business repeats — approvals, handoffs, reconciliations, the reporting someone does on a Tuesday. The part that matters is the exceptions: an automation is only trustworthy if it knows which cases it should not decide, and drawing that line is most of the work."],
+    [['what do you','services','offer','do you do','capabilit'],
+     "Nine capabilities. Three are core — platform and deployment engineering, process and workflow automation, and AI integration — because almost every engagement runs through them. The other six join when the work calls for them. None of it is subcontracted to someone you have not met."],
+    [['who are you','about','founder','balaji','team','how big','size'],
+     "Quenora is founder-led, founded in 2025 by Balaji Durai. Before Quenora he ran transformation work for multinational manufacturers, retail banking and life sciences groups; those systems went on to be used by more than 100,000 people. We work from Heilbronn, internationally, in German, French and English."],
+    [['different','why you','compare','competitor','large consult','big four'],
+     "Use a large consultancy for a multi-year, multi-country programme with a thousand stakeholders — they are built for that and we are not. For a single system that needs to reach production this year, the person who scopes your engagement is the person who does the work and the person you call when it breaks."],
+    [['long','time','timeline','how fast','duration','weeks'],
+     "Six phases, from framing to handover, and each carries an exit condition written into the statement of work. Most engagements run twelve to fourteen weeks end to end, with a working pilot well before that. The engagement is designed to end."],
+    [['cost','price','pricing','budget','how much','rate'],
+     "Scoped to outcomes rather than day rates. Chapter 08 on the homepage states how it is priced rather than making you sit through three meetings to find out. A briefing gives you a real number, not a range designed to get a second meeting."],
+    [['work','case','client','example','project','reference'],
+     "Three patterns come up most: invoice processing across unintegrated ERP instances, support triage with knowledge retrieval, and legacy modernisation with predictive scheduling. They are described by shape rather than by client name, and the figures on the Work page are illustrative of the pattern rather than audited results."],
+    [['product','framework','accelerator','toolkit','blueprint'],
+     "Five: the Automation Accelerator, the Enterprise Agent Framework, the AI Readiness Assessment, the Governance Toolkit and the Platform Blueprint. They are frameworks you own rather than licences you rent. The Products page has the detail."],
+    [['platform','infrastructure','data','deploy'],
+     "Platform and deployment engineering is capability 01 and core: data architecture, infrastructure and the internal platforms that make AI repeatable rather than a one-off — then deployment onto them, with monitoring and handover documentation that survives contact with reality."],
+    [['govern','security','compliance','risk','gdpr','eu ai act','audit'],
+     "Model risk, data privacy and audit trails are built in from the start rather than added as a separate workstream. For European clients that includes GDPR and EU AI Act alignment."],
+    [['agent','copilot','chatbot','llm','model'],
+     "Purpose-built agents wired into the systems that actually hold the work — ERP, CRM, service desk — rather than a chatbot bolted onto a homepage. The hard part is almost never the model."],
+    [['contact','talk','call','briefing','email','reach'],
+     "Start a conversation from the button in the header, or email hello@quenora.ai. A first call is a briefing, not a pitch."],
+    [['language','german','french','english','deutsch'],
+     "German, French and English."],
+    [['where','located','based','heilbronn','germany','office'],
+     "Based in Heilbronn, Germany, working internationally."]
+  ];
+
+  function ask(q){
+    q=(q||'').trim(); if(!q) return;
+    add(q,'user');
+    var k=q.toLowerCase(), m=null;
+    for(var i=0;i<A.length;i++){
+      var keys=A[i][0];
+      for(var j=0;j<keys.length;j++){
+        if(k.indexOf(keys[j])>-1){ m=A[i][1]; break; }
+      }
+      if(m) break;
+    }
+    bot(m || "That one is worth a real conversation rather than a canned line — email hello@quenora.ai and you will get specifics for your systems. In the meantime the nine chapters on this page cover the approach, the capabilities and the pricing.");
+  }
+
+  function toggle(){
+    var open=panel.classList.toggle('open');
+    fab.setAttribute('aria-expanded', open?'true':'false');
+    if(open && !opened){
+      opened=true;
+      setTimeout(function(){
+        bot("Hello. I can give you a quick sense of what Quenora does — ask a question, or pick one below. My answers are written by the team, not generated.");
+      }, 260);
+    }
+    if(open) setTimeout(function(){ input && input.focus(); }, 320);
+  }
+
+  fab.addEventListener('click', toggle);
+  if(form) form.addEventListener('submit', function(e){
+    e.preventDefault(); ask(input.value); input.value='';
+  });
+  if(sug) sug.addEventListener('click', function(e){
+    var c=e.target.closest('.ai-chip'); if(c) ask(c.getAttribute('data-q'));
+  });
+  addEventListener('keydown', function(e){
+    if(e.key==='Escape' && panel.classList.contains('open')){
+      panel.classList.remove('open');
+      fab.setAttribute('aria-expanded','false');
+      fab.focus();
+    }
   });
 })();
 </script>

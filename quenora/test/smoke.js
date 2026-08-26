@@ -95,8 +95,17 @@ for(const page of PAGES){
     fab.dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
     check(page,'assistant opens on click',panel.classList.contains('open'));
     check(page,'aria-expanded syncs',fab.getAttribute('aria-expanded')==='true');
-    const chip=d.querySelector('.chip');
-    check(page,'chips keyboard-accessible',chip&&chip.getAttribute('role')==='button'&&chip.hasAttribute('tabindex'));
+    /* The requirement is that a chip can be reached and fired from the
+       keyboard. The inner pages do that with div + role=button + tabindex;
+       the homepage uses a real <button>, which is keyboard-accessible by
+       definition and needs neither. Assert the requirement, not one spelling
+       of it. */
+    const chip=d.querySelector('.chip, .ai-chip');
+    const nativeBtn = chip && chip.tagName==='BUTTON'
+                   && (chip.getAttribute('type')||'submit')!=='submit';
+    const ariaBtn   = chip && chip.getAttribute('role')==='button'
+                   && chip.hasAttribute('tabindex');
+    check(page,'chips keyboard-accessible', !!(nativeBtn || ariaBtn));
     if(chip){
       chip.dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
       await new Promise(r=>setTimeout(r,50));

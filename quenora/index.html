@@ -391,6 +391,33 @@ body.clg .cur::after{opacity:1}
 .shapes-note{margin-top:var(--sp3);padding-top:var(--sp3);
   border-top:1px solid var(--line);color:var(--t3);font-size:.92rem;max-width:62ch}
 
+/* ── the enquiry form ── */
+.cform{max-width:640px;margin:var(--sp5) auto 0;text-align:left}
+.cfrow{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp3)}
+@media(max-width:600px){.cfrow{grid-template-columns:1fr}}
+.cfield{margin-bottom:var(--sp3)}
+.cfield label{display:block;font-family:'JetBrains Mono',monospace;
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--copper-lt);margin-bottom:9px}
+.cfield label .opt{color:var(--t3)}
+.cfield input,.cfield textarea{width:100%;background:rgba(242,239,232,.045);
+  border:1px solid var(--line);border-radius:4px;padding:12px 14px;
+  color:var(--t1);font-family:inherit;font-size:1rem;transition:border-color .3s}
+.cfield textarea{resize:vertical;min-height:104px;line-height:1.6}
+.cfield input:focus,.cfield textarea:focus{outline:none;border-color:var(--copper)}
+.cfield input[aria-invalid="true"],.cfield textarea[aria-invalid="true"]{border-color:var(--ember)}
+.cfield ::placeholder{color:var(--t3)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.cconsent{display:flex;gap:11px;align-items:flex-start;margin:var(--sp2) 0 var(--sp4);
+  font-size:.86rem;color:var(--t2);line-height:1.55;cursor:pointer}
+.cconsent input{margin-top:3px;flex:none;width:16px;height:16px;accent-color:var(--copper)}
+.cform .bcta{border:none;cursor:pointer;font-family:inherit}
+.cform .bcta[disabled]{opacity:.55;cursor:default}
+.cnote{margin-top:var(--sp3);font-size:.88rem;color:var(--t2);min-height:1.2em}
+.cnote.err{color:var(--ember)}
+.cnote.ok{color:var(--copper-lt)}
+.cnote a{color:var(--copper-lt);border-bottom:1px solid currentColor}
+
 /* ── projects & products (hidden until released) ── */
 .buildhead{color:var(--copper-lt);margin:var(--sp5) 0 var(--sp3);
   padding-bottom:var(--sp2);border-bottom:1px solid var(--line)}
@@ -799,7 +826,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <a href="#solution">Capabilities</a>
 <a href="#work">Work</a>
 <a href="#who">About</a>
-<a class="navcta" href="contact.html"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
+<a class="navcta" href="#climax"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="index.html" hreflang="en" lang="en">English</a></li><li><a href="de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/index.html" hreflang="fr" lang="fr">Français</a></li><li><a href="es/index.html" hreflang="es" lang="es">Español</a></li><li><a href="it/index.html" hreflang="it" lang="it">Italiano</a></li></ul></div>
 </div>
 </header>
@@ -1297,9 +1324,35 @@ the work to.</p>
 <p class="rv" data-d="1">One focused conversation about where intelligence can
          remove friction, increase certainty or create capacity in your operations.
          No deck. No discovery invoice.</p>
-<a class="bcta rv" data-d="2" href="contact.html" id="bcta">Start a conversation
+<form class="cform rv" data-d="2" id="cform" novalidate="">
+<div class="cfrow">
+<div class="cfield">
+<label for="cfName">Your name</label>
+<input autocomplete="name" id="cfName" name="name" required="" type="text"/>
+</div>
+<div class="cfield">
+<label for="cfEmail">Work email</label>
+<input autocomplete="email" id="cfEmail" name="email" required="" type="email"/>
+</div>
+</div>
+<div class="cfield">
+<label for="cfOrg">Company <span class="opt">(optional)</span></label>
+<input autocomplete="organization" id="cfOrg" name="org" type="text"/>
+</div>
+<div class="cfield">
+<label for="cfMsg">What is stuck?</label>
+<textarea id="cfMsg" name="message" placeholder="The pilot that stalled, the system that will not join, the process nobody owns…" required="" rows="4"></textarea>
+</div>
+<div aria-hidden="true" class="hp"><label>Do not fill this
+<input autocomplete="off" name="company_url" tabindex="-1" type="text"/></label></div>
+<label class="cconsent"><input id="cfConsent" name="consent" required="" type="checkbox"/>
+<span>I agree that Quenora may store these details in order to reply to me.
+I can ask for them to be deleted at any time.</span></label>
+<button class="bcta" id="cfSend" type="submit">Start a conversation
         <svg aria-hidden="true" fill="none" height="21" viewbox="0 0 16 16" width="21">
-<path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path></svg></a>
+<path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path></svg></button>
+<p aria-live="polite" class="cnote" id="cfNote"></p>
+</form>
 </div>
 </section>
 </main>
@@ -1355,6 +1408,7 @@ the work to.</p>
 <button class="ai-chip" data-q="How long does an engagement take?" type="button">How long?</button>
 <button class="ai-chip" data-q="What does it cost?" type="button">What does it cost?</button>
 <button class="ai-chip" data-q="Who are you?" type="button">Who are you?</button>
+<button class="ai-chip" data-act="contact" type="button">Talk to a person</button>
 </div>
 <form class="ai-form" id="aiForm">
 <label class="vh" for="aiInput">Ask a question</label>
@@ -2701,6 +2755,77 @@ the work to.</p>
    function at /api/chat) holding the key as an environment variable. The
    CSP already allows that; nothing else here would change.
    ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   THE ENQUIRY FORM
+
+   Posts to /api/enquiry, which emails it on. Same origin, so the CSP
+   (connect-src 'self') is unchanged.
+
+   If the deployment has no RESEND_API_KEY the endpoint answers 503
+   {configured:false} and this falls back to opening the visitor's mail
+   client with the message already written. A form that silently loses
+   enquiries is worse than one that says it cannot send yet — so it never
+   claims to have sent something it did not.
+   ═══════════════════════════════════════════════════════════════════ */
+(function(){
+  var form=document.getElementById('cform'); if(!form) return;
+  var note=document.getElementById('cfNote'), send=document.getElementById('cfSend');
+  var MAIL='hello@quenora.ai';
+
+  function say(t,cls){ note.className='cnote'+(cls?' '+cls:''); note.textContent=t; }
+  function mailFallback(v){
+    var body='Name: '+v.name+'\nCompany: '+(v.org||'—')+'\n\n'+v.message;
+    var href='mailto:'+MAIL+'?subject='+encodeURIComponent('Enquiry from '+v.name)
+            +'&body='+encodeURIComponent(body);
+    note.className='cnote';
+    note.innerHTML='This site is not wired to send mail yet. '
+      +'<a href="'+href+'">Open this in your mail client</a> — everything you typed is already in it.';
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v={
+      name:  form.name.value.trim(),
+      email: form.email.value.trim(),
+      org:   form.org.value.trim(),
+      message: form.message.value.trim(),
+      consent: form.consent.checked,
+      company_url: form.company_url.value
+    };
+    [['name',v.name],['email',v.email],['message',v.message]].forEach(function(p){
+      form[p[0]].setAttribute('aria-invalid', p[1]?'false':'true');
+    });
+    if(!v.name||!v.email||!v.message){ say('Name, email and a message, please.','err'); return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email)){
+      form.email.setAttribute('aria-invalid','true');
+      say('That email address does not look right.','err'); return;
+    }
+    if(!v.consent){ say('We need your agreement before we can store your details.','err'); return; }
+
+    send.disabled=true; say('Sending…');
+    fetch('/api/enquiry',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(v)
+    }).then(function(r){
+      return r.json().catch(function(){ return {}; }).then(function(j){ return {s:r.status,j:j}; });
+    }).then(function(o){
+      send.disabled=false;
+      if(o.s===200 && o.j.ok){
+        form.reset(); say('Sent. You will hear back from a person, not an autoresponder.','ok');
+      } else if(o.s===400 || o.s===429){
+        /* the endpoint is live and rejected this on its merits — say why */
+        say((o.j && o.j.error) || 'That did not send.','err');
+      } else {
+        /* 404 no endpoint deployed, 503 no key yet, 502 upstream down —
+           the visitor did nothing wrong and their words should not be lost */
+        mailFallback(v);
+      }
+    }).catch(function(){
+      send.disabled=false; mailFallback(v);
+    });
+  });
+})();
+
 (function(){
   var fab=document.getElementById('aiFab'), panel=document.getElementById('aiPanel'),
       body=document.getElementById('aiBody'), form=document.getElementById('aiForm'),
@@ -2785,7 +2910,21 @@ the work to.</p>
     e.preventDefault(); ask(input.value); input.value='';
   });
   if(sug) sug.addEventListener('click', function(e){
-    var c=e.target.closest('.ai-chip'); if(c) ask(c.getAttribute('data-q'));
+    var c=e.target.closest('.ai-chip'); if(!c) return;
+    /* the assistant's job is to hand over, not to hold on to people */
+    if(c.getAttribute('data-act')==='contact'){
+      panel.classList.remove('open');
+      fab.setAttribute('aria-expanded','false');
+      var cl=document.getElementById('climax');
+      if(cl){
+        cl.scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
+        setTimeout(function(){
+          var f=document.getElementById('cfName'); if(f) f.focus();
+        }, reduce?0:700);
+      }
+      return;
+    }
+    ask(c.getAttribute('data-q'));
   });
   addEventListener('keydown', function(e){
     if(e.key==='Escape' && panel.classList.contains('open')){

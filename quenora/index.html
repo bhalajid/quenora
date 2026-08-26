@@ -2151,26 +2151,62 @@ the work to.</p>
         'rgba('+Math.round(148+85*bridge)+','+Math.round(156+70*bridge)+','
         +Math.round(176+40*bridge)+','+(0.85+0.15*bridge).toFixed(2)+')');
 
+      /* ── where the mark will stand ──
+         Computed before the rails so each rail can stop short of it. The
+         previous build erased the rails afterwards with destination-out,
+         which also erased the terminus dots and left a grey disc where the
+         cleared pixels showed the section behind the canvas. Nothing is
+         erased now: the rails simply are not drawn through the circles. */
+      var laneSpan=(lanes-1)*step;
+      var mkS=laneSpan/MH;
+      var mkX=wall-(MB[0]+MW/2)*mkS;
+      var mkY=(head+(tight?12:0))-MB[2]*mkS;
+      /* For a given rail y, the x-span the nine circles actually cover.
+         Per-circle, so the notch follows the arc instead of being one blunt
+         rectangle — the rails meet the mark exactly where it is. */
+      function markGap(y){
+        if(bridge<=0.02) return null;
+        var lo=1e9, hi=-1e9, pad=3.5;
+        for(var z=0;z<9;z++){
+          var cy=mkY+MARK[z][1]*mkS, cr=MARK[z][2]*mkS*bridge+pad;
+          var dy=y-cy; if(Math.abs(dy)>=cr) continue;
+          var half=Math.sqrt(cr*cr-dy*dy), cx=mkX+MARK[z][0]*mkS;
+          if(cx-half<lo) lo=cx-half;
+          if(cx+half>hi) hi=cx+half;
+        }
+        return hi>lo ? [lo,hi] : null;
+      }
+      /* draw xa→xb on rail y, minus whatever the mark occupies */
+      function rail(xa,xb,y,gap){
+        if(xb<=xa) return;
+        if(!gap || gap[1]<=xa || gap[0]>=xb){
+          g.beginPath(); g.moveTo(xa,y); g.lineTo(xb,y); g.stroke(); return;
+        }
+        if(gap[0]>xa){ g.beginPath(); g.moveTo(xa,y); g.lineTo(gap[0],y); g.stroke(); }
+        if(gap[1]<xb){ g.beginPath(); g.moveTo(gap[1],y); g.lineTo(xb,y); g.stroke(); }
+      }
+
       /* ── lanes ── */
       for(var i=0;i<lanes;i++){
         var L=LANES[i], y=head + i*step + (tight?12:0);
         if(tight) label(L.n, x0, y-9, 'left', 'rgba(140,146,160,.9)');
         else      label(L.n, padL, y+3.5, 'left', 'rgba(140,146,160,.9)');
+        var gap=markGap(y);
 
         /* the half that always worked */
         g.strokeStyle='rgba(201,122,60,.47)'; g.lineWidth=1.3;
-        g.beginPath(); g.moveTo(x0,y); g.lineTo(wall,y); g.stroke();
+        rail(x0,wall,y,gap);
 
         /* the half that did not — dashed and dead until the mark bridges it,
            then it is drawn in, left to right, as real track */
         g.save(); g.setLineDash([2,8]); g.lineWidth=1;
         g.strokeStyle='rgba(148,156,176,'+(0.16*(1-bridge)).toFixed(3)+')';
-        g.beginPath(); g.moveTo(wall+7,y); g.lineTo(x1,y); g.stroke();
+        rail(wall+7,x1,y,gap);
         g.restore();
         if(bridge>0){
           g.strokeStyle='rgba(201,122,60,'+(0.47*bridge).toFixed(3)+')';
           g.lineWidth=1.3;
-          g.beginPath(); g.moveTo(wall,y); g.lineTo(wall+(x1-wall)*bridge,y); g.stroke();
+          rail(wall,wall+(x1-wall)*bridge,y,gap);
         }
 
         /* origin, and the terminus — dark until something actually arrives */
@@ -2255,32 +2291,11 @@ the work to.</p>
          line and scaled to the lane band. This is the answer occupying exactly
          the space the problem occupied. */
       if(bridge>0){
-        /* The mark spans the portfolio: its top sits on the first rail and its
-           bottom on the last, so it covers all five lanes rather than floating
-           across the middle three. Tied to the lane span itself, not to a
-           fraction of the band, so it stays true at any canvas height. */
-        var laneSpan=(lanes-1)*step;
-        var mh=laneSpan, ms=mh/MH, mw=MW*ms;
-        var mx=wall-(MB[0]+MW/2)*ms;
-        var my=(head+(tight?12:0))-MB[2]*ms;
-
-        /* Clear space. The mark is centred on the wall and on the middle lane,
-           but five horizontal rules still ran straight through the spheres, so
-           it read as pasted on top of the diagram rather than standing in it.
-           Punch the lanes out behind it first — the way a label knocks out the
-           contour it sits on — so the mark occupies the gap instead of
-           overlapping it. Soft-edged, and it fades in with the build so the
-           lanes are never cut before there is anything to cut them for. */
-        var kx=mx+(MB[0]+MW/2)*ms, ky=my+(MB[2]+MH/2)*ms;
-        var kr=Math.max(mw,mh)*0.70;
-        g.save();
-        g.globalCompositeOperation='destination-out';
-        var kg=g.createRadialGradient(kx,ky,kr*0.34,kx,ky,kr);
-        kg.addColorStop(0,'rgba(0,0,0,'+bridge.toFixed(3)+')');
-        kg.addColorStop(1,'rgba(0,0,0,0)');
-        g.fillStyle=kg;
-        g.beginPath(); g.arc(kx,ky,kr,0,6.2832); g.fill();
-        g.restore();
+        /* Geometry was computed before the rails, so they already stop short
+           of these circles. Top of the mark on the first rail, bottom on the
+           last: it spans the portfolio rather than floating across the middle
+           three lanes. */
+        var ms=mkS, mx=mkX, my=mkY;
 
         for(var q=0;q<9;q++){
           /* each circle has its own slice of the build */

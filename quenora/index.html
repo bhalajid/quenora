@@ -2255,8 +2255,14 @@ the work to.</p>
          line and scaled to the lane band. This is the answer occupying exactly
          the space the problem occupied. */
       if(bridge>0){
-        var mh=(wy1-wy0)*0.62, ms=mh/MH, mw=MW*ms;
-        var mx=wall-(MB[0]+MW/2)*ms, my=(wy0+wy1)/2-(MB[2]+MH/2)*ms;
+        /* The mark spans the portfolio: its top sits on the first rail and its
+           bottom on the last, so it covers all five lanes rather than floating
+           across the middle three. Tied to the lane span itself, not to a
+           fraction of the band, so it stays true at any canvas height. */
+        var laneSpan=(lanes-1)*step;
+        var mh=laneSpan, ms=mh/MH, mw=MW*ms;
+        var mx=wall-(MB[0]+MW/2)*ms;
+        var my=(head+(tight?12:0))-MB[2]*ms;
 
         /* Clear space. The mark is centred on the wall and on the middle lane,
            but five horizontal rules still ran straight through the spheres, so
@@ -2266,7 +2272,7 @@ the work to.</p>
            overlapping it. Soft-edged, and it fades in with the build so the
            lanes are never cut before there is anything to cut them for. */
         var kx=mx+(MB[0]+MW/2)*ms, ky=my+(MB[2]+MH/2)*ms;
-        var kr=Math.max(mw,mh)*0.62;
+        var kr=Math.max(mw,mh)*0.70;
         g.save();
         g.globalCompositeOperation='destination-out';
         var kg=g.createRadialGradient(kx,ky,kr*0.34,kx,ky,kr);

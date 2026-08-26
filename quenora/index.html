@@ -12,22 +12,23 @@
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
 <meta content="Quenora Technology Consulting" property="og:site_name"/>
-<meta content="Quenora — Most enterprise AI never leaves the lab" property="og:title"/>
+<meta content="Quenora — Most enterprise AI never reaches the work" property="og:title"/>
 <meta content="We engineer AI into what you already run, then hand you the keys." property="og:description"/>
 <meta content="https://quenora.ai/" property="og:url"/>
-<meta content="https://quenora.ai/assets/og-quenora.png" property="og:image"/>
+<meta content="https://quenora.ai/assets/og-quenora.jpg" property="og:image"/>
+<meta content="image/jpeg" property="og:image:type"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
-<meta content="Quenora — most enterprise AI never leaves the lab." property="og:image:alt"/>
+<meta content="Quenora — most enterprise AI never reaches the work." property="og:image:alt"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="https://quenora.ai/assets/og-quenora.png" name="twitter:image"/>
-<meta content="Quenora — most enterprise AI never leaves the lab." name="twitter:image:alt"/>
+<meta content="https://quenora.ai/assets/og-quenora.jpg" name="twitter:image"/>
+<meta content="Quenora — most enterprise AI never reaches the work." name="twitter:image:alt"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"Organization","@id":"https://quenora.ai/#org",
   "name":"Quenora Technology Consulting","url":"https://quenora.ai/",
-  "logo":"https://quenora.ai/assets/og-quenora.png",
-  "image":"https://quenora.ai/assets/og-quenora.png",
+  "logo":"https://quenora.ai/assets/og-quenora.jpg",
+  "image":"https://quenora.ai/assets/og-quenora.jpg",
   "description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.",
   "founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},
   "address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},
@@ -717,16 +718,17 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <section class="hook">
 <canvas aria-hidden="true" id="heroCanvas"></canvas>
 <div class="wrap">
-<p class="mono eyebrow">Enterprise AI engineering · Heilbronn</p>
+<p class="mono eyebrow">Enterprise AI &amp; automation · Working internationally</p>
 <h1>
 <span class="ln"><span class="w">Most</span> <span class="w">enterprise</span></span>
-<span class="ln"><span class="w">AI</span> <span class="w">never</span> <span class="w">leaves</span></span>
-<span class="ln"><span class="w"><em>the lab.</em></span></span>
+<span class="ln"><span class="w">AI</span> <span class="w">never</span> <span class="w">reaches</span></span>
+<span class="ln"><span class="w"><em>the work.</em></span></span>
 </h1>
 <div class="hook-foot">
 <p>We are the firm you call when the pilot worked and nothing happened next.
-           Quenora engineers AI into the platforms, workflows and decisions your
-           business already runs — then hands your team the keys and leaves.</p>
+           Quenora engineers AI and automation into the platforms, workflows and
+           decisions your business already runs — then hands your team the keys
+           and leaves.</p>
 <div aria-hidden="true" class="cue"><i></i><span class="mono">Scroll</span></div>
 </div>
 </div>
@@ -1362,6 +1364,7 @@ the work to.</p>
 
     var W=0,H=0,SC=1,OX=0,OY=0,DPR=1,narrow=false;
     var nodes=[], dust=[], pulses=[], t0=0, hraf=null, seen=true, ready=false;
+    var runs=[], nextRun=2.1;
     /* Pointer state. Two different things, previously conflated into one:
          px,py   real pointer position in canvas pixels — drives hit-testing
          gx,gy   the same, smoothed — drives dust displacement
@@ -1494,8 +1497,10 @@ the work to.</p>
     function seed(){
       nodes = ARC.map(function(a,i){
         return {hx:a[0],hy:a[1],r:a[2],
-                born:0.10+i*0.075, x:0,y:0,rr:0,b:0,near:0};
+                born:0.10+i*0.075, x:0,y:0,rr:0,b:0,near:0,
+                run:0, land:0};   /* lit by the passing run; bloom on arrival */
       });
+      runs = []; nextRun = 2.1;
       /* cosmos dust — normalised coords so a resize never strands a mote */
       dust = [];
       for(var i=0;i<170;i++){
@@ -1628,10 +1633,66 @@ the work to.</p>
         }
       }
 
+      /* ═══ THE RUN — a signal that goes the whole way ═══
+         The headline says most enterprise AI never reaches the work. The hero
+         has to show the opposite, or the mark is only decoration: one signal
+         leaves the smallest circle, travels every segment of the arc, lights
+         each circle as it passes, and blooms when it arrives at the ninth.
+         It reaches. That is the entire promise, drawn. */
+      if(!reduced){
+        if(el>nextRun){ runs.push({t:0}); nextRun = el + 5.2; }
+        /* cumulative arc length, so the signal moves at a constant speed
+           rather than jumping between unevenly spaced circles */
+        var segs=[], tot=0, si;
+        for(si=0;si<nodes.length-1;si++){
+          var dxs=nodes[si+1].x-nodes[si].x, dys=nodes[si+1].y-nodes[si].y;
+          var Ls=Math.sqrt(dxs*dxs+dys*dys); segs.push(Ls); tot+=Ls;
+        }
+        nodes.forEach(function(n){ n.run*=0.86; });
+        for(var ri=runs.length-1;ri>=0;ri--){
+          var ru=runs[ri]; ru.t += 0.0055;
+          if(ru.t>=1){
+            nodes[nodes.length-1].land = 1;      /* it arrives */
+            runs.splice(ri,1); continue;
+          }
+          /* locate the head along the polyline */
+          var want=ru.t*tot, acc=0, k2=0;
+          while(k2<segs.length-1 && acc+segs[k2]<want){ acc+=segs[k2]; k2++; }
+          var f3=segs[k2]?(want-acc)/segs[k2]:0;
+          var A3=nodes[k2], C3=nodes[k2+1];
+          var hx3=A3.x+(C3.x-A3.x)*f3, hy3=A3.y+(C3.y-A3.y)*f3;
+          /* every circle brightens as the head passes it */
+          nodes.forEach(function(n,ni){
+            var np=ni/(nodes.length-1);
+            var dd=(ru.t-np)*7;
+            var w2=Math.exp(-dd*dd);
+            if(w2>n.run) n.run=w2;
+          });
+          /* the trail it leaves behind, fading back along the arc */
+          for(var tI=0;tI<10;tI++){
+            var bt=ru.t-tI*0.012; if(bt<=0) break;
+            var w3=bt*tot, ac3=0, k3=0;
+            while(k3<segs.length-1 && ac3+segs[k3]<w3){ ac3+=segs[k3]; k3++; }
+            var f4=segs[k3]?(w3-ac3)/segs[k3]:0;
+            var A4=nodes[k3], C4=nodes[k3+1];
+            var tx=A4.x+(C4.x-A4.x)*f4, ty=A4.y+(C4.y-A4.y)*f4;
+            var ta=(1-tI/10)*0.5;
+            g.fillStyle='rgba(91,215,245,'+ta.toFixed(3)+')';
+            g.beginPath(); g.arc(tx,ty,2.6-tI*0.2,0,6.2832); g.fill();
+          }
+          var hg3=g.createRadialGradient(hx3,hy3,0,hx3,hy3,26);
+          hg3.addColorStop(0,'rgba(91,215,245,.75)');
+          hg3.addColorStop(1,'rgba(91,215,245,0)');
+          g.fillStyle=hg3; g.beginPath(); g.arc(hx3,hy3,26,0,6.2832); g.fill();
+          g.fillStyle='rgba(198,244,255,.98)';
+          g.beginPath(); g.arc(hx3,hy3,3.1,0,6.2832); g.fill();
+        }
+      }
+
       /* ── the nine ── */
       nodes.forEach(function(n,i){
         if(n.b<=0.01) return;
-        var r=n.rr, glow=n.near;
+        var r=n.rr, glow=Math.max(n.near, n.run*0.55);
         /* At rest the spheres sit back in the dark. The halo is driven purely
            by the pointer, so the field only lights where you actually are. */
         if(glow > 0.01){
@@ -1656,10 +1717,26 @@ the work to.</p>
         g.fillStyle='rgba(255,232,205,'+(0.14*n.b+glow*0.5).toFixed(3)+')';
         g.beginPath(); g.arc(n.x-r*0.34,n.y-r*0.38,Math.max(0.7,r*0.13),0,6.2832); g.fill();
 
+        /* ── arrival: the ninth circle takes the signal and rings once ── */
+        if(n.land>0.001){
+          n.land*=0.955;
+          var lr2=r*(1.05+(1-n.land)*0.9);
+          g.strokeStyle='rgba(91,215,245,'+(n.land*0.55).toFixed(3)+')';
+          g.lineWidth=1.6*n.land+0.3;
+          g.beginPath(); g.arc(n.x,n.y,lr2,0,6.2832); g.stroke();
+          var ag=g.createRadialGradient(n.x,n.y,r*0.5,n.x,n.y,r*2.3);
+          ag.addColorStop(0,'rgba(91,215,245,'+(n.land*0.22).toFixed(3)+')');
+          ag.addColorStop(1,'rgba(91,215,245,0)');
+          g.fillStyle=ag; g.beginPath(); g.arc(n.x,n.y,r*2.3,0,6.2832); g.fill();
+        }
+
         /* One label, on the lit sphere only, on a rule that draws itself out
            of the sphere — so it reads as a callout rather than floating text. */
-        if(glow>0.10){
-          var lab=NAMES[i].toUpperCase(), ease=Math.min(1,(glow-0.10)/0.55);
+        /* Hover only. The travelling run lights the spheres too, and keying
+           the callout off the combined glow made every name flash as the
+           signal went past — nine labels stacked across the headline. */
+        if(n.near>0.10){
+          var lab=NAMES[i].toUpperCase(), ease=Math.min(1,(n.near-0.10)/0.55);
           g.save();
           g.globalAlpha = ease;
           g.font='500 11px "JetBrains Mono",monospace';

@@ -317,7 +317,7 @@ body.clg .cur::after{opacity:1}
 .chead h2 em{color:var(--ember)}
 .chead .lede{margin-top:var(--sp3);max-width:56ch;color:var(--t2);font-size:1.1rem}
 
-/* ── chapter 07: the mark explained ──
+/* ── chapter 09: the mark explained ──
    The dot on each row is the mark's OWN radius for that circle, scaled by a
    single factor. So the list itself grows ninefold down the page — the rows
    are a reading of the mark, not an illustration next to one. */
@@ -376,6 +376,38 @@ body.clg .cur::after{opacity:1}
 .gapfig canvas{display:block;width:100%;height:clamp(300px,24vw,340px)}
 .gapfig figcaption,.autofig figcaption{margin-top:var(--sp3);padding-top:var(--sp3);
   border-top:1px solid var(--line);color:var(--t3);font-size:.92rem;max-width:62ch}
+/* ── chapter 05: the three engagement shapes ── */
+.shapes{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp3);
+  margin-top:var(--sp5)}
+@media(max-width:900px){.shapes{grid-template-columns:1fr;gap:var(--sp4)}}
+.shape{padding:var(--sp4);border:1px solid var(--line);border-radius:4px;
+  background:linear-gradient(180deg,rgba(20,22,30,.55),rgba(13,14,19,.22));
+  transition:border-color .5s var(--e)}
+.shape:hover{border-color:var(--line2)}
+.shape .mono{color:var(--copper-lt);margin-bottom:var(--sp3)}
+.shape h3{font-size:1.22rem;line-height:1.3;margin-bottom:var(--sp2)}
+.shape p{color:var(--t2);font-size:.96rem}
+.shapes-note{margin-top:var(--sp3);padding-top:var(--sp3);
+  border-top:1px solid var(--line);color:var(--t3);font-size:.92rem;max-width:62ch}
+
+/* ── chapter 07: who you are hiring ── */
+.whogrid{display:grid;grid-template-columns:1.55fr 1fr;gap:var(--sp5);
+  margin-top:var(--sp5);align-items:start}
+@media(max-width:900px){.whogrid{grid-template-columns:1fr;gap:var(--sp4)}}
+.whomain p{color:var(--t2);max-width:60ch;margin-bottom:var(--sp3)}
+.whomain p:last-child{margin-bottom:0}
+.whofacts{border-left:1px solid var(--line);padding-left:var(--sp4)}
+@media(max-width:900px){.whofacts{border-left:0;padding-left:0;
+  border-top:1px solid var(--line);padding-top:var(--sp4)}}
+.wfact{display:flex;flex-direction:column;gap:5px;padding:var(--sp2) 0;
+  border-bottom:1px solid var(--line)}
+.wfact:last-child{border-bottom:0}
+.wfact .mono{color:var(--t3);font-size:.6rem;letter-spacing:.28em;
+  text-transform:uppercase}
+.wfact b{font-weight:500;color:var(--t1);font-size:1rem}
+.whonote{margin-top:var(--sp4);padding-top:var(--sp3);
+  border-top:1px solid var(--line);color:var(--t3);font-size:.92rem;max-width:62ch}
+
 /* ── "in full" link: a chapter summarises, the page behind it goes deeper ── */
 .more{display:inline-flex;align-items:center;gap:10px;margin-top:var(--sp3);
   font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.2em;
@@ -673,9 +705,9 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 </svg>quenora
     </a>
 <nav aria-label="Main" class="navlinks">
-<a href="#solution">Capabilities</a>
 <a href="#journey">Approach</a>
-<a href="work.html">Work</a>
+<a href="#solution">Capabilities</a>
+<a href="#work">Work</a>
 <a class="navcta" href="contact.html"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="index.html" hreflang="en" lang="en">English</a></li><li><a href="de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/index.html" hreflang="fr" lang="fr">Français</a></li><li><a href="es/index.html" hreflang="es" lang="es">Español</a></li><li><a href="it/index.html" hreflang="it" lang="it">Italiano</a></li></ul></div>
 </div>
@@ -878,10 +910,51 @@ and drawing that line is most of the work.</figcaption>
 </div>
 </div>
 </section>
-<section id="honest">
+<section id="work">
 <div class="wrap">
 <div class="chead rv">
 <div class="cnum">05</div>
+<div>
+<h2>Three shapes this work <em>usually</em> takes.</h2>
+<p class="lede">Not a client list. These are the engagement patterns we are
+             called into most often, described by their shape rather than by whose
+             logo is on them — because the shape is what tells you whether your
+             problem is one of them.</p>
+<a class="more" href="work.html">All three, with the numbers</a>
+</div>
+</div>
+<div class="shapes">
+<article class="shape rv">
+<p class="mono">Pattern 01 · Financial services</p>
+<h3>Invoice processing across three ERP instances</h3>
+<p>High invoice volumes across three unintegrated ERP systems, with a finance
+team reconciling between them by hand. The engagement went at the integration
+layer rather than replacing any of the three.</p>
+</article>
+<article class="shape rv" data-d="1">
+<p class="mono">Pattern 02 · Manufacturing</p>
+<h3>Support triage and knowledge retrieval</h3>
+<p>A service desk routing tickets by hand and losing institutional knowledge as
+experienced staff retired. A retrieval layer over two decades of resolved
+tickets, wired into the existing service desk rather than replacing it.</p>
+</article>
+<article class="shape rv" data-d="2">
+<p class="mono">Pattern 03 · Logistics</p>
+<h3>Legacy modernisation and predictive scheduling</h3>
+<p>Scheduling running on a system older than most of the staff. Rather than a
+rewrite, an integration and data layer that lets modern predictive models reach
+the legacy core safely.</p>
+</article>
+</div>
+<p class="shapes-note">Representative engagement structures drawn from the
+sectors we work in. Any figures on the detail page are illustrative of the
+pattern rather than audited results from a named client.</p>
+</div>
+</section>
+<section id="honest">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">06</div>
 <div>
 <h2>The questions you are <em>already</em> thinking.</h2>
 <p class="lede">We are a small firm selling into organisations that usually buy
@@ -919,10 +992,50 @@ you end an engagement with nothing to show for it.</div></details>
 </div>
 </div>
 </section>
+<section id="who">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">07</div>
+<div>
+<h2>Who you are actually <em>hiring</em>.</h2>
+<p class="lede">The previous chapter argues you should not default to a large
+             consultancy. That obliges us to say plainly who you get instead —
+             including the size of us, which is the first thing a procurement team
+             will ask.</p>
+</div>
+</div>
+<div class="whogrid">
+<div class="whomain rv">
+<p>Quenora is founder-led. The person who scopes your engagement is the person
+who does the work and the person you call when it breaks — there is no account
+layer between the two, and nothing is subcontracted to someone you have not
+met.</p>
+<p>Founded and run by <span class="ph">[Founder name]</span>, previously
+<span class="ph">[previous roles and where]</span>, working from Heilbronn and
+delivering internationally. <span class="ph">[Years]</span> years building
+systems that had to survive production rather than a demo.</p>
+<p>We are <span class="ph">[team size and shape — e.g. "one engineer, with
+named specialists brought in by capability"]</span>. That is a real constraint
+and it shapes what we take on: single systems that need to reach production
+this year, not multi-year multi-country programmes. The objections chapter
+above says the same thing from the other direction.</p>
+</div>
+<div class="whofacts rv" data-d="1">
+<div class="wfact"><span class="mono">Based</span><b>Heilbronn, Germany</b></div>
+<div class="wfact"><span class="mono">Working</span><b>Internationally</b></div>
+<div class="wfact"><span class="mono">Founded</span><b><span class="ph">[Year]</span></b></div>
+<div class="wfact"><span class="mono">Team</span><b><span class="ph">[Size]</span></b></div>
+<div class="wfact"><span class="mono">Languages</span><b><span class="ph">[Languages spoken]</span></b></div>
+</div>
+</div>
+<p class="whonote">Everything marked in amber is a placeholder. It is deliberate:
+nothing about who we are goes on this page until it is true and you have said it.</p>
+</div>
+</section>
 <section id="commercial">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">06</div>
+<div class="cnum">08</div>
 <div>
 <h2>How this is <em>priced</em>.</h2>
 <p class="lede">Stated here rather than after three meetings, because finding
@@ -957,14 +1070,14 @@ and what we would not build. Yours to take to your board, or to another firm.</s
 </div>
 </div>
 </section>
-<!-- Chapter 07 — the mark explained. This is where the nine circles in the
+<!-- Chapter 09 — the mark explained. This is where the nine circles in the
      hero, the nav and the favicon finally say what they are. For a
      founder-led firm with no published case studies, the principles are the
      credibility, so they sit immediately before the call to action. -->
 <section id="principles">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">07</div>
+<div class="cnum">09</div>
 <div>
 <h2>The principles behind <em>the mark</em>.</h2>
 <p class="lede">Nine circles on a single arc, each growing ninefold from the
@@ -1601,7 +1714,7 @@ the work to.</p>
     }
   })();
 
-  /* ─────────── CHAPTER 07 · the mark explained ───────────
+  /* ─────────── CHAPTER 09 · the mark explained ───────────
      Rows and circles are the same nine things, so pointing at either lights
      both. The SVG is aria-hidden and the list carries every word, so none of
      this is load-bearing for assistive tech — it is a reading aid. */

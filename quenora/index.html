@@ -2257,6 +2257,25 @@ the work to.</p>
       if(bridge>0){
         var mh=(wy1-wy0)*0.62, ms=mh/MH, mw=MW*ms;
         var mx=wall-(MB[0]+MW/2)*ms, my=(wy0+wy1)/2-(MB[2]+MH/2)*ms;
+
+        /* Clear space. The mark is centred on the wall and on the middle lane,
+           but five horizontal rules still ran straight through the spheres, so
+           it read as pasted on top of the diagram rather than standing in it.
+           Punch the lanes out behind it first — the way a label knocks out the
+           contour it sits on — so the mark occupies the gap instead of
+           overlapping it. Soft-edged, and it fades in with the build so the
+           lanes are never cut before there is anything to cut them for. */
+        var kx=mx+(MB[0]+MW/2)*ms, ky=my+(MB[2]+MH/2)*ms;
+        var kr=Math.max(mw,mh)*0.62;
+        g.save();
+        g.globalCompositeOperation='destination-out';
+        var kg=g.createRadialGradient(kx,ky,kr*0.34,kx,ky,kr);
+        kg.addColorStop(0,'rgba(0,0,0,'+bridge.toFixed(3)+')');
+        kg.addColorStop(1,'rgba(0,0,0,0)');
+        g.fillStyle=kg;
+        g.beginPath(); g.arc(kx,ky,kr,0,6.2832); g.fill();
+        g.restore();
+
         for(var q=0;q<9;q++){
           /* each circle has its own slice of the build */
           var cq=clamp01((bridge-q*0.055)/0.34);

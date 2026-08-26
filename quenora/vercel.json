@@ -5,6 +5,7 @@
   "outputDirectory": ".",
   "framework": null,
   "cleanUrls": true,
+  "regions": ["fra1"],
   "trailingSlash": false,
   "headers": [
     {

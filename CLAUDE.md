@@ -15,6 +15,11 @@ unless the task is specifically about them:
 - `quenora/index-old-backup.html` — the superseded first homepage. Kept
   deliberately as a reference; it is linked from nothing and is NOT the live
   page. Searches for brand words hit it and return stale copy. Ignore it.
+- `quenora/story.html` — the same thing again: an *earlier* draft of the
+  homepage, not a separate page. Same `<title>`, same `problem`/`journey`/
+  `solution` ids, missing the `fit`, `honest`, `commercial` and `principles`
+  chapters. Deliberately orphaned and deliberately absent from `sitemap.xml`.
+  Do not link it — it would put a stale duplicate homepage in the navigation.
 - `quenora/de/ fr/ es/ it/` — 24 generated pages, currently frozen and stale
   (see `quenora/i18n/FROZEN`). Never hand-edit them; they come from
   `build_i18n.py`.

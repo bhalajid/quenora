@@ -58,6 +58,15 @@ hook · ticker · 01 problem (+ "the gap" diagram) · 02 fit · 03 journey
 
 ## Open — next session starts here
 
+0. **`#build` is written but hidden.** Projects & products section, in
+   `index.html` right after chapter 05. To release it, two things must happen
+   *together* or the page numbers itself wrongly:
+   - remove the `hidden` attribute on `<section hidden id="build">`
+   - renumber `#honest` `#who` `#commercial` `#principles` from 06/07/08/09
+     to 07/08/09/10
+   Ongoing-project rows are amber placeholders: title, tech stack, use case.
+   No client is named and none should be without written permission.
+
 1. **Chapter 07 integration.** Section is in and passing, but has not been
    reviewed on screen at any width.
 2. Inner pages still carry the old design — and they still hard-code the long

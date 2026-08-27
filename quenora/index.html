@@ -27,6 +27,8 @@
 {"@context":"https://schema.org","@graph":[
  {"@type":"Organization","@id":"https://quenora.ai/#org",
   "name":"Quenora Consulting","url":"https://quenora.ai/",
+  "email":"info@quenora.ai",
+  "sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],
   "logo":"https://quenora.ai/assets/og-quenora.jpg",
   "image":"https://quenora.ai/assets/og-quenora.jpg",
   "description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.",
@@ -1388,9 +1390,14 @@ notice</a>.</span></label>
 <a href="products.html">Products</a><a href="contact.html">Contact</a>
 </nav></div>
 <div><h3>Contact</h3><nav aria-label="Contact">
-<a href="mailto:hello@quenora.ai">hello@quenora.ai</a>
+<a href="mailto:info@quenora.ai">info@quenora.ai</a>
 <a href="impressum.html">Legal notice · Impressum</a>
 <a href="privacy.html">Privacy notice</a>
+</nav></div>
+<div><h3>Follow</h3><nav aria-label="Social">
+<a rel="noopener me" target="_blank" href="https://www.linkedin.com/company/quenora">LinkedIn</a>
+<a rel="noopener me" target="_blank" href="https://x.com/quenora_ai">X</a>
+<a rel="noopener me" target="_blank" href="https://www.instagram.com/quenora.ai/">Instagram</a>
 </nav></div>
 </div>
 <div class="fbot">
@@ -2775,7 +2782,7 @@ notice</a>.</span></label>
 (function(){
   var form=document.getElementById('cform'); if(!form) return;
   var note=document.getElementById('cfNote'), send=document.getElementById('cfSend');
-  var MAIL='hello@quenora.ai';
+  var MAIL='info@quenora.ai';
 
   function say(t,cls){ note.className='cnote'+(cls?' '+cls:''); note.textContent=t; }
   function mailFallback(v){
@@ -2877,7 +2884,7 @@ notice</a>.</span></label>
     [['agent','copilot','chatbot','llm','model'],
      "Purpose-built agents wired into the systems that actually hold the work — ERP, CRM, service desk — rather than a chatbot bolted onto a homepage. The hard part is almost never the model."],
     [['contact','talk','call','briefing','email','reach'],
-     "Start a conversation from the button in the header, or email hello@quenora.ai. A first call is a briefing, not a pitch."],
+     "Start a conversation from the button in the header, or email info@quenora.ai. A first call is a briefing, not a pitch."],
     [['language','german','french','english','deutsch'],
      "German, French and English."],
     [['where','located','based','heilbronn','germany','office'],
@@ -2895,7 +2902,7 @@ notice</a>.</span></label>
       }
       if(m) break;
     }
-    bot(m || "That one is worth a real conversation rather than a canned line — email hello@quenora.ai and you will get specifics for your systems. In the meantime the nine chapters on this page cover the approach, the capabilities and the pricing.");
+    bot(m || "That one is worth a real conversation rather than a canned line — email info@quenora.ai and you will get specifics for your systems. In the meantime the nine chapters on this page cover the approach, the capabilities and the pricing.");
   }
 
   function toggle(){

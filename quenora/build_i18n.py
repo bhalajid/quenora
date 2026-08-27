@@ -37,7 +37,7 @@ SKIP_TAGS = {"script", "style"}
 
 # strings that must never be translated
 DNT = re.compile(
-    r"^(quenora|quenora\.ai|hello@quenora\.ai|Quenora Technology Consulting|"
+    r"^(quenora|quenora\.ai|hello@quenora\.ai|Quenora Consulting|"
     r"GDPR|EU AI Act|IaC|MLOps|ERP|CRM|API|BI & reporting|RAG systems|"
     r"\[[^\]]+\]|Main|Footer|Contact|Legal|Site|Quenora home|Reg / VAT|AI|Core|Continuous|Choose language|Sprache w\u00e4hlen|Choisir la langue|Elegir idioma|Scegli la lingua|Deutsch|English|Français|Español|Italiano|EN|DE|FR|ES|IT|AB/\d+|Phase \d+|\d+[\d\s:.,%–—/-]*|00:00|html|uenora|"
     r"[©·→←↓↑✓–—]+)$", re.I)

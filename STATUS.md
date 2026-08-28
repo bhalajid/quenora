@@ -1,4 +1,4 @@
-# Status — 25 August 2026
+# Status — 28 August 2026
 
 Repo clean, `main` in sync with `origin/main`, release gate green
 (9 checks, `RELEASE APPROVED`).
@@ -11,7 +11,7 @@ five languages.
 
 | | |
 |---|---|
-| Live page | `quenora/index.html` — 7 chapters, ~1,500 words of prose |
+| Live page | `quenora/index.html` — 9 chapters + hidden `#build`, enquiry form, assistant |
 | Inner pages | `services` `products` `approach` `work` `contact` — not yet reworked to match the new homepage |
 | Translations | `de/ fr/ es/ it/` — 24 pages, **frozen and stale**, see `i18n/FROZEN` |
 | Tests | `quenora/test/` — 9-stage gate, `bash release.sh ..` |
@@ -19,9 +19,14 @@ five languages.
 ## Homepage chapters
 
 ```
-hook · ticker · 01 problem (+ "the gap" diagram) · 02 fit · 03 journey
-04 capabilities · 05 objections · 06 pricing · 07 the nine principles · climax
+hook · ticker · 01 problem (+ "the gap" diagram, 3 beats, loops)
+02 fit · 03 journey · 04 capabilities (+ automation figure)
+05 work · [06 build — HIDDEN] · 06 objections · 07 who/about
+08 pricing · 09 principles · climax (+ enquiry form)
 ```
+
+Headline is now "Most enterprise AI never reaches **the work**."
+See `DESIGN-BRIEF.md` for the design system and the outstanding UI/UX list.
 
 ## Done
 
@@ -67,19 +72,24 @@ hook · ticker · 01 problem (+ "the gap" diagram) · 02 fit · 03 journey
    Ongoing-project rows are amber placeholders: title, tech stack, use case.
    No client is named and none should be without written permission.
 
-1. **Chapter 07 integration.** Section is in and passing, but has not been
-   reviewed on screen at any width.
-2. Inner pages still carry the old design — and they still hard-code the long
-   nav CTA label, so they show the same overflowing header on phones that the
-   homepage just had.
-5. Translations: `rm i18n/FROZEN && python3 build_i18n.py`, then re-run the
-   gate — it will fail until every localised page matches the new structure.
+1. **The five inner pages still carry the old design.** Biggest visible
+   inconsistency on the site. They also hard-code the long nav CTA label, so
+   they show the phone header overflow the homepage no longer has.
+2. **Mobile pass** on the newer sections — work, about, the enquiry form and
+   the assistant panel were built desktop-first.
+3. Translations: `rm i18n/FROZEN && python3 build_i18n.py`, then re-run the
+   gate. They now also predate the new headline, the About chapter and the
+   renamed capabilities, and render `l'IA AI` in three languages.
 
 ## Blocking launch
 
 - **Impressum** — legally required in Germany, does not exist yet
 - **Privacy notice** — does not exist yet
-- Contact form still opens a mail client; needs a real backend
+- Enquiry form is built and posts to `/api/enquiry` (Vercel + Resend), but
+  **is not sending**: set `RESEND_API_KEY`, `ENQUIRY_TO`, `ENQUIRY_FROM` as
+  Vercel env vars. Until then it falls back to the visitor's mail client.
+- The form asks for consent to store personal data and has no privacy notice
+  to link to. That pairing is the real launch blocker, not the keys.
 - Native-speaker review of all four languages (every `i18n/*.json` carries
   `"reviewed_by_native_speaker": false`)
 - Trademark clearance for "Quenora"

@@ -407,7 +407,7 @@ body.clg .cur::after{opacity:1}
   border:1px solid var(--line);border-radius:4px;padding:12px 14px;
   color:var(--t1);font-family:inherit;font-size:1rem;transition:border-color .3s}
 .cfield textarea{resize:vertical;min-height:104px;line-height:1.6}
-.cfield input:focus,.cfield textarea:focus{outline:none;border-color:var(--copper)}
+.cfield input:focus,.cfield textarea:focus{border-color:var(--copper)}
 .cfield input[aria-invalid="true"],.cfield textarea[aria-invalid="true"]{border-color:var(--ember)}
 .cfield ::placeholder{color:var(--t3)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -495,7 +495,7 @@ body.clg .cur::after{opacity:1}
   border-radius:9px;padding:9px 12px;color:var(--t1);font-family:inherit;
   font-size:.85rem;min-width:0}
 .ai-form input::placeholder{color:var(--t3)}
-.ai-form input:focus{outline:none;border-color:var(--copper)}
+.ai-form input:focus{border-color:var(--copper)}
 .ai-form button{flex:none;background:var(--copper);color:var(--void);border:none;
   border-radius:9px;padding:0 14px;font-family:inherit;font-weight:600;
   font-size:.85rem;cursor:pointer;transition:background .2s}
@@ -697,6 +697,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   display:flex;flex-wrap:wrap;gap:var(--sp2);justify-content:space-between;
   font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--t3)}
 .fbot a{color:var(--t2);border-bottom:1px solid rgba(168,174,187,.28);
+  display:inline-block;padding:5px 0;
   transition:color .3s,border-color .3s}
 .fbot a:hover{color:var(--ember);border-bottom-color:var(--ember)}
 

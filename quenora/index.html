@@ -2666,6 +2666,22 @@ notice</a>.</span></label>
     }, { passive: true });
   }
 
+  /* Reduced motion drops the parallax and the scrubbing, not the state. The
+     nav's background and the progress bar are legibility features — without
+     .stuck the header sits transparent over the page it is on — so they keep
+     tracking scroll here, with a passive listener instead of a rAF loop. */
+  if (reduced) {
+    var flat = function () {
+      var y = w.scrollY || d.documentElement.scrollTop;
+      var docH = d.documentElement.scrollHeight - vh;
+      if (prog) prog.style.width = clamp(y / docH, 0, 1) * 100 + '%';
+      if (nav) nav.classList.toggle('stuck', y > 20);
+    };
+    w.addEventListener('scroll', flat, { passive: true });
+    w.addEventListener('resize', flat);
+    flat();
+  }
+
   if (!reduced) (function frame() {
     var y = w.scrollY || d.documentElement.scrollTop;
     var docH = d.documentElement.scrollHeight - vh;

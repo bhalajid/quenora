@@ -34,6 +34,16 @@ EN_ONLY_PAGES = {"impressum.html", "privacy.html"}
 # of the sitemap and carry a noindex meta.
 UNLISTED_PAGES = {"products.html"}
 LANGS = ["de", "fr", "es", "it"]
+# Languages that are still built and kept in the repo, but not offered to
+# visitors: absent from the switcher, from the hreflang set and from the
+# sitemap, and served noindex. The firm states it works in German, French and
+# English (the About facts list), so advertising Spanish and Italian editions
+# claimed language coverage that does not exist. They are built rather than
+# deleted so the URLs and the translated string files survive until the
+# expansion, at which point removing a code from this set republishes them.
+UNLISTED_LANGS = {"es", "it"}
+# The languages actually offered. Everything visitor-facing iterates this.
+LISTED_LANGS = [l for l in LANGS if l not in UNLISTED_LANGS]
 LANG_NAMES = {"en": "English", "de": "Deutsch", "fr": "Français",
               "es": "Español", "it": "Italiano"}
 DOMAIN = "https://quenora.ai"
@@ -116,7 +126,7 @@ SWITCH_LABEL = {"en": "Choose language", "de": "Sprache wählen",
 def switcher(lang, page):
     """Header language menu. Current language first, marked."""
     items = []
-    for code in ["en"] + LANGS:
+    for code in ["en"] + LISTED_LANGS:
         if code == "en":
             href = page if lang == "en" else "../" + page
         else:
@@ -217,7 +227,7 @@ def head_links(soup, lang, page):
     c["rel"] = "canonical"
     c["href"] = canon
     head.append(c)
-    for code in ["en"] + LANGS:
+    for code in ["en"] + LISTED_LANGS:
         b = DOMAIN + ("/" if code == "en" else "/" + code + "/")
         alt = soup.new_tag("link")
         alt["rel"] = "alternate"
@@ -257,6 +267,21 @@ def build_lang(lang):
         translate_soup(soup, tr, stats)
         localise_paths(soup, lang)
         head_links(soup, lang, page)
+
+        # An unlisted language is unlinked, so it must also be uncrawlable.
+        # Leaving it out of the sitemap is not enough on its own — a URL that
+        # was indexed once stays indexed until the page says otherwise. Note
+        # that products.html gets its noindex from the English source and so
+        # inherits it here; a language has no English source to inherit from,
+        # which is why this is set explicitly. "follow" rather than "none",
+        # matching products.html: the outbound links stay worth crawling.
+        if lang in UNLISTED_LANGS:
+            r = soup.find("meta", attrs={"name": "robots"})
+            if not r:
+                r = soup.new_tag("meta")
+                r["name"] = "robots"
+                soup.head.append(r)
+            r["content"] = "noindex, follow"
 
         # language switcher into the header, before the nav links
         st = soup.find("style")
@@ -302,7 +327,7 @@ def build_en_switcher():
 
 def sitemap():
     urls = []
-    for lang in ["en"] + LANGS:
+    for lang in ["en"] + LISTED_LANGS:
         base = DOMAIN + ("/" if lang == "en" else "/" + lang + "/")
         for page in PAGES:
             if page in UNLISTED_PAGES:
@@ -311,7 +336,7 @@ def sitemap():
             alts = "".join(
                 '\n    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>'
                 % (c, DOMAIN + ("/" if c == "en" else "/" + c + "/") + slug)
-                for c in ["en"] + LANGS)
+                for c in ["en"] + LISTED_LANGS)
             urls.append(
                 '  <url>\n    <loc>%s%s</loc>%s\n    <priority>%s</priority>\n  </url>'
                 % (base, slug, alts, "1.0" if page == "index.html" else "0.8"))

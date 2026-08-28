@@ -29,6 +29,10 @@ PAGES = ["index.html", "services.html", "products.html",
 # Pages that exist in English only. Links to these must climb out of the
 # language directory instead of resolving to a /de/... file that is not there.
 EN_ONLY_PAGES = {"impressum.html", "privacy.html"}
+# Pages kept in the repo but deliberately unlinked and not indexed. They are
+# still generated, so the localised copies stay in step, but they are left out
+# of the sitemap and carry a noindex meta.
+UNLISTED_PAGES = {"products.html"}
 LANGS = ["de", "fr", "es", "it"]
 LANG_NAMES = {"en": "English", "de": "Deutsch", "fr": "Français",
               "es": "Español", "it": "Italiano"}
@@ -301,6 +305,8 @@ def sitemap():
     for lang in ["en"] + LANGS:
         base = DOMAIN + ("/" if lang == "en" else "/" + lang + "/")
         for page in PAGES:
+            if page in UNLISTED_PAGES:
+                continue
             slug = "" if page == "index.html" else page
             alts = "".join(
                 '\n    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>'

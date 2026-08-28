@@ -20,15 +20,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/products.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/products.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/products.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/products.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://quenora.ai/es/products.html"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://quenora.ai/it/products.html"/>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://quenora.ai/approach.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/approach.html"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/approach.html"/>
@@ -71,15 +62,6 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/services.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://quenora.ai/es/services.html"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://quenora.ai/it/services.html"/>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://quenora.ai/de/products.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/products.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/products.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/products.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://quenora.ai/es/products.html"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://quenora.ai/it/products.html"/>
     <priority>0.8</priority>
   </url>
   <url>
@@ -128,15 +110,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/fr/products.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/products.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/products.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/products.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://quenora.ai/es/products.html"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://quenora.ai/it/products.html"/>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://quenora.ai/fr/approach.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/approach.html"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/approach.html"/>
@@ -182,15 +155,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/es/products.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/products.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/products.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/products.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://quenora.ai/es/products.html"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://quenora.ai/it/products.html"/>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://quenora.ai/es/approach.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/approach.html"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/approach.html"/>
@@ -233,15 +197,6 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/services.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://quenora.ai/es/services.html"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://quenora.ai/it/services.html"/>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://quenora.ai/it/products.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/products.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/products.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/products.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://quenora.ai/es/products.html"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://quenora.ai/it/products.html"/>
     <priority>0.8</priority>
   </url>
   <url>

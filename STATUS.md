@@ -1,4 +1,4 @@
-# Status — 25 August 2026
+# Status — 28 August 2026
 
 Repo clean, `main` in sync with `origin/main`, release gate green
 (9 checks, `RELEASE APPROVED`).
@@ -77,12 +77,44 @@ hook · ticker · 01 problem (+ "the gap" diagram) · 02 fit · 03 journey
 
 ## Blocking launch
 
-- **Impressum** — legally required in Germany, does not exist yet
-- **Privacy notice** — does not exist yet
-- Contact form still opens a mail client; needs a real backend
+- **The Impressum has no address or telephone number.** The page exists and is
+  linked from every footer, but renders `{{TODO:STREET_AND_NUMBER}}`,
+  `{{TODO:POSTCODE}}` and `{{TODO:TELEPHONE}}`. § 5 DDG requires a
+  *ladungsfähige Anschrift* — an address where documents can be served, so not
+  a PO box — and a second rapid-contact channel alongside email. Release gate
+  stage 4b fails on these five tokens and **they are the only thing it fails
+  on**. Only Balaji can supply the values.
 - Native-speaker review of all four languages (every `i18n/*.json` carries
   `"reviewed_by_native_speaker": false`)
 - Trademark clearance for "Quenora"
+
+## Done since this file was last written
+
+- **Impressum and privacy notice exist**, at `impressum.html` and
+  `privacy.html`, linked from every footer in all five languages. § 5 DDG and
+  GDPR Art. 13. Registration status is stated honestly: a sole proprietorship
+  not yet in the Handelsregister, so no HRB number or VAT ID is invented.
+- **The contact form is wired.** `api/enquiry.js` posts through Resend,
+  consent-gated, and falls back to the mail client only when no API key is
+  configured.
+- The company name is settled as **Quenora Consulting** — no `GmbH` until it is
+  registered. Contact address is **info@quenora.ai**, not `hello@`.
+- Release gate: **8 of 9 stages green**. Node is installed and
+  `test/node_modules` is populated, so the gate actually runs; a fresh clone
+  still needs `npm install` in `quenora/test`.
+
+## Where the detail lives
+
+Remediation against the website audit is tracked item by item — 27 closed, 27
+open, with file paths, measurements and the reasoning behind each decision — in
+a ledger outside this repo, because it contains internal criticism and
+`vercel.json` serves this directory wholesale. Ask Abinaya for the link.
+
+Deliberate decisions recorded there, so they are not re-litigated:
+`products.html` stays in the repo unlinked and `noindex`; the inner pages keep
+the old design until the homepage is finished; the four localised builds are
+deferred until then, and their rebuild has to cover country-specific legal
+content, not just translation.
 
 ## Housekeeping
 

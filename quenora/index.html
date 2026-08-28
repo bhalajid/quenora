@@ -227,14 +227,13 @@ body.clg .cur::after{opacity:1}
   transition:transform .5s var(--e)}
 .navlinks>a:hover{color:var(--t1)}
 .navlinks>a:hover::after{transform:scaleX(1);transform-origin:left}
-.navcta{border:1.5px solid var(--line2);padding:11px 20px;font-size:.8rem;
-  font-weight:600;color:var(--t1);position:relative;overflow:hidden;
-  isolation:isolate;transition:color .4s var(--e),border-color .4s var(--e)}
-.navcta::after{content:'';position:absolute;inset:0;z-index:-1;background:var(--ember);
-  transform:translateY(101%);transition:transform .5s var(--e)}
-.navcta:hover{color:var(--void);border-color:var(--ember)}
-.navcta:hover::after{transform:translateY(0)}
-.navcta{white-space:nowrap}
+.navlinks>a.navcta{background:var(--copper);color:var(--void);border:1px solid transparent;
+  padding:11px 22px;font-size:.8rem;font-weight:600;border-radius:8px;
+  white-space:nowrap;box-shadow:0 6px 24px -8px rgba(201,122,60,.45);
+  transition:background .22s ease,transform .22s ease,box-shadow .22s ease}
+.navlinks>a.navcta::after{display:none}
+.navlinks>a.navcta:hover{background:var(--copper-lt);color:var(--void);
+  transform:translateY(-1px);box-shadow:0 10px 30px -8px rgba(201,122,60,.45)}
 .cta-short{display:none}
 @media(max-width:880px){.navlinks>a:not(.navcta){display:none}}
 /* Below ~560px the row cannot hold brand + full CTA + language button, so the

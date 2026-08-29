@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Quenora Consulting — How we build</title>
+<meta content="The engineering standard behind Quenora, demonstrated on the site you are reading: no third-party JavaScript, readable without scripting, and nine checks that block the build." name="description"/>
+<meta content="Quenora Consulting — How we build" property="og:title"/>
+<meta content="The engineering standard behind Quenora, shown rather than claimed." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="en_GB" property="og:locale"/>
+<meta content="https://quenora.ai/engineering.html" property="og:url"/>
+<link href="https://quenora.ai/engineering.html" rel="canonical"/>
+<link href="https://quenora.ai/engineering.html" hreflang="en" rel="alternate"/>
+<link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='9 9 169.71 155.71'%3E%3Cg fill='%23C97A3C'%3E%3Ccircle cx='12' cy='161.71' r='3'/%3E%3Ccircle cx='21.64' cy='161.34' r='3.95'/%3E%3Ccircle cx='33.39' cy='159.88' r='5.2'/%3E%3Ccircle cx='47.73' cy='156.52' r='6.84'/%3E%3Ccircle cx='65.05' cy='149.97' r='9'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52'/%3E%3Ccircle cx='151.71' cy='36' r='27'/%3E%3C/g%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Playfair+Display:ital,wght@1,400&amp;display=swap" rel="stylesheet"/>
+<style>
+/* Same tokens as index.html. This page is deliberately lean — it is the page
+   that argues for restraint, so it does not get to carry a hero canvas. */
+:root{
+  --void:#07070A; --sf1:#0D0E13; --sf2:#14161E;
+  --t1:#F2EFE8; --t2:#A8AEBB; --t3:#7C8290;
+  --copper:#C97A3C; --copper-lt:#E9A063; --ember:#FF7043; --signal:#5BD7F5;
+  --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.05);
+  --wrap:1480px;
+  --sp2:16px; --sp3:24px; --sp4:40px; --sp5:64px; --sp6:104px; --sp7:168px;
+  --e:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--void);color:var(--t1);line-height:1.62;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+@media(min-width:1600px){.wrap{padding:0 40px}}
+.skip{position:absolute;left:-9999px;top:0;background:var(--copper);color:var(--void);
+  padding:12px 20px;z-index:999;border-radius:0 0 4px 0}
+.skip:focus{left:0}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2.5px solid var(--signal);outline-offset:3px}
+.mono{font-family:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace}
+
+/* ── header, identical structure to the homepage ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:300;border-bottom:1px solid transparent;
+  transition:background .45s var(--e),border-color .45s var(--e)}
+.nav.stuck,.nav.navopen{background:rgba(7,7,10,.9);backdrop-filter:blur(20px) saturate(160%);
+  border-bottom-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:var(--sp3);height:84px}
+.brand{display:inline-flex;align-items:center;gap:13px;font-size:1.28rem;font-weight:500;
+  letter-spacing:-.02em;color:var(--t1)}
+.brand .mk{width:40px;height:37px;color:var(--copper);flex:none}
+.navlinks{margin-left:auto;display:flex;gap:var(--sp3);align-items:center}
+.navlinks>a{font-size:.86rem;font-weight:500;color:var(--t2);padding:7px 0;
+  transition:color .3s;position:relative}
+.navlinks>a:hover{color:var(--t1)}
+.navlinks>a[aria-current=page]{color:var(--copper-lt)}
+.navlinks>a.navcta{background:var(--copper);color:var(--void);border:1px solid transparent;
+  padding:11px 22px;font-size:.8rem;font-weight:600;border-radius:8px;white-space:nowrap;
+  box-shadow:0 6px 24px -8px rgba(201,122,60,.45);transition:background .22s ease,transform .22s ease}
+.navlinks>a.navcta:hover{background:var(--copper-lt);transform:translateY(-1px)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;
+  padding:9px;flex:none;margin-left:auto;border-radius:3px}
+.burger i{display:block;width:22px;height:1.5px;background:var(--t1);transition:transform .28s var(--e),opacity .2s}
+.burger.open i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open i:nth-child(2){opacity:0}
+.burger.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+@media(max-width:880px){
+  .burger{display:flex;order:2}
+  .nav .wrap{flex-wrap:wrap;height:auto;min-height:84px}
+  .navlinks{order:4;flex-basis:100%;flex-direction:column;align-items:stretch;gap:0;
+    margin-left:0;max-height:0;overflow:hidden;transition:max-height .34s var(--e),margin .34s var(--e)}
+  .navlinks.open{max-height:320px;margin-bottom:var(--sp3)}
+  .navlinks>a{padding:14px 2px;border-bottom:1px solid var(--line-2);font-size:15px}
+  .navlinks>a.navcta{order:-1;position:absolute;right:64px;top:22px;padding:9px 16px}
+}
+@media(prefers-reduced-motion:reduce){.burger i,.navlinks{transition:none}}
+
+/* ── type ── */
+main{padding-top:84px}
+section{padding:var(--sp7) 0 0}
+section:last-of-type{padding-bottom:var(--sp7)}
+.ch{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--copper);display:flex;align-items:center;
+  gap:14px;margin:0 0 var(--sp4)}
+.ch::before{content:'';width:52px;height:1.5px;background:currentColor;flex:none}
+h1{font-size:clamp(2.5rem,6.2vw,4.6rem);font-weight:600;letter-spacing:-.035em;
+  line-height:1.02;margin:0 0 var(--sp4);text-wrap:balance;max-width:19ch}
+h1 em{color:var(--ember);font-family:'Playfair Display',Georgia,serif;font-style:italic;
+  font-weight:400}
+h2{font-size:clamp(1.7rem,3.3vw,2.6rem);font-weight:600;letter-spacing:-.028em;
+  line-height:1.1;margin:0 0 var(--sp4);text-wrap:balance;max-width:20ch}
+h3{font-size:1.06rem;font-weight:600;margin:0 0 10px;letter-spacing:-.005em}
+p{color:var(--t2);font-size:1.02rem;margin:0 0 var(--sp3);max-width:62ch}
+.lede{font-size:clamp(1.1rem,1.9vw,1.35rem);color:var(--t2);max-width:56ch;line-height:1.55}
+strong{color:var(--t1);font-weight:600}
+.hero{padding:var(--sp7) 0 0;min-height:auto}
+
+/* ── the decision list ── */
+.decisions{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+  gap:1px;background:var(--line-2);border:1px solid var(--line);border-radius:4px;
+  overflow:hidden;margin:var(--sp5) 0 0}
+.dec{background:var(--sf1);padding:var(--sp4) var(--sp4) var(--sp4)}
+.dec .n{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.2em;
+  color:var(--copper);display:block;margin-bottom:14px}
+.dec p{font-size:.94rem;margin:0}
+.dec p+p{margin-top:10px}
+.dec .why{color:var(--t3);font-size:.88rem;border-left:2px solid var(--line);
+  padding-left:14px;margin-top:14px}
+
+/* ── the gate ── */
+.gate{margin:var(--sp5) 0 0;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.gate table{border-collapse:collapse;width:100%;min-width:520px;font-size:.9rem}
+.gate th{background:var(--sf2);color:var(--t3);font-family:'JetBrains Mono',monospace;
+  font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  text-align:left;padding:13px 16px;border-bottom:1px solid var(--line)}
+.gate td{padding:13px 16px;border-bottom:1px solid var(--line-2);color:var(--t2);vertical-align:top}
+.gate tr:last-child td{border-bottom:none}
+.gate td:first-child{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--copper-lt);
+  white-space:nowrap;width:1%}
+.gate td strong{color:var(--t1)}
+.tw{overflow-x:auto}
+
+/* ── principles ── */
+.prin{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:var(--sp4) var(--sp5);margin:var(--sp5) 0 0}
+.pr h3{color:var(--t1)}
+.pr p{font-size:.94rem;margin:0}
+.pr .tie{display:block;margin-top:10px;font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--copper)}
+
+.note{background:var(--sf2);border:1px solid var(--line);border-left:2px solid var(--copper);
+  border-radius:4px;padding:var(--sp4);margin:var(--sp5) 0 0}
+.note p:last-child{margin-bottom:0}
+
+/* ── CTA ── */
+.cta-inline{display:flex;align-items:baseline;gap:var(--sp3) var(--sp4);flex-wrap:wrap;
+  margin-top:var(--sp5);padding-top:var(--sp4);border-top:1px solid var(--line)}
+.cta-inline p{margin:0;font-size:1rem;max-width:52ch}
+.cta-inline a{flex:none;background:var(--copper);color:var(--void);padding:11px 22px;
+  border-radius:8px;font-size:.8rem;font-weight:600;white-space:nowrap;
+  box-shadow:0 6px 24px -8px rgba(201,122,60,.45);transition:background .22s ease,transform .22s ease}
+.cta-inline a:hover{background:var(--copper-lt);transform:translateY(-1px)}
+@media(max-width:620px){.cta-inline a{width:100%;text-align:center}}
+
+/* ── footer, matching the homepage ── */
+footer{border-top:1px solid var(--line);padding:var(--sp6) 0 var(--sp5);margin-top:var(--sp7)}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:var(--sp5) var(--sp4)}
+@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.fgrid{grid-template-columns:1fr}}
+footer h3{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--t3);margin:0 0 var(--sp3);font-weight:500}
+footer nav{display:flex;flex-direction:column;gap:11px}
+footer nav a{color:var(--t2);font-size:.94rem;transition:color .3s,transform .3s;display:inline-block}
+footer nav a:hover{color:var(--ember);transform:translateX(5px)}
+.brand.lg{font-size:1.85rem;gap:19px}
+.brand.lg .mk{width:54px;height:50px}
+.lockup{display:flex;flex-direction:column;gap:10px}
+.lockup .desc{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--t3)}
+.fbot{margin-top:var(--sp5);padding-top:var(--sp4);border-top:1px solid var(--line-2);
+  display:flex;flex-wrap:wrap;gap:var(--sp3);justify-content:space-between;
+  font-size:.8rem;color:var(--t3)}
+.fbot a{color:var(--t3);padding:7px 0;display:inline-block}
+.fbot a:hover{color:var(--t2)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+<div class="wrap">
+<a aria-label="Quenora home" class="brand" href="index.html">
+<svg aria-hidden="true" class="mk" fill="currentColor" viewbox="9 9 169.71 155.71">
+<circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
+<circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
+<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
+<circle cx="151.71" cy="36" r="27"></circle>
+</svg>quenora
+</a>
+<button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
+<nav aria-label="Main" class="navlinks" id="navLinks">
+<a href="index.html#journey">Approach</a>
+<a href="index.html#solution">Capabilities</a>
+<a aria-current="page" href="engineering.html">Engineering</a>
+<a href="index.html#who">About</a>
+<a class="navcta" href="index.html#climax">Start a conversation</a>
+</nav>
+</div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+<div class="wrap">
+<p class="ch">How we build</p>
+<h1>You cannot check our clients. You can check <em>this</em>.</h1>
+<p class="lede">Quenora has no published case studies, and we will not invent any.
+That leaves a fair question: on what evidence should anyone trust the engineering?
+Here is one honest answer — the site you are reading is built to the standard
+we hold client work to, and every claim on this page is verifiable from your
+own browser.</p>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<p class="ch">01 · Four decisions</p>
+<h2>Every one of them cost us something.</h2>
+<p>A principle nobody paid for is a slogan. These four are on this site, they
+each closed off an easier option, and the reasoning is the part worth reading.</p>
+
+<div class="decisions">
+<div class="dec">
+<span class="n">01</span>
+<h3>No third-party JavaScript</h3>
+<p>No framework, no bundler, no build step, and not one line of script from
+anyone else's server. Every page is one file: markup, styles and behaviour
+together.</p>
+<p><strong>One exception, named rather than hidden:</strong> the three
+typefaces load from Google Fonts, which is disclosed in our
+<a href="privacy.html" style="color:var(--copper-lt);border-bottom:1px solid rgba(233,160,99,.3)">privacy
+notice</a> with its legal basis. Every face has a full local fallback stack, so
+if that request is blocked the page still sets correctly — it just sets in a
+system font.</p>
+<p class="why"><strong>What it cost.</strong> The hero was originally built on
+two well-known animation libraries served from a public CDN. On locked-down
+corporate networks — the exact networks our buyers sit behind — both were
+blocked, and the page arrived dead. Everything was rewritten against native
+canvas and CSS. It is the reason we are sceptical of any architecture whose
+first failure mode is somebody else's uptime.</p>
+</div>
+
+<div class="dec">
+<span class="n">02</span>
+<h3>It reads without JavaScript</h3>
+<p>Turn scripting off and the argument is still there: every section, every
+answer, every link. Animation is enhancement, never the delivery mechanism.</p>
+<p class="why"><strong>What it cost.</strong> Reveal-on-scroll has to be written
+twice — once as the enhanced path and once as a default that is already visible.
+The lazy version is one line and fails closed, leaving a blank page.</p>
+</div>
+
+<div class="dec">
+<span class="n">03</span>
+<h3>Contrast is a build failure, not a preference</h3>
+<p>Every text colour is checked against the surface behind it for WCAG AA. A
+pair that fails does not get discussed; it stops the release.</p>
+<p class="why"><strong>What it cost.</strong> It rules out a lot of attractive
+low-contrast typography, and it caught a header button rendering at 1.49:1 —
+which looked fine to us and would have been unreadable to a good number of
+readers.</p>
+</div>
+
+<div class="dec">
+<span class="n">04</span>
+<h3>Nothing ships unless the checks pass</h3>
+<p>A release gate runs before every push. It is not advisory. A failing stage
+returns a non-zero exit code and the build is blocked.</p>
+<p class="why"><strong>What it cost.</strong> It is currently blocking this
+site's own release, over two missing lines in a legal page. We would rather
+be late than quietly ship something incomplete — which is the same trade we
+ask you to let us make on your work.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<p class="ch">02 · The gate</p>
+<h2>What actually has to pass.</h2>
+<p>Nine stages. These are the real names and the real counts, taken from the
+last run — not a description of what a test suite might do.</p>
+
+<div class="gate"><div class="tw"><table>
+<caption class="mono" style="caption-side:bottom;text-align:left;padding:13px 16px;color:var(--t3);font-size:.72rem;letter-spacing:.06em">Stage 6 is held deliberately while the English pages are being finalised. Stage 4b is failing today, and is why this site has not launched.</caption>
+<thead><tr><th scope="col">Stage</th><th scope="col">What it proves</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Syntax and structure.</strong> Every inline script parses; section, div and main tags balance.</td></tr>
+<tr><td>2</td><td><strong>Hit-testing, 180 cases.</strong> The nine spheres in the hero across four viewports and five rotations — the right one lights every time, zero mis-picks.</td></tr>
+<tr><td>3</td><td><strong>Smoke test, 118 assertions.</strong> A headless DOM executes the real page JavaScript and checks what a visitor can actually do.</td></tr>
+<tr><td>4</td><td><strong>Accessibility and SEO.</strong> Landmarks, skip link, focus styles, reduced motion, canvas hidden from screen readers, no broken links.</td></tr>
+<tr><td>4b</td><td><strong>Legal completeness.</strong> Blocks the build on any unfilled placeholder in the Impressum or privacy notice.</td></tr>
+<tr><td>5</td><td><strong>Contrast, 54 token pairs.</strong> Every text colour against its ground, WCAG AA.</td></tr>
+<tr><td>6</td><td><strong>Translations.</strong> Coverage across the localised builds.</td></tr>
+<tr><td>7</td><td><strong>Hero geometry, 8 viewports.</strong> The constellation is measured against the page's own grid; if it drifts off the lines it is built on, the build fails.</td></tr>
+<tr><td>8</td><td><strong>Proofreading and technical writing, 87 checks.</strong> British spelling, banned filler vocabulary, sentence length, heading case, meta descriptions.</td></tr>
+</tbody>
+</table></div></div>
+
+<div class="note">
+<p><strong>Stage 7 is the one worth explaining,</strong> because it is the least
+conventional and the most revealing. The hero constellation is constructed
+against the page's own six-column grid and the measured height of the headline.
+A test asserts that relationship at eight viewport sizes and fails the build if
+it breaks.</p>
+<p>Nobody would notice a few pixels of drift. That is the point: the check exists
+because the alternative is a thing that is <em>nearly</em> right, and nearly right
+is how systems decay. We would rather encode the intent than rely on somebody
+remembering it in six months.</p>
+</div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<p class="ch">03 · Principles</p>
+<h2>Five, and what each one is tied to.</h2>
+<p>Principles are cheap to list. Each of these is attached to something specific
+in how an engagement runs, so you can hold us to it.</p>
+
+<div class="prin">
+<div class="pr">
+<h3>It has to end</h3>
+<p>Every phase carries an exit condition written into the statement of work.
+The last one is that your team runs the system without us.</p>
+<span class="tie">Tied to · phase 06, handover</span>
+</div>
+<div class="pr">
+<h3>It has to be measurable</h3>
+<p>A number is agreed in Phase 01. Phase 05 measures against that number in
+writing. If it did not move, we say so.</p>
+<span class="tie">Tied to · phases 01 and 05</span>
+</div>
+<div class="pr">
+<h3>You keep everything</h3>
+<p>The code, the documentation and the evaluation harness are yours regardless
+of how the engagement ends. There is no scenario where you finish with nothing
+to show for it.</p>
+<span class="tie">Tied to · every engagement</span>
+</div>
+<div class="pr">
+<h3>It has to run on your estate</h3>
+<p>Production means the systems you already have, with the permissions they
+already enforce. A capability that only works in a clean room has not reached
+the work.</p>
+<span class="tie">Tied to · phases 03 and 04</span>
+</div>
+<div class="pr">
+<h3>Simple enough to hand over</h3>
+<p>The measure of a design is whether the team inheriting it can change it
+safely. Cleverness that only its author can maintain is a liability we are
+handing you.</p>
+<span class="tie">Tied to · phase 06</span>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<p class="ch">04 · The evaluation harness</p>
+<h2>The part most proposals leave out.</h2>
+<p>“The model is 92% accurate” is not a finding, it is a claim. It becomes a
+finding when someone else can re-run it next quarter, on new data, and get a
+number they can compare.</p>
+<p>So a Quenora engagement produces a harness alongside the system: the test
+set, the metric, the thresholds and the script that runs them. It is what
+Phase 05 measures against, and it is <strong>handed over with the code</strong> —
+because the question that matters is not whether the system worked on the day
+we left, but whether your team can tell six months later that it still does.</p>
+<p>It is also the honest answer to a fair objection. A firm with no case studies
+is asking you to trust an assertion. A firm that hands you the means to check
+its own work is asking for something much smaller.</p>
+
+<div class="cta-inline">
+<p><strong>Want to see the shape of this against your own problem?</strong>
+Two paragraphs on what is stuck is enough to start.</p>
+<a href="index.html#climax">Start a conversation</a>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="wrap">
+<div class="fgrid">
+<div>
+<div class="lockup" style="margin-bottom:var(--sp3)">
+<span class="brand lg">
+<svg aria-hidden="true" class="mk" fill="currentColor" viewbox="9 9 169.71 155.71">
+<circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
+<circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
+<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
+<circle cx="151.71" cy="36" r="27"></circle>
+</svg>quenora</span>
+<span class="desc">Consulting</span>
+</div>
+<p style="max-width:35ch;color:var(--t2);font-size:.96rem">
+Enterprise AI, engineered to operate. Built into what you already run,
+then handed over.</p>
+<p class="mono" style="color:var(--t3)">Working internationally</p>
+</div>
+<div><h3>Site</h3><nav aria-label="Footer">
+<a href="index.html">Home</a><a href="approach.html">Approach</a>
+<a href="services.html">Capabilities</a><a href="engineering.html">Engineering</a>
+<a href="work.html">Work</a><a href="index.html#climax">Contact</a>
+</nav></div>
+<div><h3>Contact</h3><nav aria-label="Contact">
+<a href="mailto:info@quenora.ai">info@quenora.ai</a>
+<a href="impressum.html">Legal notice · Impressum</a>
+<a href="privacy.html">Privacy notice</a>
+</nav></div>
+<div><h3>Follow</h3><nav aria-label="Social">
+<a href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank">LinkedIn</a>
+<a href="https://x.com/quenora_ai" rel="noopener me" target="_blank">X</a>
+<a href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank">Instagram</a>
+</nav></div>
+</div>
+<div class="fbot">
+<span>© 2026 Quenora Consulting</span>
+<span>Heilbronn, Germany · <a href="impressum.html">Legal notice</a> · <a href="privacy.html">Privacy</a></span>
+</div>
+</div>
+</footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('stuck',scrollY>20);},{passive:true});
+  var bg=document.getElementById('burger'), nl=document.getElementById('navLinks');
+  if(!bg||!nl)return;
+  bg.addEventListener('click',function(){
+    var open=nl.classList.toggle('open');
+    bg.classList.toggle('open',open);
+    bg.setAttribute('aria-expanded',open?'true':'false');
+    nav.classList.toggle('navopen',open);
+  });
+  nl.addEventListener('click',function(e){
+    if(e.target.tagName==='A'&&nl.classList.contains('open')){
+      nl.classList.remove('open');bg.classList.remove('open');
+      bg.setAttribute('aria-expanded','false');nav.classList.remove('navopen');
+    }
+  });
+})();
+</script>
+</body>
+</html>

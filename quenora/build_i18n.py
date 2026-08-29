@@ -28,7 +28,7 @@ PAGES = ["index.html", "services.html", "products.html",
          "approach.html", "work.html", "contact.html"]
 # Pages that exist in English only. Links to these must climb out of the
 # language directory instead of resolving to a /de/... file that is not there.
-EN_ONLY_PAGES = {"impressum.html", "privacy.html"}
+EN_ONLY_PAGES = {"impressum.html", "privacy.html", "engineering.html"}
 # Pages kept in the repo but deliberately unlinked and not indexed. They are
 # still generated, so the localised copies stay in step, but they are left out
 # of the sitemap and carry a noindex meta.

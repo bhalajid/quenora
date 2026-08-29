@@ -231,6 +231,8 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
   color:var(--copper)}
 .step h3{font-size:21px;font-weight:600;letter-spacing:-.018em;margin-bottom:11px}
 .step p{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:66ch}
+.step .exit{margin:12px 0 0;padding:10px 13px;background:var(--ink-2);border-left:2px solid var(--copper);border-radius:3px;font-size:.88rem;color:var(--grey)}
+.step .exit b{color:var(--white);font-weight:600;display:block;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:5px}
 .step .wk{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:11px;
   color:var(--grey-d);padding:6px 12px;border:1px solid var(--line);border-radius:6px}
 
@@ -321,7 +323,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b><em>q</em>uenora</b>
 </a>
-<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="services.html">Capabilities</a><a href="products.html">Products</a><a class="on" href="approach.html">Approach</a><a href="work.html">Work</a><a href="contact.html">Contact</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="approach.html" hreflang="en" lang="en">English</a></li><li><a href="de/approach.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/approach.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
+<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="services.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="products.html">Products</a><a class="on" href="approach.html">Approach</a><a href="work.html">Work</a><a href="contact.html">Contact</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="approach.html" hreflang="en" lang="en">English</a></li><li><a href="de/approach.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/approach.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 <a class="btn btn-primary navcta" href="contact.html">Start a conversation</a>
 <button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <i></i><i></i><i></i>
@@ -341,33 +343,33 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">The engagement</div>
-<h2 class="scramble">Six phases, twelve weeks, one handover</h2>
+<h2 class="scramble">Six phases, fourteen weeks, one handover</h2>
 <p>Timelines shift with scope — these are indicative, not promises. What does not shift is
       the shape: diagnose before scoping, demonstrate before integrating, transfer before leaving.</p>
 </div>
 <div class="step rv">
-<div class="ph">Phase 01</div>
-<div><h3>Diagnose</h3><p>We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. Almost every engagement uncovers a constraint that was not in the original brief.</p><span class="wk">Weeks 1–2</span></div>
+<div class="ph">Phase 01 · Frame</div>
+<div><h3>Find the real constraint</h3><p>We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface.</p><p class="exit"><b>Exit condition</b> A written position on what to build first — or a recommendation to build nothing.</p><span class="wk">Weeks 1–2</span></div>
 </div>
 <div class="step rv">
-<div class="ph">Phase 02</div>
-<div><h3>Scope</h3><p>A written scope with a defined outcome, a fixed set of deliverables, and an explicit list of what we are not doing. If we think the timeline is unrealistic, you hear it here — before the contract, not during the retrospective.</p><span class="wk">Weeks 2–3</span></div>
+<div class="ph">Phase 02 · Foundation</div>
+<div><h3>The unglamorous layer</h3><p>The data joins, the permissions, the evaluation baseline. This is the layer that decides whether anything later reaches production, and it is the layer most pilots skip.</p><p class="exit"><b>Exit condition</b> Baseline evaluation scores you can hold every later change against.</p><span class="wk">Weeks 3–6</span></div>
 </div>
 <div class="step rv">
-<div class="ph">Phase 03</div>
-<div><h3>Build</h3><p>Engineering in short cycles with something demonstrable at the end of each. You see working software, not status decks. The team that scoped the work is the team building it.</p><span class="wk">Weeks 3–8</span></div>
+<div class="ph">Phase 03 · Integrate</div>
+<div><h3>Into what you already run</h3><p>Engineering in short cycles against your real systems, with something demonstrable at the end of each. You see working software, not status decks. The person who scoped the work is the person building it.</p><p class="exit"><b>Exit condition</b> A staged rollout running against real data in a non-production environment.</p><span class="wk">Weeks 4–10</span></div>
 </div>
 <div class="step rv">
-<div class="ph">Phase 04</div>
-<div><h3>Integrate</h3><p>Connection into your live systems, with rollback paths and a staged rollout. This is where most AI projects stall, so we plan for it from day one rather than treating it as a final step.</p><span class="wk">Weeks 6–10</span></div>
+<div class="ph">Phase 04 · Ship</div>
+<div><h3>Under real change control</h3><p>Into production under the same governance, review and release process as everything else you run — not beside it, and not on an exception.</p><p class="exit"><b>Exit condition</b> In production, under the same governance as everything else you run.</p><span class="wk">Weeks 10–12</span></div>
 </div>
 <div class="step rv">
-<div class="ph">Phase 05</div>
-<div><h3>Transfer</h3><p>Documentation, training, and a defined period where your team runs the system with us on call. The engagement is not finished until they can run it without us.</p><span class="wk">Weeks 9–12</span></div>
+<div class="ph">Phase 05 · Prove</div>
+<div><h3>Against the agreed number</h3><p>Measured against the number agreed in Phase 01, using the evaluation harness built in Phase 02. If it did not move, that is what the written result says.</p><p class="exit"><b>Exit condition</b> A written result — including the uncomfortable version if that is the truth.</p><span class="wk">Weeks 9–12</span></div>
 </div>
 <div class="step rv">
-<div class="ph">Phase 06</div>
-<div><h3>Sustain</h3><p>Optional ongoing operations while your team builds capability — with an agreed runway towards you taking it over entirely. Permanent dependency is not the business model.</p><span class="wk">Ongoing</span></div>
+<div class="ph">Phase 06 · Hand over</div>
+<div><h3>And then we leave</h3><p>Documentation, runbooks, architecture decision records, paired operation with your engineers, and a named owner. The engagement is not finished until your team can run it without us.</p><p class="exit"><b>Exit condition</b> Your team runs it without us. That is the definition of done.</p><span class="wk">Weeks 12–14</span></div>
 </div>
 </div>
 </section>

@@ -235,7 +235,46 @@ body.clg .cur::after{opacity:1}
 .navlinks>a.navcta:hover{background:var(--copper-lt);color:var(--void);
   transform:translateY(-1px);box-shadow:0 10px 30px -8px rgba(201,122,60,.45)}
 .cta-short{display:none}
-@media(max-width:880px){.navlinks>a:not(.navcta){display:none}}
+/* Below 880px the nav links used to be hidden with nothing in their place,
+   which left the homepage with no navigation at all across ~28 screens on a
+   phone — while the older inner pages had a working menu. Same pattern as
+   theirs, adapted to this header: the CTA stays in the bar because it is the
+   one control a visitor always wants, and the rest collapse behind the
+   button. */
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;
+  cursor:pointer;padding:9px;flex:none;margin-left:auto;border-radius:3px}
+.burger i{display:block;width:22px;height:1.5px;background:var(--t1);
+  transition:transform .28s var(--e),opacity .2s ease}
+.burger.open i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open i:nth-child(2){opacity:0}
+.burger.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.burger:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+@media(max-width:880px){
+  .burger{display:flex;order:2}
+  /* the bar is a fixed 84px on desktop; on mobile it has to be able to grow
+     to hold the open panel, or the links render past the header's own
+     background and sit unreadably over the hero */
+  .nav .wrap{flex-wrap:wrap;height:auto;min-height:84px;align-items:center}
+  /* and the panel needs a ground of its own: the header is transparent until
+     the page is scrolled, so an open menu at the top of the page would
+     otherwise have nothing behind it */
+  .nav:has(.navlinks.open){background:rgba(7,7,10,.94);
+    backdrop-filter:blur(20px) saturate(160%);border-bottom-color:var(--line)}
+  .navlinks{order:4;flex-basis:100%;flex-direction:column;align-items:stretch;
+    gap:0;margin-left:0;max-height:0;overflow:hidden;
+    transition:max-height .34s var(--e),margin .34s var(--e)}
+  .navlinks.open{max-height:320px;margin-bottom:var(--sp3)}
+  .nav.navopen{background:rgba(7,7,10,.94);
+    backdrop-filter:blur(20px) saturate(160%);border-bottom-color:var(--line)}
+  .navlinks>a{padding:14px 2px;border-bottom:1px solid var(--line-2);font-size:15px}
+  .navlinks>a::after{display:none}
+  /* the CTA leaves the collapsing panel and sits in the bar itself */
+  .navlinks>a.navcta{order:-1;position:absolute;right:64px;top:22px;padding:9px 16px}
+}
+@media(max-width:560px){.navlinks>a.navcta{right:58px;padding:8px 13px}}
+@media(prefers-reduced-motion:reduce){
+  .burger i,.navlinks{transition:none}
+}
 /* Below ~560px the row cannot hold brand + full CTA + language button, so the
    CTA wraps to two lines and pushes the header out of its band. */
 @media(max-width:560px){.cta-long{display:none}.cta-short{display:inline}}
@@ -279,7 +318,35 @@ body.clg .cur::after{opacity:1}
   align-items:end;margin-top:var(--sp6);border-top:1px solid var(--line);
   padding-top:var(--sp3);opacity:0;animation:fu .9s var(--e) 2.2s forwards}
 .hook-foot p{max-width:48ch;color:var(--t2);font-size:1.06rem;margin:0}
-@media(max-width:820px){.hook-foot{grid-template-columns:1fr}}
+/* ── inline chapter CTA ─────────────────────────────────────────────────
+   The form sits at 17.3 of 19.8 screens and the sticky header button was
+   the only in-page route to it, so a reader persuaded at chapter 03 had
+   fourteen screens to go before anything invited them to act. These three
+   sit at the end of the chapters that do the persuading. Deliberately not
+   after every chapter: a CTA the reader has already declined twice reads
+   as pestering, and the page's whole argument is that it does not pester. */
+.cta-inline{display:flex;align-items:baseline;gap:var(--sp3) var(--sp4);flex-wrap:wrap;
+  margin-top:var(--sp5);padding-top:var(--sp4);border-top:1px solid var(--line)}
+.cta-inline p{margin:0;color:var(--t2);font-size:1rem;max-width:52ch}
+.cta-inline p b{color:var(--t1);font-weight:600}
+.cta-inline a{flex:none;background:var(--copper);color:var(--void);
+  padding:11px 22px;border-radius:8px;font-size:.8rem;font-weight:600;
+  white-space:nowrap;box-shadow:0 6px 24px -8px rgba(201,122,60,.45);
+  transition:background .22s ease,transform .22s ease}
+.cta-inline a:hover{background:var(--copper-lt);transform:translateY(-1px)}
+.cta-inline a:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+@media(max-width:620px){.cta-inline a{width:100%;text-align:center}}
+.hook-trust{max-width:34ch;border-left:2px solid var(--copper);padding-left:var(--sp3);
+  align-self:start}   /* the row is end-aligned; this rides to the top of it,
+                         which is 50px higher up a short viewport */
+.hook-trust p{font-size:.92rem;line-height:1.55;color:var(--t2);margin:0;max-width:none}
+.hook-trust p b{color:var(--t1);font-weight:600}
+.hook-trust p.mono{margin-top:9px;font-family:'JetBrains Mono',monospace;font-size:.66rem;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--t3)}
+@media(max-width:820px){
+  .hook-foot{grid-template-columns:1fr}
+  .hook-trust{max-width:none;margin-top:var(--sp3)}
+}
 .cue{position:absolute;right:max(0px,calc(132px - (100vw - 100%) / 2));bottom:calc(100% + var(--sp5));
   display:flex;flex-direction:column;align-items:center;gap:11px;color:var(--t3)}
 @media(max-width:820px){.cue{position:static;margin:var(--sp2) 0 0;width:max-content}}
@@ -829,9 +896,11 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <circle cx="151.71" cy="36" r="27"></circle>
 </svg>quenora
     </a>
-<nav aria-label="Main" class="navlinks">
+<button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
+<nav aria-label="Main" class="navlinks" id="navLinks">
 <a href="#journey">Approach</a>
 <a href="#solution">Capabilities</a>
+<a href="engineering.html">Engineering</a>
 <a href="#work">Work</a>
 <a href="#who">About</a>
 <a class="navcta" href="#climax"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
@@ -853,6 +922,17 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
            Quenora embeds AI and automation into the platforms, workflows and
            decisions your business already depends on — then equips your team to
            own it, and moves on. No lock-in. No dependency.</p>
+<!-- The three strongest risk answers on this site were at screens 13 and 17.
+     A reader who skims left believing there was no proof at all. Every claim
+     here is stated verbatim elsewhere on the page — nothing new is asserted,
+     it is only brought forward. It sits in the hook-foot's second grid
+     column rather than beneath the paragraph so it costs no vertical height
+     on the short laptops where the fold is already tight. -->
+<aside class="hook-trust">
+<p><b>No published case studies yet.</b> We will arrange a call with a reference
+           before you commit.</p>
+<p class="mono">Fixed scope · written exit conditions · you keep the code</p>
+</aside>
 <div aria-hidden="true" class="cue"><i></i><span class="mono">Scroll</span></div>
 </div>
 </div>
@@ -990,6 +1070,12 @@ evidence to answer them was never captured.</p></article>
             <div class="exit"><b>Exit condition</b>Your team runs it without us. That is the definition of done.</div>
             <p class="dur mono">Weeks 12–14</p></article>
 </div>
+</div>
+</div>
+<div class="wrap">
+<div class="cta-inline rv">
+<p><b>Recognise the shape of your problem in those six phases?</b> Two paragraphs on what is stuck is enough to start — no brief, no NDA.</p>
+<a href="#climax">Start a conversation</a>
 </div>
 </div>
 </section>
@@ -1194,6 +1280,10 @@ evaluation approach in the first meeting rather than a capability deck.</div></d
 number agreed in Phase 01. If it did not move we say so. You keep the code, the
 documentation and the evaluation harness regardless — there is no scenario where
 you end an engagement with nothing to show for it.</div></details>
+<div class="cta-inline rv">
+<p><b>Still holding an objection we have not answered?</b> Put it in the first message — a direct answer is more useful to both of us than a proposal.</p>
+<a href="#climax">Ask it directly</a>
+</div>
 </div>
 </div>
 </section>
@@ -1276,6 +1366,10 @@ proposal.</span></li>
 <li><b>A written position</b><span>What we would build first, what it would cost,
 and what we would not build. Yours to take to your board, or to another firm.</span></li>
 </ol>
+<div class="cta-inline rv">
+<p><b>That is the whole process.</b> The next step is yours, and it costs one working day of ours.</p>
+<a href="#climax">Start a conversation</a>
+</div>
 </div>
 </div>
 </section>
@@ -1388,7 +1482,7 @@ notice</a>.</span></label>
 </div>
 <div><h3>Site</h3><nav aria-label="Footer">
 <a href="index.html">Home</a><a href="approach.html">Approach</a>
-<a href="services.html">Capabilities</a><a href="work.html">Work</a>
+<a href="services.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="work.html">Work</a>
 <a href="#climax">Contact</a>
 </nav></div>
 <div><h3>Contact</h3><nav aria-label="Contact">
@@ -2754,6 +2848,26 @@ notice</a>.</span></label>
 
 <script>
 (function(){
+  /* mobile navigation — the homepage had none below 880px */
+  (function(){
+    var bg=document.getElementById('burger'), nl=document.getElementById('navLinks');
+    if(!bg||!nl)return;
+    bg.addEventListener('click',function(){
+      var open=nl.classList.toggle('open');
+      bg.classList.toggle('open',open);
+      bg.setAttribute('aria-expanded',open?'true':'false');
+      /* :has() carries this in modern browsers; the class is the fallback */
+      document.getElementById('nav').classList.toggle('navopen',open);
+    });
+    /* jumping to a chapter should close the menu behind you */
+    nl.addEventListener('click',function(e){
+      if(e.target.tagName==='A'&&nl.classList.contains('open')){
+        nl.classList.remove('open'); bg.classList.remove('open');
+        bg.setAttribute('aria-expanded','false');
+      }
+    });
+  })();
+
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
   if(!b||!m)return;
   b.addEventListener('click',function(e){

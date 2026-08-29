@@ -253,6 +253,67 @@ motion detail is sized in fixed pixels that do not scale.
 | P4d-9 | **Give the arrival more weight.** The ninth sphere's bloom on arrival is the emotional payoff of the whole hero — the moment the signal *reaches the work*. It currently decays at 0.955/frame with a thin ring. A longer hold and a brief warm flare across the whole arc would land the headline's claim instead of whispering it. |
 | P4d-10 | **Reduce motion on small screens deliberately, not accidentally.** If the mark must stay small on phones, then cut the dust, drop the run, and let the mark simply *be* — a still, well-placed brand object beats a busy, illegible one. Choose the reduction; do not inherit it from a leftover band. |
 
+---
+
+## P4e — WHOLE-PAGE HIERARCHY, GRID ALIGNMENT, ANIMATION CEILING
+
+### Where the eye goes first
+
+Measured by salience (type size × contrast against the void) on the first
+screen at 1440 × 900:
+
+| Rank | Element | Salience |
+|---|---|---|
+| 1–5 | the headline words | **107** |
+| 6 | *the work.* (italic) | 61 |
+| 7 | quenora wordmark | 20 |
+| 8 | the sub-paragraph | 11 |
+| 9 | EN language switch | 11 |
+
+**The hierarchy is correct and it is the site's real strength** — the headline
+owns the screen, the mark supports, nothing competes. Keep it.
+
+| # | Item |
+|---|---|
+| P4e-1 | **The primary CTA does not appear in the top nine salience items on its own hero.** "Start a conversation" is out-ranked by the language switcher. The first screen's only stated action is the word "Scroll". The eye lands in exactly the right place and then finds nothing to do. |
+
+### Geometric alignment — the site draws a grid it does not sit on
+
+The page renders six visible column rules (`.vgrid`) at the wrap width. At
+1440 those lines fall at **20 · 251 · 482 · 713 · 943 · 1174 · 1405**.
+
+**On the grid (0px off):** h1, eyebrow, hook-foot left, chapter numerals, the
+gap figure both edges, engagement cards, capability rows. Genuinely precise.
+
+**Off the grid:**
+
+| # | Item | Measured |
+|---|---|---|
+| **P4e-2** | **The nine chapter headings each start at a different x.** `.chead` is `grid-template-columns: auto 1fr`, so the *auto* column is sized by the numeral glyph — and "01" in italic Playfair is narrower than "08". Heading left edges land at **215, 238, 233, 240, 231, 241, 236, 244, 239** — **29px of drift** across the page's most repeated structural element, and **none of them touches grid line 1 at 251**. Because the grid rules are *visible*, the near-miss is perceptible even when the reader cannot name it. **Fix: a fixed first column (`231px 1fr`, or derive it from the column width) so all nine headings start on the same line.** | 29px drift |
+| P4e-3 | **The enquiry form is centred, not aligned.** `max-width:640px; margin:0 auto` puts its edges at 393 and 1033 — **89px off** the nearest column lines on both sides. It is the one block on the page that ignores the grid entirely, and it is the block being asked to convert. | 89px |
+| P4e-4 | **Lede right edges are text-determined.** Chapter ledes and the hook-foot paragraph end wherever the `ch` measure runs out — 52–107px short of a column line. Defensible typographically, but it means no section has a right edge the eye can lock onto except the gap figure. | 52–107px |
+
+### Animation — what the ceiling actually is
+
+The spheres are already lit objects: radial body gradient, rim stroke, one
+specular highlight. That is well above a flat-disc logo. The realistic upgrades,
+all achievable in 2D canvas with zero dependencies:
+
+| # | Option | Gain | Cost / risk |
+|---|---|---|---|
+| P4e-5 | **Real bloom.** Draw bright pixels to an offscreen canvas, blur, composite additively. Today's glow is stacked radial gradients, which reads flat. True bloom is the single biggest "expensive" upgrade available and would lift the hero, the gap mark and the arrival flare at once. | **Highest** | One offscreen canvas + one blur pass per frame. Watch mobile GPU. |
+| P4e-6 | **Fresnel rim light + contact shadow.** A brighter edge on the side away from the light, and a soft occlusion where neighbouring spheres nearly touch. This is what makes CG spheres read as physical rather than drawn. | High | Pure maths, negligible cost. |
+| P4e-7 | **Depth of field.** Give each sphere a z, blur the small end slightly via `ctx.filter`. Instantly reads as a photographed object. | High | `filter` is per-draw; batch by depth band. |
+| P4e-8 | **True 3D projection with a micro-tilt.** Give the nine circles a z, project with perspective, and let the pointer tilt the arc ±6–8° — depth-sorted, near spheres larger and brighter. **Must return to exact rest**, because the gate asserts `SWAY === 0` and `BOB === 0` and its stated purpose is that the mark never drifts off the grid it is built on. At rest it stays byte-identical to the logo; the tilt is an interaction, not a state. The existing pointer parallax already establishes that precedent. | High | **Gate risk if it does not return to zero.** Never rotate on a timer. |
+| P4e-9 | **Chromatic aberration on the glow edge.** A sub-pixel R/B offset on the brightest halos. Very subtle, very film. | Medium | Cheap; easy to overdo. |
+| P4e-10 | **Give the mark a ground.** A faint elliptical light spill under the arc, and a barely-there reflection. Turns nine floating circles into an object standing somewhere. | Medium | Cheap. |
+| P4e-11 | **Sphere interior life.** A slow, low-amplitude shimmer inside each body so they read as containing something rather than being painted. | Medium | Cheap; must stay under the threshold of noticing. |
+
+**Recommended order: P4e-6 → P4e-10 → P4e-5 → P4e-7.** Rim light and ground
+are cheap and immediately physical; bloom is the transformative one; depth of
+field is the finish. Leave the 3D tilt (P4e-8) last — it is the most
+impressive and the only one that can fail the gate.
+
 ### Motion pacing
 
 | # | Item |

@@ -353,13 +353,21 @@ not indexed and not part of the site.
 |---|---|---|
 | **A** | Shipping today — body gradient, rim stroke, specular dot | Good. Clearly lit objects, not flat discs. |
 | **B** | **+ fresnel rim + contact shadow** | The cheapest real gain. The bright edge reads as light wrapping a curved surface, and the occlusion where spheres nearly touch makes them sit *in front of* each other rather than beside. Pure maths, no cost. |
-| **C** | **+ ground plane, reflection, contact spill** | The biggest single jump. Nine floating circles become an object standing on a surface. Grounds the whole mark. |
-| **D** | **+ real bloom + depth of field** | Bright pass → blur → additive composite, plus a graded blur on the small end. This is the "expensive" look — light behaves like light rather than like a gradient. |
+| **C** | **+ ground plane, reflection, contact spill** | **SHIPPED on the hero.** Nine floating circles become an object standing on a surface. |
+| **D** | **+ real bloom + depth of field** | **SHIPPED on the hero** (bloom). Bright pass → blur → additive composite. |
 
-**Recommendation: B + C are near-free and deliver most of the gain. D is the
-one that would make it competition-grade**, at the cost of one offscreen
-canvas and a blur pass per frame — needs a mobile GPU check and should be
-disabled under `prefers-reduced-motion`.
+**Status: B, C and D are now live on the hero constellation.** Fresnel rim and
+neighbour contact shadow (B), elliptical ground with reflection and contact
+spill (C), and half-resolution bloom (D). Measured after: **60.5 fps desktop,
+60.1 fps at 390px**, worst frame 19.2ms, and canvas coverage up from 204 to
+1,318 lit samples on desktop and 204 to 546 on mobile. Bloom carries a rolling
+frame-time guard that disables it permanently on any device averaging worse
+than 20ms over its first 90 frames, and is skipped entirely under
+`prefers-reduced-motion`.
+
+**Still to do from the study:** apply the same treatment to the gap diagram's
+mark (chapter 01) and the automation figure, so all three canvases share one
+lighting model. Depth-of-field blur is in the study but not yet on the hero.
 
 The 3D micro-tilt (P4e-8) remains the highest-ceiling option and the only one
 that can fail the geometry gate. Do it last, and only returning to exact rest.

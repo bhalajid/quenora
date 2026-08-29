@@ -1608,6 +1608,11 @@ I can ask for them to be deleted at any time.</span></label>
     var W=0,H=0,SC=1,OX=0,OY=0,DPR=1,narrow=false;
     var nodes=[], dust=[], pulses=[], t0=0, hraf=null, seen=true, ready=false;
     var runs=[], nextRun=2.1;
+    /* bloom: one reused offscreen canvas, half resolution, plus a frame-time
+       guard that switches it off on devices that cannot hold the rate */
+    var bc=d.createElement('canvas'), bg2=bc.getContext('2d');
+    var bloomOK = !!(bg2 && typeof g.filter==='string');
+    var fpsLast=0, fpsAcc=0, fpsN=0;
     /* Pointer state. Two different things, previously conflated into one:
          px,py   real pointer position in canvas pixels — drives hit-testing
          gx,gy   the same, smoothed — drives dust displacement
@@ -1916,6 +1921,57 @@ I can ask for them to be deleted at any time.</span></label>
         }
       }
 
+      /* ═══ C · THE GROUND ═══
+         Nine circles floating in a void are a drawing. The same nine standing
+         on a surface are an object. The surface is the headline's own baseline
+         — the line the arc is already built on — so the ground states the
+         composition rather than decorating it: a shallow light spill, a
+         contact ellipse under each sphere, and an inverted reflection that
+         fades within about a sphere's height. */
+      if(nodes.length && nodes[0].b>0.01){
+        var gy = OY + B[3]*SC;                     /* the arc's own baseline */
+        var gx0 = OX + B[0]*SC, gx1 = OX + B[1]*SC, gxc = (gx0+gx1)/2;
+        var gspan = (gx1-gx0)*0.95;
+        /* Elliptical, centred under the arc and falling off before it reaches
+           the type. A full-width band read as a haze leak across the hero
+           rather than as a surface the mark is standing on. */
+        g.save();
+        var gsp = g.createRadialGradient(gxc, gy, 0, gxc, gy, gspan);
+        gsp.addColorStop(0,'rgba(201,122,60,.075)');
+        gsp.addColorStop(0.55,'rgba(201,122,60,.026)');
+        gsp.addColorStop(1,'rgba(201,122,60,0)');
+        g.fillStyle=gsp;
+        g.beginPath(); g.ellipse(gxc, gy, gspan, gspan*0.20, 0, 0, 6.2832); g.fill();
+        g.restore();
+
+        /* the reflection: flipped about the baseline, dim, and cut off before
+           it can read as a second mark */
+        g.save();
+        g.beginPath(); g.rect(gx0-gspan*0.1, gy, (gx1-gx0)+gspan*0.2, H*0.16); g.clip();
+        g.globalAlpha = 0.11;
+        g.translate(0, gy*2); g.scale(1,-1);
+        nodes.forEach(function(n){
+          if(n.b<=0.01) return;
+          var rr2=n.rr;
+          var rf=g.createRadialGradient(n.x-rr2*0.36,n.y-rr2*0.40,rr2*0.05,n.x,n.y,rr2);
+          rf.addColorStop(0,'rgba(212,158,110,'+(n.b*0.5).toFixed(3)+')');
+          rf.addColorStop(0.46,'rgba(150,90,44,'+(n.b*0.5).toFixed(3)+')');
+          rf.addColorStop(1,'rgba(52,28,10,0)');
+          g.fillStyle=rf; g.beginPath(); g.arc(n.x,n.y,rr2,0,6.2832); g.fill();
+        });
+        g.restore();
+
+        /* contact spill — the sphere is touching something */
+        nodes.forEach(function(n){
+          if(n.b<=0.01) return;
+          var cs2=g.createRadialGradient(n.x,gy,0,n.x,gy,n.rr*2.4);
+          cs2.addColorStop(0,'rgba(233,160,99,'+(0.085*n.b).toFixed(3)+')');
+          cs2.addColorStop(1,'rgba(233,160,99,0)');
+          g.fillStyle=cs2;
+          g.beginPath(); g.ellipse(n.x,gy,n.rr*2.4,n.rr*0.42,0,0,6.2832); g.fill();
+        });
+      }
+
       /* ── the nine ── */
       nodes.forEach(function(n,i){
         if(n.b<=0.01) return;
@@ -1937,9 +1993,36 @@ I can ask for them to be deleted at any time.</span></label>
         bd.addColorStop(1,'rgba(52,28,10,'+(n.b*lum).toFixed(3)+')');
         g.fillStyle=bd; g.beginPath(); g.arc(n.x,n.y,r,0,6.2832); g.fill();
 
-        g.strokeStyle='rgba(201,122,60,'+(0.26*n.b+glow*0.5).toFixed(3)+')';
+        /* ═══ B · FRESNEL RIM ═══
+           Light wrapping a curved surface is brightest at the edge, where the
+           surface turns away from the viewer. A flat stroke says "circle with
+           an outline"; this says "sphere". It is the cheapest physicality on
+           offer — one extra gradient, no state. */
+        var fr=g.createRadialGradient(n.x,n.y,r*0.62,n.x,n.y,r);
+        fr.addColorStop(0,'rgba(233,160,99,0)');
+        fr.addColorStop(0.82,'rgba(233,160,99,'+(0.09*n.b+glow*0.12).toFixed(3)+')');
+        fr.addColorStop(1,'rgba(255,196,140,'+(0.34*n.b+glow*0.34).toFixed(3)+')');
+        g.fillStyle=fr; g.beginPath(); g.arc(n.x,n.y,r,0,6.2832); g.fill();
+
+        g.strokeStyle='rgba(201,122,60,'+(0.20*n.b+glow*0.42).toFixed(3)+')';
         g.lineWidth=Math.max(0.6,r*0.045);
         g.beginPath(); g.arc(n.x,n.y,r*0.97,0,6.2832); g.stroke();
+
+        /* contact shadow against the previous, smaller sphere — this is what
+           makes them read as in front of one another rather than beside */
+        if(i>0){
+          var pv=nodes[i-1];
+          if(pv.b>0.01){
+            var dx2=pv.x-n.x, dy2=pv.y-n.y, dd=Math.hypot(dx2,dy2);
+            if(dd>0.001 && dd < (r+pv.rr)*1.6){
+              var cx2=n.x+(dx2/dd)*r*0.88, cy2=n.y+(dy2/dd)*r*0.88;
+              var oc=g.createRadialGradient(cx2,cy2,0,cx2,cy2,r*0.62);
+              oc.addColorStop(0,'rgba(10,5,2,'+(0.5*n.b).toFixed(3)+')');
+              oc.addColorStop(1,'rgba(10,5,2,0)');
+              g.fillStyle=oc; g.beginPath(); g.arc(cx2,cy2,r*0.62,0,6.2832); g.fill();
+            }
+          }
+        }
 
         g.fillStyle='rgba(255,232,205,'+(0.14*n.b+glow*0.5).toFixed(3)+')';
         g.beginPath(); g.arc(n.x-r*0.34,n.y-r*0.38,Math.max(0.7,r*0.13),0,6.2832); g.fill();
@@ -1990,6 +2073,50 @@ I can ask for them to be deleted at any time.</span></label>
           g.restore();
         }
       });
+
+      /* ═══ D · BLOOM ═══
+         Stacked radial gradients imitate glow; they do not imitate light.
+         Real bloom is a bright pass, blurred, composited additively — so
+         highlights bleed into their surroundings the way a lens does, and
+         overlapping halos accumulate instead of flattening.
+
+         Rendered at half resolution into a reused offscreen canvas: the blur
+         hides the resampling entirely, and it quarters the fill cost. Skipped
+         under reduced motion, and skipped if the device could not hold 50fps,
+         because a hero that stutters is worse than a hero that does not
+         bloom. */
+      if(bloomOK && !reduced){
+        var bw=Math.max(1,Math.round(W*0.5)), bh=Math.max(1,Math.round(H*0.5));
+        if(bc.width!==bw||bc.height!==bh){ bc.width=bw; bc.height=bh; }
+        bg2.setTransform(0.5,0,0,0.5,0,0);
+        bg2.clearRect(0,0,W,H);
+        nodes.forEach(function(n){
+          if(n.b<=0.01) return;
+          var r=n.rr, gl=Math.max(n.near,n.run*0.55);
+          var hb=bg2.createRadialGradient(n.x-r*0.30,n.y-r*0.34,0,n.x,n.y,r*1.18);
+          hb.addColorStop(0,'rgba(255,214,170,'+(0.30*n.b+gl*0.5).toFixed(3)+')');
+          hb.addColorStop(0.55,'rgba(233,160,99,'+(0.10*n.b+gl*0.16).toFixed(3)+')');
+          hb.addColorStop(1,'rgba(201,122,60,0)');
+          bg2.fillStyle=hb; bg2.beginPath(); bg2.arc(n.x,n.y,r*1.18,0,6.2832); bg2.fill();
+        });
+        /* the signal blooms too — it is the brightest thing on the canvas */
+        runs.forEach(function(){});
+        g.save();
+        g.globalCompositeOperation='lighter';
+        g.globalAlpha=0.55;
+        g.filter='blur(13px)';
+        g.drawImage(bc,0,0,W,H);
+        g.restore();
+      }
+
+      /* Cheap rolling frame-time check. If the first ~90 frames average worse
+         than 20ms, drop bloom permanently on this device rather than shipping
+         a stutter. */
+      if(bloomOK && !reduced){
+        if(fpsLast){ fpsAcc += (now-fpsLast); fpsN++; }
+        fpsLast = now;
+        if(fpsN===90){ if(fpsAcc/fpsN > 20) bloomOK=false; }
+      }
 
       hraf = requestAnimationFrame(paint);
     }

@@ -22,7 +22,7 @@ Scored 0–100 per dimension, weighted by what actually decides a deal.
 | Credibility / proof | 20 | **30** | 85 | no photo, no LinkedIn, no sample, two methodologies |
 | Content consistency | 15 | **55** | 95 | four contradictions across pages |
 | Copy quality | 10 | **80** | 90 | strong, over-negated |
-| UI / visual craft | 5 | **85** | 90 | genuinely good, over-invested in brand |
+| UI / visual craft | 5 | **72** | 95 | strong taste, unsystematised — 33 type sizes, 9 radii, 14 durations |
 | Technical / SEO | 5 | **75** | 95 | no FAQ schema, stale indexed translations |
 | Accessibility | 5 | **90** | 95 | homepage clean, inner pages skip headings |
 
@@ -124,7 +124,47 @@ budget is spent on the firm's self-image rather than the buyer's decision.
 | P4-2 | **Three canvas animations.** Hero earns it. The gap diagram earns it. The automation figure restates its own caption. |
 | P4-3 | **Two competing hover behaviours** on the first screen (nearest-sphere lighting + cursor ring). |
 | P4-4 | **Chapter 09 sticky mark** holds a graphic on screen through nine rows of content that should not be on the homepage. |
-| P4-5 | Keep: typography scale, copper palette, spacing rhythm, reduced-motion discipline, zero-dependency build. **This is top-decile and should not be touched.** |
+
+---
+
+## P4b — POLISH / SYSTEM CONSISTENCY
+
+Measured against the CSS, not eyeballed. Individually invisible; together they
+are why the page reads as *very good* rather than *inevitable*. This is the
+difference between a site that looks designed and one that looks systematised.
+
+### What is already excellent — do not touch
+
+- **Colour discipline: 375 `var(--token)` uses against 37 raw literals.** Very
+  few teams achieve this. The palette is genuinely a system.
+- **One easing token** (`--e: cubic-bezier(.16,1,.3,1)`), used 46 times.
+- **Reveal choreography** — `.9s` with `.08s` / `.16s` stagger, applied
+  consistently across every section.
+- **Spacing scale** (16/24/40/64/104/168) is adhered to, with almost no magic
+  numbers in section rhythm.
+- **Card geometry is exact** — the three engagement cards measure 363px each,
+  aligned to the pixel.
+
+### What breaks the system
+
+| # | Item | Measured |
+|---|---|---|
+| P4b-1 | **No type scale.** 33 distinct rem font sizes. `.83 / .85 / .86 / .88` and `.92 / .94 / .95 / .96 / .98` are visually indistinguishable from one another but arbitrarily different — the reader feels imprecision without being able to name it. Collapse to 7–8 steps. | 33 sizes |
+| P4b-2 | **The uppercase mono label is one component wearing 14 different costumes.** Same visual element — eyebrow, chapter label, capability tag, exit condition, footer heading, form label, status pill — across **8 font sizes** (.56–.68rem) and **7 tracking values** (.13em–.34em). This is the single most visible consistency defect on the site, because these labels appear in every chapter. | 14 instances |
+| P4b-3 | **No radius scale.** 9 distinct values: 2, 3, 4, 9, 11, 14, 20px and 50%. Cards say 4px, form inputs 4px, buttons 9px, assistant panel 14px, chips 20px. Pick three: sharp (4), soft (9), pill (999). | 9 values |
+| P4b-4 | **No motion scale.** 14 distinct transition durations from .2s to .9s (`.2 .25 .3 .35 .38 .4 .45 .5 .55 .9`). Should be three tokens: fast (.2), base (.35), slow (.9). | 14 durations |
+| P4b-5 | **Zero section differentiation.** All 11 `<section>`s are `rgba(0,0,0,0)` — pure void from chapter 01 to the footer. `--sf1` and `--sf2` surface tokens are defined and used **only** inside the two pinned stages. Nothing but a numeral and whitespace signals a new chapter, so 9 chapters read as one undifferentiated scroll. Alternating a barely-there surface tone would give the page rhythm at almost no cost. | 11 of 11 |
+| P4b-6 | **The assistant panel is visually foreign.** 14px radius and 20px pill chips against a site whose entire language is 4px. It reads as a third-party widget bolted on rather than part of the product. | — |
+| P4b-7 | **Card padding drifts.** `.phase` uses `sp5 sp4`; `.shape` and `.build` use `sp4`. Same object, different breathing. | — |
+| P4b-8 | **Ragged eyebrow wrapping.** The three engagement-pattern labels wrap to **2, 2 and 1 lines** ("PATTERN 01 · FINANCIAL SERVICES" breaks, "PATTERN 03 · LOGISTICS" does not), so three identical cards have three different internal rhythms. Shorten the sector names or reserve two lines. | 2/2/1 |
+| P4b-9 | **Untokenised repeat.** `rgba(242,239,232,.035)` appears 3× as the grid-line colour. Should be `--line0`. | 3× |
+
+### Motion pacing
+
+| # | Item |
+|---|---|
+| P4b-10 | **Three infinite loops run at unrelated tempos.** The ticker marquee (38s), the gap diagram (11.3s cycle) and the automation figure (continuous, ~22-frame spawn) share no rhythmic relationship. Nothing needs to be synchronised exactly, but a shared tempo family would make the page feel composed rather than assembled. |
+| P4b-11 | **Motion is entirely front-loaded.** Chapters 01–04 carry all four animated elements; chapters 05–09 and the climax are completely static. The page spends its whole energy budget before it makes its argument, then goes quiet exactly where it should be closing. The climax — the screen that asks for the money — is the least alive on the page. |
 
 ---
 
@@ -175,6 +215,22 @@ P3-10 (sample deliverable), P3-11 (security page), P3-12 (continuity), P3-13
 (photo), P3-2 (halve negations), P3-3 (principles to About), P5-1, P5-2, P5-6.
 
 **Total ≈ 9–11 working days to 95.**
+
+### Look-and-feel track — can run first and independently
+
+If polish is the priority ahead of legal and conversion, P4b is a
+self-contained day and a half that lifts visual craft 72 → 95 and touches
+nothing else:
+
+1. **Tokenise the system** (½ day) — collapse 33 type sizes to 8, 9 radii to 3,
+   14 durations to 3, add `--line0`. Mechanical, low risk, gate-safe.
+2. **Fix the mono label** (2 h) — one size, one tracking, one weight, applied
+   to all 14 instances. Biggest single visible gain on the page.
+3. **Give chapters a surface rhythm** (2 h) — alternate `--sf1` at very low
+   opacity so nine chapters stop reading as one scroll.
+4. **Bring the assistant into the language** (1 h) — 4px radius, square chips.
+5. **Rebalance motion** (2 h) — quiet one front-loaded animation, give the
+   climax a reason to feel alive.
 
 Above 95 requires things a website cannot supply: ISO 27001, professional
 indemnity cover, a DPA, financial standing, and two contactable references.

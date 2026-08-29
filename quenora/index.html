@@ -1608,6 +1608,7 @@ I can ask for them to be deleted at any time.</span></label>
     var W=0,H=0,SC=1,OX=0,OY=0,DPR=1,narrow=false;
     var nodes=[], dust=[], pulses=[], t0=0, hraf=null, seen=true, ready=false;
     var runs=[], nextRun=2.1;
+    var PATH=[], PLEN=[];      /* the spline the signal travels, rebuilt per frame */
     /* bloom: one reused offscreen canvas, half resolution, plus a frame-time
        guard that switches it off on devices that cannot hold the rate */
     var bc=d.createElement('canvas'), bg2=bc.getContext('2d');
@@ -1873,13 +1874,45 @@ I can ask for them to be deleted at any time.</span></label>
          It reaches. That is the entire promise, drawn. */
       if(!reduced){
         if(el>nextRun){ runs.push({t:0}); nextRun = el + 5.2; }
-        /* cumulative arc length, so the signal moves at a constant speed
-           rather than jumping between unevenly spaced circles */
-        var segs=[], tot=0, si;
-        for(si=0;si<nodes.length-1;si++){
-          var dxs=nodes[si+1].x-nodes[si].x, dys=nodes[si+1].y-nodes[si].y;
-          var Ls=Math.sqrt(dxs*dxs+dys*dys); segs.push(Ls); tot+=Ls;
+
+        /* ── the path the signal actually travels ──
+           It used to run straight segments between circle centres, so it
+           changed direction at every circle — the zigzag. The nine centres sit
+           close to a circular arc but not on one (circles 7 and 8 are ~4% off
+           a fitted radius), so a fitted circle would drift off the spheres.
+
+           A Catmull-Rom spline passes exactly through all nine centres and is
+           smooth across each of them: the signal stays on the mark and stops
+           kinking. Resampled to a dense polyline with cumulative arc length so
+           it also moves at a constant speed. */
+        /* Only build it while a signal is actually travelling. Runs fire every
+           5.2s and last about 3s, so this was rebuilding a 129-point spline on
+           roughly 40% of frames that had nothing to draw on it. */
+        var totL=1;
+        if(runs.length){
+        PATH.length=0; PLEN.length=0;
+        for(var pi=0;pi<nodes.length-1;pi++){
+          var p0=nodes[pi>0?pi-1:0], p1=nodes[pi],
+              p2=nodes[pi+1], p3=nodes[pi<nodes.length-2?pi+2:nodes.length-1];
+          for(var sp=0;sp<16;sp++){
+            var tt=sp/16, t2=tt*tt, t3=t2*tt;
+            PATH.push({
+              x:0.5*((2*p1.x)+(-p0.x+p2.x)*tt+(2*p0.x-5*p1.x+4*p2.x-p3.x)*t2+(-p0.x+3*p1.x-3*p2.x+p3.x)*t3),
+              y:0.5*((2*p1.y)+(-p0.y+p2.y)*tt+(2*p0.y-5*p1.y+4*p2.y-p3.y)*t2+(-p0.y+3*p1.y-3*p2.y+p3.y)*t3),
+              rr:p1.rr+(p2.rr-p1.rr)*tt
+            });
+          }
         }
+        var lastN=nodes[nodes.length-1];
+        PATH.push({x:lastN.x,y:lastN.y,rr:lastN.rr});
+        var accL=0; PLEN.push(0);
+        for(var li=1;li<PATH.length;li++){
+          accL+=Math.hypot(PATH[li].x-PATH[li-1].x, PATH[li].y-PATH[li-1].y);
+          PLEN.push(accL);
+        }
+        totL=accL||1;
+        }
+
         nodes.forEach(function(n){ n.run*=0.86; });
         for(var ri=runs.length-1;ri>=0;ri--){
           var ru=runs[ri]; ru.t += 0.0055;
@@ -1887,12 +1920,18 @@ I can ask for them to be deleted at any time.</span></label>
             nodes[nodes.length-1].land = 1;      /* it arrives */
             runs.splice(ri,1); continue;
           }
-          /* locate the head along the polyline */
-          var want=ru.t*tot, acc=0, k2=0;
-          while(k2<segs.length-1 && acc+segs[k2]<want){ acc+=segs[k2]; k2++; }
-          var f3=segs[k2]?(want-acc)/segs[k2]:0;
-          var A3=nodes[k2], C3=nodes[k2+1];
-          var hx3=A3.x+(C3.x-A3.x)*f3, hy3=A3.y+(C3.y-A3.y)*f3;
+          /* sample the spline by arc length */
+          var at=function(u){
+            var target=Math.max(0,Math.min(1,u))*totL;
+            var lo=0, hi=PLEN.length-1;
+            while(lo<hi-1){ var mid=(lo+hi)>>1; if(PLEN[mid]<target) lo=mid; else hi=mid; }
+            var span=(PLEN[hi]-PLEN[lo])||1, f=(target-PLEN[lo])/span;
+            var a=PATH[lo], b=PATH[hi];
+            return {x:a.x+(b.x-a.x)*f, y:a.y+(b.y-a.y)*f, rr:a.rr+(b.rr-a.rr)*f};
+          };
+          var hd=at(ru.t);
+          var hx3=hd.x, hy3=hd.y;
+
           /* every circle brightens as the head passes it */
           nodes.forEach(function(n,ni){
             var np=ni/(nodes.length-1);
@@ -1900,38 +1939,43 @@ I can ask for them to be deleted at any time.</span></label>
             var w2=Math.exp(-dd*dd);
             if(w2>n.run) n.run=w2;
           });
-          /* the trail it leaves behind, fading back along the arc */
-          for(var tI=0;tI<10;tI++){
-            var bt=ru.t-tI*0.012; if(bt<=0) break;
-            var w3=bt*tot, ac3=0, k3=0;
-            while(k3<segs.length-1 && ac3+segs[k3]<w3){ ac3+=segs[k3]; k3++; }
-            var f4=segs[k3]?(w3-ac3)/segs[k3]:0;
-            var A4=nodes[k3], C4=nodes[k3+1];
-            var tx=A4.x+(C4.x-A4.x)*f4, ty=A4.y+(C4.y-A4.y)*f4;
-            /* the trail is sized by the circles it is passing, same as the
-               head — a constant-width tail behind a growing head reads as two
-               different objects */
-            var lr4=A4.rr+(C4.rr-A4.rr)*f4;
-            var tr4=Math.max(1.1, Math.min(lr4*0.26, 7.5))*(1-tI/13);
-            var ta=(1-tI/10)*0.5;
-            g.fillStyle='rgba(91,215,245,'+ta.toFixed(3)+')';
-            g.beginPath(); g.arc(tx,ty,tr4,0,6.2832); g.fill();
+
+          /* ── the tail ──
+             Ten spaced dots read as beads on a string. This is a dense sample
+             along the spline at uniform arc-length spacing, each blob smaller
+             and fainter than the last, so they overlap into one continuous
+             taper. Its length and width are both tied to the local circle, so
+             the whole comet grows with the mark instead of the head growing
+             while the tail stays put. */
+          var coreAt=function(rr){ return Math.max(1.4, Math.min(rr*0.26, 7.4)); };
+          var hcore=coreAt(hd.rr);
+          var tailLen=Math.min(hcore*13, totL*0.16);
+          var steps=12;
+          for(var tI=1;tI<=steps;tI++){
+            var back=(tI/steps);
+            var u4=ru.t-(tailLen/totL)*back;
+            if(u4<=0) break;
+            var sm=at(u4);
+            var fall=1-back;
+            g.fillStyle='rgba(91,215,245,'+(0.34*fall*fall).toFixed(3)+')';
+            g.beginPath(); g.arc(sm.x,sm.y,coreAt(sm.rr)*(0.30+0.70*fall),0,6.2832); g.fill();
           }
-          /* ── the head is sized by the arc it is travelling ──
-             It was a fixed 3.1px core inside a fixed 26px glow, so against the
-             3-unit first circle it arrived as a boulder and against the
-             27-unit last one it read as a speck. The signal now grows with the
-             mark: core scaled to the local circle radius, clamped so it never
-             swamps the small end nor vanishes at the large. */
-          var lr3=A3.rr+(C3.rr-A3.rr)*f3;
-          var core=Math.max(1.5, Math.min(lr3*0.30, 8.5));
-          var halo=core*5.6;
+
+          /* ── the head ──
+             Sized from the circle it is passing, and deliberately no longer a
+             blown-out white dot: the halo carries the light and the core is a
+             small warm-white centre inside it. A full-strength core inside a
+             full-strength halo is what made it read as a lamp rather than a
+             signal. */
+          var core=hcore;
+          var halo=core*4.6;
           var hg3=g.createRadialGradient(hx3,hy3,0,hx3,hy3,halo);
-          hg3.addColorStop(0,'rgba(91,215,245,.72)');
+          hg3.addColorStop(0,'rgba(91,215,245,.52)');
+          hg3.addColorStop(0.45,'rgba(91,215,245,.16)');
           hg3.addColorStop(1,'rgba(91,215,245,0)');
           g.fillStyle=hg3; g.beginPath(); g.arc(hx3,hy3,halo,0,6.2832); g.fill();
-          g.fillStyle='rgba(198,244,255,.98)';
-          g.beginPath(); g.arc(hx3,hy3,core,0,6.2832); g.fill();
+          g.fillStyle='rgba(186,236,250,.80)';
+          g.beginPath(); g.arc(hx3,hy3,core*0.72,0,6.2832); g.fill();
         }
       }
 

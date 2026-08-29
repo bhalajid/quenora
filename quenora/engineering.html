@@ -124,6 +124,29 @@ strong{color:var(--t1);font-weight:600}
 .gate td strong{color:var(--t1)}
 .tw{overflow-x:auto}
 
+/* ── the worked example ── */
+.layers{margin:var(--sp5) 0 0;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.lay{display:grid;grid-template-columns:150px 1fr 1fr;gap:0 var(--sp4);
+  padding:var(--sp4);background:var(--sf1);border-bottom:1px solid var(--line-2);
+  align-items:start}
+.lay:last-child{border-bottom:none}
+.lay:nth-child(even){background:var(--sf2)}
+.lay .ly{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--copper)}
+.lay .ly h3{color:var(--t1);font-size:.95rem;font-family:'Inter',sans-serif;
+  letter-spacing:-.01em;text-transform:none;margin:7px 0 0;font-weight:600}
+.lay .lbl{margin:0 0 6px;font-size:.7rem;font-family:'JetBrains Mono',monospace;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--t3);font-weight:500;max-width:none}
+.lay p{margin:0;font-size:.92rem;max-width:46ch}
+.illus{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;
+  text-transform:uppercase;color:#E5B14F;border:1px dashed rgba(229,177,79,.5);
+  background:rgba(229,177,79,.08);padding:5px 11px;border-radius:3px;display:inline-block;
+  margin:0 0 var(--sp3)}
+@media(max-width:820px){
+  .lay{grid-template-columns:1fr;gap:var(--sp3)}
+  .lay p{max-width:none}
+}
+
 /* ── principles ── */
 .prin{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:var(--sp4) var(--sp5);margin:var(--sp5) 0 0}
@@ -354,7 +377,90 @@ handing you.</p>
 
 <section>
 <div class="wrap">
-<p class="ch">04 · The evaluation harness</p>
+<p class="ch">04 · Problem to architecture</p>
+<h2>Where a pilot actually stops.</h2>
+<span class="illus">Illustrative — not a client engagement</span>
+<p>This is a worked example, not a case study. It describes the shape of the
+problem we are called into and how we take it apart, using a composite of the
+kind of system that stalls. No client, no numbers, nothing that happened to
+anybody in particular.</p>
+<p><strong>The setup:</strong> a retrieval assistant that answers staff
+questions from internal documentation. It works in the notebook. Eight months
+later it is still in the notebook.</p>
+
+<div class="layers">
+<div class="lay">
+<div class="ly"><span>Layer 01</span><h3>Access</h3></div>
+<div><p class="lbl">Where it stops</p><p>The documents live in four systems with four
+permission models. The pilot ran on an export somebody made by hand, so it
+never had to answer the question of who is allowed to see what.</p></div>
+<div><p class="lbl">What gets decided</p><p>Whether authorisation resolves per query
+against the source systems, or the index is partitioned by entitlement. It is
+the first decision and it constrains every later one.</p></div>
+</div>
+
+<div class="lay">
+<div class="ly"><span>Layer 02</span><h3>Ground truth</h3></div>
+<div><p class="lbl">Where it stops</p><p>Nobody can say whether an answer was right. The
+demo was judged by the people who built it, reading answers they already knew
+the answer to.</p></div>
+<div><p class="lbl">What gets decided</p><p>A test set drawn from real questions, a metric
+that reflects the actual cost of being wrong, and a threshold agreed before
+anything is built. This is the number Phase 05 measures against.</p></div>
+</div>
+
+<div class="lay">
+<div class="ly"><span>Layer 03</span><h3>Freshness</h3></div>
+<div><p class="lbl">Where it stops</p><p>The export is a snapshot. The documentation
+changed the week after, and the assistant now confidently cites a policy that
+was withdrawn.</p></div>
+<div><p class="lbl">What gets decided</p><p>How change propagates: re-index on write,
+scheduled reconciliation, or explicit staleness shown to the reader. Each is
+defensible; the wrong one for the domain is how trust is lost in month three.</p></div>
+</div>
+
+<div class="lay">
+<div class="ly"><span>Layer 04</span><h3>Failure behaviour</h3></div>
+<div><p class="lbl">Where it stops</p><p>Asked something outside its documents, the pilot
+answers anyway. In a demo that reads as capability. In production it is the
+incident.</p></div>
+<div><p class="lbl">What gets decided</p><p>What the system does when it does not know —
+abstain, escalate to a person, or answer with the evidence attached and let the
+reader judge. Wired in as behaviour, not appended as a disclaimer.</p></div>
+</div>
+
+<div class="lay">
+<div class="ly"><span>Layer 05</span><h3>Ownership</h3></div>
+<div><p class="lbl">Where it stops</p><p>It runs on somebody's account, deploys from
+somebody's laptop, and has no owner in the on-call rota. This is the layer that
+ends most pilots, and it is not a technical problem.</p></div>
+<div><p class="lbl">What gets decided</p><p>Which existing team owns it, what their
+runbook says, and what the alert means at three in the morning. If no team will
+take it, that is a finding worth more than the system.</p></div>
+</div>
+</div>
+
+<div class="note">
+<p><strong>Note what is not on that list.</strong> Which model, which vector
+store, which framework. Those are real decisions and they take an afternoon.
+The five above take the engagement, and getting them wrong is why a working
+demo is still a demo eight months later.</p>
+<p>This is also why Phase 02 — the unglamorous layer — is six weeks and not
+one. Access, ground truth and freshness are the foundation; everything after
+them is comparatively cheap.</p>
+</div>
+
+<div class="cta-inline">
+<p><strong>Recognise your own system in any of those five layers?</strong>
+That is the conversation — two paragraphs on which one is stuck.</p>
+<a href="index.html#climax">Start a conversation</a>
+</div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<p class="ch">05 · The evaluation harness</p>
 <h2>The part most proposals leave out.</h2>
 <p>“The model is 92% accurate” is not a finding, it is a claim. It becomes a
 finding when someone else can re-run it next quarter, on new data, and get a

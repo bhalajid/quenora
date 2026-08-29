@@ -202,7 +202,7 @@ enquiry form sits at the bottom of all of it.
 | # | Item |
 |---|---|
 | P4c-2 | **Hero does not fit the first screen at small and short viewports.** 320×568: hook is 1001px against 568px of viewport — the headline, the sub-paragraph and the scroll cue cannot coexist. 1024×768 (iPad landscape, and every 768-tall laptop): hook 784px against 768px — overflows by 16px, so the scroll cue is pushed under the fold on the exact screen where it is meant to invite the scroll. |
-| P4c-3 | **The homepage has no mobile navigation at all.** Below 880px the nav links are hidden by `display:none` with **no replacement** — a phone visitor to the homepage sees brand + "Contact" + language and cannot reach Approach, Capabilities, Work or About. **Every inner page has a working hamburger menu.** The finished page is the only one that loses its navigation. |
+| **P4c-3** | **The homepage has no mobile navigation at all — CONFIRMED BY OWNER ON DEVICE.** The rule `@media(max-width:880px){.navlinks>a:not(.navcta){display:none}}` hides the links with **no replacement**. A phone visitor sees only: mark + wordmark + **"Contact"** + language globe. Approach, Capabilities, Work and About are unreachable — four of the five nav destinations simply do not exist on mobile. **All five inner pages carry a working hamburger** (`.burger` + `#navLinks.open`, with `aria-expanded` wired). The finished homepage is the only page on the site that loses its navigation, and it is the page most traffic lands on. **Fix: port the inner pages' burger pattern, restyled to the homepage's 4px language.** ~1 h. |
 
 ### Verified clean
 

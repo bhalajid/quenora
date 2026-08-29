@@ -213,6 +213,46 @@ enquiry form sits at the bottom of all of it.
 - Engagement cards equal height and pixel-aligned at every width tested.
 - Hero constellation places correctly at every width (gate-enforced).
 
+---
+
+## P4d — HERO ANIMATION ON MOBILE, AND SCALE-INVARIANCE
+
+Sampled the hero canvas pixel-by-pixel at 390 × 844 over ~8 seconds.
+
+**The animations are not missing — they are running and invisible.** The
+canvas paints, the mark builds, and the cyan signal run does fire (confirmed:
+cyan present in 4 of 9 time samples). It reads as missing because the mark is
+rendered at roughly **one fifth of its desktop presence**, and because every
+motion detail is sized in fixed pixels that do not scale.
+
+### Why it reads as missing
+
+| Measure | Mobile 390×844 | Desktop ~1440 |
+|---|---|---|
+| Mark height | **63px** | ≈ headline height (~320px) |
+| Mark as % of viewport height | **7.5%** | ≈ 35% |
+| Mark as % of viewport width | 17.6% | ≈ 24% |
+| Canvas coverage (lit pixels) | **0.4–0.7%** | several times that |
+| Peak alpha anywhere on canvas | **146 / 255** | full |
+
+| # | Item |
+|---|---|
+| P4d-1 | **The mobile mark is sized by a leftover gap, not by a design decision.** Below 700px the fallback places it in the band between the nav and the eyebrow. That band is whatever happens to be left over: **83px at 390 wide, 135px at 430.** A 62% difference in the brand's presence between two ordinary phones, driven by nothing but text reflow. On desktop the mark is tied to the headline's measured height — a real relationship. Mobile has no equivalent. |
+| P4d-2 | **Nothing in the animation is scale-invariant.** Trail dots (2.6px), run head (3.1px), head glow radius (26px), pulse tails (34–60px), spark velocities and arrival ring radii are all fixed pixel constants tuned on a desktop canvas. On a 390px canvas a 26px glow is **6.7% of the width**; on 1920px the same glow is **1.35%**. The same code produces a different *visual language* at each size — chunky and blobby on phones, delicate on desktop. Everything decorative should be expressed as a fraction of canvas width or of `ms` (the mark scale factor), not in px. |
+| P4d-3 | **Dust density varies ~6× across devices.** The field is a fixed 170 particles regardless of canvas area: **511 per million px on a phone, ~88 on a 1920 desktop.** Phones get a dense speckle, large screens get an empty void. Scale the count by area for constant density. |
+| P4d-4 | **The best interaction is desktop-only.** Nearest-sphere hover — 161,877 positions tested, 0 mis-picks, the most refined thing on the site — never fires on touch (`hover:none, pointer:coarse`). Mobile visitors get none of it. A tap-to-light, or an auto-cycle that lights each sphere and names its principle, would return that value on the device most visitors use. |
+| P4d-5 | **The run is invisible at mobile scale.** The cyan signal is the animation that carries the headline's promise — *AI that reaches the work*. At 63px of arc with a 3px head, it is a flicker. It needs proportionally thicker stroke, longer dwell, and a brighter arrival bloom on small canvases. |
+
+### Room to make it better — concrete
+
+| # | Proposal |
+|---|---|
+| P4d-6 | **Give the mobile mark a real geometric anchor.** Options, best first: (a) size it to the **headline block height** exactly as desktop does, and place it in the empty band *below* the hook-foot rather than the sliver above the eyebrow; (b) let it bleed off the right edge at ~55% of viewport width — a confident, common premium pattern that turns a constraint into a decision; (c) place it behind the headline at low alpha as a ground rather than an object. Any of the three replaces "whatever gap is left" with a stated relationship. |
+| P4d-7 | **Express every constant as a ratio.** Define one `S = W/1440` scale factor at `fit()` and multiply every decorative px through it. Removes an entire class of per-device visual drift, in one pass. |
+| P4d-8 | **Tie the three figures to one tempo family.** The ticker (38s), the gap cycle (11.3s) and the automation spawn interval share no rhythmic relationship. Deriving all three from one base beat would make the page feel composed rather than assembled. |
+| P4d-9 | **Give the arrival more weight.** The ninth sphere's bloom on arrival is the emotional payoff of the whole hero — the moment the signal *reaches the work*. It currently decays at 0.955/frame with a thin ring. A longer hold and a brief warm flare across the whole arc would land the headline's claim instead of whispering it. |
+| P4d-10 | **Reduce motion on small screens deliberately, not accidentally.** If the mark must stay small on phones, then cut the dust, drop the run, and let the mark simply *be* — a still, well-placed brand object beats a busy, illegible one. Choose the reduction; do not inherit it from a leftover band. |
+
 ### Motion pacing
 
 | # | Item |

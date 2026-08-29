@@ -793,17 +793,17 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 .langsel{position:relative;margin-left:14px}
 .langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
   padding:0 12px;background:transparent;border:1px solid var(--line);
-  border-radius:3px;color:var(--grey);font:inherit;font-size:12px;
+  border-radius:3px;color:var(--grey, var(--t2));font:inherit;font-size:12px;
   letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
-.langsel>button:hover{border-color:var(--copper);color:var(--white)}
+.langsel>button:hover{border-color:var(--copper);color:var(--white, var(--t1))}
 .langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
-  margin:0;padding:6px;list-style:none;background:var(--ink-2);
+  margin:0;padding:6px;list-style:none;background:var(--ink-2, var(--sf2));
   border:1px solid var(--line);border-radius:4px;display:none;z-index:120;
   box-shadow:0 18px 44px rgba(0,0,0,.5)}
 .langmenu.open{display:block}
 .langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
-  color:var(--grey);transition:background .2s,color .2s}
-.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white)}
+  color:var(--grey, var(--t2));transition:background .2s,color .2s}
+.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white, var(--t1))}
 .langmenu a[aria-current=true]{color:var(--copper-lt)}
 @media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
   .langsel>button span{display:none}}

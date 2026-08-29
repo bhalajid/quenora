@@ -25,6 +25,7 @@ Scored 0–100 per dimension, weighted by what actually decides a deal.
 | UI / visual craft | 5 | **72** | 95 | strong taste, unsystematised — 33 type sizes, 9 radii, 14 durations |
 | Technical / SEO | 5 | **75** | 95 | no FAQ schema, stale indexed translations |
 | Accessibility | 5 | **90** | 95 | homepage clean, inner pages skip headings |
+| Responsive / mobile | *folded into UX* | **35** | 95 | journey has no width breakpoint; homepage has no mobile nav |
 
 **Weighted now: 38 / 100. Target: 95.**
 
@@ -159,6 +160,59 @@ difference between a site that looks designed and one that looks systematised.
 | P4b-8 | **Ragged eyebrow wrapping.** The three engagement-pattern labels wrap to **2, 2 and 1 lines** ("PATTERN 01 · FINANCIAL SERVICES" breaks, "PATTERN 03 · LOGISTICS" does not), so three identical cards have three different internal rhythms. Shorten the sector names or reserve two lines. | 2/2/1 |
 | P4b-9 | **Untokenised repeat.** `rgba(242,239,232,.035)` appears 3× as the grid-line colour. Should be `--line0`. | 3× |
 
+---
+
+## P4c — RESPONSIVE / SCROLL / LANDING
+
+Measured live at 320 · 390 · 820 · 1024 · 1280 · 1440 · 1920. **No horizontal
+overflow at any width** — that part is clean. Everything below is real.
+
+### The big one
+
+| # | Item |
+|---|---|
+| **P4c-1** | **There is no mobile breakpoint for the six-phase journey.** The stacking fallback (`.htrack{flex-wrap:wrap;transform:none}` / `.phase{flex:1 1 100%;max-height:none}`) lives inside `@media (prefers-reduced-motion: reduce)` — **not** inside a width query. So on every phone and tablet the journey runs as a horizontal scroll-hijack, with cards clipped and the next card sliced down the middle. This is the "half visible text" problem, and it affects 100% of mobile and tablet visitors who do not have reduced-motion enabled. **Fix: duplicate that rule block into `@media(max-width:900px)`.** One block, ~4 lines. |
+
+**Text actually cut, measured:**
+
+| Viewport | Phase card content clipped |
+|---|---|
+| 320 × 568 | **125–217px** cut per card |
+| 390 × 844 | **65px** cut per card |
+| 820 × 1180 (iPad) | **75px** cut per card |
+| 1024 × 768 (iPad landscape) | **81px** cut per card |
+
+At 320px the pinned stage also clips 233px of the "AI programmes fail at the
+seams" section.
+
+### Scroll length
+
+| Viewport | Total scroll | Journey pin alone |
+|---|---|---|
+| 320 × 568 | **43.2 screens** | 4.0 screens |
+| 390 × 844 | **27.3 screens** | 2.9 screens |
+| 820 × 1180 | 18.1 screens | 2.1 screens |
+| 1024 × 768 | 22.0 screens | 3.0 screens |
+
+**43 screens on a small phone is not a page, it is a scroll marathon.** The
+enquiry form sits at the bottom of all of it.
+
+### Landing / first screen
+
+| # | Item |
+|---|---|
+| P4c-2 | **Hero does not fit the first screen at small and short viewports.** 320×568: hook is 1001px against 568px of viewport — the headline, the sub-paragraph and the scroll cue cannot coexist. 1024×768 (iPad landscape, and every 768-tall laptop): hook 784px against 768px — overflows by 16px, so the scroll cue is pushed under the fold on the exact screen where it is meant to invite the scroll. |
+| P4c-3 | **The homepage has no mobile navigation at all.** Below 880px the nav links are hidden by `display:none` with **no replacement** — a phone visitor to the homepage sees brand + "Contact" + language and cannot reach Approach, Capabilities, Work or About. **Every inner page has a working hamburger menu.** The finished page is the only one that loses its navigation. |
+
+### Verified clean
+
+- **Zero horizontal overflow** at 320, 390, 820, 1024, 1280, 1440, 1920.
+- **Headline mask is correct** — `.ln` uses `overflow:hidden` with a matching
+  `padding-bottom`, so descenders render complete at every size. Looks like a
+  clip in measurement; is not one in rendering.
+- Engagement cards equal height and pixel-aligned at every width tested.
+- Hero constellation places correctly at every width (gate-enforced).
+
 ### Motion pacing
 
 | # | Item |
@@ -222,6 +276,12 @@ If polish is the priority ahead of legal and conversion, P4b is a
 self-contained day and a half that lifts visual craft 72 → 95 and touches
 nothing else:
 
+0. **Give the journey a width breakpoint** (15 min) — the single highest-value
+   fix in this whole document. Copy the reduced-motion stacking rule into
+   `@media(max-width:900px)`. Ends clipped cards and half-visible text on every
+   phone and tablet at once.
+0b. **Add a mobile nav to the homepage** (1 h) — it is the only page without
+   one; the inner pages already have a burger to copy.
 1. **Tokenise the system** (½ day) — collapse 33 type sizes to 8, 9 radii to 3,
    14 durations to 3, add `--line0`. Mechanical, low risk, gate-safe.
 2. **Fix the mono label** (2 h) — one size, one tracking, one weight, applied

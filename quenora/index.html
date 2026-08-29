@@ -280,6 +280,17 @@ body.clg .cur::after{opacity:1}
   padding-top:var(--sp3);opacity:0;animation:fu .9s var(--e) 2.2s forwards}
 .hook-foot p{max-width:48ch;color:var(--t2);font-size:1.06rem;margin:0}
 @media(max-width:820px){.hook-foot{grid-template-columns:1fr}}
+/* The hero is content 496px (eyebrow, headline, paragraph) inside 336px of
+   spacing. That is right on a tall screen and too generous on a short one: at
+   1366x768 the tail of the paragraph fell below the fold, which is where the
+   "No lock-in. No dependency." line sits. The content was never the problem,
+   so trim the two largest spacers rather than the copy. Above 860px tall
+   nothing changes. The arc is measured from the headline box at runtime, so
+   it follows the headline up — gate stage 7 is what proves that. */
+@media(max-height:860px){
+  .hook{padding-top:var(--sp6)}
+  .hook-foot{margin-top:var(--sp5)}
+}
 .cue{position:absolute;right:max(0px,calc(132px - (100vw - 100%) / 2));bottom:calc(100% + var(--sp5));
   display:flex;flex-direction:column;align-items:center;gap:11px;color:var(--t3)}
 @media(max-width:820px){.cue{position:static;margin:var(--sp2) 0 0;width:max-content}}

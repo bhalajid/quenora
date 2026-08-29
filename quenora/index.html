@@ -1908,16 +1908,30 @@ I can ask for them to be deleted at any time.</span></label>
             var f4=segs[k3]?(w3-ac3)/segs[k3]:0;
             var A4=nodes[k3], C4=nodes[k3+1];
             var tx=A4.x+(C4.x-A4.x)*f4, ty=A4.y+(C4.y-A4.y)*f4;
+            /* the trail is sized by the circles it is passing, same as the
+               head — a constant-width tail behind a growing head reads as two
+               different objects */
+            var lr4=A4.rr+(C4.rr-A4.rr)*f4;
+            var tr4=Math.max(1.1, Math.min(lr4*0.26, 7.5))*(1-tI/13);
             var ta=(1-tI/10)*0.5;
             g.fillStyle='rgba(91,215,245,'+ta.toFixed(3)+')';
-            g.beginPath(); g.arc(tx,ty,2.6-tI*0.2,0,6.2832); g.fill();
+            g.beginPath(); g.arc(tx,ty,tr4,0,6.2832); g.fill();
           }
-          var hg3=g.createRadialGradient(hx3,hy3,0,hx3,hy3,26);
-          hg3.addColorStop(0,'rgba(91,215,245,.75)');
+          /* ── the head is sized by the arc it is travelling ──
+             It was a fixed 3.1px core inside a fixed 26px glow, so against the
+             3-unit first circle it arrived as a boulder and against the
+             27-unit last one it read as a speck. The signal now grows with the
+             mark: core scaled to the local circle radius, clamped so it never
+             swamps the small end nor vanishes at the large. */
+          var lr3=A3.rr+(C3.rr-A3.rr)*f3;
+          var core=Math.max(1.5, Math.min(lr3*0.30, 8.5));
+          var halo=core*5.6;
+          var hg3=g.createRadialGradient(hx3,hy3,0,hx3,hy3,halo);
+          hg3.addColorStop(0,'rgba(91,215,245,.72)');
           hg3.addColorStop(1,'rgba(91,215,245,0)');
-          g.fillStyle=hg3; g.beginPath(); g.arc(hx3,hy3,26,0,6.2832); g.fill();
+          g.fillStyle=hg3; g.beginPath(); g.arc(hx3,hy3,halo,0,6.2832); g.fill();
           g.fillStyle='rgba(198,244,255,.98)';
-          g.beginPath(); g.arc(hx3,hy3,3.1,0,6.2832); g.fill();
+          g.beginPath(); g.arc(hx3,hy3,core,0,6.2832); g.fill();
         }
       }
 

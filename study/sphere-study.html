@@ -1,0 +1,172 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Quenora — sphere rendering study</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--void:#07070A;--t1:#F2EFE8;--t2:#A8AEBB;--t3:#7C8290;--copper:#C97A3C;--copper-lt:#E9A063}
+*{box-sizing:border-box;margin:0}
+body{background:var(--void);color:var(--t1);font-family:Inter,sans-serif;padding:40px}
+h1{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}
+.sub{color:var(--t3);font-size:.85rem;margin-bottom:32px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.cell{border:1px solid rgba(242,239,232,.10);border-radius:4px;overflow:hidden;background:#0b0b0f}
+.lab{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--copper-lt);padding:12px 16px;
+  border-bottom:1px solid rgba(242,239,232,.08)}
+.lab span{color:var(--t3);letter-spacing:.1em}
+canvas{display:block;width:100%;height:340px}
+</style>
+<h1>Sphere rendering study</h1>
+<p class="sub">Same nine coordinates, same palette, four treatments. Left-to-right, top-to-bottom = increasing physicality.</p>
+<div class="grid">
+  <div class="cell"><div class="lab">A · shipping today <span>— body gradient + rim + specular</span></div><canvas id="a"></canvas></div>
+  <div class="cell"><div class="lab">B · + fresnel rim &amp; contact shadow <span>— cheap, pure maths</span></div><canvas id="b"></canvas></div>
+  <div class="cell"><div class="lab">C · + ground plane &amp; reflection <span>— it stands somewhere</span></div><canvas id="c"></canvas></div>
+  <div class="cell"><div class="lab">D · + bloom &amp; depth of field <span>— the full treatment</span></div><canvas id="d"></canvas></div>
+</div>
+<script>
+const MARK=[[12,161.71,3],[21.64,161.34,3.95],[33.39,159.88,5.2],[47.73,156.52,6.84],
+            [65.05,149.97,9],[85.34,138.1,11.84],[107.49,117.76,15.59],[127.81,84.89,20.52],[151.71,36,27]];
+const B=[1e9,-1e9,1e9,-1e9];
+MARK.forEach(a=>{B[0]=Math.min(B[0],a[0]-a[2]);B[1]=Math.max(B[1],a[0]+a[2]);
+                 B[2]=Math.min(B[2],a[1]-a[2]);B[3]=Math.max(B[3],a[1]+a[2]);});
+const BW=B[1]-B[0], BH=B[3]-B[2];
+
+function layout(cv){
+  const dpr=Math.min(devicePixelRatio||1,2);
+  const w=cv.clientWidth,h=cv.clientHeight;
+  cv.width=w*dpr;cv.height=h*dpr;
+  const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);
+  const s=(h*0.66)/BH, ox=(w-BW*s)/2-B[0]*s, oy=(h*0.52)-((B[2]+B[3])/2)*s;
+  return {g,w,h,s,ox,oy};
+}
+const pos=(L,i)=>({x:L.ox+MARK[i][0]*L.s, y:L.oy+MARK[i][1]*L.s, r:MARK[i][2]*L.s});
+
+/* ---- A: exactly what ships today ---- */
+function body(g,x,y,r,a=1){
+  const bd=g.createRadialGradient(x-r*0.36,y-r*0.40,r*0.05,x,y,r);
+  bd.addColorStop(0,`rgba(212,158,110,${a})`);
+  bd.addColorStop(0.46,`rgba(150,90,44,${a})`);
+  bd.addColorStop(1,`rgba(52,28,10,${a})`);
+  g.fillStyle=bd;g.beginPath();g.arc(x,y,r,0,6.2832);g.fill();
+}
+function specular(g,x,y,r,a=1){
+  g.fillStyle=`rgba(255,232,205,${0.16*a})`;
+  g.beginPath();g.arc(x-r*0.34,y-r*0.38,Math.max(0.7,r*0.13),0,6.2832);g.fill();
+}
+function drawA(cv){
+  const L=layout(cv),g=L.g;
+  for(let i=0;i<9;i++){const p=pos(L,i);
+    const bl=g.createRadialGradient(p.x,p.y,p.r*0.6,p.x,p.y,p.r*2.1);
+    bl.addColorStop(0,'rgba(201,122,60,.13)');bl.addColorStop(1,'rgba(201,122,60,0)');
+    g.fillStyle=bl;g.beginPath();g.arc(p.x,p.y,p.r*2.1,0,6.2832);g.fill();
+    body(g,p.x,p.y,p.r);
+    g.strokeStyle='rgba(201,122,60,.34)';g.lineWidth=Math.max(.5,p.r*.045);
+    g.beginPath();g.arc(p.x,p.y,p.r*.97,0,6.2832);g.stroke();
+    specular(g,p.x,p.y,p.r);
+  }
+}
+
+/* ---- fresnel rim + contact shadow ---- */
+function fresnel(g,x,y,r,a=1){
+  const fr=g.createRadialGradient(x,y,r*0.62,x,y,r);
+  fr.addColorStop(0,'rgba(233,160,99,0)');
+  fr.addColorStop(0.82,`rgba(233,160,99,${0.10*a})`);
+  fr.addColorStop(1,`rgba(255,196,140,${0.42*a})`);
+  g.fillStyle=fr;g.beginPath();g.arc(x,y,r,0,6.2832);g.fill();
+}
+function occlude(g,L,i,a=1){
+  if(i===0)return;
+  const p=pos(L,i),q=pos(L,i-1);
+  const dx=q.x-p.x,dy=q.y-p.y,d=Math.hypot(dx,dy);
+  if(d>(p.r+q.r)*1.5)return;
+  const ux=dx/d,uy=dy/d;
+  const cx=p.x+ux*p.r*0.88, cy=p.y+uy*p.r*0.88;
+  const oc=g.createRadialGradient(cx,cy,0,cx,cy,p.r*0.62);
+  oc.addColorStop(0,`rgba(10,5,2,${0.55*a})`);oc.addColorStop(1,'rgba(10,5,2,0)');
+  g.fillStyle=oc;g.beginPath();g.arc(cx,cy,p.r*0.62,0,6.2832);g.fill();
+}
+function drawB(cv){
+  const L=layout(cv),g=L.g;
+  for(let i=0;i<9;i++){const p=pos(L,i);
+    const bl=g.createRadialGradient(p.x,p.y,p.r*0.6,p.x,p.y,p.r*2.1);
+    bl.addColorStop(0,'rgba(201,122,60,.13)');bl.addColorStop(1,'rgba(201,122,60,0)');
+    g.fillStyle=bl;g.beginPath();g.arc(p.x,p.y,p.r*2.1,0,6.2832);g.fill();
+    body(g,p.x,p.y,p.r);
+    fresnel(g,p.x,p.y,p.r);
+    occlude(g,L,i);
+    specular(g,p.x,p.y,p.r);
+  }
+}
+
+/* ---- ground plane + reflection ---- */
+function ground(g,L){
+  const yb=L.oy+B[3]*L.s;
+  const gg=g.createLinearGradient(0,yb-L.h*0.04,0,yb+L.h*0.30);
+  gg.addColorStop(0,'rgba(201,122,60,.055)');gg.addColorStop(1,'rgba(201,122,60,0)');
+  g.fillStyle=gg;g.fillRect(0,yb-L.h*0.04,L.w,L.h*0.34);
+  g.save();g.globalAlpha=.16;g.translate(0,yb*2);g.scale(1,-1);
+  for(let i=0;i<9;i++){const p=pos(L,i);
+    if(p.y>yb) continue;
+    body(g,p.x,p.y,p.r,0.5);
+  }
+  g.restore();
+  // contact spill under each sphere
+  for(let i=0;i<9;i++){const p=pos(L,i);
+    const sp=g.createRadialGradient(p.x,yb,0,p.x,yb,p.r*2.2);
+    sp.addColorStop(0,'rgba(233,160,99,.10)');sp.addColorStop(1,'rgba(233,160,99,0)');
+    g.fillStyle=sp;g.beginPath();g.ellipse(p.x,yb,p.r*2.2,p.r*0.5,0,0,6.2832);g.fill();
+  }
+}
+function drawC(cv){
+  const L=layout(cv),g=L.g;
+  ground(g,L);
+  for(let i=0;i<9;i++){const p=pos(L,i);
+    body(g,p.x,p.y,p.r);fresnel(g,p.x,p.y,p.r);occlude(g,L,i);specular(g,p.x,p.y,p.r);
+  }
+}
+
+/* ---- full: bloom + depth of field ---- */
+function drawD(cv){
+  const L=layout(cv),g=L.g;
+  ground(g,L);
+  // depth of field: small end sits "further", gets a slight blur
+  for(let i=0;i<9;i++){const p=pos(L,i);
+    const depth=1-(i/8);              // 1 at the small end, 0 at the large
+    const blur=depth*2.6;
+    g.save();
+    if(blur>0.3) g.filter=`blur(${blur.toFixed(2)}px)`;
+    body(g,p.x,p.y,p.r);fresnel(g,p.x,p.y,p.r);
+    g.restore();
+    occlude(g,L,i);
+    specular(g,p.x,p.y,p.r);
+  }
+  // real bloom: bright pass -> blur -> additive composite
+  const off=document.createElement('canvas');
+  off.width=cv.width;off.height=cv.height;
+  const o=off.getContext('2d');
+  o.setTransform(cv.width/L.w,0,0,cv.width/L.w,0,0);
+  for(let i=0;i<9;i++){const p=pos(L,i);
+    const hg=o.createRadialGradient(p.x-p.r*.3,p.y-p.r*.34,0,p.x,p.y,p.r*1.15);
+    hg.addColorStop(0,'rgba(255,214,170,.85)');
+    hg.addColorStop(.55,'rgba(233,160,99,.22)');
+    hg.addColorStop(1,'rgba(201,122,60,0)');
+    o.fillStyle=hg;o.beginPath();o.arc(p.x,p.y,p.r*1.15,0,6.2832);o.fill();
+  }
+  g.save();
+  g.filter='blur(14px)';
+  g.globalCompositeOperation='lighter';
+  g.globalAlpha=.55;
+  g.drawImage(off,0,0,L.w,L.h);
+  g.restore();
+}
+
+addEventListener('load',()=>{
+  document.fonts.ready.then(()=>{
+    drawA(document.getElementById('a'));
+    drawB(document.getElementById('b'));
+    drawC(document.getElementById('c'));
+    drawD(document.getElementById('d'));
+  });
+});
+</script>

@@ -314,6 +314,56 @@ are cheap and immediately physical; bloom is the transformative one; depth of
 field is the finish. Leave the 3D tilt (P4e-8) last — it is the most
 impressive and the only one that can fail the gate.
 
+---
+
+## P4f — THE TWO MARKS DO NOT COMPOSE
+
+Measured at 1440 × 900 on the first screen.
+
+Both marks are the same object and are correctly scaled — the nav lockup's arc
+and the hero constellation share an **identical −42° axis**. That part is
+right, and it is why they feel related at all.
+
+What is missing is any *shared line between them*:
+
+| Measure | Value |
+|---|---|
+| Nav mark arc axis | **−42°** |
+| Hero arc axis | **−42°** |
+| Line joining the two marks | **+29.8°** |
+| Hero arc **right** edge | exactly on grid line 6 (1405) |
+| Hero arc **left** end (small circle) | **78px off** the nearest grid line (943) |
+
+| # | Item |
+|---|---|
+| P4f-1 | **The hero arc is anchored at one end only.** Its right edge sits exactly on the wrap's last grid line and its bottom on the headline's baseline — two real relationships. Its **small end floats**, landing 78px past a column line, because the arc's width falls out of the scale rather than being placed. So the composition is nailed on the right and loose on the left, which is the end nearest the type. |
+| P4f-2 | **No line relates the two marks.** They share an axis but sit on a connector running at +29.8° — neither the mark's own 42°, nor 45°, nor any grid diagonal. The eye reads two instances of one object that are not on a common trajectory. Options: (a) drop the hero arc so the nav-to-hero connector runs at **+42°**, mirroring the mark's own axis and putting the whole first screen on one angle; (b) anchor the arc's small circle to grid line 4 so both ends are placed; (c) align the arc's small circle to the headline's **baseline** rather than letting it float. (b) is the cheapest and most defensible — it costs one term in `fit()`. |
+| P4f-3 | **Nav mark and hero arc share no vertical either.** The nav mark spans x 20–60 (column 0). Nothing in the hero relates to that column, so the top-left anchor and the right-hand object have no common structure at all. |
+
+---
+
+## P4g — SPHERE RENDERING STUDY (built, viewable)
+
+A working four-panel comparison lives at **`study/sphere-study.html`** — same
+nine coordinates, same palette, four treatments, all zero-dependency 2D canvas.
+Open it directly in a browser. It is outside `quenora/` so it is not served,
+not indexed and not part of the site.
+
+| Panel | Treatment | Verdict |
+|---|---|---|
+| **A** | Shipping today — body gradient, rim stroke, specular dot | Good. Clearly lit objects, not flat discs. |
+| **B** | **+ fresnel rim + contact shadow** | The cheapest real gain. The bright edge reads as light wrapping a curved surface, and the occlusion where spheres nearly touch makes them sit *in front of* each other rather than beside. Pure maths, no cost. |
+| **C** | **+ ground plane, reflection, contact spill** | The biggest single jump. Nine floating circles become an object standing on a surface. Grounds the whole mark. |
+| **D** | **+ real bloom + depth of field** | Bright pass → blur → additive composite, plus a graded blur on the small end. This is the "expensive" look — light behaves like light rather than like a gradient. |
+
+**Recommendation: B + C are near-free and deliver most of the gain. D is the
+one that would make it competition-grade**, at the cost of one offscreen
+canvas and a blur pass per frame — needs a mobile GPU check and should be
+disabled under `prefers-reduced-motion`.
+
+The 3D micro-tilt (P4e-8) remains the highest-ceiling option and the only one
+that can fail the geometry gate. Do it last, and only returning to exact rest.
+
 ### Motion pacing
 
 | # | Item |

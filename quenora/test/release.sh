@@ -61,6 +61,47 @@ sys.exit(1 if issues else 0)
 PY
 [ $? -eq 0 ] && ok "a11y + SEO clean" || bad "a11y/SEO issues"
 
+step "4b/8  legal completeness (Impressum, privacy notice, no stray placeholders)"
+python3 - "$DIR" <<'LEGALPY'
+import os, re, sys, glob
+d = sys.argv[1]
+issues = []
+
+# The pages themselves must exist. Everything else here is pointless without them.
+for req in ("impressum.html", "privacy.html"):
+    if not os.path.exists(os.path.join(d, req)):
+        issues.append("missing " + req)
+
+# No unfilled content may ship. The footer of every page in every language
+# carried "[PLACEHOLDER]" for months without anyone catching it, so this is a
+# hard gate now rather than a convention.
+TOKENS = (r"\{\{TODO:[A-Z_]+\}\}", r"\[PLACEHOLDER\]", r"\[LinkedIn\]",
+          r"\[Impressum\]", r"\[Privacy notice\]", r"\bTBD\b", r"\bXXXX+\b")
+for f in sorted(glob.glob(os.path.join(d, "*.html")) +
+                glob.glob(os.path.join(d, "??", "*.html"))):
+    h = open(f, encoding="utf-8").read()
+    n = os.path.relpath(f, d).replace(os.sep, "/")
+    if n == "index-old-backup.html":
+        continue
+    for t in TOKENS:
+        for m in sorted(set(re.findall(t, h))):
+            issues.append(n + ": unfilled placeholder " + m)
+    # A legal link that goes nowhere is worse than no link at all.
+    for label in ("Impressum", "Legal notice", "Privacy notice", "Datenschutz",
+                  "Mentions", "Aviso legal", "Note legali"):
+        if re.search(r'<a href="#"[^>]*>[^<]*' + label, h):
+            issues.append(n + ": dead legal link (" + label + ")")
+    # Every page must be able to reach both legal pages from its own footer.
+    if not re.search(r'href="(\.\./)?impressum\.html"', h):
+        issues.append(n + ": no link to the legal notice")
+    if not re.search(r'href="(\.\./)?privacy\.html"', h):
+        issues.append(n + ": no link to the privacy notice")
+
+print("\n".join("   " + i for i in issues))
+sys.exit(1 if issues else 0)
+LEGALPY
+[ $? -eq 0 ] && ok "legal pages present and complete" || bad "legal content incomplete"
+
 step "5/8  colour contrast (WCAG AA)"
 python3 contrast.py "$DIR"
 [ $? -eq 0 ] && ok "all text passes AA" || bad "contrast below AA"

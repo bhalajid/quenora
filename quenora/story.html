@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#07070A">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Quenora Technology Consulting">
+<meta property="og:site_name" content="Quenora Consulting">
 <meta property="og:title" content="Quenora — Most enterprise AI never leaves the lab">
 <meta property="og:description" content="We engineer AI into what you already run, then hand you the keys.">
 <meta property="og:url" content="https://quenora.ai/">
@@ -312,7 +312,10 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 .fbot{margin-top:var(--sp5);padding-top:var(--sp2);border-top:1px solid var(--line);
   display:flex;flex-wrap:wrap;gap:var(--sp2);justify-content:space-between;
   font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--t3)}
-.ph{color:#E5B14F;border-bottom:1px dashed currentColor}
+.fbot a{color:var(--t2);border-bottom:1px solid rgba(168,174,187,.28);
+  display:inline-block;padding:5px 0;
+  transition:color .3s,border-color .3s}
+.fbot a:hover{color:var(--ember);border-bottom-color:var(--ember)}
 
 /* ── scroll reveal (IntersectionObserver adds .in) ── */
 .rv{opacity:0;transform:translateY(26px);
@@ -486,7 +489,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
         <div class="cnum">03</div>
         <div>
           <h2>Nine capabilities. <em>One</em> team.</h2>
-          <p class="lede">Three are core, because almost every engagement runs through
+          <p class="lede">Three are core, because the work runs through
              them. The other six join when the work calls for them — not to pad a
              proposal. None of it is subcontracted to someone you have not met.</p>
         </div>
@@ -504,7 +507,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
       </div>
       <div class="counters">
         <div class="rv"><b data-count="9">0</b>
-          <span>capabilities, three of them core — because almost every engagement
+          <span>capabilities, three of them core — because the work
                 runs through those three.</span></div>
         <div class="rv" data-d="1"><b data-count="6">0</b>
           <span>phases from framing to handover, each with an exit condition written
@@ -555,15 +558,19 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
         <a href="products.html">Products</a><a href="contact.html">Contact</a>
       </nav></div>
       <div><h3>Contact</h3><nav aria-label="Contact">
-        <a href="mailto:hello@quenora.ai"><span class="ph">hello@quenora.ai</span></a>
-        <a href="#"><span class="ph">[LinkedIn]</span></a>
-        <a href="#"><span class="ph">[Impressum]</span></a>
-        <a href="#"><span class="ph">[Privacy notice]</span></a>
+        <a href="mailto:info@quenora.ai">info@quenora.ai</a>
+        <a href="impressum.html">Legal notice · Impressum</a>
+        <a href="privacy.html">Privacy notice</a>
       </nav></div>
+<div><h3>Follow</h3><nav aria-label="Social">
+<a rel="noopener me" target="_blank" href="https://www.linkedin.com/company/quenora">LinkedIn</a>
+<a rel="noopener me" target="_blank" href="https://x.com/quenora_ai">X</a>
+<a rel="noopener me" target="_blank" href="https://www.instagram.com/quenora.ai/">Instagram</a>
+</nav></div>
     </div>
     <div class="fbot">
-      <span>© 2026 Quenora Technology Consulting</span>
-      <span>Reg / VAT <span class="ph">[PLACEHOLDER]</span></span>
+      <span>© 2026 Quenora Consulting</span>
+      <span>Heilbronn, Germany · <a href="impressum.html">Legal notice</a> · <a href="privacy.html">Privacy</a></span>
     </div>
   </div>
 </footer>

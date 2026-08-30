@@ -21,6 +21,36 @@ To unfreeze, once the English page is signed off:
 The gate will then fail until every localised page matches the new English
 structure — which is the point.
 
+SPANISH AND ITALIAN ARE UNLISTED
+--------------------------------
+
+Decision, 28 August 2026. The firm states it works in German, French and
+English, so the site now offers only those three. es/ and it/ are still built
+and still in the repository — nothing is deleted — but they are:
+
+  * absent from the language switcher on every English page
+  * absent from the hreflang alternate set and from sitemap.xml
+  * served noindex, follow
+
+build_i18n.py carries this as UNLISTED_LANGS, alongside the existing
+UNLISTED_PAGES. To republish them on expansion, remove the code from that set
+and rebuild; nothing else has to be undone.
+
+The de/ and fr/ pages still list es/ and it/ in their own switchers. They were
+not hand-edited, because they are frozen and because their switcher hrefs are
+broken independently of this (see below) — regenerating fixes both at once.
+
+KNOWN BUG, NOT INTRODUCED BY THE ABOVE
+--------------------------------------
+
+The language switcher on every localised page carries English-relative hrefs:
+from /de/services.html, "Deutsch" points at de/services.html, which resolves
+to /de/de/services.html and 404s, while "English" points at services.html,
+which resolves back to /de/services.html. Cause: build_lang() only inserts a
+switcher "if not soup.find(class_='langsel')", and the English source page
+already has one, so the localised switcher is copied verbatim instead of being
+rebuilt per language. Fix that condition when unfreezing.
+
 Still outstanding before any of these go live:
   · native-speaker review of all four languages
     (every file in i18n/ carries "reviewed_by_native_speaker": false)

@@ -11,7 +11,7 @@
 <meta content="#07070A" name="theme-color"/>
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
-<meta content="Quenora Technology Consulting" property="og:site_name"/>
+<meta content="Quenora Consulting" property="og:site_name"/>
 <meta content="Quenora — Most enterprise AI never reaches the work" property="og:title"/>
 <meta content="We engineer AI into what you already run, then hand you the keys." property="og:description"/>
 <meta content="https://quenora.ai/" property="og:url"/>
@@ -26,7 +26,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"Organization","@id":"https://quenora.ai/#org",
-  "name":"Quenora Technology Consulting","url":"https://quenora.ai/",
+  "name":"Quenora Consulting","url":"https://quenora.ai/",
+  "email":"info@quenora.ai",
+  "sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],
   "logo":"https://quenora.ai/assets/og-quenora.jpg",
   "image":"https://quenora.ai/assets/og-quenora.jpg",
   "description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.",
@@ -225,16 +227,54 @@ body.clg .cur::after{opacity:1}
   transition:transform .5s var(--e)}
 .navlinks>a:hover{color:var(--t1)}
 .navlinks>a:hover::after{transform:scaleX(1);transform-origin:left}
-.navcta{border:1.5px solid var(--line2);padding:11px 20px;font-size:.8rem;
-  font-weight:600;color:var(--t1);position:relative;overflow:hidden;
-  isolation:isolate;transition:color .4s var(--e),border-color .4s var(--e)}
-.navcta::after{content:'';position:absolute;inset:0;z-index:-1;background:var(--ember);
-  transform:translateY(101%);transition:transform .5s var(--e)}
-.navcta:hover{color:var(--void);border-color:var(--ember)}
-.navcta:hover::after{transform:translateY(0)}
-.navcta{white-space:nowrap}
+.navlinks>a.navcta{background:var(--copper);color:var(--void);border:1px solid transparent;
+  padding:11px 22px;font-size:.8rem;font-weight:600;border-radius:8px;
+  white-space:nowrap;box-shadow:0 6px 24px -8px rgba(201,122,60,.45);
+  transition:background .22s ease,transform .22s ease,box-shadow .22s ease}
+.navlinks>a.navcta::after{display:none}
+.navlinks>a.navcta:hover{background:var(--copper-lt);color:var(--void);
+  transform:translateY(-1px);box-shadow:0 10px 30px -8px rgba(201,122,60,.45)}
 .cta-short{display:none}
-@media(max-width:880px){.navlinks>a:not(.navcta){display:none}}
+/* Below 880px the nav links used to be hidden with nothing in their place,
+   which left the homepage with no navigation at all across ~28 screens on a
+   phone — while the older inner pages had a working menu. Same pattern as
+   theirs, adapted to this header: the CTA stays in the bar because it is the
+   one control a visitor always wants, and the rest collapse behind the
+   button. */
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;
+  cursor:pointer;padding:9px;flex:none;margin-left:auto;border-radius:3px}
+.burger i{display:block;width:22px;height:1.5px;background:var(--t1);
+  transition:transform .28s var(--e),opacity .2s ease}
+.burger.open i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open i:nth-child(2){opacity:0}
+.burger.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.burger:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+@media(max-width:880px){
+  .burger{display:flex;order:2}
+  /* the bar is a fixed 84px on desktop; on mobile it has to be able to grow
+     to hold the open panel, or the links render past the header's own
+     background and sit unreadably over the hero */
+  .nav .wrap{flex-wrap:wrap;height:auto;min-height:84px;align-items:center}
+  /* and the panel needs a ground of its own: the header is transparent until
+     the page is scrolled, so an open menu at the top of the page would
+     otherwise have nothing behind it */
+  .nav:has(.navlinks.open){background:rgba(7,7,10,.94);
+    backdrop-filter:blur(20px) saturate(160%);border-bottom-color:var(--line)}
+  .navlinks{order:4;flex-basis:100%;flex-direction:column;align-items:stretch;
+    gap:0;margin-left:0;max-height:0;overflow:hidden;
+    transition:max-height .34s var(--e),margin .34s var(--e)}
+  .navlinks.open{max-height:320px;margin-bottom:var(--sp3)}
+  .nav.navopen{background:rgba(7,7,10,.94);
+    backdrop-filter:blur(20px) saturate(160%);border-bottom-color:var(--line)}
+  .navlinks>a{padding:14px 2px;border-bottom:1px solid var(--line-2);font-size:15px}
+  .navlinks>a::after{display:none}
+  /* the CTA leaves the collapsing panel and sits in the bar itself */
+  .navlinks>a.navcta{order:-1;position:absolute;right:64px;top:22px;padding:9px 16px}
+}
+@media(max-width:560px){.navlinks>a.navcta{right:58px;padding:8px 13px}}
+@media(prefers-reduced-motion:reduce){
+  .burger i,.navlinks{transition:none}
+}
 /* Below ~560px the row cannot hold brand + full CTA + language button, so the
    CTA wraps to two lines and pushes the header out of its band. */
 @media(max-width:560px){.cta-long{display:none}.cta-short{display:inline}}
@@ -274,12 +314,42 @@ body.clg .cur::after{opacity:1}
 @keyframes wordUp{to{transform:translateY(0)}}
 @keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 .hook h1 em{color:var(--ember)}
-.hook-foot{display:grid;grid-template-columns:1fr auto;gap:var(--sp4);
+.hook-foot{position:relative;display:grid;grid-template-columns:1fr auto;gap:var(--sp4);
   align-items:end;margin-top:var(--sp6);border-top:1px solid var(--line);
   padding-top:var(--sp3);opacity:0;animation:fu .9s var(--e) 2.2s forwards}
 .hook-foot p{max-width:48ch;color:var(--t2);font-size:1.06rem;margin:0}
-@media(max-width:820px){.hook-foot{grid-template-columns:1fr}}
-.cue{display:flex;flex-direction:column;align-items:center;gap:11px;color:var(--t3)}
+/* ── inline chapter CTA ─────────────────────────────────────────────────
+   The form sits at 17.3 of 19.8 screens and the sticky header button was
+   the only in-page route to it, so a reader persuaded at chapter 03 had
+   fourteen screens to go before anything invited them to act. These three
+   sit at the end of the chapters that do the persuading. Deliberately not
+   after every chapter: a CTA the reader has already declined twice reads
+   as pestering, and the page's whole argument is that it does not pester. */
+.cta-inline{display:flex;align-items:baseline;gap:var(--sp3) var(--sp4);flex-wrap:wrap;
+  margin-top:var(--sp5);padding-top:var(--sp4);border-top:1px solid var(--line)}
+.cta-inline p{margin:0;color:var(--t2);font-size:1rem;max-width:52ch}
+.cta-inline p b{color:var(--t1);font-weight:600}
+.cta-inline a{flex:none;background:var(--copper);color:var(--void);
+  padding:11px 22px;border-radius:8px;font-size:.8rem;font-weight:600;
+  white-space:nowrap;box-shadow:0 6px 24px -8px rgba(201,122,60,.45);
+  transition:background .22s ease,transform .22s ease}
+.cta-inline a:hover{background:var(--copper-lt);transform:translateY(-1px)}
+.cta-inline a:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+@media(max-width:620px){.cta-inline a{width:100%;text-align:center}}
+.hook-trust{max-width:34ch;border-left:2px solid var(--copper);padding-left:var(--sp3);
+  align-self:start}   /* the row is end-aligned; this rides to the top of it,
+                         which is 50px higher up a short viewport */
+.hook-trust p{font-size:.92rem;line-height:1.55;color:var(--t2);margin:0;max-width:none}
+.hook-trust p b{color:var(--t1);font-weight:600}
+.hook-trust p.mono{margin-top:9px;font-family:'JetBrains Mono',monospace;font-size:.66rem;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--t3)}
+@media(max-width:820px){
+  .hook-foot{grid-template-columns:1fr}
+  .hook-trust{max-width:none;margin-top:var(--sp3)}
+}
+.cue{position:absolute;right:max(0px,calc(132px - (100vw - 100%) / 2));bottom:calc(100% + var(--sp5));
+  display:flex;flex-direction:column;align-items:center;gap:11px;color:var(--t3)}
+@media(max-width:820px){.cue{position:static;margin:var(--sp2) 0 0;width:max-content}}
 .cue i{width:1px;height:58px;
   background:linear-gradient(180deg,var(--ember),transparent);
   animation:cue 2.6s var(--e) infinite}
@@ -404,7 +474,7 @@ body.clg .cur::after{opacity:1}
   border:1px solid var(--line);border-radius:4px;padding:12px 14px;
   color:var(--t1);font-family:inherit;font-size:1rem;transition:border-color .3s}
 .cfield textarea{resize:vertical;min-height:104px;line-height:1.6}
-.cfield input:focus,.cfield textarea:focus{outline:none;border-color:var(--copper)}
+.cfield input:focus,.cfield textarea:focus{border-color:var(--copper)}
 .cfield input[aria-invalid="true"],.cfield textarea[aria-invalid="true"]{border-color:var(--ember)}
 .cfield ::placeholder{color:var(--t3)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -417,6 +487,8 @@ body.clg .cur::after{opacity:1}
 .cnote.err{color:var(--ember)}
 .cnote.ok{color:var(--copper-lt)}
 .cnote a{color:var(--copper-lt);border-bottom:1px solid currentColor}
+.cconsent a{color:var(--copper-lt);border-bottom:1px solid currentColor}
+.cconsent a:hover{color:var(--ember)}
 
 /* ── projects & products (hidden until released) ── */
 .buildhead{color:var(--copper-lt);margin:var(--sp5) 0 var(--sp3);
@@ -490,7 +562,7 @@ body.clg .cur::after{opacity:1}
   border-radius:9px;padding:9px 12px;color:var(--t1);font-family:inherit;
   font-size:.85rem;min-width:0}
 .ai-form input::placeholder{color:var(--t3)}
-.ai-form input:focus{outline:none;border-color:var(--copper)}
+.ai-form input:focus{border-color:var(--copper)}
 .ai-form button{flex:none;background:var(--copper);color:var(--void);border:none;
   border-radius:9px;padding:0 14px;font-family:inherit;font-weight:600;
   font-size:.85rem;cursor:pointer;transition:background .2s}
@@ -657,7 +729,7 @@ body.clg .cur::after{opacity:1}
   font-size:.98rem}
 
 /* ── climax ── */
-.climax{text-align:center;padding:var(--sp8) 0;position:relative;overflow:hidden;
+.climax{text-align:center;padding:var(--sp6) 0 var(--sp8);position:relative;overflow:hidden;
   border-top:1px solid var(--line)}
 .spot{position:absolute;width:62vw;height:62vw;border-radius:50%;left:50%;top:72%;
   transform:translate(-50%,-50%);pointer-events:none;will-change:transform;
@@ -691,7 +763,10 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 .fbot{margin-top:var(--sp5);padding-top:var(--sp2);border-top:1px solid var(--line);
   display:flex;flex-wrap:wrap;gap:var(--sp2);justify-content:space-between;
   font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--t3)}
-.ph{color:#E5B14F;border-bottom:1px dashed currentColor}
+.fbot a{color:var(--t2);border-bottom:1px solid rgba(168,174,187,.28);
+  display:inline-block;padding:5px 0;
+  transition:color .3s,border-color .3s}
+.fbot a:hover{color:var(--ember);border-bottom-color:var(--ember)}
 
 /* ── scroll reveal (IntersectionObserver adds .in) ── */
 /* ── who it is for: three self-identification cards ── */
@@ -785,22 +860,22 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 .langsel{position:relative;margin-left:14px}
 .langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
   padding:0 12px;background:transparent;border:1px solid var(--line);
-  border-radius:3px;color:var(--grey);font:inherit;font-size:12px;
+  border-radius:3px;color:var(--grey, var(--t2));font:inherit;font-size:12px;
   letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
-.langsel>button:hover{border-color:var(--copper);color:var(--white)}
+.langsel>button:hover{border-color:var(--copper);color:var(--white, var(--t1))}
 .langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
-  margin:0;padding:6px;list-style:none;background:var(--ink-2);
+  margin:0;padding:6px;list-style:none;background:var(--ink-2, var(--sf2));
   border:1px solid var(--line);border-radius:4px;display:none;z-index:120;
   box-shadow:0 18px 44px rgba(0,0,0,.5)}
 .langmenu.open{display:block}
 .langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
-  color:var(--grey);transition:background .2s,color .2s}
-.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white)}
+  color:var(--grey, var(--t2));transition:background .2s,color .2s}
+.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white, var(--t1))}
 .langmenu a[aria-current=true]{color:var(--copper-lt)}
 @media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
   .langsel>button span{display:none}}
 </style>
-<meta content="en_GB" property="og:locale"/><link href="https://quenora.ai/" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/es/" hreflang="es" rel="alternate"/><link href="https://quenora.ai/it/" hreflang="it" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/></head>
+<meta content="en_GB" property="og:locale"/><link href="https://quenora.ai/" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/></head>
 <body class="no-js">
 <a class="skip" href="#main">Skip to content</a>
 <div aria-hidden="true" id="ld"><div class="n">01</div><div class="bar"></div></div>
@@ -821,13 +896,15 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <circle cx="151.71" cy="36" r="27"></circle>
 </svg>quenora
     </a>
-<nav aria-label="Main" class="navlinks">
+<button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
+<nav aria-label="Main" class="navlinks" id="navLinks">
 <a href="#journey">Approach</a>
 <a href="#solution">Capabilities</a>
+<a href="engineering.html">Engineering</a>
 <a href="#work">Work</a>
 <a href="#who">About</a>
 <a class="navcta" href="#climax"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
-</nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="index.html" hreflang="en" lang="en">English</a></li><li><a href="de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/index.html" hreflang="fr" lang="fr">Français</a></li><li><a href="es/index.html" hreflang="es" lang="es">Español</a></li><li><a href="it/index.html" hreflang="it" lang="it">Italiano</a></li></ul></div>
+</nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="index.html" hreflang="en" lang="en">English</a></li><li><a href="de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/index.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 </div>
 </header>
 <main id="main">
@@ -841,10 +918,21 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <span class="ln"><span class="w"><em>the work.</em></span></span>
 </h1>
 <div class="hook-foot">
-<p>We are the firm you call when the pilot worked and nothing happened next.
-           Quenora engineers AI and automation into the platforms, workflows and
-           decisions your business already runs — then hands your team the keys
-           and leaves.</p>
+<p>We’re the firm you call when the pilot worked and nothing happened next.
+           Quenora embeds AI and automation into the platforms, workflows and
+           decisions your business already depends on — then equips your team to
+           own it, and moves on. No lock-in. No dependency.</p>
+<!-- The three strongest risk answers on this site were at screens 13 and 17.
+     A reader who skims left believing there was no proof at all. Every claim
+     here is stated verbatim elsewhere on the page — nothing new is asserted,
+     it is only brought forward. It sits in the hook-foot's second grid
+     column rather than beneath the paragraph so it costs no vertical height
+     on the short laptops where the fold is already tight. -->
+<aside class="hook-trust">
+<p><b>No published case studies yet.</b> We’ll arrange a call with a reference
+           before you commit.</p>
+<p class="mono">Fixed scope · written exit conditions · you keep the code</p>
+</aside>
 <div aria-hidden="true" class="cue"><i></i><span class="mono">Scroll</span></div>
 </div>
 </div>
@@ -862,9 +950,9 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="cnum">01</div>
 <div>
 <h2>The demo was never <em>the hard part</em>.</h2>
-<p class="lede">Nobody’s AI programme fails because the model was weak.
-             It fails in the gap between a notebook and a Tuesday afternoon — where
-             the data will not join, the permissions do not exist, and nobody owns
+<p class="lede">AI programmes don’t fail because the model is weak.
+             They fail in the gap between a notebook and a Tuesday afternoon — where
+             the data won’t join, the permissions don’t exist and nobody owns
              the result.</p>
 </div>
 </div>
@@ -874,22 +962,22 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
      which is the whole point of this chapter. -->
 <figure class="gapfig rv">
 <canvas aria-hidden="true" id="gapCanvas"></canvas>
-<figcaption>Illustrative, not a client portfolio. Every pulse is a proof of
-concept that worked. They stop at the same wall — and the wall is never the
-model. It is the distance between the model and the work. Closing that
-distance is the whole job, and it is what the six phases below describe.</figcaption>
+<figcaption>Illustrative, not a client portfolio. Every track is a proof of
+concept that worked. They all stall at the same wall — and the wall is never
+the model. It’s the missing layer between a working demo and daily production.
+That layer is Quenora.</figcaption>
 </figure>
 </div>
 <div class="pinwrap" id="pinwrap">
 <div class="pin">
 <div class="inner">
 <h2 class="big" id="pBig">AI programmes fail at <em>the seams</em>.</h2>
-<p class="sub" id="pSub">Six of them. Every one an engineering problem rather
-             than a research problem — which is the entire reason this firm exists.</p>
+<p class="sub" id="pSub">Three of them — and not one is a research problem.
+             Every seam is an engineering problem. That’s the reason we exist.</p>
 <div class="seams" id="pSeams">
-<div><b>The data</b><span>Systems that will not join. Contracts nobody wrote. Lineage nobody can trace.</span></div>
-<div><b>The integration</b><span>A model that works in a notebook and has no route into the process that needed it.</span></div>
-<div><b>The handover</b><span>A capability only the consultants know how to run — so it quietly stops being used.</span></div>
+<div><b>The data</b><span>Systems that won’t join. Contracts nobody wrote. Lineage nobody can trace.</span></div>
+<div><b>The integration</b><span>Models that work in a notebook but no route into the process that needed them.</span></div>
+<div><b>The handover</b><span>Capabilities only the consultants know how to run, so they quietly fall out of use.</span></div>
 </div>
 </div>
 </div>
@@ -901,20 +989,20 @@ distance is the whole job, and it is what the six phases below describe.</figcap
 <div class="cnum">02</div>
 <div>
 <h2>Three situations we are <em>actually</em> called into.</h2>
-<p class="lede">Not a market segment. The three shapes of problem that land on
-us most weeks. If none of them describe you, we are probably not the right
-firm — and we would rather you knew that now.</p>
+<p class="lede">Not a market segment. The three shapes of problem this
+firm was built to take on. If none of them describe you, we’re probably not the right
+firm — and we’d rather you knew that now.</p>
 </div>
 </div>
 <div class="fit">
 <article class="rv"><span class="tick">Situation 01</span>
 <h3>The pilot that stalled</h3>
-<p>It worked in the demo. Six months later it is still a demo, because the
+<p>It worked in the demo. Six months later it’s still a demo, because the
 platform underneath it was never built and nobody owns the gap.</p></article>
 <article class="rv" data-d="1"><span class="tick">Situation 02</span>
 <h3>Retrieval that lies</h3>
 <p>The assistant answers confidently and is wrong often enough that people
-stopped trusting it. The model is fine. The data contract is not.</p></article>
+stopped trusting it. The model is fine. The data contract isn’t.</p></article>
 <article class="rv" data-d="2"><span class="tick">Situation 03</span>
 <h3>Governance arriving late</h3>
 <p>Something is live, procurement or risk is now asking questions, and the
@@ -927,10 +1015,10 @@ evidence to answer them was never captured.</p></article>
 <div class="chead rv">
 <div class="cnum">03</div>
 <div>
-<h2>Six phases. Designed to <em>end</em>.</h2>
-<p class="lede">Most consultancies are structured to extend the engagement.
-             This one is structured to finish it — every phase carries an exit
-             condition written into the statement of work.</p>
+<h2>Six phases. Designed to <em>finish</em>.</h2>
+<p class="lede">Most consultancies are designed to keep the engagement going.
+             Ours is designed to bring it to a clean close — each phase carries an
+             exit condition, agreed and written into the statement of work.</p>
 <a class="more" href="approach.html">The approach in full</a>
 </div>
 </div>
@@ -941,47 +1029,53 @@ evidence to answer them was never captured.</p></article>
 <article class="phase" data-n="01"><p class="mono">Phase 01 · Frame</p>
 <h3>Find the <em>real</em> constraint</h3>
 <p>We spend the first weeks understanding what actually happens, not what
-               the process documentation says happens. Almost every engagement uncovers
-               something that was never in the brief.</p>
+               the documentation says should. That first look is where the real
+               constraint tends to surface.</p>
 <ul><li>Process walkthrough with the people doing the work</li><li>Data and systems inventory</li><li>The constraint nobody mentioned</li></ul>
             <div class="exit"><b>Exit condition</b>A written position on what to build first — or a recommendation to build nothing.</div>
             <p class="dur mono">Weeks 1–2</p></article>
 <article class="phase" data-n="02"><p class="mono">Phase 02 · Foundation</p>
 <h3>The <em>unglamorous</em> layer</h3>
-<p>Environments, data contracts, access model, evaluation harness. The work
-               that decides whether anything after it survives contact with production.</p>
-<ul><li>Environments and access model</li><li>Data contracts, with owners named</li><li>Evaluation harness and baseline scores</li></ul>
-            <div class="exit"><b>Exit condition</b>Baseline evaluation scores you can hold every later change against.</div>
+<p>The work that decides whether anything after it survives contact with
+               production.</p>
+<ul><li>Environments and access model, documented</li><li>Data contracts, with owners named</li><li>Evaluation harness built on your actual data</li></ul>
+            <div class="exit"><b>Exit condition</b>Baseline evaluation scores to judge every change that follows.</div>
             <p class="dur mono">Weeks 3–6</p></article>
 <article class="phase" data-n="03"><p class="mono">Phase 03 · Integrate</p>
 <h3>Into what you <em>already run</em></h3>
 <p>Connected to the systems that hold the data and run the work, with the
                failure paths designed rather than discovered in production.</p>
-<ul><li>Connectors into ERP, CRM, service desk</li><li>Permission model and audit trail</li><li>Designed failure and rollback paths</li></ul>
+<ul><li>Connectors into ERP, CRM, Service Desk</li><li>Permission model and audit trail</li><li>Failure and rollback paths, mapped</li></ul>
             <div class="exit"><b>Exit condition</b>A staged rollout running against real data in a non-production environment.</div>
             <p class="dur mono">Weeks 4–10</p></article>
 <article class="phase" data-n="04"><p class="mono">Phase 04 · Ship</p>
 <h3>Under <em>real</em> change control</h3>
-<p>Into production behind the same governance as everything else you run.
-               No parallel universe. No permanent pilot.</p>
+<p>It goes live the same way every other system does — same approvals, same
+               controls. No parallel universe. No permanent pilot.</p>
 <ul><li>Release behind your existing change control</li><li>Monitoring, alerting, cost ceilings</li><li>Rollback rehearsed, not theorised</li></ul>
-            <div class="exit"><b>Exit condition</b>In production, under the same governance as everything else you run.</div>
-            <p class="dur mono">Continuous</p></article>
+            <div class="exit"><b>Exit condition</b>In production, under your existing controls — no exceptions.</div>
+            <p class="dur mono">Weeks 10–12</p></article>
 <article class="phase" data-n="05"><p class="mono">Phase 05 · Prove</p>
 <h3>Against the <em>agreed</em> number</h3>
-<p>Measured against the figure set in Frame. If it did not move, we say so,
-               and we say why. That conversation is the product.</p>
-<ul><li>Measurement against the Frame number</li><li>What moved, what did not, and why</li><li>Honest recommendation on continuing</li></ul>
-            <div class="exit"><b>Exit condition</b>A written result — including the uncomfortable version if that is the truth.</div>
+<p>Back to the number we set in Frame — did it move or not? That conversation
+               is the product.</p>
+<ul><li>Measurement against the Frame number</li><li>What moved, what didn’t, and why</li><li>Honest recommendation on continuing</li></ul>
+            <div class="exit"><b>Exit condition</b>A written result — including the uncomfortable version if that’s the truth.</div>
             <p class="dur mono">Weeks 9–12</p></article>
 <article class="phase" data-n="06"><p class="mono">Phase 06 · Hand over</p>
 <h3>And then we <em>leave</em></h3>
-<p>Runbooks, monitoring, paired operation, and a date after which your team
-               runs it without us. The engagement is designed to end.</p>
+<p>We work ourselves out of the job — a date after which your team runs it
+               without us. The engagement is designed to end.</p>
 <ul><li>Runbooks and architecture decision records</li><li>Paired operation with your engineers</li><li>Named owner and a handover date</li></ul>
-            <div class="exit"><b>Exit condition</b>Your team runs it without us. That is the definition of done.</div>
+            <div class="exit"><b>Exit condition</b>You own it, you run it, we’re gone. That’s the definition of done.</div>
             <p class="dur mono">Weeks 12–14</p></article>
 </div>
+</div>
+</div>
+<div class="wrap">
+<div class="cta-inline rv">
+<p><b>Recognise the shape of your problem in those six phases?</b> Two paragraphs on what’s stuck is enough to start — no brief, no NDA.</p>
+<a href="#climax">Start a conversation</a>
 </div>
 </div>
 </section>
@@ -991,9 +1085,9 @@ evidence to answer them was never captured.</p></article>
 <div class="cnum">04</div>
 <div>
 <h2>Nine capabilities. <em>One</em> team.</h2>
-<p class="lede">Three are core, because almost every engagement runs through
-             them. The other six join when the work calls for them — not to pad a
-             proposal. None of it is subcontracted to someone you have not met.</p>
+<p class="lede">Three are core, because everything runs through them. The
+             other six step in only when the work needs them — never to pad a
+             proposal. Nothing is handed to a subcontractor you’ve never met.</p>
 <a class="more" href="services.html">All nine in detail</a>
 </div>
 </div>
@@ -1009,20 +1103,17 @@ evidence to answer them was never captured.</p></article>
 <div class="nrow rv"><span class="i">09</span><h3>Change Management &amp; Enablement</h3><span></span></div>
 </div>
 <figure class="autofig rv">
-<p class="mono autolab">Capability 02 · what automation actually looks like</p>
+<p class="mono autolab">Capability 02 · what automation looks like in practice</p>
 <canvas aria-hidden="true" id="autoCanvas"></canvas>
-<figcaption>Illustrative, not measured. Work arrives, and most of it completes
-without anyone touching it. The rest is routed to a person on purpose — an
-automation is only trustworthy if it knows which cases it should not decide,
-and drawing that line is most of the work.</figcaption>
+<figcaption>Illustrative, not measured. Most work completes untouched. The rest
+is sent to a person by design — an automation earns trust only when it
+knows what it shouldn’t decide, and drawing that line is most of the job.</figcaption>
 </figure>
 <div class="counters">
 <div class="rv"><b data-count="9">9</b>
-<span>capabilities, three of them core — because almost every engagement
-                runs through those three.</span></div>
+<span>capabilities. Three are core — the work runs through them.</span></div>
 <div class="rv" data-d="1"><b data-count="6">6</b>
-<span>phases from framing to handover, each with an exit condition written
-                into the statement of work.</span></div>
+<span>phases, framing to handover — each with an exit condition in the statement of work.</span></div>
 <div class="rv" data-d="2"><b data-count="0">0</b>
 <span>engagements without an end date. An extension is a decision, never
                 the default.</span></div>
@@ -1035,7 +1126,7 @@ and drawing that line is most of the work.</figcaption>
 <div class="cnum">05</div>
 <div>
 <h2>Three shapes this work <em>usually</em> takes.</h2>
-<p class="lede">Not a client list. These are the engagement patterns we are
+<p class="lede">Not a client list. These are the engagement patterns we’re
              called into most often, described by their shape rather than by whose
              logo is on them — because the shape is what tells you whether your
              problem is one of them.</p>
@@ -1153,39 +1244,43 @@ permission.</p>
 <div class="chead rv">
 <div class="cnum">06</div>
 <div>
-<h2>The questions you are <em>already</em> thinking.</h2>
-<p class="lede">We are a small firm selling into organisations that usually buy
-from large ones. These are the objections that come up in every first call,
+<h2>The questions you’re <em>already</em> thinking.</h2>
+<p class="lede">We’re a small firm selling into organisations that usually buy
+from large ones. These are the objections we expect,
 answered here so the call can start further along.</p>
 </div>
 </div>
 <div class="obj rv">
 <details><summary>Why not a large consultancy?<span aria-hidden="true" class="pm"></span></summary>
 <div class="ans">You should use one for a multi-year, multi-country programme with
-a thousand stakeholders — they are built for that and we are not. For a single
+a thousand stakeholders — they’re built for that and we’re not. For a single
 system that needs to reach production this year, their engagement model costs
 more than the problem and moves slower than your business does. The people who
 sell it are also rarely the people who build it.</div></details>
 <details><summary>Why not build it in-house?<span aria-hidden="true" class="pm"></span></summary>
-<div class="ans">Often you should, and we will say so. Bring us in when your team
-has the domain knowledge but not the platform experience, or when they are
+<div class="ans">Often you should, and we’ll say so. Bring us in when your team
+has the domain knowledge but not the platform experience, or when they’re
 already fully committed to the systems that keep the business running. The
 handover phase exists precisely so that in-house becomes the answer at the end.</div></details>
 <details><summary>Why not just buy a vendor platform?<span aria-hidden="true" class="pm"></span></summary>
-<div class="ans">If a product genuinely covers your case, buy it — that is cheaper
-than anything we would build. The work we get called for is what remains:
+<div class="ans">If a product genuinely covers your case, buy it — that’s cheaper
+than anything we’d build. The work we get called for is what remains:
 connecting that product to systems it was never designed to meet, and producing
-the governance evidence the vendor does not.</div></details>
+the governance evidence the vendor doesn’t.</div></details>
 <details><summary>You have no published case studies.<span aria-hidden="true" class="pm"></span></summary>
-<div class="ans">Correct, and we will not invent them. Quenora is a founder-led
-firm in its early chapter. What we will do is arrange a direct conversation with
+<div class="ans">Correct, and we won’t invent them. Quenora is a founder-led
+firm in its early chapter. What we’ll do is arrange a direct conversation with
 a reference before you commit, and show you the actual architecture and
-evaluation approach in the first meeting rather than a capability deck.</div></details>
-<details><summary>What happens if it does not work?<span aria-hidden="true" class="pm"></span></summary>
+evaluation approach in the first meeting rather than a sales deck.</div></details>
+<details><summary>What happens if it doesn’t work?<span aria-hidden="true" class="pm"></span></summary>
 <div class="ans">Phase 05 exists to answer that in writing, measured against the
-number agreed in Phase 01. If it did not move we say so. You keep the code, the
-documentation and the evaluation harness regardless — there is no scenario where
+number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the
+documentation and the evaluation harness regardless — there’s no scenario where
 you end an engagement with nothing to show for it.</div></details>
+<div class="cta-inline rv">
+<p><b>Still holding an objection we haven’t answered?</b> Put it in the first message — a direct answer is more useful to both of us than a proposal.</p>
+<a href="#climax">Ask it directly</a>
+</div>
 </div>
 </div>
 </section>
@@ -1194,8 +1289,8 @@ you end an engagement with nothing to show for it.</div></details>
 <div class="chead rv">
 <div class="cnum">07</div>
 <div>
-<h2>Who you are actually <em>hiring</em>.</h2>
-<p class="lede">The previous chapter argues you should not default to a large
+<h2>Who you’re actually <em>hiring</em>.</h2>
+<p class="lede">The previous chapter argues you shouldn’t default to a large
              consultancy. That obliges us to say plainly who you get instead —
              including the size of us, which is the first thing a procurement team
              will ask.</p>
@@ -1204,21 +1299,20 @@ you end an engagement with nothing to show for it.</div></details>
 <div class="whogrid">
 <div class="whomain rv">
 <p>Quenora is founder-led. The person who scopes your engagement is the person
-who does the work and the person you call when it breaks — there is no account
-layer between the two, and nothing is subcontracted to someone you have not
-met.</p>
+who does the work and the person you call when it breaks — there’s no account
+layer between the two, and no one you haven’t met ever touches the work.</p>
 <p>Founded in 2025 by Balaji Durai. Before Quenora, he ran transformation work
 for multinational manufacturers, retail banking and life sciences groups — the
 kind of programme where several technologies have to be made to agree with each
 other before anything reaches a user at all.</p>
 <p>Those systems went on to be used by more than 100,000 people, and the
 measure that mattered was never the launch. It was whether the working day got
-quieter afterwards. That is still the test here, and it is why one of the nine
+quieter afterwards. That’s still the test here, and it’s why one of the nine
 principles behind the mark is Human rather than something about models.</p>
-<p>The firm is small and growing by capability rather than to a headcount plan.
-That is a real constraint and it shapes what we take on: single systems that
-need to reach production this year, not multi-year multi-country programmes.
-The chapter above says the same thing from the other direction.</p>
+<p>The firm is small, and grows by adding depth, not by hitting a headcount
+target. That’s a real constraint, and it shapes what we take on: single systems
+that need to reach production this year, not multi-year, multi-country
+programmes. The chapter above says the same thing from the other direction.</p>
 </div>
 <div class="whofacts rv" data-d="1">
 <div class="wfact"><span class="mono">Founded</span><b>2025</b></div>
@@ -1229,7 +1323,7 @@ The chapter above says the same thing from the other direction.</p>
 </div>
 </div>
 <p class="whonote">The sector experience and the figure above describe work done
-before Quenora was founded in 2025. They are not Quenora client results, and
+before Quenora was founded in 2025. They’re not Quenora client results, and
 nothing on this page claims otherwise.</p>
 </div>
 </section>
@@ -1248,26 +1342,30 @@ out late wastes your quarter and ours.</p>
 <p>Two to three weeks, agreed before we start. You keep the written position
 whether or not you engage us for anything after it.</p></div>
 <div><b>Phases 02–05 · Build</b><strong>Fixed scope</strong>
-<p>Priced against a written scope with an explicit list of what is excluded.
+<p>Priced against a written scope with an explicit list of what’s excluded.
 Changes are re-scoped in the open, not absorbed quietly into the timeline.</p></div>
 <div><b>Phase 06 · Handover</b><strong>Included</strong>
 <p>Never a separate line item. An engagement that ends without a working handover
-is not finished, so we do not charge you twice to finish it.</p></div>
+isn’t finished, so we don’t charge you twice to finish it.</p></div>
 </div>
 <div class="rv" style="margin-top:var(--sp6)">
 <p class="mono" style="color:var(--copper-lt);margin-bottom:var(--sp3)">What happens when you get in touch</p>
 <ol class="steps">
-<li><b>You write two paragraphs</b><span>What is not working, and what you have
+<li><b>You write two paragraphs</b><span>What’s not working, and what you’ve
 already tried. No brief required, no NDA needed to have the first conversation.</span></li>
 <li><b>We reply within one working day</b><span>Either with a time, or with an
-honest note that this is not our problem to solve and a pointer to someone
+honest note that this isn’t our problem to solve and a pointer to someone
 better placed.</span></li>
 <li><b>Forty-five minutes, no deck</b><span>Your systems, your constraint, our
-read on it. You will get a technical opinion in that call, not a follow-up
+read on it. You’ll get a technical opinion in that call, not a follow-up
 proposal.</span></li>
-<li><b>A written position</b><span>What we would build first, what it would cost,
-and what we would not build. Yours to take to your board, or to another firm.</span></li>
+<li><b>A written position</b><span>What we’d build first, what it would cost,
+and what we wouldn’t build. Yours to take to your board, or to another firm.</span></li>
 </ol>
+<div class="cta-inline rv">
+<p><b>That’s the whole process.</b> The next step is yours, and it costs one working day of ours.</p>
+<a href="#climax">Start a conversation</a>
+</div>
 </div>
 </div>
 </section>
@@ -1281,10 +1379,10 @@ and what we would not build. Yours to take to your board, or to another firm.</s
 <div class="cnum">09</div>
 <div>
 <h2>The principles behind <em>the mark</em>.</h2>
-<p class="lede">Nine circles on a single arc, each growing ninefold from the
-first to the last. Every circle carries a principle this firm was built on —
-written down before a line of the brand was drawn, and the standard we hold
-the work to.</p>
+<p class="lede">Nine circles on a single arc, each larger than the one before,
+growing step by step from the first to the last. Every circle carries a
+principle this firm was built on — written down before a line of the brand
+was drawn, and the standard we hold the work to.</p>
 </div>
 </div>
 <div class="nine">
@@ -1311,7 +1409,7 @@ the work to.</p>
 <li data-i="4"><span class="n">05</span><span aria-hidden="true" class="d" style="--r:9"></span><div><h3>Timeless</h3><p>The exact midpoint of the climb — built to last, not to trend.</p></div></li>
 <li data-i="5"><span class="n">06</span><span aria-hidden="true" class="d" style="--r:11.84"></span><div><h3>Enterprise</h3><p>Scale that survives real production traffic.</p></div></li>
 <li data-i="6"><span class="n">07</span><span aria-hidden="true" class="d" style="--r:15.59"></span><div><h3>Premium</h3><p>Judged by outcome, not by the size of the deck.</p></div></li>
-<li data-i="7"><span class="n">08</span><span aria-hidden="true" class="d" style="--r:20.52"></span><div><h3>Innovative</h3><p>The leap beyond what the trend alone would predict.</p></div></li>
+<li data-i="7"><span class="n">08</span><span aria-hidden="true" class="d" style="--r:20.52"></span><div><h3>Innovative</h3><p>New engineering, not a new coat of paint.</p></div></li>
 <li data-i="8"><span class="n">09</span><span aria-hidden="true" class="d" style="--r:27"></span><div><h3>Intelligent</h3><p>Where every prior principle arrives.</p></div></li>
 </ol>
 </div>
@@ -1322,7 +1420,7 @@ the work to.</p>
 <div class="wrap">
 <h2 class="rv">Build what keeps <em>working</em>.</h2>
 <p class="rv" data-d="1">One focused conversation about where intelligence can
-         remove friction, increase certainty or create capacity in your operations.
+         remove friction or risk and add confidence in your operations.
          No deck. No discovery invoice.</p>
 <form class="cform rv" data-d="2" id="cform" novalidate="">
 <div class="cfrow">
@@ -1340,14 +1438,16 @@ the work to.</p>
 <input autocomplete="organization" id="cfOrg" name="org" type="text"/>
 </div>
 <div class="cfield">
-<label for="cfMsg">What is stuck?</label>
-<textarea id="cfMsg" name="message" placeholder="The pilot that stalled, the system that will not join, the process nobody owns…" required="" rows="4"></textarea>
+<label for="cfMsg">What’s stuck?</label>
+<textarea id="cfMsg" name="message" placeholder="The pilot that stalled, the system that won’t join, the process nobody owns…" required="" rows="4"></textarea>
 </div>
 <div aria-hidden="true" class="hp"><label>Do not fill this
 <input autocomplete="off" name="company_url" tabindex="-1" type="text"/></label></div>
 <label class="cconsent"><input id="cfConsent" name="consent" required="" type="checkbox"/>
 <span>I agree that Quenora may store these details in order to reply to me.
-I can ask for them to be deleted at any time.</span></label>
+I can ask for them to be deleted at any time. What’s kept, for how long, and who
+else sees it is set out in the <a href="privacy.html" rel="noopener" target="_blank">privacy
+notice</a>.</span></label>
 <button class="bcta" id="cfSend" type="submit">Start a conversation
         <svg aria-hidden="true" fill="none" height="21" viewbox="0 0 16 16" width="21">
 <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path></svg></button>
@@ -1369,7 +1469,7 @@ I can ask for them to be deleted at any time.</span></label>
 <circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
 <circle cx="151.71" cy="36" r="27"></circle>
 </svg>quenora</span>
-<span class="desc">Technology Consulting</span>
+<span class="desc">Consulting</span>
         </div>
 <p style="max-width:35ch;color:var(--t2);font-size:.96rem">
           Enterprise AI, engineered to operate. Built into what you already run,
@@ -1377,20 +1477,24 @@ I can ask for them to be deleted at any time.</span></label>
 <p class="mono" style="color:var(--t3)">Working internationally</p>
 </div>
 <div><h3>Site</h3><nav aria-label="Footer">
-<a href="index.html">Home</a><a href="services.html">Capabilities</a>
-<a href="approach.html">Approach</a><a href="work.html">Work</a>
-<a href="products.html">Products</a><a href="contact.html">Contact</a>
+<a href="index.html">Home</a><a href="approach.html">Approach</a>
+<a href="services.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="work.html">Work</a>
+<a href="#climax">Contact</a>
 </nav></div>
 <div><h3>Contact</h3><nav aria-label="Contact">
-<a href="mailto:hello@quenora.ai"><span class="ph">hello@quenora.ai</span></a>
-<a href="#"><span class="ph">[LinkedIn]</span></a>
-<a href="#"><span class="ph">[Impressum]</span></a>
-<a href="#"><span class="ph">[Privacy notice]</span></a>
+<a href="mailto:info@quenora.ai">info@quenora.ai</a>
+<a href="impressum.html">Legal notice · Impressum</a>
+<a href="privacy.html">Privacy notice</a>
+</nav></div>
+<div><h3>Follow</h3><nav aria-label="Social">
+<a rel="noopener me" target="_blank" href="https://www.linkedin.com/company/quenora">LinkedIn</a>
+<a rel="noopener me" target="_blank" href="https://x.com/quenora_ai">X</a>
+<a rel="noopener me" target="_blank" href="https://www.instagram.com/quenora.ai/">Instagram</a>
 </nav></div>
 </div>
 <div class="fbot">
-<span>© 2026 Quenora Technology Consulting</span>
-<span>Reg / VAT <span class="ph">[PLACEHOLDER]</span></span>
+<span>© 2026 Quenora Consulting</span>
+<span>Heilbronn, Germany · <a href="impressum.html">Legal notice</a> · <a href="privacy.html">Privacy</a></span>
 </div>
 </div>
 </footer>
@@ -2837,6 +2941,22 @@ I can ask for them to be deleted at any time.</span></label>
     }, { passive: true });
   }
 
+  /* Reduced motion drops the parallax and the scrubbing, not the state. The
+     nav's background and the progress bar are legibility features — without
+     .stuck the header sits transparent over the page it is on — so they keep
+     tracking scroll here, with a passive listener instead of a rAF loop. */
+  if (reduced) {
+    var flat = function () {
+      var y = w.scrollY || d.documentElement.scrollTop;
+      var docH = d.documentElement.scrollHeight - vh;
+      if (prog) prog.style.width = clamp(y / docH, 0, 1) * 100 + '%';
+      if (nav) nav.classList.toggle('stuck', y > 20);
+    };
+    w.addEventListener('scroll', flat, { passive: true });
+    w.addEventListener('resize', flat);
+    flat();
+  }
+
   if (!reduced) (function frame() {
     var y = w.scrollY || d.documentElement.scrollTop;
     var docH = d.documentElement.scrollHeight - vh;
@@ -2909,6 +3029,26 @@ I can ask for them to be deleted at any time.</span></label>
 
 <script>
 (function(){
+  /* mobile navigation — the homepage had none below 880px */
+  (function(){
+    var bg=document.getElementById('burger'), nl=document.getElementById('navLinks');
+    if(!bg||!nl)return;
+    bg.addEventListener('click',function(){
+      var open=nl.classList.toggle('open');
+      bg.classList.toggle('open',open);
+      bg.setAttribute('aria-expanded',open?'true':'false');
+      /* :has() carries this in modern browsers; the class is the fallback */
+      document.getElementById('nav').classList.toggle('navopen',open);
+    });
+    /* jumping to a chapter should close the menu behind you */
+    nl.addEventListener('click',function(e){
+      if(e.target.tagName==='A'&&nl.classList.contains('open')){
+        nl.classList.remove('open'); bg.classList.remove('open');
+        bg.setAttribute('aria-expanded','false');
+      }
+    });
+  })();
+
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
   if(!b||!m)return;
   b.addEventListener('click',function(e){
@@ -2955,7 +3095,7 @@ I can ask for them to be deleted at any time.</span></label>
 (function(){
   var form=document.getElementById('cform'); if(!form) return;
   var note=document.getElementById('cfNote'), send=document.getElementById('cfSend');
-  var MAIL='hello@quenora.ai';
+  var MAIL='info@quenora.ai';
 
   function say(t,cls){ note.className='cnote'+(cls?' '+cls:''); note.textContent=t; }
   function mailFallback(v){
@@ -3037,15 +3177,15 @@ I can ask for them to be deleted at any time.</span></label>
     [['automation','automate','workflow','process','unattended','rpa'],
      "Automation is capability 02 and one of the three core ones. We automate the processes a business repeats — approvals, handoffs, reconciliations, the reporting someone does on a Tuesday. The part that matters is the exceptions: an automation is only trustworthy if it knows which cases it should not decide, and drawing that line is most of the work."],
     [['what do you','services','offer','do you do','capabilit'],
-     "Nine capabilities. Three are core — platform and deployment engineering, process and workflow automation, and AI integration — because almost every engagement runs through them. The other six join when the work calls for them. None of it is subcontracted to someone you have not met."],
+     "Nine capabilities. Three are core — platform and deployment engineering, process and workflow automation, and AI integration — because everything runs through them. The other six step in only when the work needs them. Nothing is handed to a subcontractor you’ve never met."],
     [['who are you','about','founder','balaji','team','how big','size'],
      "Quenora is founder-led, founded in 2025 by Balaji Durai. Before Quenora he ran transformation work for multinational manufacturers, retail banking and life sciences groups; those systems went on to be used by more than 100,000 people. We work from Heilbronn, internationally, in German, French and English."],
     [['different','why you','compare','competitor','large consult','big four'],
-     "Use a large consultancy for a multi-year, multi-country programme with a thousand stakeholders — they are built for that and we are not. For a single system that needs to reach production this year, the person who scopes your engagement is the person who does the work and the person you call when it breaks."],
+     "Use a large consultancy for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, the person who scopes your engagement is the person who does the work and the person you call when it breaks."],
     [['long','time','timeline','how fast','duration','weeks'],
      "Six phases, from framing to handover, and each carries an exit condition written into the statement of work. Most engagements run twelve to fourteen weeks end to end, with a working pilot well before that. The engagement is designed to end."],
     [['cost','price','pricing','budget','how much','rate'],
-     "Scoped to outcomes rather than day rates. Chapter 08 on the homepage states how it is priced rather than making you sit through three meetings to find out. A briefing gives you a real number, not a range designed to get a second meeting."],
+     "Scoped to outcomes rather than day rates. Chapter 08 on the homepage states how it’s priced rather than making you sit through three meetings to find out. A briefing gives you a real number, not a range designed to get a second meeting."],
     [['work','case','client','example','project','reference'],
      "Three patterns come up most: invoice processing across unintegrated ERP instances, support triage with knowledge retrieval, and legacy modernisation with predictive scheduling. They are described by shape rather than by client name, and the figures on the Work page are illustrative of the pattern rather than audited results."],
     [['product','framework','accelerator','toolkit','blueprint'],
@@ -3057,7 +3197,7 @@ I can ask for them to be deleted at any time.</span></label>
     [['agent','copilot','chatbot','llm','model'],
      "Purpose-built agents wired into the systems that actually hold the work — ERP, CRM, service desk — rather than a chatbot bolted onto a homepage. The hard part is almost never the model."],
     [['contact','talk','call','briefing','email','reach'],
-     "Start a conversation from the button in the header, or email hello@quenora.ai. A first call is a briefing, not a pitch."],
+     "Start a conversation from the button in the header, or email info@quenora.ai. A first call is a briefing, not a pitch."],
     [['language','german','french','english','deutsch'],
      "German, French and English."],
     [['where','located','based','heilbronn','germany','office'],
@@ -3075,7 +3215,7 @@ I can ask for them to be deleted at any time.</span></label>
       }
       if(m) break;
     }
-    bot(m || "That one is worth a real conversation rather than a canned line — email hello@quenora.ai and you will get specifics for your systems. In the meantime the nine chapters on this page cover the approach, the capabilities and the pricing.");
+    bot(m || "That one is worth a real conversation rather than a canned line — email info@quenora.ai and you’ll get specifics for your systems. In the meantime the nine chapters on this page cover the approach, the capabilities and the pricing.");
   }
 
   function toggle(){

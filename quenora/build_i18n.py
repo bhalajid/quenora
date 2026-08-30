@@ -26,7 +26,24 @@ from bs4 import BeautifulSoup, Comment, NavigableString
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PAGES = ["index.html", "services.html", "products.html",
          "approach.html", "work.html", "contact.html"]
+# Pages that exist in English only. Links to these must climb out of the
+# language directory instead of resolving to a /de/... file that is not there.
+EN_ONLY_PAGES = {"impressum.html", "privacy.html", "engineering.html"}
+# Pages kept in the repo but deliberately unlinked and not indexed. They are
+# still generated, so the localised copies stay in step, but they are left out
+# of the sitemap and carry a noindex meta.
+UNLISTED_PAGES = {"products.html"}
 LANGS = ["de", "fr", "es", "it"]
+# Languages that are still built and kept in the repo, but not offered to
+# visitors: absent from the switcher, from the hreflang set and from the
+# sitemap, and served noindex. The firm states it works in German, French and
+# English (the About facts list), so advertising Spanish and Italian editions
+# claimed language coverage that does not exist. They are built rather than
+# deleted so the URLs and the translated string files survive until the
+# expansion, at which point removing a code from this set republishes them.
+UNLISTED_LANGS = {"es", "it"}
+# The languages actually offered. Everything visitor-facing iterates this.
+LISTED_LANGS = [l for l in LANGS if l not in UNLISTED_LANGS]
 LANG_NAMES = {"en": "English", "de": "Deutsch", "fr": "Français",
               "es": "Español", "it": "Italiano"}
 DOMAIN = "https://quenora.ai"
@@ -34,7 +51,7 @@ SKIP_TAGS = {"script", "style"}
 
 # strings that must never be translated
 DNT = re.compile(
-    r"^(quenora|quenora\.ai|hello@quenora\.ai|Quenora Technology Consulting|"
+    r"^(quenora|quenora\.ai|hello@quenora\.ai|Quenora Consulting|"
     r"GDPR|EU AI Act|IaC|MLOps|ERP|CRM|API|BI & reporting|RAG systems|"
     r"\[[^\]]+\]|Main|Footer|Contact|Legal|Site|Quenora home|Reg / VAT|AI|Core|Continuous|Choose language|Sprache w\u00e4hlen|Choisir la langue|Elegir idioma|Scegli la lingua|Deutsch|English|Français|Español|Italiano|EN|DE|FR|ES|IT|AB/\d+|Phase \d+|\d+[\d\s:.,%–—/-]*|00:00|html|uenora|"
     r"[©·→←↓↑✓–—]+)$", re.I)
@@ -109,7 +126,7 @@ SWITCH_LABEL = {"en": "Choose language", "de": "Sprache wählen",
 def switcher(lang, page):
     """Header language menu. Current language first, marked."""
     items = []
-    for code in ["en"] + LANGS:
+    for code in ["en"] + LISTED_LANGS:
         if code == "en":
             href = page if lang == "en" else "../" + page
         else:
@@ -135,17 +152,17 @@ LANG_CSS = """
 .langsel{position:relative;margin-left:14px}
 .langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
   padding:0 12px;background:transparent;border:1px solid var(--line);
-  border-radius:3px;color:var(--grey);font:inherit;font-size:12px;
+  border-radius:3px;color:var(--grey, var(--t2));font:inherit;font-size:12px;
   letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
-.langsel>button:hover{border-color:var(--copper);color:var(--white)}
+.langsel>button:hover{border-color:var(--copper);color:var(--white, var(--t1))}
 .langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
-  margin:0;padding:6px;list-style:none;background:var(--ink-2);
+  margin:0;padding:6px;list-style:none;background:var(--ink-2, var(--sf2));
   border:1px solid var(--line);border-radius:4px;display:none;z-index:120;
   box-shadow:0 18px 44px rgba(0,0,0,.5)}
 .langmenu.open{display:block}
 .langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
-  color:var(--grey);transition:background .2s,color .2s}
-.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white)}
+  color:var(--grey, var(--t2));transition:background .2s,color .2s}
+.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white, var(--t1))}
 .langmenu a[aria-current=true]{color:var(--copper-lt)}
 @media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
   .langsel>button span{display:none}}
@@ -184,6 +201,9 @@ def localise_paths(soup, lang):
             el["href"] = "../" + el["href"]
     for a in soup.find_all("a", href=True):
         h = a["href"]
+        if h in EN_ONLY_PAGES:
+            a["href"] = "../" + h          # legal pages are English-only
+            continue
         if h.endswith(".html") and "/" not in h:
             continue                       # already relative, stays in-language
         if h.startswith("assets/"):
@@ -207,7 +227,7 @@ def head_links(soup, lang, page):
     c["rel"] = "canonical"
     c["href"] = canon
     head.append(c)
-    for code in ["en"] + LANGS:
+    for code in ["en"] + LISTED_LANGS:
         b = DOMAIN + ("/" if code == "en" else "/" + code + "/")
         alt = soup.new_tag("link")
         alt["rel"] = "alternate"
@@ -247,6 +267,21 @@ def build_lang(lang):
         translate_soup(soup, tr, stats)
         localise_paths(soup, lang)
         head_links(soup, lang, page)
+
+        # An unlisted language is unlinked, so it must also be uncrawlable.
+        # Leaving it out of the sitemap is not enough on its own — a URL that
+        # was indexed once stays indexed until the page says otherwise. Note
+        # that products.html gets its noindex from the English source and so
+        # inherits it here; a language has no English source to inherit from,
+        # which is why this is set explicitly. "follow" rather than "none",
+        # matching products.html: the outbound links stay worth crawling.
+        if lang in UNLISTED_LANGS:
+            r = soup.find("meta", attrs={"name": "robots"})
+            if not r:
+                r = soup.new_tag("meta")
+                r["name"] = "robots"
+                soup.head.append(r)
+            r["content"] = "noindex, follow"
 
         # language switcher into the header, before the nav links
         st = soup.find("style")
@@ -292,17 +327,25 @@ def build_en_switcher():
 
 def sitemap():
     urls = []
-    for lang in ["en"] + LANGS:
+    for lang in ["en"] + LISTED_LANGS:
         base = DOMAIN + ("/" if lang == "en" else "/" + lang + "/")
         for page in PAGES:
+            if page in UNLISTED_PAGES:
+                continue
             slug = "" if page == "index.html" else page
             alts = "".join(
                 '\n    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>'
                 % (c, DOMAIN + ("/" if c == "en" else "/" + c + "/") + slug)
-                for c in ["en"] + LANGS)
+                for c in ["en"] + LISTED_LANGS)
             urls.append(
                 '  <url>\n    <loc>%s%s</loc>%s\n    <priority>%s</priority>\n  </url>'
                 % (base, slug, alts, "1.0" if page == "index.html" else "0.8"))
+    # English-only pages: no hreflang alternates, low priority, but they must be
+    # indexable — an Impressum that search engines cannot find is not published.
+    for page in sorted(EN_ONLY_PAGES):
+        urls.append(
+            '  <url>\n    <loc>%s/%s</loc>\n    <priority>0.3</priority>\n  </url>'
+            % (DOMAIN, page))
     open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'

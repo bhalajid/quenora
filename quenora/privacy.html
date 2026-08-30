@@ -4,9 +4,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="noindex, follow" name="robots"/>
-<title>Quenora Consulting — Products &amp; Frameworks</title>
-<meta content="AI accelerators, agent frameworks and governance toolkits from Quenora Consulting — deployed into your environment and owned by your team." name="description"/>
+<title>Quenora Consulting — Privacy notice</title>
+<meta content="What quenora.ai collects, why, for how long, who it reaches, and the rights you hold under the GDPR." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
@@ -14,12 +13,13 @@
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='12' cy='161.71' r='3' fill='%23C97A3C'/%3E%3Ccircle cx='21.64' cy='161.34' r='3.95' fill='%23C97A3C'/%3E%3Ccircle cx='33.39' cy='159.88' r='5.2' fill='%23C97A3C'/%3E%3Ccircle cx='47.73' cy='156.52' r='6.84' fill='%23C97A3C'/%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
 <meta content="Quenora Consulting" property="og:site_name"/>
-<meta content="Quenora Consulting — Products &amp; Frameworks" property="og:title"/>
-<meta content="AI accelerators, agent frameworks and governance toolkits from Quenora Consulting — deployed into your environment and owned by your team." property="og:description"/>
-<meta content="https://quenora.ai/products.html" property="og:url"/>
+<meta content="Quenora Consulting — Privacy notice" property="og:title"/>
+<meta content="What quenora.ai collects, why, for how long, who it reaches, and the rights you hold under the GDPR." property="og:description"/>
+<meta content="https://quenora.ai/privacy.html" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Quenora Consulting — Products &amp; Frameworks" name="twitter:title"/>
-<meta content="AI accelerators, agent frameworks and governance toolkits from Quenora Consulting — deployed into your environment and owned by your team." name="twitter:description"/>
+<meta content="Quenora Consulting — Privacy notice" name="twitter:title"/>
+<meta content="What quenora.ai collects, why, for how long, who it reaches, and the rights you hold under the GDPR." name="twitter:description"/>
+<meta content="en_GB" property="og:locale"/><link href="https://quenora.ai/privacy.html" rel="canonical"/><link href="https://quenora.ai/privacy.html" hreflang="en" rel="alternate"/><link href="https://quenora.ai/privacy.html" hreflang="x-default" rel="alternate"/>
 <style>
 :root{
   /* Grounds are deliberately NEUTRAL (no blue bias). An earlier palette had
@@ -185,6 +185,44 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 .foot-line{margin-top:52px;padding-top:26px;border-top:1px solid var(--line-2);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--grey-d)}
 
+/* ---------- AI assistant ---------- */
+.ai-fab{position:fixed;bottom:28px;right:28px;z-index:400;width:58px;height:58px;border-radius:50%;
+  background:var(--copper);display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 12px 36px -8px var(--copper-glow);border:none;transition:transform .25s ease}
+.ai-fab:hover{transform:scale(1.08) rotate(90deg)}
+.ai-fab svg{width:24px;height:24px}
+.ai-fab::before{content:"";position:absolute;inset:-6px;border-radius:50%;
+  border:1px solid var(--copper);opacity:.5;animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.35);opacity:0}}
+.ai-panel{position:fixed;bottom:100px;right:28px;z-index:400;width:356px;max-width:calc(100vw - 40px);
+  background:rgba(22,22,26,.96);backdrop-filter:blur(20px);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;box-shadow:0 30px 70px -12px rgba(0,0,0,.75);
+  opacity:0;transform:translateY(16px) scale(.97);pointer-events:none;transition:.28s cubic-bezier(.16,1,.3,1)}
+.ai-panel.open{opacity:1;transform:none;pointer-events:auto}
+.ai-head{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:11px}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--copper);flex:none;
+  box-shadow:0 0 10px var(--copper);animation:breathe 2s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:1}50%{opacity:.35}}
+.ai-head b{font-size:13.5px;font-weight:600;display:block}
+.ai-head span{font-size:10.5px;color:var(--grey-d)}
+.ai-body{padding:17px 19px;max-height:290px;overflow-y:auto;display:flex;flex-direction:column;gap:11px}
+.ai-body::-webkit-scrollbar{width:4px}
+.ai-body::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}
+.ai-msg{font-size:13.5px;line-height:1.62;max-width:88%}
+.ai-msg.bot{color:var(--white);background:rgba(255,255,255,.05);padding:11px 14px;
+  border-radius:12px 12px 12px 3px;align-self:flex-start}
+.ai-msg.user{color:var(--ink);background:var(--copper);padding:11px 14px;
+  border-radius:12px 12px 3px 12px;align-self:flex-end;font-weight:450}
+.ai-suggest{display:flex;flex-wrap:wrap;gap:7px;padding:0 19px 15px}
+.chip{font-size:11.5px;padding:7px 13px;border-radius:20px;border:1px solid var(--line);
+  color:var(--grey);cursor:pointer;transition:.2s}
+.chip:hover{border-color:var(--copper);color:var(--white);background:var(--copper-dim)}
+.ai-foot{padding:12px 19px;border-top:1px solid var(--line);font-size:10.5px;color:var(--grey-d);text-align:center}
+.typing{display:inline-flex;gap:4px;padding:11px 14px}
+.typing i{width:5px;height:5px;border-radius:50%;background:var(--grey);animation:blink 1.3s infinite}
+.typing i:nth-child(2){animation-delay:.18s}
+.typing i:nth-child(3){animation-delay:.36s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
 
 
 @media(max-width:700px){
@@ -280,36 +318,6 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 .qr-mini p{font-size:12.5px;color:var(--grey-d);font-weight:300;line-height:1.65}
 .form-note{margin-top:16px;font-size:12.5px;color:var(--grey-d)}
 
-.prod{background:linear-gradient(150deg,var(--surface),var(--ink-2));border:1px solid var(--line);
-  border-radius:var(--radius);padding:38px;margin-bottom:22px;position:relative;overflow:hidden;
-  transition:border-color .3s ease}
-.prod:hover{border-color:rgba(201,122,60,.28)}
-.prod::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--copper),transparent);opacity:.45}
-.prod-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;
-  flex-wrap:wrap;margin-bottom:16px}
-.prod-name{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--copper);margin-bottom:10px}
-.prod h3{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3}
-.badge{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
-  padding:7px 13px;border-radius:20px;white-space:nowrap;flex:none;border:1px solid}
-.badge.live{color:#6EE7A8;border-color:rgba(110,231,168,.32);background:rgba(110,231,168,.07)}
-.badge.dev{color:var(--copper-lt);border-color:rgba(233,160,99,.32);background:rgba(233,160,99,.07)}
-.badge.plan{color:var(--grey);border-color:var(--line);background:rgba(255,255,255,.02)}
-.prod p{color:var(--grey);font-size:14.5px;font-weight:300;line-height:1.78;max-width:72ch}
-.prod .feat{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 30px;margin-top:24px;
-  padding-top:22px;border-top:1px solid var(--line-2)}
-@media(max-width:700px){.prod .feat{grid-template-columns:1fr}}
-.prod .feat div{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--grey);
-  font-weight:300}
-.prod .feat i{color:var(--copper);font-style:normal;flex:none;font-size:12px;padding-top:2px}
-.prod .meta{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
-.prod .meta span{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
-  padding:7px 13px;border:1px solid var(--line);border-radius:20px;color:var(--grey-d)}
-.legend{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:44px;padding:22px 26px;
-  background:rgba(255,255,255,.02);border:1px solid var(--line-2);border-radius:var(--radius)}
-.legend div{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--grey);font-weight:300}
-
 .langsel{position:relative;margin-left:14px}
 .langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
   padding:0 12px;background:transparent;border:1px solid var(--line);
@@ -327,8 +335,33 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 .langmenu a[aria-current=true]{color:var(--copper-lt)}
 @media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
   .langsel>button span{display:none}}
+
+/* ---------- legal / document pages ---------- */
+.legal{max-width:74ch;padding-bottom:20px}
+.legal h2{font-size:clamp(19px,2.4vw,25px);font-weight:600;letter-spacing:-.015em;
+  margin:56px 0 14px;padding-top:26px;border-top:1px solid var(--line-2)}
+.legal h2:first-of-type{margin-top:0;padding-top:0;border-top:0}
+.legal h3{font-size:15.5px;font-weight:600;margin:28px 0 8px;color:var(--white)}
+.legal p{color:var(--grey);font-size:15px;font-weight:300;margin-bottom:14px}
+.legal ul{margin:0 0 16px 18px}
+.legal li{color:var(--grey);font-size:15px;font-weight:300;margin-bottom:7px}
+.legal a{color:var(--copper);border-bottom:1px solid var(--copper-dim)}
+.legal a:hover{border-bottom-color:var(--copper)}
+.legal strong{color:var(--white);font-weight:550}
+.legal .addr{font-family:var(--mono);font-size:13.5px;line-height:2;color:var(--white);
+  border-left:2px solid var(--copper);padding:14px 0 14px 20px;margin:0 0 20px}
+.legal .updated{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grey-d);margin-top:56px;padding-top:22px;
+  border-top:1px solid var(--line-2)}
+.legal .note{background:var(--surface);border:1px solid var(--line);border-left:2px solid var(--copper);
+  border-radius:var(--radius);padding:20px 24px;margin:0 0 26px}
+.legal .note p:last-child{margin-bottom:0}
+.legal dl{margin:0 0 18px}
+.legal dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--grey-d);margin-top:16px}
+.legal dd{margin:3px 0 0;color:var(--white);font-size:15px;font-weight:400}
 </style>
-<meta content="en_GB" property="og:locale"/><link href="https://quenora.ai/products.html" rel="canonical"/><link href="https://quenora.ai/products.html" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/products.html" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/products.html" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/products.html" hreflang="x-default" rel="alternate"/></head>
+</head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0">
 <symbol id="mark9" viewbox="0 0 187.71 174.29">
@@ -352,7 +385,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b><em>q</em>uenora</b>
 </a>
-<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="services.html">Capabilities</a><a href="engineering.html">Engineering</a><a class="on" href="products.html">Products</a><a href="approach.html">Approach</a><a href="work.html">Work</a><a href="contact.html">Contact</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="products.html" hreflang="en" lang="en">English</a></li><li><a href="de/products.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/products.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
+<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="services.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="products.html">Products</a><a href="approach.html">Approach</a><a href="work.html">Work</a><a href="contact.html">Contact</a></div>
 <a class="btn btn-primary navcta" href="contact.html">Start a conversation</a>
 <button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <i></i><i></i><i></i>
@@ -361,120 +394,101 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 </div>
 </header>
 <main id="main"><section class="phero">
-<canvas aria-hidden="true" id="pCanvas"></canvas>
 <div class="wrap">
-<div class="kicker">Products &amp; frameworks</div>
-<h1 class="scramble">What we've built, so you don't rebuild it.</h1>
-<p>Consulting that starts from zero every time is expensive for you and slow for us. These are the frameworks and accelerators we're productising out of repeated engagement work — each one designed to be deployed into your environment and owned by your team.</p>
+<div class="kicker">Data protection · GDPR Articles 13 and 14</div>
+<h1>Privacy notice</h1>
+<p>What this site collects, why, for how long, who else sees it, and what you can require of us. We sell governance work, so this page is written to the standard we would apply to a client system.</p>
 </div>
 </section>
 <section class="section-pad">
 <div class="wrap">
-<div class="legend rv">
-<div><span class="badge live">Available now</span> Ready to engage on today</div>
-<div><span class="badge dev">In development</span> Being built out of live engagement work</div>
-<div><span class="badge plan">Planned</span> On the roadmap, not yet started</div>
+<div class="legal">
+
+<h2>Controller</h2>
+<p>The controller for the processing described here, within the meaning of Article 4 (7) of the General Data Protection Regulation (GDPR), is:</p>
+<div class="addr">
+Balaji Durai<br/>
+Quenora Consulting<br/>
+<!-- Kept in sync with impressum.html. Same two tokens, same release gate. -->
+{{TODO:STREET_AND_NUMBER}}<br/>
+{{TODO:POSTCODE}} Heilbronn<br/>
+Baden-Württemberg, Germany<br/>
+<a href="mailto:info@quenora.ai">info@quenora.ai</a>
 </div>
-<div class="prod rv">
-<div class="prod-top">
-<div>
-<div class="prod-name">AB/01</div>
-<h3>Automation Accelerator</h3>
+<p>We have not appointed a data protection officer, because we are not required to under Article 37 GDPR or § 38 BDSG. Data protection questions go to the address above and are answered by the controller directly.</p>
+
+<h2>What this site does not do</h2>
+<div class="note">
+<p>This site sets <strong>no cookies</strong>. It runs <strong>no analytics</strong>, no tag manager, no advertising or social media pixels, and no session or local storage. There is no consent banner because there is nothing to consent to.</p>
+<p>You will not be tracked across sites, profiled, or subjected to automated decision-making of any kind, including profiling within the meaning of Article 22 GDPR.</p>
 </div>
-<div class="badge dev">In development</div>
+
+<h2>Server log data</h2>
+<p>The site is hosted by Vercel. Each time a page is requested, the hosting infrastructure records technical data that your browser transmits automatically:</p>
+<ul>
+<li>the IP address of the requesting device</li>
+<li>the date and time of the request</li>
+<li>the URL requested and the HTTP status returned</li>
+<li>the referring URL, where your browser sends one</li>
+<li>the browser and operating system reported in the user-agent string</li>
+</ul>
+<p><strong>Purpose and legal basis.</strong> This data is processed to deliver the site, to keep it stable and secure, and to identify and defend against abuse. The legal basis is Article 6 (1) (f) GDPR — our legitimate interest in operating a functioning and secure website. The data is not used to identify individual visitors and is not combined with any other source.</p>
+<p><strong>Retention.</strong> Log data is retained by the hosting provider for a short operational period and then deleted, other than where a specific record is needed to investigate a concrete security incident.</p>
+
+<h2>Web fonts</h2>
+<p>Typefaces on this site are loaded from Google Fonts at <span class="mono">fonts.googleapis.com</span> and <span class="mono">fonts.gstatic.com</span>. When a page loads, your browser makes a request to those servers, and <strong>your IP address is transmitted to Google</strong> in the process. The provider for users in the European Economic Area is Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland.</p>
+<p><strong>Purpose and legal basis.</strong> Consistent typography across devices. The legal basis is Article 6 (1) (f) GDPR. Google states that font requests are kept separate from authenticated Google accounts and that no cookies are set by the font delivery domains.</p>
+<p><strong>What we intend to change.</strong> Self-hosting these fonts would remove the transfer entirely. It is on our list. Until it is done, this paragraph tells you what actually happens rather than what we would prefer to be true. Google's own privacy information is at <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">policies.google.com/privacy</a>.</p>
+
+<h2>Contact form and email</h2>
+<p>The form on the <a href="contact.html">contact page</a> is not yet connected to a server. When you submit it, the details you typed are handed to the email client on your own device as a pre-filled message. <strong>Nothing reaches us until you send that email yourself</strong>, and no copy of the form is stored on this site or by the hosting provider.</p>
+<p>Once you do send it — or if you email us directly — we process the data in your message: your name, your email address, your organisation and role where you give them, and whatever you tell us about the problem.</p>
+<p><strong>Purpose and legal basis.</strong> Answering your enquiry and, where it leads somewhere, taking steps at your request prior to entering into a contract. The legal basis is Article 6 (1) (b) GDPR for enquiries with a contractual purpose, and Article 6 (1) (f) GDPR for general correspondence.</p>
+<p><strong>Retention.</strong> Correspondence is kept for as long as it is needed to deal with your enquiry and for any subsequent engagement, then deleted — subject to the retention periods that German commercial and tax law impose on business correspondence, which run to six or ten years depending on the document.</p>
+<p>Providing this data is neither required by law nor by contract. You are free to give us only what you want to; without a way to reply, however, we cannot answer.</p>
+
+<h2>Recipients</h2>
+<p>We do not sell personal data and we do not share it for advertising. Data reaches third parties only where they operate part of this site on our behalf:</p>
+<dl>
+<dt>Hosting</dt><dd>Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA — serves the site and processes server log data.</dd>
+<dt>Web fonts</dt><dd>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland — receives your IP address when fonts load.</dd>
+<dt>Email</dt><dd>The provider handling the <span class="mono">quenora.ai</span> mailbox, which processes the messages you send us.</dd>
+</dl>
+<p>Where these providers act as processors under Article 28 GDPR, a data processing agreement is in place.</p>
+
+<h2>Transfers outside the EU</h2>
+<p>Vercel Inc. and Google are US-headquartered. Where personal data is transferred to the United States, the transfer is covered by the European Commission's adequacy decision for the EU–US Data Privacy Framework where the recipient is certified under it, and otherwise by the Commission's Standard Contractual Clauses under Article 46 (2) (c) GDPR. You can request a copy of the safeguards we rely on at the address above.</p>
+
+<h2>Data security</h2>
+<p>The site is served over HTTPS only, with HTTP Strict Transport Security, a Content Security Policy that restricts which origins may load resources, and the <span class="mono">X-Content-Type-Options</span>, <span class="mono">X-Frame-Options</span> and <span class="mono">Referrer-Policy</span> headers set. Client correspondence is held in access-controlled accounts.</p>
+
+<h2>Your rights</h2>
+<p>Under the GDPR you may require us to:</p>
+<ul>
+<li><strong>Article 15</strong> — confirm whether we process data about you, and give you a copy of it</li>
+<li><strong>Article 16</strong> — correct data that is inaccurate or incomplete</li>
+<li><strong>Article 17</strong> — erase your data, where none of the grounds for keeping it apply</li>
+<li><strong>Article 18</strong> — restrict processing while a dispute about accuracy or lawfulness is resolved</li>
+<li><strong>Article 20</strong> — provide data you gave us in a structured, machine-readable form, or transmit it to another controller</li>
+<li><strong>Article 21</strong> — <strong>object</strong> to processing based on legitimate interest, on grounds relating to your particular situation. We then stop unless we can show compelling legitimate grounds that override your interests.</li>
+</ul>
+<p>Where processing rests on consent, you may withdraw it at any time with effect for the future, without affecting the lawfulness of what was done before.</p>
+<p>Write to <a href="mailto:info@quenora.ai">info@quenora.ai</a> to exercise any of these. We answer within one month, as Article 12 (3) requires.</p>
+
+<h2>Complaints</h2>
+<p>You have the right under Article 77 GDPR to lodge a complaint with a supervisory authority, in the Member State of your residence, place of work or the alleged infringement. The authority competent for us is:</p>
+<div class="addr">
+Der Landesbeauftragte für den Datenschutz und die<br/>
+Informationsfreiheit Baden-Württemberg<br/>
+Lautenschlagerstraße 20<br/>
+70173 Stuttgart, Germany
 </div>
-<p>A pre-built library of the automation patterns that this work returns to — document intake, ticket classification, system reconciliation, approval routing. Rather than rebuilding these from scratch each time, an engagement starts from a working pattern and adapts it to your systems. This is the productised form of the demo on our homepage.</p>
-<div class="feat"><div><i>●</i><span>Pre-built connectors for common ERP and CRM systems</span></div><div><i>●</i><span>Human-in-the-loop approval gates as standard</span></div><div><i>●</i><span>Full audit logging on every automated action</span></div><div><i>●</i><span>Deployed into your infrastructure, not ours</span></div></div>
-<div class="meta"><span>Reduces build time</span><span>Client-owned</span><span>On-premise or cloud</span></div>
-</div>
-<div class="prod rv">
-<div class="prod-top">
-<div>
-<div class="prod-name">AB/02</div>
-<h3>Enterprise Agent Framework</h3>
-</div>
-<div class="badge dev">In development</div>
-</div>
-<p>An opinionated framework for building AI agents that behave predictably inside an enterprise — with defined scope boundaries, tool permissions, escalation paths to humans, and complete traceability of what the agent did and why. Most agent failures in production are governance failures rather than model failures, and this is built around that observation.</p>
-<div class="feat"><div><i>●</i><span>Scoped tool access with per-action permissions</span></div><div><i>●</i><span>Automatic escalation when confidence drops</span></div><div><i>●</i><span>Full decision trace for every agent action</span></div><div><i>●</i><span>Model-agnostic — swap providers without a rewrite</span></div></div>
-<div class="meta"><span>Model-agnostic</span><span>Audit-ready</span><span>EU AI Act aligned</span></div>
-</div>
-<div class="prod rv">
-<div class="prod-top">
-<div>
-<div class="prod-name">AB/03</div>
-<h3>AI Readiness Assessment</h3>
-</div>
-<div class="badge live">Available now</div>
-</div>
-<p>A structured two-week diagnostic that produces an honest map of where your organisation actually stands — data maturity, platform gaps, governance posture, and a prioritised list of what to fix before any model gets built. Delivered as a written assessment you own outright, with no obligation to engage us for the work that follows.</p>
-<div class="feat"><div><i>●</i><span>Two-week fixed scope and fixed price</span></div><div><i>●</i><span>Written assessment you keep regardless of next steps</span></div><div><i>●</i><span>Prioritised remediation roadmap</span></div><div><i>●</i><span>Includes governance and compliance gap analysis</span></div></div>
-<div class="meta"><span>Fixed price</span><span>2 weeks</span><span>No lock-in</span></div>
-</div>
-<div class="prod rv">
-<div class="prod-top">
-<div>
-<div class="prod-name">AB/04</div>
-<h3>Governance Toolkit</h3>
-</div>
-<div class="badge plan">Planned</div>
-</div>
-<p>Templates, controls, and monitoring patterns for organisations that need to demonstrate AI governance to a regulator, a board, or an enterprise customer's procurement team. Built around EU AI Act obligations and GDPR rather than retrofitted to them, because in European enterprise sales this is increasingly the gate you have to pass before a technical conversation happens.</p>
-<div class="feat"><div><i>●</i><span>EU AI Act risk classification templates</span></div><div><i>●</i><span>Model cards and data lineage documentation</span></div><div><i>●</i><span>Drift and bias monitoring patterns</span></div><div><i>●</i><span>Board and regulator reporting formats</span></div></div>
-<div class="meta"><span>EU AI Act</span><span>GDPR</span><span>Board-ready</span></div>
-</div>
-<div class="prod rv">
-<div class="prod-top">
-<div>
-<div class="prod-name">AB/05</div>
-<h3>Platform Blueprint</h3>
-</div>
-<div class="badge plan">Planned</div>
-</div>
-<p>Reference architectures for the platform layer that AI sits on — data pipelines, model serving, observability, and the internal developer tooling that lets a team ship AI repeatedly. Infrastructure-as-code rather than a slide deck, so the blueprint is something your engineers deploy rather than something they read.</p>
-<div class="feat"><div><i>●</i><span>Infrastructure-as-code, not documentation</span></div><div><i>●</i><span>Cloud-agnostic with provider-specific variants</span></div><div><i>●</i><span>Observability and cost controls built in</span></div><div><i>●</i><span>Designed for teams without a platform team</span></div></div>
-<div class="meta"><span>IaC</span><span>Cloud-agnostic</span><span>Self-deployable</span></div>
-</div>
-<div class="placeholder-note rv">
-<h4>Why the status labels are on this page</h4>
-<p>Most consultancy product pages present a roadmap as if it already exists. We would rather
-      you know exactly what you can buy today, what is being actively built, and what is still an
-      intention — because if you engage us on the strength of something that turns out to be
-      a slide, that is a problem for both of us on day one. If a planned item is the reason you are
-      interested, tell us in a briefing; client demand is what moves things up this list.</p>
-</div>
-</div>
-</section>
-<div class="wrap"><div class="divider"><i></i></div></div>
-<section class="section-pad" style="background:var(--ink-2);border-block:1px solid var(--line)">
-<div class="wrap">
-<div class="section-head rv">
-<div class="kicker">How these work commercially</div>
-<h2 class="scramble">Frameworks you own, not licences you rent</h2>
-</div>
-<div class="grid-3 rv">
-<div class="card"><div class="num">01</div><h4>Deployed into your environment</h4>
-<p>These run on your infrastructure, under your control, with your data staying inside your
-        boundary. Nothing here is a hosted service you become dependent on.</p></div>
-<div class="card"><div class="num">02</div><h4>Delivered with the source</h4>
-<p>Your team gets the code and the documentation. If you part ways with us, the system keeps
-        running and your engineers can extend it.</p></div>
-<div class="card"><div class="num">03</div><h4>Priced into the engagement</h4>
-<p>These accelerate delivery rather than adding a line item. The benefit shows up as a
-        shorter timeline, not a licence fee attached to it.</p></div>
-</div>
-</div>
-</section>
-<div class="wrap"><div class="divider"><i></i></div></div>
-<section class="section-pad" style="text-align:center">
-<div class="wrap rv">
-<h2 style="max-width:20ch;margin:0 auto">Want to know which of these fits your situation?</h2>
-<p style="margin-top:18px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:50ch;margin-inline:auto">
-      The readiness assessment is usually the honest starting point — it tells you what you
-      need before it tells you what to buy.</p>
-<div style="display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap">
-<a class="btn btn-primary" href="contact.html">Start a conversation</a>
-<a class="btn btn-ghost" href="services.html">See our capabilities →</a>
+
+<h2>Changes to this notice</h2>
+<p>We update this notice when the site or the way we handle data changes — self-hosted fonts and a server-side contact form are both expected, and both will be reflected here before they go live. The date below always states the current version.</p>
+
+<p class="updated">Last updated 25 August 2026</p>
+
 </div>
 </div>
 </section>
@@ -519,7 +533,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 </div>
 </div>
 <div class="foot-line">
-<span>We don't do it for you. We clear the way.</span>
+<span>Quenora Consulting · Heilbronn, Germany</span>
 <span>© 2026 Quenora Consulting</span>
 </div>
 </div>
@@ -551,174 +565,6 @@ addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40));
   }
   addEventListener('scroll',()=>{if(!tick){requestAnimationFrame(upd);tick=true;}});
   upd();
-})();
-
-// animated dividers
-(function(){
-  const ds=document.querySelectorAll('.divider');if(!ds.length)return;
-  const o=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target);}
-  }),{threshold:.5});
-  ds.forEach(d=>o.observe(d));
-})();
-
-// text scramble on headings
-//
-// Scheduling is by ELAPSED TIME, not by requestAnimationFrame count.
-//
-// The previous version gave each character a start and end expressed as a
-// frame number (i*1.6, +8..19 frames). That silently assumed 60fps. rAF makes
-// no such promise: browsers throttle it hard in a background tab and pause it
-// outright in a hidden one. Because the loop had no clock and no deadline, the
-// reveal simply stopped part-way and left the heading showing scrambled
-// characters — "One conversation. No deck required from THAO" — for as long as
-// the tab stayed unfocused. Measured on this page: 61fps focused (1.4s, fine)
-// against 34fps hidden and unresolved after 2s.
-//
-// Time-based scheduling fixes it by construction: while the tab is hidden the
-// clock keeps running, so the first frame after the reader returns finds every
-// character past its deadline and writes the finished text immediately.
-//
-// Two further guarantees, because the animation must never be the only way to
-// read the heading:
-//   * every element gets a fallback timer at setup, so the text appears even
-//     if the IntersectionObserver never fires or run() throws;
-//   * each run carries its own deadline, so it completes even if rAF never
-//     delivers another frame.
-(function(){
-  var CH='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/\\';
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var els=[].slice.call(document.querySelectorAll('.scramble'));
-  if(!els.length)return;
-
-  var TOTAL=700;      /* whole reveal, ms — the audit asked for 600–800 */
-  var CHAR_MIN=150;   /* how long one character stays scrambled */
-  var CHAR_MAX=260;
-  var SAFETY=2500;    /* text appears by now no matter what happens */
-
-  function finish(el){
-    if(el.__scDone)return;
-    el.__scDone=true;
-    clearTimeout(el.__scT);
-    el.textContent=el.dataset.txt;
-  }
-
-  function run(el){
-    if(el.__scDone)return;
-    clearTimeout(el.__scT);
-    var txt=el.dataset.txt;
-    if(reduce){finish(el);return;}
-
-    var chars=txt.split('');
-    var len=chars.length;
-    /* Spread the starts so the last character still lands inside TOTAL. */
-    var span=CHAR_MIN+Math.round((CHAR_MAX-CHAR_MIN)/2);
-    var stagger=len>1?Math.max(0,(TOTAL-span)/(len-1)):0;
-    var queue=chars.map(function(c,i){
-      var start=i*stagger;
-      return {c:c,start:start,
-              end:Math.min(TOTAL,start+CHAR_MIN+Math.random()*(CHAR_MAX-CHAR_MIN))};
-    });
-
-    var t0=performance.now();
-    /* Independent of rAF entirely: setTimeout is throttled in background tabs
-       but never paused, so this always lands. */
-    el.__scT=setTimeout(function(){finish(el);},TOTAL+400);
-
-    (function tick(){
-      if(el.__scDone)return;
-      var t=performance.now()-t0;
-      if(t>=TOTAL){finish(el);return;}
-      var out='',done=0,i,q;
-      for(i=0;i<len;i++){
-        q=queue[i];
-        if(t>=q.end){done++;out+=q.c;}
-        else if(t>=q.start){
-          out+='<span class="sc-ghost">'+
-            (q.c===' '?' ':CH[Math.floor(Math.random()*CH.length)])+'</span>';
-        } else out+=q.c===' '?' ':'<span style="opacity:0">'+q.c+'</span>';
-      }
-      if(done>=len){finish(el);return;}
-      el.innerHTML=out;
-      requestAnimationFrame(tick);
-    })();
-  }
-
-  els.forEach(function(el){
-    el.dataset.txt=el.textContent.trim();
-    el.innerHTML='<span style="opacity:0">'+el.dataset.txt+'</span>';
-    el.__scT=setTimeout(function(){finish(el);},SAFETY);
-  });
-
-  var o=new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(e.isIntersecting){run(e.target);o.unobserve(e.target);}
-    });
-  },{threshold:.6});
-  els.forEach(function(el){o.observe(el);});
-
-  /* Coming back to a parked tab must never reveal a half-scrambled heading. */
-  document.addEventListener('visibilitychange',function(){
-    if(document.hidden)return;
-    els.forEach(function(el){
-      if(!el.__scDone&&el.dataset.txt)finish(el);
-    });
-  });
-})();
-
-// scroll reveal
-const rio=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target);}
-}),{threshold:.15,rootMargin:'0px 0px -60px 0px'});
-document.querySelectorAll('.rv').forEach((el,i)=>{
-  el.style.transitionDelay=(i%4*70)+'ms';rio.observe(el);
-});
-
-// card spotlight
-document.querySelectorAll('.card').forEach(c=>{
-  c.addEventListener('mousemove',e=>{
-    const r=c.getBoundingClientRect();
-    c.style.setProperty('--mx',(e.clientX-r.left)+'px');
-    c.style.setProperty('--my',(e.clientY-r.top)+'px');
-  });
-});
-
-// count-up stats
-const sio=new IntersectionObserver(es=>es.forEach(e=>{
-  if(!e.isIntersecting)return; sio.unobserve(e.target);
-  const el=e.target, raw=el.dataset.count, suf=el.dataset.suffix||'';
-  const target=parseFloat(raw); let n=0; const dur=1100, t0=performance.now();
-  (function step(t){
-    const p=Math.min((t-t0)/dur,1), e2=1-Math.pow(1-p,3);
-    n=target*e2;
-    el.textContent=(target%1?n.toFixed(1):Math.round(n))+suf;
-    if(p<1)requestAnimationFrame(step);
-  })(t0);
-}),{threshold:.6});
-document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
-
-
-
-// (page-header WebGL block removed — no Three.js dependency remains)
-</script>
-
-
-<script>
-(function(){
-  var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
-  if(!b||!m)return;
-  b.addEventListener('click',function(e){
-    e.stopPropagation();
-    var o=m.classList.toggle('open');
-    b.setAttribute('aria-expanded',o?'true':'false');
-  });
-  document.addEventListener('click',function(){
-    m.classList.remove('open');b.setAttribute('aria-expanded','false');
-  });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){m.classList.remove('open');
-      b.setAttribute('aria-expanded','false');}
-  });
 })();
 </script>
 </body>

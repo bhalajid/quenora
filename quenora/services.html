@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Quenora Technology Consulting — Capabilities</title>
+<title>Quenora Consulting — Capabilities</title>
 <meta content="All nine Quenora capabilities, from platform engineering to AI governance." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -12,12 +12,12 @@
 <meta content="#0A0A0B" name="theme-color"/>
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='12' cy='161.71' r='3' fill='%23C97A3C'/%3E%3Ccircle cx='21.64' cy='161.34' r='3.95' fill='%23C97A3C'/%3E%3Ccircle cx='33.39' cy='159.88' r='5.2' fill='%23C97A3C'/%3E%3Ccircle cx='47.73' cy='156.52' r='6.84' fill='%23C97A3C'/%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
-<meta content="Quenora Technology Consulting" property="og:site_name"/>
-<meta content="Quenora Technology Consulting — Capabilities" property="og:title"/>
+<meta content="Quenora Consulting" property="og:site_name"/>
+<meta content="Quenora Consulting — Capabilities" property="og:title"/>
 <meta content="All nine Quenora capabilities, from platform engineering to AI governance." property="og:description"/>
 <meta content="https://quenora.ai/services.html" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Quenora Technology Consulting — Capabilities" name="twitter:title"/>
+<meta content="Quenora Consulting — Capabilities" name="twitter:title"/>
 <meta content="All nine Quenora capabilities, from platform engineering to AI governance." name="twitter:description"/>
 <style>
 :root{
@@ -101,7 +101,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
   color:var(--ink);padding:12px 20px;border-radius:0 0 8px 0;font-weight:600;font-size:14px}
 .skip:focus{left:0}
 :focus-visible{outline:2px solid var(--copper);outline-offset:3px;border-radius:4px}
-.btn:focus-visible,.chip:focus-visible,.demo-tab:focus-visible{outline-offset:2px}
+.btn:focus-visible,.demo-tab:focus-visible{outline-offset:2px}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
     transition-duration:.001ms!important;scroll-behavior:auto!important}
@@ -184,44 +184,6 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 .foot-line{margin-top:52px;padding-top:26px;border-top:1px solid var(--line-2);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--grey-d)}
 
-/* ---------- AI assistant ---------- */
-.ai-fab{position:fixed;bottom:28px;right:28px;z-index:400;width:58px;height:58px;border-radius:50%;
-  background:var(--copper);display:flex;align-items:center;justify-content:center;cursor:pointer;
-  box-shadow:0 12px 36px -8px var(--copper-glow);border:none;transition:transform .25s ease}
-.ai-fab:hover{transform:scale(1.08) rotate(90deg)}
-.ai-fab svg{width:24px;height:24px}
-.ai-fab::before{content:"";position:absolute;inset:-6px;border-radius:50%;
-  border:1px solid var(--copper);opacity:.5;animation:pulse 2.6s ease-out infinite}
-@keyframes pulse{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.35);opacity:0}}
-.ai-panel{position:fixed;bottom:100px;right:28px;z-index:400;width:356px;max-width:calc(100vw - 40px);
-  background:rgba(22,22,26,.96);backdrop-filter:blur(20px);border:1px solid var(--line);
-  border-radius:16px;overflow:hidden;box-shadow:0 30px 70px -12px rgba(0,0,0,.75);
-  opacity:0;transform:translateY(16px) scale(.97);pointer-events:none;transition:.28s cubic-bezier(.16,1,.3,1)}
-.ai-panel.open{opacity:1;transform:none;pointer-events:auto}
-.ai-head{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:11px}
-.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--copper);flex:none;
-  box-shadow:0 0 10px var(--copper);animation:breathe 2s ease-in-out infinite}
-@keyframes breathe{0%,100%{opacity:1}50%{opacity:.35}}
-.ai-head b{font-size:13.5px;font-weight:600;display:block}
-.ai-head span{font-size:10.5px;color:var(--grey-d)}
-.ai-body{padding:17px 19px;max-height:290px;overflow-y:auto;display:flex;flex-direction:column;gap:11px}
-.ai-body::-webkit-scrollbar{width:4px}
-.ai-body::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}
-.ai-msg{font-size:13.5px;line-height:1.62;max-width:88%}
-.ai-msg.bot{color:var(--white);background:rgba(255,255,255,.05);padding:11px 14px;
-  border-radius:12px 12px 12px 3px;align-self:flex-start}
-.ai-msg.user{color:var(--ink);background:var(--copper);padding:11px 14px;
-  border-radius:12px 12px 3px 12px;align-self:flex-end;font-weight:450}
-.ai-suggest{display:flex;flex-wrap:wrap;gap:7px;padding:0 19px 15px}
-.chip{font-size:11.5px;padding:7px 13px;border-radius:20px;border:1px solid var(--line);
-  color:var(--grey);cursor:pointer;transition:.2s}
-.chip:hover{border-color:var(--copper);color:var(--white);background:var(--copper-dim)}
-.ai-foot{padding:12px 19px;border-top:1px solid var(--line);font-size:10.5px;color:var(--grey-d);text-align:center}
-.typing{display:inline-flex;gap:4px;padding:11px 14px}
-.typing i{width:5px;height:5px;border-radius:50%;background:var(--grey);animation:blink 1.3s infinite}
-.typing i:nth-child(2){animation-delay:.18s}
-.typing i:nth-child(3){animation-delay:.36s}
-@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
 
 
 @media(max-width:700px){
@@ -297,7 +259,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
   text-transform:uppercase;color:var(--grey-d);margin-bottom:9px}
 .field input,.field textarea,.field select{width:100%;background:rgba(255,255,255,.03);
   border:1px solid var(--line);border-radius:9px;padding:14px 16px;color:var(--white);
-  font-family:inherit;font-size:14.5px;transition:.22s;outline:none}
+  font-family:inherit;font-size:14.5px;transition:.22s}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--copper);
   background:rgba(201,122,60,.05);box-shadow:0 0 0 3px rgba(201,122,60,.08)}
 .field textarea{min-height:130px;resize:vertical}
@@ -335,7 +297,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 @media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
   .langsel>button span{display:none}}
 </style>
-<meta content="en_GB" property="og:locale"/><link href="https://quenora.ai/services.html" rel="canonical"/><link href="https://quenora.ai/services.html" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/services.html" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/services.html" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/es/services.html" hreflang="es" rel="alternate"/><link href="https://quenora.ai/it/services.html" hreflang="it" rel="alternate"/><link href="https://quenora.ai/services.html" hreflang="x-default" rel="alternate"/></head>
+<meta content="en_GB" property="og:locale"/><link href="https://quenora.ai/services.html" rel="canonical"/><link href="https://quenora.ai/services.html" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/services.html" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/services.html" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/services.html" hreflang="x-default" rel="alternate"/></head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0">
 <symbol id="mark9" viewbox="0 0 187.71 174.29">
@@ -359,8 +321,8 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b><em>q</em>uenora</b>
 </a>
-<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a class="on" href="services.html">Capabilities</a><a href="products.html">Products</a><a href="approach.html">Approach</a><a href="work.html">Work</a><a href="contact.html">Contact</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="services.html" hreflang="en" lang="en">English</a></li><li><a href="de/services.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/services.html" hreflang="fr" lang="fr">Français</a></li><li><a href="es/services.html" hreflang="es" lang="es">Español</a></li><li><a href="it/services.html" hreflang="it" lang="it">Italiano</a></li></ul></div>
-<a class="btn btn-primary navcta" href="contact.html">Book a briefing</a>
+<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a class="on" href="services.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="products.html">Products</a><a href="approach.html">Approach</a><a href="work.html">Work</a><a href="contact.html">Contact</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="services.html" hreflang="en" lang="en">English</a></li><li><a href="de/services.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/services.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
+<a class="btn btn-primary navcta" href="contact.html">Start a conversation</a>
 <button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <i></i><i></i><i></i>
 </button>
@@ -372,7 +334,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <div class="wrap">
 <div class="kicker">Capabilities</div>
 <h1 class="scramble">Nine capabilities. One team behind all of them.</h1>
-<p>Three of these are core — almost every engagement runs through platform and deployment engineering, automation, and AI integration. The other six join when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.</p>
+<p>Three of these are core — the work runs through platform and deployment engineering, automation, and AI integration. The other six join when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.</p>
 </div>
 </section>
 <section class="section-pad">
@@ -437,8 +399,8 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <div class="idx"><i></i>08</div>
 <div>
 <h3>Managed AI Operations</h3>
-<div class="body">Monitoring, retraining, incident response, and ongoing support after go-live. Models drift, upstream systems change, and volumes grow. Someone has to own that, and if your team is not ready to yet, we can — on a defined runway toward them taking it over.</div>
-<ul><li>24/7 monitoring</li><li>Model retraining</li><li>Incident response</li><li>SLA-backed</li></ul>
+<div class="body">Monitoring, retraining, incident response, and ongoing support after go-live. Models drift, upstream systems change, and volumes grow. Someone has to own that, and if your team is not ready to yet, we can — on a defined runway towards them taking it over.</div>
+<ul><li>Monitoring and alerting</li><li>Model retraining</li><li>Incident response</li><li>Agreed response times</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
@@ -458,7 +420,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
       That is a reasonable place to start. Most engagements begin with a conversation about the
       problem, not a shopping list of capabilities.</p>
 <div style="display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap">
-<a class="btn btn-primary" href="contact.html">Book a briefing</a>
+<a class="btn btn-primary" href="contact.html">Start a conversation</a>
 <a class="btn btn-ghost" href="approach.html">How we work →</a>
 </div>
 </div>
@@ -490,33 +452,25 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <a href="contact.html">Contact</a>
 </div>
 <div class="foot-col">
+<h5>Legal</h5>
+<a href="impressum.html">Legal notice · Impressum</a>
+<a href="privacy.html">Privacy notice</a>
+</div>
+<div class="foot-col">
 <h5>Direct</h5>
-<a href="mailto:hello@quenora.ai">hello@quenora.ai</a>
+<a href="mailto:info@quenora.ai">info@quenora.ai</a>
 <a href="https://quenora.ai">quenora.ai</a>
+<a rel="noopener me" target="_blank" href="https://www.linkedin.com/company/quenora">LinkedIn</a>
+<a rel="noopener me" target="_blank" href="https://x.com/quenora_ai">X</a>
+<a rel="noopener me" target="_blank" href="https://www.instagram.com/quenora.ai/">Instagram</a>
 </div>
 </div>
 <div class="foot-line">
 <span>We don't do it for you. We clear the way.</span>
-<span>© 2026 Quenora Technology Consulting</span>
+<span>© 2026 Quenora Consulting</span>
 </div>
 </div>
 </footer>
-<button aria-controls="aiPanel" aria-expanded="false" aria-label="Open assistant" class="ai-fab" id="aiFab">
-<svg fill="none" viewbox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" stroke="#0A0A0B" stroke-linecap="round" stroke-width="2"></path><circle cx="12" cy="12" fill="#0A0A0B" r="3.2"></circle></svg>
-</button>
-<div aria-label="Preview assistant" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
-<div class="ai-head"><div class="ai-dot"></div>
-<div><b>Ask about Quenora</b><span>Preview assistant — illustrative answers</span></div>
-</div>
-<div aria-live="polite" class="ai-body" id="aiBody" role="log"></div>
-<div class="ai-suggest" id="aiSuggest">
-<div class="chip" data-q="What do you actually do?" role="button" tabindex="0">What do you actually do?</div>
-<div class="chip" data-q="How are you different?" role="button" tabindex="0">How are you different?</div>
-<div class="chip" data-q="How long does an engagement take?" role="button" tabindex="0">How long does it take?</div>
-<div class="chip" data-q="What does it cost?" role="button" tabindex="0">What does it cost?</div>
-</div>
-<div class="ai-foot">This preview shows how a live assistant would work on this site.</div>
-</div>
 <script>
 // nav solidify
 const hdr=document.getElementById('siteHeader');
@@ -556,38 +510,107 @@ addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40));
 })();
 
 // text scramble on headings
+//
+// Scheduling is by ELAPSED TIME, not by requestAnimationFrame count.
+//
+// The previous version gave each character a start and end expressed as a
+// frame number (i*1.6, +8..19 frames). That silently assumed 60fps. rAF makes
+// no such promise: browsers throttle it hard in a background tab and pause it
+// outright in a hidden one. Because the loop had no clock and no deadline, the
+// reveal simply stopped part-way and left the heading showing scrambled
+// characters — "One conversation. No deck required from THAO" — for as long as
+// the tab stayed unfocused. Measured on this page: 61fps focused (1.4s, fine)
+// against 34fps hidden and unresolved after 2s.
+//
+// Time-based scheduling fixes it by construction: while the tab is hidden the
+// clock keeps running, so the first frame after the reader returns finds every
+// character past its deadline and writes the finished text immediately.
+//
+// Two further guarantees, because the animation must never be the only way to
+// read the heading:
+//   * every element gets a fallback timer at setup, so the text appears even
+//     if the IntersectionObserver never fires or run() throws;
+//   * each run carries its own deadline, so it completes even if rAF never
+//     delivers another frame.
 (function(){
-  const CH='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/\\';
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const els=document.querySelectorAll('.scramble');if(!els.length)return;
+  var CH='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/\\';
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=[].slice.call(document.querySelectorAll('.scramble'));
+  if(!els.length)return;
+
+  var TOTAL=700;      /* whole reveal, ms — the audit asked for 600–800 */
+  var CHAR_MIN=150;   /* how long one character stays scrambled */
+  var CHAR_MAX=260;
+  var SAFETY=2500;    /* text appears by now no matter what happens */
+
+  function finish(el){
+    if(el.__scDone)return;
+    el.__scDone=true;
+    clearTimeout(el.__scT);
+    el.textContent=el.dataset.txt;
+  }
+
   function run(el){
-    const txt=el.dataset.txt;
-    if(reduce){el.textContent=txt;return;}
-    const len=txt.length;let frame=0;
-    const queue=[...txt].map((c,i)=>({
-      c,start:Math.floor(i*1.6),end:Math.floor(i*1.6)+8+Math.floor(Math.random()*12)
-    }));
+    if(el.__scDone)return;
+    clearTimeout(el.__scT);
+    var txt=el.dataset.txt;
+    if(reduce){finish(el);return;}
+
+    var chars=txt.split('');
+    var len=chars.length;
+    /* Spread the starts so the last character still lands inside TOTAL. */
+    var span=CHAR_MIN+Math.round((CHAR_MAX-CHAR_MIN)/2);
+    var stagger=len>1?Math.max(0,(TOTAL-span)/(len-1)):0;
+    var queue=chars.map(function(c,i){
+      var start=i*stagger;
+      return {c:c,start:start,
+              end:Math.min(TOTAL,start+CHAR_MIN+Math.random()*(CHAR_MAX-CHAR_MIN))};
+    });
+
+    var t0=performance.now();
+    /* Independent of rAF entirely: setTimeout is throttled in background tabs
+       but never paused, so this always lands. */
+    el.__scT=setTimeout(function(){finish(el);},TOTAL+400);
+
     (function tick(){
-      let out='',done=0;
-      queue.forEach(q=>{
-        if(frame>=q.end){done++;out+=q.c;}
-        else if(frame>=q.start){
+      if(el.__scDone)return;
+      var t=performance.now()-t0;
+      if(t>=TOTAL){finish(el);return;}
+      var out='',done=0,i,q;
+      for(i=0;i<len;i++){
+        q=queue[i];
+        if(t>=q.end){done++;out+=q.c;}
+        else if(t>=q.start){
           out+='<span class="sc-ghost">'+
             (q.c===' '?' ':CH[Math.floor(Math.random()*CH.length)])+'</span>';
         } else out+=q.c===' '?' ':'<span style="opacity:0">'+q.c+'</span>';
-      });
-      el.innerHTML=out;frame++;
-      if(done<len)requestAnimationFrame(tick);else el.textContent=txt;
+      }
+      if(done>=len){finish(el);return;}
+      el.innerHTML=out;
+      requestAnimationFrame(tick);
     })();
   }
-  els.forEach(el=>{
+
+  els.forEach(function(el){
     el.dataset.txt=el.textContent.trim();
     el.innerHTML='<span style="opacity:0">'+el.dataset.txt+'</span>';
+    el.__scT=setTimeout(function(){finish(el);},SAFETY);
   });
-  const o=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){run(e.target);o.unobserve(e.target);}
-  }),{threshold:.6});
-  els.forEach(el=>o.observe(el));
+
+  var o=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){run(e.target);o.unobserve(e.target);}
+    });
+  },{threshold:.6});
+  els.forEach(function(el){o.observe(el);});
+
+  /* Coming back to a parked tab must never reveal a half-scrambled heading. */
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden)return;
+    els.forEach(function(el){
+      if(!el.__scDone&&el.dataset.txt)finish(el);
+    });
+  });
 })();
 
 // scroll reveal
@@ -621,45 +644,6 @@ const sio=new IntersectionObserver(es=>es.forEach(e=>{
 }),{threshold:.6});
 document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
 
-// AI assistant
-(function(){
-  const fab=document.getElementById('aiFab'),panel=document.getElementById('aiPanel'),
-        body=document.getElementById('aiBody'); if(!fab)return; let opened=false;
-  function add(t,who){const m=document.createElement('div');m.className='ai-msg '+who;
-    m.textContent=t;body.appendChild(m);body.scrollTop=body.scrollHeight;}
-  function bot(t){const w=document.createElement('div');w.className='ai-msg bot';
-    w.innerHTML='<span class="typing"><i></i><i></i><i></i></span>';
-    body.appendChild(w);body.scrollTop=body.scrollHeight;
-    setTimeout(()=>{w.remove();add(t,'bot');},650+Math.random()*450);}
-  const A=[
-    [['what do you','services','offer','do you do'],"Nine capabilities in total. Three are core — platform and deployment engineering, automation, and AI integration — because almost every engagement runs through them. The other six, from data engineering to AI governance, come in when the work needs them. Most firms hand you a strategy deck; we ship something your team can run without us."],
-    [['different','why you','compare','competitor'],"We attach to what's already working and multiply it, rather than proposing a rebuild. And the same team carries the work from architecture through to production — no handoff between the people who sold it and the people who build it."],
-    [['long','time','timeline','how fast','duration'],"Scope-dependent, but most engagements move from first conversation to a working pilot in 6 to 10 weeks. We'll tell you honestly if a timeline is unrealistic before we start, not after."],
-    [['cost','price','pricing','budget','how much'],"Engagements are scoped to outcomes rather than day rates, so the honest answer is that it depends on what we're removing. A briefing gives you a real number — not a range designed to get a second meeting."],
-    [['platform','infrastructure','data'],"Platform engineering is the foundation before the model: data architecture, infrastructure, and internal platforms that make AI repeatable rather than a one-off pilot."],
-    [['govern','security','compliance','risk','eu ai act'],"Model risk, data privacy, and audit trails are built in from day one. For European clients that includes GDPR and EU AI Act alignment as part of the engagement, not a separate workstream."],
-    [['agent','copilot','chatbot','llm'],"Purpose-built agents wired into your actual workflows — CRM, ERP, support, operations — rather than a chatbot bolted onto a homepage."]
-  ];
-  function ask(q){add(q,'user');const k=q.toLowerCase();let m=null;
-    for(const [keys,ans] of A){if(keys.some(x=>k.includes(x))){m=ans;break;}}
-    bot(m||"Good question for a real conversation — book a briefing and we'll answer it with specifics for your systems rather than a generic line.");}
-  fab.addEventListener('click',()=>{
-    const open=panel.classList.toggle('open');
-    fab.setAttribute('aria-expanded',open);
-    if(!opened){opened=true;setTimeout(()=>bot("Hi — I can give you a quick sense of what Quenora does. Ask a question, or pick one below."),280);}});
-  const sug=document.getElementById('aiSuggest');
-  sug.addEventListener('click',e=>{const c=e.target.closest('.chip');if(c)ask(c.dataset.q);});
-  sug.addEventListener('keydown',e=>{
-    if(e.key==='Enter'||e.key===' '){
-      const c=e.target.closest('.chip');
-      if(c){e.preventDefault();ask(c.dataset.q);}
-    }});
-  // Escape closes the panel and returns focus to the button
-  addEventListener('keydown',e=>{
-    if(e.key==='Escape'&&panel.classList.contains('open')){
-      panel.classList.remove('open');fab.setAttribute('aria-expanded','false');fab.focus();
-    }});
-})();
 
 
 // (page-header WebGL block removed — no Three.js dependency remains)

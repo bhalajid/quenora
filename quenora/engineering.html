@@ -101,9 +101,12 @@ strong{color:var(--t1);font-weight:600}
 
 /* ── the decision list ── */
 .decisions{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
-  gap:1px;background:var(--line-2);border:1px solid var(--line);border-radius:4px;
-  overflow:hidden;margin:var(--sp5) 0 0}
-.dec{background:var(--sf1);padding:var(--sp4) var(--sp4) var(--sp4)}
+  gap:var(--sp4);margin:var(--sp5) 0 0;align-items:start}
+.decisions.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:1000px){.decisions.c3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.decisions,.decisions.c3{grid-template-columns:1fr}}
+.dec{background:var(--sf1);padding:var(--sp4);border:1px solid var(--line);
+  border-radius:4px}
 .dec .n{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.2em;
   color:var(--copper);display:block;margin-bottom:14px}
 .dec p{font-size:.94rem;margin:0}
@@ -246,7 +249,7 @@ stops, then sets out the governance decisions each one forces.</p>
 <section>
 <div class="wrap">
 <p class="ch">01 · Four decisions</p>
-<h2>Every one of them cost us something.</h2>
+<h2>Every one of them closed off an easier option.</h2>
 <p>A principle nobody paid for is a slogan. These four are on this site, they
 each closed off an easier option, and the reasoning is the part worth reading.</p>
 
@@ -255,20 +258,14 @@ each closed off an easier option, and the reasoning is the part worth reading.</
 <span class="n">01</span>
 <h3>No third-party JavaScript</h3>
 <p>No framework, no bundler, no build step, and not one line of script from
-anyone else's server. Every page is one file: markup, styles and behaviour
+anyone else’s server. Every page is one file: markup, styles and behaviour
 together.</p>
-<p><strong>One exception, named rather than hidden:</strong> the three
-typefaces load from Google Fonts, which is disclosed in our
-<a href="privacy.html" style="color:var(--copper-lt);border-bottom:1px solid rgba(233,160,99,.3)">privacy
-notice</a> with its legal basis. Every face has a full local fallback stack, so
-if that request is blocked the page still sets correctly — it just sets in a
-system font.</p>
 <p class="why"><strong>What it cost.</strong> The hero was originally built on
 two well-known animation libraries served from a public CDN. On locked-down
 corporate networks — the exact networks our buyers sit behind — both were
-blocked, and the page arrived dead. Everything was rewritten against native
+blocked, and the page arrived blank. Everything was rewritten against native
 canvas and CSS. It is the reason we are sceptical of any architecture whose
-first failure mode is somebody else's uptime.</p>
+first failure mode is somebody else’s uptime.</p>
 </div>
 
 <div class="dec">
@@ -277,8 +274,9 @@ first failure mode is somebody else's uptime.</p>
 <p>Turn scripting off and the argument is still there: every section, every
 answer, every link. Animation is enhancement, never the delivery mechanism.</p>
 <p class="why"><strong>What it cost.</strong> Reveal-on-scroll has to be written
-twice — once as the enhanced path and once as a default that is already visible.
-The lazy version is one line and fails closed, leaving a blank page.</p>
+twice — once as the enhanced path and once as a default that is already
+visible. The one-line version is quicker to write, and leaves a blank page for
+anyone whose browser does not run it.</p>
 </div>
 
 <div class="dec">
@@ -297,11 +295,20 @@ readers.</p>
 <h3>Nothing ships unless the checks pass</h3>
 <p>A release gate runs before every push. It is not advisory. A failing stage
 returns a non-zero exit code and the build is blocked.</p>
-<p class="why"><strong>What it cost.</strong> It is currently blocking this
-site's own release, over two missing lines in a legal page. We would rather
-be late than quietly ship something incomplete — which is the same trade we
+<p class="why"><strong>What it cost.</strong> It is holding this site’s own
+release today, over two lines still to be filled in a legal page. We would
+rather take the extra day than ship something incomplete — the same trade we
 ask you to let us make on your work.</p>
 </div>
+</div>
+
+<div class="note">
+<p><strong>One exception, named rather than hidden.</strong> The three typefaces
+load from Google Fonts, which is disclosed in our
+<a href="privacy.html" style="color:var(--copper-lt);border-bottom:1px solid rgba(233,160,99,.3)">privacy
+notice</a> with its legal basis. Every face has a full local fallback stack, so
+if that request is blocked the page still sets correctly — it simply sets in a
+system font.</p>
 </div>
 </div>
 </section>
@@ -314,7 +321,7 @@ ask you to let us make on your work.</p>
 last run — not a description of what a test suite might do.</p>
 
 <div class="gate"><div class="tw"><table>
-<caption class="mono" style="caption-side:bottom;text-align:left;padding:13px 16px;color:var(--t3);font-size:.72rem;letter-spacing:.06em">Stage 6 is held deliberately while the English pages are being finalised. Stage 4b is failing today, and is why this site has not launched.</caption>
+<caption class="mono" style="caption-side:bottom;text-align:left;padding:13px 16px;color:var(--t3);font-size:.72rem;letter-spacing:.06em">Stage 6 is held deliberately while the English pages are being finalised. Stage 4b is still open today, over two lines to be filled in the Impressum.</caption>
 <thead><tr><th scope="col">Stage</th><th scope="col">What it proves</th></tr></thead>
 <tbody>
 <tr><td>1</td><td><strong>Syntax and structure.</strong> Every inline script parses; section, div and main tags balance.</td></tr>
@@ -324,7 +331,7 @@ last run — not a description of what a test suite might do.</p>
 <tr><td>4b</td><td><strong>Legal completeness.</strong> Blocks the build on any unfilled placeholder in the Impressum or privacy notice.</td></tr>
 <tr><td>5</td><td><strong>Contrast, 54 token pairs.</strong> Every text colour against its ground, WCAG AA.</td></tr>
 <tr><td>6</td><td><strong>Translations.</strong> Coverage across the localised builds.</td></tr>
-<tr><td>7</td><td><strong>Hero geometry, 8 viewports.</strong> The constellation is measured against the page's own grid; if it drifts off the lines it is built on, the build fails.</td></tr>
+<tr><td>7</td><td><strong>Hero geometry, 8 viewports.</strong> The constellation is measured against the page’s own grid; if it drifts off the lines it is built on, the build fails.</td></tr>
 <tr><td>8</td><td><strong>Proofreading and technical writing, 87 checks.</strong> British spelling, banned filler vocabulary, sentence length, heading case, meta descriptions.</td></tr>
 </tbody>
 </table></div></div>
@@ -332,7 +339,7 @@ last run — not a description of what a test suite might do.</p>
 <div class="note">
 <p><strong>Stage 7 is the one worth explaining,</strong> because it is the least
 conventional and the most revealing. The hero constellation is constructed
-against the page's own six-column grid and the measured height of the headline.
+against the page’s own six-column grid and the measured height of the headline.
 A test asserts that relationship at eight viewport sizes and fails the build if
 it breaks.</p>
 <p>Nobody would notice a few pixels of drift. That is the point: the check exists
@@ -380,8 +387,8 @@ the work.</p>
 <div class="pr">
 <h3>Simple enough to hand over</h3>
 <p>The measure of a design is whether the team inheriting it can change it
-safely. Cleverness that only its author can maintain is a liability we are
-handing you.</p>
+safely. A design only its author can maintain is a cost we would be handing
+you.</p>
 <span class="tie">Tied to · phase 06</span>
 </div>
 </div>
@@ -452,8 +459,8 @@ reader judge. Wired in as behaviour, not appended as a disclaimer.</p></div>
 
 <div class="lay">
 <div class="ly"><span>Layer 05</span><h3>Ownership</h3></div>
-<div><p class="lbl">Where it stops</p><p>It runs on somebody's account, deploys from
-somebody's laptop, and has no owner in the on-call rota. This is the layer that
+<div><p class="lbl">Where it stops</p><p>It runs on somebody’s account, deploys from
+somebody’s laptop, and has no owner in the on-call rota. This is the layer that
 ends most pilots, and it is not a technical problem.</p></div>
 <div><p class="lbl">What gets decided</p><p>Which existing team owns it, what their
 runbook says, and what the alert means at three in the morning. If no team will
@@ -480,7 +487,7 @@ is a set of answers wired into the build, because each one changes the
 architecture. These are the questions we settle before anything ships, and
 where in the six phases each one gets settled.</p>
 
-<div class="decisions">
+<div class="decisions c3">
 <div class="dec">
 <span class="n">01</span>
 <h3>Who is allowed to see what</h3>

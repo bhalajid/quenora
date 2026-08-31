@@ -138,11 +138,11 @@ SWITCH_LABEL = {"en": "Choose language", "de": "Sprache wählen",
 def switcher(lang, page):
     """Header language menu. Current language first, marked."""
     items = []
+    # Root-absolute for the same reason as localise_paths: under cleanUrls the
+    # German home page is served at /de, whose directory is /, so a relative
+    # hop out of the language folder lands somewhere the author did not mean.
     for code in ["en"] + LISTED_LANGS:
-        if code == "en":
-            href = page if lang == "en" else "../" + page
-        else:
-            href = (code + "/" + page) if lang == "en" else "../" + code + "/" + page
+        href = "/" + page if code == "en" else "/" + code + "/" + page
         cur = ' aria-current="true"' if code == lang else ""
         items.append(
             '<li><a hreflang="%s" lang="%s" href="%s"%s>%s</a></li>'
@@ -203,23 +203,45 @@ LANG_JS = """
 
 
 def localise_paths(soup, lang):
-    """Rewrite asset paths one level deeper; keep internal links in-language."""
+    """Rewrite asset paths one level deeper; keep internal links in-language.
+
+    Links out of a language directory are written root-absolute (/de/x.html)
+    rather than relative (x.html), and that is not a style choice.
+
+    Vercel serves this site with cleanUrls, so /de/index.html is 308-redirected
+    to /de — with no trailing slash. A browser resolves a relative href against
+    the *directory* of the current URL, and the directory of "/de" is "/". So
+    every relative link on the German and French home pages resolved to the
+    English site in production: href="engineering.html" fetched
+    /engineering.html, not /de/engineering.html. Locally, and in every check
+    that read the files instead of the deployed URLs, the links were correct.
+
+    Sub-pages were unaffected (the directory of "/de/engineering" is "/de/"),
+    which is why this only ever showed on the one page a visitor lands on
+    first. Root-absolute paths do not depend on the shape of the current URL,
+    so the whole class of bug goes away rather than being patched per page.
+    """
+    depth = "../"
     for el in soup.find_all(["img", "source"]):
         for a in ("src", "srcset"):
             if el.has_attr(a) and el[a].startswith("assets/"):
-                el[a] = "../" + el[a]
+                el[a] = depth + el[a]
     for el in soup.find_all("link", href=True):
         if el["href"].startswith("assets/") or el["href"] == "manifest.json":
-            el["href"] = "../" + el["href"]
+            el["href"] = depth + el["href"]
     for a in soup.find_all("a", href=True):
         h = a["href"]
         if h in EN_ONLY_PAGES:
-            a["href"] = "../" + h          # legal pages are English-only
+            a["href"] = "/" + h            # legal pages are English-only
             continue
-        if h.endswith(".html") and "/" not in h:
-            continue                       # already relative, stays in-language
         if h.startswith("assets/"):
-            a["href"] = "../" + h
+            a["href"] = depth + h
+            continue
+        if h.startswith(("http://", "https://", "mailto:", "tel:", "#", "/")):
+            continue
+        page, _, frag = h.partition("#")
+        if page.endswith(".html"):
+            a["href"] = "/" + lang + "/" + page + (("#" + frag) if frag else "")
 
 
 def head_links(soup, lang, page):

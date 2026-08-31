@@ -102,6 +102,11 @@ sys.exit(1 if issues else 0)
 LEGALPY
 [ $? -eq 0 ] && ok "legal pages present and complete" || bad "legal content incomplete"
 
+step "4c/8  links, resolved the way the deployed site resolves them"
+python3 deployed_links.py "$DIR"
+[ $? -eq 0 ] && ok "no 404s, no link leaves its language" \
+  || bad "a link goes somewhere the author did not mean"
+
 step "5/8  colour contrast (WCAG AA)"
 python3 contrast.py "$DIR"
 [ $? -eq 0 ] && ok "all text passes AA" || bad "contrast below AA"

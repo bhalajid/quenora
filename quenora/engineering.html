@@ -97,6 +97,7 @@ h3{font-size:1.06rem;font-weight:600;margin:0 0 10px;letter-spacing:-.005em}
 p{color:var(--t2);font-size:1.02rem;margin:0 0 var(--sp3);max-width:62ch}
 .lede{font-size:clamp(1.1rem,1.9vw,1.35rem);color:var(--t2);max-width:56ch;line-height:1.55}
 strong{color:var(--t1);font-weight:600}
+::selection{background:var(--ember);color:var(--void)}
 .hero{padding:var(--sp7) 0 0;min-height:auto}
 
 /* ── the decision list ── */
@@ -793,54 +794,91 @@ then handed over.</p>
   });
 
   /* ── FIGURE 2 · the evaluation threshold ───────────────────────────────
-     A fixed, seeded spread of scored answers. The threshold line sweeps in,
-     and the same cloud resolves into shipped / held / escalated. The point
-     is that the dots never move — only the line does. */
+     A fixed, seeded spread of scored answers: x is only spacing, the y axis
+     is the score. The threshold sweeps in, then each answer resolves in turn
+     from left to right into shipped / escalated / held, holds, and releases.
+     The point is that the dots never move — only the line does. */
   var f2 = document.getElementById('figEval');
   if(f2) run(f2, function(g,W,H,el){
     g.clearRect(0,0,W,H);
-    var pad = 34, x0 = pad, x1 = W-pad, y0 = 26, y1 = H-40;
-    /* deterministic spread — same picture every load */
+    var tight = W < 560;
+    var padL = tight ? 50 : 74, padR = tight ? 14 : 84;
+    var x0 = padL, x1 = W-padR, y0 = 30, y1 = H-40;
+    if(x1-x0 < 60) return;
+
+    /* deterministic spread — the same picture on every load */
     var pts = [], seed = 7;
     function rnd(){ seed = (seed*1103515245 + 12345) & 0x7fffffff; return seed/0x7fffffff; }
     for(var i=0;i<64;i++){
       var q = rnd(), b = rnd();
       var score = 0.30 + 0.62*Math.pow(q,0.62) - 0.10*b;
-      pts.push({x: x0 + (x1-x0)*rnd(), s: Math.max(0.06, Math.min(0.98, score))});
+      pts.push({fx: rnd(), s: Math.max(0.06, Math.min(0.98, score))});
     }
-    /* axis */
-    g.strokeStyle='rgba('+C.t3+',.20)'; g.lineWidth=1;
-    g.beginPath(); g.moveTo(x0,y1); g.lineTo(x1,y1); g.stroke();
-    label(g,'SCORED ANSWERS', x0, y1+22, 'left', 'rgba('+C.t3+',.8)');
-    label(g,'HIGHER SCORE →', x1, 16, 'right','rgba('+C.t3+',.55)');
+    pts.sort(function(a,b){ return a.fx - b.fx; });
 
-    var appear = reduced ? 1 : Math.min(1, el/1.5);
-    var thr = 0.62;
-    var ty = y1 - (y1-y0)*thr;
+    /* the loop: sweep, resolve left to right, hold, release */
+    var T_SWEEP = 1.4, T_RESOLVE = 3.0, T_HOLD = 4.2, T_OUT = 1.2;
+    var CYCLE = T_SWEEP + T_RESOLVE + T_HOLD + T_OUT;
+    var t = reduced ? T_SWEEP + T_RESOLVE + 1 : el % CYCLE;
+    function ease(u){ u = u<0?0:u>1?1:u; return u*u*(3-2*u); }
+    function mix(a,b,u){                       /* rest colour into verdict colour */
+      var A=a.split(','), B=b.split(',');
+      return Math.round(+A[0]+(+B[0]-+A[0])*u)+','+
+             Math.round(+A[1]+(+B[1]-+A[1])*u)+','+
+             Math.round(+A[2]+(+B[2]-+A[2])*u);
+    }
+
+    var appear, release = 0;
+    if(t < T_SWEEP){ appear = ease(t/T_SWEEP); }
+    else { appear = 1; }
+    if(t > CYCLE - T_OUT){ release = ease((t-(CYCLE-T_OUT))/T_OUT); }
+    var resolved = t < T_SWEEP ? 0 : ease((t-T_SWEEP)/T_RESOLVE);
+
+    var thr = 0.62, ty = y1 - (y1-y0)*thr;
+    var fade = 1 - release;
+
+    /* axes — x is spacing only, so the score axis is the one that is drawn */
+    g.strokeStyle='rgba('+C.t3+',.20)'; g.lineWidth=1;
+    g.beginPath(); g.moveTo(x0,y1); g.lineTo(x1,y1);
+    g.moveTo(x0,y0); g.lineTo(x0,y1); g.stroke();
+    for(var k=0;k<4;k++){
+      var gy = y1 - (y1-y0)*(k/3);
+      g.beginPath(); g.moveTo(x0-4,gy); g.lineTo(x0,gy); g.stroke();
+    }
+    label(g,'ONE ANSWER EACH', x0, y1+22, 'left', 'rgba('+C.t3+',.75)');
+    g.save();
+    g.translate(x0-16, (y0+y1)/2); g.rotate(-Math.PI/2);
+    label(g,'SCORE  ↑', 0, 0, 'center', 'rgba('+C.t3+',.75)');
+    g.restore();
 
     /* the threshold */
-    if(appear>0.05){
-      g.save(); g.setLineDash([5,5]);
-      g.strokeStyle='rgba('+C.signal+','+(0.75*appear).toFixed(3)+')'; g.lineWidth=1.3;
-      g.beginPath(); g.moveTo(x0,ty); g.lineTo(x0+(x1-x0)*appear,ty); g.stroke(); g.restore();
-      label(g,'THRESHOLD, AGREED IN FRAME', x0, ty-9, 'left',
-            'rgba('+C.signal+','+(0.85*appear).toFixed(2)+')');
-    }
-    /* the answers */
+    g.save(); g.setLineDash([5,5]);
+    g.strokeStyle='rgba('+C.signal+','+(0.75*appear*fade).toFixed(3)+')'; g.lineWidth=1.3;
+    g.beginPath(); g.moveTo(x0,ty); g.lineTo(x0+(x1-x0)*appear,ty); g.stroke(); g.restore();
+    label(g, tight ? 'THRESHOLD' : 'THRESHOLD, AGREED IN FRAME', x0+4, ty-9, 'left',
+          'rgba('+C.signal+','+(0.85*appear*fade).toFixed(2)+')');
+
+    /* the answers — each settles when the resolve front passes it */
     pts.forEach(function(p,i){
-      var y = y1 - (y1-y0)*p.s;
-      var over = p.s >= thr;
-      var near = Math.abs(p.s - thr) < 0.07;
-      var lit = appear >= 1 ? 1 : 0;
-      var col = !lit ? C.t3 : (near ? C.lt : (over ? C.copper : C.t3));
-      var a   = !lit ? .30 : (near ? .95 : (over ? .85 : .30));
-      g.fillStyle='rgba('+col+','+a+')';
-      g.beginPath(); g.arc(p.x, y, near&&lit?3:2.2, 0, 6.2832); g.fill();
+      var px = x0 + (x1-x0)*p.fx;
+      var y  = y1 - (y1-y0)*p.s;
+      var front = (i/(pts.length-1))*0.72;               /* left to right */
+      var lit = ease((resolved - front)/0.28) * fade;
+      var over = p.s >= thr, near = Math.abs(p.s - thr) < 0.07;
+      var col = near ? C.lt : (over ? C.copper : C.t3);
+      var a   = 0.26 + (near ? .69 : (over ? .59 : .16))*lit;
+      var r   = 2.2 + (near ? 0.9 : 0)*lit;
+      g.fillStyle='rgba('+mix(C.t3,col,lit)+','+a.toFixed(3)+')';
+      g.beginPath(); g.arc(px, y, r, 0, 6.2832); g.fill();
     });
-    if(appear>=1){
-      label(g,'SHIPPED',    x1, ty-9,  'right','rgba('+C.copper+',.9)');
-      label(g,'ESCALATED',  x1, ty+16, 'right','rgba('+C.lt+',.9)');
-      label(g,'HELD',       x1, y1-8,  'right','rgba('+C.t3+',.75)');
+
+    /* the verdicts, once the front has passed them */
+    var vis = ease((resolved-0.82)/0.18) * fade;
+    if(vis > 0.01){
+      var lx = tight ? x1 : x1+8, al = tight ? 'right' : 'left';
+      label(g,'SHIPPED',   lx, ty-8,  al,'rgba('+C.copper+','+(0.9*vis).toFixed(2)+')');
+      label(g,'ESCALATED', lx, ty+16, al,'rgba('+C.lt+','+(0.9*vis).toFixed(2)+')');
+      label(g,'HELD',      lx, y1-8,  al,'rgba('+C.t3+','+(0.75*vis).toFixed(2)+')');
     }
   });
 })();

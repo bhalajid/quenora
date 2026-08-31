@@ -1,5 +1,18 @@
 # Quenora — backlog to 95% readiness
 
+> ## ⚠ VALIDATED AGAINST THE LIVE SITE — 31 Aug
+>
+> `quenora.vercel.app` was checked directly. **The repo moved 54 commits
+> without this branch**, from parallel sessions between 25–30 Aug, and a large
+> part of this backlog is already fixed in production.
+>
+> This branch is `ahead 2, behind 54`. The two local commits are
+> `e6442eb` (hero ground reflects the signal) and `fb9bc20` (this file).
+> **`quenora/index.html` has changed on both sides — merging will conflict.**
+>
+> Items below are marked ✅ CLOSED where the live site proves them fixed.
+
+
 Everything found across the structural audit, the content audit, a buyer-side
 review (CTO persona, €250M manufacturer, one dead pilot) and a craft-side
 teardown (B2B design/content benchmark). Nothing here is speculative — every
@@ -17,21 +30,45 @@ Scored 0–100 per dimension, weighted by what actually decides a deal.
 
 | Dimension | Weight | Now | Target | Gap |
 |---|---|---|---|---|
-| Legal compliance | 15 | **0** | 100 | Impressum, privacy notice, VAT all missing |
-| Conversion path | 25 | **20** | 95 | one CTA in 19,000px; inner pages feed a dead form |
-| Credibility / proof | 20 | **30** | 85 | no photo, no LinkedIn, no sample, two methodologies |
-| Content consistency | 15 | **55** | 95 | four contradictions across pages |
-| Copy quality | 10 | **80** | 90 | strong, over-negated |
+| Legal compliance | 15 | **100** ✅ | 100 | Impressum + privacy live, zero dead links |
+| Conversion path | 25 | **45** | 95 | mobile nav + burger landed; contact.html form still dead |
+| Credibility / proof | 20 | **45** | 85 | methodology reconciled; still no photo, sample or references |
+| Content consistency | 15 | **75** | 95 | one methodology now; stale capability names remain on 4 pages |
+| Copy quality | 10 | **88** | 90 | negation density improved 1-per-26 → **1 per 49 words** |
 | UI / visual craft | 5 | **72** | 95 | strong taste, unsystematised — 33 type sizes, 9 radii, 14 durations |
 | Technical / SEO | 5 | **75** | 95 | no FAQ schema, stale indexed translations |
 | Accessibility | 5 | **90** | 95 | homepage clean, inner pages skip headings |
-| Responsive / mobile | *folded into UX* | **35** | 95 | journey has no width breakpoint; homepage has no mobile nav |
+| Responsive / mobile | *folded into UX* | **60** | 95 | burger nav landed; journey still has no width breakpoint |
 
-**Weighted now: 38 / 100. Target: 95.**
+**Weighted then: 38 / 100.  Weighted now: 64 / 100.  Target: 95.**
 
-The two dimensions carrying 40% of the weight — conversion and legal — are the
-two scoring lowest. That is the whole story: the site argues well and converts
-badly.
+Legal is fully closed. Conversion is now the single biggest gap and the one
+carrying the most weight — the homepage form is good, but `contact.html` still
+tells visitors its form does not work, and nothing on the site can be booked.
+
+---
+
+## ✅ FIXED 31 Aug — footer and header disagreed about where a word goes
+
+Owner-reported. The footer sent **Approach → `approach.html`**, **Capabilities →
+`services.html`** and **Work → `work.html`** while the header sent the same
+three words to `#journey`, `#solution` and `#work`. One label, two
+destinations — and the footer's landed on the previous design generation
+(`#0A0A0B` ground, 1240px width, no Playfair, zero `--ember`).
+
+Both navigations now point at the same targets on `index.html` and
+`engineering.html`, the two current-generation pages. `About` was missing from
+the footer entirely and is restored. Verified: five shared labels all match,
+zero unresolved anchors, 232 local links across 9 pages with none broken.
+
+**Why the earlier link audit missed it:** it checked that every `href` resolved
+to a file that exists — true, 147 links, no 404s. It never checked whether two
+links carrying the *same label* pointed at the *same place*. A link that works
+and lands you on the wrong generation of your own site is not a broken link.
+
+The five old-design pages stay reachable from the three "in full" links inside
+chapters, which is the smaller exposure, until the inner-page redesign
+(`scope-2`) lands.
 
 ---
 
@@ -43,10 +80,10 @@ improvement drives traffic into a broken funnel or a legal exposure.
 | # | Item | Where | Effort |
 |---|---|---|---|
 | P0-1 | **`contact.html` form is not wired** and says so on screen: *"This prototype form is not yet wired to a backend."* All five inner pages' "Book a briefing" CTA points here. The working form is on the homepage only. | contact.html | 1 h |
-| P0-2 | **Impressum does not exist**, link is `href="#"`. Legally required (§5 DDG) and must be reachable from **every** page. Currently reachable from none. | all pages | 3 h |
-| P0-3 | **Privacy notice does not exist**, link is `href="#"` — while the homepage form collects name, email, company behind a consent checkbox pointing nowhere. GDPR exposure. | all pages | 4 h |
-| P0-4 | **`[PLACEHOLDER]` visible** where Reg / VAT belongs, in the live footer. A German buyer reads this as "not trading yet". | index.html footer | 5 min |
-| P0-5 | **LinkedIn link is `href="#"`** — for a firm selling one person, the person has no verifiable profile. | footer | 5 min |
+| P0-2 | ✅ **CLOSED** — `impressum.html` exists and is linked from every page. <br> ~~ **Impressum does not exist**, link is `href="#"`. Legally required (§5 DDG) and must be reachable from **every** page. Currently reachable from none. | all pages | 3 h |
+| P0-3 | ✅ **CLOSED** — `privacy.html` exists and is linked; the form links to it for consent. <br> ~~ **Privacy notice does not exist**, link is `href="#"` — while the homepage form collects name, email, company behind a consent checkbox pointing nowhere. GDPR exposure. | all pages | 4 h |
+| P0-4 | ✅ **CLOSED** — no `[PLACEHOLDER]` anywhere in the live footer. <br> ~~ **`[PLACEHOLDER]` visible** where Reg / VAT belongs, in the live footer. A German buyer reads this as "not trading yet". | index.html footer | 5 min |
+| P0-5 | ✅ **CLOSED** — real LinkedIn URL; **zero** `href="#"` links remain site-wide. <br> ~~ **LinkedIn link is `href="#"`** — for a firm selling one person, the person has no verifiable profile. | footer | 5 min |
 | P0-6 | **Homepage form does not send.** Needs `RESEND_API_KEY`, `ENQUIRY_TO`, `ENQUIRY_FROM` as Vercel env vars. Currently falls back to mail client. | Vercel config | 15 min |
 | P0-7 | **No calendar booking anywhere.** Copy promises "Forty-five minutes, no deck" with no way to book it. Buyer review: *"If there were a 'pick a slot' button I would be at 85%"* instead of 65%. | all pages | 2 h |
 
@@ -61,11 +98,11 @@ reader who opens two pages finds two firms.
 
 | # | Item | Where |
 |---|---|---|
-| P1-1 | **Two different methodologies.** Homepage: Frame / Foundation / Integrate / Ship / Prove / Hand over. `approach.html`: Diagnose / Scope / Build / Integrate / Transfer / Sustain. Different names, weeks and exit logic — and the homepage's "The approach in full →" links straight at it. | index + approach |
+| P1-1 | ✅ **CLOSED** — `approach.html` now uses Frame / Foundation / Integrate / Ship / Prove / Hand over, matching the homepage. <br> ~~ **Two different methodologies.** Homepage: Frame / Foundation / Integrate / Ship / Prove / Hand over. `approach.html`: Diagnose / Scope / Build / Integrate / Transfer / Sustain. Different names, weeks and exit logic — and the homepage's "The approach in full →" links straight at it. | index + approach |
 | P1-2 | **Two evidence standards.** `work.html` publishes "~4 hrs → 38 sec", "20 yrs knowledge indexed" for the same three engagements the homepage presents with no figures and a disclaimer. | index + work |
 | P1-3 | **Stale capability names** on four inner pages: "Deployment & Development", "Platform Engineering". Homepage sells "Platform & Deployment Engineering" and "Process & Workflow Automation". | work, approach, products, contact |
-| P1-4 | **"Six of them"** — chapter 01 says six seams, shows three (The data, The integration, The handover). | index.html |
-| P1-5 | **Fake AI assistant** on five inner pages: *"Preview assistant — illustrative answers"*. Buyer: *"the one thing a technical buyer will screenshot."* Wire it to `/api` or delete it. | 5 inner pages |
+| P1-4 | ✅ **CLOSED** — the "Six of them" line is gone; the three seam cards stand on their own. <br> ~~ **"Six of them"** — chapter 01 says six seams, shows three (The data, The integration, The handover). | index.html |
+| P1-5 | ✅ **CLOSED** — the "Preview assistant" panel is gone from all inner pages. <br> ~~ **Fake AI assistant** on five inner pages: *"Preview assistant — illustrative answers"*. Buyer: *"the one thing a technical buyer will screenshot."* Wire it to `/api` or delete it. | 5 inner pages |
 | P1-6 | **"Nine capabilities. One team."** against "founder-led, growing" three screens later. One person is not nine capabilities. | index.html |
 | P1-7 | **"24/7 monitoring, SLA-backed"** from a one-person firm. Buyer: *"Who is on call at 03:00 in the plant in Poland?"* Not survivable in a first call. | services/products |
 | P1-8 | **Footer tagline contradicts positioning.** Inner pages carry *"We don't do it for you. We clear the way."* The rest of the site promises they build and hand over. The homepage never uses this line. | inner footers |
@@ -88,6 +125,7 @@ This is the category that decides whether a convinced reader can act.
 | P2-5 | **No trust signal beside the form.** "We reply within one working day", "no NDA needed", the founder's face — all exist elsewhere or not at all, none adjacent to the input. | Move reassurance next to the form |
 | P2-6 | **Reference call buried.** "We will arrange a direct conversation with a reference before you commit" is objection #4. Strongest de-risking asset on the site. | Promote to homepage |
 | P2-7 | **AI Readiness Assessment is not purchasable.** Only "Available now" product; no price, no booking, no sample output, fourth card down. Buyer put **60%** on buying it. | Own landing page + price + buy path |
+| **P2-10** | **`products.html` is a roadmap presented as a catalogue.** Counted on the page: **2 "Available now", 3 "In development", 3 "Planned"** — three quarters of what the product page shows cannot be bought. The page's own honesty note about not presenting a roadmap as if it exists is good, and is undercut by the ratio. A visitor who arrives wanting to buy something finds mostly intentions. | Lead with what is available; move the rest to a clearly separate roadmap block |
 | P2-8 | **Scroll depth ~16–18 viewport heights** across 9 chapters. Craft review recommends 5 sections / ~7 screens; buyer never complained about length. | Compress, do not gut |
 | P2-9 | **Horizontal pinned journey ≈280vh** of scroll hijack. Breaks scrollbar meaning, find-in-page and trackpad-less mice. | Move detail to approach.html |
 
@@ -125,6 +163,7 @@ budget is spent on the firm's self-image rather than the buyer's decision.
 | P4-2 | **Three canvas animations.** Hero earns it. The gap diagram earns it. The automation figure restates its own caption. |
 | P4-3 | **Two competing hover behaviours** on the first screen (nearest-sphere lighting + cursor ring). |
 | P4-4 | **Chapter 09 sticky mark** holds a graphic on screen through nine rows of content that should not be on the homepage. |
+| **P4-5** | **The ground under the hero mark reads as a brown smudge, not a surface.** Owner-reported on device, and currently live. At hero scale the nine spheres are large and nearly touching, so flipping them into a shallow clipped band at low alpha merges them into one stain. The study panel that justified the ground used small, well-separated spheres on a wide canvas — a different composition. **A removal was built and then reverted along with a sphere rebuild the owner rejected, so the smudge is back.** The isolated fix is to delete the ground block alone (`═══ C · THE GROUND ═══`) and change nothing else — no lighting changes, no sphere rebuild. |
 
 ---
 
@@ -202,7 +241,7 @@ enquiry form sits at the bottom of all of it.
 | # | Item |
 |---|---|
 | P4c-2 | **Hero does not fit the first screen at small and short viewports.** 320×568: hook is 1001px against 568px of viewport — the headline, the sub-paragraph and the scroll cue cannot coexist. 1024×768 (iPad landscape, and every 768-tall laptop): hook 784px against 768px — overflows by 16px, so the scroll cue is pushed under the fold on the exact screen where it is meant to invite the scroll. |
-| **P4c-3** | **The homepage has no mobile navigation at all — CONFIRMED BY OWNER ON DEVICE.** The rule `@media(max-width:880px){.navlinks>a:not(.navcta){display:none}}` hides the links with **no replacement**. A phone visitor sees only: mark + wordmark + **"Contact"** + language globe. Approach, Capabilities, Work and About are unreachable — four of the five nav destinations simply do not exist on mobile. **All five inner pages carry a working hamburger** (`.burger` + `#navLinks.open`, with `aria-expanded` wired). The finished homepage is the only page on the site that loses its navigation, and it is the page most traffic lands on. **Fix: port the inner pages' burger pattern, restyled to the homepage's 4px language.** ~1 h. |
+| **P4c-3** | ✅ **CLOSED** — the homepage has a working burger menu. <br> ~~ **The homepage has no mobile navigation at all — CONFIRMED BY OWNER ON DEVICE.** The rule `@media(max-width:880px){.navlinks>a:not(.navcta){display:none}}` hides the links with **no replacement**. A phone visitor sees only: mark + wordmark + **"Contact"** + language globe. Approach, Capabilities, Work and About are unreachable — four of the five nav destinations simply do not exist on mobile. **All five inner pages carry a working hamburger** (`.burger` + `#navLinks.open`, with `aria-expanded` wired). The finished homepage is the only page on the site that loses its navigation, and it is the page most traffic lands on. **Fix: port the inner pages' burger pattern, restyled to the homepage's 4px language.** ~1 h. |
 
 ### Verified clean
 

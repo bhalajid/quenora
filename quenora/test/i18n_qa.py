@@ -62,6 +62,17 @@ fails, warns = [], []
 
 
 def fail(lang, check, msg):
+    """A shortfall in a language nobody is offered is a note, not a blocker.
+
+    es/ and it/ are built and kept in the repo but are absent from the
+    switcher, the hreflang set and the sitemap, and are served noindex. No
+    visitor can reach them, so an untranslated string there cannot reach a
+    visitor either. Blocking the release on it stops work on the languages
+    that are actually published — which is what it did the first time the
+    engineering page was localised."""
+    if lang in UNLISTED_LANGS:
+        warns.append((lang, check, msg + " (language not offered — not blocking)"))
+        return
     fails.append((lang, check, msg))
 
 

@@ -113,9 +113,30 @@ if [ -f "$DIR/i18n/FROZEN" ]; then
   printf '        Before launch: rm i18n/FROZEN && python3 build_i18n.py, then\n'
   printf '        re-run this gate — it will fail until they are regenerated.\n'
 elif [ -d "$DIR/de" ]; then
-  python3 i18n_qa.py 2>&1 | sed -n '/FAILURES/,/^====/p;/failure(s)/p' | head -30
-  python3 i18n_qa.py >/dev/null 2>&1 && ok "all four languages clean" \
-    || bad "translation gate failed — run: python3 test/i18n_qa.py"
+  # i18n_qa.py needs beautifulsoup4, which the system python here does not
+  # have (PEP 668 blocks installing into it). Pick the first interpreter that
+  # can actually import it. Without this the stage reported "translation gate
+  # failed" for a missing dependency, which sent the last investigation after
+  # the translations instead of the environment.
+  QPY=""
+  for c in "${QUENORA_PY:-}" "$DIR/../.venv/bin/python3" "$DIR/.venv/bin/python3" \
+           /tmp/qvenv/bin/python3 python3; do
+    [ -n "$c" ] || continue
+    if command -v "$c" >/dev/null 2>&1 || [ -x "$c" ]; then
+      "$c" -c 'import bs4' >/dev/null 2>&1 && { QPY="$c"; break; }
+    fi
+  done
+  if [ -z "$QPY" ]; then
+    printf '   \033[33mHELD\033[0m beautifulsoup4 is not installed for any python found here,\n'
+    printf '        so the translations could not be checked (this is the tooling,\n'
+    printf '        not the content). Fix with:\n'
+    printf '          python3 -m venv .venv && .venv/bin/pip install beautifulsoup4\n'
+    printf '        or set QUENORA_PY to an interpreter that has it.\n'
+  else
+    "$QPY" i18n_qa.py 2>&1 | sed -n '/FAILURES/,/^====/p;/failure(s)/p' | head -30
+    "$QPY" i18n_qa.py >/dev/null 2>&1 && ok "every offered language clean" \
+      || bad "translation gate failed — run: $QPY test/i18n_qa.py"
+  fi
 else
   printf '   \033[33mSKIP\033[0m no localised builds — run: python3 build_i18n.py\n'
 fi

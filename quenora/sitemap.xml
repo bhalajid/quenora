@@ -9,6 +9,13 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://quenora.ai/engineering.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/engineering.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/engineering.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/engineering.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://quenora.ai/services.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/services.html"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/services.html"/>
@@ -42,6 +49,13 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/"/>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://quenora.ai/de/engineering.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/engineering.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/engineering.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/engineering.html"/>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://quenora.ai/de/services.html</loc>
@@ -79,6 +93,13 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://quenora.ai/fr/engineering.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/engineering.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/engineering.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/engineering.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://quenora.ai/fr/services.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/services.html"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/services.html"/>
@@ -105,10 +126,6 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/contact.html"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/contact.html"/>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://quenora.ai/engineering.html</loc>
-    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://quenora.ai/impressum.html</loc>

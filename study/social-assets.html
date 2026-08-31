@@ -1,0 +1,367 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quenora — social asset studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--void:#07070A;--sf1:#0D0E13;--t1:#F2EFE8;--t2:#A8AEBB;--t3:#7C8290;
+  --copper:#C97A3C;--copper-lt:#E9A063;--ember:#FF7043;--signal:#5BD7F5;
+  --line:rgba(242,239,232,.09)}
+*{box-sizing:border-box}
+body{margin:0;background:#050508;color:var(--t1);font:400 15px/1.6 Inter,system-ui,sans-serif;padding:32px}
+h1{font-size:1.5rem;font-weight:600;letter-spacing:-.02em;margin:0 0 6px}
+.sub{color:var(--t3);font-size:.9rem;max-width:62ch;margin:0 0 28px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 28px;align-items:center}
+button{font:500 .8rem/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--sf1);color:var(--t1);border:1px solid rgba(242,239,232,.16);
+  padding:11px 15px;border-radius:4px;cursor:pointer;transition:background .2s,border-color .2s;min-height:44px}
+button:hover{background:#171a22;border-color:var(--copper)}
+button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+button[aria-pressed="true"]{border-color:var(--copper);color:var(--copper-lt)}
+.tile{margin:0 0 40px;border-top:1px solid var(--line);padding-top:22px}
+.hd{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin:0 0 12px}
+.hd h2{font-size:1rem;font-weight:600;margin:0}
+.hd .dim{font:500 .72rem/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--copper-lt)}
+.hd .note{color:var(--t3);font-size:.82rem}
+.hd button{margin-left:auto}
+.frame{position:relative;width:100%;background:var(--void);border:1px solid var(--line);
+  border-radius:4px;overflow:hidden;line-height:0}
+canvas{display:block;width:100%;height:auto}
+.frame.avatar{max-width:420px}
+.frame.tall{max-width:340px}
+@media(prefers-reduced-motion:reduce){.sub::after{content:" Motion is paused — each canvas shows one settled frame."}}
+</style></head><body>
+
+<h1>Quenora — social asset studio</h1>
+<p class="sub">Every tile is the hero mark drawn at the exact pixel size each platform wants:
+nine circles on a 90° arc, one signal that travels the whole way and blooms when it
+arrives. Save a still for the places that only take a still. Screen-record a tile for
+the places that take video.</p>
+
+<div class="bar">
+  <button id="tSafe" aria-pressed="false">Safe zones</button>
+  <button id="tMotion" aria-pressed="true">Motion</button>
+  <button id="saveAll">Save every still</button>
+</div>
+
+<div id="tiles"></div>
+
+<script>
+(function(){
+var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+var C={void:'7,7,10',t1:'242,239,232',t2:'168,174,187',t3:'124,130,144',
+       copper:'201,122,60',lt:'233,160,99',ember:'255,112,67',signal:'91,215,245'};
+
+/* the mark: nine circles, 90° arc, ×9 growth, ratio 1.3161 */
+var ARC=[[12,161.71,3],[21.64,161.34,3.95],[33.39,159.88,5.2],
+         [47.73,156.52,6.84],[65.05,149.97,9],[85.34,138.1,11.84],
+         [107.49,117.76,15.59],[127.81,84.89,20.52],[151.71,36,27]];
+var B=[1e9,-1e9,1e9,-1e9];
+ARC.forEach(function(a){B[0]=Math.min(B[0],a[0]-a[2]);B[1]=Math.max(B[1],a[0]+a[2]);
+  B[2]=Math.min(B[2],a[1]-a[2]);B[3]=Math.max(B[3],a[1]+a[2]);});
+var BW=B[1]-B[0],BH=B[3]-B[2];
+
+/* Catmull-Rom through all nine centres, so the signal stays on the mark
+   instead of kinking at every circle. Built once per layout. */
+function spline(nodes){
+  var P=[],L=[0],acc=0;
+  for(var i=0;i<nodes.length-1;i++){
+    var p0=nodes[i>0?i-1:0],p1=nodes[i],p2=nodes[i+1],
+        p3=nodes[i<nodes.length-2?i+2:nodes.length-1];
+    for(var s=0;s<16;s++){
+      var t=s/16,t2=t*t,t3=t2*t;
+      P.push({x:.5*((2*p1.x)+(-p0.x+p2.x)*t+(2*p0.x-5*p1.x+4*p2.x-p3.x)*t2+(-p0.x+3*p1.x-3*p2.x+p3.x)*t3),
+              y:.5*((2*p1.y)+(-p0.y+p2.y)*t+(2*p0.y-5*p1.y+4*p2.y-p3.y)*t2+(-p0.y+3*p1.y-3*p2.y+p3.y)*t3)});
+    }
+  }
+  P.push({x:nodes[8].x,y:nodes[8].y});
+  for(var k=1;k<P.length;k++){acc+=Math.hypot(P[k].x-P[k-1].x,P[k].y-P[k-1].y);L.push(acc);}
+  return {P:P,L:L,T:acc||1};
+}
+function at(sp,d){
+  var lo=0,hi=sp.L.length-1;
+  while(lo<hi-1){var m=(lo+hi)>>1; if(sp.L[m]<d)lo=m; else hi=m;}
+  var a=sp.P[lo],b=sp.P[hi],seg=sp.L[hi]-sp.L[lo]||1,u=(d-sp.L[lo])/seg;
+  return {x:a.x+(b.x-a.x)*u,y:a.y+(b.y-a.y)*u};
+}
+
+/* ── the scene ─────────────────────────────────────────────────────────────
+   One draw function for every format. Layout differs only in where the mark
+   sits and how big the type is; the argument it makes is identical. */
+function scene(g,W,H,t,o){
+  g.fillStyle='#07070A'; g.fillRect(0,0,W,H);
+
+  /* depth — a slow warm wash off the mark, so the plate is never flat black */
+  var wash=g.createRadialGradient(o.mx,o.my,0,o.mx,o.my,o.mr*3.4);
+  wash.addColorStop(0,'rgba(201,122,60,'+(0.16*o.glow)+')');
+  wash.addColorStop(.45,'rgba(201,122,60,'+(0.05*o.glow)+')');
+  wash.addColorStop(1,'rgba(7,7,10,0)');
+  g.fillStyle=wash; g.fillRect(0,0,W,H);
+
+  /* dust — deterministic, so a saved still is the same still every time */
+  var sd=11; function rnd(){sd=(sd*1103515245+12345)&0x7fffffff;return sd/0x7fffffff;}
+  var n=Math.round(W*H/16000);
+  for(var i=0;i<n;i++){
+    var z=.18+rnd()*.92,
+        dx=(rnd()+t*0.004*z)%1, dy=(rnd()+t*0.0022*z)%1;
+    g.fillStyle='rgba(242,239,232,'+(0.035+z*0.075).toFixed(3)+')';
+    /* dust reads as bokeh if it scales one-to-one with the mark, so it is
+       held back to just under half — present at 1920, not blobs at 640 */
+    g.beginPath(); g.arc(dx*W,dy*H,(0.35+z*1.5)*o.k*0.45,0,6.2832); g.fill();
+  }
+
+  /* the nine, placed by the shared fit */
+  var nodes=ARC.map(function(a){
+    return {x:o.mx+(a[0]-(B[0]+B[1])/2)*o.s, y:o.my+(a[1]-(B[2]+B[3])/2)*o.s, r:a[2]*o.s};
+  });
+
+  /* the arc between them */
+  for(var k=0;k<8;k++){
+    var a2=nodes[k],b2=nodes[k+1];
+    g.strokeStyle='rgba(201,122,60,.20)'; g.lineWidth=Math.max(1,o.k*.9);
+    g.beginPath(); g.moveTo(a2.x,a2.y); g.lineTo(b2.x,b2.y); g.stroke();
+  }
+
+  /* one signal, travelling the whole way — the headline is that most
+     enterprise AI never reaches the work, so the mark has to arrive */
+  var sp=spline(nodes), CY=5.2, ph=(t%CY)/3.0, lit=[];
+  for(var q=0;q<9;q++) lit[q]=0;
+  var head=null;
+  if(ph<=1){
+    var d=Math.pow(ph,.92)*sp.T; head=at(sp,d);
+    for(var q2=0;q2<9;q2++){
+      var dq=Math.hypot(nodes[q2].x-head.x,nodes[q2].y-head.y);
+      lit[q2]=Math.max(0,1-dq/(nodes[q2].r*5.5));
+      if(sp.L[sp.L.length-1] && d>=sp.T*0.985 && q2===8) lit[8]=1;
+    }
+  } else if(ph<1.45){ lit[8]=Math.max(0,1-(ph-1)/0.45); }
+
+  /* the spheres */
+  nodes.forEach(function(nd,i){
+    var b=0.34+0.66*lit[i];
+    var rg=g.createRadialGradient(nd.x-nd.r*.34,nd.y-nd.r*.38,nd.r*.05,nd.x,nd.y,nd.r);
+    rg.addColorStop(0,'rgba('+(lit[i]>.4?C.lt:C.copper)+','+(0.55+0.45*b)+')');
+    rg.addColorStop(1,'rgba(150,88,42,'+(0.42+0.5*b)+')');
+    g.fillStyle=rg; g.beginPath(); g.arc(nd.x,nd.y,nd.r,0,6.2832); g.fill();
+    if(lit[i]>0.05){
+      var hg=g.createRadialGradient(nd.x,nd.y,nd.r*.9,nd.x,nd.y,nd.r*2.4);
+      hg.addColorStop(0,'rgba(233,160,99,'+(0.22*lit[i]).toFixed(3)+')');
+      hg.addColorStop(1,'rgba(233,160,99,0)');
+      g.fillStyle=hg; g.beginPath(); g.arc(nd.x,nd.y,nd.r*2.4,0,6.2832); g.fill();
+    }
+  });
+
+  /* the head itself */
+  if(head){
+    var hg2=g.createRadialGradient(head.x,head.y,0,head.x,head.y,o.k*13);
+    hg2.addColorStop(0,'rgba(91,215,245,.85)');
+    hg2.addColorStop(.3,'rgba(91,215,245,.30)');
+    hg2.addColorStop(1,'rgba(91,215,245,0)');
+    g.fillStyle=hg2; g.beginPath(); g.arc(head.x,head.y,o.k*13,0,6.2832); g.fill();
+    g.fillStyle='rgba(226,250,255,.95)';
+    g.beginPath(); g.arc(head.x,head.y,o.k*2.1,0,6.2832); g.fill();
+  }
+
+  if(o.type) o.type(g,W,H,o);
+}
+
+/* ── type ────────────────────────────────────────────────────────────────── */
+function wordmark(g,x,y,size,align){
+  g.textAlign=align||'left'; g.textBaseline='alphabetic';
+  g.fillStyle='rgba('+C.t1+',1)';
+  g.font='600 '+size+'px Inter,system-ui,sans-serif';
+  g.letterSpacing=(-size*0.02)+'px';
+  g.fillText('quenora',x,y);
+  g.letterSpacing='0px';
+}
+function eyebrow(g,txt,x,y,size,align,col){
+  g.textAlign=align||'left'; g.textBaseline='alphabetic';
+  g.font='500 '+size+'px "JetBrains Mono",monospace';
+  g.letterSpacing=(size*0.18)+'px';
+  g.fillStyle=col||'rgba('+C.t3+',1)';
+  g.fillText(txt,x,y); g.letterSpacing='0px';
+}
+function line(g,txt,x,y,size,align,ital){
+  g.textAlign=align||'left'; g.textBaseline='alphabetic';
+  g.font=(ital?'italic ':'')+'400 '+size+'px '+(ital?'"Instrument Serif",Georgia,serif':'Inter,system-ui,sans-serif');
+  g.fillStyle=ital?'rgba('+C.lt+',1)':'rgba('+C.t1+',1)';
+  g.letterSpacing=(-size*0.022)+'px';
+  g.fillText(txt,x,y); g.letterSpacing='0px';
+}
+
+/* ── the formats ─────────────────────────────────────────────────────────── */
+var FORMATS=[
+ {id:'x-header', name:'X / Twitter header', w:1500, h:500,
+  note:'Avatar sits bottom-left; the left 260px stays empty.',
+  safe:[[0,300,300,200]],
+  layout:function(W,H){return {mx:W*0.745,my:H*0.50,s:H*0.86/BH,k:H/500,glow:1,mr:H*0.45,
+    type:function(g){
+      var x=W*0.055;
+      eyebrow(g,'ENTERPRISE AI & AUTOMATION',x,H*0.27,20,'left','rgba('+C.copper+',1)');
+      wordmark(g,x,H*0.53,92);
+      line(g,'Most enterprise AI never reaches the work.',x,H*0.70,34);
+    }};}},
+
+ {id:'linkedin-personal', name:'LinkedIn personal background', w:1584, h:396,
+  note:'Your photo overlaps bottom-left on desktop and bottom-centre on mobile, so the type stays in the top band.',
+  safe:[[0,190,430,206],[640,190,300,206]],
+  layout:function(W,H){return {mx:W*0.795,my:H*0.50,s:H*0.70/BH,k:H/396,glow:1,mr:H*0.45,
+    type:function(g){
+      var x=W*0.045;
+      wordmark(g,x,H*0.30,54);
+      eyebrow(g,'AI ENGINEERING · GOVERNANCE · AUTOMATION',x,H*0.44,16,'left','rgba('+C.copper+',1)');
+    }};}},
+
+ {id:'linkedin-cover', name:'LinkedIn company page cover', w:1128, h:191,
+  note:'Very shallow — wordmark and mark only, no second line.',
+  safe:[],
+  layout:function(W,H){return {mx:W*0.855,my:H*0.50,s:H*0.74/BH,k:H/191,glow:.9,mr:H*0.5,
+    type:function(g){
+      var x=W*0.045;
+      wordmark(g,x,H*0.48,46);
+      eyebrow(g,'ENTERPRISE AI & AUTOMATION · HEILBRONN',x,H*0.76,14,'left','rgba('+C.copper+',1)');
+    }};}},
+
+ {id:'share-card', name:'Link preview card (X, LinkedIn, WhatsApp)', w:1200, h:630,
+  note:'The image that appears when anyone pastes quenora.com into a chat or a post.',
+  safe:[],
+  layout:function(W,H){return {mx:W*0.5,my:H*0.70,s:H*0.52/BH,k:H/630,glow:1,mr:H*0.4,
+    type:function(g){
+      eyebrow(g,'ENTERPRISE AI & AUTOMATION',W*0.5,H*0.16,19,'center','rgba('+C.copper+',1)');
+      line(g,'Most enterprise AI never',W*0.5,H*0.315,52,'center');
+      line(g,'reaches ',W*0.5-70,H*0.42,52,'center');
+      line(g,'the work.',W*0.5+108,H*0.42,52,'center',true);
+      wordmark(g,W*0.945,H*0.945,32,'right');
+    }};}},
+
+ {id:'instagram-post', name:'Instagram post', w:1080, h:1080,
+  note:'Square. Type in the upper two thirds, mark below it.',
+  safe:[],
+  layout:function(W,H){return {mx:W*0.5,my:H*0.705,s:W*0.56/BW,k:H/1080,glow:1,mr:W*0.42,
+    type:function(g){
+      eyebrow(g,'ENTERPRISE AI & AUTOMATION',W*0.5,H*0.13,22,'center','rgba('+C.copper+',1)');
+      line(g,'Most enterprise AI',W*0.5,H*0.245,66,'center');
+      line(g,'never reaches',W*0.5,H*0.331,66,'center');
+      line(g,'the work.',W*0.5,H*0.417,66,'center',true);
+      eyebrow(g,'9 CIRCLES · 90° ARC · ×9 GROWTH',W*0.93,H*0.955,16,'right','rgba('+C.t3+',1)');
+    }};}},
+
+ {id:'story', name:'Instagram / WhatsApp story', w:1080, h:1920,
+  note:'Top and bottom 250px stay clear of the platform’s own controls.',
+  safe:[[0,0,1080,250],[0,1670,1080,250]],
+  layout:function(W,H){return {mx:W*0.5,my:H*0.62,s:W*0.66/BW,k:H/1920*0.62,glow:1,mr:W*0.45,
+    type:function(g){
+      eyebrow(g,'ENTERPRISE AI & AUTOMATION',W*0.5,H*0.200,24,'center','rgba('+C.copper+',1)');
+      line(g,'Most enterprise AI',W*0.5,H*0.278,72,'center');
+      line(g,'never reaches',W*0.5,H*0.325,72,'center');
+      line(g,'the work.',W*0.5,H*0.372,72,'center',true);
+      wordmark(g,W*0.5,H*0.845,52,'center');
+      eyebrow(g,'QUENORA.COM',W*0.5,H*0.882,18,'center','rgba('+C.t3+',1)');
+    }};}},
+
+ {id:'wallpaper', name:'WhatsApp chat wallpaper', w:1080, h:1920,
+  note:'No wordmark and no headline — chat bubbles sit on top, so this stays quiet.',
+  safe:[],
+  layout:function(W,H){return {mx:W*0.5,my:H*0.5,s:W*0.80/BW,k:H/1920*0.55,glow:.34,mr:W*0.5,
+    type:null, dim:0.55};}},
+
+ {id:'avatar', name:'Profile mark (WhatsApp, X, Instagram)', w:640, h:640,
+  note:'Cropped to a circle by every platform — the mark is inset to survive it.',
+  safe:[],
+  layout:function(W,H){return {mx:W*0.5,my:H*0.5,s:W*0.56/BW,k:H/640,glow:1,mr:W*0.4,type:null};}}
+];
+
+/* ── build the page ──────────────────────────────────────────────────────── */
+var showSafe=false, motion=!reduced;
+var tiles=document.getElementById('tiles');
+
+FORMATS.forEach(function(F){
+  var w=document.createElement('div'); w.className='tile';
+  var cls=F.w===F.h?'avatar':(F.h>F.w?'tall':'');
+  w.innerHTML='<div class="hd"><h2>'+F.name+'</h2>'+
+    '<span class="dim">'+F.w+' × '+F.h+'</span>'+
+    '<span class="note">'+F.note+'</span>'+
+    '<button data-save="'+F.id+'">Save PNG</button></div>'+
+    '<div class="frame '+cls+'"><canvas id="c-'+F.id+'" width="'+F.w+'" height="'+F.h+'" role="img" aria-label="'+F.name+'"></canvas></div>';
+  tiles.appendChild(w);
+  F.cv=w.querySelector('canvas'); F.g=F.cv.getContext('2d');
+});
+
+function paint(F,t){
+  var o=F.layout(F.w,F.h);
+  /* one scale for everything that is not the mark itself: dust, rails and the
+     signal head all key off the mark, so a 640px avatar and a 1920px story
+     read as the same drawing rather than the same drawing with a pinhead. */
+  o.k=o.s*1.5;
+  scene(F.g,F.w,F.h,t,o);
+  if(o.dim){ F.g.fillStyle='rgba(7,7,10,'+o.dim+')'; F.g.fillRect(0,0,F.w,F.h); }
+}
+function overlay(F){
+  if(!showSafe||!F.safe||!F.safe.length) return;
+  var g=F.g; g.save(); g.setLineDash([10,8]);
+  g.strokeStyle='rgba(91,215,245,.75)'; g.lineWidth=3;
+  F.safe.forEach(function(r){
+    g.strokeRect(r[0]+2,r[1]+2,r[2]-4,r[3]-4);
+    g.fillStyle='rgba(91,215,245,.07)'; g.fillRect(r[0],r[1],r[2],r[3]);
+  });
+  g.restore();
+}
+
+var t0=0, raf=null;
+/* The moment the signal is 91% of the way along: far enough to have lit most
+   of the arc, not yet arrived. Every saved still is this frame, so the whole
+   set is one picture at one instant rather than eight unrelated ones. */
+var STILL=2.72;
+function frame(now){
+  if(!t0) t0=now;
+  var t=(now-t0)/1000;
+  FORMATS.forEach(function(F){ paint(F,t); overlay(F); });
+  raf = motion ? requestAnimationFrame(frame) : null;
+}
+function halt(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
+function still(){ halt(); FORMATS.forEach(function(F){ paint(F,STILL); overlay(F); }); }
+
+if(motion) raf=requestAnimationFrame(frame); else still();
+
+document.getElementById('tMotion').addEventListener('click',function(){
+  motion=!motion; this.setAttribute('aria-pressed',motion?'true':'false');
+  if(motion){ t0=0; raf=requestAnimationFrame(frame); } else still();
+});
+document.getElementById('tSafe').addEventListener('click',function(){
+  showSafe=!showSafe; this.setAttribute('aria-pressed',showSafe?'true':'false');
+  if(!motion) still();
+});
+
+function save(F){
+  /* Halt the loop first. Without this the next animation frame repaints the
+     canvas before toBlob reads it, and the file is whatever moment happened
+     to land — which is how the first set came out with the signal in eight
+     different places. */
+  var wasMotion=motion, wasSafe=showSafe;
+  motion=false; halt(); showSafe=false;
+  paint(F,STILL);                                  /* guides are never exported */
+  F.cv.toBlob(function(bl){
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(bl); a.download='quenora-'+F.id+'-'+F.w+'x'+F.h+'.png';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},1500);
+    showSafe=wasSafe; motion=wasMotion;
+    if(motion && !raf){ t0=0; raf=requestAnimationFrame(frame); }
+  },'image/png');
+}
+tiles.addEventListener('click',function(e){
+  var b=e.target.closest('[data-save]'); if(!b) return;
+  var F=FORMATS.filter(function(f){return f.id===b.dataset.save;})[0];
+  b.textContent='Saved'; setTimeout(function(){b.textContent='Save PNG';},1400);
+  save(F);
+});
+document.getElementById('saveAll').addEventListener('click',function(){
+  var wasMotion=motion; motion=false; halt();
+  FORMATS.forEach(function(F,i){ setTimeout(function(){ save(F); }, i*420); });
+  setTimeout(function(){ motion=wasMotion; if(motion && !raf){ t0=0; raf=requestAnimationFrame(frame); } },
+             FORMATS.length*420+600);
+});
+})();
+</script>
+</body></html>

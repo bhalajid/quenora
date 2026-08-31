@@ -1,58 +1,16 @@
-TRANSLATIONS FROZEN
-===================
+TRANSLATIONS — DE and FR are CURRENT. ES and IT are still frozen.
+=================================================================
 
-The German, French, Spanish and Italian builds under de/ fr/ es/ it/ were
-generated from an earlier revision of the English site. The English homepage
-has since been redesigned and rewritten, so those pages are now STALE: they
-are structurally valid and grammatically clean, but they no longer say what
-index.html says.
+31 August. German and French were regenerated from the current English source
+and are at 100% coverage with zero failures in test/i18n_qa.py. They mirror
+index.html exactly: same eleven sections, same structure, same design, same
+graphics. Do not hand-edit de/ or fr/ — they are generated. Change the English
+and the i18n/*.json, then re-run build_i18n.py.
 
-They are deliberately left in place rather than deleted, so the URLs and the
-translated string files in this directory survive the English rewrite.
+Spanish and Italian are NOT current. They sit at ~60% coverage and are
+deliberately unlisted: noindex, absent from the sitemap, and not offered in the
+language switcher. They stay that way until someone commissions the copy.
 
-While this file exists, the release gate holds stage 6 instead of failing it.
-
-To unfreeze, once the English page is signed off:
-
-    rm i18n/FROZEN
-    python3 build_i18n.py
-    cd test && bash release.sh ..
-
-The gate will then fail until every localised page matches the new English
-structure — which is the point.
-
-SPANISH AND ITALIAN ARE UNLISTED
---------------------------------
-
-Decision, 28 August 2026. The firm states it works in German, French and
-English, so the site now offers only those three. es/ and it/ are still built
-and still in the repository — nothing is deleted — but they are:
-
-  * absent from the language switcher on every English page
-  * absent from the hreflang alternate set and from sitemap.xml
-  * served noindex, follow
-
-build_i18n.py carries this as UNLISTED_LANGS, alongside the existing
-UNLISTED_PAGES. To republish them on expansion, remove the code from that set
-and rebuild; nothing else has to be undone.
-
-The de/ and fr/ pages still list es/ and it/ in their own switchers. They were
-not hand-edited, because they are frozen and because their switcher hrefs are
-broken independently of this (see below) — regenerating fixes both at once.
-
-KNOWN BUG, NOT INTRODUCED BY THE ABOVE
---------------------------------------
-
-The language switcher on every localised page carries English-relative hrefs:
-from /de/services.html, "Deutsch" points at de/services.html, which resolves
-to /de/de/services.html and 404s, while "English" points at services.html,
-which resolves back to /de/services.html. Cause: build_lang() only inserts a
-switcher "if not soup.find(class_='langsel')", and the English source page
-already has one, so the localised switcher is copied verbatim instead of being
-rebuilt per language. Fix that condition when unfreezing.
-
-Still outstanding before any of these go live:
-  · native-speaker review of all four languages
-    (every file in i18n/ carries "reviewed_by_native_speaker": false)
-  · a German Impressum, which is a legal requirement, not an option
-  · a privacy notice
+Running the generator needs beautifulsoup4:
+    python3 -m venv .venv && .venv/bin/pip install beautifulsoup4
+    .venv/bin/python build_i18n.py

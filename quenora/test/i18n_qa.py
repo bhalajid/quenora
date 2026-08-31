@@ -31,6 +31,13 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 PAGES = ["index.html", "services.html", "products.html",
          "approach.html", "work.html", "contact.html"]
 LANGS = ["de", "fr", "es", "it"]
+# es and it are built but deliberately unlisted: noindex, absent from the
+# sitemap and not offered in the switcher. Advertising them in hreflang while
+# telling crawlers not to index them is a contradiction, so build_i18n.py
+# emits alternates for the LISTED languages only. This test predates that
+# decision and required all four, which failed a correct build.
+UNLISTED_LANGS = {"es", "it"}
+LISTED_LANGS = [l for l in LANGS if l not in UNLISTED_LANGS]
 LOCALE = {"de": "de_DE", "fr": "fr_FR", "es": "es_ES", "it": "it_IT"}
 
 KEEP = ["Quenora Technology Consulting", "quenora.ai", "hello@quenora.ai",
@@ -200,7 +207,7 @@ for lang in LANGS:
         if not can or ("/%s/" % lang) not in can.get("href", ""):
             fail(lang, "metadata", "%s: canonical missing or wrong" % page)
         hl = {l.get("hreflang") for l in soup.find_all("link", rel="alternate")}
-        for need in ["en"] + LANGS + ["x-default"]:
+        for need in ["en"] + LISTED_LANGS + ["x-default"]:
             if need not in hl:
                 fail(lang, "metadata", "%s: hreflang '%s' missing" % (page, need))
         ol = soup.find("meta", attrs={"property": "og:locale"})

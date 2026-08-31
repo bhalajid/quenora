@@ -51,9 +51,16 @@ SKIP_TAGS = {"script", "style"}
 
 # strings that must never be translated
 DNT = re.compile(
+    # "AI" and "Contact" were both in this list and both were wrong.
+    #   AI      the only standalone "AI" node on the site is the headline word
+    #           span, which must read KI in German and IA in French. Skipping it
+    #           is also what produced "l'IA AI": the phrase around it translated
+    #           while the bare token did not.
+    #   Contact appears as a nav link, a footer heading and the short CTA label.
+    #           All three should localise. "EU AI Act" is protected separately.
     r"^(quenora|quenora\.ai|hello@quenora\.ai|Quenora Consulting|"
     r"GDPR|EU AI Act|IaC|MLOps|ERP|CRM|API|BI & reporting|RAG systems|"
-    r"\[[^\]]+\]|Main|Footer|Contact|Legal|Site|Quenora home|Reg / VAT|AI|Core|Continuous|Choose language|Sprache w\u00e4hlen|Choisir la langue|Elegir idioma|Scegli la lingua|Deutsch|English|Français|Español|Italiano|EN|DE|FR|ES|IT|AB/\d+|Phase \d+|\d+[\d\s:.,%–—/-]*|00:00|html|uenora|"
+    r"\[[^\]]+\]|Main|Footer|Legal|Site|Quenora home|Reg / VAT|Core|Continuous|Choose language|Sprache w\u00e4hlen|Choisir la langue|Elegir idioma|Scegli la lingua|Deutsch|English|Français|Español|Italiano|EN|DE|FR|ES|IT|AB/\d+|Phase \d+|\d+[\d\s:.,%–—/-]*|00:00|html|uenora|"
     r"[©·→←↓↑✓–—]+)$", re.I)
 
 
@@ -287,10 +294,22 @@ def build_lang(lang):
         st = soup.find("style")
         if st and "langsel" not in st.text:
             st.string = st.text + LANG_CSS
+        # The English source already carries a switcher, put there by
+        # build_en_switcher(). The old condition was "insert one only if the
+        # page has none", which was therefore never true — so every localised
+        # page inherited the ENGLISH hrefs verbatim. From /de/services.html
+        # that made "Deutsch" resolve to /de/de/services.html (404) and
+        # "English" resolve back to the German page you were already on, so a
+        # visitor could not leave a localised build by the control provided
+        # for leaving it. Replace the inherited one instead of skipping it.
         nav = soup.find(class_="navlinks")
-        if nav and not soup.find(class_="langsel"):
+        if nav:
             frag = BeautifulSoup(switcher(lang, page), "html.parser")
-            nav.insert_after(frag)
+            existing = soup.find(class_="langsel")
+            if existing:
+                existing.replace_with(frag)
+            else:
+                nav.insert_after(frag)
         if "id=\"langBtn\"" in str(soup) and "langBtn'" not in str(soup):
             body = soup.body
             body.append(BeautifulSoup(LANG_JS, "html.parser"))

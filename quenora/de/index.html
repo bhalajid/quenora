@@ -4,16 +4,45 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Quenora — Die meiste Unternehmens-KI verlässt nie das Labor</title>
-<meta content="Quenora baut KI in die Plattformen, Abläufe und Entscheidungen ein, die Unternehmen bereits betreiben — und übergibt den Betrieb anschließend Ihrem Team." name="description"/>
+<!-- The <title> carries the category, because nobody searches a brand new
+     name. The hook lives in og:title, where it is read rather than matched. -->
+<title>Quenora — Enterprise-KI-Beratung &amp; Engineering</title>
+<meta content="Quenora ist eine Enterprise-KI-Beratung in Heilbronn. Wir bauen KI in die Plattformen und Arbeitsabläufe ein, die Sie bereits betreiben, und übergeben Ihrem Team anschließend die Schlüssel." name="description"/>
 <meta content="#07070A" name="theme-color"/>
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
 <meta content="Quenora Consulting" property="og:site_name"/>
-<meta content="Quenora — Die meiste Unternehmens-KI verlässt nie das Labor" property="og:title"/>
+<meta content="Quenora — Die meiste Enterprise-KI erreicht die Arbeit nie" property="og:title"/>
 <meta content="Wir bauen KI in das ein, was Sie bereits betreiben, und übergeben Ihnen dann die Schlüssel." property="og:description"/>
 <meta content="https://quenora.ai/de/" property="og:url"/>
+<meta content="https://quenora.ai/assets/og-quenora.jpg" property="og:image"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Quenora — most enterprise AI never reaches the work." property="og:image:alt"/>
 <meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://quenora.ai/assets/og-quenora.jpg" name="twitter:image"/>
+<meta content="Quenora — most enterprise AI never reaches the work." name="twitter:image:alt"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","@id":"https://quenora.ai/#org",
+  "name":"Quenora Consulting","url":"https://quenora.ai/",
+  "email":"info@quenora.ai",
+  "sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],
+  "logo":"https://quenora.ai/assets/og-quenora.jpg",
+  "image":"https://quenora.ai/assets/og-quenora.jpg",
+  "description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.",
+  "founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},
+  "address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},
+  "areaServed":[{"@type":"Place","name":"Europe"}],
+  "knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations"]},
+ {"@type":"WebSite","@id":"https://quenora.ai/#site",
+  "url":"https://quenora.ai/","name":"Quenora",
+  "publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},
+ {"@type":"WebPage","@id":"https://quenora.ai/#page",
+  "url":"https://quenora.ai/","isPartOf":{"@id":"https://quenora.ai/#site"},
+  "about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"}]}
+</script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,500;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
@@ -48,6 +77,11 @@
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
+/* The nav is fixed at 84px, so an anchored chapter would land underneath it.
+   Smooth scrolling is opt-out for anyone who has asked for less motion. */
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+section[id],main[id]{scroll-margin-top:96px}
 body{margin:0;background:var(--void);color:var(--t1);
   font-family:Inter,system-ui,-apple-system,sans-serif;
   font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;
@@ -92,13 +126,29 @@ main,header,footer{position:relative;z-index:2}
 /* ── cursor ── */
 .cur,.cdot{position:fixed;top:0;left:0;z-index:9998;pointer-events:none;
   border-radius:50%;opacity:0;transition:opacity .3s}
-.cur{width:40px;height:40px;border:1.5px solid var(--copper);margin:-20px 0 0 -20px;
+.cur{width:40px;height:40px;margin:-20px 0 0 -20px;
   transition:width .38s var(--e),height .38s var(--e),margin .38s var(--e),
-  background .38s var(--e),border-color .38s var(--e),opacity .3s}
+  opacity .3s}
+/* The ring is drawn as a rotating dashed arc rather than a plain circle, so it
+   reads as the mark's arc and not as a default custom cursor. The dashes are a
+   conic mask on a ring, which stays one element and costs nothing. */
+.cur::before{content:'';position:absolute;inset:0;border-radius:50%;
+  border:1.5px solid var(--copper);
+  -webkit-mask:repeating-conic-gradient(#000 0 14deg,transparent 14deg 22deg);
+          mask:repeating-conic-gradient(#000 0 14deg,transparent 14deg 22deg);
+  animation:curspin 5.5s linear infinite}
+.cur::after{content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,112,67,.16),transparent 70%);
+  opacity:0;transition:opacity .38s var(--e)}
+@keyframes curspin{to{transform:rotate(360deg)}}
 .cdot{width:5px;height:5px;background:var(--ember);margin:-2.5px 0 0 -2.5px}
 body.con .cur,body.con .cdot{opacity:1}
-body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
-  background:rgba(255,112,67,.13);border-color:var(--ember)}
+body.clg .cur{width:76px;height:76px;margin:-38px 0 0 -38px}
+body.clg .cur::before{border-color:var(--ember);animation-duration:2.2s;
+  -webkit-mask:repeating-conic-gradient(#000 0 26deg,transparent 26deg 34deg);
+          mask:repeating-conic-gradient(#000 0 26deg,transparent 26deg 34deg)}
+body.clg .cur::after{opacity:1}
+@media(prefers-reduced-motion:reduce){.cur::before{animation:none}}
 @media(hover:none),(pointer:coarse){.cur,.cdot{display:none}}
 
 /* ── loader ── */
@@ -119,11 +169,56 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .nav.stuck{background:rgba(7,7,10,.74);backdrop-filter:blur(20px) saturate(160%);
   border-bottom-color:var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:var(--sp3);height:84px}
-.brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:1.32rem;
-  letter-spacing:-.055em}
-.brand svg{width:27px;height:27px;color:var(--copper);
-  transition:transform .8s var(--e)}
-.brand:hover svg{transform:rotate(-14deg) scale(1.1)}
+/* ── the lockup ───────────────────────────────────────────────
+   The mark carries the colour; the wordmark stays neutral. Two competing
+   accents in a 200px space is what made the old version read as a UI label
+   rather than an identity.
+
+   Tracking: -.055em was too tight for Inter at this size — the r and the n
+   collided. -.018em keeps it deliberate without the collision. The word is
+   lowercase on purpose; the mark supplies the capital gesture. */
+.brand{display:inline-flex;align-items:center;gap:15px;
+  font-weight:500;font-size:1.36rem;letter-spacing:-.008em;
+  color:var(--t1);line-height:1}
+/* The mark is the identity; the wordmark is the caption. Setting the word at
+   700 made it shout over nine small circles and the whole lockup read as a UI
+   label. At 500 the two balance and the mark can be larger. */
+.brand .mk{width:40px;height:37px;flex:none;color:var(--copper);overflow:visible}
+.brand .mk circle{transition:opacity .5s var(--e),transform .7s var(--e);
+  transform-origin:center}
+/* at rest the arc reads as a ramp — small and quiet through to large and
+   present, which is the whole idea of the mark */
+.brand .mk circle:nth-child(1){opacity:.45}
+.brand .mk circle:nth-child(2){opacity:.51}
+.brand .mk circle:nth-child(3){opacity:.57}
+.brand .mk circle:nth-child(4){opacity:.64}
+.brand .mk circle:nth-child(5){opacity:.71}
+.brand .mk circle:nth-child(6){opacity:.79}
+.brand .mk circle:nth-child(7){opacity:.86}
+.brand .mk circle:nth-child(8){opacity:.93}
+.brand .mk circle:nth-child(9){opacity:1}
+/* hover: a charge travels up the arc rather than the whole mark tilting.
+   The old rotate-and-scale read as a toy. */
+.brand:hover .mk circle{opacity:1}
+.brand:hover .mk circle:nth-child(1){transition-delay:0ms}
+.brand:hover .mk circle:nth-child(2){transition-delay:35ms}
+.brand:hover .mk circle:nth-child(3){transition-delay:70ms}
+.brand:hover .mk circle:nth-child(4){transition-delay:105ms}
+.brand:hover .mk circle:nth-child(5){transition-delay:140ms}
+.brand:hover .mk circle:nth-child(6){transition-delay:175ms}
+.brand:hover .mk circle:nth-child(7){transition-delay:210ms}
+.brand:hover .mk circle:nth-child(8){transition-delay:245ms}
+.brand:hover .mk circle:nth-child(9){transition-delay:280ms;transform:scale(1.09)}
+@media(prefers-reduced-motion:reduce){
+  .brand .mk circle{transition:none}
+  .brand:hover .mk circle:nth-child(9){transform:none}
+}
+/* footer gets the full lockup: mark, word, and the line that says what we do */
+.brand.lg{font-size:1.85rem;gap:19px}
+.brand.lg .mk{width:54px;height:50px}
+.lockup{display:flex;flex-direction:column;gap:10px}
+.lockup .desc{font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--t3)}
 .navlinks{margin-left:auto;display:flex;gap:var(--sp3);align-items:center}
 .navlinks>a{font-size:.86rem;font-weight:500;color:var(--t2);position:relative;
   padding:7px 0;transition:color .3s}
@@ -132,14 +227,57 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
   transition:transform .5s var(--e)}
 .navlinks>a:hover{color:var(--t1)}
 .navlinks>a:hover::after{transform:scaleX(1);transform-origin:left}
-.navcta{border:1.5px solid var(--line2);padding:11px 20px;font-size:.8rem;
-  font-weight:600;color:var(--t1);position:relative;overflow:hidden;
-  isolation:isolate;transition:color .4s var(--e),border-color .4s var(--e)}
-.navcta::after{content:'';position:absolute;inset:0;z-index:-1;background:var(--ember);
-  transform:translateY(101%);transition:transform .5s var(--e)}
-.navcta:hover{color:var(--void);border-color:var(--ember)}
-.navcta:hover::after{transform:translateY(0)}
-@media(max-width:880px){.navlinks>a:not(.navcta){display:none}}
+.navlinks>a.navcta{background:var(--copper);color:var(--void);border:1px solid transparent;
+  padding:11px 22px;font-size:.8rem;font-weight:600;border-radius:8px;
+  white-space:nowrap;box-shadow:0 6px 24px -8px rgba(201,122,60,.45);
+  transition:background .22s ease,transform .22s ease,box-shadow .22s ease}
+.navlinks>a.navcta::after{display:none}
+.navlinks>a.navcta:hover{background:var(--copper-lt);color:var(--void);
+  transform:translateY(-1px);box-shadow:0 10px 30px -8px rgba(201,122,60,.45)}
+.cta-short{display:none}
+/* Below 880px the nav links used to be hidden with nothing in their place,
+   which left the homepage with no navigation at all across ~28 screens on a
+   phone — while the older inner pages had a working menu. Same pattern as
+   theirs, adapted to this header: the CTA stays in the bar because it is the
+   one control a visitor always wants, and the rest collapse behind the
+   button. */
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;
+  cursor:pointer;padding:9px;flex:none;margin-left:auto;border-radius:3px}
+.burger i{display:block;width:22px;height:1.5px;background:var(--t1);
+  transition:transform .28s var(--e),opacity .2s ease}
+.burger.open i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open i:nth-child(2){opacity:0}
+.burger.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.burger:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+@media(max-width:880px){
+  .burger{display:flex;order:2}
+  /* the bar is a fixed 84px on desktop; on mobile it has to be able to grow
+     to hold the open panel, or the links render past the header's own
+     background and sit unreadably over the hero */
+  .nav .wrap{flex-wrap:wrap;height:auto;min-height:84px;align-items:center}
+  /* and the panel needs a ground of its own: the header is transparent until
+     the page is scrolled, so an open menu at the top of the page would
+     otherwise have nothing behind it */
+  .nav:has(.navlinks.open){background:rgba(7,7,10,.94);
+    backdrop-filter:blur(20px) saturate(160%);border-bottom-color:var(--line)}
+  .navlinks{order:4;flex-basis:100%;flex-direction:column;align-items:stretch;
+    gap:0;margin-left:0;max-height:0;overflow:hidden;
+    transition:max-height .34s var(--e),margin .34s var(--e)}
+  .navlinks.open{max-height:320px;margin-bottom:var(--sp3)}
+  .nav.navopen{background:rgba(7,7,10,.94);
+    backdrop-filter:blur(20px) saturate(160%);border-bottom-color:var(--line)}
+  .navlinks>a{padding:14px 2px;border-bottom:1px solid var(--line-2);font-size:15px}
+  .navlinks>a::after{display:none}
+  /* the CTA leaves the collapsing panel and sits in the bar itself */
+  .navlinks>a.navcta{order:-1;position:absolute;right:64px;top:22px;padding:9px 16px}
+}
+@media(max-width:560px){.navlinks>a.navcta{right:58px;padding:8px 13px}}
+@media(prefers-reduced-motion:reduce){
+  .burger i,.navlinks{transition:none}
+}
+/* Below ~560px the row cannot hold brand + full CTA + language button, so the
+   CTA wraps to two lines and pushes the header out of its band. */
+@media(max-width:560px){.cta-long{display:none}.cta-short{display:inline}}
 
 /* ── hook: pure CSS word reveal, fires on load, no JS needed ── */
 .hook{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
@@ -157,7 +295,12 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .eyebrow{color:var(--copper-lt);margin-bottom:var(--sp4);display:flex;
   align-items:center;gap:15px;opacity:0;animation:fu .9s var(--e) 1.5s forwards}
 .eyebrow::before{content:'';width:68px;height:1.5px;background:currentColor}
-.hook h1{font-size:clamp(3rem,12vw,13rem);max-width:12ch}
+/* 12vw put the longest line across ~80% of the width, which left no column
+   for the constellation and forced it on top of the type. At 8.2vw the
+   headline occupies roughly four of the six grid columns and the arc gets
+   the last two — which is what makes the two read as composed rather than
+   collided. */
+.hook h1{font-size:clamp(2.6rem,8.2vw,9rem);max-width:12ch}
 .hook h1 .ln{display:block;overflow:hidden;padding-bottom:.08em}
 .hook h1 .w{display:inline-block;transform:translateY(112%);
   animation:wordUp 1.15s var(--e) forwards}
@@ -171,12 +314,42 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 @keyframes wordUp{to{transform:translateY(0)}}
 @keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 .hook h1 em{color:var(--ember)}
-.hook-foot{display:grid;grid-template-columns:1fr auto;gap:var(--sp4);
+.hook-foot{position:relative;display:grid;grid-template-columns:1fr auto;gap:var(--sp4);
   align-items:end;margin-top:var(--sp6);border-top:1px solid var(--line);
   padding-top:var(--sp3);opacity:0;animation:fu .9s var(--e) 2.2s forwards}
 .hook-foot p{max-width:48ch;color:var(--t2);font-size:1.06rem;margin:0}
-@media(max-width:820px){.hook-foot{grid-template-columns:1fr}}
-.cue{display:flex;flex-direction:column;align-items:center;gap:11px;color:var(--t3)}
+/* ── inline chapter CTA ─────────────────────────────────────────────────
+   The form sits at 17.3 of 19.8 screens and the sticky header button was
+   the only in-page route to it, so a reader persuaded at chapter 03 had
+   fourteen screens to go before anything invited them to act. These three
+   sit at the end of the chapters that do the persuading. Deliberately not
+   after every chapter: a CTA the reader has already declined twice reads
+   as pestering, and the page's whole argument is that it does not pester. */
+.cta-inline{display:flex;align-items:baseline;gap:var(--sp3) var(--sp4);flex-wrap:wrap;
+  margin-top:var(--sp5);padding-top:var(--sp4);border-top:1px solid var(--line)}
+.cta-inline p{margin:0;color:var(--t2);font-size:1rem;max-width:52ch}
+.cta-inline p b{color:var(--t1);font-weight:600}
+.cta-inline a{flex:none;background:var(--copper);color:var(--void);
+  padding:11px 22px;border-radius:8px;font-size:.8rem;font-weight:600;
+  white-space:nowrap;box-shadow:0 6px 24px -8px rgba(201,122,60,.45);
+  transition:background .22s ease,transform .22s ease}
+.cta-inline a:hover{background:var(--copper-lt);transform:translateY(-1px)}
+.cta-inline a:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+@media(max-width:620px){.cta-inline a{width:100%;text-align:center}}
+.hook-trust{max-width:34ch;border-left:2px solid var(--copper);padding-left:var(--sp3);
+  align-self:start}   /* the row is end-aligned; this rides to the top of it,
+                         which is 50px higher up a short viewport */
+.hook-trust p{font-size:.92rem;line-height:1.55;color:var(--t2);margin:0;max-width:none}
+.hook-trust p b{color:var(--t1);font-weight:600}
+.hook-trust p.mono{margin-top:9px;font-family:'JetBrains Mono',monospace;font-size:.66rem;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--t3)}
+@media(max-width:820px){
+  .hook-foot{grid-template-columns:1fr}
+  .hook-trust{max-width:none;margin-top:var(--sp3)}
+}
+.cue{position:absolute;right:max(0px,calc(132px - (100vw - 100%) / 2));bottom:calc(100% + var(--sp5));
+  display:flex;flex-direction:column;align-items:center;gap:11px;color:var(--t3)}
+@media(max-width:820px){.cue{position:static;margin:var(--sp2) 0 0;width:max-content}}
 .cue i{width:1px;height:58px;
   background:linear-gradient(180deg,var(--ember),transparent);
   animation:cue 2.6s var(--e) infinite}
@@ -186,25 +359,27 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
   100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* ── ticker: CSS keyframes, JS only nudges the speed ── */
-.ticker{border-block:1px solid var(--line);padding:var(--sp3) 0;overflow:hidden;
+.ticker{border-block:1px solid var(--line);padding:var(--sp2) 0;overflow:hidden;
   background:rgba(20,22,30,.5);position:relative}
 .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;
-  width:170px;z-index:2;pointer-events:none}
+  width:120px;z-index:2;pointer-events:none}
 .ticker::before{left:0;background:linear-gradient(90deg,var(--void),transparent)}
 .ticker::after{right:0;background:linear-gradient(270deg,var(--void),transparent)}
 .tt{display:flex;width:max-content;animation:slide 38s linear infinite;
   will-change:transform}
 @keyframes slide{to{transform:translateX(-50%)}}
-.tt b{font-size:clamp(1.5rem,3.6vw,3rem);font-weight:800;letter-spacing:-.045em;
-  white-space:nowrap;padding-right:var(--sp4);display:flex;align-items:center;
-  gap:var(--sp4);color:var(--t3);transition:color .4s}
-.tt b::after{content:'';width:10px;height:10px;border-radius:50%;
+/* Sized as a running label, not a headline. At the old clamp it topped out at
+   3rem and read louder than the h1 it sits under. */
+.tt b{font-size:clamp(.9rem,1.3vw,1.35rem);font-weight:700;letter-spacing:-.02em;
+  white-space:nowrap;padding-right:var(--sp3);display:flex;align-items:center;
+  gap:var(--sp3);color:var(--t3);transition:color .4s}
+.tt b::after{content:'';width:5px;height:5px;border-radius:50%;
   background:var(--copper);flex:none}
 .ticker:hover .tt b{color:var(--t2)}
 
 /* ── chapter heads ── */
 .chead{display:grid;grid-template-columns:auto 1fr;gap:var(--sp5);
-  align-items:start;padding:var(--sp7) 0 var(--sp4)}
+  align-items:start;padding:var(--sp6) 0 var(--sp4)}
 @media(max-width:900px){.chead{grid-template-columns:1fr;gap:var(--sp2)}}
 .cnum{font-family:'Playfair Display',serif;font-style:italic;
   font-size:clamp(4rem,10vw,10rem);line-height:.76;color:transparent;
@@ -213,8 +388,232 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .chead h2 em{color:var(--ember)}
 .chead .lede{margin-top:var(--sp3);max-width:56ch;color:var(--t2);font-size:1.1rem}
 
+/* ── chapter 09: the mark explained ──
+   The dot on each row is the mark's OWN radius for that circle, scaled by a
+   single factor. So the list itself grows ninefold down the page — the rows
+   are a reading of the mark, not an illustration next to one. */
+.nine{display:grid;grid-template-columns:minmax(260px,.85fr) 1.15fr;
+  gap:var(--sp5);margin-top:var(--sp5);align-items:start}
+@media(max-width:1000px){.nine{grid-template-columns:1fr;gap:var(--sp4)}}
+.ninemark{position:sticky;top:120px}
+@media(max-width:1000px){.ninemark{position:static;max-width:340px}}
+#nineArc{width:100%;height:auto;color:var(--copper);overflow:visible}
+#nineArc circle{transition:opacity .45s var(--e),transform .45s var(--e);
+  transform-origin:center;transform-box:fill-box}
+#nineArc circle:nth-of-type(1){opacity:.40}
+#nineArc circle:nth-of-type(2){opacity:.47}
+#nineArc circle:nth-of-type(3){opacity:.54}
+#nineArc circle:nth-of-type(4){opacity:.61}
+#nineArc circle:nth-of-type(5){opacity:.68}
+#nineArc circle:nth-of-type(6){opacity:.76}
+#nineArc circle:nth-of-type(7){opacity:.84}
+#nineArc circle:nth-of-type(8){opacity:.92}
+#nineArc circle:nth-of-type(9){opacity:1}
+/* one lit at a time — same rule as the hero */
+#nineArc.live circle{opacity:.16}
+#nineArc.live circle.on{opacity:1;transform:scale(1.06)}
+#nineArc .wires line{stroke:var(--copper);stroke-opacity:.22;stroke-width:.9}
+.ninefoot{margin-top:var(--sp3);color:var(--t3)}
+
+.ninelist{list-style:none;margin:0;padding:0;
+  border-top:1px solid var(--line2)}
+.ninelist li{display:grid;grid-template-columns:auto 62px 1fr;gap:var(--sp3);
+  align-items:center;padding:var(--sp3) var(--sp2);
+  border-bottom:1px solid var(--line);
+  transition:background .35s var(--e),padding-left .35s var(--e)}
+.ninelist li:hover,.ninelist li.on{background:rgba(201,122,60,.05);
+  padding-left:calc(var(--sp2) + 10px)}
+.ninelist .n{font-family:'JetBrains Mono',monospace;font-size:.66rem;
+  letter-spacing:.2em;color:var(--t3);transition:color .35s var(--e)}
+.ninelist li:hover .n,.ninelist li.on .n{color:var(--copper-lt)}
+/* --r is the mark's own radius; 1.05 is the only scale factor in play */
+.ninelist .d{justify-self:center;width:calc(var(--r) * 2 * 1.05px);
+  height:calc(var(--r) * 2 * 1.05px);border-radius:50%;
+  background:radial-gradient(circle at 34% 32%,#d49e6e,#965a2c 52%,#341c0a);
+  box-shadow:0 0 0 1px rgba(201,122,60,.3);
+  transition:box-shadow .35s var(--e),transform .35s var(--e)}
+.ninelist li:hover .d,.ninelist li.on .d{transform:scale(1.08);
+  box-shadow:0 0 0 1px rgba(201,122,60,.7),0 0 26px rgba(201,122,60,.35)}
+.ninelist h3{font-size:1.32rem;letter-spacing:-.02em}
+.ninelist p{margin:4px 0 0;color:var(--t2);font-size:.95rem}
+@media(max-width:520px){
+  .ninelist li{grid-template-columns:auto 40px 1fr;gap:var(--sp2)}
+  .ninelist .d{width:calc(var(--r) * 2 * .68px);height:calc(var(--r) * 2 * .68px)}
+  .ninelist h3{font-size:1.12rem}
+}
+
+/* ── "the gap": the chapter 01 diagram ── */
+.gapfig{margin:var(--sp5) 0 0;padding:0}
+.gapfig canvas{display:block;width:100%;height:clamp(300px,24vw,340px)}
+.gapfig figcaption,.autofig figcaption{margin-top:var(--sp3);padding-top:var(--sp3);
+  border-top:1px solid var(--line);color:var(--t3);font-size:.92rem;max-width:62ch}
+/* ── chapter 05: the three engagement shapes ── */
+.shapes{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp3);
+  margin-top:var(--sp5)}
+@media(max-width:900px){.shapes{grid-template-columns:1fr;gap:var(--sp4)}}
+.shape{padding:var(--sp4);border:1px solid var(--line);border-radius:4px;
+  background:linear-gradient(180deg,rgba(20,22,30,.55),rgba(13,14,19,.22));
+  transition:border-color .5s var(--e)}
+.shape:hover{border-color:var(--line2)}
+.shape .mono{color:var(--copper-lt);margin-bottom:var(--sp3)}
+.shape h3{font-size:1.22rem;line-height:1.3;margin-bottom:var(--sp2)}
+.shape p{color:var(--t2);font-size:.96rem}
+.shapes-note{margin-top:var(--sp3);padding-top:var(--sp3);
+  border-top:1px solid var(--line);color:var(--t3);font-size:.92rem;max-width:62ch}
+
+/* ── the enquiry form ── */
+.cform{max-width:640px;margin:var(--sp5) auto 0;text-align:left}
+.cfrow{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp3)}
+@media(max-width:600px){.cfrow{grid-template-columns:1fr}}
+.cfield{margin-bottom:var(--sp3)}
+.cfield label{display:block;font-family:'JetBrains Mono',monospace;
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--copper-lt);margin-bottom:9px}
+.cfield label .opt{color:var(--t3)}
+.cfield input,.cfield textarea{width:100%;background:rgba(242,239,232,.045);
+  border:1px solid var(--line);border-radius:4px;padding:12px 14px;
+  color:var(--t1);font-family:inherit;font-size:1rem;transition:border-color .3s}
+.cfield textarea{resize:vertical;min-height:104px;line-height:1.6}
+.cfield input:focus,.cfield textarea:focus{border-color:var(--copper)}
+.cfield input[aria-invalid="true"],.cfield textarea[aria-invalid="true"]{border-color:var(--ember)}
+.cfield ::placeholder{color:var(--t3)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.cconsent{display:flex;gap:11px;align-items:flex-start;margin:var(--sp2) 0 var(--sp4);
+  font-size:.86rem;color:var(--t2);line-height:1.55;cursor:pointer}
+.cconsent input{margin-top:3px;flex:none;width:16px;height:16px;accent-color:var(--copper)}
+.cform .bcta{border:none;cursor:pointer;font-family:inherit}
+.cform .bcta[disabled]{opacity:.55;cursor:default}
+.cnote{margin-top:var(--sp3);font-size:.88rem;color:var(--t2);min-height:1.2em}
+.cnote.err{color:var(--ember)}
+.cnote.ok{color:var(--copper-lt)}
+.cnote a{color:var(--copper-lt);border-bottom:1px solid currentColor}
+.cconsent a{color:var(--copper-lt);border-bottom:1px solid currentColor}
+.cconsent a:hover{color:var(--ember)}
+
+/* ── projects & products (hidden until released) ── */
+.buildhead{color:var(--copper-lt);margin:var(--sp5) 0 var(--sp3);
+  padding-bottom:var(--sp2);border-bottom:1px solid var(--line)}
+.builds{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp3)}
+@media(max-width:900px){.builds{grid-template-columns:1fr}}
+.build{padding:var(--sp4);border:1px solid var(--line);border-radius:4px;
+  background:linear-gradient(180deg,rgba(20,22,30,.55),rgba(13,14,19,.22));
+  transition:border-color .5s var(--e)}
+.build:hover{border-color:var(--line2)}
+.build h4{font-size:1.1rem;line-height:1.3;margin-bottom:8px;font-weight:600}
+.build p{color:var(--t2);font-size:.94rem}
+.btech{color:var(--t3);font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;margin-bottom:10px}
+.bstat{display:inline-flex;align-items:center;gap:7px;font-size:.6rem;
+  letter-spacing:.2em;text-transform:uppercase;margin-bottom:var(--sp2)}
+.bstat::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.bstat-live{color:var(--ember)}
+.bstat-scope{color:var(--copper-lt)}
+.bstat-done{color:var(--t3)}
+
+/* screen-reader-only: the assistant input needs a real label, not a
+   placeholder, but the panel has no room to show one */
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ── the assistant ──────────────────────────────────────────────────────
+   Ported from the inner pages, which had suggestion chips but no way to type.
+   It runs entirely in the page: keyword match over a written answer set, no
+   network call, no key, nothing to leak. The footer says what it is. */
+.ai-fab{position:fixed;bottom:26px;right:26px;z-index:400;width:56px;height:56px;
+  border-radius:50%;background:var(--copper);display:flex;align-items:center;
+  justify-content:center;cursor:pointer;border:none;
+  box-shadow:0 12px 36px -8px rgba(201,122,60,.45);transition:transform .25s var(--e)}
+.ai-fab:hover{transform:scale(1.07) rotate(90deg)}
+.ai-fab svg{width:23px;height:23px}
+.ai-fab::before{content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1px solid var(--copper);opacity:.5;animation:aipulse 2.6s ease-out infinite}
+@keyframes aipulse{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.35);opacity:0}}
+.ai-panel{position:fixed;bottom:96px;right:26px;z-index:400;width:370px;
+  max-width:calc(100vw - 36px);background:rgba(20,22,30,.97);
+  backdrop-filter:blur(20px);border:1px solid var(--line2);border-radius:14px;
+  overflow:hidden;box-shadow:0 30px 70px -12px rgba(0,0,0,.75);
+  opacity:0;transform:translateY(14px) scale(.97);pointer-events:none;
+  transition:.28s var(--e)}
+.ai-panel.open{opacity:1;transform:none;pointer-events:auto}
+.ai-head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;gap:11px}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--copper);flex:none;
+  box-shadow:0 0 10px var(--copper);animation:aibreathe 2s ease-in-out infinite}
+@keyframes aibreathe{0%,100%{opacity:1}50%{opacity:.35}}
+.ai-head b{font-size:.85rem;font-weight:600;display:block;color:var(--t1)}
+.ai-head span{font-family:'JetBrains Mono',monospace;font-size:.58rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--t3)}
+.ai-body{padding:16px 18px;max-height:280px;overflow-y:auto;display:flex;
+  flex-direction:column;gap:10px}
+.ai-body::-webkit-scrollbar{width:4px}
+.ai-body::-webkit-scrollbar-thumb{background:var(--line2);border-radius:2px}
+.ai-msg{font-size:.85rem;line-height:1.6;max-width:88%}
+.ai-msg.bot{color:var(--t1);background:rgba(242,239,232,.05);padding:10px 13px;
+  border-radius:11px 11px 11px 3px;align-self:flex-start}
+.ai-msg.user{color:var(--void);background:var(--copper);padding:10px 13px;
+  border-radius:11px 11px 3px 11px;align-self:flex-end;font-weight:500}
+.ai-suggest{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 12px}
+.ai-chip{font-size:.72rem;padding:6px 12px;border-radius:20px;
+  border:1px solid var(--line);color:var(--t2);cursor:pointer;
+  background:none;font-family:inherit;transition:.2s}
+.ai-chip:hover{border-color:var(--copper);color:var(--t1);background:rgba(201,122,60,.13)}
+.ai-form{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--line)}
+.ai-form input{flex:1;background:rgba(242,239,232,.05);border:1px solid var(--line);
+  border-radius:9px;padding:9px 12px;color:var(--t1);font-family:inherit;
+  font-size:.85rem;min-width:0}
+.ai-form input::placeholder{color:var(--t3)}
+.ai-form input:focus{border-color:var(--copper)}
+.ai-form button{flex:none;background:var(--copper);color:var(--void);border:none;
+  border-radius:9px;padding:0 14px;font-family:inherit;font-weight:600;
+  font-size:.85rem;cursor:pointer;transition:background .2s}
+.ai-form button:hover{background:var(--copper-lt)}
+.ai-foot{padding:10px 18px;border-top:1px solid var(--line);
+  font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--t3);text-align:center}
+.ai-typing{display:inline-flex;gap:4px;padding:10px 13px}
+.ai-typing i{width:5px;height:5px;border-radius:50%;background:var(--t3);
+  animation:aiblink 1.3s infinite}
+.ai-typing i:nth-child(2){animation-delay:.18s}
+.ai-typing i:nth-child(3){animation-delay:.36s}
+@keyframes aiblink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+@media(max-width:560px){.ai-fab{bottom:18px;right:18px}.ai-panel{bottom:84px;right:18px}}
+@media(prefers-reduced-motion:reduce){.ai-fab::before,.ai-dot,.ai-typing i{animation:none}}
+
+/* ── chapter 07: who you are hiring ── */
+.whogrid{display:grid;grid-template-columns:1.55fr 1fr;gap:var(--sp5);
+  margin-top:var(--sp5);align-items:start}
+@media(max-width:900px){.whogrid{grid-template-columns:1fr;gap:var(--sp4)}}
+.whomain p{color:var(--t2);max-width:60ch;margin-bottom:var(--sp3)}
+.whomain p:last-child{margin-bottom:0}
+.whofacts{border-left:1px solid var(--line);padding-left:var(--sp4)}
+@media(max-width:900px){.whofacts{border-left:0;padding-left:0;
+  border-top:1px solid var(--line);padding-top:var(--sp4)}}
+.wfact{display:flex;flex-direction:column;gap:5px;padding:var(--sp2) 0;
+  border-bottom:1px solid var(--line)}
+.wfact:last-child{border-bottom:0}
+.wfact .mono{color:var(--t3);font-size:.6rem;letter-spacing:.28em;
+  text-transform:uppercase}
+.wfact b{font-weight:500;color:var(--t1);font-size:1rem}
+.whonote{margin-top:var(--sp4);padding-top:var(--sp3);
+  border-top:1px solid var(--line);color:var(--t3);font-size:.92rem;max-width:62ch}
+
+/* ── "in full" link: a chapter summarises, the page behind it goes deeper ── */
+.more{display:inline-flex;align-items:center;gap:10px;margin-top:var(--sp3);
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--copper-lt);
+  border-bottom:1px solid rgba(201,122,60,.35);padding-bottom:5px;
+  transition:color .35s var(--e),border-color .35s var(--e),gap .35s var(--e)}
+.more::after{content:'→';font-family:inherit;transition:transform .35s var(--e)}
+.more:hover{color:var(--t1);border-color:var(--ember);gap:14px}
+.more:hover::after{transform:translateX(3px)}
+
+/* ── capability 02, illustrated: the automation figure ── */
+.autofig{margin:var(--sp5) 0 0;padding:0}
+.autofig canvas{display:block;width:100%;height:clamp(260px,20vw,300px)}
+.autofig .autolab{color:var(--copper-lt);margin-bottom:var(--sp3)}
+
 /* ── PIN 1: sticky scrub stage ── */
-.pinwrap{height:280vh;position:relative}
+.pinwrap{height:170vh;position:relative}
 .pin{position:sticky;top:0;height:100svh;display:grid;place-items:center;
   overflow:hidden;border-block:1px solid var(--line);
   background:linear-gradient(180deg,var(--sf1),var(--void))}
@@ -237,22 +636,64 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
 .hwrap{position:relative}
 .hpin{position:sticky;top:0;height:100svh;overflow:hidden;
   border-block:1px solid var(--line);
+  display:flex;align-items:center;
   background:linear-gradient(180deg,var(--sf2),var(--sf1))}
-.htrack{display:flex;height:100%;will-change:transform}
-.phase{flex:0 0 clamp(300px,44vw,600px);height:100%;padding:var(--sp6) var(--sp4);
-  border-right:1px solid var(--line);display:flex;flex-direction:column;
-  justify-content:center;position:relative;overflow:hidden}
-.phase::before{content:attr(data-n);position:absolute;right:-2vw;bottom:-4vw;
-  font-family:'Playfair Display',serif;font-style:italic;font-size:22vw;
-  line-height:.7;color:rgba(242,239,232,.03);user-select:none;pointer-events:none}
+/* The track is a row of cards, vertically centred in the stage.
+   Forcing .phase to height:100% made every card a full viewport tall while
+   its content stopped around 45% down — which is the empty half-screen under
+   the phases. Cards are now sized by their content and centred. */
+/* The stage centres the track, and the track stretches every card to the
+   tallest one. Cards were previously centred individually and sized by their
+   own content, so the row read as a ragged set of different-sized boxes. */
+.htrack{display:flex;align-items:stretch;height:auto;max-height:96svh;
+  gap:var(--sp3);padding:0 var(--sp4);will-change:transform}
+.phase{flex:0 0 clamp(300px,38vw,480px);
+  padding:var(--sp5) var(--sp4);border:1px solid var(--line);border-radius:4px;
+  background:linear-gradient(180deg,rgba(20,22,30,.62),rgba(13,14,19,.28));
+  display:flex;flex-direction:column;justify-content:flex-start;
+  position:relative;overflow:hidden;
+  transition:border-color .5s var(--e)}
+/* The card is a flex column, so its children default to flex-shrink:1 and get
+   squeezed instead of setting the card's height — which is how the duration
+   line ended up outside the card's own box. Nothing in the card shrinks. */
+.phase>*{flex:0 0 auto}
+.phase:hover{border-color:var(--line2)}
+.phase::before{content:attr(data-n);position:absolute;right:-1vw;bottom:-2.5vw;
+  font-family:'Playfair Display',serif;font-style:italic;font-size:11rem;
+  line-height:.7;color:rgba(242,239,232,.035);user-select:none;pointer-events:none}
 .phase .mono{color:var(--copper-lt);margin-bottom:var(--sp3)}
-.phase h3{font-size:clamp(2rem,5vw,3.6rem);margin-bottom:var(--sp2);
+.phase h3{font-size:clamp(1.8rem,3.4vw,2.9rem);margin-bottom:var(--sp2);
   position:relative;will-change:transform,opacity}
 .phase h3 em{color:var(--ember)}
 .phase p{color:var(--t2);max-width:42ch;font-size:1.02rem;position:relative;
   will-change:transform,opacity}
-.phase .dur{margin-top:auto;padding-top:var(--sp3);border-top:1px solid var(--line);
-  color:var(--copper-lt)}
+.phase .dur{margin-top:var(--sp3);padding-top:var(--sp3);
+  border-top:1px solid var(--line);color:var(--copper-lt)}
+/* what each phase actually hands over — fills the card and answers the
+   buyer's real question, which is "what do I get?" */
+.phase ul{list-style:none;margin:var(--sp3) 0 0;padding:0}
+.phase li{font-size:.92rem;color:var(--t2);padding:7px 0 7px 20px;position:relative}
+.phase li::before{content:'';position:absolute;left:0;top:calc(50% - 2px);
+  width:4px;height:4px;border-radius:50%;background:var(--copper)}
+.phase .exit{margin-top:var(--sp3);padding:12px 14px;border-left:2px solid var(--ember);
+  background:rgba(255,112,67,.06);font-size:.88rem;color:var(--t2)}
+.phase .exit b{color:var(--t1);font-weight:600;display:block;margin-bottom:3px;
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
+  text-transform:uppercase}
+/* Laptops in the 13-inch band have roughly 720px of viewport height. The card
+   is now the same height as the tallest one in the row, and at that height the
+   tallest card does not fit inside 86svh — the duration line fell off the
+   bottom. Tighten the card rather than clip it. */
+@media(max-height:1000px){
+  .phase{padding:var(--sp4) var(--sp4)}
+  .phase h3{font-size:clamp(1.5rem,2.4vw,2rem)}
+  .phase p{font-size:.95rem}
+  .phase .mono{margin-bottom:var(--sp2)}
+  .phase ul{margin-top:var(--sp2)}
+  .phase li{font-size:.86rem;padding:4px 0 4px 20px}
+  .phase .exit{margin-top:var(--sp2);padding:9px 12px;font-size:.83rem}
+  .phase .dur{margin-top:var(--sp2);padding-top:var(--sp2)}
+}
 
 /* ── the nine ── */
 .nine{border-top:1px solid var(--line2)}
@@ -288,7 +729,7 @@ body.clg .cur{width:80px;height:80px;margin:-40px 0 0 -40px;
   font-size:.98rem}
 
 /* ── climax ── */
-.climax{text-align:center;padding:var(--sp8) 0;position:relative;overflow:hidden;
+.climax{text-align:center;padding:var(--sp6) 0 var(--sp8);position:relative;overflow:hidden;
   border-top:1px solid var(--line)}
 .spot{position:absolute;width:62vw;height:62vw;border-radius:50%;left:50%;top:72%;
   transform:translate(-50%,-50%);pointer-events:none;will-change:transform;
@@ -323,10 +764,73 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   display:flex;flex-wrap:wrap;gap:var(--sp2);justify-content:space-between;
   font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--t3)}
 .fbot a{color:var(--t2);border-bottom:1px solid rgba(168,174,187,.28);
+  display:inline-block;padding:5px 0;
   transition:color .3s,border-color .3s}
 .fbot a:hover{color:var(--ember);border-bottom-color:var(--ember)}
 
 /* ── scroll reveal (IntersectionObserver adds .in) ── */
+/* ── who it is for: three self-identification cards ── */
+.fit{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp2);margin-top:var(--sp4)}
+@media(max-width:900px){.fit{grid-template-columns:1fr}}
+.fit article{padding:var(--sp4);border:1px solid var(--line);border-radius:3px;
+  background:linear-gradient(158deg,var(--sf1),transparent);position:relative;
+  transition:border-color .45s var(--e),transform .45s var(--e)}
+.fit article:hover{border-color:var(--line2);transform:translateY(-4px)}
+.fit .tick{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--copper-lt);display:block;margin-bottom:var(--sp3)}
+.fit h3{font-size:1.35rem;margin-bottom:10px}
+.fit p{color:var(--t2);font-size:.96rem;margin:0}
+
+/* ── objections: the questions a buyer asks a small firm ── */
+.obj{border-top:1px solid var(--line2);margin-top:var(--sp4)}
+.obj details{border-bottom:1px solid var(--line)}
+.obj summary{display:grid;grid-template-columns:1fr auto;gap:var(--sp3);
+  align-items:center;padding:var(--sp3) var(--sp2);cursor:pointer;list-style:none;
+  font-size:clamp(1.1rem,2.3vw,1.6rem);font-weight:700;letter-spacing:-.03em;
+  transition:color .35s var(--e),padding-left .45s var(--e)}
+.obj summary::-webkit-details-marker{display:none}
+.obj summary:hover{color:var(--ember);padding-left:var(--sp3)}
+.obj summary .pm{width:22px;height:22px;position:relative;flex:none;opacity:.6}
+.obj summary .pm::before,.obj summary .pm::after{content:'';position:absolute;
+  background:currentColor;transition:transform .4s var(--e)}
+.obj summary .pm::before{left:0;right:0;top:50%;height:1.5px}
+.obj summary .pm::after{top:0;bottom:0;left:50%;width:1.5px}
+.obj details[open] summary .pm::after{transform:scaleY(0)}
+.obj details[open] summary{color:var(--ember)}
+.obj .ans{padding:0 var(--sp2) var(--sp4) var(--sp2);max-width:70ch;
+  color:var(--t2);font-size:1rem}
+
+/* ── commercial posture ── */
+.money{display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--line2);border-radius:3px;overflow:hidden;margin-top:var(--sp4)}
+/* stacked: the divider has to turn with the axis, or it draws a stray
+   vertical rule down the right edge of every card */
+@media(max-width:900px){.money{grid-template-columns:1fr}
+  .money div{border-right:0;border-bottom:1px solid var(--line)}
+  .money div:last-child{border-bottom:0}}
+.money div{padding:var(--sp4);border-right:1px solid var(--line);
+  background:linear-gradient(180deg,var(--sf1),transparent)}
+.money div:last-child{border-right:0}
+.money b{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--copper-lt);
+  margin-bottom:var(--sp2)}
+.money strong{display:block;font-size:1.5rem;letter-spacing:-.03em;margin-bottom:8px;
+  font-weight:700}
+.money p{color:var(--t2);font-size:.94rem;margin:0}
+
+/* ── what happens next ── */
+.steps{counter-reset:st;margin-top:var(--sp4);max-width:74ch}
+.steps li{counter-increment:st;list-style:none;position:relative;
+  padding:0 0 var(--sp4) var(--sp5);border-left:1px solid var(--line)}
+.steps li:last-child{border-left-color:transparent;padding-bottom:0}
+.steps li::before{content:counter(st,decimal-leading-zero);position:absolute;
+  left:-15px;top:-2px;width:30px;height:30px;border-radius:50%;
+  background:var(--void);border:1px solid var(--copper);color:var(--copper-lt);
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;display:grid;
+  place-items:center}
+.steps b{display:block;font-size:1.15rem;letter-spacing:-.02em;margin-bottom:6px}
+.steps span{color:var(--t2);font-size:.96rem}
+
 .rv{opacity:0;transform:translateY(26px);
   transition:opacity .9s var(--e),transform .9s var(--e)}
 .rv.in{opacity:1;transform:none}
@@ -349,29 +853,29 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   .pin .big,.pin .sub,.seams div,.phase h3,.phase p{
     opacity:1!important;transform:none!important}
   .hpin{position:static;height:auto;overflow:visible}
-  .htrack{flex-wrap:wrap;transform:none!important}
-  .phase{flex:1 1 100%;height:auto;padding:var(--sp5) var(--sp4)}
+  .htrack{flex-wrap:wrap;transform:none!important;padding:0}
+  .phase{flex:1 1 100%;height:auto;max-height:none;padding:var(--sp5) var(--sp4)}
 }
 
 .langsel{position:relative;margin-left:14px}
 .langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
   padding:0 12px;background:transparent;border:1px solid var(--line);
-  border-radius:3px;color:var(--grey);font:inherit;font-size:12px;
+  border-radius:3px;color:var(--grey, var(--t2));font:inherit;font-size:12px;
   letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
-.langsel>button:hover{border-color:var(--copper);color:var(--white)}
+.langsel>button:hover{border-color:var(--copper);color:var(--white, var(--t1))}
 .langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
-  margin:0;padding:6px;list-style:none;background:var(--ink-2);
+  margin:0;padding:6px;list-style:none;background:var(--ink-2, var(--sf2));
   border:1px solid var(--line);border-radius:4px;display:none;z-index:120;
   box-shadow:0 18px 44px rgba(0,0,0,.5)}
 .langmenu.open{display:block}
 .langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
-  color:var(--grey);transition:background .2s,color .2s}
-.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white)}
+  color:var(--grey, var(--t2));transition:background .2s,color .2s}
+.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white, var(--t1))}
 .langmenu a[aria-current=true]{color:var(--copper-lt)}
 @media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
   .langsel>button span{display:none}}
 </style>
-<meta content="de_DE" property="og:locale"/><link href="https://quenora.ai/de/" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/es/" hreflang="es" rel="alternate"/><link href="https://quenora.ai/it/" hreflang="it" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/></head>
+<meta content="de_DE" property="og:locale"/><link href="https://quenora.ai/de/" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/></head>
 <body class="no-js">
 <a class="skip" href="#main">Zum Inhalt springen</a>
 <div aria-hidden="true" id="ld"><div class="n">01</div><div class="bar"></div></div>
@@ -384,7 +888,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <header class="nav" id="nav">
 <div class="wrap">
 <a aria-label="Quenora home" class="brand" href="index.html">
-<svg aria-hidden="true" fill="currentColor" viewbox="0 0 187.71 174.29">
+<svg aria-hidden="true" class="mk" fill="currentColor" viewbox="9 9 169.71 155.71">
 <circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
 <circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
 <circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
@@ -392,35 +896,46 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <circle cx="151.71" cy="36" r="27"></circle>
 </svg>quenora
     </a>
-<nav aria-label="Main" class="navlinks">
-<a href="services.html">Leistungen</a>
-<a href="approach.html">Vorgehen</a>
-<a href="work.html">Projekte</a>
-<a class="navcta" href="contact.html">Gespräch beginnen</a>
-</nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="index.html" hreflang="en" lang="en">English</a></li><li><a href="de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="fr/index.html" hreflang="fr" lang="fr">Français</a></li><li><a href="es/index.html" hreflang="es" lang="es">Español</a></li><li><a href="it/index.html" hreflang="it" lang="it">Italiano</a></li></ul></div>
+<button aria-controls="navLinks" aria-expanded="false" aria-label="Menü" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
+<nav aria-label="Main" class="navlinks" id="navLinks">
+<a href="#journey">Vorgehen</a>
+<a href="#solution">Leistungen</a>
+<a href="../engineering.html">Engineering</a>
+<a href="#work">Projekte</a>
+<a href="#who">Über uns</a>
+<a class="navcta" href="#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a>
+</nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Sprache wählen" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>DE</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="../index.html" hreflang="en" lang="en">English</a></li><li><a aria-current="true" href="../de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="../fr/index.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 </div>
 </header>
 <main id="main">
 <section class="hook">
 <canvas aria-hidden="true" id="heroCanvas"></canvas>
 <div class="wrap">
-<p class="mono eyebrow">Enterprise-KI-Engineering · Heilbronn</p>
+<p class="mono eyebrow">Enterprise-KI &amp; Automatisierung · International tätig</p>
 <h1>
 <span class="ln"><span class="w">Die</span> <span class="w">meiste</span></span>
-<span class="ln"><span class="w">AI</span> <span class="w">verlässt</span> <span class="w">nie</span></span>
-<span class="ln"><span class="w"><em>das Labor.</em></span></span>
+<span class="ln"><span class="w">Unternehmens-KI</span> <span class="w">erreicht</span> <span class="w">nie</span></span>
+<span class="ln"><span class="w"><em>die Arbeit.</em></span></span>
 </h1>
 <div class="hook-foot">
-<p>Wir sind das Unternehmen, das Sie rufen, wenn der Pilot funktioniert hat und danach nichts passiert ist.
-           Quenora baut KI in die Plattformen, Abläufe und Entscheidungen ein, die Ihr
-           Unternehmen bereits betreibt — und übergibt Ihrem Team dann die Schlüssel.</p>
+<p>Wir sind die Firma, die Sie rufen, wenn der Pilot funktioniert hat und danach nichts geschah. Quenora verankert KI und Automatisierung in den Plattformen, Arbeitsabläufen und Entscheidungen, auf die sich Ihr Unternehmen bereits stützt — und befähigt dann Ihr Team, es zu übernehmen, und zieht weiter. Keine Bindung. Keine Abhängigkeit.</p>
+<!-- The three strongest risk answers on this site were at screens 13 and 17.
+     A reader who skims left believing there was no proof at all. Every claim
+     here is stated verbatim elsewhere on the page — nothing new is asserted,
+     it is only brought forward. It sits in the hook-foot's second grid
+     column rather than beneath the paragraph so it costs no vertical height
+     on the short laptops where the fold is already tight. -->
+<aside class="hook-trust">
+<p><b>Bisher keine veröffentlichten Fallstudien.</b> Wir vermitteln Ihnen vor einer Zusage ein Gespräch mit einer Referenz.</p>
+<p class="mono">Fester Leistungsumfang · schriftliche Abschlusskriterien · der Code bleibt bei Ihnen</p>
+</aside>
 <div aria-hidden="true" class="cue"><i></i><span class="mono">Scrollen</span></div>
 </div>
 </div>
 </section>
 <div aria-hidden="true" class="ticker">
 <div class="tt" id="tt">
-<b>Platform Engineering</b><b>KI-Integration</b><b>Entwicklung und Inbetriebnahme</b>
+<b>Plattform &amp; Deployment</b><b>Prozessautomatisierung</b><b>KI-Integration</b>
 <b>KI-Strategie</b><b>Data Engineering</b><b>Individuelle Agenten</b>
 <b>KI-Governance</b><b>Betreuter Betrieb</b><b>Change-Befähigung</b>
 </div>
@@ -437,13 +952,20 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
              Ergebnis verantwortlich ist.</p>
 </div>
 </div>
+<!-- The lede talks about "the gap between a notebook and a Tuesday
+     afternoon". Rather than leave that as a phrase, draw it: signal leaves
+     the notebook, reaches the break, and dies there. Nothing crosses —
+     which is the whole point of this chapter. -->
+<figure class="gapfig rv">
+<canvas aria-hidden="true" id="gapCanvas"></canvas>
+<figcaption>Illustrativ, kein Kundenportfolio. Jede Spur ist ein Proof of Concept, der funktioniert hat. Alle bleiben an derselben Wand stehen — und die Wand ist nie das Modell. Es ist die fehlende Schicht zwischen einer laufenden Demo und dem täglichen Produktivbetrieb. Diese Schicht ist Quenora.</figcaption>
+</figure>
 </div>
 <div class="pinwrap" id="pinwrap">
 <div class="pin">
 <div class="inner">
 <h2 class="big" id="pBig">KI-Programme scheitern an <em>den Nahtstellen</em>.</h2>
-<p class="sub" id="pSub">Sechs davon. Jede ein Engineering-Problem und kein
-             Forschungsproblem — genau deshalb gibt es dieses Unternehmen.</p>
+<p class="sub" id="pSub">Drei davon — und keines ist ein Forschungsproblem. Jede Naht ist ein Engineering-Problem. Genau deshalb gibt es uns.</p>
 <div class="seams" id="pSeams">
 <div><b>Die Daten</b><span>Systeme, die sich nicht verbinden lassen. Verträge, die niemand geschrieben hat. Datenherkunft, die niemand nachvollziehen kann.</span></div>
 <div><b>Die Integration</b><span>Ein Modell, das im Notebook funktioniert und keinen Weg in den Prozess findet, der es gebraucht hätte.</span></div>
@@ -453,15 +975,38 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 </div>
 </div>
 </section>
-<section id="journey">
+<section id="fit">
 <div class="wrap">
 <div class="chead rv">
 <div class="cnum">02</div>
 <div>
-<h2>Sechs Phasen. Ausgelegt zu <em>enden</em>.</h2>
+<h2>Drei Situationen, in die wir <em>tatsächlich</em> gerufen werden.</h2>
+<p class="lede">Kein Marktsegment. Die drei Problemformen, für die dieses Unternehmen gebaut wurde. Wenn keine davon auf Sie zutrifft, sind wir vermutlich nicht die richtige Firma — und das sollen Sie jetzt erfahren, nicht später.</p>
+</div>
+</div>
+<div class="fit">
+<article class="rv"><span class="tick">Situation 01</span>
+<h3>Der Pilot, der stecken blieb</h3>
+<p>In der Demo hat es funktioniert. Sechs Monate später ist es immer noch eine Demo, weil die Plattform darunter nie gebaut wurde und niemand die Lücke verantwortet.</p></article>
+<article class="rv" data-d="1"><span class="tick">Situation 02</span>
+<h3>Retrieval, das lügt</h3>
+<p>Der Assistent antwortet souverän und liegt oft genug falsch, dass ihm niemand mehr vertraut. Das Modell ist in Ordnung. Der Datenvertrag nicht.</p></article>
+<article class="rv" data-d="2"><span class="tick">Situation 03</span>
+<h3>Governance kommt zu spät</h3>
+<p>Etwas ist live, Einkauf oder Risikomanagement stellen Fragen, und die Nachweise zur Beantwortung wurden nie erfasst.</p></article>
+</div>
+</div>
+</section>
+<section id="journey">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">03</div>
+<div>
+<h2>Sechs Phasen. Ausgelegt zu <em>beenden</em>.</h2>
 <p class="lede">Die meisten Beratungen sind darauf ausgerichtet, das Projekt zu verlängern.
              Diese ist darauf ausgerichtet, es abzuschließen — jede Phase trägt eine
              Abschlussbedingung, die im Leistungsschein festgehalten ist.</p>
+<a class="more" href="approach.html">Das Vorgehen im Detail</a>
 </div>
 </div>
 </div>
@@ -470,54 +1015,71 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="htrack" id="htrack">
 <article class="phase" data-n="01"><p class="mono">Phase 01 · Rahmung</p>
 <h3>Die <em>echte</em> Einschränkung finden</h3>
-<p>Wir verbringen die ersten Wochen damit zu verstehen, was tatsächlich passiert — nicht,
-               was die Prozessdokumentation behauptet. Nahezu jedes Projekt fördert etwas zutage,
-               das nie im Auftrag stand.</p>
+<p>Wir verbringen die ersten Wochen damit zu verstehen, was tatsächlich passiert, nicht was laut Dokumentation passieren sollte. Bei diesem ersten Blick zeigt sich meist die echte Beschränkung.</p>
+<ul><li>Prozessbegehung mit den Menschen, die die Arbeit machen</li><li>Bestandsaufnahme von Daten und Systemen</li><li>Die Beschränkung, die niemand erwähnt hat</li></ul>
+<div class="exit"><b>Abschlusskriterium</b>Eine schriftliche Position dazu, was zuerst gebaut wird — oder die Empfehlung, nichts zu bauen.</div>
 <p class="dur mono">Wochen 1–2</p></article>
 <article class="phase" data-n="02"><p class="mono">Phase 02 · Fundament</p>
 <h3>Die <em>unspektakuläre</em> Schicht</h3>
 <p>Umgebungen, Datenverträge, Zugriffsmodell, Evaluierungsrahmen. Die Arbeit,
                die darüber entscheidet, ob alles Weitere dem Produktivbetrieb standhält.</p>
+<ul><li>Umgebungen und Zugriffsmodell, dokumentiert</li><li>Datenverträge mit benannten Verantwortlichen</li><li>Evaluations-Harness auf Ihren echten Daten</li></ul>
+<div class="exit"><b>Abschlusskriterium</b>Baseline-Evaluationswerte, an denen sich jede spätere Änderung messen lässt.</div>
 <p class="dur mono">Wochen 3–6</p></article>
 <article class="phase" data-n="03"><p class="mono">Phase 03 · Integration</p>
 <h3>In das, was Sie <em>bereits betreiben</em></h3>
 <p>Verbunden mit den Systemen, die die Daten halten und die Arbeit erledigen — mit
                Fehlerpfaden, die entworfen und nicht im Produktivbetrieb entdeckt werden.</p>
+<ul><li>Konnektoren zu ERP, CRM und Service Desk</li><li>Berechtigungsmodell und Audit-Trail</li><li>Fehler- und Rollback-Pfade, ausgearbeitet</li></ul>
+<div class="exit"><b>Abschlusskriterium</b>Ein stufenweiser Rollout, der mit echten Daten in einer Nicht-Produktivumgebung läuft.</div>
 <p class="dur mono">Wochen 4–10</p></article>
 <article class="phase" data-n="04"><p class="mono">Phase 04 · Inbetriebnahme</p>
 <h3>Unter echter <em>echte</em> Änderungssteuerung</h3>
-<p>In den Produktivbetrieb, unter derselben Steuerung wie alles andere, was Sie betreiben.
-               Kein Paralleluniversum. Kein Dauerpilot.</p>
-<p class="dur mono">Continuous</p></article>
+<p>Es geht genauso live wie jedes andere System — dieselben Freigaben, dieselben
+               Kontrollen. Kein Paralleluniversum. Kein Dauerpilot.</p>
+<ul><li>Freigabe hinter Ihrem bestehenden Change-Control-Prozess</li><li>Monitoring, Alerting, Kostenobergrenzen</li><li>Rollback geprobt, nicht nur theoretisch beschrieben</li></ul>
+<div class="exit"><b>Abschlusskriterium</b>Im Produktivbetrieb, unter Ihren bestehenden Kontrollen — ohne Ausnahmen.</div>
+<p class="dur mono">Wochen 10–12</p></article>
 <article class="phase" data-n="05"><p class="mono">Phase 05 · Nachweis</p>
 <h3>Gegen die <em>vereinbarte</em> Kennzahl</h3>
-<p>Gemessen an der in der Rahmung festgelegten Zahl. Hat sie sich nicht bewegt, sagen wir das —
-               und wir sagen warum. Dieses Gespräch ist die Leistung.</p>
+<p>Zurück zu der in der Rahmung festgelegten Zahl — hat sie sich bewegt oder nicht?
+               Dieses Gespräch ist die Leistung.</p>
+<ul><li>Messung gegen die Frame-Zahl</li><li>Was sich bewegt hat, was nicht, und warum</li><li>Ehrliche Empfehlung zur Fortführung</li></ul>
+<div class="exit"><b>Abschlusskriterium</b>Ein schriftliches Ergebnis — auch in der unbequemen Fassung, wenn das die Wahrheit ist.</div>
 <p class="dur mono">Wochen 9–12</p></article>
 <article class="phase" data-n="06"><p class="mono">Phase 06 · Übergabe</p>
 <h3>Und dann <em>gehen wir</em></h3>
-<p>Runbooks, Monitoring, gemeinsamer Betrieb und ein Datum, ab dem Ihr Team
-               ohne uns betreibt. Das Projekt ist darauf ausgelegt zu enden.</p>
+<p>Wir machen uns selbst überflüssig — mit einem Datum, ab dem Ihr Team es ohne
+               uns betreibt. Das Projekt ist darauf ausgelegt zu enden.</p>
+<ul><li>Runbooks und Architecture Decision Records</li><li>Gemeinsamer Betrieb mit Ihren Engineers</li><li>Benannter Verantwortlicher und ein Übergabetermin</li></ul>
+<div class="exit"><b>Abschlusskriterium</b>Sie besitzen es, Sie betreiben es, wir sind weg. Das ist die Definition von fertig.</div>
 <p class="dur mono">Wochen 12–14</p></article>
 </div>
+</div>
+</div>
+<div class="wrap">
+<div class="cta-inline rv">
+<p><b>Erkennen Sie die Form Ihres Problems in diesen sechs Phasen?</b> Zwei Absätze darüber, was feststeckt, genügen für den Anfang — kein Briefing, keine Geheimhaltungsvereinbarung.</p>
+<a href="#climax">Gespräch beginnen</a>
 </div>
 </div>
 </section>
 <section id="solution">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">03</div>
+<div class="cnum">04</div>
 <div>
 <h2>Neun Leistungen. <em>Ein</em> Team.</h2>
-<p class="lede">Drei sind Kernleistungen, weil nahezu jedes Projekt über sie
-             läuft. Die anderen sechs kommen hinzu, wenn die Aufgabe es verlangt — nicht, um ein
-             Angebot zu füllen. Nichts davon wird an jemanden vergeben, den Sie nie getroffen haben.</p>
+<p class="lede">Drei sind Kernleistungen, weil alles über sie läuft. Die
+             anderen sechs kommen nur hinzu, wenn die Arbeit sie braucht — nie, um ein
+             Angebot zu füllen. Nichts wird an einen Subunternehmer gegeben, den Sie nie getroffen haben.</p>
+<a class="more" href="services.html">Alle neun im Detail</a>
 </div>
 </div>
 <div class="nine">
-<div class="nrow rv"><span class="i">01</span><h3>Platform Engineering</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">02</span><h3>KI-Integration</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">03</span><h3>Entwicklung und Inbetriebnahme</h3><span class="tag">Core</span></div>
+<div class="nrow rv"><span class="i">01</span><h3>Plattform- &amp; Deployment-Engineering</h3><span class="tag">Core</span></div>
+<div class="nrow rv"><span class="i">02</span><h3>Prozess- &amp; Workflow-Automatisierung</h3><span class="tag">Core</span></div>
+<div class="nrow rv"><span class="i">03</span><h3>KI-Integration</h3><span class="tag">Core</span></div>
 <div class="nrow rv"><span class="i">04</span><h3>KI-Strategie und Beratung</h3><span></span></div>
 <div class="nrow rv"><span class="i">05</span><h3>Data Engineering und Analytics</h3><span></span></div>
 <div class="nrow rv"><span class="i">06</span><h3>Individuelle KI-Agenten und Copilots</h3><span></span></div>
@@ -525,16 +1087,247 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="nrow rv"><span class="i">08</span><h3>Betreuter KI-Betrieb</h3><span></span></div>
 <div class="nrow rv"><span class="i">09</span><h3>Change Management und Befähigung</h3><span></span></div>
 </div>
+<figure class="autofig rv">
+<p class="mono autolab">Leistung 02 · wie Automatisierung in der Praxis aussieht</p>
+<canvas aria-hidden="true" id="autoCanvas"></canvas>
+<figcaption>Illustrativ, nicht gemessen. Der größte Teil der Arbeit läuft unberührt durch. Der Rest geht bewusst an einen Menschen — eine Automatisierung verdient Vertrauen erst, wenn sie weiß, was sie nicht entscheiden darf, und diese Grenze zu ziehen ist der größere Teil der Arbeit.</figcaption>
+</figure>
 <div class="counters">
-<div class="rv"><b data-count="9">0</b>
-<span>Leistungen, drei davon Kernleistungen — weil nahezu jedes Projekt
-                über diese drei läuft.</span></div>
-<div class="rv" data-d="1"><b data-count="6">0</b>
-<span>Phasen von der Rahmung bis zur Übergabe, jede mit einer Abschlussbedingung
-                im Leistungsschein.</span></div>
+<div class="rv"><b data-count="9">9</b>
+<span>Leistungen. Drei davon sind Kernleistungen — die Arbeit läuft über sie.</span></div>
+<div class="rv" data-d="1"><b data-count="6">6</b>
+<span>Phasen, von der Rahmung bis zur Übergabe — jede mit einer Abschlussbedingung im Leistungsschein.</span></div>
 <div class="rv" data-d="2"><b data-count="0">0</b>
 <span>Projekte ohne Enddatum. Eine Verlängerung ist eine Entscheidung, niemals
                 der Normalfall.</span></div>
+</div>
+</div>
+</section>
+<section id="work">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">05</div>
+<div>
+<h2>Drei Formen, die diese Arbeit <em>üblicherweise</em> annimmt.</h2>
+<p class="lede">Keine Kundenliste. Dies sind die Projektmuster, in die wir am häufigsten gerufen werden, beschrieben nach ihrer Form statt danach, wessen Logo darauf steht — denn die Form sagt Ihnen, ob Ihr Problem eines davon ist.</p>
+<a class="more" href="work.html">Alle drei, mit den Zahlen</a>
+</div>
+</div>
+<div class="shapes">
+<article class="shape rv">
+<p class="mono">Muster 01 · Finanzdienstleistungen</p>
+<h3>Rechnungsverarbeitung über drei ERP-Instanzen</h3>
+<p>Hohe Rechnungsvolumina über drei nicht integrierte ERP-Systeme hinweg, während ein Finanzteam von Hand zwischen ihnen abgleicht. Das Projekt setzte an der Integrationsschicht an, statt eines der drei Systeme zu ersetzen.</p>
+</article>
+<article class="shape rv" data-d="1">
+<p class="mono">Muster 02 · Fertigung</p>
+<h3>Support-Triage und Wissensabruf</h3>
+<p>Ein Service Desk, der Tickets von Hand verteilt und mit dem Ruhestand erfahrener Mitarbeiter Wissen verliert. Eine Retrieval-Schicht über zwei Jahrzehnte gelöster Tickets, angebunden an den bestehenden Service Desk statt ihn zu ersetzen.</p>
+</article>
+<article class="shape rv" data-d="2">
+<p class="mono">Muster 03 · Logistik</p>
+<h3>Modernisierung von Altsystemen und vorausschauende Einsatzplanung</h3>
+<p>Eine Einsatzplanung auf einem System, das älter ist als der Großteil der Belegschaft. Statt einer Neuentwicklung eine Integrations- und Datenschicht, über die moderne Prognosemodelle den Legacy-Kern sicher erreichen.</p>
+</article>
+</div>
+<p class="shapes-note">Repräsentative Projektstrukturen aus den Branchen, in denen wir arbeiten. Zahlen auf der Detailseite illustrieren das Muster und sind keine geprüften Ergebnisse eines benannten Kunden.</p>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════════
+     PROJECTS & PRODUCTS — built, and deliberately HIDDEN until released.
+
+     Remove the `hidden` attribute below to publish it. When you do, TWO
+     things must happen together or the page numbers itself wrongly:
+
+       1. this section takes number 06, and
+       2. #honest #who #commercial #principles shift 06→07, 07→08,
+          08→09, 09→10.
+
+     Ongoing projects are amber placeholders on purpose — the same rule as
+     chapter 07. Fill in title, tech stack and use case per row, and only
+     publish what the client has agreed to. Nothing here names a client,
+     and nothing should until permission exists in writing.
+
+     The five products are real: they already have detail on products.html.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section hidden="" id="build">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">06</div>
+<div>
+<h2>Was <em>läuft.</em> und was gebaut ist.</h2>
+<p class="lede">Laufende Projekte nach Form und Phase, dazu die Frameworks, die aus früheren entstanden sind. Projekte werden ohne Kundennamen beschrieben; die Produkte gehören Ihnen, statt gemietete Lizenzen zu sein.</p>
+<a class="more" href="products.html">Alle fünf Produkte im Detail</a>
+</div>
+</div>
+<h3 class="buildhead mono">Laufend</h3>
+<div class="builds">
+<article class="build rv">
+<p class="mono bstat bstat-live">In Umsetzung</p>
+<h4><span class="ph">[Project title]</span></h4>
+<p class="btech mono"><span class="ph">[Tech stack]</span></p>
+<p><span class="ph">[Use case — what it removes, in one sentence]</span></p>
+</article>
+<article class="build rv" data-d="1">
+<p class="mono bstat bstat-live">In Umsetzung</p>
+<h4><span class="ph">[Project title]</span></h4>
+<p class="btech mono"><span class="ph">[Tech stack]</span></p>
+<p><span class="ph">[Use case — what it removes, in one sentence]</span></p>
+</article>
+<article class="build rv" data-d="2">
+<p class="mono bstat bstat-scope">In Zuschnitt</p>
+<h4><span class="ph">[Project title]</span></h4>
+<p class="btech mono"><span class="ph">[Tech stack]</span></p>
+<p><span class="ph">[Use case — what it removes, in one sentence]</span></p>
+</article>
+</div>
+<h3 class="buildhead mono">Geliefert — Frameworks, die Ihnen gehören</h3>
+<div class="builds">
+<article class="build rv"><p class="mono bstat bstat-done">Geliefert</p>
+<h4>Automatisierungs-Beschleuniger</h4>
+<p class="btech mono">Prozess- &amp; Workflow-Automatisierung</p></article>
+<article class="build rv" data-d="1"><p class="mono bstat bstat-done">Geliefert</p>
+<h4>Enterprise-Agenten-Framework</h4>
+<p class="btech mono">Individuelle Agents &amp; Copilots</p></article>
+<article class="build rv" data-d="2"><p class="mono bstat bstat-done">Geliefert</p>
+<h4>KI-Reifegradanalyse</h4>
+<p class="btech mono">Strategie &amp; Beratung</p></article>
+<article class="build rv"><p class="mono bstat bstat-done">Geliefert</p>
+<h4>Governance-Werkzeugkasten</h4>
+<p class="btech mono">Governance, Sicherheit &amp; Compliance</p></article>
+<article class="build rv" data-d="1"><p class="mono bstat bstat-done">Geliefert</p>
+<h4>Plattform-Blaupause</h4>
+<p class="btech mono">Plattform- &amp; Deployment-Engineering</p></article>
+</div>
+<p class="whonote">Laufende Projekte werden ausschließlich nach Form und Phase gezeigt. Auf dieser Seite wird kein Kunde genannt, und keiner wird es ohne schriftliche Zustimmung.</p>
+</div>
+</section>
+<section id="honest">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">06</div>
+<div>
+<h2>Die Fragen, die Sie sich <em>bereits</em> stellen.</h2>
+<p class="lede">Wir sind ein kleines Unternehmen, das an Organisationen verkauft, die üblicherweise bei großen einkaufen. Dies sind die Einwände, die wir erwarten — hier beantwortet, damit das Gespräch weiter vorn beginnen kann.</p>
+</div>
+</div>
+<div class="obj rv">
+<details><summary>Warum keine große Beratung?<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">Für ein mehrjähriges Programm über mehrere Länder mit tausend Beteiligten sollten Sie eine nehmen — dafür sind sie gebaut und wir nicht. Für ein einzelnes System, das dieses Jahr in den Produktivbetrieb muss, kostet ihr Projektmodell mehr als das Problem und bewegt sich langsamer als Ihr Geschäft. Und die Menschen, die es verkaufen, sind selten die, die es bauen.</div></details>
+<details><summary>Warum nicht selbst bauen?<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">Oft sollten Sie das, und wir sagen es Ihnen auch. Holen Sie uns dann, wenn Ihr Team das Fachwissen hat, aber nicht die Plattformerfahrung — oder wenn es bereits vollständig durch die Systeme gebunden ist, die das Geschäft am Laufen halten. Die Übergabephase gibt es genau deshalb, damit am Ende die eigene Mannschaft die Antwort ist.</div></details>
+<details><summary>Warum nicht einfach eine Anbieterplattform kaufen?<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">Wenn ein Produkt Ihren Fall wirklich abdeckt, kaufen Sie es — das ist günstiger als alles, was wir bauen würden. Wir werden für das gerufen, was danach übrig bleibt: dieses Produkt an Systeme anzubinden, für die es nie gedacht war, und die Governance-Nachweise zu erzeugen, die der Anbieter nicht liefert.</div></details>
+<details><summary>Sie haben keine veröffentlichten Fallstudien.<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">Richtig, und wir erfinden auch keine. Quenora ist ein inhabergeführtes Unternehmen in seinem frühen Kapitel. Was wir tun: Wir vermitteln Ihnen vor einer Zusage ein direktes Gespräch mit einer Referenz und zeigen Ihnen im ersten Termin die tatsächliche Architektur und den Evaluationsansatz statt einer Verkaufspräsentation.</div></details>
+<details><summary>Was passiert, wenn es nicht funktioniert?<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">Phase 05 ist dafür da, das schriftlich zu beantworten, gemessen an der in Phase 01 vereinbarten Zahl. Hat sie sich nicht bewegt, sagen wir das. Der Code, die Dokumentation und das Evaluations-Harness bleiben in jedem Fall bei Ihnen — es gibt kein Szenario, in dem Sie ein Projekt ohne vorzeigbares Ergebnis beenden.</div></details>
+<div class="cta-inline rv">
+<p><b>Haben Sie noch einen Einwand, den wir nicht beantwortet haben?</b> Schreiben Sie es in die erste Nachricht — eine direkte Antwort nützt uns beiden mehr als ein Angebot.</p>
+<a href="#climax">Fragen Sie direkt</a>
+</div>
+</div>
+</div>
+</section>
+<section id="who">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">07</div>
+<div>
+<h2>Wen Sie tatsächlich <em>beauftragen</em>.</h2>
+<p class="lede">Das vorige Kapitel argumentiert, dass eine große Beratung nicht die Standardwahl sein sollte. Das verpflichtet uns zu sagen, wen Sie stattdessen bekommen — einschließlich unserer Größe, wonach ein Einkaufsteam als Erstes fragt.</p>
+</div>
+</div>
+<div class="whogrid">
+<div class="whomain rv">
+<p>Quenora ist inhabergeführt. Wer Ihr Projekt zuschneidet, macht die Arbeit und ist die Person, die Sie anrufen, wenn etwas bricht — dazwischen liegt keine Account-Ebene, und niemand, den Sie nicht kennengelernt haben, fasst die Arbeit an.</p>
+<p>2025 von Balaji Durai gegründet. Vor Quenora verantwortete er Transformationsarbeit für multinationale Fertigungsunternehmen, das Privatkundengeschäft von Banken und Life-Sciences-Konzerne — die Art von Programm, bei der mehrere Technologien erst miteinander in Einklang gebracht werden müssen, bevor überhaupt etwas bei einem Nutzer ankommt.</p>
+<p>Diese Systeme wurden später von mehr als 100.000 Menschen genutzt, und der Maßstab, auf den es ankam, war nie der Launch. Es war die Frage, ob der Arbeitstag danach ruhiger wurde. Das ist hier noch immer der Prüfstein — und der Grund, warum eines der neun Prinzipien hinter der Bildmarke „Menschlich“ heißt und nicht etwas über Modelle.</p>
+<p>Das Unternehmen ist klein und wächst über Tiefe, nicht über eine Personalzielzahl. Das ist eine echte Beschränkung, und sie bestimmt, was wir annehmen: einzelne Systeme, die dieses Jahr in den Produktivbetrieb müssen, keine mehrjährigen Programme über mehrere Länder. Das Kapitel darüber sagt dasselbe aus der anderen Richtung.</p>
+</div>
+<div class="whofacts rv" data-d="1">
+<div class="wfact"><span class="mono">Gegründet</span><b>2025</b></div>
+<div class="wfact"><span class="mono">Sitz</span><b>Heilbronn, Deutschland</b></div>
+<div class="wfact"><span class="mono">Tätig</span><b>International</b></div>
+<div class="wfact"><span class="mono">Team</span><b>Inhabergeführt, wachsend</b></div>
+<div class="wfact"><span class="mono">Sprachen</span><b>Deutsch · Französisch · Englisch</b></div>
+</div>
+</div>
+<p class="whonote">Die Branchenerfahrung und die Zahl oben beschreiben Arbeit, die vor der Gründung von Quenora im Jahr 2025 geleistet wurde. Es sind keine Kundenergebnisse von Quenora, und nichts auf dieser Seite behauptet das.</p>
+</div>
+</section>
+<section id="commercial">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">08</div>
+<div>
+<h2>Wie sich das <em>zusammensetzt</em>.</h2>
+<p class="lede">Hier genannt statt nach drei Terminen, denn es spät zu erfahren kostet Ihr Quartal und unseres.</p>
+</div>
+</div>
+<div class="money rv">
+<div><b>Phase 01 · Rahmung</b><strong>Festpreis</strong>
+<p>Zwei bis drei Wochen, vor Beginn vereinbart. Die schriftliche Position bleibt bei Ihnen, unabhängig davon, ob Sie uns danach beauftragen.</p></div>
+<div><b>Phasen 02–05 · Umsetzung</b><strong>Fester Leistungsumfang</strong>
+<p>Kalkuliert gegen einen schriftlichen Leistungsumfang mit ausdrücklicher Liste der Ausschlüsse. Änderungen werden offen neu zugeschnitten und nicht stillschweigend im Terminplan aufgefangen.</p></div>
+<div><b>Phase 06 · Übergabe</b><strong>Inklusive</strong>
+<p>Nie eine eigene Position. Ein Projekt, das ohne funktionierende Übergabe endet, ist nicht fertig — deshalb berechnen wir Ihnen das Fertigwerden nicht zweimal.</p></div>
+</div>
+<div class="rv" style="margin-top:var(--sp6)">
+<p class="mono" style="color:var(--copper-lt);margin-bottom:var(--sp3)">Was passiert, wenn Sie sich melden</p>
+<ol class="steps">
+<li><b>Sie schreiben zwei Absätze</b><span>Was nicht funktioniert und was Sie bereits versucht haben. Kein Briefing nötig, keine Geheimhaltungsvereinbarung für das erste Gespräch.</span></li>
+<li><b>Wir antworten innerhalb eines Arbeitstages</b><span>Entweder mit einem Termin oder mit dem ehrlichen Hinweis, dass dies nicht unser Problem ist, und einem Verweis auf jemanden, der besser passt.</span></li>
+<li><b>Fünfundvierzig Minuten, keine Präsentation</b><span>Ihre Systeme, Ihre Beschränkung, unsere Einschätzung dazu. Sie bekommen in diesem Gespräch eine fachliche Meinung, kein Folgeangebot.</span></li>
+<li><b>Eine schriftliche Position</b><span>Was wir zuerst bauen würden, was es kosten würde und was wir nicht bauen würden. Zur freien Verwendung — in Ihrem Vorstand oder bei einer anderen Firma.</span></li>
+</ol>
+<div class="cta-inline rv">
+<p><b>Das ist der gesamte Ablauf.</b> Der nächste Schritt liegt bei Ihnen und kostet uns einen Arbeitstag.</p>
+<a href="#climax">Gespräch beginnen</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Chapter 09 — the mark explained. This is where the nine circles in the
+     hero, the nav and the favicon finally say what they are. For a
+     founder-led firm with no published case studies, the principles are the
+     credibility, so they sit immediately before the call to action. -->
+<section id="principles">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">09</div>
+<div>
+<h2>Die Prinzipien hinter <em>der Bildmarke</em>.</h2>
+<p class="lede">Neun Kreise auf einem einzigen Bogen, jeder größer als der vorige, Schritt für Schritt wachsend vom ersten bis zum letzten. Jeder Kreis trägt ein Prinzip, auf dem dieses Unternehmen gebaut ist — niedergeschrieben, bevor eine Linie der Marke gezeichnet war, und der Maßstab, an dem wir die Arbeit messen.</p>
+</div>
+</div>
+<div class="nine">
+<div class="ninemark">
+<svg aria-hidden="true" fill="currentColor" id="nineArc" viewbox="9 9 169.71 155.71">
+<g class="wires" id="nineWires"></g>
+<circle cx="12" cy="161.71" data-i="0" r="3"></circle>
+<circle cx="21.64" cy="161.34" data-i="1" r="3.95"></circle>
+<circle cx="33.39" cy="159.88" data-i="2" r="5.2"></circle>
+<circle cx="47.73" cy="156.52" data-i="3" r="6.84"></circle>
+<circle cx="65.05" cy="149.97" data-i="4" r="9"></circle>
+<circle cx="85.34" cy="138.1" data-i="5" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" data-i="6" r="15.59"></circle>
+<circle cx="127.81" cy="84.89" data-i="7" r="20.52"></circle>
+<circle cx="151.71" cy="36" data-i="8" r="27"></circle>
+</svg>
+<p class="mono ninefoot">9 Kreise · 90°-Bogen · ×9 Wachstum · Verhältnis 1,3161</p>
+</div>
+<ol class="ninelist" id="nineList">
+<li data-i="0"><span class="n">01</span><span aria-hidden="true" class="d" style="--r:3"></span><div><h3>Vertrauenswürdig</h3><p>Das Fundament, auf dem alles andere steht.</p></div></li>
+<li data-i="1"><span class="n">02</span><span aria-hidden="true" class="d" style="--r:3.95"></span><div><h3>Menschlich</h3><p>Der Mensch zuerst, auch innerhalb eines automatisierten Systems.</p></div></li>
+<li data-i="2"><span class="n">03</span><span aria-hidden="true" class="d" style="--r:5.2"></span><div><h3>Souverän</h3><p>Sicherheit, die aus Engineering kommt, nicht aus Marketing.</p></div></li>
+<li data-i="3"><span class="n">04</span><span aria-hidden="true" class="d" style="--r:6.84"></span><div><h3>Elegant</h3><p>Sorgfalt in dem, was wir ausliefern, nicht nur in seinem Aussehen.</p></div></li>
+<li data-i="4"><span class="n">05</span><span aria-hidden="true" class="d" style="--r:9"></span><div><h3>Zeitlos</h3><p>Der exakte Mittelpunkt des Anstiegs — gebaut für Dauer, nicht für Trends.</p></div></li>
+<li data-i="5"><span class="n">06</span><span aria-hidden="true" class="d" style="--r:11.84"></span><div><h3>Enterprise</h3><p>Skalierung, die echtem Produktivlastverkehr standhält.</p></div></li>
+<li data-i="6"><span class="n">07</span><span aria-hidden="true" class="d" style="--r:15.59"></span><div><h3>Premium</h3><p>Gemessen am Ergebnis, nicht am Umfang der Präsentation.</p></div></li>
+<li data-i="7"><span class="n">08</span><span aria-hidden="true" class="d" style="--r:20.52"></span><div><h3>Innovativ</h3><p>Neues Engineering, kein neuer Anstrich.</p></div></li>
+<li data-i="8"><span class="n">09</span><span aria-hidden="true" class="d" style="--r:27"></span><div><h3>Intelligent</h3><p>Wo jedes vorherige Prinzip ankommt.</p></div></li>
+</ol>
 </div>
 </div>
 </section>
@@ -543,11 +1336,36 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="wrap">
 <h2 class="rv">Bauen Sie, was dauerhaft <em>funktioniert</em>.</h2>
 <p class="rv" data-d="1">Ein fokussiertes Gespräch darüber, wo Intelligenz in Ihrem Betrieb
-         Reibung beseitigen, Sicherheit erhöhen oder Kapazität schaffen kann.
+         Reibung oder Risiko beseitigen und Sicherheit geben kann.
          Keine Präsentation. Keine Analyse-Rechnung.</p>
-<a class="bcta rv" data-d="2" href="contact.html" id="bcta">Gespräch beginnen
+<form class="cform rv" data-d="2" id="cform" novalidate="">
+<div class="cfrow">
+<div class="cfield">
+<label for="cfName">Ihr Name</label>
+<input autocomplete="name" id="cfName" name="name" required="" type="text"/>
+</div>
+<div class="cfield">
+<label for="cfEmail">Geschäftliche E-Mail</label>
+<input autocomplete="email" id="cfEmail" name="email" required="" type="email"/>
+</div>
+</div>
+<div class="cfield">
+<label for="cfOrg">Unternehmen <span class="opt">(optional)</span></label>
+<input autocomplete="organization" id="cfOrg" name="org" type="text"/>
+</div>
+<div class="cfield">
+<label for="cfMsg">Was steckt fest?</label>
+<textarea id="cfMsg" name="message" placeholder="Der Pilot, der stecken blieb, das System, das sich nicht verbinden lässt, der Prozess, den niemand verantwortet …" required="" rows="4"></textarea>
+</div>
+<div aria-hidden="true" class="hp"><label>Dieses Feld bitte nicht ausfüllen
+<input autocomplete="off" name="company_url" tabindex="-1" type="text"/></label></div>
+<label class="cconsent"><input id="cfConsent" name="consent" required="" type="checkbox"/>
+<span>Ich bin damit einverstanden, dass Quenora diese Angaben speichert, um mir zu antworten. Ich kann ihre Löschung jederzeit verlangen. Was gespeichert wird, wie lange und wer es sonst sieht, steht in der <a href="../privacy.html" rel="noopener" target="_blank">Datenschutzerklärung</a>.</span></label>
+<button class="bcta" id="cfSend" type="submit">Gespräch beginnen
         <svg aria-hidden="true" fill="none" height="21" viewbox="0 0 16 16" width="21">
-<path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path></svg></a>
+<path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path></svg></button>
+<p aria-live="polite" class="cnote" id="cfNote"></p>
+</form>
 </div>
 </section>
 </main>
@@ -555,42 +1373,74 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="wrap">
 <div class="fgrid">
 <div>
-<div class="brand" style="margin-bottom:var(--sp2)">
-<svg aria-hidden="true" fill="var(--copper)" viewbox="0 0 187.71 174.29">
+<div class="lockup" style="margin-bottom:var(--sp3)">
+<span class="brand lg">
+<svg aria-hidden="true" class="mk" fill="currentColor" viewbox="9 9 169.71 155.71">
 <circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
 <circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
 <circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
 <circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
 <circle cx="151.71" cy="36" r="27"></circle>
-</svg>quenora
-        </div>
+</svg>quenora</span>
+<span class="desc">Consulting</span>
+</div>
 <p style="max-width:35ch;color:var(--t2);font-size:.96rem">
           Enterprise-KI, für den Betrieb entwickelt. Eingebaut in das, was Sie bereits betreiben,
           und dann übergeben.</p>
-<p class="mono" style="color:var(--t3)">Heilbronn, Deutschland · Weltweit tätig</p>
+<p class="mono" style="color:var(--t3)">International tätig</p>
 </div>
+<!-- The footer mirrors the header, target for target. It used to send
+     Approach, Capabilities and Work to approach.html, services.html and
+     work.html while the header sent the same three words to #journey,
+     #solution and #work — so one label had two destinations, and the footer's
+     landed on the previous design generation. Until those pages are rebuilt
+     (scope-2), both navigations point at the same places. About was missing
+     here entirely and is restored. -->
 <div><h3>Site</h3><nav aria-label="Footer">
-<a href="index.html">Start</a><a href="services.html">Leistungen</a>
-<a href="approach.html">Vorgehen</a><a href="work.html">Projekte</a>
-<a href="products.html">Produkte</a><a href="contact.html">Contact</a>
+<a href="index.html">Start</a><a href="#journey">Vorgehen</a>
+<a href="#solution">Leistungen</a><a href="../engineering.html">Engineering</a><a href="#work">Projekte</a>
+<a href="#who">Über uns</a><a href="#climax">Kontakt</a>
 </nav></div>
-<div><h3>Contact</h3><nav aria-label="Contact">
+<div><h3>Kontakt</h3><nav aria-label="Kontakt">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
-<a href="../impressum.html" hreflang="en" lang="en">Impressum</a>
-<a href="../privacy.html" hreflang="en" lang="en">Datenschutzerklärung</a>
+<a href="../impressum.html">Impressum</a>
+<a href="../privacy.html">Datenschutzerklärung</a>
 </nav></div>
-<div><h3>Folgen</h3><nav aria-label="Social">
-<a rel="noopener me" target="_blank" href="https://www.linkedin.com/company/quenora">LinkedIn</a>
-<a rel="noopener me" target="_blank" href="https://x.com/quenora_ai">X</a>
-<a rel="noopener me" target="_blank" href="https://www.instagram.com/quenora.ai/">Instagram</a>
+<div><h3>Folgen</h3><nav aria-label="Social Media">
+<a href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank">LinkedIn</a>
+<a href="https://x.com/quenora_ai" rel="noopener me" target="_blank">X</a>
+<a href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank">Instagram</a>
 </nav></div>
 </div>
 <div class="fbot">
 <span>© 2026 Quenora Consulting</span>
-<span>Heilbronn, Deutschland · <a href="../impressum.html" hreflang="en" lang="en">Impressum</a></span>
+<span>Heilbronn, Deutschland · <a href="../impressum.html">Impressum</a> · <a href="../privacy.html">Datenschutz</a></span>
 </div>
 </div>
 </footer>
+<button aria-controls="aiPanel" aria-expanded="false" aria-label="Assistent öffnen" class="ai-fab" id="aiFab" type="button">
+<svg aria-hidden="true" fill="none" viewbox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" stroke="#07070A" stroke-linecap="round" stroke-width="2"></path><circle cx="12" cy="12" fill="#07070A" r="3.2"></circle></svg>
+</button>
+<div aria-label="Quenora-Assistent" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
+<div class="ai-head"><div aria-hidden="true" class="ai-dot"></div>
+<div><b>Fragen Sie zu Quenora</b><span>Von uns verfasste Antworten, nicht generiert</span></div>
+</div>
+<div aria-live="polite" class="ai-body" id="aiBody" role="log"></div>
+<div class="ai-suggest" id="aiSuggest">
+<button class="ai-chip" data-q="What do you actually do?" type="button">Was machen Sie konkret?</button>
+<button class="ai-chip" data-q="What is automation here?" type="button">Automatisierung?</button>
+<button class="ai-chip" data-q="How long does an engagement take?" type="button">Wie lange?</button>
+<button class="ai-chip" data-q="What does it cost?" type="button">Was kostet es?</button>
+<button class="ai-chip" data-q="Who are you?" type="button">Wer sind Sie?</button>
+<button class="ai-chip" data-act="contact" type="button">Mit einem Menschen sprechen</button>
+</div>
+<form class="ai-form" id="aiForm">
+<label class="vh" for="aiInput">Stellen Sie eine Frage</label>
+<input autocomplete="off" id="aiInput" placeholder="Stellen Sie eine Frage …" type="text"/>
+<button type="submit">Fragen</button>
+</form>
+<div class="ai-foot">Geschriebene Antworten, per Stichwort zugeordnet · kein Live-Modell</div>
+</div>
 <script>
 /* ═══════════════════════════════════════════════════════════════════
    All motion, hand-written. No library, no CDN, nothing to block.
@@ -637,9 +1487,21 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
       body.classList.add('con');
       cdot.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0)';
     }, { passive: true });
+    /* The ring lags, and the lag is the input: the further it is behind the
+       pointer the more it stretches along the direction of travel and the
+       thinner it goes across it. Standing still it is a circle; moving fast it
+       is a comet. That is the whole difference between this and a ring that
+       merely follows. */
+    var sq = 0;
     (function ring() {
+      var dx = mx - rx, dy = my - ry;
       rx = lerp(rx, mx, 0.16); ry = lerp(ry, my, 0.16);
-      cur.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0)';
+      var sp = Math.sqrt(dx * dx + dy * dy);
+      sq = lerp(sq, Math.min(sp / 46, 1), 0.2);
+      var ang = sp > 0.6 ? Math.atan2(dy, dx) * 57.2958 : 0;
+      cur.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0)'
+        + ' rotate(' + ang + 'deg)'
+        + ' scale(' + (1 + sq * 0.5) + ',' + (1 - sq * 0.34) + ')';
       requestAnimationFrame(ring);
     })();
     d.addEventListener('mouseover', function (e) {
@@ -742,9 +1604,67 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     var NAMES = ['Trustworthy','Human','Confident','Elegant','Timeless',
                  'Enterprise','Premium','Innovative','Intelligent'];
 
-    var W=0,H=0,SC=1,OX=0,OY=0,DPR=1;
-    var nodes=[], stars=[], pulses=[], t0=0, hraf=null, seen=true, ready=false;
-    var tmx=0,tmy=0,cmx=0,cmy=0;
+    /* bounding box of the mark, in arc units — computed once */
+    var B=[1e9,-1e9,1e9,-1e9];
+    ARC.forEach(function(a){
+      B[0]=Math.min(B[0],a[0]-a[2]); B[1]=Math.max(B[1],a[0]+a[2]);
+      B[2]=Math.min(B[2],a[1]-a[2]); B[3]=Math.max(B[3],a[1]+a[2]);
+    });
+    var BW=B[1]-B[0], BH=B[3]-B[2], CXA=(B[0]+B[1])/2, CYA=(B[2]+B[3])/2;
+    /* A lit sphere's halo reaches 2.4× its radius. Budgeting for that here —
+       inside the fit, in arc units — is what keeps the field on screen without
+       the clamp-and-hope correction the previous build needed. */
+    var HALO = 2.4, PAD = 27 * HALO;
+    /* THE MARK DOES NOT MOVE.
+
+       Two rounds of this: first every sphere had its own orbit — different
+       radius, phase and speed each — which pulled the gaps apart every frame,
+       so what the hero drew stopped being the logo. That was replaced with a
+       rigid sway of the whole arc, which fixed the spacing but then drifted
+       the arc off the grid lines it is now constructed on.
+
+       So: no sway, no bob, no orbits. The arc sits exactly where the grid
+       puts it. Life comes from the dust, the pulses running the wires, the
+       hover, and a parallax that returns to zero the moment the pointer
+       stops — none of which touch the geometry at rest. */
+    var SWAY = 0, BOB = 0;
+
+    var W=0,H=0,SC=1,OX=0,OY=0,DPR=1,narrow=false;
+    var nodes=[], dust=[], pulses=[], t0=0, hraf=null, seen=true, ready=false;
+    var runs=[], nextRun=2.1;
+    var PATH=[], PLEN=[];      /* the spline the signal travels, rebuilt per frame */
+    /* bloom: one reused offscreen canvas, half resolution, plus a frame-time
+       guard that switches it off on devices that cannot hold the rate */
+    var bc=d.createElement('canvas'), bg2=bc.getContext('2d');
+    var bloomOK = !!(bg2 && typeof g.filter==='string');
+    var fpsLast=0, fpsAcc=0, fpsN=0;
+    /* Pointer state. Two different things, previously conflated into one:
+         px,py   real pointer position in canvas pixels — drives hit-testing
+         gx,gy   the same, smoothed — drives dust displacement
+         nx,ny   normalised −1..1 — drives parallax only
+       The old build hit-tested against (nx*0.5+0.5)*W, which squeezes the
+       whole pointer range into the middle half of the canvas. The cursor and
+       the sphere it lit were never in the same place, and near the seam two
+       neighbours lit at once. That is the clumsiness. */
+    var px=-9e9, py=-9e9, gx=-9e9, gy=-9e9, nx=0, ny=0, cnx=0, cny=0, over=false;
+
+    /* widest actual ink in the headline — not the max-width box, which is far
+       wider than the words that land in it */
+    function inkRight(h1, originX){
+      var best = 0;
+      var lines = h1.querySelectorAll('.ln');
+      for(var i=0;i<lines.length;i++){
+        var rr;
+        if(d.createRange){
+          var rg=d.createRange(); rg.selectNodeContents(lines[i]);
+          rr = rg.getBoundingClientRect();
+          /* the words animate in on a transform; measure where they land */
+          if(!rr || rr.width < 2) rr = lines[i].getBoundingClientRect();
+        } else rr = lines[i].getBoundingClientRect();
+        if(rr && rr.right - originX > best) best = rr.right - originX;
+      }
+      return best;
+    }
 
     function fit(){
       var r = cv.getBoundingClientRect();
@@ -752,30 +1672,119 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
       W=r.width; H=r.height; DPR=Math.min(devicePixelRatio||1,2);
       cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
       g.setTransform(DPR,0,0,DPR,0,0);
-      var b=[1e9,-1e9,1e9,-1e9];
-      ARC.forEach(function(a){
-        b[0]=Math.min(b[0],a[0]-a[2]); b[1]=Math.max(b[1],a[0]+a[2]);
-        b[2]=Math.min(b[2],a[1]-a[2]); b[3]=Math.max(b[3],a[1]+a[2]);
-      });
-      var bw=b[1]-b[0], bh=b[3]-b[2];
-      /* fill the hero properly — big on desktop, centred on mobile */
-      SC = Math.min(W/bw, H/bh) * (W<900 ? 0.80 : 1.18);
-      OX = W*(W<900 ? 0.50 : 0.70) - ((b[0]+b[1])/2)*SC;
-      OY = H*(W<900 ? 0.42 : 0.50) - ((b[2]+b[3])/2)*SC;
+      /* Below this the headline fills the column and the grid-snapped arc would
+         land on top of the type; above it there is clear space to its right.
+         At the old 900 threshold tablets took the centred fallback, which puts
+         the arc across the hook-foot paragraph. */
+      narrow = W < 700;
+
+      /* ── the field is constructed on the page's own grid ──
+         The previous box was arbitrary viewport fractions (0.50, 0.985) with
+         nothing aligned to anything, which is why the arc read as floating
+         next to the headline rather than composed with it.
+
+         The page already draws a six-column grid (.vgrid) at exactly the
+         wrap's width — those are the faint vertical rules behind the type.
+         The constellation is now built on them:
+
+           right edge  → a grid column line
+           bottom edge → the headline's own bottom
+           left edge   → the first grid line clear of the widest line of type
+
+         so both ends of the arc land on lines the eye can actually verify. */
+      var wrapEl = d.querySelector('.hook .wrap');
+      var h1El   = d.querySelector('.hook h1');
+      var fx0, fx1, fy0, fy1, snapped = false;
+
+      if(wrapEl && h1El && !narrow){
+        var wr = wrapEl.getBoundingClientRect();
+        var hr = h1El.getBoundingClientRect();
+        if(wr.width > 2 && hr.height > 2){
+          var wl = wr.left - r.left, ww = wr.width, col = ww/6;
+          var line = function(i){ return wl + col*i; };
+
+          /* The arc is exactly as tall as the headline block. That single
+             decision is what ties them together: both objects occupy the
+             same horizontal band and the same height, so the eye reads one
+             composition instead of two things placed near each other. */
+          fy0 = hr.top - r.top; fy1 = hr.bottom - r.top;
+          SC = (fy1-fy0)/BH;
+
+          /* Right edge on the wrap's own right grid line — the same vertical
+             the nav CTA and the hook-foot rule sit on.
+
+             An earlier version pulled this edge inward a column at a time so
+             the hover glow would fit on screen, which dragged the mark into
+             the type on 1280–1512 displays. Wrong trade: the glow is a soft
+             gradient that has already fallen to about 14% alpha by the time
+             it reaches the edge, so letting it bleed costs nothing, whereas
+             moving the mark off the grid costs the whole point. */
+          fx1 = line(6); fx0 = fx1 - BW*SC;
+          OX = fx1 - B[1]*SC;
+          OY = fy1 - B[3]*SC;
+          snapped = true;
+        }
+      }
+
+      if(!snapped){
+        /* Narrow screens: the headline fills the column, so there is no clear
+           space beside it. The one genuinely empty band is between the nav and
+           the eyebrow — putting the arc there keeps it off the type entirely.
+           The old fallback centred it low, which laid it across the hook-foot
+           paragraph on every phone and tablet. */
+        var navEl = d.getElementById('nav');
+        var eyeEl = d.querySelector('.hook .eyebrow');
+        var wrapN = d.querySelector('.hook .wrap');
+        if(navEl && eyeEl && wrapN){
+          var nb = navEl.getBoundingClientRect().bottom - r.top;
+          var et = eyeEl.getBoundingClientRect().top - r.top;
+          var wrn = wrapN.getBoundingClientRect();
+          var band = et - nb;
+          if(band > 60){
+            fy0 = nb + band*0.12; fy1 = et - band*0.12;
+            SC = (fy1-fy0)/BH;
+            OX = (wrn.right - r.left) - B[1]*SC;
+            OY = fy1 - B[3]*SC;
+            snapped = true;
+          }
+        }
+      }
+
+      if(!snapped){
+        /* last-resort: nothing measurable yet — centre under the type with the
+           halo budgeted inside the fit */
+        fx0 = W*0.06; fx1 = W*0.94; fy0 = H*0.52; fy1 = H*0.97;
+        SC = Math.min((fx1-fx0)/(BW+PAD*2), (fy1-fy0)/(BH+PAD*2));
+        OX = (fx0+fx1)/2 - CXA*SC;
+        OY = (fy0+fy1)/2 - CYA*SC;
+      }
+
+      /* last resort: never let the mark itself leave the canvas */
+      if(OX + B[1]*SC > W-2) OX = W-2 - B[1]*SC;
+      if(OY + B[3]*SC > H-2) OY = H-2 - B[3]*SC;
+      if(OY + B[2]*SC < 2)   OY = 2 - B[2]*SC;
+
       ready = true; return true;
     }
 
     function seed(){
       nodes = ARC.map(function(a,i){
-        return {hx:a[0],hy:a[1],r:a[2],ang:Math.random()*6.2832,
-                orb:6+i*1.9, spd:(0.09+i*0.014)*(i%2?1:-1),
-                born:0.10+i*0.075, x:0,y:0,rr:0,b:0,near:0};
+        return {hx:a[0],hy:a[1],r:a[2],
+                born:0.10+i*0.075, x:0,y:0,rr:0,b:0,near:0,
+                run:0, land:0};   /* lit by the passing run; bloom on arrival */
       });
-      stars = [];
-      for(var i=0;i<130;i++){
-        stars.push({x:Math.random(),y:Math.random(),
-                    z:0.25+Math.random()*0.9, r:0.4+Math.random()*1.5,
-                    ph:Math.random()*6.2832});
+      runs = []; nextRun = 2.1;
+      /* cosmos dust — normalised coords so a resize never strands a mote */
+      dust = [];
+      for(var i=0;i<170;i++){
+        var z = 0.18 + Math.random()*0.92;               /* depth */
+        dust.push({x:Math.random(), y:Math.random(), z:z,
+                   r:0.35+z*1.5,
+                   /* slow constant drift, faster when nearer the viewer */
+                   vx:(Math.random()-0.5)*0.00016*z,
+                   vy:(Math.random()-0.5)*0.00016*z,
+                   ox:0, oy:0,                            /* cursor push-off */
+                   ph:Math.random()*6.2832});
       }
       pulses = [];
     }
@@ -786,91 +1795,410 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
       var el=(now-t0)/1000;
       g.clearRect(0,0,W,H);
 
-      cmx += (tmx-cmx)*0.05; cmy += (tmy-cmy)*0.05;
-
-      /* ── starfield, parallaxed by depth ── */
-      for(var i=0;i<stars.length;i++){
-        var st=stars[i];
-        var sx=st.x*W + cmx*26*st.z, sy=st.y*H + cmy*26*st.z;
-        var tw=0.30+0.45*Math.abs(Math.sin(el*0.7+st.ph));
-        g.fillStyle='rgba(242,239,232,'+(tw*st.z*0.42).toFixed(3)+')';
-        g.beginPath(); g.arc(sx,sy,st.r*st.z,0,6.2832); g.fill();
+      cnx += (nx-cnx)*0.05; cny += (ny-cny)*0.05;
+      if(over){
+        gx = gx < -1e8 ? px : gx + (px-gx)*0.18;
+        gy = gy < -1e8 ? py : gy + (py-gy)*0.18;
       }
 
-      /* ── node positions ── */
-      var px=cmx*20, py=cmy*20;
-      nodes.forEach(function(n,i){
+      /* ── cosmos dust: drifts always, scatters from the cursor ──
+         Each mote carries its own displacement that eases back to zero, so
+         the wake persists for a moment after the pointer has gone by rather
+         than snapping back the instant it leaves. */
+      var DR = Math.min(W,H)*0.22, DR2 = DR*DR;
+      for(var i=0;i<dust.length;i++){
+        var m=dust[i];
+        if(!reduced){
+          m.x += m.vx; m.y += m.vy;
+          if(m.x<-0.02) m.x=1.02; else if(m.x>1.02) m.x=-0.02;
+          if(m.y<-0.02) m.y=1.02; else if(m.y>1.02) m.y=-0.02;
+        }
+        var bx = m.x*W + cnx*30*m.z, by = m.y*H + cny*30*m.z;
+        var boost = 0;
+        if(over && !reduced){
+          var dx=bx-gx, dy=by-gy, d2=dx*dx+dy*dy;
+          if(d2 < DR2 && d2 > 0.01){
+            var dd = Math.sqrt(d2);
+            var f = (1-dd/DR);                            /* 0 at rim, 1 at cursor */
+            f = f*f;                                      /* soften the falloff */
+            m.ox += ((dx/dd)*f*46*m.z - m.ox)*0.10;
+            m.oy += ((dy/dd)*f*46*m.z - m.oy)*0.10;
+            boost = f;
+          }
+        }
+        m.ox *= 0.94; m.oy *= 0.94;                       /* ease home */
+        var tw = 0.30 + 0.45*Math.abs(Math.sin(el*0.7+m.ph));
+        var a  = tw*m.z*0.24 + boost*0.45;
+        /* motes caught in the wake warm towards copper */
+        g.fillStyle = boost > 0.02
+          ? 'rgba('+Math.round(242-41*boost)+','+Math.round(239-117*boost)+','+
+            Math.round(232-172*boost)+','+a.toFixed(3)+')'
+          : 'rgba(242,239,232,'+a.toFixed(3)+')';
+        g.beginPath();
+        g.arc(bx+m.ox, by+m.oy, m.r*m.z*(1+boost*0.9), 0, 6.2832);
+        g.fill();
+      }
+
+      /* ── node positions: one rigid transform for the whole arc ── */
+      var ppx=cnx*20, ppy=cny*20;
+      var ga  = reduced ? 0 : Math.sin(el*0.16)*SWAY;
+      var bob = reduced ? 0 : Math.sin(el*0.23)*BOB;
+      var ca=Math.cos(ga), sa=Math.sin(ga);
+      nodes.forEach(function(n){
         var t=reduced?1:Math.max(0,Math.min(1,(el-n.born)/1.25));
         n.b = 1-Math.pow(1-t,3);
-        if(!reduced) n.ang += n.spd*0.016;
-        n.x = OX + n.hx*SC + Math.cos(n.ang)*n.orb + px;
-        n.y = OY + n.hy*SC + Math.sin(n.ang)*n.orb*0.6 + py;
+        /* rotate about the arc's own centroid — every gap survives intact */
+        var dx=n.hx-CXA, dy=n.hy-CYA;
+        n.x = OX + (CXA + dx*ca - dy*sa)*SC + ppx;
+        n.y = OY + (CYA + dx*sa + dy*ca)*SC + ppy + bob;
         n.rr = n.r*SC*(0.4+n.b*0.6);
-        var hx=(cmx*0.5+0.5)*W, hy=(cmy*0.5+0.5)*H;
-        n.near += (((Math.hypot(n.x-hx,n.y-hy) < 150)?1:0)-n.near)*0.1;
       });
+
+      /* ── exactly one sphere may be lit ──
+         Score by distance relative to each sphere's own reach, so a small
+         sphere you are sitting on beats a large one you are merely near.
+         Everything else is driven to zero. No more two-at-once. */
+      var hot=-1, best=1;
+      if(over){
+        for(var q=0;q<nodes.length;q++){
+          var nq=nodes[q];
+          var reach = nq.rr + Math.max(46, nq.rr*1.15);
+          var score = Math.hypot(nq.x-px, nq.y-py)/reach;
+          if(score < best){ best=score; hot=q; }
+        }
+      }
+      for(var s=0;s<nodes.length;s++){
+        var ns=nodes[s];
+        ns.near += ((s===hot?1:0) - ns.near) * (s===hot ? 0.16 : 0.10);
+      }
 
       /* ── wires ── */
       for(var k=0;k<nodes.length-1;k++){
-        var a=nodes[k], b2=nodes[k+1], s2=Math.min(a.b,b2.b);
+        var a2=nodes[k], b2=nodes[k+1], s2=Math.min(a2.b,b2.b);
         if(s2<=0.02) continue;
-        var lg=g.createLinearGradient(a.x,a.y,b2.x,b2.y);
-        lg.addColorStop(0,'rgba(201,122,60,'+(0.50*s2).toFixed(3)+')');
-        lg.addColorStop(1,'rgba(201,122,60,'+(0.16*s2).toFixed(3)+')');
-        g.strokeStyle=lg; g.lineWidth=1.2;
-        g.beginPath(); g.moveTo(a.x,a.y); g.lineTo(b2.x,b2.y); g.stroke();
+        var live = Math.max(a2.near,b2.near);
+        var lg=g.createLinearGradient(a2.x,a2.y,b2.x,b2.y);
+        lg.addColorStop(0,'rgba(201,122,60,'+((0.22+live*0.5)*s2).toFixed(3)+')');
+        lg.addColorStop(1,'rgba(201,122,60,'+((0.06+live*0.3)*s2).toFixed(3)+')');
+        g.strokeStyle=lg; g.lineWidth=1.2+live*0.8;
+        g.beginPath(); g.moveTo(a2.x,a2.y); g.lineTo(b2.x,b2.y); g.stroke();
       }
 
-      /* ── signal pulses ── */
+      /* The old build fired up to 16 random cyan pulses on random segments at
+         once. Read as speckle — blue dots drifting up the arc with no
+         direction and no meaning. One deliberate signal that goes the whole
+         way says the thing; a swarm says nothing. Removed in favour of the
+         run below. */
+
+      /* ═══ THE RUN — a signal that goes the whole way ═══
+         The headline says most enterprise AI never reaches the work. The hero
+         has to show the opposite, or the mark is only decoration: one signal
+         leaves the smallest circle, travels every segment of the arc, lights
+         each circle as it passes, and blooms when it arrives at the ninth.
+         It reaches. That is the entire promise, drawn. */
       if(!reduced){
-        if(el>1.4 && Math.random()<0.03){
-          var q=Math.floor(Math.random()*(nodes.length-1));
-          pulses.push({i:q,t:0,sp:0.009+Math.random()*0.012});
-          if(pulses.length>16) pulses.shift();
+        if(el>nextRun){ runs.push({t:0}); nextRun = el + 5.2; }
+
+        /* ── the path the signal actually travels ──
+           It used to run straight segments between circle centres, so it
+           changed direction at every circle — the zigzag. The nine centres sit
+           close to a circular arc but not on one (circles 7 and 8 are ~4% off
+           a fitted radius), so a fitted circle would drift off the spheres.
+
+           A Catmull-Rom spline passes exactly through all nine centres and is
+           smooth across each of them: the signal stays on the mark and stops
+           kinking. Resampled to a dense polyline with cumulative arc length so
+           it also moves at a constant speed. */
+        /* Only build it while a signal is actually travelling. Runs fire every
+           5.2s and last about 3s, so this was rebuilding a 129-point spline on
+           roughly 40% of frames that had nothing to draw on it. */
+        var totL=1;
+        if(runs.length){
+        PATH.length=0; PLEN.length=0;
+        for(var pi=0;pi<nodes.length-1;pi++){
+          var p0=nodes[pi>0?pi-1:0], p1=nodes[pi],
+              p2=nodes[pi+1], p3=nodes[pi<nodes.length-2?pi+2:nodes.length-1];
+          for(var sp=0;sp<16;sp++){
+            var tt=sp/16, t2=tt*tt, t3=t2*tt;
+            PATH.push({
+              x:0.5*((2*p1.x)+(-p0.x+p2.x)*tt+(2*p0.x-5*p1.x+4*p2.x-p3.x)*t2+(-p0.x+3*p1.x-3*p2.x+p3.x)*t3),
+              y:0.5*((2*p1.y)+(-p0.y+p2.y)*tt+(2*p0.y-5*p1.y+4*p2.y-p3.y)*t2+(-p0.y+3*p1.y-3*p2.y+p3.y)*t3),
+              rr:p1.rr+(p2.rr-p1.rr)*tt
+            });
+          }
         }
-        for(var pI=pulses.length-1;pI>=0;pI--){
-          var pu=pulses[pI]; pu.t+=pu.sp;
-          if(pu.t>=1){ pulses.splice(pI,1); continue; }
-          var A=nodes[pu.i], B=nodes[pu.i+1];
-          var x=A.x+(B.x-A.x)*pu.t, y=A.y+(B.y-A.y)*pu.t;
-          var f=Math.sin(pu.t*Math.PI);
-          var rg=g.createRadialGradient(x,y,0,x,y,18);
-          rg.addColorStop(0,'rgba(91,215,245,'+(0.9*f).toFixed(3)+')');
-          rg.addColorStop(1,'rgba(91,215,245,0)');
-          g.fillStyle=rg; g.beginPath(); g.arc(x,y,18,0,6.2832); g.fill();
-          g.fillStyle='rgba(160,238,255,'+f.toFixed(3)+')';
-          g.beginPath(); g.arc(x,y,2.2,0,6.2832); g.fill();
+        var lastN=nodes[nodes.length-1];
+        PATH.push({x:lastN.x,y:lastN.y,rr:lastN.rr});
+        var accL=0; PLEN.push(0);
+        for(var li=1;li<PATH.length;li++){
+          accL+=Math.hypot(PATH[li].x-PATH[li-1].x, PATH[li].y-PATH[li-1].y);
+          PLEN.push(accL);
         }
+        totL=accL||1;
+        }
+
+        nodes.forEach(function(n){ n.run*=0.86; });
+        for(var ri=runs.length-1;ri>=0;ri--){
+          var ru=runs[ri]; ru.t += 0.0055;
+          if(ru.t>=1){
+            nodes[nodes.length-1].land = 1;      /* it arrives */
+            runs.splice(ri,1); continue;
+          }
+          /* sample the spline by arc length */
+          var at=function(u){
+            var target=Math.max(0,Math.min(1,u))*totL;
+            var lo=0, hi=PLEN.length-1;
+            while(lo<hi-1){ var mid=(lo+hi)>>1; if(PLEN[mid]<target) lo=mid; else hi=mid; }
+            var span=(PLEN[hi]-PLEN[lo])||1, f=(target-PLEN[lo])/span;
+            var a=PATH[lo], b=PATH[hi];
+            return {x:a.x+(b.x-a.x)*f, y:a.y+(b.y-a.y)*f, rr:a.rr+(b.rr-a.rr)*f};
+          };
+          var hd=at(ru.t);
+          var hx3=hd.x, hy3=hd.y;
+
+          /* every circle brightens as the head passes it */
+          nodes.forEach(function(n,ni){
+            var np=ni/(nodes.length-1);
+            var dd=(ru.t-np)*7;
+            var w2=Math.exp(-dd*dd);
+            if(w2>n.run) n.run=w2;
+          });
+
+          /* ── the tail ──
+             Ten spaced dots read as beads on a string. This is a dense sample
+             along the spline at uniform arc-length spacing, each blob smaller
+             and fainter than the last, so they overlap into one continuous
+             taper. Its length and width are both tied to the local circle, so
+             the whole comet grows with the mark instead of the head growing
+             while the tail stays put. */
+          var coreAt=function(rr){ return Math.max(1.4, Math.min(rr*0.26, 7.4)); };
+          var hcore=coreAt(hd.rr);
+          var tailLen=Math.min(hcore*13, totL*0.16);
+          var steps=12;
+          for(var tI=1;tI<=steps;tI++){
+            var back=(tI/steps);
+            var u4=ru.t-(tailLen/totL)*back;
+            if(u4<=0) break;
+            var sm=at(u4);
+            var fall=1-back;
+            g.fillStyle='rgba(91,215,245,'+(0.34*fall*fall).toFixed(3)+')';
+            g.beginPath(); g.arc(sm.x,sm.y,coreAt(sm.rr)*(0.30+0.70*fall),0,6.2832); g.fill();
+          }
+
+          /* ── the head ──
+             Sized from the circle it is passing, and deliberately no longer a
+             blown-out white dot: the halo carries the light and the core is a
+             small warm-white centre inside it. A full-strength core inside a
+             full-strength halo is what made it read as a lamp rather than a
+             signal. */
+          var core=hcore;
+          var halo=core*4.6;
+          var hg3=g.createRadialGradient(hx3,hy3,0,hx3,hy3,halo);
+          hg3.addColorStop(0,'rgba(91,215,245,.52)');
+          hg3.addColorStop(0.45,'rgba(91,215,245,.16)');
+          hg3.addColorStop(1,'rgba(91,215,245,0)');
+          g.fillStyle=hg3; g.beginPath(); g.arc(hx3,hy3,halo,0,6.2832); g.fill();
+          g.fillStyle='rgba(186,236,250,.80)';
+          g.beginPath(); g.arc(hx3,hy3,core*0.72,0,6.2832); g.fill();
+        }
+      }
+
+      /* ═══ C · THE GROUND ═══
+         Nine circles floating in a void are a drawing. The same nine standing
+         on a surface are an object. The surface is the headline's own baseline
+         — the line the arc is already built on — so the ground states the
+         composition rather than decorating it: a shallow light spill, a
+         contact ellipse under each sphere, and an inverted reflection that
+         fades within about a sphere's height. */
+      if(nodes.length && nodes[0].b>0.01){
+        var gy = OY + B[3]*SC;                     /* the arc's own baseline */
+        var gx0 = OX + B[0]*SC, gx1 = OX + B[1]*SC, gxc = (gx0+gx1)/2;
+        var gspan = (gx1-gx0)*0.95;
+        /* Elliptical, centred under the arc and falling off before it reaches
+           the type. A full-width band read as a haze leak across the hero
+           rather than as a surface the mark is standing on. */
+        g.save();
+        var gsp = g.createRadialGradient(gxc, gy, 0, gxc, gy, gspan);
+        gsp.addColorStop(0,'rgba(201,122,60,.075)');
+        gsp.addColorStop(0.55,'rgba(201,122,60,.026)');
+        gsp.addColorStop(1,'rgba(201,122,60,0)');
+        g.fillStyle=gsp;
+        g.beginPath(); g.ellipse(gxc, gy, gspan, gspan*0.20, 0, 0, 6.2832); g.fill();
+        g.restore();
+
+        /* the reflection: flipped about the baseline, dim, and cut off before
+           it can read as a second mark */
+        g.save();
+        g.beginPath(); g.rect(gx0-gspan*0.1, gy, (gx1-gx0)+gspan*0.2, H*0.16); g.clip();
+        g.globalAlpha = 0.11;
+        g.translate(0, gy*2); g.scale(1,-1);
+        nodes.forEach(function(n){
+          if(n.b<=0.01) return;
+          var rr2=n.rr;
+          var rf=g.createRadialGradient(n.x-rr2*0.36,n.y-rr2*0.40,rr2*0.05,n.x,n.y,rr2);
+          rf.addColorStop(0,'rgba(212,158,110,'+(n.b*0.5).toFixed(3)+')');
+          rf.addColorStop(0.46,'rgba(150,90,44,'+(n.b*0.5).toFixed(3)+')');
+          rf.addColorStop(1,'rgba(52,28,10,0)');
+          g.fillStyle=rf; g.beginPath(); g.arc(n.x,n.y,rr2,0,6.2832); g.fill();
+        });
+        g.restore();
+
+        /* contact spill — the sphere is touching something */
+        nodes.forEach(function(n){
+          if(n.b<=0.01) return;
+          var cs2=g.createRadialGradient(n.x,gy,0,n.x,gy,n.rr*2.4);
+          cs2.addColorStop(0,'rgba(233,160,99,'+(0.085*n.b).toFixed(3)+')');
+          cs2.addColorStop(1,'rgba(233,160,99,0)');
+          g.fillStyle=cs2;
+          g.beginPath(); g.ellipse(n.x,gy,n.rr*2.4,n.rr*0.42,0,0,6.2832); g.fill();
+        });
       }
 
       /* ── the nine ── */
       nodes.forEach(function(n,i){
         if(n.b<=0.01) return;
-        var r=n.rr, lift=n.near;
-        var h=g.createRadialGradient(n.x,n.y,r*0.35,n.x,n.y,r*(2.9+lift*1.4));
-        h.addColorStop(0,'rgba(201,122,60,'+(0.34*n.b+lift*0.24).toFixed(3)+')');
-        h.addColorStop(1,'rgba(201,122,60,0)');
-        g.fillStyle=h; g.beginPath(); g.arc(n.x,n.y,r*(2.9+lift*1.4),0,6.2832); g.fill();
+        var r=n.rr, glow=Math.max(n.near, n.run*0.55);
+        /* At rest the spheres sit back in the dark. The halo is driven purely
+           by the pointer, so the field only lights where you actually are. */
+        if(glow > 0.01){
+          var hr = r*(1 + glow*(HALO-1));
+          var h=g.createRadialGradient(n.x,n.y,r*0.35,n.x,n.y,hr);
+          h.addColorStop(0,'rgba(201,122,60,'+(0.30*glow*n.b).toFixed(3)+')');
+          h.addColorStop(1,'rgba(201,122,60,0)');
+          g.fillStyle=h; g.beginPath(); g.arc(n.x,n.y,hr,0,6.2832); g.fill();
+        }
 
+        var lum = 0.42 + glow*0.58;                       /* dim → full */
         var bd=g.createRadialGradient(n.x-r*0.36,n.y-r*0.40,r*0.05,n.x,n.y,r);
-        bd.addColorStop(0,'rgba(250,196,144,'+n.b.toFixed(3)+')');
-        bd.addColorStop(0.46,'rgba(201,122,60,'+n.b.toFixed(3)+')');
-        bd.addColorStop(1,'rgba(88,46,16,'+n.b.toFixed(3)+')');
+        bd.addColorStop(0,'rgba(212,158,110,'+(n.b*lum).toFixed(3)+')');
+        bd.addColorStop(0.46,'rgba(150,90,44,'+(n.b*lum).toFixed(3)+')');
+        bd.addColorStop(1,'rgba(52,28,10,'+(n.b*lum).toFixed(3)+')');
         g.fillStyle=bd; g.beginPath(); g.arc(n.x,n.y,r,0,6.2832); g.fill();
 
-        g.strokeStyle='rgba(250,196,144,'+(0.55*n.b+lift*0.4).toFixed(3)+')';
-        g.lineWidth=Math.max(0.6,r*0.05);
+        /* ═══ B · FRESNEL RIM ═══
+           Light wrapping a curved surface is brightest at the edge, where the
+           surface turns away from the viewer. A flat stroke says "circle with
+           an outline"; this says "sphere". It is the cheapest physicality on
+           offer — one extra gradient, no state. */
+        var fr=g.createRadialGradient(n.x,n.y,r*0.62,n.x,n.y,r);
+        fr.addColorStop(0,'rgba(233,160,99,0)');
+        fr.addColorStop(0.82,'rgba(233,160,99,'+(0.09*n.b+glow*0.12).toFixed(3)+')');
+        fr.addColorStop(1,'rgba(255,196,140,'+(0.34*n.b+glow*0.34).toFixed(3)+')');
+        g.fillStyle=fr; g.beginPath(); g.arc(n.x,n.y,r,0,6.2832); g.fill();
+
+        g.strokeStyle='rgba(201,122,60,'+(0.20*n.b+glow*0.42).toFixed(3)+')';
+        g.lineWidth=Math.max(0.6,r*0.045);
         g.beginPath(); g.arc(n.x,n.y,r*0.97,0,6.2832); g.stroke();
 
-        g.fillStyle='rgba(255,232,205,'+(0.6*n.b).toFixed(3)+')';
-        g.beginPath(); g.arc(n.x-r*0.34,n.y-r*0.38,Math.max(0.7,r*0.14),0,6.2832); g.fill();
+        /* contact shadow against the previous, smaller sphere — this is what
+           makes them read as in front of one another rather than beside */
+        if(i>0){
+          var pv=nodes[i-1];
+          if(pv.b>0.01){
+            var dx2=pv.x-n.x, dy2=pv.y-n.y, dd=Math.hypot(dx2,dy2);
+            if(dd>0.001 && dd < (r+pv.rr)*1.6){
+              var cx2=n.x+(dx2/dd)*r*0.88, cy2=n.y+(dy2/dd)*r*0.88;
+              var oc=g.createRadialGradient(cx2,cy2,0,cx2,cy2,r*0.62);
+              oc.addColorStop(0,'rgba(10,5,2,'+(0.5*n.b).toFixed(3)+')');
+              oc.addColorStop(1,'rgba(10,5,2,0)');
+              g.fillStyle=oc; g.beginPath(); g.arc(cx2,cy2,r*0.62,0,6.2832); g.fill();
+            }
+          }
+        }
 
-        if(lift>0.06 && r>7){
-          g.font='500 12px "JetBrains Mono",monospace'; g.textAlign='center';
-          g.fillStyle='rgba(242,239,232,'+(lift*0.95).toFixed(3)+')';
-          g.fillText(NAMES[i].toUpperCase(), n.x, n.y-r-16);
+        g.fillStyle='rgba(255,232,205,'+(0.14*n.b+glow*0.5).toFixed(3)+')';
+        g.beginPath(); g.arc(n.x-r*0.34,n.y-r*0.38,Math.max(0.7,r*0.13),0,6.2832); g.fill();
+
+        /* ── arrival: the ninth circle takes the signal and rings once ── */
+        if(n.land>0.001){
+          n.land*=0.955;
+          var lr2=r*(1.05+(1-n.land)*0.9);
+          g.strokeStyle='rgba(91,215,245,'+(n.land*0.55).toFixed(3)+')';
+          g.lineWidth=1.6*n.land+0.3;
+          g.beginPath(); g.arc(n.x,n.y,lr2,0,6.2832); g.stroke();
+          var ag=g.createRadialGradient(n.x,n.y,r*0.5,n.x,n.y,r*2.3);
+          ag.addColorStop(0,'rgba(91,215,245,'+(n.land*0.22).toFixed(3)+')');
+          ag.addColorStop(1,'rgba(91,215,245,0)');
+          g.fillStyle=ag; g.beginPath(); g.arc(n.x,n.y,r*2.3,0,6.2832); g.fill();
+        }
+
+        /* One label, on the lit sphere only, on a rule that draws itself out
+           of the sphere — so it reads as a callout rather than floating text. */
+        /* Hover only. The travelling run lights the spheres too, and keying
+           the callout off the combined glow made every name flash as the
+           signal went past — nine labels stacked across the headline. */
+        if(n.near>0.10){
+          var lab=NAMES[i].toUpperCase(), ease=Math.min(1,(n.near-0.10)/0.55);
+          g.save();
+          g.globalAlpha = ease;
+          g.font='500 11px "JetBrains Mono",monospace';
+          g.textBaseline='middle';
+          /* The leader was anchored at r*0.72 and ran up-right. On the small
+             circles that is inside the circle itself, and up-right is exactly
+             where the next, larger circle sits — so the name landed on top of
+             its neighbour. The arc climbs to the right, which leaves the space
+             below-right of every circle empty: the callout goes there, off the
+             circle's edge with a fixed clearance rather than a fraction of a
+             radius that vanishes at r=3. */
+          var tw=g.measureText(lab).width;
+          var drop=Math.max(r*0.55,13)+ease*4;
+          var reach=Math.max(r*0.5,16)+ease*10;
+          var right = (n.x+r+reach+tw+18) < W-6;   /* flip near the right edge */
+          var sx=n.x+(right?1:-1)*(r*0.72), sy=n.y+r*0.62;
+          var ex=sx+(right?1:-1)*reach, ey=sy+drop;
+          var tipX=ex+(right?1:-1)*(tw+14);
+          g.strokeStyle='rgba(201,122,60,.7)'; g.lineWidth=1;
+          g.beginPath(); g.moveTo(sx,sy); g.lineTo(ex,ey); g.lineTo(tipX,ey); g.stroke();
+          g.fillStyle='rgba(242,239,232,.96)';
+          g.textAlign = right?'left':'right';
+          g.fillText(lab, ex+(right?7:-7), ey-8);
+          g.restore();
         }
       });
+
+      /* ═══ D · BLOOM ═══
+         Stacked radial gradients imitate glow; they do not imitate light.
+         Real bloom is a bright pass, blurred, composited additively — so
+         highlights bleed into their surroundings the way a lens does, and
+         overlapping halos accumulate instead of flattening.
+
+         Rendered at half resolution into a reused offscreen canvas: the blur
+         hides the resampling entirely, and it quarters the fill cost. Skipped
+         under reduced motion, and skipped if the device could not hold 50fps,
+         because a hero that stutters is worse than a hero that does not
+         bloom. */
+      if(bloomOK && !reduced){
+        var bw=Math.max(1,Math.round(W*0.5)), bh=Math.max(1,Math.round(H*0.5));
+        if(bc.width!==bw||bc.height!==bh){ bc.width=bw; bc.height=bh; }
+        bg2.setTransform(0.5,0,0,0.5,0,0);
+        bg2.clearRect(0,0,W,H);
+        nodes.forEach(function(n){
+          if(n.b<=0.01) return;
+          var r=n.rr, gl=Math.max(n.near,n.run*0.55);
+          var hb=bg2.createRadialGradient(n.x-r*0.30,n.y-r*0.34,0,n.x,n.y,r*1.18);
+          hb.addColorStop(0,'rgba(255,214,170,'+(0.30*n.b+gl*0.5).toFixed(3)+')');
+          hb.addColorStop(0.55,'rgba(233,160,99,'+(0.10*n.b+gl*0.16).toFixed(3)+')');
+          hb.addColorStop(1,'rgba(201,122,60,0)');
+          bg2.fillStyle=hb; bg2.beginPath(); bg2.arc(n.x,n.y,r*1.18,0,6.2832); bg2.fill();
+        });
+        /* the signal blooms too — it is the brightest thing on the canvas */
+        runs.forEach(function(){});
+        g.save();
+        g.globalCompositeOperation='lighter';
+        g.globalAlpha=0.55;
+        g.filter='blur(13px)';
+        g.drawImage(bc,0,0,W,H);
+        g.restore();
+      }
+
+      /* Cheap rolling frame-time check. If the first ~90 frames average worse
+         than 20ms, drop bloom permanently on this device rather than shipping
+         a stutter. */
+      if(bloomOK && !reduced){
+        if(fpsLast){ fpsAcc += (now-fpsLast); fpsN++; }
+        fpsLast = now;
+        if(fpsN===90){ if(fpsAcc/fpsN > 20) bloomOK=false; }
+      }
 
       hraf = requestAnimationFrame(paint);
     }
@@ -889,12 +2217,24 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     if(d.fonts && d.fonts.ready) d.fonts.ready.then(fit);
 
     var hero = cv.parentNode;
-    hero.addEventListener('mousemove', function(e){
+    function track(cx, cy){
       var r=cv.getBoundingClientRect();
-      tmx=((e.clientX-r.left)/r.width)*2-1;
-      tmy=((e.clientY-r.top)/r.height)*2-1;
+      px = cx-r.left; py = cy-r.top;
+      nx = (px/r.width)*2-1; ny = (py/r.height)*2-1;
+      over = true;
+    }
+    hero.addEventListener('mousemove', function(e){ track(e.clientX,e.clientY); },{passive:true});
+    hero.addEventListener('mouseleave', function(){
+      over=false; nx=0; ny=0; px=-9e9; py=-9e9;
+    });
+    /* touch: a tap lights the nearest sphere and the dust scatters once */
+    hero.addEventListener('touchstart', function(e){
+      if(e.touches[0]) track(e.touches[0].clientX, e.touches[0].clientY);
     },{passive:true});
-    hero.addEventListener('mouseleave',function(){ tmx=0; tmy=0; });
+    hero.addEventListener('touchmove', function(e){
+      if(e.touches[0]) track(e.touches[0].clientX, e.touches[0].clientY);
+    },{passive:true});
+    hero.addEventListener('touchend', function(){ over=false; nx=0; ny=0; });
 
     if('IntersectionObserver' in w){
       new IntersectionObserver(function(es){
@@ -902,6 +2242,580 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
         if(seen && !reduced) go(); else halt();
       },{threshold:0.01}).observe(cv);
     }
+  })();
+
+  /* ─────────── CHAPTER 09 · the mark explained ───────────
+     Rows and circles are the same nine things, so pointing at either lights
+     both. The SVG is aria-hidden and the list carries every word, so none of
+     this is load-bearing for assistive tech — it is a reading aid. */
+  (function(){
+    var arc=d.getElementById('nineArc'), list=d.getElementById('nineList');
+    if(!arc||!list) return;
+    var circles=arc.querySelectorAll('circle');
+    var rows=list.querySelectorAll('li');
+
+    /* draw the wires between consecutive circles, from the geometry itself */
+    var wires=d.getElementById('nineWires');
+    if(wires){
+      for(var i=0;i<circles.length-1;i++){
+        var a=circles[i], b=circles[i+1];
+        var ln=d.createElementNS('http://www.w3.org/2000/svg','line');
+        ln.setAttribute('x1',a.getAttribute('cx')); ln.setAttribute('y1',a.getAttribute('cy'));
+        ln.setAttribute('x2',b.getAttribute('cx')); ln.setAttribute('y2',b.getAttribute('cy'));
+        wires.appendChild(ln);
+      }
+    }
+
+    function light(i){
+      if(i<0){ arc.classList.remove('live'); }
+      else arc.classList.add('live');
+      for(var k=0;k<circles.length;k++) circles[k].classList.toggle('on', k===i);
+      for(var j=0;j<rows.length;j++)    rows[j].classList.toggle('on', j===i);
+    }
+    function bind(el,i){
+      el.addEventListener('mouseenter',function(){ light(i); });
+      el.addEventListener('focusin',   function(){ light(i); });
+    }
+    for(var r=0;r<rows.length;r++) bind(rows[r], r);
+    for(var c=0;c<circles.length;c++){
+      circles[c].style.cursor='pointer';
+      bind(circles[c], c);
+    }
+    list.addEventListener('mouseleave', function(){ light(-1); });
+    arc.addEventListener('mouseleave',  function(){ light(-1); });
+  })();
+
+  /* ═══════════════════════════════════════════════════════════════
+     "THE GAP" — the chapter 01 diagram, in three beats.
+
+     BEAT 1 · the problem.  A rail runs from the notebook on the left to
+     production on the right, broken in the middle. Pulses leave the notebook,
+     reach the wall, and are thrown back. None of them cross. This is the
+     chapter's argument, and it has to land before anything answers it.
+
+     BEAT 2 · the answer arrives.  The mark builds in the gap, circle by
+     circle, in its own order. The wall stops being a blockade and becomes a
+     crossing. The label under it changes from THE GAP to QUENORA.
+
+     BEAT 3 · the work lands.  Pulses now run the whole rail, pass through the
+     mark, and arrive. The production terminals fill as they do, and stay
+     filled. The diagram ends on the outcome, not on the problem.
+
+     The nine circles are the brand mark's own coordinates, unchanged — the
+     same nine triples the nav, the footer and the hero use.
+     ═══════════════════════════════════════════════════════════════ */
+  (function(){
+    var cv=d.getElementById('gapCanvas'); if(!cv) return;
+    var g=cv.getContext && cv.getContext('2d'); if(!g) return;
+    var W=0,H=0,DPR=1,raf=null,seen=false,t0=0,ready=false;
+    var sparks=[], rings=[], flares=[], lands=[];
+
+    /* the mark, in arc units — identical to every other place it is drawn */
+    var MARK=[[12,161.71,3],[21.64,161.34,3.95],[33.39,159.88,5.2],
+              [47.73,156.52,6.84],[65.05,149.97,9],[85.34,138.1,11.84],
+              [107.49,117.76,15.59],[127.81,84.89,20.52],[151.71,36,27]];
+    var MB=[1e9,-1e9,1e9,-1e9];
+    MARK.forEach(function(a){
+      MB[0]=Math.min(MB[0],a[0]-a[2]); MB[1]=Math.max(MB[1],a[0]+a[2]);
+      MB[2]=Math.min(MB[2],a[1]-a[2]); MB[3]=Math.max(MB[3],a[1]+a[2]);
+    });
+    var MW=MB[1]-MB[0], MH=MB[3]-MB[2];
+
+    /* Beat timing, in seconds. The figure loops: the argument is worth making
+       more than once, and the mark rebuilding in the gap on every pass is the
+       point at which the brand and the argument are the same object. */
+    /* Timing is a retention problem, not an aesthetic one. At 5.4s of wall
+       plus 2.2s of build the mark did not finish arriving until 7.6s, by
+       which point a reader is already scrolling. The problem still has to
+       land, so it is shortened rather than skipped. */
+    var T_HOLD=3.0,      /* how long the wall wins */
+        T_BUILD=1.9,     /* how long the mark takes to build */
+        T_SHOW=6.4,      /* how long the work keeps landing once it is open */
+        CYCLE=T_HOLD+T_BUILD+T_SHOW;
+    var lastLoop=-1;
+    function easeOut(x){ return 1-Math.pow(1-x,3); }
+    function clamp01(x){ return x<0?0:x>1?1:x; }
+
+    /* Five lanes, because one rail was a thin line across an empty box — it
+       created exactly the kind of dead space this page has been fighting.
+       A portfolio of pilots all stalling at the same wall fills the column
+       and makes the argument harder at the same time.
+
+       These are generic use cases, not client work. The caption says so. */
+    var LANES=[
+      {n:'RETRIEVAL ASSISTANT',  p:Math.random()*0.5},
+      {n:'DEMAND FORECAST',      p:Math.random()*0.5},
+      {n:'DOCUMENT CLASSIFIER',  p:Math.random()*0.5},
+      {n:'SERVICE COPILOT',      p:Math.random()*0.5},
+      {n:'ANOMALY DETECTION',    p:Math.random()*0.5}
+    ];
+    /* Reduced motion never runs the beats, so it is shown the answer rather
+       than a frozen problem: bridged, and every terminal lit. */
+    LANES.forEach(function(L){
+      L.sp=0.0034+Math.random()*0.0030;
+      L.lit=reduced?1:0;
+    });
+
+    var WALL=0.52;                     /* where the wall sits along the rail */
+
+    function fit(){
+      var r=cv.getBoundingClientRect();
+      if(r.width<2||r.height<2) return false;
+      W=r.width; H=r.height; DPR=Math.min(devicePixelRatio||1,2);
+      cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+      g.setTransform(DPR,0,0,DPR,0,0);
+      ready=true; return true;
+    }
+
+    function label(txt,x,y,align,col){
+      g.font='500 10px "JetBrains Mono",monospace';
+      g.textAlign=align; g.textBaseline='alphabetic';
+      g.fillStyle=col; g.fillText(txt,x,y);
+    }
+
+    function paint(now){
+      if(!ready && !fit()){ raf=requestAnimationFrame(paint); return; }
+      if(!t0) t0=now;
+      var el=(now-t0)/1000;
+      g.clearRect(0,0,W,H);
+
+      /* Below ~640px the lane names would eat the whole rail, so they move
+         above their lane instead of beside it. */
+      var tight = W < 640;
+      var padL=2, padR=Math.max(10,W*0.01);
+      var labw = tight ? 0 : Math.min(215, W*0.22);
+      var x0=padL+labw, x1=W-padR, span=x1-x0;
+      var head = tight ? 26 : 34;
+      var lanes = LANES.length;
+      /* bottom reserve: QUENORA sits at wy1+24 and the line that explains
+         what the middle is sits at wy1+41, so 46px clipped the explanation */
+      var room = H - head - 64;
+      var step = room/(lanes-1+(tight?0.9:0));
+      var wall = x0 + span*WALL;
+
+      /* ── where we are in the three beats ──
+         cyc is the position inside one cycle. Crossing into a new cycle puts
+         the wall back up and clears the terminals, so the argument restarts
+         rather than half-dissolving. */
+      var cyc = el % CYCLE, loopIdx = Math.floor(el/CYCLE);
+      if(!reduced && loopIdx!==lastLoop){
+        lastLoop = loopIdx;
+        if(loopIdx>0){
+          LANES.forEach(function(L){ L.lit=0; L.p=-Math.random()*0.35; });
+          sparks.length=0; rings.length=0; flares.length=0; lands.length=0;
+        }
+      }
+      var bridge = reduced ? 1 : easeOut(clamp01((cyc-T_HOLD)/T_BUILD));
+      var open   = bridge > 0.02;
+
+      /* ── headers ── */
+      label('A TYPICAL PILOT PORTFOLIO', padL, head-14, 'left', 'rgba(233,160,99,.95)');
+      if(!tight) label('IN PRODUCTION', x1, head-14, 'right',
+        'rgba('+Math.round(148+85*bridge)+','+Math.round(156+70*bridge)+','
+        +Math.round(176+40*bridge)+','+(0.85+0.15*bridge).toFixed(2)+')');
+
+      /* ── where the mark will stand ──
+         Computed before the rails so each rail can stop short of it. The
+         previous build erased the rails afterwards with destination-out,
+         which also erased the terminus dots and left a grey disc where the
+         cleared pixels showed the section behind the canvas. Nothing is
+         erased now: the rails simply are not drawn through the circles. */
+      var laneSpan=(lanes-1)*step;
+      var mkS=laneSpan/MH;
+      var mkX=wall-(MB[0]+MW/2)*mkS;
+      var mkY=(head+(tight?12:0))-MB[2]*mkS;
+      /* For a given rail y, the x-span the nine circles actually cover.
+         Per-circle, so the notch follows the arc instead of being one blunt
+         rectangle — the rails meet the mark exactly where it is. */
+      function markGap(y){
+        if(bridge<=0.02) return null;
+        var lo=1e9, hi=-1e9, pad=3.5;
+        for(var z=0;z<9;z++){
+          var cy=mkY+MARK[z][1]*mkS, cr=MARK[z][2]*mkS*bridge+pad;
+          var dy=y-cy; if(Math.abs(dy)>=cr) continue;
+          var half=Math.sqrt(cr*cr-dy*dy), cx=mkX+MARK[z][0]*mkS;
+          if(cx-half<lo) lo=cx-half;
+          if(cx+half>hi) hi=cx+half;
+        }
+        return hi>lo ? [lo,hi] : null;
+      }
+      /* draw xa→xb on rail y, minus whatever the mark occupies */
+      function rail(xa,xb,y,gap){
+        if(xb<=xa) return;
+        if(!gap || gap[1]<=xa || gap[0]>=xb){
+          g.beginPath(); g.moveTo(xa,y); g.lineTo(xb,y); g.stroke(); return;
+        }
+        if(gap[0]>xa){ g.beginPath(); g.moveTo(xa,y); g.lineTo(gap[0],y); g.stroke(); }
+        if(gap[1]<xb){ g.beginPath(); g.moveTo(gap[1],y); g.lineTo(xb,y); g.stroke(); }
+      }
+
+      /* ── lanes ── */
+      for(var i=0;i<lanes;i++){
+        var L=LANES[i], y=head + i*step + (tight?12:0);
+        if(tight) label(L.n, x0, y-9, 'left', 'rgba(140,146,160,.9)');
+        else      label(L.n, padL, y+3.5, 'left', 'rgba(140,146,160,.9)');
+        var gap=markGap(y);
+
+        /* the half that always worked */
+        g.strokeStyle='rgba(201,122,60,.47)'; g.lineWidth=1.3;
+        rail(x0,wall,y,gap);
+
+        /* the half that did not — dashed and dead until the mark bridges it,
+           then it is drawn in, left to right, as real track */
+        g.save(); g.setLineDash([2,8]); g.lineWidth=1;
+        g.strokeStyle='rgba(148,156,176,'+(0.16*(1-bridge)).toFixed(3)+')';
+        rail(wall+7,x1,y,gap);
+        g.restore();
+        if(bridge>0){
+          g.strokeStyle='rgba(201,122,60,'+(0.47*bridge).toFixed(3)+')';
+          g.lineWidth=1.3;
+          rail(wall,wall+(x1-wall)*bridge,y,gap);
+        }
+
+        /* origin, and the terminus — dark until something actually arrives */
+        g.fillStyle='rgba(201,122,60,.92)';
+        g.beginPath(); g.arc(x0,y,3.5,0,6.2832); g.fill();
+        var lit = L.lit||0;
+        g.strokeStyle='rgba('+Math.round(148+53*lit)+','+Math.round(156-34*lit)+','
+          +Math.round(176-116*lit)+','+(0.28+0.67*lit).toFixed(2)+')';
+        g.lineWidth=1+lit*0.8;
+        g.beginPath(); g.arc(x1,y,4,0,6.2832); g.stroke();
+        if(lit>0){
+          g.fillStyle='rgba(233,160,99,'+(lit*0.9).toFixed(3)+')';
+          g.beginPath(); g.arc(x1,y,2.1*lit,0,6.2832); g.fill();
+        }
+
+        /* ── the pulse ──
+           p runs 0..1 across the WHOLE rail. WALL is the fraction of it the
+           wall sits at, so "blocked" and "crossing" are the same journey with
+           a different stopping point, not two different animations. */
+        if(!reduced){
+          L.p += L.sp;
+          if(!open && L.p>=WALL){
+            /* BEAT 1. The impact is the argument, so it is staged as one: the
+               wall flares where it was struck, a shockwave leaves the contact
+               point, and the run scatters *backwards*. It does not leak
+               through and it does not fade politely — it is turned back. */
+            flares.push({y:y, l:1});
+            rings.push({x:wall, y:y, l:1});
+            for(var k=0;k<20;k++){
+              var a=Math.PI+(Math.random()-0.5)*2.3;   /* rejected, not dispersed */
+              var sp0=0.7+Math.random()*2.6;
+              sparks.push({x:wall, y:y,
+                           vx:Math.cos(a)*sp0,
+                           vy:Math.sin(a)*sp0*0.8, l:1});
+            }
+            L.p = -(0.12+Math.random()*0.5);         /* pause, then try again */
+          } else if(L.p>=1){
+            /* BEAT 3. It arrives. The terminal lights and stays lit. */
+            L.lit = 1;
+            lands.push({x:x1, y:y, l:1});
+            L.p = -(0.10+Math.random()*0.42);
+          }
+        }
+        if(L.p>0){
+          var px=x0+span*L.p, fade=Math.min(1,L.p*9);
+          /* the run tightens as it closes on whatever it is heading for */
+          var goal = open ? 1 : WALL;
+          var near=clamp01((L.p-goal*0.6)/(goal*0.4));
+          var tail=34+near*26;
+          var tr=g.createLinearGradient(px-tail,0,px,0);
+          tr.addColorStop(0,'rgba(233,160,99,0)');
+          tr.addColorStop(1,'rgba(233,160,99,'+(0.62*fade).toFixed(3)+')');
+          g.strokeStyle=tr; g.lineWidth=1.7+near*0.9;
+          g.beginPath(); g.moveTo(px-tail,y); g.lineTo(px,y); g.stroke();
+          /* the halo carries the light, the core stays small and hot — a
+             full-strength core inside a full-strength halo is what made these
+             read as blown-out white dots rather than moving light */
+          var hg=g.createRadialGradient(px,y,0,px,y,6+near*4);
+          hg.addColorStop(0,'rgba(233,178,120,'+(0.42*fade).toFixed(3)+')');
+          hg.addColorStop(1,'rgba(201,122,60,0)');
+          g.fillStyle=hg;
+          g.beginPath(); g.arc(px,y,6+near*4,0,6.2832); g.fill();
+          g.fillStyle='rgba(255,226,196,'+(0.82*fade).toFixed(3)+')';
+          g.beginPath(); g.arc(px,y,1.9+near*0.7,0,6.2832); g.fill();
+        }
+      }
+
+      /* ── the wall, which stops being a wall ──
+         It fades as the mark takes its place: the same vertical, no longer a
+         blockade. */
+      var wy0=head-18, wy1=head+(lanes-1)*step+(tight?12:0)+18;
+      var wOp=1-bridge*0.72;
+      var wg=g.createLinearGradient(0,wy0,0,wy1);
+      wg.addColorStop(0,'rgba(255,112,67,'+(0.25*wOp).toFixed(3)+')');
+      wg.addColorStop(0.5,'rgba(255,112,67,'+(0.95*wOp).toFixed(3)+')');
+      wg.addColorStop(1,'rgba(255,112,67,'+(0.25*wOp).toFixed(3)+')');
+      g.strokeStyle=wg; g.lineWidth=1.8;
+      g.beginPath(); g.moveTo(wall,wy0); g.lineTo(wall,wy1); g.stroke();
+
+      /* ── BEAT 2 · the mark builds in the gap ──
+         Nine circles in their own order, smallest first, sitting on the wall
+         line and scaled to the lane band. This is the answer occupying exactly
+         the space the problem occupied. */
+      if(bridge>0){
+        /* Geometry was computed before the rails, so they already stop short
+           of these circles. Top of the mark on the first rail, bottom on the
+           last: it spans the portfolio rather than floating across the middle
+           three lanes. */
+        var ms=mkS, mx=mkX, my=mkY;
+
+        for(var q=0;q<9;q++){
+          /* each circle has its own slice of the build */
+          var cq=clamp01((bridge-q*0.055)/0.34);
+          if(cq<=0) continue;
+          var cx=mx+MARK[q][0]*ms, cy=my+MARK[q][1]*ms, cr=MARK[q][2]*ms*cq;
+
+          /* Lit spheres, not flat discs. Nine solid copper circles at .92 with
+             a wide bloom sat on top of the lanes as one bright blob and blew
+             out the whole figure. This is the hero's own sphere treatment —
+             dark body, lit rim, one specular highlight — so the mark reads as
+             an object with depth and the lanes stay readable behind it. */
+          var bl=g.createRadialGradient(cx,cy,cr*0.6,cx,cy,cr*2.1);
+          bl.addColorStop(0,'rgba(201,122,60,'+(0.13*cq).toFixed(3)+')');
+          bl.addColorStop(1,'rgba(201,122,60,0)');
+          g.fillStyle=bl;
+          g.beginPath(); g.arc(cx,cy,cr*2.1,0,6.2832); g.fill();
+
+          var bd=g.createRadialGradient(cx-cr*0.36,cy-cr*0.40,cr*0.05,cx,cy,cr);
+          bd.addColorStop(0,'rgba(212,158,110,'+(0.95*cq).toFixed(3)+')');
+          bd.addColorStop(0.46,'rgba(150,90,44,'+(0.95*cq).toFixed(3)+')');
+          bd.addColorStop(1,'rgba(52,28,10,'+(0.95*cq).toFixed(3)+')');
+          g.fillStyle=bd;
+          g.beginPath(); g.arc(cx,cy,cr,0,6.2832); g.fill();
+
+          g.strokeStyle='rgba(201,122,60,'+(0.34*cq).toFixed(3)+')';
+          g.lineWidth=Math.max(0.5,cr*0.045);
+          g.beginPath(); g.arc(cx,cy,cr*0.97,0,6.2832); g.stroke();
+
+          g.fillStyle='rgba(255,232,205,'+(0.16*cq).toFixed(3)+')';
+          g.beginPath(); g.arc(cx-cr*0.34,cy-cr*0.38,Math.max(0.6,cr*0.13),0,6.2832); g.fill();
+        }
+      }
+
+      /* ── the label under it changes with what it is ── */
+      if(bridge<1)
+        label('THE GAP', wall, wy1+24, 'center',
+              'rgba(255,112,67,'+(0.95*(1-bridge)).toFixed(3)+')');
+      if(bridge>0){
+        label('QUENORA', wall, wy1+24, 'center',
+              'rgba(233,160,99,'+(0.95*bridge).toFixed(3)+')');
+        /* The mark appearing mid-rail does not explain itself — without this
+           it is just a logo dropped in the middle of a diagram. This says what
+           the middle IS: the wall was never the model, it was the missing
+           layer, and that layer is the thing being sold. */
+        if(!tight)
+          label('THE LAYER THAT WAS MISSING', wall, wy1+41, 'center',
+                'rgba(148,156,176,'+(0.7*bridge).toFixed(3)+')');
+      }
+
+      /* ── the wall lights where it was struck, then cools ── */
+      if(!reduced){
+        for(var f=flares.length-1;f>=0;f--){
+          var fl=flares[f]; fl.l-=0.022;
+          if(fl.l<=0){ flares.splice(f,1); continue; }
+          var ext=52*fl.l+14;
+          var fg=g.createLinearGradient(0,fl.y-ext,0,fl.y+ext);
+          fg.addColorStop(0,'rgba(255,140,90,0)');
+          fg.addColorStop(0.5,'rgba(255,190,150,'+(fl.l*0.95).toFixed(3)+')');
+          fg.addColorStop(1,'rgba(255,140,90,0)');
+          g.strokeStyle=fg; g.lineWidth=1.8+fl.l*2.6;
+          g.beginPath(); g.moveTo(wall,fl.y-ext); g.lineTo(wall,fl.y+ext); g.stroke();
+        }
+        /* ── the shockwave leaving the contact point ── */
+        for(var n=rings.length-1;n>=0;n--){
+          var rg2=rings[n]; rg2.l-=0.035;
+          if(rg2.l<=0){ rings.splice(n,1); continue; }
+          var rr=(1-rg2.l)*26+3;
+          g.strokeStyle='rgba(255,150,100,'+(rg2.l*0.55).toFixed(3)+')';
+          g.lineWidth=1.3*rg2.l+0.3;
+          g.beginPath();
+          /* only the half that bounces back — nothing radiates past the wall */
+          g.arc(rg2.x,rg2.y,rr,Math.PI*0.5,Math.PI*1.5); g.stroke();
+        }
+      }
+
+      /* ── the scatter dies ── */
+      if(!reduced){
+        for(var j=sparks.length-1;j>=0;j--){
+          var sp=sparks[j];
+          sp.x+=sp.vx; sp.y+=sp.vy; sp.vx*=0.945; sp.vy*=0.945;
+          sp.vy+=0.012;                      /* they fall, they do not float */
+          sp.l-=0.020;
+          if(sp.l<=0){ sparks.splice(j,1); continue; }
+          if(sp.x>wall) sp.x=wall;           /* never past the wall */
+          g.fillStyle='rgba(255,130,85,'+(sp.l*0.8).toFixed(3)+')';
+          g.beginPath(); g.arc(sp.x,sp.y,1.7*sp.l+0.4,0,6.2832); g.fill();
+        }
+
+        /* ── BEAT 3 · arrival. A ring opening forwards, into production —
+           the mirror of the shockwave that used to bounce back. ── */
+        for(var m=lands.length-1;m>=0;m--){
+          var ld=lands[m]; ld.l-=0.030;
+          if(ld.l<=0){ lands.splice(m,1); continue; }
+          var lr=(1-ld.l)*22+3;
+          g.strokeStyle='rgba(233,178,120,'+(ld.l*0.7).toFixed(3)+')';
+          g.lineWidth=1.4*ld.l+0.3;
+          g.beginPath(); g.arc(ld.x,ld.y,lr,-Math.PI*0.5,Math.PI*0.5); g.stroke();
+        }
+      }
+
+      raf=requestAnimationFrame(paint);
+    }
+
+    function go(){ if(!raf && seen) raf=requestAnimationFrame(paint); }
+    function halt(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
+
+    fit();
+    if('ResizeObserver' in w) new ResizeObserver(function(){ fit(); }).observe(cv);
+    w.addEventListener('resize', fit, {passive:true});
+    if(d.fonts && d.fonts.ready) d.fonts.ready.then(fit);
+
+    if(reduced){ paint(performance.now()); halt(); }
+    else if('IntersectionObserver' in w){
+      new IntersectionObserver(function(es){
+        seen=es[0].isIntersecting; if(seen) go(); else halt();
+      },{threshold:0.05}).observe(cv);
+    } else { seen=true; go(); }
+  })();
+
+  /* ═══════════════════════════════════════════════════════════════
+     CAPABILITY 02 — the automation figure.
+
+     Work arrives on the left at a steady rate and runs a single automated
+     spine. At the decision point most of it continues to DONE on its own.
+     A minority is routed down to a person, on purpose.
+
+     That split is the argument. Automation that claims to handle everything
+     is either lying or unsupervised; the figure that sells honestly is the
+     one that shows a deliberate human branch. It runs continuously — there
+     is no beginning or end to it, which is the point.
+     ═══════════════════════════════════════════════════════════════ */
+  (function(){
+    var cv=d.getElementById('autoCanvas'); if(!cv) return;
+    var g=cv.getContext && cv.getContext('2d'); if(!g) return;
+    var W=0,H=0,DPR=1,raf=null,seen=false,ready=false,t0=0;
+    var items=[], done=[], spawn=0;
+
+    var EX_EVERY=5;          /* one in five is routed to a person */
+    var made=0;
+
+    function fit(){
+      var r=cv.getBoundingClientRect();
+      if(r.width<2||r.height<2) return false;
+      W=r.width; H=r.height; DPR=Math.min(devicePixelRatio||1,2);
+      cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+      g.setTransform(DPR,0,0,DPR,0,0);
+      ready=true; return true;
+    }
+    function lab(t,x,y,a,c){
+      g.font='500 10px "JetBrains Mono",monospace';
+      g.textAlign=a; g.textBaseline='alphabetic'; g.fillStyle=c; g.fillText(t,x,y);
+    }
+    function cl(x){ return x<0?0:x>1?1:x; }
+
+    function paint(now){
+      if(!ready && !fit()){ raf=requestAnimationFrame(paint); return; }
+      if(!t0) t0=now;
+      g.clearRect(0,0,W,H);
+
+      var tight=W<640;
+      var padL=2, padR=Math.max(10,W*0.01);
+      var x0=padL+(tight?0:Math.min(150,W*0.15));
+      var x1=W-padR-(tight?0:Math.min(150,W*0.15));
+      var xd=x0+(x1-x0)*0.54;                 /* the decision point */
+      var mid=H*0.44, top=H*0.26, bot=H*0.78;
+
+      /* ── the spine everything runs ── */
+      g.strokeStyle='rgba(201,122,60,.42)'; g.lineWidth=1.3;
+      g.beginPath(); g.moveTo(x0,mid); g.lineTo(xd,mid); g.stroke();
+      /* ── the two outcomes ── */
+      g.strokeStyle='rgba(201,122,60,.42)';
+      g.beginPath(); g.moveTo(xd,mid); g.lineTo(x1,top); g.stroke();
+      g.save(); g.setLineDash([3,5]); g.lineWidth=1.1;
+      g.strokeStyle='rgba(148,156,176,.34)';
+      g.beginPath(); g.moveTo(xd,mid); g.lineTo(x1,bot); g.stroke(); g.restore();
+
+      /* ── the decision point itself ── */
+      g.strokeStyle='rgba(233,160,99,.75)'; g.lineWidth=1.2;
+      g.beginPath(); g.arc(xd,mid,5.5,0,6.2832); g.stroke();
+      lab(tight?'DECIDE':'HANDLE OR ESCALATE', xd, mid-16, 'center', 'rgba(233,160,99,.8)');
+
+      /* ── labels ── */
+      lab('WORK ARRIVES', padL, mid-14, 'left', 'rgba(233,160,99,.95)');
+      lab(tight?'DONE':'DONE, UNATTENDED', W-padR, top-13, 'right', 'rgba(233,160,99,.95)');
+      lab(tight?'TO A PERSON':'ROUTED TO A PERSON', W-padR, bot+19, 'right', 'rgba(148,156,176,.9)');
+
+      /* ── intake and the two terminals ── */
+      g.fillStyle='rgba(201,122,60,.92)';
+      g.beginPath(); g.arc(x0,mid,3.5,0,6.2832); g.fill();
+      g.strokeStyle='rgba(201,122,60,.55)'; g.lineWidth=1.1;
+      g.beginPath(); g.arc(x1,top,4.5,0,6.2832); g.stroke();
+      g.strokeStyle='rgba(148,156,176,.45)';
+      g.beginPath(); g.arc(x1,bot,4.5,0,6.2832); g.stroke();
+
+      /* ── work arriving ── */
+      if(!reduced){
+        if(--spawn<=0){
+          spawn=22+Math.round(Math.random()*10);
+          made++;
+          items.push({p:0, ex:(made%EX_EVERY===0), sp:0.0055+Math.random()*0.0022});
+        }
+        for(var i=items.length-1;i>=0;i--){
+          var it=items[i]; it.p+=it.sp;
+          if(it.p>=1){
+            done.push({x:x1, y:it.ex?bot:top, ex:it.ex, l:1});
+            items.splice(i,1); continue;
+          }
+          var ix,iy;
+          if(it.p<0.54){                       /* on the shared spine */
+            ix=x0+(xd-x0)*(it.p/0.54); iy=mid;
+          } else {                             /* past the decision */
+            var q=(it.p-0.54)/0.46;
+            ix=xd+(x1-xd)*q; iy=mid+((it.ex?bot:top)-mid)*q;
+          }
+          var col=it.ex?'148,176,196':'255,226,190';
+          var gg=g.createRadialGradient(ix,iy,0,ix,iy,8);
+          gg.addColorStop(0,'rgba('+col+',.55)');
+          gg.addColorStop(1,'rgba('+col+',0)');
+          g.fillStyle=gg; g.beginPath(); g.arc(ix,iy,8,0,6.2832); g.fill();
+          g.fillStyle='rgba('+col+',.95)';
+          g.beginPath(); g.arc(ix,iy,2.4,0,6.2832); g.fill();
+        }
+        /* ── arrivals ── */
+        for(var j=done.length-1;j>=0;j--){
+          var dn=done[j]; dn.l-=0.032;
+          if(dn.l<=0){ done.splice(j,1); continue; }
+          var rr=(1-dn.l)*17+3;
+          g.strokeStyle=(dn.ex?'rgba(148,176,196,':'rgba(233,178,120,')+(dn.l*0.7).toFixed(3)+')';
+          g.lineWidth=1.3*dn.l+0.3;
+          g.beginPath(); g.arc(dn.x,dn.y,rr,-Math.PI*0.5,Math.PI*0.5); g.stroke();
+        }
+      } else {
+        /* reduced motion: one of each, at rest, so the split still reads */
+        g.fillStyle='rgba(255,226,190,.95)';
+        g.beginPath(); g.arc(xd+(x1-xd)*0.55, mid+(top-mid)*0.55, 2.4,0,6.2832); g.fill();
+        g.fillStyle='rgba(148,176,196,.95)';
+        g.beginPath(); g.arc(xd+(x1-xd)*0.55, mid+(bot-mid)*0.55, 2.4,0,6.2832); g.fill();
+      }
+
+      raf=requestAnimationFrame(paint);
+    }
+
+    function go(){ if(!raf && seen) raf=requestAnimationFrame(paint); }
+    function halt(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
+
+    fit();
+    if('ResizeObserver' in w) new ResizeObserver(function(){ fit(); }).observe(cv);
+    w.addEventListener('resize', fit, {passive:true});
+    if(d.fonts && d.fonts.ready) d.fonts.ready.then(fit);
+
+    if(reduced){ paint(performance.now()); halt(); }
+    else if('IntersectionObserver' in w){
+      new IntersectionObserver(function(es){
+        seen=es[0].isIntersecting; if(seen) go(); else halt();
+      },{threshold:0.05}).observe(cv);
+    } else { seen=true; go(); }
   })();
 
   /* ─────────── 7 · THE SCROLL ENGINE ───────────
@@ -918,7 +2832,14 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   function measure() {
     vw = w.innerWidth; vh = w.innerHeight;
     if (htrack && hwrap) {
-      trackW = htrack.scrollWidth;
+      /* scrollWidth on a flex row omits the container's trailing padding, so
+         the track was measured short by one gutter and the last card could
+         never be scrolled fully into view. Measure the real right edge. */
+      var lastPh = phases[phases.length - 1];
+      var padR = parseFloat(getComputedStyle(htrack).paddingRight) || 0;
+      trackW = lastPh
+        ? lastPh.offsetLeft + lastPh.offsetWidth + padR
+        : htrack.scrollWidth;
       /* the wrapper is as tall as the horizontal distance plus one screen.
          Guard the floor: if the track is narrower than the viewport there is
          nothing to scrub, and a negative height would collapse the section. */
@@ -940,6 +2861,22 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     }, { passive: true });
   }
 
+  /* Reduced motion drops the parallax and the scrubbing, not the state. The
+     nav's background and the progress bar are legibility features — without
+     .stuck the header sits transparent over the page it is on — so they keep
+     tracking scroll here, with a passive listener instead of a rAF loop. */
+  if (reduced) {
+    var flat = function () {
+      var y = w.scrollY || d.documentElement.scrollTop;
+      var docH = d.documentElement.scrollHeight - vh;
+      if (prog) prog.style.width = clamp(y / docH, 0, 1) * 100 + '%';
+      if (nav) nav.classList.toggle('stuck', y > 20);
+    };
+    w.addEventListener('scroll', flat, { passive: true });
+    w.addEventListener('resize', flat);
+    flat();
+  }
+
   if (!reduced) (function frame() {
     var y = w.scrollY || d.documentElement.scrollTop;
     var docH = d.documentElement.scrollHeight - vh;
@@ -955,17 +2892,24 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     if (pinwrap) {
       var r = pinwrap.getBoundingClientRect();
       var p = clamp(-r.top / (pinwrap.offsetHeight - vh), 0, 1);
-      /* headline settles over the first 45% */
-      var a = ease(clamp(p / 0.45, 0, 1));
-      pBig.style.opacity = a;
-      pBig.style.transform = 'translate3d(0,' + (1 - a) * 70 + 'px,0) scale(' + (0.94 + a * 0.06) + ')';
-      var b = ease(clamp((p - 0.2) / 0.35, 0, 1));
-      pSub.style.opacity = b;
-      pSub.style.transform = 'translate3d(0,' + (1 - b) * 40 + 'px,0)';
+      /* The stage is stuck to the viewport for the whole of pinwrap, so
+         whatever it shows at p=0 is what the visitor stares at on arrival.
+         The previous choreography started the headline at opacity 0 and only
+         finished it at p=0.45 — which meant three quarters of a screen of
+         scrolling against a completely empty stage. That was the blank.
+
+         The headline is now present the moment the stage is, and scroll is
+         spent on the reveal *below* it rather than on the reveal *of* it. */
+      var a = ease(clamp(p / 0.22, 0, 1));
+      pBig.style.opacity = 1;
+      pBig.style.transform = 'scale(' + (0.985 + a * 0.015) + ')';
+      var b = ease(clamp(p / 0.16, 0, 1));
+      pSub.style.opacity = 0.35 + b * 0.65;
+      pSub.style.transform = 'translate3d(0,' + (1 - b) * 18 + 'px,0)';
       seams.forEach(function (s, i) {
-        var c = ease(clamp((p - 0.4 - i * 0.13) / 0.3, 0, 1));
-        s.style.opacity = c;
-        s.style.transform = 'translate3d(0,' + (1 - c) * 52 + 'px,0)';
+        var c = ease(clamp((p - 0.18 - i * 0.14) / 0.30, 0, 1));
+        s.style.opacity = 0.12 + c * 0.88;
+        s.style.transform = 'translate3d(0,' + (1 - c) * 34 + 'px,0)';
       });
     }
 
@@ -978,7 +2922,12 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
       /* per-phase parallax, driven by horizontal position not page scroll */
       phases.forEach(function (ph) {
         var left = ph.offsetLeft - shift;
-        var t = clamp(1 - (left - vw * 0.15) / (vw * 0.7), 0, 1);
+        /* Reveal on the card's own entry, not on an absolute viewport band.
+           The old band only completed for cards that travelled near the left
+           edge — the last two never do, so phases 05 and 06 stayed greyed out
+           however far you scrolled. A card is fully revealed once it is fully
+           on screen, which every card reaches. */
+        var t = clamp((vw - left) / (ph.offsetWidth * 0.9), 0, 1);
         var e2 = ease(t);
         var h3 = ph.querySelector('h3'), pp = ph.querySelector('p:not(.dur)');
         if (h3) { h3.style.opacity = e2; h3.style.transform = 'translate3d(' + (1 - e2) * 80 + 'px,0,0)'; }
@@ -994,6 +2943,200 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 
     requestAnimationFrame(frame);
   })();
+})();
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   THE ASSISTANT
+
+   Every answer below is written. There is no model behind this and no
+   network call — the CSP is connect-src 'self' and there is no key in this
+   repo, by policy. It matches keywords against written answers and says so
+   in its own footer, because a box that looks like a chatbot and quietly
+   is not is the kind of small dishonesty this site is built to avoid.
+
+   To make it a real assistant you need a same-origin endpoint (a Vercel
+   function at /api/chat) holding the key as an environment variable. The
+   CSP already allows that; nothing else here would change.
+   ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   THE ENQUIRY FORM
+
+   Posts to /api/enquiry, which emails it on. Same origin, so the CSP
+   (connect-src 'self') is unchanged.
+
+   If the deployment has no RESEND_API_KEY the endpoint answers 503
+   {configured:false} and this falls back to opening the visitor's mail
+   client with the message already written. A form that silently loses
+   enquiries is worse than one that says it cannot send yet — so it never
+   claims to have sent something it did not.
+   ═══════════════════════════════════════════════════════════════════ */
+(function(){
+  var form=document.getElementById('cform'); if(!form) return;
+  var note=document.getElementById('cfNote'), send=document.getElementById('cfSend');
+  var MAIL='info@quenora.ai';
+
+  function say(t,cls){ note.className='cnote'+(cls?' '+cls:''); note.textContent=t; }
+  function mailFallback(v){
+    var body='Name: '+v.name+'\nCompany: '+(v.org||'—')+'\n\n'+v.message;
+    var href='mailto:'+MAIL+'?subject='+encodeURIComponent('Enquiry from '+v.name)
+            +'&body='+encodeURIComponent(body);
+    note.className='cnote';
+    note.innerHTML='This site is not wired to send mail yet. '
+      +'<a href="'+href+'">Open this in your mail client</a> — everything you typed is already in it.';
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v={
+      name:  form.name.value.trim(),
+      email: form.email.value.trim(),
+      org:   form.org.value.trim(),
+      message: form.message.value.trim(),
+      consent: form.consent.checked,
+      company_url: form.company_url.value
+    };
+    [['name',v.name],['email',v.email],['message',v.message]].forEach(function(p){
+      form[p[0]].setAttribute('aria-invalid', p[1]?'false':'true');
+    });
+    if(!v.name||!v.email||!v.message){ say('Name, email and a message, please.','err'); return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email)){
+      form.email.setAttribute('aria-invalid','true');
+      say('That email address does not look right.','err'); return;
+    }
+    if(!v.consent){ say('We need your agreement before we can store your details.','err'); return; }
+
+    send.disabled=true; say('Sending…');
+    fetch('/api/enquiry',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(v)
+    }).then(function(r){
+      return r.json().catch(function(){ return {}; }).then(function(j){ return {s:r.status,j:j}; });
+    }).then(function(o){
+      send.disabled=false;
+      if(o.s===200 && o.j.ok){
+        form.reset(); say('Sent. You will hear back from a person, not an autoresponder.','ok');
+      } else if(o.s===400 || o.s===429){
+        /* the endpoint is live and rejected this on its merits — say why */
+        say((o.j && o.j.error) || 'That did not send.','err');
+      } else {
+        /* 404 no endpoint deployed, 503 no key yet, 502 upstream down —
+           the visitor did nothing wrong and their words should not be lost */
+        mailFallback(v);
+      }
+    }).catch(function(){
+      send.disabled=false; mailFallback(v);
+    });
+  });
+})();
+
+(function(){
+  var fab=document.getElementById('aiFab'), panel=document.getElementById('aiPanel'),
+      body=document.getElementById('aiBody'), form=document.getElementById('aiForm'),
+      input=document.getElementById('aiInput'), sug=document.getElementById('aiSuggest');
+  if(!fab||!panel||!body) return;
+  var opened=false;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function add(t,who){
+    var m=document.createElement('div');
+    m.className='ai-msg '+who; m.textContent=t;
+    body.appendChild(m); body.scrollTop=body.scrollHeight;
+  }
+  function bot(t){
+    if(reduce){ add(t,'bot'); return; }
+    var w=document.createElement('div');
+    w.className='ai-msg bot';
+    w.innerHTML='<span class="ai-typing"><i></i><i></i><i></i></span>';
+    body.appendChild(w); body.scrollTop=body.scrollHeight;
+    setTimeout(function(){ w.remove(); add(t,'bot'); }, 520+Math.random()*380);
+  }
+
+  var A=[
+    [['automation','automate','workflow','process','unattended','rpa'],
+     "Automation is capability 02 and one of the three core ones. We automate the processes a business repeats — approvals, handoffs, reconciliations, the reporting someone does on a Tuesday. The part that matters is the exceptions: an automation is only trustworthy if it knows which cases it should not decide, and drawing that line is most of the work."],
+    [['what do you','services','offer','do you do','capabilit'],
+     "Nine capabilities. Three are core — platform and deployment engineering, process and workflow automation, and AI integration — because everything runs through them. The other six step in only when the work needs them. Nothing is handed to a subcontractor you’ve never met."],
+    [['who are you','about','founder','balaji','team','how big','size'],
+     "Quenora is founder-led, founded in 2025 by Balaji Durai. Before Quenora he ran transformation work for multinational manufacturers, retail banking and life sciences groups; those systems went on to be used by more than 100,000 people. We work from Heilbronn, internationally, in German, French and English."],
+    [['different','why you','compare','competitor','large consult','big four'],
+     "Use a large consultancy for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, the person who scopes your engagement is the person who does the work and the person you call when it breaks."],
+    [['long','time','timeline','how fast','duration','weeks'],
+     "Six phases, from framing to handover, and each carries an exit condition written into the statement of work. Most engagements run twelve to fourteen weeks end to end, with a working pilot well before that. The engagement is designed to end."],
+    [['cost','price','pricing','budget','how much','rate'],
+     "Scoped to outcomes rather than day rates. Chapter 08 on the homepage states how it’s priced rather than making you sit through three meetings to find out. A briefing gives you a real number, not a range designed to get a second meeting."],
+    [['work','case','client','example','project','reference'],
+     "Three patterns come up most: invoice processing across unintegrated ERP instances, support triage with knowledge retrieval, and legacy modernisation with predictive scheduling. They are described by shape rather than by client name, and the figures on the Work page are illustrative of the pattern rather than audited results."],
+    [['product','framework','accelerator','toolkit','blueprint'],
+     "Five: the Automation Accelerator, the Enterprise Agent Framework, the AI Readiness Assessment, the Governance Toolkit and the Platform Blueprint. They are frameworks you own rather than licences you rent. The Products page has the detail."],
+    [['platform','infrastructure','data','deploy'],
+     "Platform and deployment engineering is capability 01 and core: data architecture, infrastructure and the internal platforms that make AI repeatable rather than a one-off — then deployment onto them, with monitoring and handover documentation that survives contact with reality."],
+    [['govern','security','compliance','risk','gdpr','eu ai act','audit'],
+     "Model risk, data privacy and audit trails are built in from the start rather than added as a separate workstream. For European clients that includes GDPR and EU AI Act alignment."],
+    [['agent','copilot','chatbot','llm','model'],
+     "Purpose-built agents wired into the systems that actually hold the work — ERP, CRM, service desk — rather than a chatbot bolted onto a homepage. The hard part is almost never the model."],
+    [['contact','talk','call','briefing','email','reach'],
+     "Start a conversation from the button in the header, or email info@quenora.ai. A first call is a briefing, not a pitch."],
+    [['language','german','french','english','deutsch'],
+     "German, French and English."],
+    [['where','located','based','heilbronn','germany','office'],
+     "Based in Heilbronn, Germany, working internationally."]
+  ];
+
+  function ask(q){
+    q=(q||'').trim(); if(!q) return;
+    add(q,'user');
+    var k=q.toLowerCase(), m=null;
+    for(var i=0;i<A.length;i++){
+      var keys=A[i][0];
+      for(var j=0;j<keys.length;j++){
+        if(k.indexOf(keys[j])>-1){ m=A[i][1]; break; }
+      }
+      if(m) break;
+    }
+    bot(m || "That one is worth a real conversation rather than a canned line — email info@quenora.ai and you’ll get specifics for your systems. In the meantime the nine chapters on this page cover the approach, the capabilities and the pricing.");
+  }
+
+  function toggle(){
+    var open=panel.classList.toggle('open');
+    fab.setAttribute('aria-expanded', open?'true':'false');
+    if(open && !opened){
+      opened=true;
+      setTimeout(function(){
+        bot("Hello. I can give you a quick sense of what Quenora does — ask a question, or pick one below. My answers are written by the team, not generated.");
+      }, 260);
+    }
+    if(open) setTimeout(function(){ input && input.focus(); }, 320);
+  }
+
+  fab.addEventListener('click', toggle);
+  if(form) form.addEventListener('submit', function(e){
+    e.preventDefault(); ask(input.value); input.value='';
+  });
+  if(sug) sug.addEventListener('click', function(e){
+    var c=e.target.closest('.ai-chip'); if(!c) return;
+    /* the assistant's job is to hand over, not to hold on to people */
+    if(c.getAttribute('data-act')==='contact'){
+      panel.classList.remove('open');
+      fab.setAttribute('aria-expanded','false');
+      var cl=document.getElementById('climax');
+      if(cl){
+        cl.scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
+        setTimeout(function(){
+          var f=document.getElementById('cfName'); if(f) f.focus();
+        }, reduce?0:700);
+      }
+      return;
+    }
+    ask(c.getAttribute('data-q'));
+  });
+  addEventListener('keydown', function(e){
+    if(e.key==='Escape' && panel.classList.contains('open')){
+      panel.classList.remove('open');
+      fab.setAttribute('aria-expanded','false');
+      fab.focus();
+    }
+  });
 })();
 </script>
 <script>

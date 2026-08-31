@@ -28,6 +28,18 @@
   --e:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box}
+/* German and French compounds are long enough to set a grid track's minimum
+   width on their own: a 1fr track carries an implicit min-width:auto, so
+   "Prozessautomatisierung" made the German homepage 393px wide on a 375px
+   phone and the whole page scrolled sideways. minmax(0,1fr) lets the track
+   shrink; hyphenation then gives the word somewhere to break rather than
+   overflowing its card. Hyphens are switched on only where the language
+   expects them — English typography here is set unhyphenated on purpose. */
+:lang(de),:lang(fr){hyphens:auto;-webkit-hyphens:auto}
+/* except in the mono labels, where a hyphen lands mid-word in letter-spaced
+   uppercase and reads as a typo rather than as typesetting */
+.mono,.ch,.eyebrow,.tie,.lbl,.ly,.n,.figlab,code,kbd{hyphens:manual;-webkit-hyphens:manual}
+h1,h2,h3,h4,p,li,td,th,figcaption{overflow-wrap:break-word}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--void);color:var(--t1);line-height:1.62;
@@ -56,10 +68,10 @@ a{color:inherit;text-decoration:none}
   transition:color .3s;position:relative}
 .navlinks>a:hover{color:var(--t1)}
 .navlinks>a[aria-current=page]{color:var(--copper-lt)}
-.navlinks>a.navcta{background:var(--copper);color:var(--void);border:1px solid transparent;
+.navcta{background:var(--copper);color:var(--void);border:1px solid transparent;
   padding:11px 22px;font-size:.8rem;font-weight:600;border-radius:8px;white-space:nowrap;
   box-shadow:0 6px 24px -8px rgba(201,122,60,.45);transition:background .22s ease,transform .22s ease}
-.navlinks>a.navcta:hover{background:var(--copper-lt);transform:translateY(-1px)}
+.navcta:hover{background:var(--copper-lt);transform:translateY(-1px)}
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;
   padding:9px;flex:none;margin-left:auto;border-radius:3px}
 .burger i{display:block;width:22px;height:1.5px;background:var(--t1);transition:transform .28s var(--e),opacity .2s}
@@ -67,14 +79,29 @@ a{color:inherit;text-decoration:none}
 .burger.open i:nth-child(2){opacity:0}
 .burger.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 @media(max-width:880px){
-  .burger{display:flex;order:2}
+  .burger{display:flex}
   .nav .wrap{flex-wrap:wrap;height:auto;min-height:84px}
   .navlinks{order:4;flex-basis:100%;flex-direction:column;align-items:stretch;gap:0;
     margin-left:0;max-height:0;overflow:hidden;transition:max-height .34s var(--e),margin .34s var(--e)}
   .navlinks.open{max-height:320px;margin-bottom:var(--sp3)}
   .navlinks>a{padding:14px 2px;border-bottom:1px solid var(--line-2);font-size:15px}
-  .navlinks>a.navcta{order:-1;position:absolute;right:64px;top:22px;padding:9px 16px}
+  /* The CTA used to leave the panel and sit at a fixed right offset, with the
+     language button pushed to that same edge by margin-left:auto. The two
+     overlapped — 14px in English, 35px on the engineering page, and in the
+     German build the globe sat through the middle of "Kontakt". No fixed
+     offset can be right, because the label is a different width in every
+     language. The CTA is now a flex item of the bar like everything else, so
+     the row cannot overlap itself at any width in any language. */
+  .navcta{order:2}
+  .langsel{order:1;margin-left:auto}
+  .burger{order:3}
+  .navcta{padding:9px 16px}
 }
+/* Below ~560px the row cannot hold brand + full CTA + language button, so the
+   CTA drops to its short label — the same trade the homepage makes. */
+.cta-short{display:none}
+@media(max-width:560px){.cta-long{display:none}.cta-short{display:inline}
+  .navcta{padding:8px 13px}}
 @media(prefers-reduced-motion:reduce){.burger i,.navlinks{transition:none}}
 
 /* ── type ── */
@@ -103,7 +130,7 @@ strong{color:var(--t1);font-weight:600}
   gap:var(--sp4);margin:var(--sp5) 0 0;align-items:start}
 .decisions.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:1000px){.decisions.c3{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){.decisions,.decisions.c3{grid-template-columns:1fr}}
+@media(max-width:640px){.decisions,.decisions.c3{grid-template-columns:minmax(0,1fr)}}
 .dec{background:var(--sf1);padding:var(--sp4);border:1px solid var(--line);
   border-radius:4px}
 .dec .n{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.2em;
@@ -145,7 +172,7 @@ strong{color:var(--t1);font-weight:600}
   background:rgba(229,177,79,.08);padding:5px 11px;border-radius:3px;display:inline-block;
   margin:0 0 var(--sp3)}
 @media(max-width:820px){
-  .lay{grid-template-columns:1fr;gap:var(--sp3)}
+  .lay{grid-template-columns:minmax(0,1fr);gap:var(--sp3)}
   .lay p{max-width:none}
 }
 
@@ -187,8 +214,8 @@ strong{color:var(--t1);font-weight:600}
 /* ── footer, matching the homepage ── */
 footer{border-top:1px solid var(--line);padding:var(--sp6) 0 var(--sp5);margin-top:var(--sp7)}
 .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:var(--sp5) var(--sp4)}
-@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.fgrid{grid-template-columns:1fr}}
+@media(max-width:900px){.fgrid{grid-template-columns:minmax(0,1fr) 1fr}}
+@media(max-width:560px){.fgrid{grid-template-columns:minmax(0,1fr)}}
 footer h3{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
   text-transform:uppercase;color:var(--t3);margin:0 0 var(--sp3);font-weight:500}
 footer nav{display:flex;flex-direction:column;gap:11px}
@@ -220,8 +247,39 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   color:var(--grey, var(--t2));transition:background .2s,color .2s}
 .langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white, var(--t1))}
 .langmenu a[aria-current=true]{color:var(--copper-lt)}
-@media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
-  .langsel>button span{display:none}}
+@media(max-width:900px){.langsel>button span{display:none}}
+/* Below 880px the CTA leaves the collapsing panel and is positioned
+   absolutely at a fixed distance from the right edge. The language button was
+   still in flow with margin-left:auto, so it was pushed to that same right
+   edge and the two landed on top of each other: 14px of overlap in English,
+   and in the German build the globe sat through the middle of "Kontakt".
+   Anchoring it to the left instead keeps it clear of the CTA whatever the CTA
+   says — which matters, because that label is a different width in every
+   language and no fixed right offset can be correct for all of them. */
+
+/* At the narrow end the brand, the globe, the short CTA and the burger have
+   to share about 300px of usable width. */
+/* Four things now share the bar — brand, globe, CTA, burger — and at the
+   narrow end they have about 280px of usable width between them. The default
+   24px gap alone was 72px of that, which is what pushed the row onto a second
+   line and made the header 119px tall on a phone. Everything below tightens
+   until the bar is one row again at 320px. */
+@media(max-width:880px){
+  .nav .wrap{gap:12px}
+}
+@media(max-width:560px){
+  .brand{font-size:1.16rem;gap:10px}
+  .brand .mk{width:32px;height:30px}
+  .langsel{margin-left:0}
+  .langsel>button{min-height:36px;padding:7px 9px}
+  .navcta{font-size:.8rem}
+}
+@media(max-width:380px){
+  .nav .wrap{gap:8px}
+  .brand{font-size:1.02rem;gap:8px}
+  .brand .mk{width:28px;height:26px}
+  .navcta{padding:8px 10px}
+}
 </style>
 <link href="https://quenora.ai/fr/engineering.html" rel="canonical"/><link href="https://quenora.ai/engineering.html" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/engineering.html" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/engineering.html" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/engineering.html" hreflang="x-default" rel="alternate"/></head>
 <body>
@@ -243,8 +301,8 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <a href="index.html#solution">Expertises</a>
 <a aria-current="page" href="engineering.html">Ingénierie</a>
 <a href="index.html#who">À propos</a>
-<a class="navcta" href="index.html#climax">Engager la conversation</a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choisir la langue" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>FR</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="../engineering.html" hreflang="en" lang="en">English</a></li><li><a href="../de/engineering.html" hreflang="de" lang="de">Deutsch</a></li><li><a aria-current="true" href="../fr/engineering.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
+<a class="navcta" href="index.html#climax"><span class="cta-long">Engager la conversation</span><span class="cta-short">Contact</span></a>
 </div>
 </header>
 <main id="main">
@@ -497,8 +555,7 @@ L’IA d’entreprise, conçue pour fonctionner. Intégrée à ce que vous explo
 <a href="index.html">Accueil</a><a href="index.html#journey">Méthode</a>
 <a href="index.html#solution">Expertises</a><a href="engineering.html">Ingénierie</a>
 <a href="index.html#work">Missions</a><a href="index.html#who">À propos</a>
-<a href="index.html#climax">Contact</a>
-</nav></div>
+<a href="index.html#climax">Contact</a></nav></div>
 <div><h3>Contact</h3><nav aria-label="Contact">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
 <a href="../impressum.html">Mentions légales</a>

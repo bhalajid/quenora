@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Quenora Consulting — How we build</title>
-<meta content="The engineering standard behind Quenora, demonstrated on the site you are reading: no third-party JavaScript, readable without scripting, and nine checks that block the build." name="description"/>
-<meta content="Quenora Consulting — How we build" property="og:title"/>
-<meta content="The engineering standard behind Quenora, shown rather than claimed." property="og:description"/>
+<title>Quenora Consulting — AI engineering &amp; governance</title>
+<meta content="How Quenora engineers AI into production and governs it there: where pilots stop, what the evaluation harness measures, and the governance decisions that have to be made before anything ships." name="description"/>
+<meta content="Quenora Consulting — AI engineering &amp; governance" property="og:title"/>
+<meta content="Where pilots stop, what gets measured, and what governance actually has to decide." property="og:description"/>
 <meta content="website" property="og:type"/>
 <meta content="en_GB" property="og:locale"/>
 <meta content="https://quenora.ai/engineering.html" property="og:url"/>
@@ -155,6 +155,19 @@ strong{color:var(--t1);font-weight:600}
 .pr .tie{display:block;margin-top:10px;font-family:'JetBrains Mono',monospace;
   font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--copper)}
 
+
+/* ── figures ──────────────────────────────────────────────────────────────
+   Two small canvases. Both draw a thing this page is arguing about rather
+   than decorating around it: the first shows a request meeting a layer that
+   was never built, the second shows what an evaluation threshold actually
+   does to a spread of answers. Same zero-dependency rule as the rest of the
+   site — 2D canvas, no library — and both stop under reduced motion. */
+.fig{margin:var(--sp5) 0 0;padding:0}
+.fig canvas{display:block;width:100%;height:clamp(230px,19vw,290px)}
+.fig figcaption{margin-top:var(--sp3);padding-top:var(--sp3);
+  border-top:1px solid var(--line);color:var(--t3);font-size:.9rem;max-width:62ch}
+.figlab{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--copper-lt);margin:0 0 var(--sp3)}
 .note{background:var(--sf2);border:1px solid var(--line);border-left:2px solid var(--copper);
   border-radius:4px;padding:var(--sp4);margin:var(--sp5) 0 0}
 .note p:last-child{margin-bottom:0}
@@ -220,13 +233,13 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 
 <section class="hero">
 <div class="wrap">
-<p class="ch">How we build</p>
-<h1>You cannot check our clients. You can check <em>this</em>.</h1>
-<p class="lede">Quenora has no published case studies, and we will not invent any.
-That leaves a fair question: on what evidence should anyone trust the engineering?
-Here is one honest answer — the site you are reading is built to the standard
-we hold client work to, and every claim on this page is verifiable from your
-own browser.</p>
+<p class="ch">AI engineering &amp; governance</p>
+<h1>Most pilots don’t fail at the model. They stop at <em>five layers</em>.</h1>
+<p class="lede">A demo answers questions. A production system has to answer them
+for people who are allowed to ask, from data that is current, and say something
+useful when it does not know — while leaving a trail somebody can audit. This
+page walks three worked problems through the layers where that work actually
+stops, then sets out the governance decisions each one forces.</p>
 </div>
 </section>
 
@@ -387,6 +400,14 @@ anybody in particular.</p>
 <p><strong>The setup:</strong> a retrieval assistant that answers staff
 questions from internal documentation. It works in the notebook. Eight months
 later it is still in the notebook.</p>
+<figure class="fig">
+<p class="figlab">A request meeting a layer that was never built</p>
+<canvas aria-hidden="true" id="figLayers"></canvas>
+<figcaption>A request has to clear all five to reach an answer. A pilot
+typically builds the first and the last, so requests stop at whichever of the
+middle three was skipped — and the failure looks like a bad model rather than
+a missing layer. Illustrative.</figcaption>
+</figure>
 
 <div class="layers">
 <div class="lay">
@@ -450,6 +471,86 @@ one. Access, ground truth and freshness are the foundation; everything after
 them is comparatively cheap.</p>
 </div>
 
+<section>
+<div class="wrap">
+<p class="ch">06 · Governance</p>
+<h2>Governance is a set of decisions, not a document.</h2>
+<p>Most governance material describes a policy. What a production system needs
+is a set of answers wired into the build, because each one changes the
+architecture. These are the questions we settle before anything ships, and
+where in the six phases each one gets settled.</p>
+
+<div class="decisions">
+<div class="dec">
+<span class="n">01</span>
+<h3>Who is allowed to see what</h3>
+<p>Whether authorisation resolves per query against the source systems, or the
+index is partitioned by entitlement. Settled in Foundation, because every later
+decision inherits it.</p>
+<p class="why">The version that goes wrong quietly: a pilot built on a manual
+export, where the permission question was never asked because there was only
+one copy and one reader.</p>
+</div>
+<div class="dec">
+<span class="n">02</span>
+<h3>What the system refuses to decide</h3>
+<p>The threshold above which an answer is returned, below which it is escalated,
+and the path a human sees when it is. Settled in Foundation with the evaluation
+harness, and measured in Prove.</p>
+<p class="why">An automation earns trust by knowing what it should not decide.
+Drawing that line is the work; a disclaimer appended afterwards is not the same
+thing.</p>
+</div>
+<div class="dec">
+<span class="n">03</span>
+<h3>What is written down when it runs</h3>
+<p>Which inputs, outputs, model version and decision path are retained, for how
+long, and who can read them. Settled in Integrate, because retro-fitting an
+audit trail means re-running history you no longer have.</p>
+<p class="why">This is the evidence procurement and risk ask for after
+go-live — the question that arrives when something is already in production and
+nobody captured the answer.</p>
+</div>
+<div class="dec">
+<span class="n">04</span>
+<h3>Where the data goes, and to whom</h3>
+<p>Which providers process what, in which jurisdiction, whether anything is
+retained by them, and what leaves your boundary at all. Settled in Frame,
+because it constrains the architecture rather than following from it.</p>
+<p class="why">For European clients this is the first works-council and
+procurement question, and it is a design constraint, not a compliance exercise
+to be run at the end.</p>
+</div>
+<div class="dec">
+<span class="n">05</span>
+<h3>What happens when it drifts</h3>
+<p>What is monitored, what threshold triggers a human, who is on the escalation
+path, and what the rollback actually is. Settled in Ship, rehearsed rather than
+theorised.</p>
+<p class="why">Models drift, upstream systems change and volumes grow. A system
+nobody is watching is not governed, however good the policy document is.</p>
+</div>
+<div class="dec">
+<span class="n">06</span>
+<h3>Who owns it after we leave</h3>
+<p>A named owner, the runbooks, the decision records and the evaluation harness
+— handed over as working artefacts, not as a folder. Settled in Handover.</p>
+<p class="why">Governance that depends on the firm that built the system is not
+governance. It is a dependency.</p>
+</div>
+</div>
+
+<div class="note">
+<p><strong>What this page does not claim.</strong> Quenora holds no ISO 27001
+or SOC 2 certification today, and this page will not imply one. The six
+decisions above describe how the work is engineered. Attestations, a data
+processing agreement, subprocessor list and insurance evidence are supplied on
+request during procurement — ask for them in the first conversation rather than
+the third.</p>
+</div>
+</div>
+</section>
+
 <div class="cta-inline">
 <p><strong>Recognise your own system in any of those five layers?</strong>
 That is the conversation — two paragraphs on which one is stuck.</p>
@@ -462,6 +563,14 @@ That is the conversation — two paragraphs on which one is stuck.</p>
 <div class="wrap">
 <p class="ch">05 · The evaluation harness</p>
 <h2>The part most proposals leave out.</h2>
+<figure class="fig">
+<p class="figlab">What a threshold does to a spread of answers</p>
+<canvas aria-hidden="true" id="figEval"></canvas>
+<figcaption>Every dot is one answer scored against a test set. Without an
+agreed threshold the spread is just a cloud and any reading of it is
+defensible. With one, the same cloud splits into shipped, held and escalated —
+and the argument about whether it worked has a number in it. Illustrative.</figcaption>
+</figure>
 <p>“The model is 92% accurate” is not a finding, it is a claim. It becomes a
 finding when someone else can re-run it next quarter, on new data, and get a
 number they can compare.</p>
@@ -548,6 +657,183 @@ then handed over.</p>
     if(e.target.tagName==='A'&&nl.classList.contains('open')){
       nl.classList.remove('open');bg.classList.remove('open');
       bg.setAttribute('aria-expanded','false');nav.classList.remove('navopen');
+    }
+  });
+})();
+</script>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   Two figures. Both argue; neither decorates.
+
+   Same constraints as the rest of the site: 2D canvas, no library, nothing
+   loaded from anyone else's server. Both hold still under reduced motion —
+   they render one correct frame and stop, so the point survives without the
+   movement.
+   ═══════════════════════════════════════════════════════════════════ */
+(function(){
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var C = {copper:'201,122,60', lt:'233,160,99', ember:'255,112,67',
+           t3:'124,130,144', signal:'91,215,245'};
+
+  function setup(cv){
+    var g = cv.getContext && cv.getContext('2d'); if(!g) return null;
+    function fit(){
+      var r = cv.getBoundingClientRect();
+      if(r.width<2||r.height<2) return false;
+      var d = Math.min(devicePixelRatio||1,2);
+      cv.width = Math.round(r.width*d); cv.height = Math.round(r.height*d);
+      g.setTransform(d,0,0,d,0,0);
+      cv.__w = r.width; cv.__h = r.height; return true;
+    }
+    return {g:g, fit:fit};
+  }
+  function run(cv, draw){
+    var ctx = setup(cv); if(!ctx) return;
+    var raf = null, seen = false, t0 = 0;
+    function frame(now){
+      if(!cv.__w && !ctx.fit()){ raf = requestAnimationFrame(frame); return; }
+      if(!t0) t0 = now;
+      draw(ctx.g, cv.__w, cv.__h, (now-t0)/1000);
+      raf = requestAnimationFrame(frame);
+    }
+    function go(){ if(!raf && seen && !reduced) raf = requestAnimationFrame(frame); }
+    function halt(){ if(raf){ cancelAnimationFrame(raf); raf = null; } }
+    ctx.fit();
+    if(reduced){ draw(ctx.g, cv.__w, cv.__h, 3.2); }
+    if('ResizeObserver' in window) new ResizeObserver(function(){
+      if(ctx.fit() && reduced) draw(ctx.g, cv.__w, cv.__h, 3.2);
+    }).observe(cv);
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){
+        seen = es[0].isIntersecting; if(seen) go(); else halt();
+      },{threshold:.05}).observe(cv);
+    } else { seen = true; go(); }
+  }
+  function label(g,t,x,y,align,col){
+    g.font='500 10px "JetBrains Mono",monospace';
+    g.textAlign=align; g.textBaseline='alphabetic'; g.fillStyle=col; g.fillText(t,x,y);
+  }
+
+  /* ── FIGURE 1 · the five layers ────────────────────────────────────────
+     A request travels left to right through five gates. Three are built and
+     pass it on. Layer 03 was skipped, so the request reaches it and stops —
+     which is the whole claim of this section, drawn rather than asserted. */
+  var f1 = document.getElementById('figLayers');
+  if(f1) run(f1, function(g,W,H,el){
+    g.clearRect(0,0,W,H);
+    var names = ['ACCESS','GROUND TRUTH','FRESHNESS','FAILURE','OWNERSHIP'];
+    var built = [true,true,false,true,true];        /* 03 was skipped */
+    var padL = 8, padR = 8;
+    var x0 = padL, x1 = W-padR;
+    var n = names.length;
+    var gapW = (x1-x0)/n;
+    var midY = H*0.44;
+    var stopX = x0 + gapW*2 + gapW*0.5;             /* centre of layer 03 */
+
+    /* the rail */
+    g.strokeStyle='rgba('+C.copper+',.30)'; g.lineWidth=1.2;
+    g.beginPath(); g.moveTo(x0,midY); g.lineTo(stopX,midY); g.stroke();
+    g.save(); g.setLineDash([2,7]);
+    g.strokeStyle='rgba('+C.t3+',.22)';
+    g.beginPath(); g.moveTo(stopX,midY); g.lineTo(x1,midY); g.stroke(); g.restore();
+
+    /* the gates */
+    for(var i=0;i<n;i++){
+      var cx = x0 + gapW*i + gapW*0.5;
+      var h = H*0.30, top = midY-h/2;
+      var ok = built[i];
+      g.strokeStyle = ok ? 'rgba('+C.copper+',.55)' : 'rgba('+C.ember+',.85)';
+      g.lineWidth = ok ? 1.2 : 1.8;
+      g.beginPath(); g.moveTo(cx, top); g.lineTo(cx, top+h); g.stroke();
+      if(!ok){
+        var pg = g.createLinearGradient(0,top,0,top+h);
+        pg.addColorStop(0,'rgba('+C.ember+',0)');
+        pg.addColorStop(.5,'rgba('+C.ember+',.16)');
+        pg.addColorStop(1,'rgba('+C.ember+',0)');
+        g.fillStyle=pg; g.fillRect(cx-7,top,14,h);
+      }
+      g.font='500 9.5px "JetBrains Mono",monospace';
+      g.textAlign='center'; g.textBaseline='alphabetic';
+      g.fillStyle = ok ? 'rgba('+C.t3+',.95)' : 'rgba('+C.ember+',.95)';
+      g.fillText(names[i], cx, top+h+22);
+      g.fillStyle = ok ? 'rgba('+C.copper+',.75)' : 'rgba('+C.ember+',.95)';
+      g.fillText(ok?'BUILT':'SKIPPED', cx, top-12);
+    }
+
+    /* the request */
+    if(!reduced || el>0){
+      var cycle = 4.2, t = (el % cycle)/cycle;
+      var travel = Math.min(1, t/0.72);
+      var px = x0 + (stopX-x0)*travel;
+      var hit = travel >= 1;
+      if(hit){
+        var since = (t-0.72)/0.28;
+        var rr = 4 + since*26;
+        g.strokeStyle='rgba('+C.ember+','+(0.7*(1-since)).toFixed(3)+')';
+        g.lineWidth=1.4*(1-since)+0.3;
+        g.beginPath(); g.arc(stopX,midY,rr,Math.PI*0.5,Math.PI*1.5); g.stroke();
+      }
+      var hg=g.createRadialGradient(px,midY,0,px,midY,13);
+      hg.addColorStop(0,'rgba('+C.lt+',.5)');
+      hg.addColorStop(1,'rgba('+C.copper+',0)');
+      g.fillStyle=hg; g.beginPath(); g.arc(px,midY,13,0,6.2832); g.fill();
+      g.fillStyle='rgba(255,226,196,.9)';
+      g.beginPath(); g.arc(px,midY,2.6,0,6.2832); g.fill();
+    }
+    label(g,'REQUEST', x0, midY-18, 'left', 'rgba('+C.lt+',.9)');
+    label(g,'ANSWER',  x1, midY-18, 'right','rgba('+C.t3+',.55)');
+  });
+
+  /* ── FIGURE 2 · the evaluation threshold ───────────────────────────────
+     A fixed, seeded spread of scored answers. The threshold line sweeps in,
+     and the same cloud resolves into shipped / held / escalated. The point
+     is that the dots never move — only the line does. */
+  var f2 = document.getElementById('figEval');
+  if(f2) run(f2, function(g,W,H,el){
+    g.clearRect(0,0,W,H);
+    var pad = 34, x0 = pad, x1 = W-pad, y0 = 26, y1 = H-40;
+    /* deterministic spread — same picture every load */
+    var pts = [], seed = 7;
+    function rnd(){ seed = (seed*1103515245 + 12345) & 0x7fffffff; return seed/0x7fffffff; }
+    for(var i=0;i<64;i++){
+      var q = rnd(), b = rnd();
+      var score = 0.30 + 0.62*Math.pow(q,0.62) - 0.10*b;
+      pts.push({x: x0 + (x1-x0)*rnd(), s: Math.max(0.06, Math.min(0.98, score))});
+    }
+    /* axis */
+    g.strokeStyle='rgba('+C.t3+',.20)'; g.lineWidth=1;
+    g.beginPath(); g.moveTo(x0,y1); g.lineTo(x1,y1); g.stroke();
+    label(g,'SCORED ANSWERS', x0, y1+22, 'left', 'rgba('+C.t3+',.8)');
+    label(g,'HIGHER SCORE →', x1, 16, 'right','rgba('+C.t3+',.55)');
+
+    var appear = reduced ? 1 : Math.min(1, el/1.5);
+    var thr = 0.62;
+    var ty = y1 - (y1-y0)*thr;
+
+    /* the threshold */
+    if(appear>0.05){
+      g.save(); g.setLineDash([5,5]);
+      g.strokeStyle='rgba('+C.signal+','+(0.75*appear).toFixed(3)+')'; g.lineWidth=1.3;
+      g.beginPath(); g.moveTo(x0,ty); g.lineTo(x0+(x1-x0)*appear,ty); g.stroke(); g.restore();
+      label(g,'THRESHOLD, AGREED IN FRAME', x0, ty-9, 'left',
+            'rgba('+C.signal+','+(0.85*appear).toFixed(2)+')');
+    }
+    /* the answers */
+    pts.forEach(function(p,i){
+      var y = y1 - (y1-y0)*p.s;
+      var over = p.s >= thr;
+      var near = Math.abs(p.s - thr) < 0.07;
+      var lit = appear >= 1 ? 1 : 0;
+      var col = !lit ? C.t3 : (near ? C.lt : (over ? C.copper : C.t3));
+      var a   = !lit ? .30 : (near ? .95 : (over ? .85 : .30));
+      g.fillStyle='rgba('+col+','+a+')';
+      g.beginPath(); g.arc(p.x, y, near&&lit?3:2.2, 0, 6.2832); g.fill();
+    });
+    if(appear>=1){
+      label(g,'SHIPPED',    x1, ty-9,  'right','rgba('+C.copper+',.9)');
+      label(g,'ESCALATED',  x1, ty+16, 'right','rgba('+C.lt+',.9)');
+      label(g,'HELD',       x1, y1-8,  'right','rgba('+C.t3+',.75)');
     }
   });
 })();

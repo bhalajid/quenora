@@ -85,6 +85,16 @@ for rel in pages():
     if re.search(r"<h[1-3][^>]*>[^<]*<em>", html) and "Playfair" not in html:
         bad.append("%s: a heading uses <em> but the serif is not loaded" % rel)
 
+    # Heading emphasis is one accent across the site. Setting it to --copper-lt
+    # on three pages meant the same italic serif came out a different colour
+    # depending which page you were reading — which is how it was noticed.
+    for m in re.finditer(r"h[1-3] em[^{]*\{([^}]*)\}", styles):
+        decl = m.group(1)
+        if "color:" in decl and "var(--ember)" not in decl:
+            colour = re.search(r"color:\s*([^;}]+)", decl).group(1).strip()
+            bad.append("%s: heading emphasis is %s, the site sets var(--ember)"
+                       % (rel, colour))
+
 print("  %d page(s) checked for design drift" % checked)
 if bad:
     for b in bad:

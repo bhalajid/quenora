@@ -167,8 +167,13 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
 /* Emphasis in a heading is set in the same italic serif as the home page.
    The h1 here is a .scramble target, whose JS rewrites the text node, so
    markup inside it would not survive — this applies to h2/h3 emphasis. */
+/* --ember, not --copper-lt. The home page, engineering and story all set
+   heading emphasis in ember; picking the lighter copper here meant the same
+   italic serif came out a different colour depending on which page you were
+   reading, which reads as two brands rather than one accent. Letter-spacing
+   matches the home page's em rule too. */
 h1 em,h2 em,h3 em{font-family:var(--serif);font-style:italic;
-  font-weight:400;color:var(--copper-lt)}
+  font-weight:400;letter-spacing:-.02em;color:var(--ember)}
 .scramble .sc-ghost{color:var(--copper);opacity:.85}
 
 /* ---------- typography ---------- */

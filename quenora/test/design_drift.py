@@ -40,6 +40,12 @@ BANNED = [
      "a glow behind the mark — the home page lockup has none"),
     (re.compile(r"\.navcta\s*\{\s*display:\s*none", re.I),
      "the header CTA hidden on small screens — every other page keeps it"),
+    (re.compile(r"\.(?:kicker|ch)\s*\{[^}]*color:\s*var\(--copper\)\s*[;}]", re.I),
+     "the section eyebrow in --copper — the site sets --copper-lt"),
+    (re.compile(r"(?:--font:|font-family:)\s*'?Inter'?\s*,\s*-apple-system", re.I),
+     "a second Inter fallback stack — the site has one"),
+    (re.compile(r"--mono:\s*'JetBrains Mono',ui-monospace,Menlo", re.I),
+     "a second JetBrains Mono fallback stack — the site has one"),
 ]
 
 

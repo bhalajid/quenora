@@ -32,8 +32,10 @@
   --serif:'Playfair Display',Georgia,serif;
   --white:#F2EFE8; --grey:#A8AEBB; --grey-d:#7C8290;
   --line:rgba(242,239,232,.09); --line-2:rgba(242,239,232,.05);
-  --font:'Inter',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  /* the home page's stack, so a page falls back the same way if Inter
+     does not load */
+  --font:Inter,system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
   --radius:14px; --maxw:1240px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -164,8 +166,11 @@ h1 em,h2 em,h3 em{font-family:var(--serif);font-style:italic;
 
 /* ---------- typography ---------- */
 .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--copper);margin-bottom:16px;display:flex;align-items:center;gap:11px}
-.kicker::before{content:"";width:20px;height:1px;background:var(--copper);flex:none}
+  /* --copper-lt, matching the section eyebrows on the home page. These were
+     the darker --copper, so the small mono label above every heading came out
+     a different colour depending which page you were on. */
+  color:var(--copper-lt);margin-bottom:16px;display:flex;align-items:center;gap:11px}
+.kicker::before{content:"";width:20px;height:1px;background:var(--copper-lt);flex:none}
 h1{font-size:clamp(40px,5.4vw,74px);font-weight:600;letter-spacing:-.035em;line-height:1.03}
 h2{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;line-height:1.12}
 .section-pad{padding:120px 0;position:relative;z-index:2}

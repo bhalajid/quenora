@@ -102,6 +102,11 @@ sys.exit(1 if issues else 0)
 LEGALPY
 [ $? -eq 0 ] && ok "legal pages present and complete" || bad "legal content incomplete"
 
+step "3b/8  work-page field figure (headless, recorded canvas)"
+node figure_space.js "$DIR"
+[ $? -eq 0 ] && ok "the field draws, sweeps, calls out three and repeats" \
+  || bad "the field figure is not drawing what it claims"
+
 step "4c/8  links, resolved the way the deployed site resolves them"
 python3 deployed_links.py "$DIR"
 [ $? -eq 0 ] && ok "no 404s, no link leaves its language" \

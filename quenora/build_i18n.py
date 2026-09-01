@@ -181,7 +181,7 @@ LANG_CSS = """
 """
 
 LANG_JS = """
-<script>
+<script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
   if(!b||!m)return;
@@ -358,11 +358,18 @@ def build_en_switcher():
         st = soup.find("style")
         if st and "langsel" not in st.text:
             st.string = st.text + LANG_CSS
-        # drop any previously appended switcher script before re-adding it,
-        # otherwise every rebuild leaves another copy behind
-        for sc in soup.find_all("script"):
-            if sc.string and "getElementById('langBtn')" in sc.string:
-                sc.decompose()
+        # Drop the previously appended switcher script before re-adding it,
+        # otherwise every rebuild leaves another copy behind.
+        #
+        # This used to match on the script's *contents* — any <script> that
+        # mentioned getElementById('langBtn') was decomposed whole. Hand-written
+        # code that happened to live in the same tag went with it: the work
+        # page's field figure was appended to that block and silently vanished
+        # on the next build, leaving a canvas with nothing to draw it. The
+        # generated script now carries a marker and only that marker is matched,
+        # so the build can never delete code it did not write.
+        for sc in soup.find_all("script", attrs={"data-generated": "langsel"}):
+            sc.decompose()
         nav = soup.find(class_="navlinks")
         if nav:
             nav.insert_after(BeautifulSoup(switcher("en", page), "html.parser"))

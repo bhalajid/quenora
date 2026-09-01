@@ -1161,9 +1161,9 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="chead rv">
 <div class="cnum">05</div>
 <div>
-<h2>Drei Formen, die diese Arbeit <em>üblicherweise</em> annimmt.</h2>
-<p class="lede">Keine Kundenliste. Dies sind die Projektmuster, in die wir am häufigsten gerufen werden, beschrieben nach ihrer Form statt danach, wessen Logo darauf steht — denn die Form sagt Ihnen, ob Ihr Problem eines davon ist.</p>
-<a class="more" href="/de/work.html">Alle drei, mit den Zahlen</a>
+<h2>Der Raum ist weit. Diese <em>drei</em> kehren wieder.</h2>
+<p class="lede">Keine Kundenliste und keine Speisekarte. Neun Fähigkeiten lassen sich auf mehr Probleme richten, als eine Seite auflisten könnte. Es folgen daher drei Formen, in die wir am häufigsten gerufen werden — beschrieben über ihre Gestalt und nicht darüber, wessen Logo darauf steht. Ist Ihre nicht dabei, ist das kein Zuschnittproblem; das ist der Normalfall.</p>
+<a class="more" href="/de/work.html">Die weitere Karte, und die Zahlen</a>
 </div>
 </div>
 <div class="shapes">
@@ -3192,6 +3192,24 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 })();
 </script>
 <script>
+(function(){
+  var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
+  if(!b||!m)return;
+  b.addEventListener('click',function(e){
+    e.stopPropagation();
+    var o=m.classList.toggle('open');
+    b.setAttribute('aria-expanded',o?'true':'false');
+  });
+  document.addEventListener('click',function(){
+    m.classList.remove('open');b.setAttribute('aria-expanded','false');
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){m.classList.remove('open');
+      b.setAttribute('aria-expanded','false');}
+  });
+})();
+</script>
+<script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
   if(!b||!m)return;

@@ -1178,12 +1178,13 @@ knows what it shouldn’t decide, and drawing that line is most of the job.</fig
 <div class="chead rv">
 <div class="cnum">05</div>
 <div>
-<h2>Three shapes this work <em>usually</em> takes.</h2>
-<p class="lede">Not a client list. These are the engagement patterns we’re
-             called into most often, described by their shape rather than by whose
-             logo is on them — because the shape is what tells you whether your
-             problem is one of them.</p>
-<a class="more" href="work.html">All three, with the numbers</a>
+<h2>The space is wide. These <em>three</em> recur.</h2>
+<p class="lede">Not a client list, and not a menu. Nine capabilities can be
+             pointed at more problems than any page could list, so what follows is
+             three shapes we are called into most often — described by their shape
+             rather than by whose logo is on them. If yours is not one of the
+             three, that is not a scoping problem; it is the usual case.</p>
+<a class="more" href="work.html">The wider map, and the numbers</a>
 </div>
 </div>
 <div class="shapes">
@@ -3273,9 +3274,26 @@ notice</a>.</span></label>
   });
 })();
 </script>
-
-
 <script>
+(function(){
+  var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
+  if(!b||!m)return;
+  b.addEventListener('click',function(e){
+    e.stopPropagation();
+    var o=m.classList.toggle('open');
+    b.setAttribute('aria-expanded',o?'true':'false');
+  });
+  document.addEventListener('click',function(){
+    m.classList.remove('open');b.setAttribute('aria-expanded','false');
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){m.classList.remove('open');
+      b.setAttribute('aria-expanded','false');}
+  });
+})();
+</script>
+
+<script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
   if(!b||!m)return;

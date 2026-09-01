@@ -847,5 +847,23 @@ Unternehmens-KI, für den Betrieb konstruiert. Eingebaut in das, was Sie bereits
   });
 })();
 </script>
+<script data-generated="langsel">
+(function(){
+  var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
+  if(!b||!m)return;
+  b.addEventListener('click',function(e){
+    e.stopPropagation();
+    var o=m.classList.toggle('open');
+    b.setAttribute('aria-expanded',o?'true':'false');
+  });
+  document.addEventListener('click',function(){
+    m.classList.remove('open');b.setAttribute('aria-expanded','false');
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){m.classList.remove('open');
+      b.setAttribute('aria-expanded','false');}
+  });
+})();
+</script>
 </body>
 </html>

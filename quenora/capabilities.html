@@ -182,8 +182,12 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-
 .section-head p{margin-top:16px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:56ch}
 
 /* reveal on scroll */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .rv.in{opacity:1;transform:none}
+/* the home page's stagger, so a heading and its lede arrive in the same
+   rhythm here as they do there */
+.rv[data-d="1"]{transition-delay:.08s}
+.rv[data-d="2"]{transition-delay:.16s}
 
 /* ---------- cards ---------- */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
@@ -262,11 +266,12 @@ footer nav{display:block}
 .svc-detail{display:grid;grid-template-columns:76px 1fr;gap:30px;padding:46px 0;
   border-bottom:1px solid var(--line-2);align-items:start}
 @media(max-width:760px){.svc-detail{grid-template-columns:1fr;gap:14px}}
-.svc-detail .idx{font-family:var(--mono);font-size:13px;color:var(--copper);padding-top:5px;
-  display:flex;align-items:center;gap:12px}
-.svc-detail .idx i{width:9px;height:9px;border-radius:50%;
-  background:radial-gradient(circle at 34% 30%,var(--copper-lt),var(--copper));
-  box-shadow:0 0 12px var(--copper-glow);flex:none}
+.svc-detail /* .74rem / .15em, matching .nrow .i on the home page, which numbers the same
+   nine capabilities. The glowing dot that used to sit in front of it is gone:
+   the nine-circle gesture belongs to the mark, not to a list bullet. */
+.idx{font-family:var(--mono);font-size:.74rem;color:var(--copper);padding-top:5px;
+  letter-spacing:.15em;display:flex;align-items:center;gap:12px}
+.svc-detail 
 .svc-detail h3{font-size:23px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
 .svc-detail .body{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:68ch}
 .svc-detail ul{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;list-style:none}
@@ -383,15 +388,15 @@ footer nav{display:block}
 <main id="main"><section class="phero">
 <canvas aria-hidden="true" id="pCanvas"></canvas>
 <div class="wrap">
-<div class="kicker">Capabilities</div>
-<h1 class="scramble">Nine capabilities. One team behind all of them.</h1>
-<p>Three of these are core — the work runs through platform and deployment engineering, automation, and AI integration. The other six join when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.</p>
+<div class="kicker rv">Capabilities</div>
+<h1 class="rv" data-d="1">Nine capabilities. One team behind all of them.</h1>
+<p class="rv" data-d="2">Three of these are core — the work runs through platform and deployment engineering, automation, and AI integration. The other six join when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.</p>
 </div>
 </section>
 <section class="section-pad">
 <div class="wrap">
 <div class="svc-detail rv">
-<div class="idx"><i></i>01</div>
+<div class="idx">01</div>
 <div>
 <h3>Platform &amp; Deployment Engineering</h3>
 <div class="body">The foundation every AI initiative silently depends on, and the path into production at the end of it. We design the data architecture, provision the infrastructure, and build the internal platforms that let your teams ship AI repeatedly rather than once — then deploy on them, with monitoring and handover documentation that survives contact with reality. Without this layer every model becomes a bespoke project that dies when its champion leaves, and an engagement is finished when your team can run, extend and debug the system without calling us.</div>
@@ -399,7 +404,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>02</div>
+<div class="idx">02</div>
 <div>
 <h3>Process &amp; Workflow Automation</h3>
 <div class="body">The work itself, running without hands on it. We automate the processes your business repeats — the approvals, the handoffs, the reconciliations, the reporting somebody currently does on a Tuesday afternoon. This is where an AI capability stops being a capability and becomes throughput. It is designed around the exceptions rather than the happy path, because the exceptions are what send automated work back to a human, and deciding which ones should is most of the job.</div>
@@ -407,7 +412,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>03</div>
+<div class="idx">03</div>
 <div>
 <h3>AI Integration</h3>
 <div class="body">Models connected into the systems your business already runs on — CRM, ERP, service desks, operations tooling. The hard part is almost never the model; it is the plumbing, the permissions, and the edge cases nobody documented. We attach to what is already moving rather than proposing you replace it.</div>
@@ -415,7 +420,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>04</div>
+<div class="idx">04</div>
 <div>
 <h3>AI Strategy &amp; Advisory</h3>
 <div class="body">Roadmaps, build-versus-buy decisions, and honest feasibility assessments from people who have shipped rather than only presented. This includes telling you when AI is the wrong answer for a problem — advice that is worth more than a workstream you did not need.</div>
@@ -423,7 +428,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>05</div>
+<div class="idx">05</div>
 <div>
 <h3>Data Engineering &amp; Analytics</h3>
 <div class="body">Pipelines, warehouses, and quality controls that make data model-ready. This is the least glamorous line on this page and the one that determines whether everything above it works. Most failed AI programmes are actually failed data programmes.</div>
@@ -431,7 +436,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>06</div>
+<div class="idx">06</div>
 <div>
 <h3>Custom AI Agents &amp; Copilots</h3>
 <div class="body">Purpose-built agents wired into real workflows, with defined scope, guardrails, and escalation paths to humans. Not a chatbot bolted onto a homepage — systems that take an action, log what they did, and hand off cleanly when they hit their limits.</div>
@@ -439,7 +444,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>07</div>
+<div class="idx">07</div>
 <div>
 <h3>AI Governance, Security &amp; Compliance</h3>
 <div class="body">Model risk, data privacy, access control, and audit trails built in from day one. For European clients that means GDPR and EU AI Act alignment treated as part of the engineering work, not as a document produced afterwards to satisfy a regulator.</div>
@@ -447,7 +452,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>08</div>
+<div class="idx">08</div>
 <div>
 <h3>Managed AI Operations</h3>
 <div class="body">Monitoring, retraining, incident response, and ongoing support after go-live. Models drift, upstream systems change, and volumes grow. Someone has to own that, and if your team is not ready to yet, we can — on a defined runway towards them taking it over.</div>
@@ -455,7 +460,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>09</div>
+<div class="idx">09</div>
 <div>
 <h3>Change Management &amp; Enablement</h3>
 <div class="body">Training, documentation, and adoption support so the people who have to live with the system actually use it. The most common cause of a failed AI rollout is not technical. It is a team that was never brought along and quietly routed around the new thing.</div>
@@ -674,7 +679,7 @@ const rio=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target);}
 }),{threshold:.15,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.rv').forEach((el,i)=>{
-  el.style.transitionDelay=(i%4*70)+'ms';rio.observe(el);
+  if(!el.dataset.d)el.style.transitionDelay=(i%3*80)+'ms';rio.observe(el);
 });
 
 // card spotlight

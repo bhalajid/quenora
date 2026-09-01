@@ -177,8 +177,12 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-
 .section-head p{margin-top:16px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:56ch}
 
 /* reveal on scroll */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .rv.in{opacity:1;transform:none}
+/* the home page's stagger, so a heading and its lede arrive in the same
+   rhythm here as they do there */
+.rv[data-d="1"]{transition-delay:.08s}
+.rv[data-d="2"]{transition-delay:.16s}
 
 /* ---------- cards ---------- */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
@@ -256,11 +260,12 @@ footer nav{display:block}
 .svc-detail{display:grid;grid-template-columns:76px 1fr;gap:30px;padding:46px 0;
   border-bottom:1px solid var(--line-2);align-items:start}
 @media(max-width:760px){.svc-detail{grid-template-columns:1fr;gap:14px}}
-.svc-detail .idx{font-family:var(--mono);font-size:13px;color:var(--copper);padding-top:5px;
-  display:flex;align-items:center;gap:12px}
-.svc-detail .idx i{width:9px;height:9px;border-radius:50%;
-  background:radial-gradient(circle at 34% 30%,var(--copper-lt),var(--copper));
-  box-shadow:0 0 12px var(--copper-glow);flex:none}
+.svc-detail /* .74rem / .15em, matching .nrow .i on the home page, which numbers the same
+   nine capabilities. The glowing dot that used to sit in front of it is gone:
+   the nine-circle gesture belongs to the mark, not to a list bullet. */
+.idx{font-family:var(--mono);font-size:.74rem;color:var(--copper);padding-top:5px;
+  letter-spacing:.15em;display:flex;align-items:center;gap:12px}
+.svc-detail 
 .svc-detail h3{font-size:23px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
 .svc-detail .body{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:68ch}
 .svc-detail ul{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;list-style:none}
@@ -382,9 +387,9 @@ footer nav{display:block}
 <main id="main"><section class="phero">
 <canvas aria-hidden="true" id="pCanvas"></canvas>
 <div class="wrap">
-<div class="kicker">Contact</div>
-<h1 class="scramble">One conversation. No deck required from you.</h1>
-<p>Tell us roughly what the problem looks like. If we are not the right firm for it, we will say so and point you somewhere better — that costs us nothing and saves you a quarter.</p>
+<div class="kicker rv">Contact</div>
+<h1 class="rv" data-d="1">One conversation. No deck required from you.</h1>
+<p class="rv" data-d="2">Tell us roughly what the problem looks like. If we are not the right firm for it, we will say so and point you somewhere better — that costs us nothing and saves you a quarter.</p>
 </div>
 </section>
 <section class="section-pad">
@@ -634,7 +639,7 @@ const rio=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target);}
 }),{threshold:.15,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.rv').forEach((el,i)=>{
-  el.style.transitionDelay=(i%4*70)+'ms';rio.observe(el);
+  if(!el.dataset.d)el.style.transitionDelay=(i%3*80)+'ms';rio.observe(el);
 });
 
 // card spotlight

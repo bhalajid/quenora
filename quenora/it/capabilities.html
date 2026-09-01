@@ -182,8 +182,12 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-
 .section-head p{margin-top:16px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:56ch}
 
 /* reveal on scroll */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .rv.in{opacity:1;transform:none}
+/* the home page's stagger, so a heading and its lede arrive in the same
+   rhythm here as they do there */
+.rv[data-d="1"]{transition-delay:.08s}
+.rv[data-d="2"]{transition-delay:.16s}
 
 /* ---------- cards ---------- */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
@@ -262,11 +266,12 @@ footer nav{display:block}
 .svc-detail{display:grid;grid-template-columns:76px 1fr;gap:30px;padding:46px 0;
   border-bottom:1px solid var(--line-2);align-items:start}
 @media(max-width:760px){.svc-detail{grid-template-columns:1fr;gap:14px}}
-.svc-detail .idx{font-family:var(--mono);font-size:13px;color:var(--copper);padding-top:5px;
-  display:flex;align-items:center;gap:12px}
-.svc-detail .idx i{width:9px;height:9px;border-radius:50%;
-  background:radial-gradient(circle at 34% 30%,var(--copper-lt),var(--copper));
-  box-shadow:0 0 12px var(--copper-glow);flex:none}
+.svc-detail /* .74rem / .15em, matching .nrow .i on the home page, which numbers the same
+   nine capabilities. The glowing dot that used to sit in front of it is gone:
+   the nine-circle gesture belongs to the mark, not to a list bullet. */
+.idx{font-family:var(--mono);font-size:.74rem;color:var(--copper);padding-top:5px;
+  letter-spacing:.15em;display:flex;align-items:center;gap:12px}
+.svc-detail 
 .svc-detail h3{font-size:23px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
 .svc-detail .body{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:68ch}
 .svc-detail ul{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;list-style:none}
@@ -383,15 +388,15 @@ footer nav{display:block}
 <main id="main"><section class="phero">
 <canvas aria-hidden="true" id="pCanvas"></canvas>
 <div class="wrap">
-<div class="kicker">Competenze</div>
-<h1 class="scramble">Nove competenze. Un solo team dietro a tutte.</h1>
-<p>Three of these are core — the work runs through platform and deployment engineering, automation, and AI integration. The other six join when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.</p>
+<div class="kicker rv">Competenze</div>
+<h1 class="rv" data-d="1">Nove competenze. Un solo team dietro a tutte.</h1>
+<p class="rv" data-d="2">Three of these are core — the work runs through platform and deployment engineering, automation, and AI integration. The other six join when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.</p>
 </div>
 </section>
 <section class="section-pad">
 <div class="wrap">
 <div class="svc-detail rv">
-<div class="idx"><i></i>01</div>
+<div class="idx">01</div>
 <div>
 <h3>Platform &amp; Deployment Engineering</h3>
 <div class="body">The foundation every AI initiative silently depends on, and the path into production at the end of it. We design the data architecture, provision the infrastructure, and build the internal platforms that let your teams ship AI repeatedly rather than once — then deploy on them, with monitoring and handover documentation that survives contact with reality. Without this layer every model becomes a bespoke project that dies when its champion leaves, and an engagement is finished when your team can run, extend and debug the system without calling us.</div>
@@ -399,7 +404,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>02</div>
+<div class="idx">02</div>
 <div>
 <h3>Process &amp; Workflow Automation</h3>
 <div class="body">The work itself, running without hands on it. We automate the processes your business repeats — the approvals, the handoffs, the reconciliations, the reporting somebody currently does on a Tuesday afternoon. This is where an AI capability stops being a capability and becomes throughput. It is designed around the exceptions rather than the happy path, because the exceptions are what send automated work back to a human, and deciding which ones should is most of the job.</div>
@@ -407,7 +412,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>03</div>
+<div class="idx">03</div>
 <div>
 <h3>Integrazione dell'IA</h3>
 <div class="body">Modelli collegati ai sistemi su cui la vostra azienda già funziona: CRM, ERP, service desk, strumenti di operations. La parte difficile non è quasi mai il modello, ma i collegamenti, i permessi e i casi limite che nessuno ha documentato. Ci innestiamo su ciò che è già in movimento anziché proporvi di sostituirlo.</div>
@@ -415,7 +420,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>04</div>
+<div class="idx">04</div>
 <div>
 <h3>Strategia e consulenza sull'IA</h3>
 <div class="body">Roadmap, decisioni tra sviluppare e acquistare e valutazioni di fattibilità oneste, formulate da chi ha rilasciato e non soltanto presentato. Questo comprende dirvi quando l'IA è la risposta sbagliata a un problema: un consiglio che vale più di un filone di lavoro di cui non avevate bisogno.</div>
@@ -423,7 +428,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>05</div>
+<div class="idx">05</div>
 <div>
 <h3>Data engineering e analytics</h3>
 <div class="body">Pipeline, data warehouse e controlli di qualità che rendono i dati pronti per il modello. È la voce meno appariscente di questa pagina e quella che determina se tutto ciò che la precede funziona. La maggior parte dei programmi di IA falliti sono in realtà programmi sui dati falliti.</div>
@@ -431,7 +436,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>06</div>
+<div class="idx">06</div>
 <div>
 <h3>Agenti e copiloti di IA su misura</h3>
 <div class="body">Agenti costruiti su misura e collegati a flussi di lavoro reali, con perimetro definito, protezioni e percorsi di escalation verso le persone. Non un chatbot avvitato su una home page, ma sistemi che compiono un'azione, registrano ciò che hanno fatto e passano la mano in modo pulito quando raggiungono il loro limite.</div>
@@ -439,7 +444,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>07</div>
+<div class="idx">07</div>
 <div>
 <h3>Governance, sicurezza e conformità dell'IA</h3>
 <div class="body">Rischio di modello, protezione dei dati, controllo degli accessi e tracciabilità integrati fin dal primo giorno. Per i clienti europei significa che la conformità al GDPR e al regolamento europeo sull'IA fa parte del lavoro di ingegneria e non di un documento prodotto in seguito per soddisfare un'autorità.</div>
@@ -447,7 +452,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>08</div>
+<div class="idx">08</div>
 <div>
 <h3>Gestione operativa dell'IA in outsourcing</h3>
 <div class="body">Monitoring, retraining, incident response, and ongoing support after go-live. Models drift, upstream systems change, and volumes grow. Someone has to own that, and if your team is not ready to yet, we can — on a defined runway towards them taking it over.</div>
@@ -455,7 +460,7 @@ footer nav{display:block}
 </div>
 </div>
 <div class="svc-detail rv">
-<div class="idx"><i></i>09</div>
+<div class="idx">09</div>
 <div>
 <h3>Gestione del cambiamento e abilitazione</h3>
 <div class="body">Formazione, documentazione e accompagnamento all'adozione affinché le persone che dovranno convivere con il sistema lo usino davvero. La causa più frequente di un rilascio di IA fallito non è tecnica: è un team che non è mai stato coinvolto e che aggira silenziosamente la novità.</div>
@@ -674,7 +679,7 @@ const rio=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target);}
 }),{threshold:.15,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.rv').forEach((el,i)=>{
-  el.style.transitionDelay=(i%4*70)+'ms';rio.observe(el);
+  if(!el.dataset.d)el.style.transitionDelay=(i%3*80)+'ms';rio.observe(el);
 });
 
 // card spotlight

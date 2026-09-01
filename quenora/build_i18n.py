@@ -80,7 +80,7 @@ DNT = re.compile(
     #           All three should localise. "EU AI Act" is protected separately.
     r"^(quenora|quenora\.ai|hello@quenora\.ai|Quenora Consulting|"
     r"GDPR|EU AI Act|IaC|MLOps|ERP|CRM|API|BI & reporting|RAG systems|"
-    r"\[[^\]]+\]|Main|Footer|Legal|Site|Quenora home|Reg / VAT|Core|Continuous|Choose language|Sprache w\u00e4hlen|Choisir la langue|Elegir idioma|Scegli la lingua|Deutsch|English|Français|Español|Italiano|EN|DE|FR|ES|IT|AB/\d+|Phase \d+|\d+[\d\s:.,%–—/-]*|00:00|html|uenora|"
+    r"\[[^\]]+\]|Main|Footer|Quenora home|Reg / VAT|Core|Choose language|Sprache w\u00e4hlen|Choisir la langue|Elegir idioma|Scegli la lingua|Deutsch|English|Français|Español|Italiano|EN|DE|FR|ES|IT|AB/\d+|Phase \d+|\d+[\d\s:.,%–—/-]*|00:00|html|uenora|"
     r"[©·→←↓↑✓–—]+)$", re.I)
 
 

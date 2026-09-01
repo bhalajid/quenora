@@ -61,14 +61,13 @@ level, beside `"headers"`:
       "destination": "https://quenora.ai/:path*",
       "permanent": true
     },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.quenora.ai" }],
-      "destination": "https://quenora.ai/:path*",
-      "permanent": true
-    }
   ],
 ```
+
+Only the one rule. Add `www.quenora.ai` as a domain in the Vercel dashboard and
+set it to redirect to the apex there — the dashboard handles www natively, and
+a second vercel.json rule doing the same job is a redirect loop waiting to
+happen.
 
 This is deliberately **not** in the repo yet. While quenora.ai does not answer,
 quenora.vercel.app is the only working address, and redirecting it to a host
@@ -91,11 +90,22 @@ Ask and it is a ten-minute change.
 
 ## 5 · After the first deploy on the real domain
 
+One command, twenty checks:
+
 ```bash
-curl -sI https://quenora.ai/de/work | head -3      # 200, no redirect
-curl -sI https://quenora.vercel.app/ | head -3     # 308 to quenora.ai
-curl -s  https://quenora.ai/sitemap.xml | head     # every loc on quenora.ai
+cd /Users/balajidurai/Quenora/quenora && bash test/launch_check.sh
 ```
+
+It answers only the questions the repo cannot: whether DNS resolves, whether
+the certificate is issued, whether every clean URL serves without a hop,
+whether the deployment host redirects away and keeps the path, whether the
+sitemap and canonicals name quenora.ai, and whether the security headers
+survived the domain change.
+
+Today it stops at the first check, because the domain does not answer. Run
+against the deployment host it already reports **17 passed, 2 failed** — the
+two failures being the redirect from step 3, which is not in place yet by
+design.
 
 Then submit `https://quenora.ai/sitemap.xml` in Google Search Console.
 

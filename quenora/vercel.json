@@ -9,6 +9,21 @@
   "headers": [
     {
       "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<h>.*\\.vercel\\.app)"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
       "headers": [
         {
           "key": "X-Content-Type-Options",
@@ -53,30 +68,6 @@
           "value": "public, max-age=0, must-revalidate"
         }
       ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "(?<host>.*\\.vercel\\.app)"
-        }
-      ],
-      "destination": "https://quenora.ai/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.quenora.ai"
-        }
-      ],
-      "destination": "https://quenora.ai/:path*",
-      "permanent": true
     }
   ]
 }

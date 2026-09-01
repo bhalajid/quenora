@@ -173,9 +173,20 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;line-
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-index:2;
   background:linear-gradient(180deg,transparent,rgba(201,122,60,.03))}
-.foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:44px}
+/* space-between across a wrapping flex row put the last two columns against
+   opposite edges of the second line. A grid gives four columns that line up. */
+.foot-row{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));
+  gap:56px 40px}
+/* The header sets a bare `nav{display:flex}`, which also caught the footer's
+   own <nav> elements and laid seven site links out in a single row — that is
+   what pushed the columns to 103/545/279/184 instead of 1.6/1/1/1. */
+footer nav{display:block}
+@media(max-width:900px){.foot-row{grid-template-columns:1fr 1fr;gap:40px 32px}}
+@media(max-width:560px){.foot-row{grid-template-columns:1fr;gap:32px}}
+.foot-col h5{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--grey-d);font-weight:500;margin:0 0 16px}
 .foot-brand{display:flex;align-items:center;gap:11px;margin-bottom:14px}
-.foot-brand svg{width:26px;filter:drop-shadow(0 0 8px var(--copper-glow))}
+.foot-brand svg{width:26px}
 .foot-brand b{font-size:16.5px;font-weight:600}
 .foot-col h5{font-size:11px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;
   color:var(--grey-d);margin-bottom:16px}
@@ -323,8 +334,8 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b><em>q</em>uenora</b>
 </a>
-<div class="navlinks" id="navLinks"><a href="/de/index.html">Start</a><a href="/de/services.html">Leistungen</a><a href="/de/engineering.html">KI-Engineering</a><a href="/de/products.html">Produkte</a><a class="on" href="/de/approach.html">Vorgehen</a><a href="/de/work.html">Projekte</a><a href="/de/contact.html">Kontakt</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Sprache wählen" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>DE</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/approach.html" hreflang="en" lang="en">English</a></li><li><a aria-current="true" href="/de/approach.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/approach.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
-<a class="btn btn-primary navcta" href="/de/contact.html">Gespräch beginnen</a>
+<div class="navlinks" id="navLinks"><a href="/de/index.html">Start</a><a href="/de/index.html#journey">Vorgehen</a><a href="/de/services.html">Leistungen</a><a href="/de/engineering.html">KI-Engineering</a><a href="/de/work.html">Projekte</a><a href="/de/index.html#who">Über uns</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Sprache wählen" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>DE</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/approach.html" hreflang="en" lang="en">English</a></li><li><a aria-current="true" href="/de/approach.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/approach.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
+<a class="btn btn-primary navcta" href="/de/index.html#climax">Gespräch beginnen</a>
 <button aria-expanded="false" aria-label="Menü" class="burger" id="burger">
 <i></i><i></i><i></i>
 </button>
@@ -403,7 +414,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <div class="wrap rv">
 <h2 style="max-width:18ch;margin:0 auto">Möchten Sie das an Ihrem echten Problem prüfen?</h2>
 <div style="display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap">
-<a class="btn btn-primary" href="/de/contact.html">Gespräch beginnen</a>
+<a class="btn btn-primary" href="/de/index.html#climax">Gespräch beginnen</a>
 <a class="btn btn-ghost" href="/de/services.html">Leistungen ansehen →</a>
 </div>
 </div>
@@ -417,40 +428,40 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b>quenora</b>
 </div>
-<p style="color:var(--grey-d);font-size:13px">Enterprise-KI-Transformation über Platform Engineering,
-        Integration und Inbetriebnahme. Europa und weltweit remote.</p>
+<p style="color:var(--grey-d);font-size:13px">Unternehmens-KI, für den Betrieb konstruiert. Eingebaut in das, was Sie bereits betreiben, und dann übergeben.</p>
 </div>
 <div class="foot-col">
-<h5>Kernleistungen</h5>
-<a href="/de/services.html">Platform Engineering</a>
-<a href="/de/services.html">KI-Integration</a>
-<a href="/de/services.html">Entwicklung und Inbetriebnahme</a>
-<a href="/de/services.html">Alle neun Leistungen</a>
-<a href="/de/products.html">Produkte und Frameworks</a>
-</div>
-<div class="foot-col">
-<h5>Unternehmen</h5>
-<a href="/de/approach.html">Unser Vorgehen</a>
+<h5>Site</h5>
+<nav aria-label="Footer">
+<a href="/de/index.html">Start</a>
+<a href="/de/index.html#journey">Vorgehen</a>
+<a href="/de/services.html">Leistungen</a>
+<a href="/de/engineering.html">KI-Engineering</a>
 <a href="/de/work.html">Projekte</a>
-<a href="/de/contact.html">Kontakt</a>
+<a href="/de/index.html#who">Über uns</a>
+<a href="/de/index.html#climax">Kontakt</a>
+</nav>
 </div>
 <div class="foot-col">
-<h5>Legal</h5>
+<h5>Kontakt</h5>
+<nav aria-label="Kontakt">
+<a href="mailto:info@quenora.ai">info@quenora.ai</a>
 <a href="/impressum.html">Impressum</a>
 <a href="/privacy.html">Datenschutzerklärung</a>
+</nav>
 </div>
 <div class="foot-col">
-<h5>Direkt</h5>
-<a href="mailto:info@quenora.ai">info@quenora.ai</a>
-<a href="https://quenora.ai">quenora.ai</a>
+<h5>Folgen</h5>
+<nav aria-label="Social Media">
 <a href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank">LinkedIn</a>
 <a href="https://x.com/quenora_ai" rel="noopener me" target="_blank">X</a>
 <a href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank">Instagram</a>
+</nav>
 </div>
 </div>
 <div class="foot-line">
-<span>Wir machen es nicht für Sie. Wir räumen Ihnen den Weg frei.</span>
 <span>© 2026 Quenora Consulting</span>
+<span>Heilbronn, Deutschland · <a href="/impressum.html">Impressum</a> · <a href="/privacy.html">Datenschutz</a></span>
 </div>
 </div>
 </footer>

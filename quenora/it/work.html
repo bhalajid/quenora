@@ -212,9 +212,21 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;line-
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-index:2;
   background:linear-gradient(180deg,transparent,rgba(201,122,60,.03))}
-.foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:44px}
+/* space-between across a wrapping flex row put the last two columns against
+   opposite edges of the second line, which is the ragged footer that got
+   flagged. A grid gives four columns that line up, and collapses cleanly. */
+.foot-row{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));
+  gap:56px 40px}
+/* The header sets a bare `nav{display:flex}`, which also caught the footer's
+   own <nav> elements and laid seven site links out in a single row — that is
+   what pushed the columns to 103/545/279/184 instead of 1.6/1/1/1. */
+footer nav{display:block}
+@media(max-width:900px){.foot-row{grid-template-columns:1fr 1fr;gap:40px 32px}}
+@media(max-width:560px){.foot-row{grid-template-columns:1fr;gap:32px}}
+.foot-col h5{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--grey-d);font-weight:500;margin:0 0 16px}
 .foot-brand{display:flex;align-items:center;gap:11px;margin-bottom:14px}
-.foot-brand svg{width:26px;filter:drop-shadow(0 0 8px var(--copper-glow))}
+.foot-brand svg{width:26px}
 .foot-brand b{font-size:16.5px;font-weight:600}
 .foot-col h5{font-size:11px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;
   color:var(--grey-d);margin-bottom:16px}
@@ -462,39 +474,45 @@ catalogue. Illustrative.</figcaption>
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b>quenora</b>
 </div>
-<p style="color:var(--grey-d);font-size:13px">Trasformazione con l'IA aziendale su ingegneria di piattaforma,
-        integrazione e messa in produzione. Europa e da remoto in tutto il mondo.</p>
+<p style="color:var(--grey-d);font-size:13px">Enterprise AI, engineered to operate.
+        Built into what you already run, then handed over.</p>
 </div>
+<!-- The footer mirrors this page's header, target for target. It used to run a
+     map of its own - Core capabilities, Firm, four links that all went to the
+     same page - so a word in the header and the same word in the footer led
+     somewhere different. One page, one map. -->
 <div class="foot-col">
-<h5>Competenze principali</h5>
-<a href="/it/services.html">Platform Engineering</a>
-<a href="/it/services.html">Integrazione dell'IA</a>
-<a href="/it/services.html">Sviluppo e messa in produzione</a>
-<a href="/it/services.html">Le nove competenze</a>
-</div>
-<div class="foot-col">
-<h5>Studio</h5>
-<a href="/it/index.html#journey">Il nostro metodo</a>
+<h5>Site</h5>
+<nav aria-label="Footer">
+<a href="/it/index.html">Home</a>
+<a href="/it/index.html#journey">Metodo</a>
+<a href="/it/services.html">Competenze</a>
+<a href="/it/engineering.html">Engineering</a>
 <a href="/it/work.html">Progetti</a>
+<a href="/it/index.html#who">About</a>
 <a href="/it/index.html#climax">Contatti</a>
+</nav>
 </div>
 <div class="foot-col">
-<h5>Legal</h5>
+<h5>Contatti</h5>
+<nav aria-label="Contatti">
+<a href="mailto:info@quenora.ai">info@quenora.ai</a>
 <a href="/impressum.html">Legal notice · Impressum</a>
 <a href="/privacy.html">Privacy notice</a>
+</nav>
 </div>
 <div class="foot-col">
-<h5>Diretto</h5>
-<a href="mailto:info@quenora.ai">info@quenora.ai</a>
-<a href="https://quenora.ai">quenora.ai</a>
+<h5>Follow</h5>
+<nav aria-label="Social">
 <a href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank">LinkedIn</a>
 <a href="https://x.com/quenora_ai" rel="noopener me" target="_blank">X</a>
 <a href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank">Instagram</a>
+</nav>
 </div>
 </div>
 <div class="foot-line">
-<span>Non lo facciamo al posto vostro. Vi sgombriamo la strada.</span>
 <span>© 2026 Quenora Consulting</span>
+<span>Heilbronn, Germany · <a href="/impressum.html">Legal notice</a> · <a href="/privacy.html">Privacy</a></span>
 </div>
 </div>
 </footer>

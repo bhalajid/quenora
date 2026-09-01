@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+QPY_NAV="${QUENORA_PY:-python3}"
 # ---------------------------------------------------------------
 # Quenora release gate. Nothing ships unless every stage passes.
 #   ./release.sh <site-dir>
@@ -106,6 +107,11 @@ step "3b/8  work-page field figure (headless, recorded canvas)"
 node figure_space.js "$DIR"
 [ $? -eq 0 ] && ok "the field draws, sweeps, calls out three and repeats" \
   || bad "the field figure is not drawing what it claims"
+
+step "4d/8  header and footer agree, page by page"
+$QPY_NAV nav_map.py "$DIR"
+[ $? -eq 0 ] && ok "every page sends the same word to the same place" \
+  || bad "a label leads to two different places on the same page"
 
 step "4c/8  links, resolved the way the deployed site resolves them"
 python3 deployed_links.py "$DIR"

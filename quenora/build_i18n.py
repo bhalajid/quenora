@@ -150,6 +150,12 @@ SWITCH_LABEL = {"en": "Choose language", "de": "Sprache wählen",
                 "it": "Scegli la lingua"}
 
 
+def _norm(text):
+    """Whitespace-insensitive body of a script, for exact-match comparison."""
+    import re as _re
+    return _re.sub(r"\s+", " ", _re.sub(r"</?script[^>]*>", "", text or "")).strip()
+
+
 def switcher(lang, page):
     """Header language menu. Current language first, marked."""
     items = []
@@ -371,17 +377,26 @@ def build_en_switcher():
         if st and "langsel" not in st.text:
             st.string = st.text + LANG_CSS
         # Drop the previously appended switcher script before re-adding it,
-        # otherwise every rebuild leaves another copy behind.
+        # otherwise every rebuild leaves another copy behind — and two copies
+        # means two click handlers, both toggling, so the menu opens and closes
+        # on the same click and the language dropdown cannot be used at all.
         #
-        # This used to match on the script's *contents* — any <script> that
-        # mentioned getElementById('langBtn') was decomposed whole. Hand-written
-        # code that happened to live in the same tag went with it: the work
-        # page's field figure was appended to that block and silently vanished
-        # on the next build, leaving a canvas with nothing to draw it. The
-        # generated script now carries a marker and only that marker is matched,
-        # so the build can never delete code it did not write.
-        for sc in soup.find_all("script", attrs={"data-generated": "langsel"}):
-            sc.decompose()
+        # Matching on contents alone was wrong: any <script> that merely
+        # mentioned getElementById('langBtn') was decomposed whole, which ate
+        # the work page's field figure when it shared the tag. Matching on the
+        # marker alone was also wrong: scripts written before the marker
+        # existed carried no attribute, were never removed, and a second tagged
+        # copy was appended on top of them.
+        #
+        # So: the marker, or an exact match on the body this file generates.
+        # Neither can remove code this file did not write, and together they
+        # cannot leave a duplicate behind.
+        generated = _norm(LANG_JS)
+        for sc in list(soup.find_all("script")):
+            if sc.get("data-generated") == "langsel":
+                sc.decompose()
+            elif sc.string and _norm(sc.string) and _norm(sc.string) in generated:
+                sc.decompose()
         nav = soup.find(class_="navlinks")
         if nav:
             nav.insert_after(BeautifulSoup(switcher("en", page), "html.parser"))

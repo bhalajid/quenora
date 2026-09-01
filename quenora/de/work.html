@@ -703,24 +703,6 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
 // (page-header WebGL block removed — no Three.js dependency remains)
 </script>
 <script>
-(function(){
-  var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
-  if(!b||!m)return;
-  b.addEventListener('click',function(e){
-    e.stopPropagation();
-    var o=m.classList.toggle('open');
-    b.setAttribute('aria-expanded',o?'true':'false');
-  });
-  document.addEventListener('click',function(){
-    m.classList.remove('open');b.setAttribute('aria-expanded','false');
-  });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){m.classList.remove('open');
-      b.setAttribute('aria-expanded','false');}
-  });
-})();
-</script>
-<script>
 /* ═══ THE FIELD ══════════════════════════════════════════════════════════════
    Nine capabilities laid along the arc the mark is built on. Each one opens
    into the problems it reaches; a signal travels the arc and blooms each

@@ -118,6 +118,11 @@ $QPY_NAV design_drift.py "$DIR"
 [ $? -eq 0 ] && ok "no page carries the previous generation's look" \
   || bad "a page is drifting off the design system"
 
+step "4c2/8  the language switcher actually opens"
+$QPY_NAV switcher.py "$DIR"
+[ $? -eq 0 ] && ok "one handler, wired, three languages, one marked current" \
+  || bad "the language switcher is broken"
+
 step "4d/8  header and footer agree, page by page"
 $QPY_NAV nav_map.py "$DIR"
 [ $? -eq 0 ] && ok "every page sends the same word to the same place" \

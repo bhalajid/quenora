@@ -88,6 +88,7 @@ def pages():
 
 
 bad, checked = [], 0
+HEADERS = {}
 for rel in pages():
     html = open(os.path.join(ROOT, rel), encoding="utf-8").read()
     name = os.path.basename(rel)
@@ -111,6 +112,7 @@ for rel in pages():
 
     checked += 1
     h = dict(links(strip_cta(strip_switcher(header))))
+    HEADERS[rel] = list(h)
     f = dict(links(site))
 
     # the CTA lives outside .navlinks; fold it in under its own label
@@ -142,6 +144,34 @@ for rel in pages():
         bad.append("%s: in the header but not the footer: %s" % (rel, ", ".join(sorted(missing))))
     if strays:
         bad.append("%s: in the footer but not the header: %s" % (rel, ", ".join(sorted(strays))))
+
+# ── and the same header on every page, not just a self-consistent one ──
+#
+# The checks above compare a page's header against its own footer. That let
+# approach, contact and products carry a six-item header with "Home" in it
+# while every other page had five — self-consistent, and different from the
+# rest of the site. A visitor moving between them saw the nav change shape.
+per_lang = {}
+for rel, labels in HEADERS.items():
+    lang = rel.split("/")[0] if "/" in rel else "en"
+    if rel.split("/")[-1] in NAV_EXEMPT:
+        continue
+    per_lang.setdefault(lang, {})[rel] = labels
+
+for lang, pages_in in sorted(per_lang.items()):
+    if len(pages_in) < 2:
+        continue
+    counts = {}
+    for rel, labels in pages_in.items():
+        counts.setdefault(tuple(labels), []).append(rel)
+    if len(counts) > 1:
+        common = max(counts.items(), key=lambda kv: len(kv[1]))[0]
+        for shape, rels in counts.items():
+            if shape == common:
+                continue
+            for rel in rels:
+                bad.append("%s: header is %s; every other %s page is %s"
+                           % (rel, " / ".join(shape), lang, " / ".join(common)))
 
 print("  %d page(s) checked for header/footer agreement" % checked)
 if bad:

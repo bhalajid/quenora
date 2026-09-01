@@ -40,8 +40,11 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+/* 17px/1.62, the home page's base. These pages inherited the browser
+   default 16px at 1.6, so body copy was a step smaller and a shade
+   tighter than on the page that links to them. */
 body{background:var(--ink);color:var(--white);font-family:var(--font);
-  font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  font-weight:400;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
 a{color:inherit;text-decoration:none}
 section{position:relative}
@@ -107,7 +110,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
 .burger.open i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .burger.open i:nth-child(2){opacity:0}
 .burger.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-@media(max-width:1000px){
+@media(max-width:880px){
   .burger{display:flex}
   nav{flex-wrap:wrap}
   .navlinks{order:3;flex-basis:100%;flex-direction:column;gap:0;
@@ -160,8 +163,8 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
      a different colour depending which page you were on. */
   color:var(--copper-lt);margin-bottom:16px;display:flex;align-items:center;gap:11px}
 .kicker::before{content:"";width:20px;height:1px;background:var(--copper-lt);flex:none}
-h1{font-size:clamp(40px,5.4vw,74px);font-weight:600;letter-spacing:-.035em;line-height:1.03}
-h2{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;line-height:1.12}
+h1{font-size:clamp(40px,5.4vw,74px);font-weight:700;letter-spacing:-.035em;line-height:1.03}
+h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-height:1.12}
 .section-pad{padding:120px 0;position:relative;z-index:2}
 .section-head{max-width:680px;margin-bottom:60px}
 .section-head p{margin-top:16px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:56ch}
@@ -184,7 +187,7 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;line-
 .card:hover::after{opacity:1}
 .card .num{font-family:var(--mono);font-size:11.5px;color:var(--copper);margin-bottom:22px;
   letter-spacing:.1em}
-.card h3{font-size:19px;font-weight:600;letter-spacing:-.015em;margin-bottom:11px}
+.card h3{font-size:19px;font-weight:700;letter-spacing:-.015em;margin-bottom:11px}
 .card h4{font-size:16.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:9px}
 .card p{font-size:14px;color:var(--grey);line-height:1.68;margin-top:auto;padding-top:6px;font-weight:300}
 @media(max-width:900px){.grid-3,.grid-2{grid-template-columns:1fr}}
@@ -278,7 +281,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 .svc-detail .idx i{width:9px;height:9px;border-radius:50%;
   background:radial-gradient(circle at 34% 30%,var(--copper-lt),var(--copper));
   box-shadow:0 0 12px var(--copper-glow);flex:none}
-.svc-detail h3{font-size:23px;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+.svc-detail h3{font-size:23px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
 .svc-detail .body{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:68ch}
 .svc-detail ul{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;list-style:none}
 .svc-detail li{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
@@ -291,7 +294,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 @media(max-width:760px){.step{grid-template-columns:1fr;gap:12px}}
 .step .ph{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--copper)}
-.step h3{font-size:21px;font-weight:600;letter-spacing:-.018em;margin-bottom:11px}
+.step h3{font-size:21px;font-weight:700;letter-spacing:-.018em;margin-bottom:11px}
 .step p{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:66ch}
 .step .wk{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:11px;
   color:var(--grey-d);padding:6px 12px;border:1px solid var(--line);border-radius:6px}
@@ -302,7 +305,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
   background:linear-gradient(90deg,transparent,var(--copper),transparent);opacity:.5}
 .case .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--copper);margin-bottom:18px}
-.case h3{font-size:21px;font-weight:600;letter-spacing:-.018em;margin-bottom:14px;line-height:1.28}
+.case h3{font-size:21px;font-weight:700;letter-spacing:-.018em;margin-bottom:14px;line-height:1.28}
 .case p{color:var(--grey);font-size:14.5px;font-weight:300;line-height:1.75}
 .case .metrics{display:flex;gap:34px;margin-top:26px;padding-top:24px;
   border-top:1px solid var(--line-2);flex-wrap:wrap}
@@ -328,7 +331,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 .field select option{background:var(--surface);color:var(--white)}
 .contact-side{background:linear-gradient(150deg,var(--surface),var(--ink-2));
   border:1px solid var(--line);border-radius:var(--radius);padding:36px}
-.contact-side h4{font-size:16px;font-weight:600;margin-bottom:20px}
+.contact-side h4{font-size:17px;font-weight:600;margin-bottom:20px}
 .contact-side .row{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid var(--line-2);
   align-items:flex-start}
 .contact-side .row:last-child{border:none}
@@ -361,10 +364,10 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 
 /* ---------- legal / document pages ---------- */
 .legal{max-width:74ch;padding-bottom:20px}
-.legal h2{font-size:clamp(19px,2.4vw,25px);font-weight:600;letter-spacing:-.015em;
+.legal h2{font-size:clamp(19px,2.4vw,25px);font-weight:700;letter-spacing:-.015em;
   margin:56px 0 14px;padding-top:26px;border-top:1px solid var(--line-2)}
 .legal h2:first-of-type{margin-top:0;padding-top:0;border-top:0}
-.legal h3{font-size:15.5px;font-weight:600;margin:28px 0 8px;color:var(--white)}
+.legal h3{font-size:15.5px;font-weight:700;margin:28px 0 8px;color:var(--white)}
 .legal p{color:var(--grey);font-size:15px;font-weight:300;margin-bottom:14px}
 .legal ul{margin:0 0 16px 18px}
 .legal li{color:var(--grey);font-size:15px;font-weight:300;margin-bottom:7px}
@@ -408,7 +411,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b><em>q</em>uenora</b>
 </a>
-<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="services.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="products.html">Products</a><a href="approach.html">Approach</a><a href="work.html">Work</a><a href="index.html#climax">Contact</a></div>
+<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="capabilities.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="products.html">Products</a><a href="approach.html">Approach</a><a href="work.html">Work</a><a href="index.html#climax">Contact</a></div>
 <a class="btn btn-primary navcta" href="index.html#climax"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
 <button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <i></i><i></i><i></i>
@@ -505,10 +508,10 @@ Address as above
 </div>
 <div class="foot-col">
 <h5>Core capabilities</h5>
-<a href="services.html">Platform Engineering</a>
-<a href="services.html">AI Integration</a>
-<a href="services.html">Deployment &amp; Development</a>
-<a href="services.html">All nine capabilities</a>
+<a href="capabilities.html">Platform Engineering</a>
+<a href="capabilities.html">AI Integration</a>
+<a href="capabilities.html">Deployment &amp; Development</a>
+<a href="capabilities.html">All nine capabilities</a>
 <a href="products.html">Products &amp; frameworks</a>
 </div>
 <div class="foot-col">

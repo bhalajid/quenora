@@ -40,8 +40,11 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+/* 17px/1.62, the home page's base. These pages inherited the browser
+   default 16px at 1.6, so body copy was a step smaller and a shade
+   tighter than on the page that links to them. */
 body{background:var(--ink);color:var(--white);font-family:var(--font);
-  font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  font-weight:400;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
 a{color:inherit;text-decoration:none}
 section{position:relative}
@@ -113,7 +116,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
   text-transform:uppercase;color:var(--copper-lt);margin:0 0 14px}
 .fig figcaption{margin-top:18px;padding-top:16px;border-top:1px solid var(--line-2);
   color:var(--grey-d);font-size:13.5px;line-height:1.62;max-width:74ch}
-@media(max-width:640px){.fig canvas{height:300px}}
+@media(max-width:880px){.fig canvas{height:300px}}
 
 /* hamburger + collapsible nav */
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;
@@ -122,7 +125,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
 .burger.open i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .burger.open i:nth-child(2){opacity:0}
 .burger.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-@media(max-width:1000px){
+@media(max-width:880px){
   .burger{display:flex}
   nav{flex-wrap:wrap}
   .navlinks{order:3;flex-basis:100%;flex-direction:column;gap:0;
@@ -185,8 +188,8 @@ h1 em,h2 em,h3 em{font-family:var(--serif);font-style:italic;
      a different colour depending which page you were on. */
   color:var(--copper-lt);margin-bottom:16px;display:flex;align-items:center;gap:11px}
 .kicker::before{content:"";width:20px;height:1px;background:var(--copper-lt);flex:none}
-h1{font-size:clamp(40px,5.4vw,74px);font-weight:600;letter-spacing:-.035em;line-height:1.03}
-h2{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;line-height:1.12}
+h1{font-size:clamp(40px,5.4vw,74px);font-weight:700;letter-spacing:-.035em;line-height:1.03}
+h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-height:1.12}
 .section-pad{padding:120px 0;position:relative;z-index:2}
 .section-head{max-width:680px;margin-bottom:60px}
 .section-head p{margin-top:16px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:56ch}
@@ -209,7 +212,7 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;line-
 .card:hover::after{opacity:1}
 .card .num{font-family:var(--mono);font-size:11.5px;color:var(--copper);margin-bottom:22px;
   letter-spacing:.1em}
-.card h3{font-size:19px;font-weight:600;letter-spacing:-.015em;margin-bottom:11px}
+.card h3{font-size:19px;font-weight:700;letter-spacing:-.015em;margin-bottom:11px}
 .card h4{font-size:16.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:9px}
 .card p{font-size:14px;color:var(--grey);line-height:1.68;margin-top:auto;padding-top:6px;font-weight:300}
 @media(max-width:900px){.grid-3,.grid-2{grid-template-columns:1fr}}
@@ -277,7 +280,7 @@ footer nav{display:block}
 .svc-detail .idx i{width:9px;height:9px;border-radius:50%;
   background:radial-gradient(circle at 34% 30%,var(--copper-lt),var(--copper));
   box-shadow:0 0 12px var(--copper-glow);flex:none}
-.svc-detail h3{font-size:23px;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+.svc-detail h3{font-size:23px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
 .svc-detail .body{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:68ch}
 .svc-detail ul{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;list-style:none}
 .svc-detail li{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
@@ -290,7 +293,7 @@ footer nav{display:block}
 @media(max-width:760px){.step{grid-template-columns:1fr;gap:12px}}
 .step .ph{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--copper)}
-.step h3{font-size:21px;font-weight:600;letter-spacing:-.018em;margin-bottom:11px}
+.step h3{font-size:21px;font-weight:700;letter-spacing:-.018em;margin-bottom:11px}
 .step p{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:66ch}
 .step .wk{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:11px;
   color:var(--grey-d);padding:6px 12px;border:1px solid var(--line);border-radius:6px}
@@ -301,7 +304,7 @@ footer nav{display:block}
   background:linear-gradient(90deg,transparent,var(--copper),transparent);opacity:.5}
 .case .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--copper);margin-bottom:18px}
-.case h3{font-size:21px;font-weight:600;letter-spacing:-.018em;margin-bottom:14px;line-height:1.28}
+.case h3{font-size:21px;font-weight:700;letter-spacing:-.018em;margin-bottom:14px;line-height:1.28}
 .case p{color:var(--grey);font-size:14.5px;font-weight:300;line-height:1.75}
 .case .metrics{display:flex;gap:34px;margin-top:26px;padding-top:24px;
   border-top:1px solid var(--line-2);flex-wrap:wrap}
@@ -327,7 +330,7 @@ footer nav{display:block}
 .field select option{background:var(--surface);color:var(--white)}
 .contact-side{background:linear-gradient(150deg,var(--surface),var(--ink-2));
   border:1px solid var(--line);border-radius:var(--radius);padding:36px}
-.contact-side h4{font-size:16px;font-weight:600;margin-bottom:20px}
+.contact-side h4{font-size:17px;font-weight:600;margin-bottom:20px}
 .contact-side .row{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid var(--line-2);
   align-items:flex-start}
 .contact-side .row:last-child{border:none}
@@ -382,7 +385,7 @@ footer nav{display:block}
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b><em>q</em>uenora</b>
 </a>
-<div class="navlinks" id="navLinks"><a href="/es/index.html#journey">Método</a><a href="/es/services.html">Capacidades</a><a href="/es/engineering.html">Engineering</a><a class="on" href="/es/work.html">Proyectos</a><a href="/es/index.html#who">About</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Elegir idioma" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>ES</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/work.html" hreflang="en" lang="en">English</a></li><li><a href="/de/work.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/work.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
+<div class="navlinks" id="navLinks"><a href="/es/index.html#journey">Método</a><a href="/es/capabilities.html">Capacidades</a><a href="/es/engineering.html">Engineering</a><a class="on" href="/es/work.html">Proyectos</a><a href="/es/index.html#who">About</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Elegir idioma" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>ES</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/work.html" hreflang="en" lang="en">English</a></li><li><a href="/de/work.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/work.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 <a class="btn btn-primary navcta" href="/es/index.html#climax"><span class="cta-long">Iniciar una conversación</span><span class="cta-short">Contacto</span></a>
 <button aria-expanded="false" aria-label="Menú" class="burger" id="burger">
 <i></i><i></i><i></i>
@@ -478,7 +481,7 @@ catalogue. Illustrative.</figcaption>
      reachable from the bottom of the page. -->
 <div style="display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap">
 <a class="btn btn-primary" href="/es/index.html#climax">Iniciar una conversación</a>
-<a class="btn btn-ghost" href="/es/services.html">Ver capacidades →</a>
+<a class="btn btn-ghost" href="/es/capabilities.html">Ver capacidades →</a>
 <a class="btn btn-ghost" href="/es/index.html#journey">Cómo trabajamos →</a>
 </div>
 </div>
@@ -504,7 +507,7 @@ catalogue. Illustrative.</figcaption>
 <nav aria-label="Footer">
 <a href="/es/index.html">Inicio</a>
 <a href="/es/index.html#journey">Método</a>
-<a href="/es/services.html">Capacidades</a>
+<a href="/es/capabilities.html">Capacidades</a>
 <a href="/es/engineering.html">Engineering</a>
 <a href="/es/work.html">Proyectos</a>
 <a href="/es/index.html#who">About</a>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Quenora Consulting — Leistungen</title>
-<meta content="Alle neun Leistungsbereiche von Quenora, von Platform Engineering bis KI-Governance." name="description"/>
+<title>Quenora Consulting — Capabilities</title>
+<meta content="All nine Quenora capabilities, from platform engineering to AI governance." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,500;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
@@ -13,12 +13,12 @@
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='12' cy='161.71' r='3' fill='%23C97A3C'/%3E%3Ccircle cx='21.64' cy='161.34' r='3.95' fill='%23C97A3C'/%3E%3Ccircle cx='33.39' cy='159.88' r='5.2' fill='%23C97A3C'/%3E%3Ccircle cx='47.73' cy='156.52' r='6.84' fill='%23C97A3C'/%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
 <meta content="Quenora Consulting" property="og:site_name"/>
-<meta content="Quenora Consulting — Leistungen" property="og:title"/>
-<meta content="Alle neun Leistungsbereiche von Quenora, von Platform Engineering bis KI-Governance." property="og:description"/>
-<meta content="https://quenora.ai/de/services" property="og:url"/>
+<meta content="Quenora Consulting — Capabilities" property="og:title"/>
+<meta content="All nine Quenora capabilities, from platform engineering to AI governance." property="og:description"/>
+<meta content="https://quenora.ai/capabilities" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Quenora Consulting — Leistungen" name="twitter:title"/>
-<meta content="Alle neun Leistungsbereiche von Quenora, von Platform Engineering bis KI-Governance." name="twitter:description"/>
+<meta content="Quenora Consulting — Capabilities" name="twitter:title"/>
+<meta content="All nine Quenora capabilities, from platform engineering to AI governance." name="twitter:description"/>
 <style>
 :root{
   /* Grounds are deliberately NEUTRAL (no blue bias). An earlier palette had
@@ -40,8 +40,11 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+/* 17px/1.62, the home page's base. These pages inherited the browser
+   default 16px at 1.6, so body copy was a step smaller and a shade
+   tighter than on the page that links to them. */
 body{background:var(--ink);color:var(--white);font-family:var(--font);
-  font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  font-weight:400;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
 a{color:inherit;text-decoration:none}
 section{position:relative}
@@ -109,7 +112,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
 .burger.open i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .burger.open i:nth-child(2){opacity:0}
 .burger.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-@media(max-width:1000px){
+@media(max-width:880px){
   .burger{display:flex}
   nav{flex-wrap:wrap}
   .navlinks{order:3;flex-basis:100%;flex-direction:column;gap:0;
@@ -172,8 +175,8 @@ h1 em,h2 em,h3 em{font-family:var(--serif);font-style:italic;
      a different colour depending which page you were on. */
   color:var(--copper-lt);margin-bottom:16px;display:flex;align-items:center;gap:11px}
 .kicker::before{content:"";width:20px;height:1px;background:var(--copper-lt);flex:none}
-h1{font-size:clamp(40px,5.4vw,74px);font-weight:600;letter-spacing:-.035em;line-height:1.03}
-h2{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;line-height:1.12}
+h1{font-size:clamp(40px,5.4vw,74px);font-weight:700;letter-spacing:-.035em;line-height:1.03}
+h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-height:1.12}
 .section-pad{padding:120px 0;position:relative;z-index:2}
 .section-head{max-width:680px;margin-bottom:60px}
 .section-head p{margin-top:16px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:56ch}
@@ -196,7 +199,7 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;line-
 .card:hover::after{opacity:1}
 .card .num{font-family:var(--mono);font-size:11.5px;color:var(--copper);margin-bottom:22px;
   letter-spacing:.1em}
-.card h3{font-size:19px;font-weight:600;letter-spacing:-.015em;margin-bottom:11px}
+.card h3{font-size:19px;font-weight:700;letter-spacing:-.015em;margin-bottom:11px}
 .card h4{font-size:16.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:9px}
 .card p{font-size:14px;color:var(--grey);line-height:1.68;margin-top:auto;padding-top:6px;font-weight:300}
 @media(max-width:900px){.grid-3,.grid-2{grid-template-columns:1fr}}
@@ -264,7 +267,7 @@ footer nav{display:block}
 .svc-detail .idx i{width:9px;height:9px;border-radius:50%;
   background:radial-gradient(circle at 34% 30%,var(--copper-lt),var(--copper));
   box-shadow:0 0 12px var(--copper-glow);flex:none}
-.svc-detail h3{font-size:23px;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+.svc-detail h3{font-size:23px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
 .svc-detail .body{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:68ch}
 .svc-detail ul{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;list-style:none}
 .svc-detail li{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
@@ -277,7 +280,7 @@ footer nav{display:block}
 @media(max-width:760px){.step{grid-template-columns:1fr;gap:12px}}
 .step .ph{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--copper)}
-.step h3{font-size:21px;font-weight:600;letter-spacing:-.018em;margin-bottom:11px}
+.step h3{font-size:21px;font-weight:700;letter-spacing:-.018em;margin-bottom:11px}
 .step p{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:66ch}
 .step .wk{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:11px;
   color:var(--grey-d);padding:6px 12px;border:1px solid var(--line);border-radius:6px}
@@ -288,7 +291,7 @@ footer nav{display:block}
   background:linear-gradient(90deg,transparent,var(--copper),transparent);opacity:.5}
 .case .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--copper);margin-bottom:18px}
-.case h3{font-size:21px;font-weight:600;letter-spacing:-.018em;margin-bottom:14px;line-height:1.28}
+.case h3{font-size:21px;font-weight:700;letter-spacing:-.018em;margin-bottom:14px;line-height:1.28}
 .case p{color:var(--grey);font-size:14.5px;font-weight:300;line-height:1.75}
 .case .metrics{display:flex;gap:34px;margin-top:26px;padding-top:24px;
   border-top:1px solid var(--line-2);flex-wrap:wrap}
@@ -314,7 +317,7 @@ footer nav{display:block}
 .field select option{background:var(--surface);color:var(--white)}
 .contact-side{background:linear-gradient(150deg,var(--surface),var(--ink-2));
   border:1px solid var(--line);border-radius:var(--radius);padding:36px}
-.contact-side h4{font-size:16px;font-weight:600;margin-bottom:20px}
+.contact-side h4{font-size:17px;font-weight:600;margin-bottom:20px}
 .contact-side .row{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid var(--line-2);
   align-items:flex-start}
 .contact-side .row:last-child{border:none}
@@ -345,7 +348,7 @@ footer nav{display:block}
 @media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
   .langsel>button span{display:none}}
 </style>
-<meta content="de_DE" property="og:locale"/><link href="https://quenora.ai/de/services" rel="canonical"/><link href="https://quenora.ai/services" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/services" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/services" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/services" hreflang="x-default" rel="alternate"/></head>
+<meta content="en_GB" property="og:locale"/><link href="https://quenora.ai/capabilities" rel="canonical"/><link href="https://quenora.ai/capabilities" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/capabilities" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/capabilities" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/capabilities" hreflang="x-default" rel="alternate"/></head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0">
 <symbol id="mark9" viewbox="0 0 187.71 174.29">
@@ -360,18 +363,18 @@ footer nav{display:block}
 <circle cx="151.71" cy="36.0" fill="#C97A3C" r="27.0"></circle>
 </symbol>
 </svg>
-<a class="skip" href="#main">Zum Inhalt springen</a>
+<a class="skip" href="#main">Skip to content</a>
 <div class="progress" id="progressBar"></div>
 <header id="siteHeader">
 <div class="wrap">
 <nav>
-<a class="brand" href="/de/index.html">
+<a class="brand" href="index.html">
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b><em>q</em>uenora</b>
 </a>
-<div class="navlinks" id="navLinks"><a href="/de/index.html#journey">Vorgehen</a><a class="on" href="/de/services.html">Leistungen</a><a href="/de/engineering.html">KI-Engineering</a><a href="/de/work.html">Projekte</a><a href="/de/index.html#who">Über uns</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Sprache wählen" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>DE</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/services.html" hreflang="en" lang="en">English</a></li><li><a aria-current="true" href="/de/services.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/services.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
-<a class="btn btn-primary navcta" href="/de/index.html#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a>
-<button aria-expanded="false" aria-label="Menü" class="burger" id="burger">
+<div class="navlinks" id="navLinks"><a href="index.html#journey">Approach</a><a class="on" href="capabilities.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="work.html">Work</a><a href="index.html#who">About</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choose language" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>EN</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a aria-current="true" href="/capabilities.html" hreflang="en" lang="en">English</a></li><li><a href="/de/capabilities.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/capabilities.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
+<a class="btn btn-primary navcta" href="index.html#climax"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
+<button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <i></i><i></i><i></i>
 </button>
 </nav>
@@ -380,9 +383,9 @@ footer nav{display:block}
 <main id="main"><section class="phero">
 <canvas aria-hidden="true" id="pCanvas"></canvas>
 <div class="wrap">
-<div class="kicker">Leistungen</div>
-<h1 class="scramble">Neun Leistungen. Ein Team hinter allen.</h1>
-<p>Drei davon sind zentral — die Arbeit läuft über Plattform- und Deployment-Engineering, Automatisierung und KI-Integration. Die anderen sechs kommen dazu, wenn die Arbeit sie erfordert. Alle neun werden vom selben Team erbracht; nichts davon wird an jemanden vergeben, den Sie nicht kennengelernt haben.</p>
+<div class="kicker">Capabilities</div>
+<h1 class="scramble">Nine capabilities. One team behind all of them.</h1>
+<p>Three of these are core — the work runs through platform and deployment engineering, automation, and AI integration. The other six join when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.</p>
 </div>
 </section>
 <section class="section-pad">
@@ -390,86 +393,86 @@ footer nav{display:block}
 <div class="svc-detail rv">
 <div class="idx"><i></i>01</div>
 <div>
-<h3>Plattform- &amp; Deployment-Engineering</h3>
-<div class="body">Das Fundament, auf das sich jede KI-Initiative stillschweigend stützt — und der Weg in den Produktivbetrieb an dessen Ende. Wir entwerfen die Datenarchitektur, stellen die Infrastruktur bereit und bauen die internen Plattformen, mit denen Ihre Teams KI wiederholt statt einmalig ausliefern — und deployen dann darauf, mit Monitoring und Übergabedokumentation, die dem Kontakt mit der Realität standhält. Ohne diese Schicht wird jedes Modell zum Einzelprojekt, das stirbt, sobald sein Fürsprecher geht; und ein Projekt ist abgeschlossen, wenn Ihr Team das System ohne uns betreiben, erweitern und debuggen kann.</div>
-<ul><li>Datenarchitektur</li><li>Cloud-Infrastruktur</li><li>Interne Plattformen</li><li>MLOps-Grundlagen</li><li>Inbetriebnahme im Produktivbetrieb</li><li>Individuelle Entwicklung</li><li>Monitoring</li><li>Wissenstransfer</li></ul>
+<h3>Platform &amp; Deployment Engineering</h3>
+<div class="body">The foundation every AI initiative silently depends on, and the path into production at the end of it. We design the data architecture, provision the infrastructure, and build the internal platforms that let your teams ship AI repeatedly rather than once — then deploy on them, with monitoring and handover documentation that survives contact with reality. Without this layer every model becomes a bespoke project that dies when its champion leaves, and an engagement is finished when your team can run, extend and debug the system without calling us.</div>
+<ul><li>Data architecture</li><li>Cloud infrastructure</li><li>Internal platforms</li><li>MLOps foundations</li><li>Production deployment</li><li>Custom development</li><li>Monitoring</li><li>Knowledge transfer</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>02</div>
 <div>
-<h3>Prozess- &amp; Workflow-Automatisierung</h3>
-<div class="body">Die Arbeit selbst, laufend ohne Hände daran. Wir automatisieren die Prozesse, die Ihr Unternehmen wiederholt — die Freigaben, die Übergaben, die Abstimmungen, das Reporting, das derzeit jemand an einem Dienstagnachmittag erledigt. Hier hört eine KI-Fähigkeit auf, eine Fähigkeit zu sein, und wird zu Durchsatz. Sie wird um die Ausnahmen herum entworfen statt um den Idealfall, denn die Ausnahmen schicken automatisierte Arbeit zurück an einen Menschen — und zu entscheiden, welche das sein sollen, ist der größere Teil der Arbeit.</div>
-<ul><li>Prozessautomatisierung</li><li>Workflow-Orchestrierung</li><li>Human-in-the-Loop-Design</li><li>Ausnahmebehandlung</li></ul>
+<h3>Process &amp; Workflow Automation</h3>
+<div class="body">The work itself, running without hands on it. We automate the processes your business repeats — the approvals, the handoffs, the reconciliations, the reporting somebody currently does on a Tuesday afternoon. This is where an AI capability stops being a capability and becomes throughput. It is designed around the exceptions rather than the happy path, because the exceptions are what send automated work back to a human, and deciding which ones should is most of the job.</div>
+<ul><li>Process automation</li><li>Workflow orchestration</li><li>Human-in-the-loop design</li><li>Exception handling</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>03</div>
 <div>
-<h3>KI-Integration</h3>
-<div class="body">Modelle, verbunden mit den Systemen, auf denen Ihr Unternehmen bereits läuft — CRM, ERP, Service-Desks, Betriebswerkzeuge. Das Schwierige ist fast nie das Modell; es sind die Verbindungen, die Berechtigungen und die Sonderfälle, die niemand dokumentiert hat. Wir docken an das an, was bereits läuft, statt Ihnen vorzuschlagen, es zu ersetzen.</div>
-<ul><li>Systemintegration</li><li>API-Orchestrierung</li><li>Modellauswahl</li><li>Anbieterneutral</li></ul>
+<h3>AI Integration</h3>
+<div class="body">Models connected into the systems your business already runs on — CRM, ERP, service desks, operations tooling. The hard part is almost never the model; it is the plumbing, the permissions, and the edge cases nobody documented. We attach to what is already moving rather than proposing you replace it.</div>
+<ul><li>System integration</li><li>API orchestration</li><li>Model selection</li><li>Vendor-neutral</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>04</div>
 <div>
-<h3>KI-Strategie und Beratung</h3>
-<div class="body">Roadmaps, Make-or-Buy-Entscheidungen und ehrliche Machbarkeitsbewertungen von Menschen, die ausgeliefert und nicht nur präsentiert haben. Dazu gehört auch, Ihnen zu sagen, wann KI die falsche Antwort auf ein Problem ist — ein Rat, der mehr wert ist als ein Arbeitspaket, das Sie nicht gebraucht hätten.</div>
-<ul><li>KI-Roadmap</li><li>Make-or-Buy</li><li>Machbarkeit</li><li>Anbieterbewertung</li></ul>
+<h3>AI Strategy &amp; Advisory</h3>
+<div class="body">Roadmaps, build-versus-buy decisions, and honest feasibility assessments from people who have shipped rather than only presented. This includes telling you when AI is the wrong answer for a problem — advice that is worth more than a workstream you did not need.</div>
+<ul><li>AI roadmap</li><li>Build vs buy</li><li>Feasibility</li><li>Vendor evaluation</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>05</div>
 <div>
-<h3>Data Engineering und Analytics</h3>
-<div class="body">Pipelines, Data Warehouses und Qualitätskontrollen, die Daten modellreif machen. Dies ist die unspektakulärste Zeile auf dieser Seite und zugleich diejenige, die darüber entscheidet, ob alles darüber funktioniert. Die meisten gescheiterten KI-Programme sind in Wahrheit gescheiterte Datenprogramme.</div>
-<ul><li>ETL-Pipelines</li><li>Data Warehousing</li><li>Datenqualität</li><li>BI &amp; reporting</li></ul>
+<h3>Data Engineering &amp; Analytics</h3>
+<div class="body">Pipelines, warehouses, and quality controls that make data model-ready. This is the least glamorous line on this page and the one that determines whether everything above it works. Most failed AI programmes are actually failed data programmes.</div>
+<ul><li>ETL pipelines</li><li>Data warehousing</li><li>Data quality</li><li>BI &amp; reporting</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>06</div>
 <div>
-<h3>Individuelle KI-Agenten und Copilots</h3>
-<div class="body">Zweckgebaute Agenten, eingebunden in reale Arbeitsabläufe, mit definiertem Umfang, Leitplanken und Eskalationswegen zu Menschen. Kein Chatbot, der auf eine Startseite geschraubt wird — Systeme, die eine Aktion ausführen, protokollieren, was sie getan haben, und sauber übergeben, wenn sie an ihre Grenzen stoßen.</div>
-<ul><li>Agenten-Design</li><li>RAG systems</li><li>Werkzeugnutzung</li><li>Human-in-the-Loop</li></ul>
+<h3>Custom AI Agents &amp; Copilots</h3>
+<div class="body">Purpose-built agents wired into real workflows, with defined scope, guardrails, and escalation paths to humans. Not a chatbot bolted onto a homepage — systems that take an action, log what they did, and hand off cleanly when they hit their limits.</div>
+<ul><li>Agent design</li><li>RAG systems</li><li>Tool use</li><li>Human-in-the-loop</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>07</div>
 <div>
-<h3>KI-Governance, Sicherheit und Compliance</h3>
-<div class="body">Modellrisiko, Datenschutz, Zugriffskontrolle und Audit-Trails von Tag eins an eingebaut. Für europäische Kunden bedeutet das, dass DSGVO- und EU-AI-Act-Konformität Teil der Engineering-Arbeit ist und nicht ein Dokument, das hinterher zur Beruhigung einer Aufsichtsbehörde entsteht.</div>
-<ul><li>EU AI Act</li><li>GDPR</li><li>Modellrisiko</li><li>Audit-Trails</li></ul>
+<h3>AI Governance, Security &amp; Compliance</h3>
+<div class="body">Model risk, data privacy, access control, and audit trails built in from day one. For European clients that means GDPR and EU AI Act alignment treated as part of the engineering work, not as a document produced afterwards to satisfy a regulator.</div>
+<ul><li>EU AI Act</li><li>GDPR</li><li>Model risk</li><li>Audit trails</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>08</div>
 <div>
-<h3>Betreuter KI-Betrieb</h3>
-<div class="body">Monitoring, Retraining, Incident Response und laufende Betreuung nach dem Go-live. Modelle driften, vorgelagerte Systeme ändern sich, Volumina wachsen. Jemand muss das verantworten — und wenn Ihr Team dafür noch nicht bereit ist, können wir es übernehmen, auf einem definierten Weg hin zur Übernahme durch Ihr Team.</div>
-<ul><li>Monitoring und Alerting</li><li>Modell-Nachtraining</li><li>Störungsbehebung</li><li>Vereinbarte Reaktionszeiten</li></ul>
+<h3>Managed AI Operations</h3>
+<div class="body">Monitoring, retraining, incident response, and ongoing support after go-live. Models drift, upstream systems change, and volumes grow. Someone has to own that, and if your team is not ready to yet, we can — on a defined runway towards them taking it over.</div>
+<ul><li>Monitoring and alerting</li><li>Model retraining</li><li>Incident response</li><li>Agreed response times</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>09</div>
 <div>
-<h3>Change Management und Befähigung</h3>
-<div class="body">Schulung, Dokumentation und Einführungsbegleitung, damit die Menschen, die mit dem System leben müssen, es auch tatsächlich nutzen. Die häufigste Ursache für einen gescheiterten KI-Rollout ist nicht technisch. Es ist ein Team, das nie mitgenommen wurde und das neue System stillschweigend umgeht.</div>
-<ul><li>Team-Schulung</li><li>Dokumentation</li><li>Nutzungsmessung</li><li>Interne Fürsprecher</li></ul>
+<h3>Change Management &amp; Enablement</h3>
+<div class="body">Training, documentation, and adoption support so the people who have to live with the system actually use it. The most common cause of a failed AI rollout is not technical. It is a team that was never brought along and quietly routed around the new thing.</div>
+<ul><li>Team training</li><li>Documentation</li><li>Adoption tracking</li><li>Internal champions</li></ul>
 </div>
 </div></div>
 </section>
 <div class="wrap"><div class="divider"><i></i></div></div>
 <section class="section-pad" style="background:var(--ink-2);border-top:1px solid var(--line);text-align:center">
 <div class="wrap rv">
-<h2 style="max-width:20ch;margin:0 auto">Unsicher, welches davon Sie wirklich brauchen?</h2>
+<h2 style="max-width:20ch;margin:0 auto">Not sure which of these you actually need?</h2>
 <p style="margin-top:18px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:52ch;margin-inline:auto">
-      Das ist ein vernünftiger Anfang. Die meisten Projekte beginnen mit einem Gespräch über das
-      Problem, nicht mit einer Einkaufsliste von Leistungen.</p>
+      That is a reasonable place to start. Most engagements begin with a conversation about the
+      problem, not a shopping list of capabilities.</p>
 <div style="display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap">
-<a class="btn btn-primary" href="/de/index.html#climax">Gespräch beginnen</a>
-<a class="btn btn-ghost" href="/de/index.html#journey">Unser Vorgehen →</a>
+<a class="btn btn-primary" href="index.html#climax">Start a conversation</a>
+<a class="btn btn-ghost" href="index.html#journey">How we work →</a>
 </div>
 </div>
 </section>
@@ -482,7 +485,8 @@ footer nav{display:block}
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b>quenora</b>
 </div>
-<p style="color:var(--grey-d);font-size:13px">Unternehmens-KI, für den Betrieb konstruiert. Eingebaut in das, was Sie bereits betreiben, und dann übergeben.</p>
+<p style="color:var(--grey-d);font-size:13px">Enterprise AI, engineered to operate.
+        Built into what you already run, then handed over.</p>
 </div>
 <!-- The footer mirrors this page's header, target for target. It used to run a
      map of its own - Core capabilities, Firm, four links that all went to the
@@ -491,26 +495,26 @@ footer nav{display:block}
 <div class="foot-col">
 <h5>Site</h5>
 <nav aria-label="Footer">
-<a href="/de/index.html">Start</a>
-<a href="/de/index.html#journey">Vorgehen</a>
-<a href="/de/services.html">Leistungen</a>
-<a href="/de/engineering.html">KI-Engineering</a>
-<a href="/de/work.html">Projekte</a>
-<a href="/de/index.html#who">Über uns</a>
-<a href="/de/index.html#climax">Kontakt</a>
+<a href="index.html">Home</a>
+<a href="index.html#journey">Approach</a>
+<a href="capabilities.html">Capabilities</a>
+<a href="engineering.html">Engineering</a>
+<a href="work.html">Work</a>
+<a href="index.html#who">About</a>
+<a href="index.html#climax">Contact</a>
 </nav>
 </div>
 <div class="foot-col">
-<h5>Kontakt</h5>
-<nav aria-label="Kontakt">
+<h5>Contact</h5>
+<nav aria-label="Contact">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
-<a href="/impressum.html">Impressum</a>
-<a href="/privacy.html">Datenschutzerklärung</a>
+<a href="impressum.html">Legal notice · Impressum</a>
+<a href="privacy.html">Privacy notice</a>
 </nav>
 </div>
 <div class="foot-col">
-<h5>Folgen</h5>
-<nav aria-label="Social Media">
+<h5>Follow</h5>
+<nav aria-label="Social">
 <a href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank">LinkedIn</a>
 <a href="https://x.com/quenora_ai" rel="noopener me" target="_blank">X</a>
 <a href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank">Instagram</a>
@@ -519,7 +523,7 @@ footer nav{display:block}
 </div>
 <div class="foot-line">
 <span>© 2026 Quenora Consulting</span>
-<span>Heilbronn, Deutschland · <a href="/impressum.html">Impressum</a> · <a href="/privacy.html">Datenschutz</a></span>
+<span>Heilbronn, Germany · <a href="impressum.html">Legal notice</a> · <a href="privacy.html">Privacy</a></span>
 </div>
 </div>
 </footer>
@@ -700,6 +704,8 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
 
 // (page-header WebGL block removed — no Three.js dependency remains)
 </script>
+
+
 <script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');

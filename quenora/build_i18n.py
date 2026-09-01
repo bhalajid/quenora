@@ -24,7 +24,7 @@ import sys
 from bs4 import BeautifulSoup, Comment, NavigableString
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-PAGES = ["index.html", "engineering.html", "services.html", "products.html",
+PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
          "approach.html", "work.html", "contact.html"]
 # Pages that exist in English only. Links to these must climb out of the
 # language directory instead of resolving to a /de/... file that is not there.

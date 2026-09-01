@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
-<html lang="it">
+<html lang="fr">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Quenora Consulting — Capabilities</title>
-<meta content="Le nove competenze di Quenora, dall'ingegneria di piattaforma alla governance dell'IA." name="description"/>
+<title>Quenora Consulting — Compétences</title>
+<meta content="Les neuf expertises de Quenora, de l'ingénierie de plateforme à la gouvernance de l'IA." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,500;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
@@ -13,12 +13,12 @@
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='12' cy='161.71' r='3' fill='%23C97A3C'/%3E%3Ccircle cx='21.64' cy='161.34' r='3.95' fill='%23C97A3C'/%3E%3Ccircle cx='33.39' cy='159.88' r='5.2' fill='%23C97A3C'/%3E%3Ccircle cx='47.73' cy='156.52' r='6.84' fill='%23C97A3C'/%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
 <meta content="Quenora Consulting" property="og:site_name"/>
-<meta content="Quenora Consulting — Capabilities" property="og:title"/>
-<meta content="Le nove competenze di Quenora, dall'ingegneria di piattaforma alla governance dell'IA." property="og:description"/>
-<meta content="https://quenora.ai/it/services" property="og:url"/>
+<meta content="Quenora Consulting — Compétences" property="og:title"/>
+<meta content="Les neuf expertises de Quenora, de l'ingénierie de plateforme à la gouvernance de l'IA." property="og:description"/>
+<meta content="https://quenora.ai/fr/capabilities" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Quenora Consulting — Capabilities" name="twitter:title"/>
-<meta content="Le nove competenze di Quenora, dall'ingegneria di piattaforma alla governance dell'IA." name="twitter:description"/>
+<meta content="Quenora Consulting — Compétences" name="twitter:title"/>
+<meta content="Les neuf expertises de Quenora, de l'ingénierie de plateforme à la gouvernance de l'IA." name="twitter:description"/>
 <style>
 :root{
   /* Grounds are deliberately NEUTRAL (no blue bias). An earlier palette had
@@ -40,8 +40,11 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+/* 17px/1.62, the home page's base. These pages inherited the browser
+   default 16px at 1.6, so body copy was a step smaller and a shade
+   tighter than on the page that links to them. */
 body{background:var(--ink);color:var(--white);font-family:var(--font);
-  font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  font-weight:400;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
 a{color:inherit;text-decoration:none}
 section{position:relative}
@@ -109,7 +112,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
 .burger.open i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .burger.open i:nth-child(2){opacity:0}
 .burger.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-@media(max-width:1000px){
+@media(max-width:880px){
   .burger{display:flex}
   nav{flex-wrap:wrap}
   .navlinks{order:3;flex-basis:100%;flex-direction:column;gap:0;
@@ -172,8 +175,8 @@ h1 em,h2 em,h3 em{font-family:var(--serif);font-style:italic;
      a different colour depending which page you were on. */
   color:var(--copper-lt);margin-bottom:16px;display:flex;align-items:center;gap:11px}
 .kicker::before{content:"";width:20px;height:1px;background:var(--copper-lt);flex:none}
-h1{font-size:clamp(40px,5.4vw,74px);font-weight:600;letter-spacing:-.035em;line-height:1.03}
-h2{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;line-height:1.12}
+h1{font-size:clamp(40px,5.4vw,74px);font-weight:700;letter-spacing:-.035em;line-height:1.03}
+h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-height:1.12}
 .section-pad{padding:120px 0;position:relative;z-index:2}
 .section-head{max-width:680px;margin-bottom:60px}
 .section-head p{margin-top:16px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:56ch}
@@ -196,7 +199,7 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;line-
 .card:hover::after{opacity:1}
 .card .num{font-family:var(--mono);font-size:11.5px;color:var(--copper);margin-bottom:22px;
   letter-spacing:.1em}
-.card h3{font-size:19px;font-weight:600;letter-spacing:-.015em;margin-bottom:11px}
+.card h3{font-size:19px;font-weight:700;letter-spacing:-.015em;margin-bottom:11px}
 .card h4{font-size:16.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:9px}
 .card p{font-size:14px;color:var(--grey);line-height:1.68;margin-top:auto;padding-top:6px;font-weight:300}
 @media(max-width:900px){.grid-3,.grid-2{grid-template-columns:1fr}}
@@ -264,7 +267,7 @@ footer nav{display:block}
 .svc-detail .idx i{width:9px;height:9px;border-radius:50%;
   background:radial-gradient(circle at 34% 30%,var(--copper-lt),var(--copper));
   box-shadow:0 0 12px var(--copper-glow);flex:none}
-.svc-detail h3{font-size:23px;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+.svc-detail h3{font-size:23px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
 .svc-detail .body{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:68ch}
 .svc-detail ul{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;list-style:none}
 .svc-detail li{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
@@ -277,7 +280,7 @@ footer nav{display:block}
 @media(max-width:760px){.step{grid-template-columns:1fr;gap:12px}}
 .step .ph{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--copper)}
-.step h3{font-size:21px;font-weight:600;letter-spacing:-.018em;margin-bottom:11px}
+.step h3{font-size:21px;font-weight:700;letter-spacing:-.018em;margin-bottom:11px}
 .step p{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:66ch}
 .step .wk{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:11px;
   color:var(--grey-d);padding:6px 12px;border:1px solid var(--line);border-radius:6px}
@@ -288,7 +291,7 @@ footer nav{display:block}
   background:linear-gradient(90deg,transparent,var(--copper),transparent);opacity:.5}
 .case .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--copper);margin-bottom:18px}
-.case h3{font-size:21px;font-weight:600;letter-spacing:-.018em;margin-bottom:14px;line-height:1.28}
+.case h3{font-size:21px;font-weight:700;letter-spacing:-.018em;margin-bottom:14px;line-height:1.28}
 .case p{color:var(--grey);font-size:14.5px;font-weight:300;line-height:1.75}
 .case .metrics{display:flex;gap:34px;margin-top:26px;padding-top:24px;
   border-top:1px solid var(--line-2);flex-wrap:wrap}
@@ -314,7 +317,7 @@ footer nav{display:block}
 .field select option{background:var(--surface);color:var(--white)}
 .contact-side{background:linear-gradient(150deg,var(--surface),var(--ink-2));
   border:1px solid var(--line);border-radius:var(--radius);padding:36px}
-.contact-side h4{font-size:16px;font-weight:600;margin-bottom:20px}
+.contact-side h4{font-size:17px;font-weight:600;margin-bottom:20px}
 .contact-side .row{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid var(--line-2);
   align-items:flex-start}
 .contact-side .row:last-child{border:none}
@@ -345,7 +348,7 @@ footer nav{display:block}
 @media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
   .langsel>button span{display:none}}
 </style>
-<meta content="it_IT" property="og:locale"/><link href="https://quenora.ai/it/services" rel="canonical"/><link href="https://quenora.ai/services" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/services" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/services" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/services" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/></head>
+<meta content="fr_FR" property="og:locale"/><link href="https://quenora.ai/fr/capabilities" rel="canonical"/><link href="https://quenora.ai/capabilities" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/capabilities" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/capabilities" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/capabilities" hreflang="x-default" rel="alternate"/></head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0">
 <symbol id="mark9" viewbox="0 0 187.71 174.29">
@@ -360,17 +363,17 @@ footer nav{display:block}
 <circle cx="151.71" cy="36.0" fill="#C97A3C" r="27.0"></circle>
 </symbol>
 </svg>
-<a class="skip" href="#main">Vai al contenuto</a>
+<a class="skip" href="#main">Aller au contenu</a>
 <div class="progress" id="progressBar"></div>
 <header id="siteHeader">
 <div class="wrap">
 <nav>
-<a class="brand" href="/it/index.html">
+<a class="brand" href="/fr/index.html">
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b><em>q</em>uenora</b>
 </a>
-<div class="navlinks" id="navLinks"><a href="/it/index.html#journey">Metodo</a><a class="on" href="/it/services.html">Competenze</a><a href="/it/engineering.html">Engineering</a><a href="/it/work.html">Progetti</a><a href="/it/index.html#who">About</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Scegli la lingua" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>IT</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/services.html" hreflang="en" lang="en">English</a></li><li><a href="/de/services.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/services.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
-<a class="btn btn-primary navcta" href="/it/index.html#climax"><span class="cta-long">Iniziamo a parlarne</span><span class="cta-short">Contatti</span></a>
+<div class="navlinks" id="navLinks"><a href="/fr/index.html#journey">Méthode</a><a class="on" href="/fr/capabilities.html">Expertises</a><a href="/fr/engineering.html">Ingénierie</a><a href="/fr/work.html">Missions</a><a href="/fr/index.html#who">À propos</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choisir la langue" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>FR</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/capabilities.html" hreflang="en" lang="en">English</a></li><li><a href="/de/capabilities.html" hreflang="de" lang="de">Deutsch</a></li><li><a aria-current="true" href="/fr/capabilities.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
+<a class="btn btn-primary navcta" href="/fr/index.html#climax"><span class="cta-long">Engager la conversation</span><span class="cta-short">Contact</span></a>
 <button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <i></i><i></i><i></i>
 </button>
@@ -380,9 +383,9 @@ footer nav{display:block}
 <main id="main"><section class="phero">
 <canvas aria-hidden="true" id="pCanvas"></canvas>
 <div class="wrap">
-<div class="kicker">Competenze</div>
-<h1 class="scramble">Nove competenze. Un solo team dietro a tutte.</h1>
-<p>Three of these are core — the work runs through platform and deployment engineering, automation, and AI integration. The other six join when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.</p>
+<div class="kicker">Expertises</div>
+<h1 class="scramble">Neuf expertises. Une seule équipe derrière chacune.</h1>
+<p>Trois d’entre elles sont centrales — le travail passe par l’ingénierie de plateforme et de déploiement, l’automatisation et l’intégration d’IA. Les six autres s’ajoutent quand le travail l’exige. Les neuf sont assurées par la même équipe ; rien n’est sous-traité à quelqu’un que vous n’avez pas rencontré.</p>
 </div>
 </section>
 <section class="section-pad">
@@ -390,86 +393,86 @@ footer nav{display:block}
 <div class="svc-detail rv">
 <div class="idx"><i></i>01</div>
 <div>
-<h3>Platform &amp; Deployment Engineering</h3>
-<div class="body">The foundation every AI initiative silently depends on, and the path into production at the end of it. We design the data architecture, provision the infrastructure, and build the internal platforms that let your teams ship AI repeatedly rather than once — then deploy on them, with monitoring and handover documentation that survives contact with reality. Without this layer every model becomes a bespoke project that dies when its champion leaves, and an engagement is finished when your team can run, extend and debug the system without calling us.</div>
-<ul><li>Architettura dei dati</li><li>Infrastruttura cloud</li><li>Piattaforme interne</li><li>Fondamenta MLOps</li><li>Messa in produzione</li><li>Sviluppo su misura</li><li>Monitoraggio</li><li>Trasferimento di competenze</li></ul>
+<h3>Ingénierie de plateforme &amp; de déploiement</h3>
+<div class="body">Le socle dont dépend silencieusement toute initiative d’IA, et le chemin vers la production qui la termine. Nous concevons l’architecture de données, provisionnons l’infrastructure et construisons les plateformes internes qui permettent à vos équipes de livrer de l’IA de façon répétée plutôt qu’une seule fois — puis nous déployons dessus, avec une supervision et une documentation de transfert qui résistent au contact du réel. Sans cette couche, chaque modèle devient un projet sur mesure qui meurt au départ de celui qui le portait ; et une mission est terminée lorsque votre équipe peut exploiter, étendre et déboguer le système sans nous appeler.</div>
+<ul><li>Architecture de données</li><li>Infrastructure cloud</li><li>Plateformes internes</li><li>Fondations MLOps</li><li>Mise en production</li><li>Développement sur mesure</li><li>Supervision</li><li>Transfert de connaissances</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>02</div>
 <div>
-<h3>Process &amp; Workflow Automation</h3>
-<div class="body">The work itself, running without hands on it. We automate the processes your business repeats — the approvals, the handoffs, the reconciliations, the reporting somebody currently does on a Tuesday afternoon. This is where an AI capability stops being a capability and becomes throughput. It is designed around the exceptions rather than the happy path, because the exceptions are what send automated work back to a human, and deciding which ones should is most of the job.</div>
-<ul><li>Automazione dei processi</li><li>Workflow orchestration</li><li>Human-in-the-loop design</li><li>Exception handling</li></ul>
+<h3>Automatisation des processus &amp; des flux</h3>
+<div class="body">Le travail lui-même, qui tourne sans intervention. Nous automatisons les processus que votre entreprise répète — les validations, les transmissions, les rapprochements, le reporting que quelqu’un produit actuellement un mardi après-midi. C’est là qu’une capacité d’IA cesse d’être une capacité pour devenir du débit. Elle est conçue autour des exceptions plutôt que du cas idéal, car ce sont les exceptions qui renvoient le travail automatisé vers un humain — et décider lesquelles doivent l’être constitue l’essentiel du travail.</div>
+<ul><li>Automatisation des processus</li><li>Orchestration des flux de travail</li><li>Conception avec intervention humaine</li><li>Traitement des exceptions</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>03</div>
 <div>
-<h3>Integrazione dell'IA</h3>
-<div class="body">Modelli collegati ai sistemi su cui la vostra azienda già funziona: CRM, ERP, service desk, strumenti di operations. La parte difficile non è quasi mai il modello, ma i collegamenti, i permessi e i casi limite che nessuno ha documentato. Ci innestiamo su ciò che è già in movimento anziché proporvi di sostituirlo.</div>
-<ul><li>Integrazione dei sistemi</li><li>Orchestrazione delle API</li><li>Scelta del modello</li><li>Neutrale rispetto ai fornitori</li></ul>
+<h3>Intégration de l'IA</h3>
+<div class="body">Des modèles connectés aux systèmes sur lesquels votre entreprise fonctionne déjà — CRM, ERP, centres de services, outils d'exploitation. Le plus difficile n'est presque jamais le modèle : c'est la tuyauterie, les autorisations et les cas limites que personne n'a documentés. Nous nous greffons sur ce qui fonctionne déjà plutôt que de vous proposer de le remplacer.</div>
+<ul><li>Intégration des systèmes</li><li>Orchestration d'API</li><li>Choix du modèle</li><li>Neutre vis-à-vis des fournisseurs</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>04</div>
 <div>
-<h3>Strategia e consulenza sull'IA</h3>
-<div class="body">Roadmap, decisioni tra sviluppare e acquistare e valutazioni di fattibilità oneste, formulate da chi ha rilasciato e non soltanto presentato. Questo comprende dirvi quando l'IA è la risposta sbagliata a un problema: un consiglio che vale più di un filone di lavoro di cui non avevate bisogno.</div>
-<ul><li>Roadmap dell'IA</li><li>Sviluppare o acquistare</li><li>Fattibilità</li><li>Valutazione dei fornitori</li></ul>
+<h3>Stratégie et conseil en IA</h3>
+<div class="body">Feuilles de route, arbitrages entre développement et achat, et évaluations de faisabilité honnêtes, formulées par des personnes qui ont livré et pas seulement présenté. Cela inclut de vous dire quand l'IA est la mauvaise réponse à un problème — un conseil qui vaut plus qu'un chantier dont vous n'aviez pas besoin.</div>
+<ul><li>Feuille de route IA</li><li>Développer ou acheter</li><li>Faisabilité</li><li>Évaluation des fournisseurs</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>05</div>
 <div>
-<h3>Data engineering e analytics</h3>
-<div class="body">Pipeline, data warehouse e controlli di qualità che rendono i dati pronti per il modello. È la voce meno appariscente di questa pagina e quella che determina se tutto ciò che la precede funziona. La maggior parte dei programmi di IA falliti sono in realtà programmi sui dati falliti.</div>
-<ul><li>Pipeline ETL</li><li>Data warehousing</li><li>Qualità dei dati</li><li>BI &amp; reporting</li></ul>
+<h3>Ingénierie des données et analytique</h3>
+<div class="body">Pipelines, entrepôts et contrôles qualité qui rendent les données exploitables par un modèle. C'est la ligne la moins spectaculaire de cette page, et celle qui détermine si tout ce qui précède fonctionne. La plupart des programmes d'IA qui échouent sont en réalité des programmes de données qui ont échoué.</div>
+<ul><li>Pipelines ETL</li><li>Entreposage de données</li><li>Qualité des données</li><li>BI &amp; reporting</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>06</div>
 <div>
-<h3>Agenti e copiloti di IA su misura</h3>
-<div class="body">Agenti costruiti su misura e collegati a flussi di lavoro reali, con perimetro definito, protezioni e percorsi di escalation verso le persone. Non un chatbot avvitato su una home page, ma sistemi che compiono un'azione, registrano ciò che hanno fatto e passano la mano in modo pulito quando raggiungono il loro limite.</div>
-<ul><li>Progettazione degli agenti</li><li>RAG systems</li><li>Uso degli strumenti</li><li>Con supervisione umana</li></ul>
+<h3>Agents et copilotes d'IA sur mesure</h3>
+<div class="body">Des agents conçus sur mesure et raccordés à de vrais flux de travail, avec un périmètre défini, des garde-fous et des voies d'escalade vers des humains. Pas un agent conversationnel greffé sur une page d'accueil — des systèmes qui agissent, consignent ce qu'ils ont fait et passent proprement la main lorsqu'ils atteignent leurs limites.</div>
+<ul><li>Conception d'agents</li><li>RAG systems</li><li>Usage des outils</li><li>Humain dans la boucle</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>07</div>
 <div>
-<h3>Governance, sicurezza e conformità dell'IA</h3>
-<div class="body">Rischio di modello, protezione dei dati, controllo degli accessi e tracciabilità integrati fin dal primo giorno. Per i clienti europei significa che la conformità al GDPR e al regolamento europeo sull'IA fa parte del lavoro di ingegneria e non di un documento prodotto in seguito per soddisfare un'autorità.</div>
-<ul><li>EU AI Act</li><li>GDPR</li><li>Rischio di modello</li><li>Tracciabilità</li></ul>
+<h3>Gouvernance, sécurité et conformité de l'IA</h3>
+<div class="body">Risque de modèle, protection des données, contrôle d'accès et pistes d'audit intégrés dès le premier jour. Pour les clients européens, cela signifie que la conformité au RGPD et au règlement européen sur l'IA fait partie du travail d'ingénierie, et non d'un document produit après coup pour satisfaire un régulateur.</div>
+<ul><li>EU AI Act</li><li>GDPR</li><li>Risque de modèle</li><li>Pistes d'audit</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>08</div>
 <div>
-<h3>Gestione operativa dell'IA in outsourcing</h3>
-<div class="body">Monitoring, retraining, incident response, and ongoing support after go-live. Models drift, upstream systems change, and volumes grow. Someone has to own that, and if your team is not ready to yet, we can — on a defined runway towards them taking it over.</div>
-<ul><li>Monitoring and alerting</li><li>Riaddestramento dei modelli</li><li>Gestione degli incidenti</li><li>Agreed response times</li></ul>
+<h3>Exploitation infogérée de l'IA</h3>
+<div class="body">Supervision, réentraînement, gestion des incidents et accompagnement continu après la mise en service. Les modèles dérivent, les systèmes en amont évoluent, les volumes augmentent. Quelqu’un doit en assumer la responsabilité — et si votre équipe n’y est pas encore prête, nous pouvons le faire, selon une trajectoire définie vers sa reprise en main.</div>
+<ul><li>Supervision et alertes</li><li>Réentraînement des modèles</li><li>Gestion des incidents</li><li>Délais de réponse convenus</li></ul>
 </div>
 </div>
 <div class="svc-detail rv">
 <div class="idx"><i></i>09</div>
 <div>
-<h3>Gestione del cambiamento e abilitazione</h3>
-<div class="body">Formazione, documentazione e accompagnamento all'adozione affinché le persone che dovranno convivere con il sistema lo usino davvero. La causa più frequente di un rilascio di IA fallito non è tecnica: è un team che non è mai stato coinvolto e che aggira silenziosamente la novità.</div>
-<ul><li>Formazione del team</li><li>Documentazione</li><li>Monitoraggio dell'adozione</li><li>Referenti interni</li></ul>
+<h3>Conduite du changement et montée en compétences</h3>
+<div class="body">Formation, documentation et accompagnement à l'adoption pour que les personnes qui devront vivre avec le système l'utilisent réellement. La cause la plus fréquente d'un déploiement d'IA raté n'est pas technique : c'est une équipe qu'on n'a jamais embarquée et qui contourne discrètement la nouveauté.</div>
+<ul><li>Formation des équipes</li><li>Documentation</li><li>Suivi de l'adoption</li><li>Relais internes</li></ul>
 </div>
 </div></div>
 </section>
 <div class="wrap"><div class="divider"><i></i></div></div>
 <section class="section-pad" style="background:var(--ink-2);border-top:1px solid var(--line);text-align:center">
 <div class="wrap rv">
-<h2 style="max-width:20ch;margin:0 auto">Non sa quale le serva davvero?</h2>
+<h2 style="max-width:20ch;margin:0 auto">Vous ne savez pas lequel vous est réellement utile ?</h2>
 <p style="margin-top:18px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:52ch;margin-inline:auto">
-      È un punto di partenza ragionevole. La maggior parte dei progetti inizia con una conversazione sul
-      problema, non con una lista della spesa di competenze.</p>
+      C'est un point de départ raisonnable. La plupart des missions commencent par un échange sur le
+      problème, et non par une liste de courses d'expertises.</p>
 <div style="display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap">
-<a class="btn btn-primary" href="/it/index.html#climax">Iniziamo a parlarne</a>
-<a class="btn btn-ghost" href="/it/index.html#journey">Come lavoriamo →</a>
+<a class="btn btn-primary" href="/fr/index.html#climax">Engager la conversation</a>
+<a class="btn btn-ghost" href="/fr/index.html#journey">Notre méthode →</a>
 </div>
 </div>
 </section>
@@ -482,8 +485,7 @@ footer nav{display:block}
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b>quenora</b>
 </div>
-<p style="color:var(--grey-d);font-size:13px">Enterprise AI, engineered to operate.
-        Built into what you already run, then handed over.</p>
+<p style="color:var(--grey-d);font-size:13px">L’IA d’entreprise, conçue pour fonctionner. Intégrée à ce que vous exploitez déjà, puis transmise.</p>
 </div>
 <!-- The footer mirrors this page's header, target for target. It used to run a
      map of its own - Core capabilities, Firm, four links that all went to the
@@ -492,26 +494,26 @@ footer nav{display:block}
 <div class="foot-col">
 <h5>Site</h5>
 <nav aria-label="Footer">
-<a href="/it/index.html">Home</a>
-<a href="/it/index.html#journey">Metodo</a>
-<a href="/it/services.html">Competenze</a>
-<a href="/it/engineering.html">Engineering</a>
-<a href="/it/work.html">Progetti</a>
-<a href="/it/index.html#who">About</a>
-<a href="/it/index.html#climax">Contatti</a>
+<a href="/fr/index.html">Accueil</a>
+<a href="/fr/index.html#journey">Méthode</a>
+<a href="/fr/capabilities.html">Expertises</a>
+<a href="/fr/engineering.html">Ingénierie</a>
+<a href="/fr/work.html">Missions</a>
+<a href="/fr/index.html#who">À propos</a>
+<a href="/fr/index.html#climax">Contact</a>
 </nav>
 </div>
 <div class="foot-col">
-<h5>Contatti</h5>
-<nav aria-label="Contatti">
+<h5>Contact</h5>
+<nav aria-label="Contact">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
-<a href="/impressum.html">Legal notice · Impressum</a>
-<a href="/privacy.html">Privacy notice</a>
+<a href="/impressum.html">Mentions légales</a>
+<a href="/privacy.html">Politique de confidentialité</a>
 </nav>
 </div>
 <div class="foot-col">
-<h5>Follow</h5>
-<nav aria-label="Social">
+<h5>Suivre</h5>
+<nav aria-label="Réseaux sociaux">
 <a href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank">LinkedIn</a>
 <a href="https://x.com/quenora_ai" rel="noopener me" target="_blank">X</a>
 <a href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank">Instagram</a>
@@ -520,7 +522,7 @@ footer nav{display:block}
 </div>
 <div class="foot-line">
 <span>© 2026 Quenora Consulting</span>
-<span>Heilbronn, Germany · <a href="/impressum.html">Legal notice</a> · <a href="/privacy.html">Privacy</a></span>
+<span>Heilbronn, Allemagne · <a href="/impressum.html">Mentions légales</a> · <a href="/privacy.html">Confidentialité</a></span>
 </div>
 </div>
 </footer>

@@ -16,10 +16,10 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/services</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/services"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/services"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/services"/>
+    <loc>https://quenora.ai/capabilities</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/capabilities"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/capabilities"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/capabilities"/>
     <priority>0.8</priority>
   </url>
   <url>
@@ -58,10 +58,10 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/de/services</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/services"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/services"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/services"/>
+    <loc>https://quenora.ai/de/capabilities</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/capabilities"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/capabilities"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/capabilities"/>
     <priority>0.8</priority>
   </url>
   <url>
@@ -100,10 +100,10 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/fr/services</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/services"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/services"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/services"/>
+    <loc>https://quenora.ai/fr/capabilities</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/capabilities"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/capabilities"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/capabilities"/>
     <priority>0.8</priority>
   </url>
   <url>

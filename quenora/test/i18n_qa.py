@@ -28,7 +28,7 @@ from collections import defaultdict
 from bs4 import BeautifulSoup, Comment
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-PAGES = ["index.html", "services.html", "products.html",
+PAGES = ["index.html", "capabilities.html", "products.html",
          "approach.html", "work.html", "contact.html"]
 LANGS = ["de", "fr", "es", "it"]
 # es and it are built but deliberately unlisted: noindex, absent from the

@@ -69,5 +69,27 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/services",
+      "destination": "/capabilities",
+      "permanent": true
+    },
+    {
+      "source": "/services.html",
+      "destination": "/capabilities",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(de|fr|es|it)/services",
+      "destination": "/:lang/capabilities",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(de|fr|es|it)/services.html",
+      "destination": "/:lang/capabilities",
+      "permanent": true
+    }
   ]
 }

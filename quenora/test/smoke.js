@@ -7,7 +7,7 @@ const fs=require('fs'), path=require('path');
 const {JSDOM,VirtualConsole}=require('jsdom');
 
 const DIR=process.argv[2]||'..';
-const PAGES=['index.html','services.html','products.html','approach.html','work.html','contact.html'];
+const PAGES=['index.html','capabilities.html','products.html','approach.html','work.html','contact.html'];
 let pass=0, fail=0;
 const failures=[];
 

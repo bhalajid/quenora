@@ -8,7 +8,7 @@
 <meta content="Un método de seis fases diseñado para terminar cuando su equipo opere el sistema." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,500;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <meta content="#0A0A0B" name="theme-color"/>
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='12' cy='161.71' r='3' fill='%23C97A3C'/%3E%3Ccircle cx='21.64' cy='161.34' r='3.95' fill='%23C97A3C'/%3E%3Ccircle cx='33.39' cy='159.88' r='5.2' fill='%23C97A3C'/%3E%3Ccircle cx='47.73' cy='156.52' r='6.84' fill='%23C97A3C'/%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
@@ -39,6 +39,12 @@
   --radius:14px; --maxw:1240px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+/* Interactive controls opt out of double-tap-to-zoom, so a second tap on a
+   button is a second tap rather than a zoom gesture. */
+a,button,input,select,textarea,summary,[role="button"]{touch-action:manipulation}
+/* Below 16px iOS zooms the viewport when a field takes focus, which throws the
+   page off centre mid-form. */
+input,select,textarea{font-size:16px}
 html{scroll-behavior:smooth}
 /* 17px/1.62, the home page's base. These pages inherited the browser
    default 16px at 1.6, so body copy was a step smaller and a shade

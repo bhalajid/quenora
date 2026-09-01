@@ -20,7 +20,7 @@
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="Quenora — most enterprise AI never reaches the work." property="og:image:alt"/>
-<meta content="summary_large_image" name="twitter:card"/>
+<meta content="summary_large_image" name="twitter:card"/><meta content="Unternehmens-KI &amp; Automatisierung" name="twitter:title"/><meta content="Wir bauen KI in die Systeme ein, die Sie bereits betreiben, und übergeben sie dann." name="twitter:description"/>
 <meta content="https://quenora.ai/assets/og-quenora.jpg" name="twitter:image"/>
 <meta content="Quenora — most enterprise AI never reaches the work." name="twitter:image:alt"/>
 <script type="application/ld+json">
@@ -45,7 +45,7 @@
 </script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,500;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <style>
 /* ═══════════════════════════════════════════════════════════════════
    QUENORA — dark editorial scroll narrative
@@ -76,6 +76,15 @@
   --e:cubic-bezier(.16,1,.3,1);
 }
 *,*::before,*::after{box-sizing:border-box}
+/* Interactive controls opt out of double-tap-to-zoom, so a second tap on a
+   button is a second tap rather than a zoom gesture. */
+a,button,input,select,textarea,summary,[role="button"]{touch-action:manipulation}
+/* Below 16px iOS zooms the viewport when a field takes focus, which throws the
+   page off centre mid-form. Three fields were at 13px. */
+input,select,textarea{font-size:16px}
+/* WCAG 2.2 Target Size (Minimum) is 24x24. This was 16x16, which is hard to
+   hit on a phone and is the one control a visitor must tap to send the form. */
+#cfConsent{width:24px;height:24px;flex:none;accent-color:var(--copper)}
 /* German and French compounds are long enough to set a grid track's minimum
    width on their own: a 1fr track carries an implicit min-width:auto, so
    "Prozessautomatisierung" made the German homepage 393px wide on a 375px
@@ -582,7 +591,9 @@ body.clg .cur::after{opacity:1}
 .ai-form{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--line)}
 .ai-form input{flex:1;background:rgba(242,239,232,.05);border:1px solid var(--line);
   border-radius:9px;padding:9px 12px;color:var(--t1);font-family:inherit;
-  font-size:.85rem;min-width:0}
+  /* 16px, not .85rem: below 16 iOS zooms the viewport when the field takes
+     focus, and this one sits inside a fixed panel, so the zoom strands it. */
+  font-size:16px;min-width:0}
 .ai-form input::placeholder{color:var(--t3)}
 .ai-form input:focus{border-color:var(--copper)}
 .ai-form button{flex:none;background:var(--copper);color:var(--void);border:none;
@@ -699,7 +710,7 @@ body.clg .cur::after{opacity:1}
   width:4px;height:4px;border-radius:50%;background:var(--copper)}
 .phase .exit{margin-top:var(--sp3);padding:12px 14px;border-left:2px solid var(--ember);
   background:rgba(255,112,67,.06);font-size:.88rem;color:var(--t2)}
-.phase .exit b{color:var(--t1);font-weight:600;display:block;margin-bottom:3px;
+.phase .exit b{color:var(--t1);font-weight:500;display:block;margin-bottom:3px;
   font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
   text-transform:uppercase}
 /* Laptops in the 13-inch band have roughly 720px of viewport height. The card
@@ -835,7 +846,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 .money div:last-child{border-right:0}
 .money b{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;
   letter-spacing:.2em;text-transform:uppercase;color:var(--copper-lt);
-  margin-bottom:var(--sp2)}
+  margin-bottom:var(--sp2);font-weight:500}
 .money strong{display:block;font-size:1.5rem;letter-spacing:-.03em;margin-bottom:8px;
   font-weight:700}
 .money p{color:var(--t2);font-size:.94rem;margin:0}
@@ -1609,12 +1620,21 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     w.addEventListener('scroll', function () {
       var v = Math.abs(w.scrollY - lastY); lastY = w.scrollY;
       boost = clamp(1 + v / 26, 1, 6);
+      tkWake();
     }, { passive: true });
-    (function tk() {
+    /* boost decays toward 1 and then stays there, so this was writing the
+       same animation-duration on every frame for as long as the page was
+       open — a style recalculation per frame for no change. It now stops
+       when it has settled and the scroll handler wakes it. */
+    var tkRaf = null;
+    function tk() {
       boost = lerp(boost, 1, 0.06);
       tt.style.animationDuration = (38 / boost) + 's';
-      requestAnimationFrame(tk);
-    })();
+      if (Math.abs(boost - 1) > 0.002) { tkRaf = requestAnimationFrame(tk); }
+      else { tt.style.animationDuration = '38s'; tkRaf = null; }
+    }
+    function tkWake() { if (!tkRaf) tkRaf = requestAnimationFrame(tk); }
+    tk();
   }
 
   /* ─────────── 6 · MAGNETIC CTA ─────────── */
@@ -2929,9 +2949,19 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     flat();
   }
 
+  /* This ran progress, nav state, the aurora transform and both pin scrubs on
+     every frame whether or not the page had moved. Nothing it computes can
+     change while the scroll position and the viewport are identical, so the
+     frame now returns immediately in that case. On a still page that is the
+     overwhelming majority of frames. */
+  var lastFrameY = -1, lastFrameH = -1;
   if (!reduced) (function frame() {
     var y = w.scrollY || d.documentElement.scrollTop;
     var docH = d.documentElement.scrollHeight - vh;
+    if (y === lastFrameY && docH === lastFrameH) {
+      return requestAnimationFrame(frame);
+    }
+    lastFrameY = y; lastFrameH = docH;
 
     /* progress + nav */
     if (prog) prog.style.width = clamp(y / docH, 0, 1) * 100 + '%';

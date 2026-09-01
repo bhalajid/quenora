@@ -81,8 +81,22 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
   box-shadow:0 10px 30px -8px var(--copper-glow)}
 .btn-ghost{border-color:var(--line);color:var(--white);background:rgba(255,255,255,.02)}
 .btn-ghost:hover{border-color:var(--copper);background:var(--copper-dim)}
-.navcta{display:none}
-@media(min-width:1000px){.navcta{display:inline-flex}}
+/* The CTA used to be hidden below 1000px, so on every phone and tablet the one
+   conversion control disappeared from the header. It stays now, dropping to its
+   short label at 560 like the rest of the site. */
+.navcta{display:inline-flex}
+.cta-short{display:none}
+@media(max-width:560px){
+  .cta-long{display:none}.cta-short{display:inline}
+  .navcta{padding:9px 14px}
+}
+@media(max-width:400px){
+  nav{gap:10px}
+  .brand{gap:10px}
+  .brand svg{width:32px}
+  .brand b{font-size:1.06rem}
+  .navcta{padding:8px 11px;font-size:12.5px}
+}
 
 /* hamburger + collapsible nav */
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;
@@ -389,8 +403,8 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
 <b><em>q</em>uenora</b>
 </a>
-<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="services.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="products.html">Products</a><a href="approach.html">Approach</a><a href="work.html">Work</a><a href="contact.html">Contact</a></div>
-<a class="btn btn-primary navcta" href="contact.html">Start a conversation</a>
+<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="services.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="products.html">Products</a><a href="approach.html">Approach</a><a href="work.html">Work</a><a href="index.html#climax">Contact</a></div>
+<a class="btn btn-primary navcta" href="index.html#climax"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
 <button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <i></i><i></i><i></i>
 </button>
@@ -431,7 +445,7 @@ Baden-Württemberg, Germany
 <dt>Telephone</dt><dd>{{TODO:TELEPHONE}}</dd>
 <dt>Web</dt><dd><a href="https://quenora.ai">quenora.ai</a></dd>
 </dl>
-<p>Email is answered within one working day. If you would rather start with a conversation than a message, the <a href="contact.html">contact page</a> explains exactly what happens next.</p>
+<p>Email is answered within one working day. If you would rather start with a conversation than a message, the <a href="index.html#climax">contact page</a> explains exactly what happens next.</p>
 
 <h2>Responsible for editorial content</h2>
 <p>Under § 18 (2) MStV, responsibility for the journalistic and editorial content of this site rests with:</p>
@@ -496,7 +510,7 @@ Address as above
 <h5>Firm</h5>
 <a href="approach.html">Our approach</a>
 <a href="work.html">Work</a>
-<a href="contact.html">Contact</a>
+<a href="index.html#climax">Contact</a>
 </div>
 <div class="foot-col">
 <h5>Legal</h5>

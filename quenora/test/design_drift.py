@@ -38,6 +38,8 @@ BANNED = [
      "the copper initial in the wordmark — the lockup is one colour"),
     (re.compile(r"\.brand\s+svg\s*\{[^}]*drop-shadow", re.I),
      "a glow behind the mark — the home page lockup has none"),
+    (re.compile(r"\.navcta\s*\{\s*display:\s*none", re.I),
+     "the header CTA hidden on small screens — every other page keeps it"),
 ]
 
 

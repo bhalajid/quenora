@@ -108,6 +108,11 @@ node figure_space.js "$DIR"
 [ $? -eq 0 ] && ok "the field draws, sweeps, calls out three and repeats" \
   || bad "the field figure is not drawing what it claims"
 
+step "4f/8  the site declares one address, the one it launches on"
+$QPY_NAV public_urls.py "$DIR"
+[ $? -eq 0 ] && ok "every declared URL is quenora.ai, in the served form" \
+  || bad "a declared URL is on the wrong host or redirects"
+
 step "4e/8  one palette and one wordmark across the site"
 $QPY_NAV design_drift.py "$DIR"
 [ $? -eq 0 ] && ok "no page carries the previous generation's look" \

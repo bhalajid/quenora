@@ -215,8 +215,13 @@ for lang in LANGS:
             fail(lang, "metadata", "%s: html lang is '%s'"
                  % (page, soup.html.get("lang")))
         can = soup.find("link", rel="canonical")
-        if not can or ("/%s/" % lang) not in can.get("href", ""):
-            fail(lang, "metadata", "%s: canonical missing or wrong" % page)
+        # cleanUrls means the language index is served at /de, not /de/, so the
+        # canonical is "…/de" exactly or "…/de/<page>" — a trailing slash was
+        # required here and would now flag the correct value as wrong.
+        href = can.get("href", "") if can else ""
+        want = "/%s" % lang
+        if not can or not (href.endswith(want) or ("%s/" % want) in href):
+            fail(lang, "metadata", "%s: canonical missing or wrong (%s)" % (page, href))
         hl = {l.get("hreflang") for l in soup.find_all("link", rel="alternate")}
         for need in ["en"] + LISTED_LANGS + ["x-default"]:
             if need not in hl:

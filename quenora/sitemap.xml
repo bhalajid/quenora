@@ -4,135 +4,135 @@
   <url>
     <loc>https://quenora.ai/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr"/>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/engineering.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/engineering.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/engineering.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/engineering.html"/>
+    <loc>https://quenora.ai/engineering</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/engineering"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/engineering"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/engineering"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/services.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/services.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/services.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/services.html"/>
+    <loc>https://quenora.ai/services</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/services"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/services"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/services"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/approach.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/approach.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/approach.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/approach.html"/>
+    <loc>https://quenora.ai/approach</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/approach"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/approach"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/approach"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/work.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/work.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/work.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/work.html"/>
+    <loc>https://quenora.ai/work</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/work"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/work"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/work"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/contact.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/contact.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/contact.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/contact.html"/>
+    <loc>https://quenora.ai/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/contact"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/contact"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/de/</loc>
+    <loc>https://quenora.ai/de</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr"/>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/de/engineering.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/engineering.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/engineering.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/engineering.html"/>
+    <loc>https://quenora.ai/de/engineering</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/engineering"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/engineering"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/engineering"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/de/services.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/services.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/services.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/services.html"/>
+    <loc>https://quenora.ai/de/services</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/services"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/services"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/services"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/de/approach.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/approach.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/approach.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/approach.html"/>
+    <loc>https://quenora.ai/de/approach</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/approach"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/approach"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/approach"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/de/work.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/work.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/work.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/work.html"/>
+    <loc>https://quenora.ai/de/work</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/work"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/work"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/work"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/de/contact.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/contact.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/contact.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/contact.html"/>
+    <loc>https://quenora.ai/de/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/contact"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/contact"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/fr/</loc>
+    <loc>https://quenora.ai/fr</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr"/>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/fr/engineering.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/engineering.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/engineering.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/engineering.html"/>
+    <loc>https://quenora.ai/fr/engineering</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/engineering"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/engineering"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/engineering"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/fr/services.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/services.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/services.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/services.html"/>
+    <loc>https://quenora.ai/fr/services</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/services"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/services"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/services"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/fr/approach.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/approach.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/approach.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/approach.html"/>
+    <loc>https://quenora.ai/fr/approach</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/approach"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/approach"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/approach"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/fr/work.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/work.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/work.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/work.html"/>
+    <loc>https://quenora.ai/fr/work</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/work"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/work"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/work"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/fr/contact.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/contact.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/contact.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/contact.html"/>
+    <loc>https://quenora.ai/fr/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/contact"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/contact"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/impressum.html</loc>
+    <loc>https://quenora.ai/impressum</loc>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://quenora.ai/privacy.html</loc>
+    <loc>https://quenora.ai/privacy</loc>
     <priority>0.3</priority>
   </url>
 </urlset>

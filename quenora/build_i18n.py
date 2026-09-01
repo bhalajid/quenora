@@ -52,6 +52,21 @@ LISTED_LANGS = [l for l in LANGS if l not in UNLISTED_LANGS]
 LANG_NAMES = {"en": "English", "de": "Deutsch", "fr": "Français",
               "es": "Español", "it": "Italiano"}
 DOMAIN = "https://quenora.ai"
+
+
+def served(lang, page):
+    """The URL Vercel actually serves, which is the only URL worth declaring.
+
+    vercel.json sets cleanUrls, so /services.html is 308-redirected to
+    /services and /de/index.html to /de. Every canonical, hreflang, og:url and
+    sitemap entry was being written in the .html form, so each one pointed at a
+    redirect rather than at the page. Search engines follow it, but a canonical
+    that is not the final URL is a canonical that disagrees with the site.
+    """
+    path = "" if lang == "en" else "/" + lang
+    if page == "index.html":
+        return DOMAIN + (path or "/")
+    return DOMAIN + path + "/" + page[: -len(".html")]
 SKIP_TAGS = {"script", "style"}
 
 # strings that must never be translated
@@ -247,9 +262,7 @@ def localise_paths(soup, lang):
 def head_links(soup, lang, page):
     """canonical + hreflang alternates + og:url + lang attribute."""
     soup.html["lang"] = lang
-    slug = "" if page == "index.html" else page
-    base = DOMAIN + ("/" if lang == "en" else "/" + lang + "/")
-    canon = base + slug
+    canon = served(lang, page)
 
     for l in soup.find_all("link", rel=lambda v: v and "canonical" in v):
         l.decompose()
@@ -262,15 +275,14 @@ def head_links(soup, lang, page):
     c["href"] = canon
     head.append(c)
     for code in ["en"] + LISTED_LANGS:
-        b = DOMAIN + ("/" if code == "en" else "/" + code + "/")
         alt = soup.new_tag("link")
         alt["rel"] = "alternate"
-        alt["href"] = b + slug
+        alt["href"] = served(code, page)
         alt["hreflang"] = code
         head.append(alt)
     xd = soup.new_tag("link")
     xd["rel"] = "alternate"
-    xd["href"] = DOMAIN + "/" + slug
+    xd["href"] = served("en", page)
     xd["hreflang"] = "x-default"
     head.append(xd)
 
@@ -381,24 +393,23 @@ def build_en_switcher():
 def sitemap():
     urls = []
     for lang in ["en"] + LISTED_LANGS:
-        base = DOMAIN + ("/" if lang == "en" else "/" + lang + "/")
         for page in PAGES:
             if page in UNLISTED_PAGES:
                 continue
-            slug = "" if page == "index.html" else page
             alts = "".join(
                 '\n    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>'
-                % (c, DOMAIN + ("/" if c == "en" else "/" + c + "/") + slug)
+                % (c, served(c, page))
                 for c in ["en"] + LISTED_LANGS)
             urls.append(
-                '  <url>\n    <loc>%s%s</loc>%s\n    <priority>%s</priority>\n  </url>'
-                % (base, slug, alts, "1.0" if page == "index.html" else "0.8"))
+                '  <url>\n    <loc>%s</loc>%s\n    <priority>%s</priority>\n  </url>'
+                % (served(lang, page), alts,
+                   "1.0" if page == "index.html" else "0.8"))
     # English-only pages: no hreflang alternates, low priority, but they must be
     # indexable — an Impressum that search engines cannot find is not published.
     for page in sorted(EN_ONLY_PAGES):
         urls.append(
-            '  <url>\n    <loc>%s/%s</loc>\n    <priority>0.3</priority>\n  </url>'
-            % (DOMAIN, page))
+            '  <url>\n    <loc>%s</loc>\n    <priority>0.3</priority>\n  </url>'
+            % served("en", page))
     open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'

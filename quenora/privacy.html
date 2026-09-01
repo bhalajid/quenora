@@ -26,11 +26,12 @@
      +10 to +31 more blue than red in every dark tone, which compounded with
      the blue backlight bleed of cheap/uncalibrated laptop panels and made the
      whole site read as navy/purple rather than near-black. */
-  --ink:#0A0A0B; --ink-2:#0E0E10; --surface:#16161A; --surface-2:#1F1F24;
+  --ink:#07070A; --ink-2:#0A0B10; --surface:#0D0E13; --surface-2:#14161E;
   --copper:#C97A3C; --copper-lt:#E9A063; --copper-dk:#8A4E20;
   --copper-dim:rgba(201,122,60,.13); --copper-glow:rgba(201,122,60,.45);
-  --white:#F8FAFC; --grey:#A9A9B2; --grey-d:#7E7E88;
-  --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.055);
+  --ember:#FF7043;--signal:#5BD7F5;
+  --white:#F2EFE8; --grey:#A8AEBB; --grey-d:#7C8290;
+  --line:rgba(242,239,232,.09); --line-2:rgba(242,239,232,.05);
   --font:'Inter',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
   --radius:14px; --maxw:1240px;
@@ -58,10 +59,13 @@ header{position:fixed;top:0;left:0;right:0;z-index:300;padding:20px 0;
 header.solid{background:rgba(10,10,11,.85);backdrop-filter:blur(16px) saturate(140%);
   border-color:var(--line);padding:13px 0}
 nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
-.brand{display:flex;align-items:center;gap:12px;flex:none}
-.brand svg{width:32px;height:auto;filter:drop-shadow(0 0 10px var(--copper-glow))}
-.brand b{font-size:19px;font-weight:600;letter-spacing:-.02em;white-space:nowrap}
-.brand b em{font-style:normal;color:var(--copper)}
+/* Same lockup as the home page: mark 40px, wordmark Inter 500 at 1.36rem, no
+   glow, no copper initial. These two are linked from every footer on the site. */
+.brand{display:flex;align-items:center;gap:15px;flex:none;line-height:1}
+.brand svg{width:40px;height:auto}
+.brand b{font-size:1.36rem;font-weight:500;letter-spacing:-.008em;
+  white-space:nowrap;color:var(--white)}
+.brand b em{font-style:normal;color:inherit}
 .navlinks{display:flex;gap:30px;font-size:13.5px;color:var(--grey)}
 .navlinks a{position:relative;padding:4px 0;transition:color .2s}
 .navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;

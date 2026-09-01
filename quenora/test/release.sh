@@ -108,6 +108,11 @@ node figure_space.js "$DIR"
 [ $? -eq 0 ] && ok "the field draws, sweeps, calls out three and repeats" \
   || bad "the field figure is not drawing what it claims"
 
+step "4e/8  one palette and one wordmark across the site"
+$QPY_NAV design_drift.py "$DIR"
+[ $? -eq 0 ] && ok "no page carries the previous generation's look" \
+  || bad "a page is drifting off the design system"
+
 step "4d/8  header and footer agree, page by page"
 $QPY_NAV nav_map.py "$DIR"
 [ $? -eq 0 ] && ok "every page sends the same word to the same place" \

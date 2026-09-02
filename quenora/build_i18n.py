@@ -117,7 +117,7 @@ def translate_soup(soup, tr, stats):
         else:
             stats["miss"].add(key)
 
-    for attr in ("alt", "aria-label", "placeholder", "title"):
+    for attr in ("alt", "aria-label", "placeholder", "title", "data-q"):
         for el in soup.find_all(attrs={attr: True}):
             v = el[attr].strip()
             if not v or DNT.match(v):

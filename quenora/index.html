@@ -949,6 +949,32 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   .brand .mk{width:28px;height:26px}
   .navcta{padding:8px 10px}
 }
+
+/* ── the contact card ──────────────────────────────────────────────────
+   Sits under the form because the form is the primary ask; this is for the
+   person who met you and wants the number in their phone before they forget. */
+.qrcard{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--sp4);
+  align-items:center;margin-top:var(--sp5);padding-top:var(--sp4);
+  border-top:1px solid var(--line);
+  /* the contact chapter centres its own copy; a card is read left to right */
+  text-align:left}
+.qrcode{width:132px;height:132px;flex:none;padding:12px;border-radius:6px;
+  background:var(--t1)}
+.qrcode svg{width:100%;height:100%;display:block;shape-rendering:crispEdges}
+.qrsay p{margin:0}
+.qrsay .mono{color:var(--copper-lt);font-size:.66rem;letter-spacing:.2em;
+  text-transform:uppercase;margin-bottom:10px}
+.qrsay p+p{margin-top:10px}
+.qrtel{display:flex;gap:var(--sp3);flex-wrap:wrap;font-family:'JetBrains Mono',monospace;
+  font-size:.92rem}
+.qrtel a{color:var(--t1);border-bottom:1px solid var(--line2)}
+.qrtel a:hover{color:var(--copper-lt)}
+.qrdl{font-size:.86rem;color:var(--t3)}
+.qrdl a{color:var(--copper-lt);border-bottom:1px solid rgba(233,160,99,.3)}
+@media(max-width:620px){
+  .qrcard{grid-template-columns:1fr;gap:var(--sp3);justify-items:start}
+  .qrcode{width:118px;height:118px}
+}
 </style>
 <meta content="en_GB" property="og:locale"/><link href="https://quenora.ai/" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/></head>
 <body class="no-js">
@@ -1524,6 +1550,21 @@ notice</a>.</span></label>
 <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path></svg></button>
 <p aria-live="polite" class="cnote" id="cfNote"></p>
 </form>
+<!-- The card, for the half of a conversation that happens in a room. The QR
+     opens /c, which counts the scan and hands over a vCard filed under
+     Quenora Consulting. The numbers are written out underneath because a QR
+     is useless to anyone reading this on the device they would scan it with. -->
+<div class="qrcard rv" data-d="2">
+<div class="qrcode"><svg viewbox="0 0 37 37" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5h7m1 0h1m1 0h5m1 0h2m1 0h2m1 0h7m-29 1h1m5 0h1m2 0h4m2 0h1m4 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m5 0h1m1 0h1m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m6 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h3m2 0h1m2 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h4m3 0h4m1 0h1m-16 1h2m2 0h1m1 0h1m1 0h3m6 0h1m1 0h1m1 0h1m1 0h1m-29 1h3m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1m5 0h1m1 0h2m-28 1h2m3 0h2m1 0h2m1 0h1m3 0h3m1 0h1m1 0h4m1 0h1m-27 1h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m1 0h1m2 0h1m-25 1h7m3 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m-28 1h1m3 0h2m1 0h1m3 0h5m2 0h3m1 0h1m1 0h2m1 0h2m-28 1h1m4 0h3m1 0h1m2 0h1m1 0h4m1 0h1m1 0h2m-23 1h4m2 0h2m2 0h1m4 0h2m2 0h2m2 0h4m-26 1h1m1 0h1m1 0h3m1 0h1m2 0h1m2 0h3m6 0h2m1 0h1m-29 1h1m2 0h1m3 0h1m3 0h4m7 0h3m3 0h1m-29 1h3m2 0h2m1 0h3m2 0h1m3 0h4m3 0h1m1 0h1m1 0h1m-29 1h1m1 0h2m1 0h1m2 0h3m1 0h3m3 0h1m2 0h2m1 0h1m-25 1h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h1m1 0h5m1 0h1m-19 1h3m2 0h1m1 0h1m1 0h1m1 0h2m3 0h3m-27 1h7m2 0h1m2 0h2m3 0h4m1 0h1m1 0h1m-25 1h1m5 0h1m1 0h3m1 0h2m3 0h4m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m4 0h6m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h4m3 0h2m2 0h1m1 0h3m-28 1h1m1 0h3m1 0h1m3 0h1m1 0h1m2 0h1m2 0h7m1 0h2m-28 1h1m5 0h1m2 0h2m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h7m4 0h1m1 0h1m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1" stroke="#07070a"></path></svg></div>
+<div class="qrsay">
+<p class="mono">Or take the card</p>
+<p>Scan to save <b>Quenora Consulting</b> to your phone — both numbers, the
+address and the email, in one tap.</p>
+<p class="qrtel"><a href="tel:+4915233927436">+49 152 3392 7436</a>
+<a href="tel:+4915256433329">+49 152 5643 3329</a></p>
+<p class="qrdl"><a href="/c">Save the contact</a> · nothing is stored about you</p>
+</div>
+</div>
 </div>
 </section>
 </main>

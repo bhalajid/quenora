@@ -91,5 +91,11 @@
       "destination": "/:lang/capabilities",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/c",
+      "destination": "/api/card"
+    }
   ]
 }

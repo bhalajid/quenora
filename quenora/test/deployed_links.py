@@ -21,6 +21,11 @@ DOMAIN = "https://quenora.ai"
 CLEAN_URLS = True          # mirrors vercel.json
 LEGAL = {"impressum.html", "privacy.html"}   # English-only by design
 
+# Paths served by a function rather than a file. vercel.json rewrites these,
+# so there is nothing on disk to find and a filesystem check reports a 404
+# that does not exist. Keep this list in step with vercel.json "rewrites".
+FUNCTION_ROUTES = {"/c", "/api/enquiry", "/api/card"}
+
 
 def landing(rel):
     """The URL a visitor ends up on after Vercel's redirects."""
@@ -71,6 +76,8 @@ for pg in pages():
             continue
         h = m.group(1)
         if h.startswith(("http", "mailto:", "tel:", "#")) or h.startswith("'"):
+            continue
+        if h.split("?")[0] in FUNCTION_ROUTES:
             continue
         f = to_file(urljoin(base, h))
         n += 1

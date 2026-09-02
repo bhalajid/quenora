@@ -371,6 +371,88 @@ footer nav{display:block}
 .langmenu a[aria-current=true]{color:var(--copper-lt)}
 @media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
   .langsel>button span{display:none}}
+/* ══ Governed vs ungoverned demo ═══════════════════════════════════════
+   Every class is prefixed gd- because this page already has .card, .num
+   and .step, and a collision here would be invisible until it was live.
+   Colours come from the page's own tokens; nothing new is introduced. */
+.gd-picker{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.gd-tab{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;
+  text-transform:uppercase;cursor:pointer;background:transparent;color:var(--grey-d);
+  border:1px solid var(--line);border-radius:2px;padding:9px 14px;
+  transition:color .2s,border-color .2s,background .2s}
+.gd-tab:hover{color:var(--grey);border-color:rgba(242,239,232,.18)}
+.gd-tab[aria-selected="true"]{color:var(--ink);background:var(--copper-lt);
+  border-color:var(--copper-lt)}
+.gd-ask{border:1px solid rgba(242,239,232,.18);background:var(--surface);
+  border-radius:3px;padding:22px;margin-bottom:32px;
+  display:flex;gap:22px;align-items:center;flex-wrap:wrap;text-align:left}
+.gd-ask .gd-q{flex:1 1 430px;min-width:0}
+.gd-ask .gd-q .kicker{display:block;margin-bottom:8px}
+.gd-ask .gd-q p{margin:0;font-size:1.05rem}
+.gd-run{font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;
+  background:var(--white);color:var(--ink);border:0;border-radius:2px;
+  padding:14px 26px;transition:background .2s}
+.gd-run:hover{background:var(--copper-lt)}
+.gd-run[disabled]{opacity:.4;cursor:default;background:var(--white)}
+.gd-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;
+  align-items:start;text-align:left}
+@media(max-width:880px){.gd-pair{grid-template-columns:minmax(0,1fr)}}
+.gd-panel{border:1px solid var(--line);background:var(--surface);border-radius:3px;
+  padding:22px;display:flex;flex-direction:column;min-height:520px}
+.gd-panel.gd-bad{border-color:rgba(255,112,67,.28)}
+.gd-panel.gd-good{border-color:rgba(91,215,245,.24)}
+.gd-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.gd-head h3{font-size:1rem;margin:0;font-weight:600;letter-spacing:-.01em}
+.gd-bad .gd-head h3{color:var(--ember)}
+.gd-good .gd-head h3{color:var(--signal)}
+.gd-clock{font-family:var(--mono);font-size:.72rem;color:var(--grey-d);
+  font-variant-numeric:tabular-nums}
+.gd-step{font-family:var(--mono);font-size:.72rem;color:var(--grey-d);margin:0 0 8px;
+  opacity:0;transform:translateY(4px);transition:opacity .35s,transform .35s}
+.gd-step.on{opacity:1;transform:none}
+.gd-step b{color:var(--grey);font-weight:500}
+.gd-ans{font-size:.96rem;margin:0 0 22px;opacity:0;transition:opacity .45s;
+  color:var(--grey)}
+.gd-ans.on{opacity:1}
+.gd-ans strong{color:var(--white);font-weight:600}
+.gd-ans .gd-num{color:var(--ember);font-weight:600;
+  border-bottom:1px dashed rgba(255,112,67,.5)}
+.gd-good .gd-ans .gd-num{color:var(--signal);border-bottom-color:rgba(91,215,245,.5)}
+.gd-cost{font-family:var(--mono);font-size:.76rem;color:var(--ember);
+  border:1px solid rgba(255,112,67,.3);border-radius:2px;padding:9px 12px;
+  margin:0 0 22px;opacity:0;transition:opacity .4s}
+.gd-cost.on{opacity:1}
+.gd-cost b{color:var(--white);font-weight:500}
+.gd-cite{border-left:2px solid rgba(242,239,232,.18);padding:10px 0 10px 14px;
+  margin:0 0 12px;font-size:.85rem;color:var(--grey);opacity:0;
+  transform:translateX(-4px);transition:opacity .4s,transform .4s}
+.gd-cite.on{opacity:1;transform:none}
+.gd-cite .gd-src{display:block;font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.06em;color:var(--copper-lt);margin-bottom:5px}
+.gd-cite strong{color:var(--white);font-weight:600}
+.gd-unknown{border:1px dashed rgba(91,215,245,.4);border-radius:2px;padding:12px 14px;
+  margin:0 0 22px;font-size:.88rem;color:var(--grey);opacity:0;transition:opacity .4s}
+.gd-unknown.on{opacity:1}
+.gd-unknown b{color:var(--signal);font-weight:500}
+.gd-flags{margin-top:auto;padding-top:22px;border-top:1px solid var(--line);
+  list-style:none;padding-left:0;margin-bottom:0}
+.gd-flags li{font-size:.85rem;color:var(--grey);padding:7px 0 7px 24px;
+  position:relative;opacity:0;transform:translateY(5px);
+  transition:opacity .4s,transform .4s}
+.gd-flags li.on{opacity:1;transform:none}
+.gd-flags li::before{position:absolute;left:0;top:7px;font-family:var(--mono);
+  font-size:.8rem}
+.gd-bad .gd-flags li::before{content:"\2715";color:var(--ember)}
+.gd-good .gd-flags li::before{content:"\2713";color:var(--signal)}
+.gd-flags li b{color:var(--white);font-weight:500}
+.gd-price{font-family:var(--mono);font-size:.78rem;color:var(--grey-d);
+  border-left:2px solid var(--copper);padding-left:14px;margin:32px auto 0;
+  max-width:62ch;text-align:left}
+.gd-price b{color:var(--grey);font-weight:400}
+@media(prefers-reduced-motion:reduce){
+  .gd-step,.gd-ans,.gd-cite,.gd-unknown,.gd-cost,.gd-flags li{transition-duration:.01ms}
+}
 </style>
 <meta content="en_GB" property="og:locale"/><link href="https://quenora.ai/work" rel="canonical"/><link href="https://quenora.ai/work" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/work" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/work" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/work" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/work#page","url":"https://quenora.ai/work","name":"Engagement patterns, honestly labelled.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"Engagement patterns and the sectors Quenora Consulting works in.","breadcrumb":{"@id":"https://quenora.ai/work#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/work#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"Engagement patterns, honestly labelled.","item":"https://quenora.ai/work"}]}]}</script></head>
 <body>
@@ -461,6 +543,58 @@ catalogue. Illustrative.</figcaption>
 </div>
 </section>
 <div class="wrap"><div class="divider"><i></i></div></div>
+<!-- ══ The demo, live on the page rather than described ═══════════════════
+     Four questions people actually put to an internal assistant. Both panels
+     run in the browser from fixed data — no API, no key, no per-visitor cost.
+     The scenario content sits in the DOM rather than in JavaScript strings so
+     that the localisation build reaches it like any other page. -->
+<section class="section-pad" id="governed">
+<div class="wrap">
+<div class="section-head rv">
+<div class="kicker">See it, rather than take our word</div>
+<h2>The same question, answered twice</h2>
+<p style="max-width:64ch;margin:18px auto 0">Four questions people actually put to
+an internal assistant. The left panel is never a straw man: every answer it gives is
+fluent, specific and entirely plausible. That is the problem. The dashed figures are
+the ones it invented.</p>
+</div>
+<div aria-label="Scenario" class="gd-picker rv" role="tablist">
+<button aria-controls="gdAsk" aria-selected="true" class="gd-tab" role="tab" type="button">Finance · invoice</button>
+<button aria-controls="gdAsk" aria-selected="false" class="gd-tab" role="tab" type="button">HR · leave</button>
+<button aria-controls="gdAsk" aria-selected="false" class="gd-tab" role="tab" type="button">Data · GDPR</button>
+<button aria-controls="gdAsk" aria-selected="false" class="gd-tab" role="tab" type="button">Support · SLA</button>
+</div>
+<div class="gd-ask rv" id="gdAsk">
+<div class="gd-q">
+<span class="kicker" id="gdWho">The question, from accounts payable</span>
+<p id="gdQ">“Invoice INV-88214, €48,900 from Rehder GmbH. It doesn’t match the PO. Can I post it?”</p>
+</div>
+<button class="gd-run" id="gdRun" type="button">Run both</button>
+</div>
+<div class="gd-pair rv">
+<div class="gd-panel gd-bad">
+<div class="gd-head"><h3>Ungoverned</h3><span class="gd-clock" id="gdClkBad">—</span></div>
+<p class="gd-step" id="gdStepBad">▶ answering</p>
+<div class="gd-ans" id="gdAnsBad"></div>
+<p class="gd-cost" id="gdCostBad"></p>
+<ul class="gd-flags" id="gdFlagsBad"></ul>
+</div>
+<div class="gd-panel gd-good">
+<div class="gd-head"><h3>Governed</h3><span class="gd-clock" id="gdClkGood">—</span></div>
+<div id="gdStepsGood"></div>
+<div id="gdCitesGood"></div>
+<div class="gd-ans" id="gdAnsGood"></div>
+<div class="gd-unknown" id="gdUnkGood"></div>
+<ul class="gd-flags" id="gdFlagsGood"></ul>
+</div>
+</div>
+<p class="gd-price rv"><b>The honest cost:</b> the governed answer takes roughly
+<span id="gdDelta">2.3s</span> longer and reads two documents to do it. That is the
+price, and we state it rather than hide it. Documents, figures and reference numbers
+here are worked examples; nothing on this page claims to be a real client.</p>
+</div>
+</section>
+<div class="wrap"><div class="divider"><i></i></div></div>
 <section class="section-pad" style="background:var(--ink-2);border-block:1px solid var(--line)">
 <div class="wrap">
 <div class="section-head rv">
@@ -497,6 +631,115 @@ catalogue. Illustrative.</figcaption>
 </div>
 </div>
 </section>
+<div hidden="" id="gdData">
+<div class="gd-scn">
+<p class="gd-who">The question, from accounts payable</p>
+<p class="gd-qq">“Invoice INV-88214, €48,900 from Rehder GmbH. It doesn’t match the PO. Can I post it?”</p>
+<div class="gd-d-bad">Yes — this is inside tolerance. Three-way match allows a variance of <span class="gd-num">3% or €1,500</span>, whichever is lower, so a €2,040 difference on a €46,860 PO clears automatically. Post it to the original PO line and the system will net the difference at period close.</div>
+<div class="gd-d-cost">If posted: <b>€2,040 overpaid</b>, and the duplicate in the second ERP instance goes unnoticed.</div>
+<ul class="gd-d-flags">
+<li><b>No source.</b> Which policy says 3%? Nothing to open.</li>
+<li><b>One system.</b> It never looked at the other two ERP instances.</li>
+<li><b>Not reproducible.</b> Ask next quarter, get a different tolerance.</li>
+<li><b>Nothing for an auditor.</b> No record this was ever asked.</li>
+<li><b>Confidently wrong reads exactly like confidently right.</b></li>
+</ul>
+<ul class="gd-d-steps">
+<li>resolving identity · <b>accounts-payable, DE entity</b></li>
+<li>retrieving · <b>three-way match · tolerance · goods receipt</b></li>
+<li>querying · <b>3 ERP instances for INV-88214</b></li>
+<li>4 passages retained of 21 · <b>threshold 0.71</b></li>
+</ul>
+<ul class="gd-d-cites">
+<li><span class="gd-src">AP Manual v6.1 · §4.3 · revised 2026-05-02</span>Price variance is auto-cleared to <strong>1% or €250</strong>, whichever is lower. Anything above requires the originating buyer’s approval.</li>
+<li><span class="gd-src">ERP query · 3 instances · live</span>INV-88214 is present in <strong>NAV-DE and SAP-AT</strong>. The Austrian instance already shows it as <strong>parked</strong>.</li>
+</ul>
+<div class="gd-d-good"><strong>No — hold it.</strong> The variance is <span class="gd-num">4.35%</span>, over the <span class="gd-num">1%</span> limit, so it needs the buyer’s approval. It is also <strong>already parked in SAP-AT</strong>: posting here creates a duplicate payment.</div>
+<div class="gd-d-unk"><b>Not answered:</b> I cannot tell which entity should own this invoice. The PO and the goods receipt sit in different instances, and no rule I retrieved decides that. A person has to.</div>
+</div>
+<div class="gd-scn">
+<p class="gd-who">The question, from an HR business partner</p>
+<p class="gd-qq">“Employee in Germany is asking about parental leave. What are they entitled to, and do we top it up?”</p>
+<div class="gd-d-bad">Elternzeit is up to three years per child, and Elterngeld replaces <span class="gd-num">67%</span> of net pay for twelve months. On top of the statutory amount our works agreement adds a company supplement of <span class="gd-num">15% of gross</span> for the first six months, which HR processes automatically once the leave is approved.</div>
+<div class="gd-d-cost">If relied on: a <b>commitment we never made</b>, given in writing, to an employee.</div>
+<ul class="gd-d-flags">
+<li><b>Statute and policy blurred.</b> The law is right; the company part is invented.</li>
+<li><b>No source.</b> No works agreement, no clause, no date.</li>
+<li><b>No jurisdiction check.</b> It never confirmed which entity employs them.</li>
+<li><b>Nothing for an auditor</b>, and this one ends up in an employment file.</li>
+<li><b>Confidently wrong reads exactly like confidently right.</b></li>
+</ul>
+<ul class="gd-d-steps">
+<li>resolving identity · <b>HR business partner · DE entity</b></li>
+<li>retrieving · <b>Elternzeit · Elterngeld · company supplement</b></li>
+<li>separating · <b>statutory sources from internal policy</b></li>
+<li>3 passages retained of 17 · <b>threshold 0.71</b></li>
+</ul>
+<ul class="gd-d-cites">
+<li><span class="gd-src">BEEG §15 · statutory · consolidated 2026-01</span>Entitlement to <strong>up to three years</strong> of Elternzeit per child, of which 24 months may be taken between the third and eighth birthday.</li>
+<li><span class="gd-src">Betriebsvereinbarung 2024-07 · §9</span>Covers unpaid leave scheduling and return-to-work rights. <strong>No pay supplement is defined.</strong></li>
+</ul>
+<div class="gd-d-good"><strong>Statutory entitlement, yes. A top-up, no.</strong> Up to three years’ Elternzeit under BEEG §15. The works agreement covers scheduling and return rights and defines <span class="gd-num">no pay supplement</span>.</div>
+<div class="gd-d-unk"><b>Not answered:</b> Elterngeld is calculated by the Elterngeldstelle from net income, not by us, so I will not quote a percentage as if it were the employee’s figure. Point them at the authority.</div>
+</div>
+<div class="gd-scn">
+<p class="gd-who">The question, from a data lead</p>
+<p class="gd-qq">“Can I send our customer list to the new analytics vendor for the pilot?”</p>
+<div class="gd-d-bad">Yes, provided it is pseudonymised first. Strip names and email addresses, keep the customer ID, and the export falls outside GDPR because the vendor cannot re-identify anyone. Standard practice for a <span class="gd-num">30-day pilot</span> — a full DPA is only required once the engagement becomes <span class="gd-num">production</span>.</div>
+<div class="gd-d-cost">If actioned: an <b>unlawful transfer</b>, reportable under Art. 33 within 72 hours.</div>
+<ul class="gd-d-flags">
+<li><b>Legally wrong, and fluent about it.</b> Pseudonymised data is still personal data.</li>
+<li><b>Invented threshold.</b> There is no pilot exemption from Art. 28.</li>
+<li><b>No vendor check.</b> It never looked at whether a DPA exists.</li>
+<li><b>Nothing for an auditor</b> — the one answer here a regulator would ask to see.</li>
+<li><b>Confidently wrong reads exactly like confidently right.</b></li>
+</ul>
+<ul class="gd-d-steps">
+<li>resolving identity · <b>data lead · EU entity</b></li>
+<li>retrieving · <b>processor agreement · transfer · pseudonymisation</b></li>
+<li>checking · <b>vendor register for a signed DPA</b></li>
+<li>3 passages retained of 12 · <b>threshold 0.71</b></li>
+</ul>
+<ul class="gd-d-cites">
+<li><span class="gd-src">GDPR Art. 4(5) and Recital 26</span>Pseudonymised data that can be attributed to a person using additional information <strong>remains personal data</strong>.</li>
+<li><span class="gd-src">Vendor register · queried live</span>No processor agreement is recorded for this vendor. <strong>Status: not approved.</strong></li>
+</ul>
+<div class="gd-d-good"><strong>No — not yet.</strong> Pseudonymised data is still personal data, so Art. 28 applies, and the register shows <span class="gd-num">no signed DPA</span> with this vendor. The transfer needs the agreement in place first.</div>
+<div class="gd-d-unk"><b>Not answered:</b> whether a legitimate-interest basis could cover the pilot. That is a DPO judgement, not a retrieval result, and I will not manufacture one.</div>
+</div>
+<div class="gd-scn">
+<p class="gd-who">The question, from a support manager</p>
+<p class="gd-qq">“Customer says we breached the four-hour response SLA twice this month. Do we owe them credits?”</p>
+<div class="gd-d-bad">Yes. Two breaches in a rolling month triggers the standard service credit of <span class="gd-num">5% of monthly fee</span> per incident, so <span class="gd-num">10%</span> off their next invoice. Apply it directly as a credit note and log it against the account — no approval needed at that level.</div>
+<div class="gd-d-cost">If applied: a <b>credit we did not owe</b>, and a precedent set in writing.</div>
+<ul class="gd-d-flags">
+<li><b>No contract read.</b> It never checked which tier this customer is on.</li>
+<li><b>Invented figures.</b> The 5% and the threshold came from nowhere.</li>
+<li><b>No clock definition.</b> Response time from ticket creation, or from triage?</li>
+<li><b>Nothing for an auditor</b>, and credits are a revenue adjustment.</li>
+<li><b>Confidently wrong reads exactly like confidently right.</b></li>
+</ul>
+<ul class="gd-d-steps">
+<li>resolving identity · <b>support manager · EMEA</b></li>
+<li>retrieving · <b>service credits · response SLA · tier</b></li>
+<li>checking · <b>this account’s contract tier</b></li>
+<li>4 passages retained of 19 · <b>threshold 0.71</b></li>
+</ul>
+<ul class="gd-d-cites">
+<li><span class="gd-src">MSA Schedule 2 · Business tier · signed 2025-11</span>Response target four business hours. Credits accrue from the <strong>third</strong> breach in a calendar month, at <strong>2% of monthly fee</strong> per breach.</li>
+<li><span class="gd-src">Ticket log · queried live</span>Two breaches recorded this month. Both measured from <strong>first human response</strong>.</li>
+</ul>
+<div class="gd-d-good"><strong>Not yet — two is under the threshold.</strong> This account is Business tier: credits start at the <span class="gd-num">third</span> breach, at <span class="gd-num">2%</span> each. Two breaches, so nothing is owed contractually.</div>
+<div class="gd-d-unk"><b>Not answered:</b> whether to offer a credit anyway as a relationship decision. That is commercial judgement and belongs to a person, not to this system.</div>
+</div>
+<ul id="gdGoodFlags">
+<li><b>Sources shown.</b> Both passages above, with section and revision date.</li>
+<li><b>Pinned.</b> Model version, prompt version and index build recorded.</li>
+<li><b>Reproducible.</b> Same inputs, same retrieval, same answer — replayable.</li>
+<li><b>Audit record written.</b> Who asked, what was read, what was said.</li>
+<li><b>Says what it does not know</b>, instead of filling the gap.</li>
+</ul>
+</div>
 </main>
 <footer>
 <div class="wrap">
@@ -1010,6 +1253,117 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
   } else { seen = true; go(); }
 })();
 
+</script>
+<script>
+/* Governed vs ungoverned. Scenario content is read from #gdData rather than
+   held in JavaScript strings, so the localisation build translates it the way
+   it translates the rest of the page. */
+(function(){
+  /* Guard on a capability, not on truthiness. The headless harness that
+     verifies the field figure runs every script on this page against a
+     minimal DOM stub, where getElementById returns an object that is truthy
+     but has no querySelectorAll — so "if (!data) return" sailed past and
+     took the figure check down with it. */
+  var data = document.getElementById('gdData');
+  if (!data || typeof data.querySelectorAll !== 'function') return;
+  var run = document.getElementById('gdRun');
+  if (!run) return;
+  var scns = [].slice.call(data.querySelectorAll('.gd-scn')),
+      tabs = [].slice.call(document.querySelectorAll('.gd-tab')),
+      reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+      BAD = 1200, GOOD = 3500,
+      timers = [], clocks = [];
+
+  function el(id){ return document.getElementById(id); }
+  function at(ms, fn){ timers.push(setTimeout(fn, ms)); }
+  function clear(){
+    timers.forEach(clearTimeout); timers = [];
+    clocks.forEach(function(f){ f(); }); clocks = [];
+  }
+  function off(){
+    ['.gd-step','.gd-ans','.gd-cite','.gd-unknown','.gd-cost','.gd-flags li']
+      .forEach(function(s){
+        [].forEach.call(document.querySelectorAll(s), function(e){
+          e.classList.remove('on'); });
+      });
+    el('gdStepBad').classList.add('on');
+    el('gdClkBad').innerHTML = '&mdash;';
+    el('gdClkGood').innerHTML = '&mdash;';
+  }
+  function html(node){ return node ? node.innerHTML : ''; }
+
+  function load(i){
+    clear();
+    var s = scns[i];
+    tabs.forEach(function(t, n){
+      t.setAttribute('aria-selected', n === i ? 'true' : 'false'); });
+    el('gdWho').textContent = s.querySelector('.gd-who').textContent;
+    el('gdQ').innerHTML     = html(s.querySelector('.gd-qq'));
+    el('gdAnsBad').innerHTML  = html(s.querySelector('.gd-d-bad'));
+    el('gdCostBad').innerHTML = html(s.querySelector('.gd-d-cost'));
+    el('gdAnsGood').innerHTML = html(s.querySelector('.gd-d-good'));
+    el('gdUnkGood').innerHTML = html(s.querySelector('.gd-d-unk'));
+    el('gdFlagsBad').innerHTML  = html(s.querySelector('.gd-d-flags'));
+    el('gdFlagsGood').innerHTML = html(el('gdGoodFlags'));
+    el('gdStepsGood').innerHTML = [].map.call(
+      s.querySelectorAll('.gd-d-steps li'), function(li){
+        return '<p class="gd-step">&#9654; ' + li.innerHTML + '</p>'; }).join('');
+    el('gdCitesGood').innerHTML = [].map.call(
+      s.querySelectorAll('.gd-d-cites li'), function(li){
+        return '<div class="gd-cite">' + li.innerHTML + '</div>'; }).join('');
+    off();
+    run.disabled = false;
+    run.textContent = run.getAttribute('data-run') || 'Run both';
+  }
+
+  /* The clock runs because the latency difference is part of the argument
+     rather than something to disguise. */
+  function clock(node, ms){
+    var t0 = (window.performance || Date).now(), id;
+    (function tick(){
+      var d = (window.performance || Date).now() - t0;
+      if (d >= ms){ node.textContent = (ms/1000).toFixed(1) + 's'; return; }
+      node.textContent = (d/1000).toFixed(1) + 's';
+      id = requestAnimationFrame(tick);
+    })();
+    clocks.push(function(){ cancelAnimationFrame(id); });
+  }
+
+  function stagger(sel, from, gap, k){
+    [].forEach.call(document.querySelectorAll(sel), function(e, n){
+      at(from + n*gap*k, function(){ e.classList.add('on'); });
+    });
+  }
+
+  function play(){
+    clear(); off();
+    if (!run.getAttribute('data-run')) run.setAttribute('data-run', run.textContent);
+    run.disabled = true;
+    var k = reduce ? 0.12 : 1;
+
+    clock(el('gdClkBad'), BAD*k);
+    at(BAD*k, function(){
+      el('gdStepBad').classList.remove('on');
+      el('gdAnsBad').classList.add('on');
+    });
+    at((BAD + 450)*k, function(){ el('gdCostBad').classList.add('on'); });
+    stagger('#gdFlagsBad li', (BAD + 900)*k, 380, k);
+
+    clock(el('gdClkGood'), GOOD*k);
+    stagger('.gd-good .gd-step', 120*k, 480, k);
+    stagger('.gd-good .gd-cite', 1900*k, 420, k);
+    at(GOOD*k, function(){ el('gdAnsGood').classList.add('on'); });
+    at((GOOD + 500)*k, function(){ el('gdUnkGood').classList.add('on'); });
+    stagger('#gdFlagsGood li', (GOOD + 1000)*k, 380, k);
+    at((GOOD + 2900)*k, function(){ run.disabled = false; });
+  }
+
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ load(i); }); });
+  run.addEventListener('click', play);
+  el('gdDelta').textContent = ((GOOD - BAD)/1000).toFixed(1) + 's';
+  load(0);
+})();
 </script>
 <script data-generated="langsel">
 (function(){

@@ -31,7 +31,7 @@ Each was released as its own commit so it can be reverted alone.
 | 2 | Contact QR → vCard + scan count | **Done** | `c3f7fcd` |
 | 3 | `llms.txt` / agent-readable structure | **Done** | `2dda952` |
 | 4 | Wallet pass | **Google done, Apple blocked** | `983294f` |
-| 5 | Governed-vs-ungoverned demo | **NOT STARTED — the last one** | — |
+| 5 | Governed-vs-ungoverned demo | **Done** | `PENDING` |
 
 ### #1 — The assistant
 
@@ -56,6 +56,33 @@ eight months later. Three printed codes exist (`/c`, `/c?k=card`,
 no cookie — which is what the privacy notice promises.
 
 The QR sits **above** the enquiry form: one scan beats eleven fields.
+
+### #5 — The governed-vs-ungoverned demo
+
+Lives on the work page at `/work#governed`, in all three languages, with a
+small pulsing link to it from chapter 05 of the homepage.
+
+Four questions people actually put to an internal assistant — a finance clerk,
+an HR business partner, a data lead, a support manager. Each is answered twice,
+side by side.
+
+**The left panel is never a straw man.** Every ungoverned answer is fluent,
+specific and plausible; the invented figures are underlined with a dashed rule.
+Three of the four would cost money and one is a reportable data protection
+incident. That is the argument: the danger is not that ungoverned AI is stupid,
+it is that it is persuasive and unaccountable.
+
+The governed panel shows retrieval, quotes both sources with section and
+revision date, pins the versions, and ends each answer with what it will **not**
+say.
+
+Both panels run in the browser from fixed data — no API, no key, no
+per-visitor cost. Every class is prefixed `gd-`, because the work page already
+has `.card`, `.num` and `.step`.
+
+**The original idea was dropped deliberately.** Scanning the QR to silently do
+something on a visitor's phone is the behaviour the firm sells protection
+against; a prospect sharp enough to buy would read it as a stunt.
 
 ### #3 — Agent-readable structure
 

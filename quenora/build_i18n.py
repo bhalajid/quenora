@@ -70,6 +70,25 @@ def served(lang, page):
 SKIP_TAGS = {"script", "style"}
 
 # strings that must never be translated
+# A percentage is a number, so DNT skips it — and then German and French get
+# "4.35%", which is English notation. Both write a comma decimal and put a
+# space before the sign: 4,35 %. The rewrite is deliberately narrow, matching
+# only a bare percentage, because the general case is not safe: "48,900" is an
+# English thousands separator and "2026-05-02" is a date, and both would be
+# mangled by a blanket swap.
+PERCENT = re.compile(r"^(\d+)(?:\.(\d+))?\s*%$")
+
+def localise_number(txt, lang):
+    if lang not in ("de", "fr", "es", "it"):
+        return txt
+    m = PERCENT.match(txt.strip())
+    if not m:
+        return txt
+    n = m.group(1) + ("," + m.group(2) if m.group(2) else "")
+    # French uses a narrow no-break space before the sign; German a normal
+    # no-break space. Neither breaks across a line.
+    return n + ("\u202f%" if lang == "fr" else "\u00a0%")
+
 DNT = re.compile(
     # "AI" and "Contact" were both in this list and both were wrong.
     #   AI      the only standalone "AI" node on the site is the headline word
@@ -107,6 +126,9 @@ def translate_soup(soup, tr, stats):
         if len(key) < 2:
             continue
         if DNT.match(key):
+            nk = localise_number(key, lang)
+            if nk != key:
+                node.replace_with(node.string.replace(key, nk))
             continue
         stats["total"] += 1
         if key in tr:

@@ -43,6 +43,28 @@ LOCALE = {"de": "de_DE", "fr": "fr_FR", "es": "es_ES", "it": "it_IT"}
 KEEP = ["Quenora Technology Consulting", "quenora.ai", "hello@quenora.ai",
         "EU AI Act", "GDPR", "Platform Engineering"]
 
+# Some terms in KEEP are not brand names but regulations, and a regulation has
+# an official name in each language. Requiring the English acronym inside a
+# German sentence is requiring the wrong word: German law calls it the DSGVO
+# and French the RGPD, and a German buyer reading "GDPR" reads a translation
+# nobody finished. So these count as preserved when the localised form is
+# there instead.
+ALSO_COUNTS = {
+    "GDPR":       {"de": ["DSGVO"], "fr": ["RGPD"],
+                   "es": ["RGPD"],  "it": ["GDPR", "RGPD"]},
+    "EU AI Act":  {"de": ["KI-Verordnung", "EU AI Act"],
+                   "fr": ["règlement IA", "EU AI Act"],
+                   "es": ["EU AI Act"], "it": ["EU AI Act"]},
+}
+
+
+def kept(term, lang, raw):
+    """True when the page carries the term, in whichever form that language
+    actually uses for it."""
+    if term in raw:
+        return True
+    return any(a in raw for a in ALSO_COUNTS.get(term, {}).get(lang, []))
+
 # common English words that should never survive in translated body copy
 EN_RESIDUE = re.compile(
     r"\b(the|and|with|from|your|our|that|this|which|because|without|"
@@ -142,7 +164,7 @@ for lang in LANGS:
         for k in KEEP:
             # only require a term where the English page actually uses it —
             # the two homepage layouts do not share the same vocabulary
-            if k in en_raw and k not in raw:
+            if k in en_raw and not kept(k, lang, raw):
                 fail(lang, "placeholder", "%s: '%s' lost in translation"
                      % (page, k))
 

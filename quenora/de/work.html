@@ -371,6 +371,88 @@ footer nav{display:block}
 .langmenu a[aria-current=true]{color:var(--copper-lt)}
 @media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
   .langsel>button span{display:none}}
+/* ══ Governed vs ungoverned demo ═══════════════════════════════════════
+   Every class is prefixed gd- because this page already has .card, .num
+   and .step, and a collision here would be invisible until it was live.
+   Colours come from the page's own tokens; nothing new is introduced. */
+.gd-picker{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.gd-tab{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;
+  text-transform:uppercase;cursor:pointer;background:transparent;color:var(--grey-d);
+  border:1px solid var(--line);border-radius:2px;padding:9px 14px;
+  transition:color .2s,border-color .2s,background .2s}
+.gd-tab:hover{color:var(--grey);border-color:rgba(242,239,232,.18)}
+.gd-tab[aria-selected="true"]{color:var(--ink);background:var(--copper-lt);
+  border-color:var(--copper-lt)}
+.gd-ask{border:1px solid rgba(242,239,232,.18);background:var(--surface);
+  border-radius:3px;padding:22px;margin-bottom:32px;
+  display:flex;gap:22px;align-items:center;flex-wrap:wrap;text-align:left}
+.gd-ask .gd-q{flex:1 1 430px;min-width:0}
+.gd-ask .gd-q .kicker{display:block;margin-bottom:8px}
+.gd-ask .gd-q p{margin:0;font-size:1.05rem}
+.gd-run{font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;
+  background:var(--white);color:var(--ink);border:0;border-radius:2px;
+  padding:14px 26px;transition:background .2s}
+.gd-run:hover{background:var(--copper-lt)}
+.gd-run[disabled]{opacity:.4;cursor:default;background:var(--white)}
+.gd-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;
+  align-items:start;text-align:left}
+@media(max-width:880px){.gd-pair{grid-template-columns:minmax(0,1fr)}}
+.gd-panel{border:1px solid var(--line);background:var(--surface);border-radius:3px;
+  padding:22px;display:flex;flex-direction:column;min-height:520px}
+.gd-panel.gd-bad{border-color:rgba(255,112,67,.28)}
+.gd-panel.gd-good{border-color:rgba(91,215,245,.24)}
+.gd-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.gd-head h3{font-size:1rem;margin:0;font-weight:600;letter-spacing:-.01em}
+.gd-bad .gd-head h3{color:var(--ember)}
+.gd-good .gd-head h3{color:var(--signal)}
+.gd-clock{font-family:var(--mono);font-size:.72rem;color:var(--grey-d);
+  font-variant-numeric:tabular-nums}
+.gd-step{font-family:var(--mono);font-size:.72rem;color:var(--grey-d);margin:0 0 8px;
+  opacity:0;transform:translateY(4px);transition:opacity .35s,transform .35s}
+.gd-step.on{opacity:1;transform:none}
+.gd-step b{color:var(--grey);font-weight:500}
+.gd-ans{font-size:.96rem;margin:0 0 22px;opacity:0;transition:opacity .45s;
+  color:var(--grey)}
+.gd-ans.on{opacity:1}
+.gd-ans strong{color:var(--white);font-weight:600}
+.gd-ans .gd-num{color:var(--ember);font-weight:600;
+  border-bottom:1px dashed rgba(255,112,67,.5)}
+.gd-good .gd-ans .gd-num{color:var(--signal);border-bottom-color:rgba(91,215,245,.5)}
+.gd-cost{font-family:var(--mono);font-size:.76rem;color:var(--ember);
+  border:1px solid rgba(255,112,67,.3);border-radius:2px;padding:9px 12px;
+  margin:0 0 22px;opacity:0;transition:opacity .4s}
+.gd-cost.on{opacity:1}
+.gd-cost b{color:var(--white);font-weight:500}
+.gd-cite{border-left:2px solid rgba(242,239,232,.18);padding:10px 0 10px 14px;
+  margin:0 0 12px;font-size:.85rem;color:var(--grey);opacity:0;
+  transform:translateX(-4px);transition:opacity .4s,transform .4s}
+.gd-cite.on{opacity:1;transform:none}
+.gd-cite .gd-src{display:block;font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.06em;color:var(--copper-lt);margin-bottom:5px}
+.gd-cite strong{color:var(--white);font-weight:600}
+.gd-unknown{border:1px dashed rgba(91,215,245,.4);border-radius:2px;padding:12px 14px;
+  margin:0 0 22px;font-size:.88rem;color:var(--grey);opacity:0;transition:opacity .4s}
+.gd-unknown.on{opacity:1}
+.gd-unknown b{color:var(--signal);font-weight:500}
+.gd-flags{margin-top:auto;padding-top:22px;border-top:1px solid var(--line);
+  list-style:none;padding-left:0;margin-bottom:0}
+.gd-flags li{font-size:.85rem;color:var(--grey);padding:7px 0 7px 24px;
+  position:relative;opacity:0;transform:translateY(5px);
+  transition:opacity .4s,transform .4s}
+.gd-flags li.on{opacity:1;transform:none}
+.gd-flags li::before{position:absolute;left:0;top:7px;font-family:var(--mono);
+  font-size:.8rem}
+.gd-bad .gd-flags li::before{content:"\2715";color:var(--ember)}
+.gd-good .gd-flags li::before{content:"\2713";color:var(--signal)}
+.gd-flags li b{color:var(--white);font-weight:500}
+.gd-price{font-family:var(--mono);font-size:.78rem;color:var(--grey-d);
+  border-left:2px solid var(--copper);padding-left:14px;margin:32px auto 0;
+  max-width:62ch;text-align:left}
+.gd-price b{color:var(--grey);font-weight:400}
+@media(prefers-reduced-motion:reduce){
+  .gd-step,.gd-ans,.gd-cite,.gd-unknown,.gd-cost,.gd-flags li{transition-duration:.01ms}
+}
 </style>
 <meta content="de_DE" property="og:locale"/><link href="https://quenora.ai/de/work" rel="canonical"/><link href="https://quenora.ai/work" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/work" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/work" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/work" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de/work#page","url":"https://quenora.ai/de/work","name":"Projektmuster, ehrlich benannt.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Projektmuster und die Branchen, in denen Quenora Consulting arbeitet.","breadcrumb":{"@id":"https://quenora.ai/de/work#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/de/work#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://quenora.ai/de"},{"@type":"ListItem","position":2,"name":"Projektmuster, ehrlich benannt.","item":"https://quenora.ai/de/work"}]}]}</script></head>
 <body>
@@ -454,6 +536,53 @@ footer nav{display:block}
 </div>
 </section>
 <div class="wrap"><div class="divider"><i></i></div></div>
+<!-- ══ The demo, live on the page rather than described ═══════════════════
+     Four questions people actually put to an internal assistant. Both panels
+     run in the browser from fixed data — no API, no key, no per-visitor cost.
+     The scenario content sits in the DOM rather than in JavaScript strings so
+     that the localisation build reaches it like any other page. -->
+<section class="section-pad" id="governed">
+<div class="wrap">
+<div class="section-head rv">
+<div class="kicker">Sehen, statt uns zu glauben</div>
+<h2>Dieselbe Frage, zweimal beantwortet</h2>
+<p style="max-width:64ch;margin:18px auto 0">Vier Fragen, die Menschen einem internen Assistenten tatsächlich stellen. Die linke Seite ist nie ein Strohmann: Jede Antwort dort ist flüssig, konkret und vollkommen plausibel. Genau das ist das Problem. Die gestrichelt unterstrichenen Zahlen sind die erfundenen.</p>
+</div>
+<div aria-label="Szenario" class="gd-picker rv" role="tablist">
+<button aria-controls="gdAsk" aria-selected="true" class="gd-tab" role="tab" type="button">Finanzen · Rechnung</button>
+<button aria-controls="gdAsk" aria-selected="false" class="gd-tab" role="tab" type="button">Personal · Elternzeit</button>
+<button aria-controls="gdAsk" aria-selected="false" class="gd-tab" role="tab" type="button">Daten · DSGVO</button>
+<button aria-controls="gdAsk" aria-selected="false" class="gd-tab" role="tab" type="button">Support · SLA</button>
+</div>
+<div class="gd-ask rv" id="gdAsk">
+<div class="gd-q">
+<span class="kicker" id="gdWho">Die Frage, aus der Kreditorenbuchhaltung</span>
+<p id="gdQ">„Rechnung INV-88214, 48.900 € von der Rehder GmbH. Sie stimmt nicht mit der Bestellung überein. Kann ich sie buchen?“</p>
+</div>
+<button class="gd-run" id="gdRun" type="button">Beide ausführen</button>
+</div>
+<div class="gd-pair rv">
+<div class="gd-panel gd-bad">
+<div class="gd-head"><h3>Ohne Governance</h3><span class="gd-clock" id="gdClkBad">—</span></div>
+<p class="gd-step" id="gdStepBad">▶ antwortet</p>
+<div class="gd-ans" id="gdAnsBad"></div>
+<p class="gd-cost" id="gdCostBad"></p>
+<ul class="gd-flags" id="gdFlagsBad"></ul>
+</div>
+<div class="gd-panel gd-good">
+<div class="gd-head"><h3>Mit Governance</h3><span class="gd-clock" id="gdClkGood">—</span></div>
+<div id="gdStepsGood"></div>
+<div id="gdCitesGood"></div>
+<div class="gd-ans" id="gdAnsGood"></div>
+<div class="gd-unknown" id="gdUnkGood"></div>
+<ul class="gd-flags" id="gdFlagsGood"></ul>
+</div>
+</div>
+<p class="gd-price rv"><b>Der ehrliche Preis:</b> die Antwort mit Governance dauert rund
+<span id="gdDelta">2,3 s</span> länger und liest dafür zwei Dokumente. Das ist der Preis, und wir nennen ihn, statt ihn zu verbergen. Dokumente, Zahlen und Referenznummern auf dieser Seite sind durchgerechnete Beispiele; nichts hier gibt vor, ein echter Kunde zu sein.</p>
+</div>
+</section>
+<div class="wrap"><div class="divider"><i></i></div></div>
 <section class="section-pad" style="background:var(--ink-2);border-block:1px solid var(--line)">
 <div class="wrap">
 <div class="section-head rv">
@@ -489,6 +618,115 @@ footer nav{display:block}
 </div>
 </div>
 </section>
+<div hidden="" id="gdData">
+<div class="gd-scn">
+<p class="gd-who">Die Frage, aus der Kreditorenbuchhaltung</p>
+<p class="gd-qq">„Rechnung INV-88214, 48.900 € von der Rehder GmbH. Sie stimmt nicht mit der Bestellung überein. Kann ich sie buchen?“</p>
+<div class="gd-d-bad">Ja — das liegt innerhalb der Toleranz. Der Drei-Wege-Abgleich erlaubt eine Abweichung von <span class="gd-num">3 % oder 1.500 €</span>, je nachdem, was niedriger ist. Eine Differenz von 2.040 € auf eine Bestellung über 46.860 € wird also automatisch freigegeben. Buchen Sie auf die ursprüngliche Bestellposition; das System gleicht die Differenz zum Periodenabschluss aus.</div>
+<div class="gd-d-cost">Wenn gebucht: <b>2.040 € zu viel gezahlt</b>, und der Doppelbeleg in der zweiten ERP-Instanz bleibt unbemerkt.</div>
+<ul class="gd-d-flags">
+<li><b>Keine Quelle.</b> Welche Richtlinie nennt 3 %? Nichts zum Nachschlagen.</li>
+<li><b>Ein System.</b> Die beiden anderen ERP-Instanzen hat es nie angesehen.</li>
+<li><b>Nicht reproduzierbar.</b> Nächstes Quartal gefragt, andere Toleranz erhalten.</li>
+<li><b>Nichts für eine Prüfung.</b> Kein Nachweis, dass die Frage je gestellt wurde.</li>
+<li><b>Selbstbewusst falsch liest sich genau wie selbstbewusst richtig.</b></li>
+</ul>
+<ul class="gd-d-steps">
+<li>Identität wird geklärt · <b>Kreditorenbuchhaltung, Gesellschaft DE</b></li>
+<li>Abruf · <b>Drei-Wege-Abgleich · Toleranz · Wareneingang</b></li>
+<li>Abfrage · <b>3 ERP-Instanzen nach INV-88214</b></li>
+<li>4 von 21 Passagen behalten · <b>Schwelle 0,71</b></li>
+</ul>
+<ul class="gd-d-cites">
+<li><span class="gd-src">Kreditorenhandbuch v6.1 · §4.3 · Stand 2026-05-02</span>Preisabweichungen werden automatisch freigegeben bis <strong>1 % oder 250 €</strong>, je nachdem, was niedriger ist. Alles darüber erfordert die Freigabe des bestellenden Einkäufers.</li>
+<li><span class="gd-src">ERP-Abfrage · 3 Instanzen · live</span>INV-88214 liegt vor in <strong>NAV-DE und SAP-AT</strong>. Die österreichische Instanz führt sie bereits als <strong>vorerfasst</strong>.</li>
+</ul>
+<div class="gd-d-good"><strong>Nein — zurückhalten.</strong> Die Abweichung beträgt <span class="gd-num">4,35 %</span>, über der Grenze von <span class="gd-num">1 %</span>  — daher ist die Freigabe des Einkäufers nötig. Zudem ist sie <strong>in SAP-AT bereits vorerfasst</strong>: eine Buchung hier erzeugt eine Doppelzahlung.</div>
+<div class="gd-d-unk"><b>Nicht beantwortet:</b> Ich kann nicht bestimmen, welche Gesellschaft diese Rechnung tragen soll. Bestellung und Wareneingang liegen in unterschiedlichen Instanzen, und keine der abgerufenen Regeln entscheidet das. Das muss ein Mensch tun.</div>
+</div>
+<div class="gd-scn">
+<p class="gd-who">Die Frage, von einer HR-Business-Partnerin</p>
+<p class="gd-qq">„Eine Mitarbeiterin in Deutschland fragt nach Elternzeit. Worauf hat sie Anspruch, und zahlen wir etwas dazu?“</p>
+<div class="gd-d-bad">Elternzeit beträgt bis zu drei Jahre pro Kind, und das Elterngeld ersetzt <span class="gd-num">67 %</span> des Nettoentgelts für zwölf Monate. Zusätzlich zum gesetzlichen Betrag sieht unsere Betriebsvereinbarung einen Firmenzuschuss von <span class="gd-num">15 % des Bruttogehalts</span> für die ersten sechs Monate vor, den die Personalabteilung nach Genehmigung der Elternzeit automatisch auszahlt.</div>
+<div class="gd-d-cost">Wenn darauf vertraut wird: eine <b>Zusage, die wir nie gegeben haben</b>, schriftlich, gegenüber einer Mitarbeiterin.</div>
+<ul class="gd-d-flags">
+<li><b>Gesetz und Richtlinie vermischt.</b> Das Gesetz stimmt; der Firmenteil ist erfunden.</li>
+<li><b>Keine Quelle.</b> Keine Betriebsvereinbarung, keine Klausel, kein Datum.</li>
+<li><b>Keine Prüfung der Rechtsordnung.</b> Es hat nie geprüft, welche Gesellschaft sie beschäftigt.</li>
+<li><b>Nichts für eine Prüfung</b>, und dieser Fall landet in einer Personalakte.</li>
+<li><b>Selbstbewusst falsch liest sich genau wie selbstbewusst richtig.</b></li>
+</ul>
+<ul class="gd-d-steps">
+<li>Identität wird geklärt · <b>HR-Business-Partnerin · Gesellschaft DE</b></li>
+<li>Abruf · <b>Elternzeit · Elterngeld · Firmenzuschuss</b></li>
+<li>Trennung · <b>gesetzlicher Quellen von interner Richtlinie</b></li>
+<li>3 von 17 Passagen behalten · <b>Schwelle 0,71</b></li>
+</ul>
+<ul class="gd-d-cites">
+<li><span class="gd-src">BEEG §15 · Gesetz · konsolidiert 2026-01</span>Anspruch auf <strong>bis zu drei Jahre</strong> Elternzeit pro Kind, davon 24 Monate zwischen dem dritten und achten Geburtstag.</li>
+<li><span class="gd-src">Betriebsvereinbarung 2024-07 · §9</span>Regelt die zeitliche Lage unbezahlter Freistellung und Rückkehrrechte. <strong>Ein Entgeltzuschuss ist nicht geregelt.</strong></li>
+</ul>
+<div class="gd-d-good"><strong>Gesetzlicher Anspruch ja. Ein Zuschuss nein.</strong> Bis zu drei Jahre Elternzeit nach BEEG §15. Die Betriebsvereinbarung regelt zeitliche Lage und Rückkehrrechte und sieht <span class="gd-num">keinen Entgeltzuschuss vor</span>.</div>
+<div class="gd-d-unk"><b>Nicht beantwortet:</b> Das Elterngeld berechnet die Elterngeldstelle aus dem Nettoeinkommen, nicht wir. Deshalb nenne ich keinen Prozentsatz, als wäre er ihr Betrag. Verweisen Sie sie an die Behörde.</div>
+</div>
+<div class="gd-scn">
+<p class="gd-who">Die Frage, von einer Datenverantwortlichen</p>
+<p class="gd-qq">„Darf ich unsere Kundenliste für den Piloten an den neuen Analytics-Anbieter senden?“</p>
+<div class="gd-d-bad">Ja, sofern die Daten vorher pseudonymisiert werden. Entfernen Sie Namen und E-Mail-Adressen, behalten Sie die Kundennummer, und der Export fällt nicht unter die DSGVO, weil der Anbieter niemanden re-identifizieren kann. Übliche Praxis für einen <span class="gd-num">30-tägigen Piloten</span> — ein vollständiger Auftragsverarbeitungsvertrag ist erst nötig, sobald die Zusammenarbeit in <span class="gd-num">Produktion</span>.</div>
+<div class="gd-d-cost">Wenn umgesetzt: eine <b>unrechtmäßige Übermittlung</b>, meldepflichtig nach Art. 33 innerhalb von 72 Stunden.</div>
+<ul class="gd-d-flags">
+<li><b>Juristisch falsch — und flüssig formuliert.</b> Pseudonymisierte Daten bleiben personenbezogene Daten.</li>
+<li><b>Erfundene Schwelle.</b> Eine Pilot-Ausnahme von Art. 28 gibt es nicht.</li>
+<li><b>Keine Anbieterprüfung.</b> Ob ein Auftragsverarbeitungsvertrag besteht, hat es nie geprüft.</li>
+<li><b>Nichts für eine Prüfung</b> — und genau diese Antwort würde eine Aufsichtsbehörde sehen wollen.</li>
+<li><b>Selbstbewusst falsch liest sich genau wie selbstbewusst richtig.</b></li>
+</ul>
+<ul class="gd-d-steps">
+<li>Identität wird geklärt · <b>Datenverantwortliche · Gesellschaft EU</b></li>
+<li>Abruf · <b>Auftragsverarbeitung · Übermittlung · Pseudonymisierung</b></li>
+<li>Prüfung · <b>Lieferantenregister auf einen unterzeichneten AV-Vertrag</b></li>
+<li>3 von 12 Passagen behalten · <b>Schwelle 0,71</b></li>
+</ul>
+<ul class="gd-d-cites">
+<li><span class="gd-src">DSGVO Art. 4 Nr. 5 und Erwägungsgrund 26</span>Pseudonymisierte Daten, die sich mithilfe zusätzlicher Informationen einer Person zuordnen lassen, <strong>bleiben personenbezogene Daten</strong>.</li>
+<li><span class="gd-src">Lieferantenregister · live abgefragt</span>Für diesen Anbieter ist kein Auftragsverarbeitungsvertrag hinterlegt. <strong>Status: nicht freigegeben.</strong></li>
+</ul>
+<div class="gd-d-good"><strong>Nein — noch nicht.</strong> Pseudonymisierte Daten bleiben personenbezogene Daten, also gilt Art. 28 — und das Register weist <span class="gd-num">keinen unterzeichneten AV-Vertrag</span> mit diesem Anbieter aus. Die Übermittlung setzt den Vertrag voraus.</div>
+<div class="gd-d-unk"><b>Nicht beantwortet:</b> ob ein berechtigtes Interesse den Piloten tragen könnte. Das ist eine Entscheidung des Datenschutzbeauftragten, kein Rechercheergebnis, und ich erfinde sie nicht.</div>
+</div>
+<div class="gd-scn">
+<p class="gd-who">Die Frage, von einem Support-Manager</p>
+<p class="gd-qq">„Ein Kunde sagt, wir hätten das Vier-Stunden-Reaktions-SLA diesen Monat zweimal verletzt. Schulden wir ihm Gutschriften?“</p>
+<div class="gd-d-bad">Ja. Zwei Verletzungen im rollierenden Monat lösen die übliche Servicegutschrift von <span class="gd-num">5 % der Monatsgebühr</span> je Vorfall aus, also <span class="gd-num">10 %</span> Nachlass auf die nächste Rechnung. Erfassen Sie das direkt als Gutschrift und vermerken Sie es am Konto — auf dieser Höhe ist keine Freigabe nötig.</div>
+<div class="gd-d-cost">Wenn gewährt: eine <b>Gutschrift, die wir nicht schuldeten</b>, und ein schriftlich gesetzter Präzedenzfall.</div>
+<ul class="gd-d-flags">
+<li><b>Kein Vertrag gelesen.</b> Welche Vertragsstufe dieser Kunde hat, hat es nie geprüft.</li>
+<li><b>Erfundene Zahlen.</b> Die 5 % und die Schwelle kamen aus dem Nichts.</li>
+<li><b>Keine Definition der Frist.</b> Reaktionszeit ab Ticket-Erstellung oder ab Triage?</li>
+<li><b>Nichts für eine Prüfung</b>, und Gutschriften sind eine Umsatzkorrektur.</li>
+<li><b>Selbstbewusst falsch liest sich genau wie selbstbewusst richtig.</b></li>
+</ul>
+<ul class="gd-d-steps">
+<li>Identität wird geklärt · <b>Support-Manager · EMEA</b></li>
+<li>Abruf · <b>Servicegutschriften · Reaktions-SLA · Vertragsstufe</b></li>
+<li>Prüfung · <b>die Vertragsstufe dieses Kontos</b></li>
+<li>4 von 19 Passagen behalten · <b>Schwelle 0,71</b></li>
+</ul>
+<ul class="gd-d-cites">
+<li><span class="gd-src">Rahmenvertrag Anlage 2 · Business-Stufe · unterzeichnet 2025-11</span>Reaktionsziel vier Geschäftsstunden. Gutschriften entstehen ab der <strong>dritten</strong> Verletzung im Kalendermonat, mit <strong>2 % der Monatsgebühr</strong> je Verletzung.</li>
+<li><span class="gd-src">Ticket-Protokoll · live abgefragt</span>Zwei Verletzungen in diesem Monat erfasst. Beide gemessen ab <strong>der ersten Antwort durch einen Menschen</strong>.</li>
+</ul>
+<div class="gd-d-good"><strong>Noch nicht — zwei liegt unter der Schwelle.</strong> Dieses Konto hat die Business-Stufe: Gutschriften beginnen ab der <span class="gd-num">dritten</span> Verletzung, mit <span class="gd-num">2 %</span> je. Bei zwei Verletzungen ist vertraglich nichts geschuldet.</div>
+<div class="gd-d-unk"><b>Nicht beantwortet:</b> ob dennoch aus Kundenbeziehungsgründen eine Gutschrift gewährt wird. Das ist eine kaufmännische Entscheidung und gehört zu einem Menschen, nicht zu diesem System.</div>
+</div>
+<ul id="gdGoodFlags">
+<li><b>Quellen sichtbar.</b> Beide Passagen oben, mit Abschnitt und Änderungsdatum.</li>
+<li><b>Festgeschrieben.</b> Modellversion, Prompt-Version und Index-Stand sind festgehalten.</li>
+<li><b>Reproduzierbar.</b> Gleiche Eingaben, gleicher Abruf, gleiche Antwort — wiederholbar.</li>
+<li><b>Prüfeintrag geschrieben.</b> Wer gefragt hat, was gelesen wurde, was gesagt wurde.</li>
+<li><b>Sagt, was es nicht weiß</b>, statt die Lücke zu füllen.</li>
+</ul>
+</div>
 </main>
 <footer>
 <div class="wrap">
@@ -1001,6 +1239,117 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
   } else { seen = true; go(); }
 })();
 
+</script>
+<script>
+/* Governed vs ungoverned. Scenario content is read from #gdData rather than
+   held in JavaScript strings, so the localisation build translates it the way
+   it translates the rest of the page. */
+(function(){
+  /* Guard on a capability, not on truthiness. The headless harness that
+     verifies the field figure runs every script on this page against a
+     minimal DOM stub, where getElementById returns an object that is truthy
+     but has no querySelectorAll — so "if (!data) return" sailed past and
+     took the figure check down with it. */
+  var data = document.getElementById('gdData');
+  if (!data || typeof data.querySelectorAll !== 'function') return;
+  var run = document.getElementById('gdRun');
+  if (!run) return;
+  var scns = [].slice.call(data.querySelectorAll('.gd-scn')),
+      tabs = [].slice.call(document.querySelectorAll('.gd-tab')),
+      reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+      BAD = 1200, GOOD = 3500,
+      timers = [], clocks = [];
+
+  function el(id){ return document.getElementById(id); }
+  function at(ms, fn){ timers.push(setTimeout(fn, ms)); }
+  function clear(){
+    timers.forEach(clearTimeout); timers = [];
+    clocks.forEach(function(f){ f(); }); clocks = [];
+  }
+  function off(){
+    ['.gd-step','.gd-ans','.gd-cite','.gd-unknown','.gd-cost','.gd-flags li']
+      .forEach(function(s){
+        [].forEach.call(document.querySelectorAll(s), function(e){
+          e.classList.remove('on'); });
+      });
+    el('gdStepBad').classList.add('on');
+    el('gdClkBad').innerHTML = '&mdash;';
+    el('gdClkGood').innerHTML = '&mdash;';
+  }
+  function html(node){ return node ? node.innerHTML : ''; }
+
+  function load(i){
+    clear();
+    var s = scns[i];
+    tabs.forEach(function(t, n){
+      t.setAttribute('aria-selected', n === i ? 'true' : 'false'); });
+    el('gdWho').textContent = s.querySelector('.gd-who').textContent;
+    el('gdQ').innerHTML     = html(s.querySelector('.gd-qq'));
+    el('gdAnsBad').innerHTML  = html(s.querySelector('.gd-d-bad'));
+    el('gdCostBad').innerHTML = html(s.querySelector('.gd-d-cost'));
+    el('gdAnsGood').innerHTML = html(s.querySelector('.gd-d-good'));
+    el('gdUnkGood').innerHTML = html(s.querySelector('.gd-d-unk'));
+    el('gdFlagsBad').innerHTML  = html(s.querySelector('.gd-d-flags'));
+    el('gdFlagsGood').innerHTML = html(el('gdGoodFlags'));
+    el('gdStepsGood').innerHTML = [].map.call(
+      s.querySelectorAll('.gd-d-steps li'), function(li){
+        return '<p class="gd-step">&#9654; ' + li.innerHTML + '</p>'; }).join('');
+    el('gdCitesGood').innerHTML = [].map.call(
+      s.querySelectorAll('.gd-d-cites li'), function(li){
+        return '<div class="gd-cite">' + li.innerHTML + '</div>'; }).join('');
+    off();
+    run.disabled = false;
+    run.textContent = run.getAttribute('data-run') || 'Run both';
+  }
+
+  /* The clock runs because the latency difference is part of the argument
+     rather than something to disguise. */
+  function clock(node, ms){
+    var t0 = (window.performance || Date).now(), id;
+    (function tick(){
+      var d = (window.performance || Date).now() - t0;
+      if (d >= ms){ node.textContent = (ms/1000).toFixed(1) + 's'; return; }
+      node.textContent = (d/1000).toFixed(1) + 's';
+      id = requestAnimationFrame(tick);
+    })();
+    clocks.push(function(){ cancelAnimationFrame(id); });
+  }
+
+  function stagger(sel, from, gap, k){
+    [].forEach.call(document.querySelectorAll(sel), function(e, n){
+      at(from + n*gap*k, function(){ e.classList.add('on'); });
+    });
+  }
+
+  function play(){
+    clear(); off();
+    if (!run.getAttribute('data-run')) run.setAttribute('data-run', run.textContent);
+    run.disabled = true;
+    var k = reduce ? 0.12 : 1;
+
+    clock(el('gdClkBad'), BAD*k);
+    at(BAD*k, function(){
+      el('gdStepBad').classList.remove('on');
+      el('gdAnsBad').classList.add('on');
+    });
+    at((BAD + 450)*k, function(){ el('gdCostBad').classList.add('on'); });
+    stagger('#gdFlagsBad li', (BAD + 900)*k, 380, k);
+
+    clock(el('gdClkGood'), GOOD*k);
+    stagger('.gd-good .gd-step', 120*k, 480, k);
+    stagger('.gd-good .gd-cite', 1900*k, 420, k);
+    at(GOOD*k, function(){ el('gdAnsGood').classList.add('on'); });
+    at((GOOD + 500)*k, function(){ el('gdUnkGood').classList.add('on'); });
+    stagger('#gdFlagsGood li', (GOOD + 1000)*k, 380, k);
+    at((GOOD + 2900)*k, function(){ run.disabled = false; });
+  }
+
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ load(i); }); });
+  run.addEventListener('click', play);
+  el('gdDelta').textContent = ((GOOD - BAD)/1000).toFixed(1) + 's';
+  load(0);
+})();
 </script>
 <script data-generated="langsel">
 (function(){

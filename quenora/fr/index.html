@@ -3192,6 +3192,31 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
      it costs a visitor who never asks anything nothing at all. */
   var IDX = null, IDXSTATE = 'cold';
 
+  /* Everything inside a <script> is invisible to the localisation build, so
+     without this the German page refused in English and matched on English
+     synonyms — "wer seid ihr" and "wo sitzt ihr" both came back empty. Same
+     mechanism as the engineering page's figure labels. */
+  var LANG = document.documentElement.lang || 'en';
+  var UI = {
+    en:{ none:'Nothing on this site matches that, and I would rather say so than find words in common and call it an answer. Email <a href="mailto:info@quenora.ai">info@quenora.ai</a>, or press Start a conversation below.',
+         many:function(n){ return n+' passages from this site.'; },
+         one:'One passage from this site.',
+         notit:'Not what you asked?', email:'Email us',
+         team:'Written by the team.', more:'Ask something else' },
+    de:{ none:'Dazu steht nichts auf dieser Website, und das sage ich Ihnen lieber, als gemeinsame Wörter zu finden und es eine Antwort zu nennen. Schreiben Sie an <a href="mailto:info@quenora.ai">info@quenora.ai</a> oder starten Sie unten ein Gespräch.',
+         many:function(n){ return n+' Passagen von dieser Website.'; },
+         one:'Eine Passage von dieser Website.',
+         notit:'Nicht das, was Sie gefragt haben?', email:'Schreiben Sie uns',
+         team:'Vom Team geschrieben.', more:'Fragen Sie etwas anderes' },
+    fr:{ none:'Rien sur ce site ne correspond, et je préfère vous le dire plutôt que de trouver des mots en commun et d’appeler cela une réponse. Écrivez à <a href="mailto:info@quenora.ai">info@quenora.ai</a>, ou engagez la conversation ci-dessous.',
+         many:function(n){ return n+' passages de ce site.'; },
+         one:'Un passage de ce site.',
+         notit:'Ce n’est pas votre question ?', email:'Écrivez-nous',
+         team:'Écrit par l’équipe.', more:'Posez une autre question' }
+  }[LANG] || null;
+  if(!UI) UI = { none:'Nothing on this site matches that.', many:function(n){return n+' passages.';},
+                 one:'One passage.', notit:'', email:'Email', team:'', more:'' };
+
   function fold(s){
     return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
   }
@@ -3250,8 +3275,37 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     certified:['iso','soc','attestation'], compliance:['governance','iso','soc'],
     big:['firm','small','size','depth'], many:['firm','small','size'],
     people:['firm','team','size','depth'], headcount:['firm','size','depth'],
-    staff:['firm','team','size']
+    staff:['firm','team','size'],
+    who:['hiring','founder','firm','balaji','founded'],
+    you:['quenora','firm','hiring'], about:['hiring','founder','firm','founded'],
+    behind:['founder','hiring','balaji'], founder:['balaji','hiring','founded'],
+    based:['heilbronn','germany','where'], where:['heilbronn','germany','based'],
+    located:['heilbronn','germany','based'], office:['heilbronn','germany','based'],
+    country:['heilbronn','germany'], languages:['german','french','english'],
+    language:['german','french','english']
   };
+  /* the same bridge in the two other published languages */
+  var ALIAS_DE = {
+    wer:['balaji','grunder','firma','einstellen'], ihr:['quenora','firma'],
+    seid:['quenora','firma'], sitzt:['heilbronn','deutschland','sitz'],
+    wo:['heilbronn','deutschland','sitz'], sitz:['heilbronn','deutschland'],
+    kostet:['preis','honorar','festpreis'], preis:['kostet','honorar'],
+    lange:['wochen','phasen','vierzehn'], dauer:['wochen','phasen'],
+    dauert:['wochen','phasen'], team:['firma','grunder','gross'],
+    gehort:['behalten','ihnen','ubergabe'], sicherheit:['governance','zugriff'],
+    zertifizierung:['iso','soc','anspruch'], sprachen:['deutsch','franzosisch','englisch']
+  };
+  var ALIAS_FR = {
+    qui:['balaji','fondateur','cabinet','recrutez'], etes:['quenora','cabinet'],
+    situe:['heilbronn','allemagne'], base:['heilbronn','allemagne'],
+    coute:['prix','tarif','forfait'], prix:['coute','tarif'],
+    duree:['semaines','phases','quatorze'], combien:['semaines','prix'],
+    equipe:['cabinet','fondateur','taille'],
+    appartient:['gardez','votres','transmission'],
+    certification:['iso','soc'], langues:['allemand','francais','anglais']
+  };
+  if(LANG==='de') for(var dk in ALIAS_DE) ALIAS[dk]=ALIAS_DE[dk];
+  if(LANG==='fr') for(var fk in ALIAS_FR) ALIAS[fk]=ALIAS_FR[fk];
   function expand(qs){
     var seen={}, out=[];
     qs.forEach(function(t){
@@ -3281,7 +3335,14 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
      on volume alone. */
   function rank(q){
     if(!IDX) return [];
-    var raw=terms(q), qs=expand(raw), k1=1.5, b=0.75, out=[];
+    var raw=terms(q);
+    /* "who are you" is three stopwords, so the query came out empty and the
+       panel refused to answer the most basic question a visitor asks. When
+       stripping leaves nothing, keep the words. */
+    if(!raw.length){
+      raw = fold(q).split(/[^a-z0-9]+/).filter(function(t){ return t.length>2; });
+    }
+    var qs=expand(raw), k1=1.5, b=0.75, out=[];
     if(!raw.length) return [];
     IDX.docs.forEach(function(d){
       var sc=0, hit=0;
@@ -3306,10 +3367,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   function answer(q){
     var hits = rank(q);
     if(!hits.length){
-      bot('Nothing on this site matches that, and I would rather say so than '
-        + 'find words in common and call it an answer. Email '
-        + '<a href="mailto:info@quenora.ai">info@quenora.ai</a>, or press '
-        + 'Start a conversation below.');
+      bot(UI.none);
       return;
     }
     /* Measuring this made the design decision. "can you build me a chatbot for
@@ -3333,14 +3391,31 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
       html += '</span>';
     });
     html += '<span class="ai-foot">'
-         +  (top.length > 1 ? top.length + ' passages from this site.' : 'One passage from this site.')
-         +  ' Not what you asked? <a href="mailto:info@quenora.ai">Email us</a>.</span>';
+         +  (top.length > 1 ? UI.many(top.length) : UI.one)
+         +  ' ' + UI.notit + ' <a href="mailto:info@quenora.ai">' + UI.email + '</a>.</span>';
     bot(html);
   }
 
   function ask(q){
     q=(q||'').trim(); if(!q) return;
     add(q,'user');
+    /* The curated answers were written for the questions buyers actually ask
+       and are better than any passage retrieval can surface for them. The
+       rewrite left them unused; they belong in front of it, with retrieval
+       carrying everything they do not cover. */
+    /* the curated answers are English prose and were never translated,
+       so a German visitor got English text. Retrieval covers those pages,
+       and its passages are already in their language. */
+    var kq = LANG==='en' ? q.toLowerCase() : '\u0000';
+    for(var ci=0; ci<A.length; ci++){
+      for(var cj=0; cj<A[ci][0].length; cj++){
+        if(kq.indexOf(A[ci][0][cj]) > -1){
+          bot(esc(A[ci][1]) + '<span class="ai-foot">' + UI.team
+            + ' <a href="mailto:info@quenora.ai">' + UI.more + '</a>.</span>');
+          return;
+        }
+      }
+    }
     if(IDX){ answer(q); return; }
     if(IDXSTATE==='failed'){ answer(q); return; }
     /* No placeholder bubble: bot() already shows a typing indicator, and the

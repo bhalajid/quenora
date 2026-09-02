@@ -57,7 +57,10 @@ def tokens(s):
     return [t for t in re.split(r"[^a-z0-9]+", fold(s)) if len(t) > 2 and t not in STOP]
 
 
-def chunks_for(path, page_url):
+COVERS = {"en": "Covers", "de": "Umfasst", "fr": "Couvre"}
+
+
+def chunks_for(path, page_url, lang="en"):
     """One chunk per heading: the heading plus the prose under it."""
     html = open(path, encoding="utf-8").read()
     soup = BeautifulSoup(html, "html.parser")
@@ -71,8 +74,21 @@ def chunks_for(path, page_url):
     # A capability's description is a bare <div>, not a <p>, so every one of
     # the nine sections had an empty body and was dropped whole — keywords
     # included. Leaf divs (no element children) are prose here.
-    for el in main.find_all(["h1", "h2", "h3", "p", "li", "figcaption", "span", "div"]):
+    # dt/dd hold the About facts — Founded 2025, Based Heilbronn — and td/th
+    # the release-gate table. Both were outside the element list, so "where
+    # are you based" had nothing to find.
+    for el in main.find_all(["h1", "h2", "h3", "p", "li", "figcaption", "span",
+                             "div", "dt", "dd", "td", "th"]):
         if el.name == "div" and el.find(True) is not None:
+            # A div whose children are all inline is a labelled fact, not a
+            # layout container: <div class="wfact"><span>Based</span><b>
+            # Heilbronn, Germany</b></div>. Skipping every div with children
+            # meant "where are you based" had nothing to find.
+            if el.find(["p", "div", "ul", "ol", "dl", "section",
+                        "h1", "h2", "h3", "h4"]) is None \
+               and len(" ".join(el.get_text(" ").split())) < 60:
+                if cur is not None:
+                    cur["tags"].append(" ".join(el.get_text(" ").split()))
             continue
         cls = el.get("class") or []
         is_chip = el.name == "span" and ("tag" in cls or "chip" in cls)
@@ -88,7 +104,14 @@ def chunks_for(path, page_url):
         # and the closest thing it has to the vocabulary a buyer types. A
         # capability nobody can find is a capability the firm does not appear
         # to have. They are collected here instead.
-        if (is_chip or el.name == "li") and len(text) < 60:
+        if el.name == "dt":
+            cur and cur.setdefault("dl", []).append(text)
+            continue
+        if el.name == "dd" and cur and cur.get("dl"):
+            # pair the value with the label it answers
+            cur["tags"].append(cur["dl"].pop() + ": " + text)
+            continue
+        if (is_chip or el.name in ("li", "td", "th")) and len(text) < 60:
             if cur is not None:
                 cur["tags"].append(text)
             continue
@@ -124,7 +147,7 @@ def chunks_for(path, page_url):
         # lands on the capability rather than on nothing
         tags = c.get("tags") or []
         if tags:
-            packed.append({"h": c["h"], "t": "Covers: " + ", ".join(tags) + ".",
+            packed.append({"h": c["h"], "t": COVERS[lang] + ": " + ", ".join(tags) + ".",
                            "u": c["url"]})
     return packed
 
@@ -137,7 +160,7 @@ def build(lang, sub):
             continue
         url = ("/" + sub + "/" if sub else "/") + (
             "" if page == "index.html" else page[:-len(".html")])
-        docs += chunks_for(path, url)
+        docs += chunks_for(path, url, lang)
 
     # Ship the passages and nothing else. Shipping precomputed term
     # frequencies tripled the file and put a second tokeniser in the browser

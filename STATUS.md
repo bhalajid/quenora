@@ -29,7 +29,7 @@ Each was released as its own commit so it can be reverted alone.
 |---|---------|-------|--------|
 | 1 | Site assistant (real chatbot, no tokens burned) | **Done** | `00cd8e7` + 3 fixes |
 | 2 | Contact QR → vCard + scan count | **Done** | `c3f7fcd` |
-| 3 | `llms.txt` / agent-readable structure | **Done** | `PENDING` |
+| 3 | `llms.txt` / agent-readable structure | **Done** | `2dda952` |
 | 4 | Wallet pass | **Google done, Apple blocked** | `983294f` |
 | 5 | Governed-vs-ungoverned demo | **NOT STARTED — the last one** | — |
 

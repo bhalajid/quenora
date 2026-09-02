@@ -588,6 +588,17 @@ body.clg .cur::after{opacity:1}
   border:1px solid var(--line);color:var(--t2);cursor:pointer;
   background:none;font-family:inherit;transition:.2s}
 .ai-chip:hover{border-color:var(--copper);color:var(--t1);background:rgba(201,122,60,.13)}
+/* Every answer names where it came from, because a passage without a source
+   is indistinguishable from something invented. */
+.ai-first,.ai-more{display:block}
+.ai-more{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);color:var(--t2)}
+.ai-src{display:block;margin-top:7px;font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--copper-lt);border-bottom:none}
+.ai-foot{display:block;margin-top:12px;padding-top:9px;
+  border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;
+  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
+.ai-foot a{color:var(--copper-lt)}
 .ai-form{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--line)}
 .ai-form input{flex:1;background:rgba(242,239,232,.05);border:1px solid var(--line);
   border-radius:9px;padding:9px 12px;color:var(--t1);font-family:inherit;
@@ -1569,7 +1580,7 @@ notice</a>.</span></label>
 </button>
 <div aria-label="Quenora assistant" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
 <div class="ai-head"><div aria-hidden="true" class="ai-dot"></div>
-<div><b>Faccia una domanda su Quenora</b><span>Answers written by us, not generated</span></div>
+<div><b>Faccia una domanda su Quenora</b><span>Passaggi di questo sito, abbinati alla tua domanda</span></div>
 </div>
 <div aria-live="polite" class="ai-body" id="aiBody" role="log"></div>
 <div class="ai-suggest" id="aiSuggest">
@@ -1585,7 +1596,7 @@ notice</a>.</span></label>
 <input autocomplete="off" id="aiInput" placeholder="Ask a question…" type="text"/>
 <button type="submit">Ask</button>
 </form>
-<div class="ai-foot">Written answers, matched by keyword · not a live model</div>
+<div class="ai-foot">Search over this site · no model, nothing invented</div>
 </div>
 <script>
 /* ═══════════════════════════════════════════════════════════════════
@@ -3205,18 +3216,22 @@ notice</a>.</span></label>
   var opened=false;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function add(t,who){
+  function add(t,who,html){
     var m=document.createElement('div');
-    m.className='ai-msg '+who; m.textContent=t;
+    m.className='ai-msg '+who;
+    /* Anything a visitor typed goes in as text, always — that is the XSS
+       guard and it does not move. Only the panel's own markup, built here
+       from esc()'d passages, is allowed in as HTML. */
+    if(html && who==='bot') m.innerHTML=t; else m.textContent=t;
     body.appendChild(m); body.scrollTop=body.scrollHeight;
   }
   function bot(t){
-    if(reduce){ add(t,'bot'); return; }
+    if(reduce){ add(t,'bot',true); return; }
     var w=document.createElement('div');
     w.className='ai-msg bot';
     w.innerHTML='<span class="ai-typing"><i></i><i></i><i></i></span>';
     body.appendChild(w); body.scrollTop=body.scrollHeight;
-    setTimeout(function(){ w.remove(); add(t,'bot'); }, 520+Math.random()*380);
+    setTimeout(function(){ w.remove(); add(t,'bot',true); }, 420+Math.random()*260);
   }
 
   var A=[
@@ -3250,19 +3265,186 @@ notice</a>.</span></label>
      "Based in Heilbronn, Germany, working internationally."]
   ];
 
+  /* ═══ RETRIEVAL ═══════════════════════════════════════════════════════
+     Answers are passages from this site, ranked against the question with
+     BM25. No model, so it cannot invent a capability the firm does not have
+     — which is the failure the whole page argues against — and no third
+     party ever sees what a visitor typed, so the privacy notice stays true.
+
+     The index is fetched the first time the panel opens, not on page load:
+     it costs a visitor who never asks anything nothing at all. */
+  var IDX = null, IDXSTATE = 'cold';
+
+  function fold(s){
+    return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+  }
+  var STOP = ('a an and are as at be but by for from has have if in into is it its of on or '
+    +'that the their then there these this to was were what when which who will with you your '
+    +'our we us how why can does do not no der die das den dem des ein eine einer eines und '
+    +'oder aber ist sind war waren sein ihre ihr wir uns sie ihnen mit von zu im am auf fur '
+    +'als auch nicht kein wie wer wo wenn dann dass le la les un une des du de et ou mais '
+    +'est sont etait etaient etre leur nos nous vous avec pour dans sur comme aussi ne pas '
+    +'que qui quoi ou quand si').split(' ');
+  var STOPSET = {}; STOP.forEach(function(w){ STOPSET[w]=1; });
+
+  function terms(s){
+    var out=[], parts=fold(s).split(/[^a-z0-9]+/);
+    for(var i=0;i<parts.length;i++){
+      var t=parts[i];
+      if(t.length>2 && !STOPSET[t]){
+        out.push(t);
+        /* one suffix strip, not a stemmer: "certifications" has to reach
+           "certification", and "weeks" has to reach "week". Anything more
+           aggressive starts matching words that only look alike. */
+        if(t.length>4 && /(s|es)$/.test(t)) out.push(t.replace(/(es|s)$/,''));
+      }
+    }
+    return out;
+  }
+
+  /* BM25 is lexical: it cannot know that "how long" is asking about the
+     fourteen weeks, or that "who owns the code" is answered by "you keep
+     everything". This is the bridge — the words buyers use, mapped to the
+     words the site uses. Query side only, so it never distorts a passage.
+     Hand-written and short on purpose: a wrong synonym here surfaces the
+     wrong passage, which is the one failure this design exists to avoid. */
+  var ALIAS = {
+    long:['weeks','phases','fourteen','duration','timeline'],
+    duration:['weeks','phases','fourteen'], timeline:['weeks','phases'],
+    take:['weeks','phases'], time:['weeks','phases'],
+    own:['keep','yours','handover','owner'], owns:['keep','yours','owner'],
+    owner:['keep','yours','handover'], ownership:['keep','yours','handover'],
+    keep:['yours','own','handover'], afterwards:['handover','leave','ends'],
+    cost:['priced','pricing','fee','rate','budget'],
+    price:['priced','pricing','fee','cost'], pricing:['priced','fee','cost'],
+    fee:['priced','pricing','cost'], budget:['priced','fee','cost'],
+    charge:['priced','fee','cost'], expensive:['priced','fee','cost'],
+    change:['governance','control','approvals'],
+    security:['governance','permission','audit','access'],
+    gdpr:['privacy','data','governance'], privacy:['data','governance'],
+    team:['who','firm','founder','size'], size:['firm','team','who'],
+    hire:['firm','team','who'], support:['operations','monitoring','runbook'],
+    start:['frame','first','begin'], contract:['statement','work','exit'],
+    guarantee:['exit','condition','number','measure'],
+    proof:['harness','measure','number','evidence'],
+    references:['reference','case','studies','call'],
+    certification:['iso','soc','attestation','claim'],
+    certifications:['iso','soc','attestation','claim'],
+    certified:['iso','soc','attestation'], compliance:['governance','iso','soc'],
+    big:['firm','small','size','depth'], many:['firm','small','size'],
+    people:['firm','team','size','depth'], headcount:['firm','size','depth'],
+    staff:['firm','team','size']
+  };
+  function expand(qs){
+    var seen={}, out=[];
+    qs.forEach(function(t){
+      if(!seen[t]){ seen[t]=1; out.push(t); }
+      (ALIAS[t]||[]).forEach(function(a){ if(!seen[a]){ seen[a]=1; out.push(a); } });
+    });
+    return out;
+  }
+
+  function indexDocs(docs){
+    var df={}, total=0;
+    docs.forEach(function(d){
+      d.f={}; d.hf={};
+      terms(d.h).forEach(function(t){ d.hf[t]=1; });
+      var ts=terms(d.h+' '+d.t);
+      ts.forEach(function(t){ d.f[t]=(d.f[t]||0)+1; });
+      d.l=ts.length; total+=d.l;
+      for(var t in d.f) df[t]=(df[t]||0)+1;
+    });
+    var N=docs.length, idf={};
+    for(var t in df) idf[t]=Math.log(1+(N-df[t]+0.5)/(df[t]+0.5));
+    return {docs:docs, idf:idf, avg:total/Math.max(1,N)};
+  }
+
+  /* BM25, the standard parameters. k1 damps a term repeated many times in one
+     passage; b normalises for passage length so a long chapter does not win
+     on volume alone. */
+  function rank(q){
+    if(!IDX) return [];
+    var raw=terms(q), qs=expand(raw), k1=1.5, b=0.75, out=[];
+    if(!raw.length) return [];
+    IDX.docs.forEach(function(d){
+      var sc=0, hit=0;
+      qs.forEach(function(t){
+        var f=d.f[t]; if(!f) return;
+        hit++;
+        var idf=IDX.idf[t]||0;
+        sc += idf * (f*(k1+1)) / (f + k1*(1-b+b*d.l/IDX.avg));
+        /* A question that names the heading is asking for that section. The
+           body alone ranked "what does it cost" onto a paragraph about the
+           cost of a bad design, over the chapter actually headed pricing. */
+        if(d.hf[t]) sc += idf * 1.8;
+      });
+      if(hit) out.push({d:d, s:sc, hit:hit/raw.length});
+    });
+    out.sort(function(a,b2){ return b2.s-a.s; });
+    return out;
+  }
+
+  function esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function answer(q){
+    var hits = rank(q);
+    if(!hits.length){
+      bot('Nothing on this site matches that, and I would rather say so than '
+        + 'find words in common and call it an answer. Email '
+        + '<a href="mailto:info@quenora.ai">info@quenora.ai</a>, or press '
+        + 'Start a conversation below.');
+      return;
+    }
+    /* Measuring this made the design decision. "can you build me a chatbot for
+       my shop" scored 7.62 — higher than "what does it cost" at 3.40 — because
+       score is dominated by rare terms, not by whether the question was
+       answered. No threshold separates the two. So this stops asserting an
+       answer and shows what it found, which is what it actually has: a search
+       over the site's own sentences, with the reader judging relevance. */
+    var top = hits.slice(0, 3).filter(function(h, i){
+      return i === 0 || h.s > hits[0].s * 0.42;
+    });
+    var html = '';
+    var lastHead = null;
+    top.forEach(function(h, i){
+      html += (i ? '<span class="ai-more">' : '<span class="ai-first">') + esc(h.d.t);
+      /* three passages from one chapter repeated its name three times */
+      if(h.d.h !== lastHead){
+        html += '<a class="ai-src" href="' + h.d.u + '">' + esc(h.d.h) + '</a>';
+        lastHead = h.d.h;
+      }
+      html += '</span>';
+    });
+    html += '<span class="ai-foot">'
+         +  (top.length > 1 ? top.length + ' passages from this site.' : 'One passage from this site.')
+         +  ' Not what you asked? <a href="mailto:info@quenora.ai">Email us</a>.</span>';
+    bot(html);
+  }
+
   function ask(q){
     q=(q||'').trim(); if(!q) return;
     add(q,'user');
-    var k=q.toLowerCase(), m=null;
-    for(var i=0;i<A.length;i++){
-      var keys=A[i][0];
-      for(var j=0;j<keys.length;j++){
-        if(k.indexOf(keys[j])>-1){ m=A[i][1]; break; }
-      }
-      if(m) break;
-    }
-    bot(m || "That one is worth a real conversation rather than a canned line — email info@quenora.ai and you’ll get specifics for your systems. In the meantime the nine chapters on this page cover the approach, the capabilities and the pricing.");
+    if(IDX){ answer(q); return; }
+    if(IDXSTATE==='failed'){ answer(q); return; }
+    /* No placeholder bubble: bot() already shows a typing indicator, and the
+       earlier version removed body.lastChild, which during that animation is
+       the indicator rather than the placeholder — so the '…' stayed. */
+    loadIndex().then(function(){ answer(q); });
   }
+
+  function loadIndex(){
+    if(IDXSTATE==='loading' || IDXSTATE==='ready') return IDXSTATE_P;
+    IDXSTATE='loading';
+    IDXSTATE_P = fetch(ASSET_BASE+'assistant.json')
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(j){ IDX=indexDocs(j.docs); IDXSTATE='ready'; })
+      .catch(function(){ IDXSTATE='failed'; });
+    return IDXSTATE_P;
+  }
+  var IDXSTATE_P = null;
+  /* /de/ and /fr/ each ship their own index; the page knows which it is */
+  var ASSET_BASE = (location.pathname.match(/^\/(de|fr)\//) || [null,''])[1];
+  ASSET_BASE = ASSET_BASE ? '/'+ASSET_BASE+'/' : '/';
 
   function toggle(){
     var open=panel.classList.toggle('open');
@@ -3270,7 +3452,7 @@ notice</a>.</span></label>
     if(open && !opened){
       opened=true;
       setTimeout(function(){
-        bot("Hello. I can give you a quick sense of what Quenora does — ask a question, or pick one below. My answers are written by the team, not generated.");
+        bot("Ask anything about Quenora and I will show you what this site says about it, in its own words, with a link to where it sits. I do not generate answers — if it is not written here, I will tell you that instead of guessing.");
       }, 260);
     }
     if(open) setTimeout(function(){ input && input.focus(); }, 320);

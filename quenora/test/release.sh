@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 QPY_NAV="${QUENORA_PY:-python3}"
+
+# The interpreter that has beautifulsoup4, found once and shared. This search
+# used to live inside the translation stage, which meant every other stage
+# that parses HTML got a bare ModuleNotFoundError and reported it as a content
+# failure. A missing dependency is a tooling problem and has to say so.
+QPY_BS=""
+for c in "${QUENORA_PY:-}" "$(dirname "$0")/../.venv/bin/python3" \
+         "$(dirname "$0")/.venv/bin/python3" /tmp/qvenv/bin/python3 python3; do
+  [ -n "$c" ] || continue
+  if command -v "$c" >/dev/null 2>&1 || [ -x "$c" ]; then
+    "$c" -c 'import bs4' >/dev/null 2>&1 && { QPY_BS="$c"; break; }
+  fi
+done
 # ---------------------------------------------------------------
 # Quenora release gate. Nothing ships unless every stage passes.
 #   ./release.sh <site-dir>
@@ -123,6 +136,16 @@ $QPY_NAV assistant_aliases.py "$DIR"
 [ $? -eq 0 ] && ok "every synonym resolves in its own language" \
   || bad "a synonym points at a word that is not on the site"
 
+step "4h/8  structured data says what the page is, in the page's own language"
+if [ -z "$QPY_BS" ]; then
+  printf '   \033[33mHELD\033[0m beautifulsoup4 is not installed for any python found here.\n'
+  printf '        pip install beautifulsoup4\n'
+else
+  $QPY_BS machine_readable.py "$DIR"
+  [ $? -eq 0 ] && ok "every page declares its own URL, language and graph" \
+    || bad "structured data disagrees with the page it sits on"
+fi
+
 step "4c2/8  the language switcher actually opens"
 $QPY_NAV switcher.py "$DIR"
 [ $? -eq 0 ] && ok "one handler, wired, three languages, one marked current" \
@@ -154,14 +177,7 @@ elif [ -d "$DIR/de" ]; then
   # can actually import it. Without this the stage reported "translation gate
   # failed" for a missing dependency, which sent the last investigation after
   # the translations instead of the environment.
-  QPY=""
-  for c in "${QUENORA_PY:-}" "$DIR/../.venv/bin/python3" "$DIR/.venv/bin/python3" \
-           /tmp/qvenv/bin/python3 python3; do
-    [ -n "$c" ] || continue
-    if command -v "$c" >/dev/null 2>&1 || [ -x "$c" ]; then
-      "$c" -c 'import bs4' >/dev/null 2>&1 && { QPY="$c"; break; }
-    fi
-  done
+  QPY="$QPY_BS"
   if [ -z "$QPY" ]; then
     printf '   \033[33mHELD\033[0m beautifulsoup4 is not installed for any python found here,\n'
     printf '        so the translations could not be checked (this is the tooling,\n'

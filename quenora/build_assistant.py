@@ -25,6 +25,15 @@ import re
 import sys
 import unicodedata
 
+def _tidy(t):
+    """Headings are split into text nodes by their <em>, and joining those
+    with a space leaves "the hard part ." — invisible in the layout, but the
+    assistant prints the heading above every passage, so it showed up in the
+    answers. French keeps its space before ; : ! ?; nothing keeps one before
+    a full stop or a comma."""
+    return re.sub(r"\s+([.,])", r"\1", " ".join(t.split()))
+
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 LANGS = {"en": "", "de": "de", "fr": "fr"}
 PAGES = ["index.html", "engineering.html", "capabilities.html",
@@ -86,15 +95,15 @@ def chunks_for(path, page_url, lang="en"):
             # meant "where are you based" had nothing to find.
             if el.find(["p", "div", "ul", "ol", "dl", "section",
                         "h1", "h2", "h3", "h4"]) is None \
-               and len(" ".join(el.get_text(" ").split())) < 60:
+               and len(_tidy(el.get_text(" "))) < 60:
                 if cur is not None:
-                    cur["tags"].append(" ".join(el.get_text(" ").split()))
+                    cur["tags"].append(_tidy(el.get_text(" ")))
             continue
         cls = el.get("class") or []
         is_chip = el.name == "span" and ("tag" in cls or "chip" in cls)
         if el.name == "span" and not is_chip:
             continue
-        text = " ".join(el.get_text(" ").split())
+        text = _tidy(el.get_text(" "))
         if not text:
             continue
         # The capability keywords — "RAG systems", "Agent design", "MLOps
@@ -145,7 +154,10 @@ def chunks_for(path, page_url, lang="en"):
             packed.append({"h": c["h"], "t": para[:600], "u": c["url"]})
         # the chips become one passage of their own, so a search for a keyword
         # lands on the capability rather than on nothing
-        tags = c.get("tags") or []
+        # An empty <div> counts as a fact with no text and was landing in the
+        # list as nothing, producing "Covers: ." — a passage with no content
+        # that retrieval could still return as an answer.
+        tags = [t for t in (c.get("tags") or []) if t.strip(" .,")]
         if tags:
             packed.append({"h": c["h"], "t": COVERS[lang] + ": " + ", ".join(tags) + ".",
                            "u": c["url"]})

@@ -1,0 +1,49 @@
+# Quenora Consulting
+
+> Enterprise AI and automation consultancy in Heilbronn, Germany.
+> Founder-led. Works in English, German and French across Europe.
+> Engineers AI into the systems a business already runs, then hands
+> the client's own team the keys.
+
+Founded 2025. Contact: info@quenora.ai · +49 152 3392 7436 · +49 152 5643 3329
+
+## What the firm does
+
+- **Platform & Deployment Engineering** — The foundation every AI initiative silently depends on, and the path into production at the end of it. We design the data architecture, provision the infrastructure, and build the internal platforms that let your teams ship AI repeatedly rather than once — then deploy on them, with monitoring and handover documentation that survives contact with reality. Without this layer every model becomes a bespoke project that dies when its champion leaves, and an engagement is finished when your team can run, extend and debug the system without calling us.
+- **Process & Workflow Automation** — The work itself, running without hands on it. We automate the processes your business repeats — the approvals, the handoffs, the reconciliations, the reporting somebody currently does on a Tuesday afternoon. This is where an AI capability stops being a capability and becomes throughput. It is designed around the exceptions rather than the happy path, because the exceptions are what send automated work back to a human, and deciding which ones should is most of the job.
+- **AI Integration** — Models connected into the systems your business already runs on — CRM, ERP, service desks, operations tooling. The hard part is almost never the model; it is the plumbing, the permissions, and the edge cases nobody documented. We attach to what is already moving rather than proposing you replace it.
+- **AI Strategy & Advisory** — Roadmaps, build-versus-buy decisions, and honest feasibility assessments from people who have shipped rather than only presented. This includes telling you when AI is the wrong answer for a problem — advice that is worth more than a workstream you did not need.
+- **Data Engineering & Analytics** — Pipelines, warehouses, and quality controls that make data model-ready. This is the least glamorous line on this page and the one that determines whether everything above it works. Most failed AI programmes are actually failed data programmes.
+- **Custom AI Agents & Copilots** — Purpose-built agents wired into real workflows, with defined scope, guardrails, and escalation paths to humans. Not a chatbot bolted onto a homepage — systems that take an action, log what they did, and hand off cleanly when they hit their limits.
+- **AI Governance, Security & Compliance** — Model risk, data privacy, access control, and audit trails built in from day one. For European clients that means GDPR and EU AI Act alignment treated as part of the engineering work, not as a document produced afterwards to satisfy a regulator.
+- **Managed AI Operations** — Monitoring, retraining, incident response, and ongoing support after go-live. Models drift, upstream systems change, and volumes grow. Someone has to own that, and if your team is not ready to yet, we can — on a defined runway towards them taking it over.
+- **Change Management & Enablement** — Training, documentation, and adoption support so the people who have to live with the system actually use it. The most common cause of a failed AI rollout is not technical. It is a team that was never brought along and quietly routed around the new thing.
+
+## Pages
+
+- [Most enterprise AI never reaches the work.](https://quenora.ai/): Quenora is an enterprise AI consultancy in Heilbronn. We engineer AI into the platforms and workflows you already run, then hand your team the keys.
+- [Most pilots don’t fail at the model. They stop at five layers.](https://quenora.ai/engineering): How Quenora engineers AI into production and governs it there: where pilots stop, what the evaluation harness measures, and the governance decisions that have to be made before anything ships.
+- [Nine capabilities. One team behind all of them.](https://quenora.ai/capabilities): All nine Quenora capabilities, from platform engineering to AI governance.
+- [A method built to end, not to renew itself.](https://quenora.ai/approach): A six-phase engagement method designed to end with your team running the system.
+- [Engagement patterns, honestly labelled.](https://quenora.ai/work): Engagement patterns and the sectors Quenora Consulting works in.
+- [One conversation. No deck required from you.](https://quenora.ai/contact): Start a conversation with Quenora Consulting. Europe and global remote.
+
+## Other languages
+
+- de-DE: https://quenora.ai/de
+- fr-FR: https://quenora.ai/fr
+
+## Machine-readable
+
+- [Full site text](https://quenora.ai/llms-full.txt): every paragraph, plain text.
+- [Site index, JSON](https://quenora.ai/assistant.json): the same corpus, one object
+  per passage, with its heading. `/de/assistant.json`, `/fr/assistant.json`.
+- Structured data: JSON-LD on every page (Organization, WebPage,
+  BreadcrumbList, Service ×9, FAQPage).
+
+## Notes
+
+This site sets no cookies and runs no third-party JavaScript. Nothing
+here is generated by a language model; every sentence was written by
+the firm and is a claim it stands behind. There are no case studies
+because the firm is new and will not invent a client list.

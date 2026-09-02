@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Build the site. The order matters and is the reason this file exists.
+#
+#   build_i18n      regenerates de/ fr/ es/ it/ from the English source.
+#                   It overwrites those directories wholesale.
+#   build_assistant reads the built pages and writes one search index per
+#                   language, so it has to see the localised pages.
+#   build_seo       writes JSON-LD into every page and generates llms.txt.
+#                   It writes INTO de/ and fr/, so if build_i18n ran after
+#                   it, every localised page would silently lose its
+#                   structured data and go back to declaring itself English.
+#
+# build_qr is separate and deliberate: the printed codes are regenerated
+# only when the contact details change, because a code that has been
+# printed cannot be reissued.
+set -euo pipefail
+cd "$(dirname "$0")"
+
+PY=${PY:-/tmp/qvenv/bin/python3}
+if ! "$PY" -c 'import bs4' 2>/dev/null; then
+  echo "  $PY has no beautifulsoup4."
+  echo "  Set PY, or:  python3 -m venv /tmp/qvenv && /tmp/qvenv/bin/pip install beautifulsoup4"
+  exit 1
+fi
+
+"$PY" build_i18n.py
+"$PY" build_assistant.py
+"$PY" build_seo.py
+
+echo
+echo "Built. Verify with:  cd test && bash release.sh .."

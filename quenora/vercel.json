@@ -96,6 +96,10 @@
     {
       "source": "/c",
       "destination": "/api/card"
+    },
+    {
+      "source": "/w",
+      "destination": "/api/pass"
     }
   ]
 }

@@ -24,7 +24,7 @@ LEGAL = {"impressum.html", "privacy.html"}   # English-only by design
 # Paths served by a function rather than a file. vercel.json rewrites these,
 # so there is nothing on disk to find and a filesystem check reports a 404
 # that does not exist. Keep this list in step with vercel.json "rewrites".
-FUNCTION_ROUTES = {"/c", "/api/enquiry", "/api/card"}
+FUNCTION_ROUTES = {"/c", "/w", "/api/enquiry", "/api/card", "/api/pass"}
 
 
 def landing(rel):

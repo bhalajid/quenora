@@ -1528,8 +1528,16 @@ address and the email, in one tap.</p>
 <p class="qrtel"><a href="tel:+4915233927436">+49 152 3392 7436</a>
 <a href="tel:+4915256433329">+49 152 5643 3329</a></p>
 <p class="qrdl"><a href="/c">Save the contact</a> · nothing is stored about you</p>
+<p class="qrdl" hidden="" id="wrow"><a href="/w">Add it to your wallet</a> · updates if a number ever changes</p>
 </div>
 </div>
+<script>
+/* A wallet button is only honest if a wallet is configured. Ask the
+   function, and draw the row only if the answer is yes. */
+(function(){var r=document.getElementById('wrow');if(!r)return;
+ fetch('/w?probe=1').then(function(x){return x.json()})
+  .then(function(j){if(j&&j.google)r.hidden=false}).catch(function(){});})();
+</script>
 <form class="cform rv" data-d="2" id="cform" novalidate="">
 <div class="cfrow">
 <div class="cfield">

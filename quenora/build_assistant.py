@@ -68,22 +68,42 @@ def chunks_for(path, page_url):
         return []
 
     out, cur = [], None
-    for el in main.find_all(["h1", "h2", "h3", "p", "li", "figcaption"]):
+    # A capability's description is a bare <div>, not a <p>, so every one of
+    # the nine sections had an empty body and was dropped whole — keywords
+    # included. Leaf divs (no element children) are prose here.
+    for el in main.find_all(["h1", "h2", "h3", "p", "li", "figcaption", "span", "div"]):
+        if el.name == "div" and el.find(True) is not None:
+            continue
+        cls = el.get("class") or []
+        is_chip = el.name == "span" and ("tag" in cls or "chip" in cls)
+        if el.name == "span" and not is_chip:
+            continue
         text = " ".join(el.get_text(" ").split())
         if not text:
             continue
+        # The capability keywords — "RAG systems", "Agent design", "MLOps
+        # foundations" — are short list items and chips. The prose filter
+        # below drops anything under 60 characters as noise, which silently
+        # dropped every one of them: the most searchable words on the site,
+        # and the closest thing it has to the vocabulary a buyer types. A
+        # capability nobody can find is a capability the firm does not appear
+        # to have. They are collected here instead.
+        if (is_chip or el.name == "li") and len(text) < 60:
+            if cur is not None:
+                cur["tags"].append(text)
+            continue
         if el.name in ("h1", "h2", "h3"):
-            if cur and cur["body"]:
+            if cur and (cur["body"] or cur["tags"]):
                 out.append(cur)
             anchor = ""
             for parent in el.parents:
                 if parent.get and parent.get("id"):
                     anchor = "#" + parent["id"]
                     break
-            cur = {"h": text, "body": [], "url": page_url + anchor}
+            cur = {"h": text, "body": [], "tags": [], "url": page_url + anchor}
         elif cur and len(text) > 40:
             cur["body"].append(text)
-    if cur and cur["body"]:
+    if cur and (cur["body"] or cur["tags"]):
         out.append(cur)
 
     # One passage per paragraph, carrying its heading for context.
@@ -100,6 +120,12 @@ def chunks_for(path, page_url):
             if len(para) < 60:
                 continue
             packed.append({"h": c["h"], "t": para[:600], "u": c["url"]})
+        # the chips become one passage of their own, so a search for a keyword
+        # lands on the capability rather than on nothing
+        tags = c.get("tags") or []
+        if tags:
+            packed.append({"h": c["h"], "t": "Covers: " + ", ".join(tags) + ".",
+                           "u": c["url"]})
     return packed
 
 

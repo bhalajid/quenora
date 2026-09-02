@@ -31,7 +31,7 @@ Each was released as its own commit so it can be reverted alone.
 | 2 | Contact QR → vCard + scan count | **Done** | `c3f7fcd` |
 | 3 | `llms.txt` / agent-readable structure | **Done** | `2dda952` |
 | 4 | Wallet pass | **Google done, Apple blocked** | `983294f` |
-| 5 | Governed-vs-ungoverned demo | **Done** | `PENDING` |
+| 5 | Governed-vs-ungoverned demo | **Done** | `f2e5a66` |
 
 ### #1 — The assistant
 

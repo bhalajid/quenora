@@ -118,6 +118,11 @@ $QPY_NAV design_drift.py "$DIR"
 [ $? -eq 0 ] && ok "no page carries the previous generation's look" \
   || bad "a page is drifting off the design system"
 
+step "4g/8  assistant synonyms point at words the site uses"
+$QPY_NAV assistant_aliases.py "$DIR"
+[ $? -eq 0 ] && ok "every synonym resolves in its own language" \
+  || bad "a synonym points at a word that is not on the site"
+
 step "4c2/8  the language switcher actually opens"
 $QPY_NAV switcher.py "$DIR"
 [ $? -eq 0 ] && ok "one handler, wired, three languages, one marked current" \

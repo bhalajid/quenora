@@ -3304,12 +3304,12 @@ notice</a>.</span></label>
     return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
   }
   var STOP = ('a an and are as at be but by for from has have if in into is it its of on or '
-    +'that the their then there these this to was were what when which who will with you your '
+    +'that the their then there these this to was were what when which will with you your '
     +'our we us how why can does do not no der die das den dem des ein eine einer eines und '
     +'oder aber ist sind war waren sein ihre ihr wir uns sie ihnen mit von zu im am auf fur '
     +'als auch nicht kein wie wer wo wenn dann dass le la les un une des du de et ou mais '
     +'est sont etait etaient etre leur nos nous vous avec pour dans sur comme aussi ne pas '
-    +'que qui quoi ou quand si').split(' ');
+    +'que quoi quand si').split(' ');
   var STOPSET = {}; STOP.forEach(function(w){ STOPSET[w]=1; });
 
   function terms(s){
@@ -3334,16 +3334,16 @@ notice</a>.</span></label>
      Hand-written and short on purpose: a wrong synonym here surfaces the
      wrong passage, which is the one failure this design exists to avoid. */
   var ALIAS = {
-    long:['weeks','phases','fourteen','duration','timeline'],
+    long:['weeks','phases','fourteen'],
     duration:['weeks','phases','fourteen'], timeline:['weeks','phases'],
     take:['weeks','phases'], time:['weeks','phases'],
     own:['keep','yours','handover','owner'], owns:['keep','yours','owner'],
     owner:['keep','yours','handover'], ownership:['keep','yours','handover'],
     keep:['yours','own','handover'], afterwards:['handover','leave','ends'],
-    cost:['priced','pricing','fee','rate','budget'],
-    price:['priced','pricing','fee','cost'], pricing:['priced','fee','cost'],
-    fee:['priced','pricing','cost'], budget:['priced','fee','cost'],
-    charge:['priced','fee','cost'], expensive:['priced','fee','cost'],
+    cost:['priced','costs'],
+    price:['priced','cost'], pricing:['priced','cost'],
+    fee:['priced','cost'], budget:['priced','cost'],
+    charge:['priced','cost'], expensive:['priced','cost'],
     change:['governance','control','approvals'],
     security:['governance','permission','audit','access'],
     gdpr:['privacy','data','governance'], privacy:['data','governance'],
@@ -3353,13 +3353,14 @@ notice</a>.</span></label>
     guarantee:['exit','condition','number','measure'],
     proof:['harness','measure','number','evidence'],
     references:['reference','case','studies','call'],
-    certification:['iso','soc','attestation','claim'],
-    certifications:['iso','soc','attestation','claim'],
-    certified:['iso','soc','attestation'], compliance:['governance','iso','soc'],
+    certification:['iso','soc','attestations'],
+    certifications:['iso','soc','attestations'],
+    certified:['iso','soc','attestations'], compliance:['governance','iso','soc'],
     big:['firm','small','size','depth'], many:['firm','small','size'],
     people:['firm','team','size','depth'], headcount:['firm','size','depth'],
     staff:['firm','team','size'],
     who:['hiring','founder','firm','balaji','founded'],
+    where:['heilbronn','germany','based'],
     you:['quenora','firm','hiring'], about:['hiring','founder','firm','founded'],
     behind:['founder','hiring','balaji'], founder:['balaji','hiring','founded'],
     based:['heilbronn','germany','where'], where:['heilbronn','germany','based'],
@@ -3369,23 +3370,32 @@ notice</a>.</span></label>
   };
   /* the same bridge in the two other published languages */
   var ALIAS_DE = {
-    wer:['balaji','grunder','firma','einstellen'], ihr:['quenora','firma'],
+    wer:['balaji','inhabergefuhrt','firma','gegrundet'],
+    wo:['heilbronn','deutschland','sitz'],
     seid:['quenora','firma'], sitzt:['heilbronn','deutschland','sitz'],
-    wo:['heilbronn','deutschland','sitz'], sitz:['heilbronn','deutschland'],
-    kostet:['preis','honorar','festpreis'], preis:['kostet','honorar'],
-    lange:['wochen','phasen','vierzehn'], dauer:['wochen','phasen'],
-    dauert:['wochen','phasen'], team:['firma','grunder','gross'],
-    gehort:['behalten','ihnen','ubergabe'], sicherheit:['governance','zugriff'],
-    zertifizierung:['iso','soc','anspruch'], sprachen:['deutsch','franzosisch','englisch']
+    sitz:['heilbronn','deutschland'], standort:['heilbronn','deutschland','sitz'],
+    kostet:['kosten','gekostet','zusammensetzt'], kosten:['kostet','gekostet'],
+    lange:['wochen','phasen','vierzehn','dauert'],
+    dauer:['wochen','phasen','dauert'], dauert:['wochen','phasen'],
+    team:['firma','inhabergefuhrt'], gehort:['ubergabe','ihnen'],
+    sicherheit:['governance','zugriff','audit'],
+    zertifizierung:['iso','soc'], zertifiziert:['iso','soc'],
+    sprachen:['deutsch','franzosisch','englisch'],
+    sprache:['deutsch','franzosisch','englisch']
   };
   var ALIAS_FR = {
-    qui:['balaji','fondateur','cabinet','recrutez'], etes:['quenora','cabinet'],
-    situe:['heilbronn','allemagne'], base:['heilbronn','allemagne'],
-    coute:['prix','tarif','forfait'], prix:['coute','tarif'],
-    duree:['semaines','phases','quatorze'], combien:['semaines','prix'],
-    equipe:['cabinet','fondateur','taille'],
-    appartient:['gardez','votres','transmission'],
-    certification:['iso','soc'], langues:['allemand','francais','anglais']
+    qui:['balaji','fondateur','cabinet','dirige'],
+    etes:['quenora','cabinet','dirige'],
+    situes:['heilbronn','allemagne','siege'], situe:['heilbronn','allemagne','siege'],
+    base:['heilbronn','allemagne','siege'], siege:['heilbronn','allemagne'],
+    coute:['tarife','cout'], cout:['tarife'], couts:['tarife','cout'],
+    tarif:['tarife','cout'], budget:['tarife','cout'],
+    duree:['semaines','phases'], temps:['semaines','phases'],
+    longtemps:['semaines','phases'],
+    equipe:['cabinet','fondateur'], appartient:['transmission','appartiennent'],
+    certification:['iso','soc'], securite:['gouvernance','acces'],
+    langues:['allemand','francais','anglais'],
+    langue:['allemand','francais','anglais']
   };
   if(LANG==='de') for(var dk in ALIAS_DE) ALIAS[dk]=ALIAS_DE[dk];
   if(LANG==='fr') for(var fk in ALIAS_FR) ALIAS[fk]=ALIAS_FR[fk];

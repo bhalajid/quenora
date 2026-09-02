@@ -1494,6 +1494,10 @@ was drawn, and the standard we hold the work to.</p>
 <input autocomplete="organization" id="cfOrg" name="org" type="text"/>
 </div>
 <div class="cfield">
+<label for="cfPhone">Telefono <span class="opt">(optional)</span></label>
+<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" type="tel"/>
+</div>
+<div class="cfield">
 <label for="cfMsg">What’s stuck?</label>
 <textarea id="cfMsg" name="message" placeholder="The pilot that stalled, the system that won’t join, the process nobody owns…" required="" rows="4"></textarea>
 </div>
@@ -3139,7 +3143,8 @@ notice</a>.</span></label>
 
   function say(t,cls){ note.className='cnote'+(cls?' '+cls:''); note.textContent=t; }
   function mailFallback(v){
-    var body='Name: '+v.name+'\nCompany: '+(v.org||'—')+'\n\n'+v.message;
+    var body='Name: '+v.name+'\nCompany: '+(v.org||'—')
+            +'\nPhone: '+(v.phone||'—')+'\n\n'+v.message;
     var href='mailto:'+MAIL+'?subject='+encodeURIComponent('Enquiry from '+v.name)
             +'&body='+encodeURIComponent(body);
     note.className='cnote';
@@ -3153,6 +3158,7 @@ notice</a>.</span></label>
       name:  form.name.value.trim(),
       email: form.email.value.trim(),
       org:   form.org.value.trim(),
+      phone: form.phone.value.trim(),
       message: form.message.value.trim(),
       consent: form.consent.checked,
       company_url: form.company_url.value

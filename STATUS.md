@@ -273,7 +273,10 @@ it needs eyes.
   speech, translation, recommendation, anomaly detection, fine-tuning, LLM
   evaluation, MLOps.
 - Terms of Service; accessibility statement.
-- The hidden `#build` section (needs chapters renumbered 06–09 → 07–10).
+- The hidden `#build` section. **Two sections both claim chapter 06** —
+  `#build` and `#honest`. Invisible today only because `#build` carries a
+  `hidden` attribute; taking that attribute off publishes the duplicate.
+  Renumber 06–09 → 07–10 in the same change.
 - Copy: "0 engagements" reads as *zero engagements*.
 
 ---

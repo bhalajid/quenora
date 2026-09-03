@@ -439,7 +439,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div><p class="lbl">Was entschieden wird</p><p>Ob die Autorisierung pro Anfrage gegen die Quellsysteme aufgelöst wird oder der Index nach Berechtigungen partitioniert ist. Es ist die erste Entscheidung und sie bedingt jede spätere.</p></div>
 </div>
 <div class="lay">
-<div class="ly"><span>Ebene 02</span><h3>Referenzwahrheit</h3></div>
+<div class="ly"><span>Ebene 02</span><h3>Ground Truth</h3></div>
 <div><p class="lbl">Wo es stehen bleibt</p><p>Niemand kann sagen, ob eine Antwort richtig war. Die Demo wurde von den Menschen beurteilt, die sie gebaut hatten, und die Antworten lasen, deren Antwort sie bereits kannten.</p></div>
 <div><p class="lbl">Was entschieden wird</p><p>Ein Testset aus echten Fragen, eine Metrik, die die tatsächlichen Kosten eines Fehlers abbildet, und ein Schwellenwert, der vereinbart wird, bevor irgendetwas gebaut wird. Das ist die Kennzahl, gegen die Phase 05 misst.</p></div>
 </div>
@@ -449,12 +449,12 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div><p class="lbl">Was entschieden wird</p><p>Wie sich Änderungen fortpflanzen: Neuindizierung beim Schreiben, geplanter Abgleich oder explizit angezeigte Veraltung für die lesende Person. Jede Variante ist vertretbar; die für die Domäne falsche ist der Weg, auf dem im dritten Monat das Vertrauen verloren geht.</p></div>
 </div>
 <div class="lay">
-<div class="ly"><span>Ebene 04</span><h3>Fehlverhalten</h3></div>
+<div class="ly"><span>Ebene 04</span><h3>Fehlerverhalten</h3></div>
 <div><p class="lbl">Wo es stehen bleibt</p><p>Wird der Pilot nach etwas gefragt, das außerhalb seiner Dokumente liegt, antwortet er trotzdem. In einer Demo liest sich das als Leistungsfähigkeit. In der Produktion ist es der Vorfall.</p></div>
 <div><p class="lbl">Was entschieden wird</p><p>Was das System tut, wenn es etwas nicht weiß — sich enthalten, an einen Menschen eskalieren oder mit beigefügten Belegen antworten und die lesende Person urteilen lassen. Als Verhalten eingebaut, nicht als Haftungsausschluss angehängt.</p></div>
 </div>
 <div class="lay">
-<div class="ly"><span>Ebene 05</span><h3>Verantwortung</h3></div>
+<div class="ly"><span>Ebene 05</span><h3>Eigentum</h3></div>
 <div><p class="lbl">Wo es stehen bleibt</p><p>Es läuft auf jemandes Konto, wird von jemandes Laptop deployt und hat niemanden in der Rufbereitschaft. Das ist die Ebene, an der die meisten Piloten enden, und sie ist kein technisches Problem.</p></div>
 <div><p class="lbl">Was entschieden wird</p><p>Welches bestehende Team es besitzt, was in dessen Runbook steht und was der Alarm um drei Uhr morgens bedeutet. Will kein Team es übernehmen, ist das eine Erkenntnis, die mehr wert ist als das System.</p></div>
 </div>
@@ -466,7 +466,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <section>
 <div class="wrap">
 <p class="ch">06 · Governance</p>
-<h2>Governance ist eine Menge von Entscheidungen, kein Dokument.</h2>
+<h2>Governance ist eine Reihe von Entscheidungen, kein Dokument.</h2>
 <p>Die meisten Governance-Unterlagen beschreiben eine Richtlinie. Was ein Produktivsystem braucht, ist eine Menge von Antworten, die in den Bau eingelassen sind, denn jede davon verändert die Architektur. Das sind die Fragen, die wir klären, bevor etwas ausgeliefert wird, und wo in den sechs Phasen jede davon geklärt wird.</p>
 <div class="decisions c3">
 <div class="dec">
@@ -477,7 +477,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 </div>
 <div class="dec">
 <span class="n">02</span>
-<h3>Was das System nicht entscheiden darf</h3>
+<h3>Was das System nicht entscheidet</h3>
 <p>Der Schwellenwert, oberhalb dessen eine Antwort zurückgegeben wird, unterhalb dessen sie eskaliert wird, und der Weg, den ein Mensch dann sieht. Festgelegt in Foundation zusammen mit dem Evaluations-Harness und gemessen in Prove.</p>
 <p class="why">Eine Automatisierung verdient Vertrauen, indem sie weiß, was sie nicht entscheiden darf. Diese Linie zu ziehen ist die Arbeit; ein nachträglich angehängter Haftungsausschluss ist nicht dasselbe.</p>
 </div>

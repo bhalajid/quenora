@@ -98,7 +98,7 @@ DNT = re.compile(
     #   Contact appears as a nav link, a footer heading and the short CTA label.
     #           All three should localise. "EU AI Act" is protected separately.
     r"^(quenora|quenora\.ai|hello@quenora\.ai|Quenora Consulting|"
-    r"GDPR|EU AI Act|IaC|MLOps|ERP|CRM|API|BI & reporting|RAG systems|"
+    r"GDPR|EU AI Act|IaC|MLOps|ERP|CRM|API|BI & reporting|"
     r"\[[^\]]+\]|Main|Footer|Quenora home|Reg / VAT|Core|Choose language|Sprache w\u00e4hlen|Choisir la langue|Elegir idioma|Scegli la lingua|Deutsch|English|Français|Español|Italiano|EN|DE|FR|ES|IT|AB/\d+|Phase \d+|\d+[\d\s:.,%–—/-]*|00:00|html|uenora|"
     # a telephone number reads the same in every language
     r"\+\d[\d\s/()-]*|"

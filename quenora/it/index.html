@@ -3283,9 +3283,9 @@ notice</a>.</span></label>
   var A=[
     [['automation','automate','workflow','process','unattended','rpa'],
      "Automation is capability 02 and one of the three core ones. We automate the processes a business repeats — approvals, handoffs, reconciliations, the reporting someone does on a Tuesday. The part that matters is the exceptions: an automation is only trustworthy if it knows which cases it should not decide, and drawing that line is most of the work."],
-    [['what do you','services','offer','do you do','capabilit'],
+    [['what do you','services','offer','do you do','capabilit','quenora do','what does quenora'],
      "Nine capabilities. Three are core — platform and deployment engineering, process and workflow automation, and AI integration — because everything runs through them. The other six step in only when the work needs them. Nothing is handed to a subcontractor you’ve never met."],
-    [['who are you','about','founder','balaji','team','how big','size'],
+    [['who are you','about you','about quenora','founder','balaji','team','how big','size'],
      "Quenora is founder-led, founded in 2025 by Balaji Durai. Before Quenora he ran transformation work for multinational manufacturers, retail banking and life sciences groups; those systems went on to be used by more than 100,000 people. We work from Heilbronn, internationally, in German, French and English."],
     [['different','why you','compare','competitor','large consult','big four'],
      "Use a large consultancy for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, the person who scopes your engagement is the person who does the work and the person you call when it breaks."],
@@ -3293,6 +3293,8 @@ notice</a>.</span></label>
      "Six phases, from framing to handover, and each carries an exit condition written into the statement of work. Most engagements run twelve to fourteen weeks end to end, with a working pilot well before that. The engagement is designed to end."],
     [['cost','price','pricing','budget','how much','rate'],
      "Scoped to outcomes rather than day rates. Chapter 08 on the homepage states how it’s priced rather than making you sit through three meetings to find out. A briefing gives you a real number, not a range designed to get a second meeting."],
+    [['does not work',"doesn’t work",'if it fails','if this fails','goes wrong','not work out','guarantee'],
+     "Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it."],
     [['work','case','client','example','project','reference'],
      "Three patterns come up most: invoice processing across unintegrated ERP instances, support triage with knowledge retrieval, and legacy modernisation with predictive scheduling. They are described by shape rather than by client name, and the figures on the Work page are illustrative of the pattern rather than audited results."],
     [['product','framework','accelerator','toolkit','blueprint'],
@@ -3430,6 +3432,27 @@ notice</a>.</span></label>
     team:['firma','inhabergefuhrt'], gehort:['ubergabe','ihnen'],
     sicherheit:['governance','zugriff','audit'],
     zertifizierung:['iso','soc'], zertifiziert:['iso','soc'],
+    /* widened to match the English table's reach: it had 45 bridges to
+       German's 16, and the localised table is merged INTO the English one,
+       so most of a German visitor's coverage was English words their
+       question would never contain. Every target verified present in the
+       German index. */
+    eigentum:['ubergabe','gehort'], besitzt:['ubergabe','gehort'],
+    behalten:['ubergabe','code'], garantie:['zahl','messen'],
+    nachweis:['harness','evaluations','messen','zahl'],
+    beleg:['harness','evaluations','nachweis'],
+    referenzen:['referenz','fallstudien','gesprach'],
+    fallstudien:['referenz','fallstudie'],
+    vertrag:['leistungsschein','umfang'],
+    datenschutz:['dsgvo','daten','governance'],
+    dsgvo:['datenschutz','daten','governance'],
+    anderung:['governance','freigabe','anderungskontrolle'],
+    mitarbeiter:['firma','inhabergefuhrt','team'],
+    gross:['firma','klein','tiefe'], beginn:['rahmung','erste'],
+    support:['betrieb','monitoring','runbook'],
+    betrieb:['monitoring','runbook','ubergabe'],
+    compliance:['governance','iso','soc'],
+    rollback:['rollback','zuruck'],
     sprachen:['deutsch','franzosisch','englisch'],
     sprache:['deutsch','franzosisch','englisch']
   };
@@ -3447,6 +3470,23 @@ notice</a>.</span></label>
     /* the French page says 'retour arriere'; a French CTO still types
        'rollback', which matched nothing once 'comment' became a stopword */
     rollback:['retour','arriere'],
+    /* same widening on the French side, every target verified present in
+       the French index */
+    propriete:['transmission','appartient','appartiennent'],
+    garantie:['condition','sortie','chiffre','mesure'],
+    preuve:['harnais','evaluation','mesure','chiffre'],
+    references:['reference','cas','echange'],
+    contrat:['perimetre','condition','sortie'],
+    confidentialite:['rgpd','donnees','gouvernance'],
+    rgpd:['confidentialite','donnees','gouvernance'],
+    changement:['gouvernance','controle'],
+    effectif:['cabinet','petit','profondeur'],
+    taille:['cabinet','petit','equipe'],
+    demarrer:['cadrage','premier','commencer'],
+    support:['exploitation','supervision','runbook'],
+    exploitation:['supervision','runbook','transmission'],
+    conformite:['gouvernance','iso','soc'],
+    combien:['tarife','cout','semaines'],
     langues:['allemand','francais','anglais'],
     langue:['allemand','francais','anglais']
   };

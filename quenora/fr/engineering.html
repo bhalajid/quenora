@@ -132,7 +132,7 @@ p{color:var(--t2);font-size:1.02rem;margin:0 0 var(--sp3);max-width:62ch}
 .lede{font-size:clamp(1.1rem,1.9vw,1.35rem);color:var(--t2);max-width:56ch;line-height:1.55}
 strong{color:var(--t1);font-weight:600}
 ::selection{background:var(--ember);color:var(--void)}
-.hero{padding:var(--sp7) 0 0;min-height:auto}
+.hero{padding:108px 0 0;min-height:auto}/* was var(--sp7), 168px. Every other inner page opens its headline 249px from the top of the viewport; this one opened it at 309, because its eyebrow carries more space beneath it than the .phero family does. Matching the headline position rather than the padding number. */
 
 /* ── the decision list ── */
 .decisions{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
@@ -421,8 +421,13 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
    That is the last of the shifting. Scoped to desktop so each page keeps the
    mobile gutter it was designed with. */
 @media(min-width:881px){
-  header .wrap{width:auto;max-width:1240px;margin-inline:auto;
-    padding-left:40px;padding-right:40px}
+  /* width:100%, not auto. The home page's hero section is display:flex, and
+     on a flex item width:auto shrink-wraps to the content — the wrap collapsed
+     to 1055px and margin-inline:auto then centred it, putting the headline
+     92px to the RIGHT of the logo. 100% behaves in both a block and a flex
+     parent. */
+  header .wrap, main section > .wrap{width:100%;max-width:1240px;
+    margin-inline:auto;padding-left:40px;padding-right:40px}
 }
 
 @media(min-width:881px){

@@ -146,6 +146,15 @@ else
     || bad "structured data disagrees with the page it sits on"
 fi
 
+step "4i/8  every page is built from the same shell"
+if [ -z "$QPY_BS" ]; then
+  printf '   \033[33mHELD\033[0m beautifulsoup4 is not installed for any python found here.\n'
+else
+  $QPY_BS page_shell.py "$DIR"
+  [ $? -eq 0 ] && ok "one shell: ember headline, shared container, switcher" \
+    || bad "a page has drifted off the shared shell"
+fi
+
 step "4c2/8  the language switcher actually opens"
 $QPY_NAV switcher.py "$DIR"
 [ $? -eq 0 ] && ok "one handler, wired, three languages, one marked current" \

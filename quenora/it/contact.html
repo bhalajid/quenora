@@ -489,8 +489,13 @@ footer nav{display:block}
    That is the last of the shifting. Scoped to desktop so each page keeps the
    mobile gutter it was designed with. */
 @media(min-width:881px){
-  header .wrap{width:auto;max-width:1240px;margin-inline:auto;
-    padding-left:40px;padding-right:40px}
+  /* width:100%, not auto. The home page's hero section is display:flex, and
+     on a flex item width:auto shrink-wraps to the content — the wrap collapsed
+     to 1055px and margin-inline:auto then centred it, putting the headline
+     92px to the RIGHT of the logo. 100% behaves in both a block and a flex
+     parent. */
+  header .wrap, main section > .wrap{width:100%;max-width:1240px;
+    margin-inline:auto;padding-left:40px;padding-right:40px}
 }
 
 @media(min-width:881px){
@@ -558,7 +563,7 @@ header .navlinks a[aria-current="page"]::after{width:0}
 <canvas aria-hidden="true" id="pCanvas"></canvas>
 <div class="wrap">
 <div class="kicker rv">Contatti</div>
-<h1 class="rv" data-d="1">Una conversazione. Non le chiediamo alcuna presentazione.</h1>
+<h1 class="rv" data-d="1">One conversation. No deck <em>required</em> from you.</h1>
 <p class="rv" data-d="2">Ci descriva a grandi linee com'è fatto il problema. Se non siamo lo studio giusto lo diremo e la indirizzeremo altrove: a noi non costa nulla e a lei fa risparmiare un trimestre.</p>
 </div>
 </section>

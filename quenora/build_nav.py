@@ -126,8 +126,13 @@ NAV_CSS = """/* ── one header, on every page ──────────�
    That is the last of the shifting. Scoped to desktop so each page keeps the
    mobile gutter it was designed with. */
 @media(min-width:881px){
-  header .wrap{width:auto;max-width:1240px;margin-inline:auto;
-    padding-left:40px;padding-right:40px}
+  /* width:100%, not auto. The home page's hero section is display:flex, and
+     on a flex item width:auto shrink-wraps to the content — the wrap collapsed
+     to 1055px and margin-inline:auto then centred it, putting the headline
+     92px to the RIGHT of the logo. 100% behaves in both a block and a flex
+     parent. */
+  header .wrap, main section > .wrap{width:100%;max-width:1240px;
+    margin-inline:auto;padding-left:40px;padding-right:40px}
 }
 
 @media(min-width:881px){

@@ -1027,8 +1027,13 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
    That is the last of the shifting. Scoped to desktop so each page keeps the
    mobile gutter it was designed with. */
 @media(min-width:881px){
-  header .wrap{width:auto;max-width:1240px;margin-inline:auto;
-    padding-left:40px;padding-right:40px}
+  /* width:100%, not auto. The home page's hero section is display:flex, and
+     on a flex item width:auto shrink-wraps to the content — the wrap collapsed
+     to 1055px and margin-inline:auto then centred it, putting the headline
+     92px to the RIGHT of the logo. 100% behaves in both a block and a flex
+     parent. */
+  header .wrap, main section > .wrap{width:100%;max-width:1240px;
+    margin-inline:auto;padding-left:40px;padding-right:40px}
 }
 
 @media(min-width:881px){
@@ -1064,7 +1069,9 @@ header .navlinks a[aria-current="page"]::after{width:0}
    gutter, so the logo, the nav and the body text all start at the same x
    whichever page you are on.
 
-   The hero keeps 1480 deliberately. It is not a column of text, it is a
+   The hero's TEXT is in this too, so the logo sits directly above the
+   headline instead of 160px to the right of it. The mark is a canvas outside
+   .wrap and keeps the wider grid: it is not a column of text, it is a
    measured composition: the mark's height equals the headline's, its right
    edge sits on grid line 6, and its left edge has to clear the widest line
    of type by 24px. The headline is sized by clamp() against the VIEWPORT,
@@ -1072,8 +1079,8 @@ header .navlinks a[aria-current="page"]::after{width:0}
    screen and wider the mark and the headline collided. The release gate
    caught it; this is why the hero is exempt rather than why it was skipped. */
 @media(min-width:881px){
-  main section:not(.hook) > .wrap{
-    width:auto;max-width:1240px;margin-inline:auto;
+  main section > .wrap{
+    width:100%;max-width:1240px;margin-inline:auto;
     padding-left:40px;padding-right:40px}
 }
 </style>

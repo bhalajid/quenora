@@ -1,22 +1,23 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Quenora — Most enterprise AI never leaves the lab</title>
-<meta name="description" content="Quenora engineers AI into the platforms, workflows and decisions enterprises already run — then hands the running of it to your team.">
-<link rel="canonical" href="https://quenora.ai/">
-<meta name="theme-color" content="#07070A">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Quenora Consulting">
-<meta property="og:title" content="Quenora — Most enterprise AI never leaves the lab">
-<meta property="og:description" content="We engineer AI into what you already run, then hand you the keys.">
-<meta property="og:url" content="https://quenora.ai/">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta content="Quenora engineers AI into the platforms, workflows and decisions enterprises already run — then hands the running of it to your team." name="description"/>
+<link href="https://quenora.ai/" rel="canonical"/>
+<meta content="#07070A" name="theme-color"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<meta content="website" property="og:type"/>
+<meta content="Quenora Consulting" property="og:site_name"/>
+<meta content="Quenora — Most enterprise AI never leaves the lab" property="og:title"/>
+<meta content="We engineer AI into what you already run, then hand you the keys." property="og:description"/>
+<meta content="https://quenora.ai/" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <style>
 /* ═══════════════════════════════════════════════════════════════════
    QUENORA — dark editorial scroll narrative
@@ -453,240 +454,233 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 @media(prefers-reduced-motion:reduce){.ai-fab::before,.ai-dot,.ai-typing i{animation:none}}
 .ai-fab:focus-visible{outline:2px solid var(--w-signal);outline-offset:4px}
 /*/WIDGET:CSS*/
+/*NAV:CSS*/
+/* The inner pages spread five header children with space-between, which put
+   the links in the middle of the bar while the home page pushed them right.
+   Same rule on every page now, so nothing moves when you navigate. */
+.navlinks{margin-left:auto}
+/*/NAV:CSS*/
 </style>
 </head>
 <body class="no-js">
 <a class="skip" href="#main">Skip to content</a>
-
-<div id="ld" aria-hidden="true"><div class="n">01</div><div class="bar"></div></div>
-<div class="prog" id="prog" aria-hidden="true"></div>
-<div class="aura" id="aura" aria-hidden="true"></div>
-<div class="vgrid" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-<div class="grain" aria-hidden="true"></div>
-<div class="cur" id="cur" aria-hidden="true"></div>
-<div class="cdot" id="cdot" aria-hidden="true"></div>
-
+<div aria-hidden="true" id="ld"><div class="n">01</div><div class="bar"></div></div>
+<div aria-hidden="true" class="prog" id="prog"></div>
+<div aria-hidden="true" class="aura" id="aura"></div>
+<div aria-hidden="true" class="vgrid"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+<div aria-hidden="true" class="grain"></div>
+<div aria-hidden="true" class="cur" id="cur"></div>
+<div aria-hidden="true" class="cdot" id="cdot"></div>
 <header class="nav" id="nav">
-  <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Quenora home">
-      <svg viewBox="0 0 187.71 174.29" aria-hidden="true" fill="currentColor">
-        <circle cx="12" cy="161.71" r="3"/><circle cx="21.64" cy="161.34" r="3.95"/>
-        <circle cx="33.39" cy="159.88" r="5.2"/><circle cx="47.73" cy="156.52" r="6.84"/>
-        <circle cx="65.05" cy="149.97" r="9"/><circle cx="85.34" cy="138.1" r="11.84"/>
-        <circle cx="107.49" cy="117.76" r="15.59"/><circle cx="127.81" cy="84.89" r="20.52"/>
-        <circle cx="151.71" cy="36" r="27"/>
-      </svg>quenora
+<div class="wrap">
+<a aria-label="Quenora home" class="brand" href="index.html">
+<svg aria-hidden="true" fill="currentColor" viewbox="0 0 187.71 174.29">
+<circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
+<circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
+<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
+<circle cx="151.71" cy="36" r="27"></circle>
+</svg>quenora
     </a>
-    <nav class="navlinks" aria-label="Main">
-<a href="index.html#journey">Approach</a>
+<nav aria-label="Main" class="navlinks">
+<a href="approach.html">Approach</a>
 <a href="capabilities.html">Capabilities</a>
 <a href="engineering.html">Engineering</a>
 <a href="work.html">Work</a>
 <a href="index.html#who">About</a>
 <a class="navcta" href="index.html#climax">Start a conversation</a>
 </nav>
-  </div>
+</div>
 </header>
-
 <main id="main">
-  <section class="hook">
-    <div class="wrap">
-      <p class="mono eyebrow">Enterprise AI engineering · Heilbronn</p>
-      <h1>
-        <span class="ln"><span class="w">Most</span> <span class="w">enterprise</span></span>
-        <span class="ln"><span class="w">AI</span> <span class="w">never</span> <span class="w">leaves</span></span>
-        <span class="ln"><span class="w"><em>the&nbsp;lab.</em></span></span>
-      </h1>
-      <div class="hook-foot">
-        <p>We are the firm you call when the pilot worked and nothing happened next.
+<section class="hook">
+<div class="wrap">
+<p class="mono eyebrow">Enterprise AI engineering · Heilbronn</p>
+<h1>
+<span class="ln"><span class="w">Most</span> <span class="w">enterprise</span></span>
+<span class="ln"><span class="w">AI</span> <span class="w">never</span> <span class="w">leaves</span></span>
+<span class="ln"><span class="w"><em>the lab.</em></span></span>
+</h1>
+<div class="hook-foot">
+<p>We are the firm you call when the pilot worked and nothing happened next.
            Quenora engineers AI into the platforms, workflows and decisions your
            business already runs — then hands your team the keys and leaves.</p>
-        <div class="cue" aria-hidden="true"><i></i><span class="mono">Scroll</span></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ticker" aria-hidden="true">
-    <div class="tt" id="tt">
-      <b>Platform Engineering</b><b>AI Integration</b><b>Deployment &amp; Development</b>
-      <b>AI Strategy</b><b>Data Engineering</b><b>Custom Agents</b>
-      <b>AI Governance</b><b>Managed Operations</b><b>Change Enablement</b>
-    </div>
-  </div>
-
-  <section id="problem">
-    <div class="wrap">
-      <div class="chead rv">
-        <div class="cnum">01</div>
-        <div>
-          <h2>The demo was never <em>the hard part</em>.</h2>
-          <p class="lede">Nobody's AI programme fails because the model was weak.
+<div aria-hidden="true" class="cue"><i></i><span class="mono">Scroll</span></div>
+</div>
+</div>
+</section>
+<div aria-hidden="true" class="ticker">
+<div class="tt" id="tt">
+<b>Platform Engineering</b><b>AI Integration</b><b>Deployment &amp; Development</b>
+<b>AI Strategy</b><b>Data Engineering</b><b>Custom Agents</b>
+<b>AI Governance</b><b>Managed Operations</b><b>Change Enablement</b>
+</div>
+</div>
+<section id="problem">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">01</div>
+<div>
+<h2>The demo was never <em>the hard part</em>.</h2>
+<p class="lede">Nobody's AI programme fails because the model was weak.
              It fails in the gap between a notebook and a Tuesday afternoon — where
              the data will not join, the permissions do not exist, and nobody owns
              the result.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="pinwrap" id="pinwrap">
-      <div class="pin">
-        <div class="inner">
-          <h2 class="big" id="pBig">AI programmes fail at <em>the seams</em>.</h2>
-          <p class="sub" id="pSub">Six of them. Every one an engineering problem rather
+</div>
+</div>
+</div>
+<div class="pinwrap" id="pinwrap">
+<div class="pin">
+<div class="inner">
+<h2 class="big" id="pBig">AI programmes fail at <em>the seams</em>.</h2>
+<p class="sub" id="pSub">Six of them. Every one an engineering problem rather
              than a research problem — which is the entire reason this firm exists.</p>
-          <div class="seams" id="pSeams">
-            <div><b>The data</b><span>Systems that will not join. Contracts nobody wrote. Lineage nobody can trace.</span></div>
-            <div><b>The integration</b><span>A model that works in a notebook and has no route into the process that needed it.</span></div>
-            <div><b>The handover</b><span>A capability only the consultants know how to run — so it quietly stops being used.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="journey">
-    <div class="wrap">
-      <div class="chead rv">
-        <div class="cnum">02</div>
-        <div>
-          <h2>Six phases. Designed to <em>end</em>.</h2>
-          <p class="lede">Most consultancies are structured to extend the engagement.
+<div class="seams" id="pSeams">
+<div><b>The data</b><span>Systems that will not join. Contracts nobody wrote. Lineage nobody can trace.</span></div>
+<div><b>The integration</b><span>A model that works in a notebook and has no route into the process that needed it.</span></div>
+<div><b>The handover</b><span>A capability only the consultants know how to run — so it quietly stops being used.</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="journey">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">02</div>
+<div>
+<h2>Six phases. Designed to <em>end</em>.</h2>
+<p class="lede">Most consultancies are structured to extend the engagement.
              This one is structured to finish it — every phase carries an exit
              condition written into the statement of work.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="hwrap" id="hwrap">
-      <div class="hpin">
-        <div class="htrack" id="htrack">
-          <article class="phase" data-n="01"><p class="mono">Phase 01 · Frame</p>
-            <h3>Find the <em>real</em> constraint</h3>
-            <p>We spend the first weeks understanding what actually happens, not what
+</div>
+</div>
+</div>
+<div class="hwrap" id="hwrap">
+<div class="hpin">
+<div class="htrack" id="htrack">
+<article class="phase" data-n="01"><p class="mono">Phase 01 · Frame</p>
+<h3>Find the <em>real</em> constraint</h3>
+<p>We spend the first weeks understanding what actually happens, not what
                the process documentation says happens. Almost every engagement uncovers
                something that was never in the brief.</p>
-            <p class="dur mono">Weeks 1–2</p></article>
-          <article class="phase" data-n="02"><p class="mono">Phase 02 · Foundation</p>
-            <h3>The <em>unglamorous</em> layer</h3>
-            <p>Environments, data contracts, access model, evaluation harness. The work
+<p class="dur mono">Weeks 1–2</p></article>
+<article class="phase" data-n="02"><p class="mono">Phase 02 · Foundation</p>
+<h3>The <em>unglamorous</em> layer</h3>
+<p>Environments, data contracts, access model, evaluation harness. The work
                that decides whether anything after it survives contact with production.</p>
-            <p class="dur mono">Weeks 3–6</p></article>
-          <article class="phase" data-n="03"><p class="mono">Phase 03 · Integrate</p>
-            <h3>Into what you <em>already run</em></h3>
-            <p>Connected to the systems that hold the data and run the work, with the
+<p class="dur mono">Weeks 3–6</p></article>
+<article class="phase" data-n="03"><p class="mono">Phase 03 · Integrate</p>
+<h3>Into what you <em>already run</em></h3>
+<p>Connected to the systems that hold the data and run the work, with the
                failure paths designed rather than discovered in production.</p>
-            <p class="dur mono">Weeks 4–10</p></article>
-          <article class="phase" data-n="04"><p class="mono">Phase 04 · Ship</p>
-            <h3>Under <em>real</em> change control</h3>
-            <p>Into production behind the same governance as everything else you run.
+<p class="dur mono">Weeks 4–10</p></article>
+<article class="phase" data-n="04"><p class="mono">Phase 04 · Ship</p>
+<h3>Under <em>real</em> change control</h3>
+<p>Into production behind the same governance as everything else you run.
                No parallel universe. No permanent pilot.</p>
-            <p class="dur mono">Continuous</p></article>
-          <article class="phase" data-n="05"><p class="mono">Phase 05 · Prove</p>
-            <h3>Against the <em>agreed</em> number</h3>
-            <p>Measured against the figure set in Frame. If it did not move, we say so,
+<p class="dur mono">Continuous</p></article>
+<article class="phase" data-n="05"><p class="mono">Phase 05 · Prove</p>
+<h3>Against the <em>agreed</em> number</h3>
+<p>Measured against the figure set in Frame. If it did not move, we say so,
                and we say why. That conversation is the product.</p>
-            <p class="dur mono">Weeks 9–12</p></article>
-          <article class="phase" data-n="06"><p class="mono">Phase 06 · Hand over</p>
-            <h3>And then we <em>leave</em></h3>
-            <p>Runbooks, monitoring, paired operation, and a date after which your team
+<p class="dur mono">Weeks 9–12</p></article>
+<article class="phase" data-n="06"><p class="mono">Phase 06 · Hand over</p>
+<h3>And then we <em>leave</em></h3>
+<p>Runbooks, monitoring, paired operation, and a date after which your team
                runs it without us. The engagement is designed to end.</p>
-            <p class="dur mono">Weeks 12–14</p></article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="solution">
-    <div class="wrap">
-      <div class="chead rv">
-        <div class="cnum">03</div>
-        <div>
-          <h2>Nine capabilities. <em>One</em> team.</h2>
-          <p class="lede">Three are core, because the work runs through
+<p class="dur mono">Weeks 12–14</p></article>
+</div>
+</div>
+</div>
+</section>
+<section id="solution">
+<div class="wrap">
+<div class="chead rv">
+<div class="cnum">03</div>
+<div>
+<h2>Nine capabilities. <em>One</em> team.</h2>
+<p class="lede">Three are core, because the work runs through
              them. The other six join when the work calls for them — not to pad a
              proposal. None of it is subcontracted to someone you have not met.</p>
-        </div>
-      </div>
-      <div class="nine">
-        <div class="nrow rv"><span class="i">01</span><h3>Platform Engineering</h3><span class="tag">Core</span></div>
-        <div class="nrow rv"><span class="i">02</span><h3>AI Integration</h3><span class="tag">Core</span></div>
-        <div class="nrow rv"><span class="i">03</span><h3>Deployment &amp; Development</h3><span class="tag">Core</span></div>
-        <div class="nrow rv"><span class="i">04</span><h3>AI Strategy &amp; Advisory</h3><span></span></div>
-        <div class="nrow rv"><span class="i">05</span><h3>Data Engineering &amp; Analytics</h3><span></span></div>
-        <div class="nrow rv"><span class="i">06</span><h3>Custom AI Agents &amp; Copilots</h3><span></span></div>
-        <div class="nrow rv"><span class="i">07</span><h3>AI Governance, Security &amp; Compliance</h3><span></span></div>
-        <div class="nrow rv"><span class="i">08</span><h3>Managed AI Operations</h3><span></span></div>
-        <div class="nrow rv"><span class="i">09</span><h3>Change Management &amp; Enablement</h3><span></span></div>
-      </div>
-      <div class="counters">
-        <div class="rv"><b data-count="9">0</b>
-          <span>capabilities, three of them core — because the work
+</div>
+</div>
+<div class="nine">
+<div class="nrow rv"><span class="i">01</span><h3>Platform Engineering</h3><span class="tag">Core</span></div>
+<div class="nrow rv"><span class="i">02</span><h3>AI Integration</h3><span class="tag">Core</span></div>
+<div class="nrow rv"><span class="i">03</span><h3>Deployment &amp; Development</h3><span class="tag">Core</span></div>
+<div class="nrow rv"><span class="i">04</span><h3>AI Strategy &amp; Advisory</h3><span></span></div>
+<div class="nrow rv"><span class="i">05</span><h3>Data Engineering &amp; Analytics</h3><span></span></div>
+<div class="nrow rv"><span class="i">06</span><h3>Custom AI Agents &amp; Copilots</h3><span></span></div>
+<div class="nrow rv"><span class="i">07</span><h3>AI Governance, Security &amp; Compliance</h3><span></span></div>
+<div class="nrow rv"><span class="i">08</span><h3>Managed AI Operations</h3><span></span></div>
+<div class="nrow rv"><span class="i">09</span><h3>Change Management &amp; Enablement</h3><span></span></div>
+</div>
+<div class="counters">
+<div class="rv"><b data-count="9">0</b>
+<span>capabilities, three of them core — because the work
                 runs through those three.</span></div>
-        <div class="rv" data-d="1"><b data-count="6">0</b>
-          <span>phases from framing to handover, each with an exit condition written
+<div class="rv" data-d="1"><b data-count="6">0</b>
+<span>phases from framing to handover, each with an exit condition written
                 into the statement of work.</span></div>
-        <div class="rv" data-d="2"><b data-count="0">0</b>
-          <span>engagements without an end date. An extension is a decision, never
+<div class="rv" data-d="2"><b data-count="0">0</b>
+<span>engagements without an end date. An extension is a decision, never
                 the default.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="climax" id="climax">
-    <div class="spot" id="spot" aria-hidden="true"></div>
-    <div class="wrap">
-      <h2 class="rv">Build what keeps <em>working</em>.</h2>
-      <p class="rv" data-d="1">One focused conversation about where intelligence can
+</div>
+</div>
+</section>
+<section class="climax" id="climax">
+<div aria-hidden="true" class="spot" id="spot"></div>
+<div class="wrap">
+<h2 class="rv">Build what keeps <em>working</em>.</h2>
+<p class="rv" data-d="1">One focused conversation about where intelligence can
          remove friction, increase certainty or create capacity in your operations.
          No deck. No discovery invoice.</p>
-      <a class="bcta rv" data-d="2" id="bcta" href="index.html#climax">Start a conversation
-        <svg width="21" height="21" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7"
-                stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-  </section>
+<a class="bcta rv" data-d="2" href="index.html#climax" id="bcta">Start a conversation
+        <svg aria-hidden="true" fill="none" height="21" viewbox="0 0 16 16" width="21">
+<path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path></svg></a>
+</div>
+</section>
 </main>
-
 <footer>
-  <div class="wrap">
-    <div class="fgrid">
-      <div>
-        <div class="brand" style="margin-bottom:var(--sp2)">
-          <svg viewBox="0 0 187.71 174.29" aria-hidden="true" fill="var(--copper)">
-            <circle cx="12" cy="161.71" r="3"/><circle cx="21.64" cy="161.34" r="3.95"/>
-            <circle cx="33.39" cy="159.88" r="5.2"/><circle cx="47.73" cy="156.52" r="6.84"/>
-            <circle cx="65.05" cy="149.97" r="9"/><circle cx="85.34" cy="138.1" r="11.84"/>
-            <circle cx="107.49" cy="117.76" r="15.59"/><circle cx="127.81" cy="84.89" r="20.52"/>
-            <circle cx="151.71" cy="36" r="27"/>
-          </svg>quenora
+<div class="wrap">
+<div class="fgrid">
+<div>
+<div class="brand" style="margin-bottom:var(--sp2)">
+<svg aria-hidden="true" fill="var(--copper)" viewbox="0 0 187.71 174.29">
+<circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
+<circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
+<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
+<circle cx="151.71" cy="36" r="27"></circle>
+</svg>quenora
         </div>
-        <p style="max-width:35ch;color:var(--t2);font-size:.96rem">
+<p style="max-width:35ch;color:var(--t2);font-size:.96rem">
           Enterprise AI, engineered to operate. Built into what you already run,
           then handed over.</p>
-        <p class="mono" style="color:var(--t3)">Heilbronn, Germany · Working internationally</p>
-      </div>
-      <div><h3>Site</h3><nav aria-label="Footer">
-        <a href="index.html">Home</a><a href="index.html#journey">Approach</a><a href="capabilities.html">Capabilities</a>
-        <a href="engineering.html">Engineering</a><a href="work.html">Work</a><a href="index.html#who">About</a><a href="index.html#climax">Contact</a>
-      </nav></div>
-      <div><h3>Contact</h3><nav aria-label="Contact">
-        <a href="mailto:info@quenora.ai">info@quenora.ai</a>
-        <a href="impressum.html">Legal notice · Impressum</a>
-        <a href="privacy.html">Privacy notice</a>
-      </nav></div>
-<div><h3>Follow</h3><nav aria-label="Social">
-<a rel="noopener me" target="_blank" href="https://www.linkedin.com/company/quenora">LinkedIn</a>
-<a rel="noopener me" target="_blank" href="https://x.com/quenora_ai">X</a>
-<a rel="noopener me" target="_blank" href="https://www.instagram.com/quenora.ai/">Instagram</a>
+<p class="mono" style="color:var(--t3)">Heilbronn, Germany · Working internationally</p>
+</div>
+<div><h3>Site</h3><nav aria-label="Footer">
+<a href="index.html">Home</a><a href="approach.html">Approach</a><a href="capabilities.html">Capabilities</a>
+<a href="engineering.html">Engineering</a><a href="work.html">Work</a><a href="index.html#who">About</a><a href="index.html#climax">Contact</a>
 </nav></div>
-    </div>
-    <div class="fbot">
-      <span>© 2026 Quenora Consulting</span>
-      <span>Heilbronn, Germany · <a href="impressum.html">Legal notice</a> · <a href="privacy.html">Privacy</a></span>
-    </div>
-  </div>
+<div><h3>Contact</h3><nav aria-label="Contact">
+<a href="mailto:info@quenora.ai">info@quenora.ai</a>
+<a href="impressum.html">Legal notice · Impressum</a>
+<a href="privacy.html">Privacy notice</a>
+</nav></div>
+<div><h3>Follow</h3><nav aria-label="Social">
+<a href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank">LinkedIn</a>
+<a href="https://x.com/quenora_ai" rel="noopener me" target="_blank">X</a>
+<a href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank">Instagram</a>
+</nav></div>
+</div>
+<div class="fbot">
+<span>© 2026 Quenora Consulting</span>
+<span>Heilbronn, Germany · <a href="impressum.html">Legal notice</a> · <a href="privacy.html">Privacy</a></span>
+</div>
+</div>
 </footer>
-
 <script>
 /* ═══════════════════════════════════════════════════════════════════
    All motion, hand-written. No library, no CDN, nothing to block.
@@ -1329,5 +1323,24 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 })();
 </script>
 <!--/WIDGET:JS-->
+<!--NAV:JS-->
+<script>
+/* A reload used to drop the reader back into the middle of a chapter with its
+   scroll-triggered reveals already spent, which reads as a broken page rather
+   than as a convenience. Returning to the top is the honest default; an anchor
+   in the URL is an explicit request for a place and is left alone. */
+(function(){
+  /* The work page's field figure is verified by a headless harness with no
+     history and no window; this must not throw there. */
+  if(typeof history==='undefined'||typeof window==='undefined') return;
+  if(!('scrollRestoration' in history)) return;
+  history.scrollRestoration = 'manual';
+  addEventListener('load', function(){
+    if(location.hash) return;
+    window.scrollTo(0, 0);
+  });
+})();
+</script>
+<!--/NAV:JS-->
 </body>
 </html>

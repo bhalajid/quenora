@@ -497,6 +497,12 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 @media(prefers-reduced-motion:reduce){.ai-fab::before,.ai-dot,.ai-typing i{animation:none}}
 .ai-fab:focus-visible{outline:2px solid var(--w-signal);outline-offset:4px}
 /*/WIDGET:CSS*/
+/*NAV:CSS*/
+/* The inner pages spread five header children with space-between, which put
+   the links in the middle of the bar while the home page pushed them right.
+   Same rule on every page now, so nothing moves when you navigate. */
+.navlinks{margin-left:auto}
+/*/NAV:CSS*/
 </style>
 <script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/impressum#page","url":"https://quenora.ai/impressum","name":"Legal notice","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"Legal notice under § 5 DDG: who operates quenora.ai, how to reach us, and the current registration status of the firm.","breadcrumb":{"@id":"https://quenora.ai/impressum#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/impressum#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"Legal notice","item":"https://quenora.ai/impressum"}]}]}</script></head>
 <body>
@@ -1090,5 +1096,24 @@ addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40));
 })();
 </script>
 <!--/WIDGET:JS-->
+<!--NAV:JS-->
+<script>
+/* A reload used to drop the reader back into the middle of a chapter with its
+   scroll-triggered reveals already spent, which reads as a broken page rather
+   than as a convenience. Returning to the top is the honest default; an anchor
+   in the URL is an explicit request for a place and is left alone. */
+(function(){
+  /* The work page's field figure is verified by a headless harness with no
+     history and no window; this must not throw there. */
+  if(typeof history==='undefined'||typeof window==='undefined') return;
+  if(!('scrollRestoration' in history)) return;
+  history.scrollRestoration = 'manual';
+  addEventListener('load', function(){
+    if(location.hash) return;
+    window.scrollTo(0, 0);
+  });
+})();
+</script>
+<!--/NAV:JS-->
 </body>
 </html>

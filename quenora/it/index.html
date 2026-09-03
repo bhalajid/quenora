@@ -1000,6 +1000,12 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   flex:none;animation:livepulse 2.4s var(--e) infinite}
 @keyframes livepulse{0%,100%{opacity:1}50%{opacity:.28}}
 @media(prefers-reduced-motion:reduce){.livelink .dot{animation:none}}
+/*NAV:CSS*/
+/* The inner pages spread five header children with space-between, which put
+   the links in the middle of the bar while the home page pushed them right.
+   Same rule on every page now, so nothing moves when you navigate. */
+.navlinks{margin-left:auto}
+/*/NAV:CSS*/
 </style>
 <meta content="it_IT" property="og:locale"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/#page","url":"https://quenora.ai/","name":"Most enterprise AI never reaches the work.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"Quenora is an enterprise AI consultancy in Heilbronn. We engineer AI into the platforms and workflows you already run, then hand your team the keys."},{"@type":"FAQPage","@id":"https://quenora.ai/#faq","mainEntity":[{"@type":"Question","name":"Why not a large consultancy?","acceptedAnswer":{"@type":"Answer","text":"You should use one for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, their engagement model costs more than the problem and moves slower than your business does. The people who sell it are also rarely the people who build it."}},{"@type":"Question","name":"Why not build it in-house?","acceptedAnswer":{"@type":"Answer","text":"Often you should, and we’ll say so. Bring us in when your team has the domain knowledge but not the platform experience, or when they’re already fully committed to the systems that keep the business running. The handover phase exists precisely so that in-house becomes the answer at the end."}},{"@type":"Question","name":"Why not just buy a vendor platform?","acceptedAnswer":{"@type":"Answer","text":"If a product genuinely covers your case, buy it — that’s cheaper than anything we’d build. The work we get called for is what remains: connecting that product to systems it was never designed to meet, and producing the governance evidence the vendor doesn’t."}},{"@type":"Question","name":"You have no published case studies.","acceptedAnswer":{"@type":"Answer","text":"Correct, and we won’t invent them. Quenora is a founder-led firm in its early chapter. What we’ll do is arrange a direct conversation with a reference before you commit, and show you the actual architecture and evaluation approach in the first meeting rather than a sales deck."}},{"@type":"Question","name":"What happens if it doesn’t work?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it."}}]}]}</script><link href="https://quenora.ai/it" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/></head>
 <body class="no-js">
@@ -1024,10 +1030,10 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     </a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
 <nav aria-label="Main" class="navlinks" id="navLinks">
-<a href="#journey">Metodo</a>
-<a href="#solution">Competenze</a>
+<a href="/it/approach.html">Metodo</a>
+<a href="/it/capabilities.html">Competenze</a>
 <a href="/it/engineering.html">Engineering</a>
-<a href="#work">Progetti</a>
+<a href="/it/work.html">Progetti</a>
 <a href="#who">About</a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Scegli la lingua" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>IT</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/index.html" hreflang="en" lang="en">English</a></li><li><a href="/de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/index.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 <a class="navcta" href="#climax"><span class="cta-long">Iniziamo a parlarne</span><span class="cta-short">Contatti</span></a>
@@ -1631,8 +1637,8 @@ notice</a>.</span></label>
      (scope-2), both navigations point at the same places. About was missing
      here entirely and is restored. -->
 <div><h3>Navigazione</h3><nav aria-label="Footer">
-<a href="/it/index.html">Home</a><a href="#journey">Metodo</a>
-<a href="#solution">Competenze</a><a href="/it/engineering.html">Engineering</a><a href="#work">Progetti</a>
+<a aria-current="page" class="on" href="/it/index.html">Home</a><a href="/it/approach.html">Metodo</a>
+<a href="/it/capabilities.html">Competenze</a><a href="/it/engineering.html">Engineering</a><a href="/it/work.html">Progetti</a>
 <a href="#who">About</a><a href="#climax">Contatti</a></nav></div>
 <div><h3>Contatti</h3><nav aria-label="Contatti">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
@@ -3684,6 +3690,25 @@ notice</a>.</span></label>
 })();
 </script>
 <!--/WIDGET:JS-->
+<!--NAV:JS-->
+<script>
+/* A reload used to drop the reader back into the middle of a chapter with its
+   scroll-triggered reveals already spent, which reads as a broken page rather
+   than as a convenience. Returning to the top is the honest default; an anchor
+   in the URL is an explicit request for a place and is left alone. */
+(function(){
+  /* The work page's field figure is verified by a headless harness with no
+     history and no window; this must not throw there. */
+  if(typeof history==='undefined'||typeof window==='undefined') return;
+  if(!('scrollRestoration' in history)) return;
+  history.scrollRestoration = 'manual';
+  addEventListener('load', function(){
+    if(location.hash) return;
+    window.scrollTo(0, 0);
+  });
+})();
+</script>
+<!--/NAV:JS-->
 <script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');

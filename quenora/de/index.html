@@ -1000,6 +1000,12 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   flex:none;animation:livepulse 2.4s var(--e) infinite}
 @keyframes livepulse{0%,100%{opacity:1}50%{opacity:.28}}
 @media(prefers-reduced-motion:reduce){.livelink .dot{animation:none}}
+/*NAV:CSS*/
+/* The inner pages spread five header children with space-between, which put
+   the links in the middle of the bar while the home page pushed them right.
+   Same rule on every page now, so nothing moves when you navigate. */
+.navlinks{margin-left:auto}
+/*/NAV:CSS*/
 </style>
 <meta content="de_DE" property="og:locale"/><link href="https://quenora.ai/de" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de#page","url":"https://quenora.ai/de","name":"Die meiste Unternehmens-KI erreicht nie die Arbeit.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Quenora ist eine Enterprise-KI-Beratung in Heilbronn. Wir bauen KI in die Plattformen und Arbeitsabläufe ein, die Sie bereits betreiben, und übergeben Ihrem Team anschließend die Schlüssel."},{"@type":"FAQPage","@id":"https://quenora.ai/de#faq","mainEntity":[{"@type":"Question","name":"Warum keine große Beratung?","acceptedAnswer":{"@type":"Answer","text":"Für ein mehrjähriges Programm über mehrere Länder mit tausend Beteiligten sollten Sie eine nehmen — dafür sind sie gebaut und wir nicht. Für ein einzelnes System, das dieses Jahr in den Produktivbetrieb muss, kostet ihr Projektmodell mehr als das Problem und bewegt sich langsamer als Ihr Geschäft. Und die Menschen, die es verkaufen, sind selten die, die es bauen."}},{"@type":"Question","name":"Warum nicht selbst bauen?","acceptedAnswer":{"@type":"Answer","text":"Oft sollten Sie das, und wir sagen es Ihnen auch. Holen Sie uns dann, wenn Ihr Team das Fachwissen hat, aber nicht die Plattformerfahrung — oder wenn es bereits vollständig durch die Systeme gebunden ist, die das Geschäft am Laufen halten. Die Übergabephase gibt es genau deshalb, damit am Ende die eigene Mannschaft die Antwort ist."}},{"@type":"Question","name":"Warum nicht einfach eine Anbieterplattform kaufen?","acceptedAnswer":{"@type":"Answer","text":"Wenn ein Produkt Ihren Fall wirklich abdeckt, kaufen Sie es — das ist günstiger als alles, was wir bauen würden. Wir werden für das gerufen, was danach übrig bleibt: dieses Produkt an Systeme anzubinden, für die es nie gedacht war, und die Governance-Nachweise zu erzeugen, die der Anbieter nicht liefert."}},{"@type":"Question","name":"Sie haben keine veröffentlichten Fallstudien.","acceptedAnswer":{"@type":"Answer","text":"Richtig, und wir erfinden auch keine. Quenora ist ein inhabergeführtes Unternehmen in seinem frühen Kapitel. Was wir tun: Wir vermitteln Ihnen vor einer Zusage ein direktes Gespräch mit einer Referenz und zeigen Ihnen im ersten Termin die tatsächliche Architektur und den Evaluationsansatz statt einer Verkaufspräsentation."}},{"@type":"Question","name":"Was passiert, wenn es nicht funktioniert?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 ist dafür da, das schriftlich zu beantworten, gemessen an der in Phase 01 vereinbarten Zahl. Hat sie sich nicht bewegt, sagen wir das. Der Code, die Dokumentation und das Evaluations-Harness bleiben in jedem Fall bei Ihnen — es gibt kein Szenario, in dem Sie ein Projekt ohne vorzeigbares Ergebnis beenden."}}]}]}</script></head>
 <body class="no-js">
@@ -1024,10 +1030,10 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     </a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menü" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
 <nav aria-label="Main" class="navlinks" id="navLinks">
-<a href="#journey">Vorgehen</a>
-<a href="#solution">Leistungen</a>
+<a href="/de/approach.html">Vorgehen</a>
+<a href="/de/capabilities.html">Leistungen</a>
 <a href="/de/engineering.html">KI-Engineering</a>
-<a href="#work">Projekte</a>
+<a href="/de/work.html">Projekte</a>
 <a href="#who">Über uns</a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Sprache wählen" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>DE</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/index.html" hreflang="en" lang="en">English</a></li><li><a aria-current="true" href="/de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/index.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 <a class="navcta" href="#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a>
@@ -1547,8 +1553,8 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
      (scope-2), both navigations point at the same places. About was missing
      here entirely and is restored. -->
 <div><h3>Navigation</h3><nav aria-label="Footer">
-<a href="/de/index.html">Start</a><a href="#journey">Vorgehen</a>
-<a href="#solution">Leistungen</a><a href="/de/engineering.html">KI-Engineering</a><a href="#work">Projekte</a>
+<a aria-current="page" class="on" href="/de/index.html">Start</a><a href="/de/approach.html">Vorgehen</a>
+<a href="/de/capabilities.html">Leistungen</a><a href="/de/engineering.html">KI-Engineering</a><a href="/de/work.html">Projekte</a>
 <a href="#who">Über uns</a><a href="#climax">Kontakt</a></nav></div>
 <div><h3>Kontakt</h3><nav aria-label="Kontakt">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
@@ -3600,6 +3606,25 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 })();
 </script>
 <!--/WIDGET:JS-->
+<!--NAV:JS-->
+<script>
+/* A reload used to drop the reader back into the middle of a chapter with its
+   scroll-triggered reveals already spent, which reads as a broken page rather
+   than as a convenience. Returning to the top is the honest default; an anchor
+   in the URL is an explicit request for a place and is left alone. */
+(function(){
+  /* The work page's field figure is verified by a headless harness with no
+     history and no window; this must not throw there. */
+  if(typeof history==='undefined'||typeof window==='undefined') return;
+  if(!('scrollRestoration' in history)) return;
+  history.scrollRestoration = 'manual';
+  addEventListener('load', function(){
+    if(location.hash) return;
+    window.scrollTo(0, 0);
+  });
+})();
+</script>
+<!--/NAV:JS-->
 <script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');

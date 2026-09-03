@@ -3247,20 +3247,24 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
          many:function(n){ return n+' passages from this site.'; },
          one:'One passage from this site.',
          notit:'Not what you asked?', email:'Email us',
-         team:'Written by the team.', more:'Ask something else' },
+         team:'Written by the team.', more:'Ask something else',
+         greet:'Ask anything about Quenora and I will show you what this site says about it, in its own words, with a link to where it sits. I do not generate answers — if it is not written here, I will tell you that instead of guessing.' },
     de:{ none:'Dazu steht nichts auf dieser Website, und das sage ich Ihnen lieber, als gemeinsame Wörter zu finden und es eine Antwort zu nennen. Schreiben Sie an <a href="mailto:info@quenora.ai">info@quenora.ai</a> oder starten Sie unten ein Gespräch.',
          many:function(n){ return n+' Passagen von dieser Website.'; },
          one:'Eine Passage von dieser Website.',
          notit:'Nicht das, was Sie gefragt haben?', email:'Schreiben Sie uns',
-         team:'Vom Team geschrieben.', more:'Fragen Sie etwas anderes' },
+         team:'Vom Team geschrieben.', more:'Fragen Sie etwas anderes',
+         greet:'Fragen Sie alles über Quenora, und ich zeige Ihnen, was diese Website dazu sagt — in ihren eigenen Worten, mit einem Link zur Fundstelle. Ich erzeuge keine Antworten: Steht es hier nicht, sage ich Ihnen das, statt zu raten.' },
     fr:{ none:'Rien sur ce site ne correspond, et je préfère vous le dire plutôt que de trouver des mots en commun et d’appeler cela une réponse. Écrivez à <a href="mailto:info@quenora.ai">info@quenora.ai</a>, ou engagez la conversation ci-dessous.',
          many:function(n){ return n+' passages de ce site.'; },
          one:'Un passage de ce site.',
          notit:'Ce n’est pas votre question ?', email:'Écrivez-nous',
-         team:'Écrit par l’équipe.', more:'Posez une autre question' }
+         team:'Écrit par l’équipe.', more:'Posez une autre question',
+         greet:'Posez n’importe quelle question sur Quenora et je vous montrerai ce que ce site en dit, dans ses propres mots, avec un lien vers l’endroit exact. Je ne génère pas de réponses : si ce n’est pas écrit ici, je vous le dirai plutôt que de deviner.' }
   }[LANG] || null;
   if(!UI) UI = { none:'Nothing on this site matches that.', many:function(n){return n+' passages.';},
-                 one:'One passage.', notit:'', email:'Email', team:'', more:'' };
+                 one:'One passage.', notit:'', email:'Email', team:'', more:'',
+                 greet:'Ask anything about Quenora and I will show you what this site says about it, in its own words, with a link to where it sits. I do not generate answers — if it is not written here, I will tell you that instead of guessing.' };
 
   function fold(s){
     return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
@@ -3269,9 +3273,9 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     +'that the their then there these this to was were what when which will with you your '
     +'our we us how why can does do not no der die das den dem des ein eine einer eines und '
     +'oder aber ist sind war waren sein ihre ihr wir uns sie ihnen mit von zu im am auf fur '
-    +'als auch nicht kein wie wer wo wenn dann dass le la les un une des du de et ou mais '
+    +'als auch nicht kein wie wenn dann dass le la les un une des du de et ou mais '
     +'est sont etait etaient etre leur nos nous vous avec pour dans sur comme aussi ne pas '
-    +'que quoi quand si').split(' ');
+    +'que quoi quand comment si').split(' ');
   var STOPSET = {}; STOP.forEach(function(w){ STOPSET[w]=1; });
 
   function terms(s){
@@ -3304,7 +3308,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     keep:['yours','own','handover'], afterwards:['handover','leave','ends'],
     cost:['priced','costs'],
     price:['priced','cost'], pricing:['priced','cost'],
-    fee:['priced','cost'], budget:['priced','cost'],
+    fee:['priced','cost','fixed'], budget:['priced','cost'],
     charge:['priced','cost'], expensive:['priced','cost'],
     change:['governance','control','approvals'],
     security:['governance','permission','audit','access'],
@@ -3356,6 +3360,9 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     longtemps:['semaines','phases'],
     equipe:['cabinet','fondateur'], appartient:['transmission','appartiennent'],
     certification:['iso','soc'], securite:['gouvernance','acces'],
+    /* the French page says 'retour arriere'; a French CTO still types
+       'rollback', which matched nothing once 'comment' became a stopword */
+    rollback:['retour','arriere'],
     langues:['allemand','francais','anglais'],
     langue:['allemand','francais','anglais']
   };
@@ -3499,7 +3506,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     if(open && !opened){
       opened=true;
       setTimeout(function(){
-        bot("Ask anything about Quenora and I will show you what this site says about it, in its own words, with a link to where it sits. I do not generate answers — if it is not written here, I will tell you that instead of guessing.");
+        bot(UI.greet);
       }, 260);
     }
     if(open) setTimeout(function(){ input && input.focus(); }, 320);

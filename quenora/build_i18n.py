@@ -466,7 +466,8 @@ if __name__ == "__main__":
         report[l] = sorted(st["miss"])
         print("%-6s %6.1f%%   %d string(s)" % (l, cov, len(st["miss"])))
     sitemap()
-    json.dump(report, open(os.path.join(ROOT, "_untranslated.json"), "w"),
+    json.dump(report, open(os.path.join(ROOT, "_untranslated.json"), "w",
+                          encoding="utf-8"),
               indent=1, ensure_ascii=False)
     print("\nsitemap.xml rewritten with hreflang alternates")
     print("gaps listed in _untranslated.json")

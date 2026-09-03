@@ -483,7 +483,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 </svg>quenora
     </a>
 <nav aria-label="Main" class="navlinks">
-<a href="approach.html">Approach</a>
+<a href="index.html#journey">Approach</a>
 <a href="capabilities.html">Capabilities</a>
 <a href="engineering.html">Engineering</a>
 <a href="work.html">Work</a>
@@ -661,7 +661,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <p class="mono" style="color:var(--t3)">Heilbronn, Germany · Working internationally</p>
 </div>
 <div><h3>Site</h3><nav aria-label="Footer">
-<a href="index.html">Home</a><a href="approach.html">Approach</a><a href="capabilities.html">Capabilities</a>
+<a href="index.html">Home</a><a href="index.html#journey">Approach</a><a href="capabilities.html">Capabilities</a>
 <a href="engineering.html">Engineering</a><a href="work.html">Work</a><a href="index.html#who">About</a><a href="index.html#climax">Contact</a>
 </nav></div>
 <div><h3>Contact</h3><nav aria-label="Contact">
@@ -1325,19 +1325,74 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <!--/WIDGET:JS-->
 <!--NAV:JS-->
 <script>
-/* A reload used to drop the reader back into the middle of a chapter with its
-   scroll-triggered reveals already spent, which reads as a broken page rather
-   than as a convenience. Returning to the top is the honest default; an anchor
-   in the URL is an explicit request for a place and is left alone. */
+/* Two things about arriving at this page, both about scroll.
+
+   ONE — ARRIVING AT AN ANCHOR FROM ANOTHER PAGE
+
+   html{scroll-behavior:smooth} is right for a nav click inside the page: the
+   reader keeps their bearings while the page glides. It is wrong on arrival.
+   Following Approach from an inner page loads the home page at the top and
+   then smooth-scrolls all the way down to the chapter — so the reader watches
+   the chapter numbers count past, 01, 02, 03, before the page settles. It
+   looks like the site loaded the wrong page and corrected itself.
+
+   The fix is to make only the first jump instant, then hand smooth back, so
+   every later click behaves as before.
+
+   TWO — A RELOAD
+
+   The browser restores scroll position by default. On a chaptered page whose
+   sections reveal on scroll, that drops the reader into the middle of a
+   narrative with the reveals already spent. A reload returns to the top —
+   unless the URL carries an anchor, which is an explicit request for a place.
+
+   The work page's field figure is verified by a headless harness with no
+   history and no window, so this must not throw there. */
 (function(){
-  /* The work page's field figure is verified by a headless harness with no
-     history and no window; this must not throw there. */
-  if(typeof history==='undefined'||typeof window==='undefined') return;
-  if(!('scrollRestoration' in history)) return;
-  history.scrollRestoration = 'manual';
-  addEventListener('load', function(){
-    if(location.hash) return;
-    window.scrollTo(0, 0);
+  if(typeof window==='undefined'||typeof document==='undefined') return;
+  /* The harness defines window and document but not the bare globals a page
+     normally inherits from window, so reach for them explicitly and check. */
+  if(typeof window.addEventListener!=='function'
+     || typeof window.requestAnimationFrame!=='function') return;
+  var root = document.documentElement;
+  if(!root||!root.style) return;
+
+  function instantly(fn){
+    var had = root.style.scrollBehavior, done = false;
+    root.style.scrollBehavior = 'auto';
+    fn();
+    /* Give the jump a frame to land before smooth is allowed back, or the
+       browser applies the restored value to the scroll still in flight.
+       The timer is not belt and braces: requestAnimationFrame does not run in
+       a background tab, and a page opened in one would have kept smooth
+       scrolling switched off until it was looked at. */
+    function restore(){
+      if(done) return;
+      done = true;
+      root.style.scrollBehavior = had;
+    }
+    window.requestAnimationFrame(function(){
+      window.requestAnimationFrame(restore);
+    });
+    setTimeout(restore, 400);
+  }
+
+  if(typeof history!=='undefined' && 'scrollRestoration' in history){
+    history.scrollRestoration = 'manual';
+  }
+
+  window.addEventListener('load', function(){
+    var hash = location.hash;
+    if(!hash || hash === '#'){
+      instantly(function(){ window.scrollTo(0, 0); });
+      return;
+    }
+    var target;
+    try { target = document.querySelector(hash); } catch(e){ target = null; }
+    if(!target) return;
+    instantly(function(){
+      target.scrollIntoView({behavior: 'auto', block: 'start'});
+    });
   });
 })();
 </script>

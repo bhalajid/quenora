@@ -54,18 +54,32 @@ PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
 # One label, one destination. About has no page of its own, so it stays a
 # chapter on the home page — stated here rather than left to look like an
 # oversight.
-DEST = {
-    "Approach":     "approach.html",
-    "Capabilities": "capabilities.html",
-    "Engineering":  "engineering.html",
-    "Work":         "work.html",
-    "About":        "index.html#who",
-    # The enquiry form lives in the home page's closing chapter. contact.html
-    # exists but carries no form, so sending "Contact" there would land a
-    # visitor on a page with nothing to fill in — the CTA and the footer both
-    # point at the form itself.
-    "Contact":      "index.html#climax",
-    "Home":         "index.html",
+# The home page is a single scrolling narrative; its nav jumps to chapters
+# inside it. The inner pages send you to whole pages, except Approach and
+# About, whose content IS a chapter of the home page. That is deliberate and
+# was reverted here after being "corrected" once: approach.html is a longer
+# companion to the chapter, not a replacement for it.
+DEST_HOME = {
+    "Approach": "#journey", "Capabilities": "#solution",
+    "Engineering": "engineering.html", "Work": "#work",
+    "About": "#who", "Contact": "#climax", "Home": "index.html",
+}
+DEST_INNER = {
+    "Approach": "index.html#journey", "Capabilities": "capabilities.html",
+    "Engineering": "engineering.html", "Work": "work.html",
+    "About": "index.html#who", "Contact": "index.html#climax",
+    "Home": "index.html",
+}
+
+# Which nav label a page IS. Highlighting cannot be derived from the href:
+# on approach.html the Approach link points at the home page's chapter, so
+# matching on destination would leave the page you are reading unmarked.
+CURRENT = {
+    "approach.html":     "Approach",
+    "capabilities.html": "Capabilities",
+    "engineering.html":  "Engineering",
+    "work.html":         "Work",
+    "contact.html":      "Contact",
 }
 
 CSS_M = ("/*NAV:CSS*/", "/*/NAV:CSS*/")
@@ -77,19 +91,74 @@ NAV_CSS = """/* The inner pages spread five header children with space-between, 
 .navlinks{margin-left:auto}"""
 
 NAV_JS = """<script>
-/* A reload used to drop the reader back into the middle of a chapter with its
-   scroll-triggered reveals already spent, which reads as a broken page rather
-   than as a convenience. Returning to the top is the honest default; an anchor
-   in the URL is an explicit request for a place and is left alone. */
+/* Two things about arriving at this page, both about scroll.
+
+   ONE — ARRIVING AT AN ANCHOR FROM ANOTHER PAGE
+
+   html{scroll-behavior:smooth} is right for a nav click inside the page: the
+   reader keeps their bearings while the page glides. It is wrong on arrival.
+   Following Approach from an inner page loads the home page at the top and
+   then smooth-scrolls all the way down to the chapter — so the reader watches
+   the chapter numbers count past, 01, 02, 03, before the page settles. It
+   looks like the site loaded the wrong page and corrected itself.
+
+   The fix is to make only the first jump instant, then hand smooth back, so
+   every later click behaves as before.
+
+   TWO — A RELOAD
+
+   The browser restores scroll position by default. On a chaptered page whose
+   sections reveal on scroll, that drops the reader into the middle of a
+   narrative with the reveals already spent. A reload returns to the top —
+   unless the URL carries an anchor, which is an explicit request for a place.
+
+   The work page's field figure is verified by a headless harness with no
+   history and no window, so this must not throw there. */
 (function(){
-  /* The work page's field figure is verified by a headless harness with no
-     history and no window; this must not throw there. */
-  if(typeof history==='undefined'||typeof window==='undefined') return;
-  if(!('scrollRestoration' in history)) return;
-  history.scrollRestoration = 'manual';
-  addEventListener('load', function(){
-    if(location.hash) return;
-    window.scrollTo(0, 0);
+  if(typeof window==='undefined'||typeof document==='undefined') return;
+  /* The harness defines window and document but not the bare globals a page
+     normally inherits from window, so reach for them explicitly and check. */
+  if(typeof window.addEventListener!=='function'
+     || typeof window.requestAnimationFrame!=='function') return;
+  var root = document.documentElement;
+  if(!root||!root.style) return;
+
+  function instantly(fn){
+    var had = root.style.scrollBehavior, done = false;
+    root.style.scrollBehavior = 'auto';
+    fn();
+    /* Give the jump a frame to land before smooth is allowed back, or the
+       browser applies the restored value to the scroll still in flight.
+       The timer is not belt and braces: requestAnimationFrame does not run in
+       a background tab, and a page opened in one would have kept smooth
+       scrolling switched off until it was looked at. */
+    function restore(){
+      if(done) return;
+      done = true;
+      root.style.scrollBehavior = had;
+    }
+    window.requestAnimationFrame(function(){
+      window.requestAnimationFrame(restore);
+    });
+    setTimeout(restore, 400);
+  }
+
+  if(typeof history!=='undefined' && 'scrollRestoration' in history){
+    history.scrollRestoration = 'manual';
+  }
+
+  window.addEventListener('load', function(){
+    var hash = location.hash;
+    if(!hash || hash === '#'){
+      instantly(function(){ window.scrollTo(0, 0); });
+      return;
+    }
+    var target;
+    try { target = document.querySelector(hash); } catch(e){ target = null; }
+    if(!target) return;
+    instantly(function(){
+      target.scrollIntoView({behavior: 'auto', block: 'start'});
+    });
   });
 })();
 </script>"""
@@ -107,35 +176,25 @@ def splice(s, marks, body, before):
 
 
 def retarget_and_mark(soup, page):
-    """Point every nav label at its one destination, and flag the current
-    page. Both the header and the footer, because the release gate requires
-    them to agree and a visitor reads whichever is nearer."""
+    """Put every nav label back on its one destination for this page, and flag
+    the label this page IS. Header and footer both, because the release gate
+    requires them to agree and a visitor reads whichever is nearer."""
+    dest = DEST_HOME if page == "index.html" else DEST_INNER
+    here = CURRENT.get(page)
     changed = marked = 0
     for root in (soup.find("header"), soup.find("footer")):
         if root is None:
             continue
         for a in root.find_all("a"):
             label = a.get_text(" ", strip=True)
-            want = DEST.get(label)
-            if not want:
-                continue
-            # On the home page the two anchor destinations are in-page, and
-            # the header CTA has always written them relatively. Keeping the
-            # same form means the header and the footer agree by destination.
-            if page == "index.html" and want.startswith("index.html#"):
-                want = want[len("index.html"):]
-            if a.get("href") != want:
+            want = dest.get(label)
+            if want and a.get("href") != want:
                 a["href"] = want
                 changed += 1
             cls = [c for c in (a.get("class") or []) if c != "on"]
-            # "on" means this link points at the page you are reading. The
-            # brand and the call to action are excluded: they are controls,
-            # not a position in the navigation.
-            # An exact match only. "About" resolves to index.html#who, which
-            # shares a filename with the home page but is a chapter inside it,
-            # not the page's identity — matching on the filename alone lit
-            # About up as the current tab on the home page.
-            if want == page and "navcta" not in cls and "brand" not in cls:
+            # The brand and the call to action are controls, not a position
+            # in the navigation, so neither is ever the current tab.
+            if label == here and "navcta" not in cls and "brand" not in cls:
                 cls.append("on")
                 a["aria-current"] = "page"
                 marked += 1

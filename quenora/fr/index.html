@@ -1030,10 +1030,10 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     </a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
 <nav aria-label="Main" class="navlinks" id="navLinks">
-<a href="/fr/approach.html">Méthode</a>
-<a href="/fr/capabilities.html">Expertises</a>
+<a href="#journey">Méthode</a>
+<a href="#solution">Expertises</a>
 <a href="/fr/engineering.html">Ingénierie</a>
-<a href="/fr/work.html">Missions</a>
+<a href="#work">Missions</a>
 <a href="#who">À propos</a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choisir la langue" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>FR</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/index.html" hreflang="en" lang="en">English</a></li><li><a href="/de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a aria-current="true" href="/fr/index.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 <a class="navcta" href="#climax"><span class="cta-long">Engager la conversation</span><span class="cta-short">Contact</span></a>
@@ -1553,8 +1553,8 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
      (scope-2), both navigations point at the same places. About was missing
      here entirely and is restored. -->
 <div><h3>Navigation</h3><nav aria-label="Footer">
-<a aria-current="page" class="on" href="/fr/index.html">Accueil</a><a href="/fr/approach.html">Méthode</a>
-<a href="/fr/capabilities.html">Expertises</a><a href="/fr/engineering.html">Ingénierie</a><a href="/fr/work.html">Missions</a>
+<a href="/fr/index.html">Accueil</a><a href="#journey">Méthode</a>
+<a href="#solution">Expertises</a><a href="/fr/engineering.html">Ingénierie</a><a href="#work">Missions</a>
 <a href="#who">À propos</a><a href="#climax">Contact</a></nav></div>
 <div><h3>Contact</h3><nav aria-label="Contact">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
@@ -3608,19 +3608,74 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <!--/WIDGET:JS-->
 <!--NAV:JS-->
 <script>
-/* A reload used to drop the reader back into the middle of a chapter with its
-   scroll-triggered reveals already spent, which reads as a broken page rather
-   than as a convenience. Returning to the top is the honest default; an anchor
-   in the URL is an explicit request for a place and is left alone. */
+/* Two things about arriving at this page, both about scroll.
+
+   ONE — ARRIVING AT AN ANCHOR FROM ANOTHER PAGE
+
+   html{scroll-behavior:smooth} is right for a nav click inside the page: the
+   reader keeps their bearings while the page glides. It is wrong on arrival.
+   Following Approach from an inner page loads the home page at the top and
+   then smooth-scrolls all the way down to the chapter — so the reader watches
+   the chapter numbers count past, 01, 02, 03, before the page settles. It
+   looks like the site loaded the wrong page and corrected itself.
+
+   The fix is to make only the first jump instant, then hand smooth back, so
+   every later click behaves as before.
+
+   TWO — A RELOAD
+
+   The browser restores scroll position by default. On a chaptered page whose
+   sections reveal on scroll, that drops the reader into the middle of a
+   narrative with the reveals already spent. A reload returns to the top —
+   unless the URL carries an anchor, which is an explicit request for a place.
+
+   The work page's field figure is verified by a headless harness with no
+   history and no window, so this must not throw there. */
 (function(){
-  /* The work page's field figure is verified by a headless harness with no
-     history and no window; this must not throw there. */
-  if(typeof history==='undefined'||typeof window==='undefined') return;
-  if(!('scrollRestoration' in history)) return;
-  history.scrollRestoration = 'manual';
-  addEventListener('load', function(){
-    if(location.hash) return;
-    window.scrollTo(0, 0);
+  if(typeof window==='undefined'||typeof document==='undefined') return;
+  /* The harness defines window and document but not the bare globals a page
+     normally inherits from window, so reach for them explicitly and check. */
+  if(typeof window.addEventListener!=='function'
+     || typeof window.requestAnimationFrame!=='function') return;
+  var root = document.documentElement;
+  if(!root||!root.style) return;
+
+  function instantly(fn){
+    var had = root.style.scrollBehavior, done = false;
+    root.style.scrollBehavior = 'auto';
+    fn();
+    /* Give the jump a frame to land before smooth is allowed back, or the
+       browser applies the restored value to the scroll still in flight.
+       The timer is not belt and braces: requestAnimationFrame does not run in
+       a background tab, and a page opened in one would have kept smooth
+       scrolling switched off until it was looked at. */
+    function restore(){
+      if(done) return;
+      done = true;
+      root.style.scrollBehavior = had;
+    }
+    window.requestAnimationFrame(function(){
+      window.requestAnimationFrame(restore);
+    });
+    setTimeout(restore, 400);
+  }
+
+  if(typeof history!=='undefined' && 'scrollRestoration' in history){
+    history.scrollRestoration = 'manual';
+  }
+
+  window.addEventListener('load', function(){
+    var hash = location.hash;
+    if(!hash || hash === '#'){
+      instantly(function(){ window.scrollTo(0, 0); });
+      return;
+    }
+    var target;
+    try { target = document.querySelector(hash); } catch(e){ target = null; }
+    if(!target) return;
+    instantly(function(){
+      target.scrollIntoView({behavior: 'auto', block: 'start'});
+    });
   });
 })();
 </script>

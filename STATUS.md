@@ -259,7 +259,11 @@ it needs eyes.
   now start at the same x on every page. The hero keeps 1480 deliberately: its
   mark is tied to the headline height and a grid line, and the headline is
   sized against the viewport, so narrowing the grid made them collide.
-- `story.html` has no DE/FR version.
+- **`story.html` — the last nav exception.** It is English-only AND carries a
+  different header with no language switcher, so "About" points at the home
+  page chapter instead of at it. Translating it and giving it the standard
+  header would make all five nav labels behave identically; until then About
+  is the one tab that opens a chapter rather than a page.
 - Spanish and Italian are ~45% translated and currently unlisted.
 
 **Yours, decisions**

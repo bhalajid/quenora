@@ -54,26 +54,41 @@ PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
 # One label, one destination. About has no page of its own, so it stays a
 # chapter on the home page — stated here rather than left to look like an
 # oversight.
-# The home page is a single scrolling narrative; its nav jumps to chapters
-# inside it. The inner pages send you to whole pages, except Approach and
-# About, whose content IS a chapter of the home page. That is deliberate and
-# was reverted here after being "corrected" once: approach.html is a longer
-# companion to the chapter, not a replacement for it.
+# One label, one destination, from every page — including the home page.
+#
+# The reasoning, because this was argued both ways and reversed once. The home
+# page chapters are the argument; the pages are the evidence, and they share no
+# sentences — the chapter/page pairs run 178 words against 684, 239 against
+# 1824, 165 against 2353. Nothing is being duplicated or moved.
+#
+# What changes is only where a MENU click lands. A visitor scrolling the home
+# page meets each chapter in order and takes its "in full" link in context —
+# that path is untouched and is the one that converts. A visitor who reaches
+# for the nav has already opted out of reading in sequence: they want the
+# reference, and handing them a 178-word teaser plus another click answers a
+# question they did not ask.
+#
+# It is also the only model under which the current-tab marker can ever fire
+# from the home page: routing Capabilities to #solution keeps you on
+# index.html, so no tab is ever the current one.
+#
+# About is the exception, and it is a translation exception rather than a
+# design one. story.html is English-only and carries a different header with
+# no language switcher, so linking it would strand a German or French visitor
+# on an English page with no way back. Until it is translated, About stays the
+# home page chapter, which does exist in all three languages.
 DEST_HOME = {
-    "Approach": "#journey", "Capabilities": "#solution",
-    "Engineering": "engineering.html", "Work": "#work",
+    "Approach": "approach.html", "Capabilities": "capabilities.html",
+    "Engineering": "engineering.html", "Work": "work.html",
     "About": "#who", "Contact": "#climax", "Home": "index.html",
 }
 DEST_INNER = {
-    "Approach": "index.html#journey", "Capabilities": "capabilities.html",
+    "Approach": "approach.html", "Capabilities": "capabilities.html",
     "Engineering": "engineering.html", "Work": "work.html",
     "About": "index.html#who", "Contact": "index.html#climax",
     "Home": "index.html",
 }
 
-# Which nav label a page IS. Highlighting cannot be derived from the href:
-# on approach.html the Approach link points at the home page's chapter, so
-# matching on destination would leave the page you are reading unmarked.
 CURRENT = {
     "approach.html":     "Approach",
     "capabilities.html": "Capabilities",

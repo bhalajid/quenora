@@ -34,6 +34,21 @@ async function load(file,reduceMotion=false){
         observe(el){setTimeout(()=>this.cb([{isIntersecting:true,target:el}],this),0);}
         unobserve(){} disconnect(){}
       };
+      // jsdom has no fetch. The assistant lazily fetches its index, so every
+      // page threw ReferenceError before a single assertion ran. Serving the
+      // real file off disk exercises the real path instead of hiding it —
+      // the same reason the canvas stub returns a working 2D context.
+      w.fetch=(u)=>{
+        const rel=String(u).replace(/^https?:\/\/[^/]+\//,'').split('?')[0];
+        const p=path.join(DIR,rel);
+        if(!fs.existsSync(p)) return Promise.resolve({ok:false,status:404,
+          json:()=>Promise.reject(new Error('404 '+rel)),
+          text:()=>Promise.resolve('')});
+        const body=fs.readFileSync(p,'utf8');
+        return Promise.resolve({ok:true,status:200,
+          json:()=>Promise.resolve(JSON.parse(body)),
+          text:()=>Promise.resolve(body)});
+      };
       w.requestAnimationFrame=cb=>setTimeout(()=>cb(Date.now()),16);
       w.cancelAnimationFrame=id=>clearTimeout(id);
       w.scrollTo=()=>{};

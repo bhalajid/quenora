@@ -83,7 +83,8 @@ def pages():
         dirs[:] = [x for x in dirs if x not in SKIP_DIRS and not x.startswith(".")]
         for f in fs:
             if f.endswith(".html") and f not in SKIP_FILES:
-                out.append(os.path.relpath(os.path.join(d, f), ROOT))
+                out.append(os.path.relpath(os.path.join(d, f), ROOT)
+                           .replace(os.sep, "/"))
     return sorted(out)
 
 

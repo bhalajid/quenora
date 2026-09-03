@@ -47,6 +47,124 @@ not a sample.
 
 ---
 
+## 0a. Resolution status — updated 4 September 2026
+
+Pass 2 is applied, built and pushed to `linguistics`. **Gate: 16 of 17.** The
+one red stage is 4b, the legal placeholders, which are the client's.
+
+| ID | Finding | Status |
+|---|---|---|
+| **C1** | Assistant greeted DE/FR visitors in English | **Fixed** — now `UI.greet`, one key per language |
+| **C2** | Ungoverned demo's straw-man served as a pricing answer | **Fixed** — excluded from the index; it also left `llms-full.txt` |
+| **C3** | "Fixed fee / Festpreis / Forfait" absent from all three indexes | **Fixed** — card labels now indexed; all three questions resolve |
+| **C4** | Impressum and privacy placeholders | **Open — Balaji.** The only red gate stage |
+| **H1** | "What does Quenora do?" answered with a disclaimer and the QR card | **Fixed** — curated set widened; verified live |
+| **H2** | Curated answers English-only; alias tables 45/16/18 | **Partly fixed.** Aliases now 45/35/33. Curated answers stay English-only *by decision* — see 0b |
+| **H3** | Failure question matched the case-studies answer | **Fixed** — a failure set now sits above it; bare `about` narrowed |
+| **H4** | German `wer` / `wo` aliases were dead code | **Fixed** — both removed from the stopword list |
+| **H5** | Every French "Comment…?" dragged to pricing | **Fixed** — `comment` added to the stopword list |
+| **§5** | French narrow no-break space missing on 6 of 7 pages | **Fixed** — 78 corrections; **0 plain spaces remain on any page** |
+| **§6** | Twelve wording corrections | **Fixed** — all twelve |
+| **§7** | Nine principle names inconsistent between DE and FR | **Fixed** — German now translates all nine |
+| **§7** | Nav label, footer heading | **Open — two small decisions, see 0b** |
+| **§9** | `next year.` dead key; duplicate `where:` | **Open — housekeeping, no visible effect** |
+
+### Found while fixing, not in the original audit
+
+| Finding | Status |
+|---|---|
+| `RAG systems` sat in `build_i18n.py`'s **do-not-translate list** beside GDPR and MLOps, so `RAG-Systeme` and `Systèmes RAG` — both already written — could never be reached | **Fixed** — removed from DNT |
+| `build_i18n.py` wrote `_untranslated.json` through a handle with no encoding while passing `ensure_ascii=False`, so the build **died on Windows** after writing the localised pages but before `build_assistant` and `build_seo` — the half-built state STATUS.md §5 warns about | **Fixed** — `encoding="utf-8"` |
+| The release gate reported five red stages here against STATUS.md's one. Three were `rel.split("/")[0] if "/" in rel else "en"` in `nav_map.py`, `switcher.py` and `deployed_links.py`: on Windows `rel` is `de\approach.html`, so **every localised page was classified as English**. The fourth was jsdom having no `fetch` | **Fixed** — separators normalised at the source; `fetch` added to the stub block that already existed |
+| French says *retour arrière*, so the English term `rollback` — which a French CTO would still type — matched nothing. Masked until H5 removed the wrong pricing answer that had been covering it | **Fixed** — `ALIAS_FR` bridge |
+
+---
+
+## 0b. Decisions taken, and what they cost
+
+**Curated answers stay English-only.** Writing fourteen answers each in German
+and French would add twenty-eight paragraphs of marketing copy that no native
+speaker has read — enlarging the exact unreviewed surface this audit says to
+shrink. Widening the alias tables was taken as the honest substitute. **The
+asymmetry is reduced, not removed:** English still gets curated answers plus
+retrieval; German and French get retrieval only, now with roughly three times
+the bridging they had.
+
+**The nine principles are translated in German.** `Enterprise` and `Premium`
+were the last two left in English while French translated all nine. The German
+nine are adjectives, so the replacements are adjectives, sized against the
+existing longest (*Vertrauenswürdig*, 16 characters):
+
+| | was | now |
+|---|---|---|
+| Enterprise | Enterprise | **Unternehmenstauglich** |
+| Premium | Premium | **Hochwertig** |
+
+These are brand vocabulary tied to the nine circles of the mark. One line
+overrides either.
+
+**Two §7 items are still open, deliberately.** Neither is a defect:
+
+- **Nav label.** German says `KI-Engineering`; English and French say
+  `Engineering` / `Ingénierie`. Here German is *more* descriptive, not less —
+  aligning it down would make the German worse. Recommendation: leave it.
+- **Footer heading.** English says `Site`; both translations say `Navigation`,
+  which is better. Recommendation: adopt `Navigation` in English. That is an
+  English copy change, so it is the client's voice, not mine.
+
+---
+
+## 0c. Deferred to after launch — native-speaker review
+
+**`reviewed_by_native_speaker` remains `false` in both dictionaries, and stays
+false on purpose.**
+
+Agreed 4 September 2026: the native-speaker pass for German and French is
+**held until after launch, to be handled from 9 September 2026.**
+
+What that means precisely, so nobody reads more into this audit than it
+supports:
+
+- This pass fixed defects a native reviewer would find — mistranslations,
+  register, typography, dead terminology. It is **not** a substitute for one.
+- Roughly 1,000 strings per language were machine-checked for consistency and
+  read selectively for quality. **Headings and CTAs were read in full; body
+  prose was sampled.** Anything not quoted in §6 has not been individually
+  judged by a human reader of that language.
+- The German and French copy is now defensible for launch. It is not certified.
+- The flag is the honest marker of that, and flipping it needs a real German
+  and a real French reader, not another pass by me.
+
+---
+
+## 0d. Re-verification, 4 September 2026
+
+Every existence claim in Pass 2 was re-checked using the **gate's own**
+definition rather than mine, after the gate caught one my checker had accepted.
+
+**The error being hunted:** my tokeniser applies a one-suffix strip, so
+`validations` in the page text produced `validation` in my vocabulary, and I
+accepted a French synonym pointing at a word that is not literally in the
+index. Stage 4g checks the literal token and rejected it.
+
+| Re-checked | Result |
+|---|---|
+| Alias targets, all three languages, literal tokens | **349 targets, 0 dead** |
+| Pricing labels present in each index | en `fixed fee` · de `festpreis` · fr `forfait` — all present |
+| Ungoverned demo absent from every surface | 3 indexes + `llms.txt` + `llms-full.txt` — all clean |
+| Greeting localised on every built homepage | 0 English literals, 3 `UI.greet` |
+| French high punctuation in the built pages | **0 plain spaces on all 7 pages** |
+
+**One false alarm of my own, recorded so it is not repeated.** My first
+re-check tested the *English* alias table against the German and French
+indexes and reported ~100 dead targets. That is wrong: the gate pairs each
+table with its own language. The English table is merged *into* the localised
+one at runtime, so its English targets are inert there — a German visitor's
+question will never contain "ownership". Inert, not broken. It is also the
+clearest measure of why H2 mattered.
+
+---
+
 ## 1. Executive summary
 
 | | Score | One-line justification |
@@ -238,7 +356,7 @@ Fourteen hand-written answers exist for the questions buyers actually ask. They
 are disabled for German and French by design:
 
 ```js
-var kq = LANG==='en' ? q.toLowerCase() : ' ';
+var kq = LANG==='en' ? q.toLowerCase() : '\u0000';
 ```
 
 The in-code comment explains why, and the reasoning is sound — they were never
@@ -449,7 +567,12 @@ Listed so a later pass does not "improve" them.
   or someone with the working build to regenerate.
 - **The nine principle names (§7) are a brand decision, not a language one.**
   They map to the nine circles of the mark. I have not assumed an answer.
-- **`reviewed_by_native_speaker` stays `false`.** I am not a native German or
+- **`reviewed_by_native_speaker` stays `false`** — now a recorded
+  deferral rather than an open question. See 0c: held until after launch,
+  from 9 September 2026.
+- **The build now runs here.** `beautifulsoup4` is installed and
+  `PY=python ./build.sh` works; the gate is 16 of 17.
+- **Superseded:** I am not a native German or
   French speaker, and this audit does not change that flag. It finds defects a
   native reviewer would find; it is not a substitute for one on the remaining
   prose. `STATUS.md` §6 already records this as an open item, and it should

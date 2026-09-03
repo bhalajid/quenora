@@ -27,7 +27,7 @@ Each was released as its own commit so it can be reverted alone.
 
 | # | Feature | State | Commit |
 |---|---------|-------|--------|
-| 1 | **Nora** — site assistant, floating on every page | **Done** | `00cd8e7` + fixes, widget `PENDING` |
+| 1 | **Nora** — site assistant, floating on every page | **Done** | `00cd8e7` + fixes, widget `1d12458` |
 | 2 | Contact QR → vCard + scan count | **Done** | `c3f7fcd` |
 | 3 | `llms.txt` / agent-readable structure | **Done** | `2dda952` |
 | 4 | Wallet pass | **Google done, Apple blocked** | `983294f` |

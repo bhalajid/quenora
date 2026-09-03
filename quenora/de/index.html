@@ -1001,10 +1001,47 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 @keyframes livepulse{0%,100%{opacity:1}50%{opacity:.28}}
 @media(prefers-reduced-motion:reduce){.livelink .dot{animation:none}}
 /*NAV:CSS*/
+/* ── one header, on every page ──────────────────────────────────────────
+   This site grew two header systems. The home page and engineering.html
+   space the links with var(--sp3) and mark the current page by turning it
+   copper, through a bare [aria-current=page] rule. approach, capabilities,
+   work and contact use a 30px gap, a smaller type size, and mark the current
+   page white with a growing underline. Same nav, same words, three different
+   treatments depending on where you happened to be standing — and the links
+   sat at a different x on each page, so they visibly jumped as you clicked
+   through.
+
+   Everything below is the single treatment. It is injected last, so it wins
+   on order rather than on !important, and the desktop metrics are scoped
+   above the 880px breakpoint that both families already use for the burger,
+   so the mobile drawer keeps its own larger tap targets. */
+
 /* The inner pages spread five header children with space-between, which put
-   the links in the middle of the bar while the home page pushed them right.
-   Same rule on every page now, so nothing moves when you navigate. */
+   the links in the middle of the bar while the home page pushed them right. */
 .navlinks{margin-left:auto}
+
+@media(min-width:881px){
+  .navlinks{gap:26px;align-items:center}
+  .navlinks a,.navlinks>a{font-size:14px;padding:4px 0;border-bottom:0}
+  .navcta{padding:9px 16px;font-size:12.5px}
+}
+
+/* The current page: white, over a copper rule. Drawn as a background image
+   rather than a border or an ::after, because one family already owns the
+   ::after for its hover underline and a border-bottom is taken by the mobile
+   drawer — this collides with neither. */
+header .navlinks a.on,
+header .navlinks a[aria-current="page"]{
+  color:#F2EFE8;
+  background-image:linear-gradient(#C97A3C,#C97A3C);
+  background-size:100% 2px;
+  background-repeat:no-repeat;
+  background-position:0 100%;
+}
+/* and suppress the other family's underline, so the active tab never wears
+   two of them at once */
+header .navlinks a.on::after,
+header .navlinks a[aria-current="page"]::after{width:0}
 /*/NAV:CSS*/
 </style>
 <meta content="de_DE" property="og:locale"/><link href="https://quenora.ai/de" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de#page","url":"https://quenora.ai/de","name":"Die meiste Unternehmens-KI erreicht nie die Arbeit.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Quenora ist eine Enterprise-KI-Beratung in Heilbronn. Wir bauen KI in die Plattformen und Arbeitsabläufe ein, die Sie bereits betreiben, und übergeben Ihrem Team anschließend die Schlüssel."},{"@type":"FAQPage","@id":"https://quenora.ai/de#faq","mainEntity":[{"@type":"Question","name":"Warum keine große Beratung?","acceptedAnswer":{"@type":"Answer","text":"Für ein mehrjähriges Programm über mehrere Länder mit tausend Beteiligten sollten Sie eine nehmen — dafür sind sie gebaut und wir nicht. Für ein einzelnes System, das dieses Jahr in den Produktivbetrieb muss, kostet ihr Projektmodell mehr als das Problem und bewegt sich langsamer als Ihr Geschäft. Und die Menschen, die es verkaufen, sind selten die, die es bauen."}},{"@type":"Question","name":"Warum nicht selbst bauen?","acceptedAnswer":{"@type":"Answer","text":"Oft sollten Sie das, und wir sagen es Ihnen auch. Holen Sie uns dann, wenn Ihr Team das Fachwissen hat, aber nicht die Plattformerfahrung — oder wenn es bereits vollständig durch die Systeme gebunden ist, die das Geschäft am Laufen halten. Die Übergabephase gibt es genau deshalb, damit am Ende die eigene Mannschaft die Antwort ist."}},{"@type":"Question","name":"Warum nicht einfach eine Anbieterplattform kaufen?","acceptedAnswer":{"@type":"Answer","text":"Wenn ein Produkt Ihren Fall wirklich abdeckt, kaufen Sie es — das ist günstiger als alles, was wir bauen würden. Wir werden für das gerufen, was danach übrig bleibt: dieses Produkt an Systeme anzubinden, für die es nie gedacht war, und die Governance-Nachweise zu erzeugen, die der Anbieter nicht liefert."}},{"@type":"Question","name":"Sie haben keine veröffentlichten Fallstudien.","acceptedAnswer":{"@type":"Answer","text":"Richtig, und wir erfinden auch keine. Quenora ist ein inhabergeführtes Unternehmen in seinem frühen Kapitel. Was wir tun: Wir vermitteln Ihnen vor einer Zusage ein direktes Gespräch mit einer Referenz und zeigen Ihnen im ersten Termin die tatsächliche Architektur und den Evaluationsansatz statt einer Verkaufspräsentation."}},{"@type":"Question","name":"Was passiert, wenn es nicht funktioniert?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 ist dafür da, das schriftlich zu beantworten, gemessen an der in Phase 01 vereinbarten Zahl. Hat sie sich nicht bewegt, sagen wir das. Der Code, die Dokumentation und das Evaluations-Harness bleiben in jedem Fall bei Ihnen — es gibt kein Szenario, in dem Sie ein Projekt ohne vorzeigbares Ergebnis beenden."}}]}]}</script></head>

@@ -255,7 +255,10 @@ it needs eyes.
 
 - Self-host the fonts. Lighthouse prices Google Fonts as render-blocking at
   **2,050 ms** — the single largest remaining performance item.
-- Inner pages are 1240 px wide, the homepage 1480 px.
+- ~~Inner pages 1240px, homepage 1480px~~ — **closed.** Header, nav and body
+  now start at the same x on every page. The hero keeps 1480 deliberately: its
+  mark is tied to the headline height and a grid line, and the headline is
+  sized against the viewport, so narrowing the grid made them collide.
 - `story.html` has no DE/FR version.
 - Spanish and Italian are ~45% translated and currently unlisted.
 

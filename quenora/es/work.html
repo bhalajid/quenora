@@ -578,7 +578,23 @@ footer nav{display:block}
    the links in the middle of the bar while the home page pushed them right. */
 .navlinks{margin-left:auto}
 
+/* Same container, so the header sits at the same x on every page. The three
+   families each defined .wrap differently — width:min(100% - 40px, W) with no
+   padding, max-width with 20px of padding, and max-width with 40px — so even
+   after the max-width was unified the CONTENT box was 1240, 1200 and 1160.
+   That is the last of the shifting. Scoped to desktop so each page keeps the
+   mobile gutter it was designed with. */
 @media(min-width:881px){
+  header .wrap{width:auto;max-width:1240px;margin-inline:auto;
+    padding-left:40px;padding-right:40px}
+}
+
+@media(min-width:881px){
+  /* The header's own flex container: a div.wrap on the home page and inner
+     engineering, a nav on the rest. Their gaps were 24px and 30px, and with
+     three items to the right of the links that is a 12px difference in where
+     the links end — the last of the movement between pages. */
+  header > .wrap, header nav{gap:26px}
   .navlinks{gap:26px;align-items:center}
   .navlinks a,.navlinks>a{font-size:14px;padding:4px 0;border-bottom:0}
   .navcta{padding:9px 16px;font-size:12.5px}
@@ -601,6 +617,11 @@ header .navlinks a[aria-current="page"]{
 header .navlinks a.on::after,
 header .navlinks a[aria-current="page"]::after{width:0}
 /*/NAV:CSS*/
+/* The three worked-problem paragraphs had no measure at all: max-width:none,
+   so each ran the full 1078px of the column — about 135 characters a line,
+   roughly twice a comfortable measure and the longest text on the site. The
+   rest of this page was already capped in ch; these three were simply missed. */
+.case > p{max-width:70ch}
 </style>
 <meta content="es_ES" property="og:locale"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/work#page","url":"https://quenora.ai/work","name":"Engagement patterns, honestly labelled.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"Engagement patterns and the sectors Quenora Consulting works in.","breadcrumb":{"@id":"https://quenora.ai/work#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/work#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"Engagement patterns, honestly labelled.","item":"https://quenora.ai/work"}]}]}</script><link href="https://quenora.ai/es/work" rel="canonical"/><link href="https://quenora.ai/work" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/work" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/work" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/work" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/></head>
 <body>

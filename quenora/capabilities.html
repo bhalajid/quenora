@@ -483,7 +483,23 @@ footer nav{display:block}
    the links in the middle of the bar while the home page pushed them right. */
 .navlinks{margin-left:auto}
 
+/* Same container, so the header sits at the same x on every page. The three
+   families each defined .wrap differently — width:min(100% - 40px, W) with no
+   padding, max-width with 20px of padding, and max-width with 40px — so even
+   after the max-width was unified the CONTENT box was 1240, 1200 and 1160.
+   That is the last of the shifting. Scoped to desktop so each page keeps the
+   mobile gutter it was designed with. */
 @media(min-width:881px){
+  header .wrap{width:auto;max-width:1240px;margin-inline:auto;
+    padding-left:40px;padding-right:40px}
+}
+
+@media(min-width:881px){
+  /* The header's own flex container: a div.wrap on the home page and inner
+     engineering, a nav on the rest. Their gaps were 24px and 30px, and with
+     three items to the right of the links that is a 12px difference in where
+     the links end — the last of the movement between pages. */
+  header > .wrap, header nav{gap:26px}
   .navlinks{gap:26px;align-items:center}
   .navlinks a,.navlinks>a{font-size:14px;padding:4px 0;border-bottom:0}
   .navcta{padding:9px 16px;font-size:12.5px}

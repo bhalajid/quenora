@@ -44,7 +44,7 @@
   --line2:rgba(242,239,232,.18);
   --sp2:16px; --sp3:24px; --sp4:40px; --sp5:64px;
   --sp6:104px; --sp7:168px; --sp8:250px;
-  --wrap:1480px;
+  --wrap:1240px/* was 1480px. The inner pages have always been 1240, so the header — logo, nav, language button — sat at a different x on every page and the links visibly jumped as you clicked through. Measured before changing it: the hero headline is sized by clamp() against the viewport, the body copy is already capped in ch, and the field-figure canvas is full-bleed outside .wrap, so none of them move. Only the three-across chapter grids tighten, from 474px to 413px a cell. */;
   --e:cubic-bezier(.16,1,.3,1);
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -474,7 +474,23 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
    the links in the middle of the bar while the home page pushed them right. */
 .navlinks{margin-left:auto}
 
+/* Same container, so the header sits at the same x on every page. The three
+   families each defined .wrap differently — width:min(100% - 40px, W) with no
+   padding, max-width with 20px of padding, and max-width with 40px — so even
+   after the max-width was unified the CONTENT box was 1240, 1200 and 1160.
+   That is the last of the shifting. Scoped to desktop so each page keeps the
+   mobile gutter it was designed with. */
 @media(min-width:881px){
+  header .wrap{width:auto;max-width:1240px;margin-inline:auto;
+    padding-left:40px;padding-right:40px}
+}
+
+@media(min-width:881px){
+  /* The header's own flex container: a div.wrap on the home page and inner
+     engineering, a nav on the rest. Their gaps were 24px and 30px, and with
+     three items to the right of the links that is a 12px difference in where
+     the links end — the last of the movement between pages. */
+  header > .wrap, header nav{gap:26px}
   .navlinks{gap:26px;align-items:center}
   .navlinks a,.navlinks>a{font-size:14px;padding:4px 0;border-bottom:0}
   .navcta{padding:9px 16px;font-size:12.5px}

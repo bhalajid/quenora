@@ -1,0 +1,103 @@
+/* ── Nora, the site assistant ───────────────────────────────────────────
+   Floating on every page, so the widget cannot rely on any one page's token
+   names: the home page calls the foreground --t1 and the inner pages call it
+   --white. A var() that resolves to nothing is an invalid declaration, and
+   the panel would have rendered unstyled on eight of eleven pages with no
+   error anywhere. So the widget carries its own scoped tokens, with the same
+   literal values as the palette, and everything inside inherits them.
+
+   It runs entirely in the page: BM25 over a pre-built index of this site's
+   own sentences. No model, no key, no network call beyond one JSON file. */
+.ai-fab,.ai-panel{
+  --w-void:#07070A; --w-sf:#14161E;
+  --w-t1:#F2EFE8; --w-t2:#A8AEBB; --w-t3:#7C8290;
+  --w-copper:#C97A3C; --w-copper-lt:#E9A063; --w-signal:#5BD7F5;
+  --w-line:rgba(242,239,232,.09); --w-line2:rgba(242,239,232,.18);
+  --w-e:cubic-bezier(.16,1,.3,1);
+}
+.ai-fab{position:fixed;bottom:26px;right:26px;z-index:400;width:56px;height:56px;
+  border-radius:50%;background:var(--w-copper);display:flex;align-items:center;
+  justify-content:center;cursor:pointer;border:none;
+  box-shadow:0 12px 36px -8px rgba(201,122,60,.45);transition:transform .25s var(--w-e)}
+.ai-fab:hover{transform:scale(1.06)}
+.ai-fab:hover .ai-mk{transform:scale(1.08)}
+.ai-fab .ai-mk{width:25px;height:25px;transition:transform .25s var(--w-e)}
+/* The name, on hover and on keyboard focus. A tooltip nobody can reach with
+   a keyboard is decoration; :focus-visible makes it part of the control. */
+.ai-tip{position:absolute;right:calc(100% + 12px);top:50%;transform:translateY(-50%) translateX(6px);
+  white-space:nowrap;font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--w-t1);background:rgba(20,22,30,.97);border:1px solid var(--w-line2);
+  border-radius:2px;padding:7px 11px;opacity:0;pointer-events:none;
+  transition:opacity .2s var(--w-e),transform .2s var(--w-e)}
+.ai-fab:hover .ai-tip,.ai-fab:focus-visible .ai-tip{opacity:1;transform:translateY(-50%)}
+.ai-fab.open .ai-tip{opacity:0}
+.ai-fab::before{content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1px solid var(--w-copper);opacity:.5;animation:aipulse 2.6s ease-out infinite}
+@keyframes aipulse{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.35);opacity:0}}
+.ai-panel{position:fixed;bottom:96px;right:26px;z-index:400;width:370px;
+  max-width:calc(100vw - 36px);background:rgba(20,22,30,.97);
+  backdrop-filter:blur(20px);border:1px solid var(--w-line2);border-radius:14px;
+  overflow:hidden;box-shadow:0 30px 70px -12px rgba(0,0,0,.75);
+  opacity:0;transform:translateY(14px) scale(.97);pointer-events:none;
+  transition:.28s var(--w-e)}
+.ai-panel.open{opacity:1;transform:none;pointer-events:auto}
+.ai-head{padding:15px 18px;border-bottom:1px solid var(--w-line);display:flex;
+  align-items:center;gap:11px}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--w-copper);flex:none;
+  box-shadow:0 0 10px var(--w-copper);animation:aibreathe 2s ease-in-out infinite}
+@keyframes aibreathe{0%,100%{opacity:1}50%{opacity:.35}}
+.ai-head b{font-size:.85rem;font-weight:600;display:block;color:var(--w-t1)}
+.ai-head span{font-family:'JetBrains Mono',monospace;font-size:.58rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--w-t3)}
+.ai-body{padding:16px 18px;max-height:280px;overflow-y:auto;display:flex;
+  flex-direction:column;gap:10px}
+.ai-body::-webkit-scrollbar{width:4px}
+.ai-body::-webkit-scrollbar-thumb{background:var(--w-line2);border-radius:2px}
+.ai-msg{font-size:.85rem;line-height:1.6;max-width:88%}
+.ai-msg.bot{color:var(--w-t1);background:rgba(242,239,232,.05);padding:10px 13px;
+  border-radius:11px 11px 11px 3px;align-self:flex-start}
+.ai-msg.user{color:var(--w-void);background:var(--w-copper);padding:10px 13px;
+  border-radius:11px 11px 3px 11px;align-self:flex-end;font-weight:500}
+.ai-suggest{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 12px}
+.ai-chip{font-size:.72rem;padding:6px 12px;border-radius:20px;
+  border:1px solid var(--w-line);color:var(--w-t2);cursor:pointer;
+  background:none;font-family:inherit;transition:.2s}
+.ai-chip:hover{border-color:var(--w-copper);color:var(--w-t1);background:rgba(201,122,60,.13)}
+/* Every answer names where it came from, because a passage without a source
+   is indistinguishable from something invented. */
+.ai-first,.ai-more{display:block}
+.ai-more{margin-top:14px;padding-top:12px;border-top:1px solid var(--w-line);color:var(--w-t2)}
+.ai-src{display:block;margin-top:7px;font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--w-copper-lt);border-bottom:none}
+.ai-foot{display:block;margin-top:12px;padding-top:9px;
+  border-top:1px solid var(--w-line);font-family:'JetBrains Mono',monospace;
+  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--w-t3)}
+.ai-foot a{color:var(--w-copper-lt)}
+.ai-form{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--w-line)}
+.ai-form input{flex:1;background:rgba(242,239,232,.05);border:1px solid var(--w-line);
+  border-radius:9px;padding:9px 12px;color:var(--w-t1);font-family:inherit;
+  /* 16px, not .85rem: below 16 iOS zooms the viewport when the field takes
+     focus, and this one sits inside a fixed panel, so the zoom strands it. */
+  font-size:16px;min-width:0}
+.ai-form input::placeholder{color:var(--w-t3)}
+.ai-form input:focus{border-color:var(--w-copper)}
+.ai-form button{flex:none;background:var(--w-copper);color:var(--w-void);border:none;
+  border-radius:9px;padding:0 14px;font-family:inherit;font-weight:600;
+  font-size:.85rem;cursor:pointer;transition:background .2s}
+.ai-form button:hover{background:var(--w-copper-lt)}
+.ai-foot{padding:10px 18px;border-top:1px solid var(--w-line);
+  font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--w-t3);text-align:center}
+.ai-typing{display:inline-flex;gap:4px;padding:10px 13px}
+.ai-typing i{width:5px;height:5px;border-radius:50%;background:var(--w-t3);
+  animation:aiblink 1.3s infinite}
+.ai-typing i:nth-child(2){animation-delay:.18s}
+.ai-typing i:nth-child(3){animation-delay:.36s}
+@keyframes aiblink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+@media(max-width:560px){.ai-fab{bottom:18px;right:18px}.ai-panel{bottom:84px;right:18px}
+  /* no room beside the button on a phone, and no hover there either */
+  .ai-tip{display:none}}
+@media(prefers-reduced-motion:reduce){.ai-fab::before,.ai-dot,.ai-typing i{animation:none}}
+.ai-fab:focus-visible{outline:2px solid var(--w-signal);outline-offset:4px}

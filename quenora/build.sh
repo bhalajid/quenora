@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Build the site. The order matters and is the reason this file exists.
 #
+#   build_widget    injects Nora (the floating assistant) into the English
+#                   pages from widget/. Must run FIRST, so the localisation
+#                   build carries her into every language.
 #   build_i18n      regenerates de/ fr/ es/ it/ from the English source.
 #                   It overwrites those directories wholesale.
 #   build_assistant reads the built pages and writes one search index per
@@ -23,6 +26,7 @@ if ! "$PY" -c 'import bs4' 2>/dev/null; then
   exit 1
 fi
 
+"$PY" build_widget.py
 "$PY" build_i18n.py
 "$PY" build_assistant.py
 "$PY" build_seo.py

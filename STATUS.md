@@ -27,7 +27,7 @@ Each was released as its own commit so it can be reverted alone.
 
 | # | Feature | State | Commit |
 |---|---------|-------|--------|
-| 1 | Site assistant (real chatbot, no tokens burned) | **Done** | `00cd8e7` + 3 fixes |
+| 1 | **Nora** — site assistant, floating on every page | **Done** | `00cd8e7` + fixes, widget `PENDING` |
 | 2 | Contact QR → vCard + scan count | **Done** | `c3f7fcd` |
 | 3 | `llms.txt` / agent-readable structure | **Done** | `2dda952` |
 | 4 | Wallet pass | **Google done, Apple blocked** | `983294f` |
@@ -44,6 +44,17 @@ lazily, one index per language.
 
 If it cannot match, it says so and points at the form. That is the honest
 failure, and it is deliberate.
+
+**Nora** is the assistant's name. She floats bottom-right on all 24 pages,
+labelled "Ask Nora" on hover and on keyboard focus, with the wordmark's five
+largest circles as her icon. One source in `widget/`, injected by
+`build_widget.py`; there is no second copy to drift.
+
+**Known gap:** the canned fallback answers — used only when `assistant.json`
+fails to load — are still English in every language, because they live in
+JavaScript string literals that `build_i18n` cannot reach. The greeting was in
+the same position and has been moved into the DOM. Moving the remaining twelve
+is mechanical but not yet done.
 
 ### #2 — The contact QR
 

@@ -80,6 +80,10 @@ def block(html, start_pat, end_tag):
 def pages():
     out = []
     for d, dirs, fs in os.walk(ROOT):
+        # widget/ holds the assistant's source fragments, not pages. They are
+        # injected into every page by build_widget.py and have no header of
+        # their own to agree with a footer.
+        dirs[:] = [x for x in dirs if x not in ("widget", "test", "api", "node_modules")]
         dirs[:] = [x for x in dirs if x not in SKIP_DIRS and not x.startswith(".")]
         for f in fs:
             if f.endswith(".html") and f not in SKIP_FILES:

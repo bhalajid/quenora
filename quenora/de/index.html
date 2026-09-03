@@ -526,82 +526,112 @@ body.clg .cur::after{opacity:1}
 .vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
-/* ── the assistant ──────────────────────────────────────────────────────
-   Ported from the inner pages, which had suggestion chips but no way to type.
-   It runs entirely in the page: keyword match over a written answer set, no
-   network call, no key, nothing to leak. The footer says what it is. */
+/*WIDGET:CSS*/
+/* ── Nora, the site assistant ───────────────────────────────────────────
+   Floating on every page, so the widget cannot rely on any one page's token
+   names: the home page calls the foreground --t1 and the inner pages call it
+   --white. A var() that resolves to nothing is an invalid declaration, and
+   the panel would have rendered unstyled on eight of eleven pages with no
+   error anywhere. So the widget carries its own scoped tokens, with the same
+   literal values as the palette, and everything inside inherits them.
+
+   It runs entirely in the page: BM25 over a pre-built index of this site's
+   own sentences. No model, no key, no network call beyond one JSON file. */
+.ai-fab,.ai-panel{
+  --w-void:#07070A; --w-sf:#14161E;
+  --w-t1:#F2EFE8; --w-t2:#A8AEBB; --w-t3:#7C8290;
+  --w-copper:#C97A3C; --w-copper-lt:#E9A063; --w-signal:#5BD7F5;
+  --w-line:rgba(242,239,232,.09); --w-line2:rgba(242,239,232,.18);
+  --w-e:cubic-bezier(.16,1,.3,1);
+}
 .ai-fab{position:fixed;bottom:26px;right:26px;z-index:400;width:56px;height:56px;
-  border-radius:50%;background:var(--copper);display:flex;align-items:center;
+  border-radius:50%;background:var(--w-copper);display:flex;align-items:center;
   justify-content:center;cursor:pointer;border:none;
-  box-shadow:0 12px 36px -8px rgba(201,122,60,.45);transition:transform .25s var(--e)}
-.ai-fab:hover{transform:scale(1.07) rotate(90deg)}
-.ai-fab svg{width:23px;height:23px}
+  box-shadow:0 12px 36px -8px rgba(201,122,60,.45);transition:transform .25s var(--w-e)}
+.ai-fab:hover{transform:scale(1.06)}
+.ai-fab:hover .ai-mk{transform:scale(1.08)}
+.ai-fab .ai-mk{width:25px;height:25px;transition:transform .25s var(--w-e)}
+/* The name, on hover and on keyboard focus. A tooltip nobody can reach with
+   a keyboard is decoration; :focus-visible makes it part of the control. */
+.ai-tip{position:absolute;right:calc(100% + 12px);top:50%;transform:translateY(-50%) translateX(6px);
+  white-space:nowrap;font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--w-t1);background:rgba(20,22,30,.97);border:1px solid var(--w-line2);
+  border-radius:2px;padding:7px 11px;opacity:0;pointer-events:none;
+  transition:opacity .2s var(--w-e),transform .2s var(--w-e)}
+.ai-fab:hover .ai-tip,.ai-fab:focus-visible .ai-tip{opacity:1;transform:translateY(-50%)}
+.ai-fab.open .ai-tip{opacity:0}
 .ai-fab::before{content:'';position:absolute;inset:-6px;border-radius:50%;
-  border:1px solid var(--copper);opacity:.5;animation:aipulse 2.6s ease-out infinite}
+  border:1px solid var(--w-copper);opacity:.5;animation:aipulse 2.6s ease-out infinite}
 @keyframes aipulse{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.35);opacity:0}}
 .ai-panel{position:fixed;bottom:96px;right:26px;z-index:400;width:370px;
   max-width:calc(100vw - 36px);background:rgba(20,22,30,.97);
-  backdrop-filter:blur(20px);border:1px solid var(--line2);border-radius:14px;
+  backdrop-filter:blur(20px);border:1px solid var(--w-line2);border-radius:14px;
   overflow:hidden;box-shadow:0 30px 70px -12px rgba(0,0,0,.75);
   opacity:0;transform:translateY(14px) scale(.97);pointer-events:none;
-  transition:.28s var(--e)}
+  transition:.28s var(--w-e)}
 .ai-panel.open{opacity:1;transform:none;pointer-events:auto}
-.ai-head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;
+.ai-head{padding:15px 18px;border-bottom:1px solid var(--w-line);display:flex;
   align-items:center;gap:11px}
-.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--copper);flex:none;
-  box-shadow:0 0 10px var(--copper);animation:aibreathe 2s ease-in-out infinite}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--w-copper);flex:none;
+  box-shadow:0 0 10px var(--w-copper);animation:aibreathe 2s ease-in-out infinite}
 @keyframes aibreathe{0%,100%{opacity:1}50%{opacity:.35}}
-.ai-head b{font-size:.85rem;font-weight:600;display:block;color:var(--t1)}
+.ai-head b{font-size:.85rem;font-weight:600;display:block;color:var(--w-t1)}
 .ai-head span{font-family:'JetBrains Mono',monospace;font-size:.58rem;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--t3)}
+  letter-spacing:.16em;text-transform:uppercase;color:var(--w-t3)}
 .ai-body{padding:16px 18px;max-height:280px;overflow-y:auto;display:flex;
   flex-direction:column;gap:10px}
 .ai-body::-webkit-scrollbar{width:4px}
-.ai-body::-webkit-scrollbar-thumb{background:var(--line2);border-radius:2px}
+.ai-body::-webkit-scrollbar-thumb{background:var(--w-line2);border-radius:2px}
 .ai-msg{font-size:.85rem;line-height:1.6;max-width:88%}
-.ai-msg.bot{color:var(--t1);background:rgba(242,239,232,.05);padding:10px 13px;
+.ai-msg.bot{color:var(--w-t1);background:rgba(242,239,232,.05);padding:10px 13px;
   border-radius:11px 11px 11px 3px;align-self:flex-start}
-.ai-msg.user{color:var(--void);background:var(--copper);padding:10px 13px;
+.ai-msg.user{color:var(--w-void);background:var(--w-copper);padding:10px 13px;
   border-radius:11px 11px 3px 11px;align-self:flex-end;font-weight:500}
 .ai-suggest{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 12px}
 .ai-chip{font-size:.72rem;padding:6px 12px;border-radius:20px;
-  border:1px solid var(--line);color:var(--t2);cursor:pointer;
+  border:1px solid var(--w-line);color:var(--w-t2);cursor:pointer;
   background:none;font-family:inherit;transition:.2s}
-.ai-chip:hover{border-color:var(--copper);color:var(--t1);background:rgba(201,122,60,.13)}
+.ai-chip:hover{border-color:var(--w-copper);color:var(--w-t1);background:rgba(201,122,60,.13)}
 /* Every answer names where it came from, because a passage without a source
    is indistinguishable from something invented. */
 .ai-first,.ai-more{display:block}
-.ai-more{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);color:var(--t2)}
+.ai-more{margin-top:14px;padding-top:12px;border-top:1px solid var(--w-line);color:var(--w-t2)}
 .ai-src{display:block;margin-top:7px;font-family:'JetBrains Mono',monospace;
   font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--copper-lt);border-bottom:none}
+  color:var(--w-copper-lt);border-bottom:none}
 .ai-foot{display:block;margin-top:12px;padding-top:9px;
-  border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;
-  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
-.ai-foot a{color:var(--copper-lt)}
-.ai-form{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--line)}
-.ai-form input{flex:1;background:rgba(242,239,232,.05);border:1px solid var(--line);
-  border-radius:9px;padding:9px 12px;color:var(--t1);font-family:inherit;
+  border-top:1px solid var(--w-line);font-family:'JetBrains Mono',monospace;
+  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--w-t3)}
+.ai-foot a{color:var(--w-copper-lt)}
+.ai-form{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--w-line)}
+.ai-form input{flex:1;background:rgba(242,239,232,.05);border:1px solid var(--w-line);
+  border-radius:9px;padding:9px 12px;color:var(--w-t1);font-family:inherit;
   /* 16px, not .85rem: below 16 iOS zooms the viewport when the field takes
      focus, and this one sits inside a fixed panel, so the zoom strands it. */
   font-size:16px;min-width:0}
-.ai-form input::placeholder{color:var(--t3)}
-.ai-form input:focus{border-color:var(--copper)}
-.ai-form button{flex:none;background:var(--copper);color:var(--void);border:none;
+.ai-form input::placeholder{color:var(--w-t3)}
+.ai-form input:focus{border-color:var(--w-copper)}
+.ai-form button{flex:none;background:var(--w-copper);color:var(--w-void);border:none;
   border-radius:9px;padding:0 14px;font-family:inherit;font-weight:600;
   font-size:.85rem;cursor:pointer;transition:background .2s}
-.ai-form button:hover{background:var(--copper-lt)}
-.ai-foot{padding:10px 18px;border-top:1px solid var(--line);
+.ai-form button:hover{background:var(--w-copper-lt)}
+.ai-foot{padding:10px 18px;border-top:1px solid var(--w-line);
   font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--t3);text-align:center}
+  text-transform:uppercase;color:var(--w-t3);text-align:center}
 .ai-typing{display:inline-flex;gap:4px;padding:10px 13px}
-.ai-typing i{width:5px;height:5px;border-radius:50%;background:var(--t3);
+.ai-typing i{width:5px;height:5px;border-radius:50%;background:var(--w-t3);
   animation:aiblink 1.3s infinite}
 .ai-typing i:nth-child(2){animation-delay:.18s}
 .ai-typing i:nth-child(3){animation-delay:.36s}
 @keyframes aiblink{0%,80%,100%{opacity:.25}40%{opacity:1}}
-@media(max-width:560px){.ai-fab{bottom:18px;right:18px}.ai-panel{bottom:84px;right:18px}}
+@media(max-width:560px){.ai-fab{bottom:18px;right:18px}.ai-panel{bottom:84px;right:18px}
+  /* no room beside the button on a phone, and no hover there either */
+  .ai-tip{display:none}}
 @media(prefers-reduced-motion:reduce){.ai-fab::before,.ai-dot,.ai-typing i{animation:none}}
+.ai-fab:focus-visible{outline:2px solid var(--w-signal);outline-offset:4px}
+/*/WIDGET:CSS*/
+
 
 /* ── chapter 07: who you are hiring ── */
 .whogrid{display:grid;grid-template-columns:1.55fr 1fr;gap:var(--sp5);
@@ -1537,14 +1567,27 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 </div>
 </div>
 </footer>
-<button aria-controls="aiPanel" aria-expanded="false" aria-label="Assistent öffnen" class="ai-fab" id="aiFab" type="button">
-<svg aria-hidden="true" fill="none" viewbox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" stroke="#07070A" stroke-linecap="round" stroke-width="2"></path><circle cx="12" cy="12" fill="#07070A" r="3.2"></circle></svg>
+<!--WIDGET:HTML-->
+<button aria-controls="aiPanel" aria-expanded="false" aria-label="Nora fragen" class="ai-fab" id="aiFab" type="button">
+<!-- The wordmark's five largest circles. Below about 20px the four smallest
+     are sub-pixel and only muddy the shape, so the arc is cropped rather
+     than shrunk — it stays the same mark, still legible at 24px. -->
+<svg aria-hidden="true" class="ai-mk" fill="#07070A" viewbox="56 9 123 150">
+<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
+<circle cx="151.71" cy="36" r="27"></circle>
+</svg>
+<span aria-hidden="true" class="ai-tip">Nora fragen</span>
 </button>
-<div aria-label="Quenora-Assistent" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
+<div aria-label="Nora, die Quenora-Assistentin" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
 <div class="ai-head"><div aria-hidden="true" class="ai-dot"></div>
-<div><b>Fragen Sie zu Quenora</b><span>Passagen von dieser Website, auf Ihre Frage abgestimmt</span></div>
+<div><b>Nora fragen</b><span>Antworten ausschließlich von dieser Website — Passagen, passend zu Ihrer Frage</span></div>
 </div>
 <div aria-live="polite" class="ai-body" id="aiBody" role="log"></div>
+<!-- The opening line lives here, not in the script, because build_i18n
+     translates text nodes and cannot reach a JavaScript string literal. It
+     was greeting German and French visitors in English on every open. -->
+<p class="ai-greet" hidden="" id="aiGreet">Ich bin Nora. Fragen Sie mich alles über Quenora, und ich zeige Ihnen, was diese Website dazu sagt — in ihren eigenen Worten, mit einem Link zur Fundstelle. Ich erfinde keine Antworten: Steht es hier nicht, sage ich Ihnen das, statt zu raten.</p>
 <div class="ai-suggest" id="aiSuggest">
 <button class="ai-chip" data-q="Was machen Sie konkret?" type="button">Was machen Sie konkret?</button>
 <button class="ai-chip" data-q="Was bedeutet Automatisierung hier?" type="button">Automatisierung?</button>
@@ -1555,11 +1598,12 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 </div>
 <form class="ai-form" id="aiForm">
 <label class="vh" for="aiInput">Stellen Sie eine Frage</label>
-<input autocomplete="off" id="aiInput" placeholder="Stellen Sie eine Frage …" type="text"/>
+<input autocomplete="off" id="aiInput" placeholder="Nora etwas fragen…" type="text"/>
 <button type="submit">Fragen</button>
 </form>
 <div class="ai-foot">Suche auf dieser Website · kein Modell, nichts erfunden</div>
 </div>
+<!--/WIDGET:HTML-->
 <script>
 /* ═══════════════════════════════════════════════════════════════════
    All motion, hand-written. No library, no CDN, nothing to block.
@@ -3170,13 +3214,27 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
   });
 })();
 
+</script>
+<!--WIDGET:JS-->
+<script>
 (function(){
   var fab=document.getElementById('aiFab'), panel=document.getElementById('aiPanel'),
       body=document.getElementById('aiBody'), form=document.getElementById('aiForm'),
       input=document.getElementById('aiInput'), sug=document.getElementById('aiSuggest');
   if(!fab||!panel||!body) return;
+  /* The widget needs a browser, and it is now on every page — including the
+     work page, whose field figure is verified by a headless harness running a
+     minimal DOM stub with no location. Checking the elements is not enough:
+     that stub returns something truthy for every id. Check for the thing the
+     code actually uses. */
+  if(typeof location==='undefined'||typeof fab.addEventListener!=='function') return;
   var opened=false;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function close(){
+    panel.classList.remove('open');
+    fab.classList.remove('open');
+    fab.setAttribute('aria-expanded','false');
+  }
 
   function add(t,who,html){
     var m=document.createElement('div');
@@ -3495,11 +3553,13 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 
   function toggle(){
     var open=panel.classList.toggle('open');
+    fab.classList.toggle('open', open);
     fab.setAttribute('aria-expanded', open?'true':'false');
     if(open && !opened){
       opened=true;
       setTimeout(function(){
-        bot("Ask anything about Quenora and I will show you what this site says about it, in its own words, with a link to where it sits. I do not generate answers — if it is not written here, I will tell you that instead of guessing.");
+        var g=document.getElementById('aiGreet');
+        bot(g ? g.textContent.trim() : 'Ask anything about Quenora.');
       }, 260);
     }
     if(open) setTimeout(function(){ input && input.focus(); }, 320);
@@ -3513,14 +3573,19 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
     var c=e.target.closest('.ai-chip'); if(!c) return;
     /* the assistant's job is to hand over, not to hold on to people */
     if(c.getAttribute('data-act')==='contact'){
-      panel.classList.remove('open');
-      fab.setAttribute('aria-expanded','false');
+      close();
+      /* The form is on the home page. On the other ten pages there is nothing
+         to scroll to, and the button used to do nothing at all — silently,
+         which is the worst way for a hand-off to fail. Elsewhere it goes to
+         the contact page, in the visitor's own language. */
       var cl=document.getElementById('climax');
       if(cl){
         cl.scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
         setTimeout(function(){
           var f=document.getElementById('cfName'); if(f) f.focus();
         }, reduce?0:700);
+      } else {
+        location.href = ASSET_BASE + 'contact';
       }
       return;
     }
@@ -3528,13 +3593,13 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
   });
   addEventListener('keydown', function(e){
     if(e.key==='Escape' && panel.classList.contains('open')){
-      panel.classList.remove('open');
-      fab.setAttribute('aria-expanded','false');
+      close();
       fab.focus();
     }
   });
 })();
 </script>
+<!--/WIDGET:JS-->
 <script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');

@@ -17,6 +17,9 @@ __pycache__/
 *.pyc
 
 # build scratch
+# screenshots from the browser audit — regenerate with:
+#   cd test && node browser_audit.js .. --shots
+test/shots/
 _strings.json
 _untranslated.json
 _keys.json

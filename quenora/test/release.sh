@@ -155,6 +155,16 @@ else
     || bad "a page has drifted off the shared shell"
 fi
 
+step "4j/8  the whole site in a real browser (Chromium)"
+if node -e "require.resolve('playwright')" >/dev/null 2>&1; then
+  node browser_audit.js "$DIR"
+  [ $? -eq 0 ] && ok "aligned, emphasised, labelled, no console errors" \
+    || bad "a page fails in a real browser"
+else
+  printf '   \033[33mHELD\033[0m playwright is not installed.\n'
+  printf '        cd test && npm i playwright && npx playwright install chromium\n'
+fi
+
 step "4c2/8  the language switcher actually opens"
 $QPY_NAV switcher.py "$DIR"
 [ $? -eq 0 ] && ok "one handler, wired, three languages, one marked current" \

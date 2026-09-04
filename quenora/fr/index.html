@@ -1249,6 +1249,74 @@ a.ch-card:hover .ch-title{color:var(--copper-lt)}
 .cap-n{color:var(--t3);font-size:.6rem;letter-spacing:.1em;margin:0}
 .cap-name{color:var(--t2);font-size:.92rem;line-height:1.3}
 .cap.core .cap-name{color:var(--t1);font-weight:500}
+
+/* ── the rail draws itself ─────────────────────────────────────────────
+   The six stops arrive in order when the chapter comes into view: the line
+   draws left to right and each stop lands as the line reaches it. It is the
+   one chapter where motion means something — the content is a sequence, and
+   the animation is that sequence.
+
+   The line stops at the sixth stop and the last dot stays hollow. Nothing
+   loops: an engagement designed to finish should not animate forever.
+
+   Everything is opt-in through .go, added by an IntersectionObserver, so a
+   reader who never scrolls here pays nothing — and prefers-reduced-motion
+   gets the finished state immediately rather than a degraded one. */
+.ph::before{transform-origin:left center;transform:scaleX(0);
+  transition:transform 1.15s cubic-bezier(.22,1,.36,1)}
+.ph.go::before{transform:scaleX(1)}
+.ph-stop{opacity:0;transform:translateY(6px);
+  transition:opacity .5s var(--e),transform .5s var(--e)}
+.ph.go .ph-stop{opacity:1;transform:none}
+.ph.go .ph-stop:nth-child(1){transition-delay:.10s}
+.ph.go .ph-stop:nth-child(2){transition-delay:.28s}
+.ph.go .ph-stop:nth-child(3){transition-delay:.46s}
+.ph.go .ph-stop:nth-child(4){transition-delay:.64s}
+.ph.go .ph-stop:nth-child(5){transition-delay:.82s}
+.ph.go .ph-stop:nth-child(6){transition-delay:1.00s}
+/* the handover lands, then breathes once and stops */
+.ph.go .ph-stop.last .ph-dot{animation:phlast 1.6s var(--e) 1.15s 1}
+@keyframes phlast{
+  0%{box-shadow:0 0 0 5px var(--void),0 0 0 5px rgba(201,122,60,.55)}
+  70%{box-shadow:0 0 0 5px var(--void),0 0 0 16px rgba(201,122,60,0)}
+  100%{box-shadow:0 0 0 5px var(--void),0 0 0 16px rgba(201,122,60,0)}
+}
+@media(max-width:760px){
+  .ph::before{transform-origin:center top;transform:scaleY(0)}
+  .ph.go::before{transform:scaleY(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  .ph::before,.ph.go::before{transform:none;transition:none}
+  .ph-stop,.ph.go .ph-stop{opacity:1;transform:none;transition:none;
+    transition-delay:0s}
+  .ph.go .ph-stop.last .ph-dot{animation:none}
+}
+
+/* ── chapter 07, once the detail moved to about.html ───────────────────
+   The body paragraphs left with the page. What remained was a two-column
+   grid holding one child — the facts sat in the first column and the second
+   was simply a hole, which is what the blank in the screenshot was.
+
+   The lede lives in the chapter header like every other chapter, so the grid
+   has one job left: the five facts. They run as a strip across the full
+   width, which fills the measure instead of leaving it. */
+#who .whogrid{grid-template-columns:minmax(0,1fr)}
+#who .whofacts{border-left:0;padding-left:0;
+  border-top:1px solid var(--line);padding-top:var(--sp4);
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--sp3)}
+#who .wfact{display:flex;flex-direction:column;gap:6px;
+  border-right:1px solid var(--line);padding-right:var(--sp3)}
+#who .wfact:last-child{border-right:0;padding-right:0}
+#who .wfact span{color:var(--t3);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase}
+#who .wfact b{color:var(--t1);font-weight:500;font-size:1rem;line-height:1.3}
+@media(max-width:900px){
+  #who .whofacts{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp3)}
+  #who .wfact{border-right:0;padding-right:0;
+    border-bottom:1px solid var(--line);padding-bottom:14px}
+  #who .wfact:nth-last-child(-n+1){border-bottom:0;padding-bottom:0}
+}
+@media(max-width:480px){#who .whofacts{grid-template-columns:minmax(0,1fr)}}
 /*/PREVIEW:CSS*/
 </style>
 <meta content="fr_FR" property="og:locale"/><link href="https://quenora.ai/fr" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR"},{"@type":"WebPage","@id":"https://quenora.ai/fr#page","url":"https://quenora.ai/fr","name":"La plupart de l'IA d'entreprise n'atteint jamais le travail.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR","description":"Quenora est un cabinet de conseil en IA d’entreprise établi à Heilbronn. Nous intégrons l’IA dans les plateformes et les flux de travail que vous exploitez déjà, puis nous en remettons les clés à votre équipe."},{"@type":"FAQPage","@id":"https://quenora.ai/fr#faq","mainEntity":[{"@type":"Question","name":"Pourquoi pas un grand cabinet ?","acceptedAnswer":{"@type":"Answer","text":"Pour un programme pluriannuel, multipays, avec un millier de parties prenantes, vous devriez en prendre un — ils sont faits pour cela, nous ne le sommes pas. Pour un système unique qui doit atteindre la production cette année, leur modèle de mission coûte plus cher que le problème et avance plus lentement que votre entreprise. Et ceux qui le vendent sont rarement ceux qui le construisent."}},{"@type":"Question","name":"Pourquoi ne pas le construire en interne ?","acceptedAnswer":{"@type":"Answer","text":"Souvent, vous devriez, et nous vous le dirons. Faites-nous intervenir lorsque votre équipe possède la connaissance métier mais pas l’expérience plateforme, ou lorsqu’elle est déjà entièrement mobilisée par les systèmes qui font tourner l’entreprise. La phase de transfert existe précisément pour qu’à la fin, l’interne soit la réponse."}},{"@type":"Question","name":"Pourquoi ne pas simplement acheter une plateforme du marché ?","acceptedAnswer":{"@type":"Answer","text":"Si un produit couvre réellement votre cas, achetez-le — cela coûtera moins cher que tout ce que nous construirions. Ce pour quoi on nous appelle, c’est ce qui reste : raccorder ce produit à des systèmes pour lesquels il n’a jamais été conçu, et produire les preuves de gouvernance que l’éditeur ne fournit pas."}},{"@type":"Question","name":"Vous n’avez aucune étude de cas publiée.","acceptedAnswer":{"@type":"Answer","text":"C’est exact, et nous n’en inventerons pas. Quenora est un cabinet dirigé par son fondateur, à ses débuts. Ce que nous ferons : organiser un échange direct avec une référence avant tout engagement de votre part, et vous montrer dès le premier rendez-vous l’architecture réelle et la démarche d’évaluation plutôt qu’une présentation commerciale."}},{"@type":"Question","name":"Que se passe-t-il si cela ne fonctionne pas ?","acceptedAnswer":{"@type":"Answer","text":"La phase 05 existe pour y répondre par écrit, face au chiffre convenu en phase 01. S’il n’a pas bougé, nous le disons. Le code, la documentation et le harnais d’évaluation vous restent dans tous les cas — il n’existe aucun scénario où vous terminez une mission sans rien à montrer."}}]}]}</script></head>
@@ -1528,14 +1596,13 @@ a.ch-card:hover .ch-title{color:var(--copper-lt)}
 <section id="who">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">07<a class="more" href="/fr/about.html">Qui vous engagez, en détail</a></div>
+<div class="cnum">07</div>
 <div>
-<h2></h2>
-</div>
+<h2>Qui vous engagez <em>réellement</em>.</h2>
+<p class="lede">Le chapitre précédent soutient qu’un grand cabinet ne devrait pas être le choix par défaut. Cela nous oblige à dire clairement qui vous obtenez à la place — y compris notre taille, la première chose que demandera un service achats.</p>
+<a class="more" href="/fr/about.html">Qui vous engagez, en détail</a></div>
 </div>
 <div class="whogrid">
-<div class="whomain rv">
-</div>
 <div class="whofacts rv" data-d="1">
 <div class="wfact"><span class="mono">Fondée</span><b>2025</b></div>
 <div class="wfact"><span class="mono">Siège</span><b>Heilbronn, Allemagne</b></div>
@@ -3876,6 +3943,27 @@ a.ch-card:hover .ch-title{color:var(--copper-lt)}
 })();
 </script>
 <!--/NAV:JS-->
+<!--RAIL:JS--><script>
+/* The rail draws itself when the chapter arrives, once. An observer rather
+   than a scroll handler, so nothing runs while the reader is elsewhere on a
+   page this long; disconnected after the first hit because a sequence that
+   replays every time you scroll past stops meaning anything. */
+(function(){
+  var rail = document.querySelector('.ph');
+  if (!rail || typeof IntersectionObserver !== 'function') { if (rail) rail.classList.add('go'); return; }
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    rail.classList.add('go'); return;
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      e.target.classList.add('go');
+      io.disconnect();
+    });
+  }, { threshold: 0.25 });
+  io.observe(rail);
+})();
+</script>
 <script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');

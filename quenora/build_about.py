@@ -65,12 +65,18 @@ def main():
     kick.string = 'About'
     wrap.append(kick)
 
+    # COPY the heading and the lede; do not extract them. Extracting left the
+    # home page with an empty <h2> and an empty column where the argument used
+    # to be — the chapter still has to make its point before offering the link.
     h1 = shell.new_tag('h1'); h1['class'] = 'rv'; h1['data-d'] = '1'
-    for c in list(h2.contents):
-        h1.append(c.extract())
+    # list() first. Appending a node removes it from the source .contents,
+    # so iterating it live skips every other child — the <em> vanished and the
+    # About page read "Who you're actually ." with the word hiring missing.
+    for c in list(BS(str(h2), 'html.parser').find('h2').contents):
+        h1.append(c)
     wrap.append(h1)
     if lede:
-        wrap.append(lede.extract())
+        wrap.append(BS(str(lede), 'html.parser').find(True))
     sec.append(wrap); main_el.append(sec)
 
     sec2 = shell.new_tag('section'); sec2['class'] = 'section-pad'
@@ -115,9 +121,18 @@ def main():
     keep = home.new_tag('a'); keep['class'] = 'more'
     keep['href'] = 'about.html'
     keep.string = 'Who you’re hiring, in full'
-    chead = who.select_one('.chead > div') or who.select_one('.chead')
-    if chead is not None:
-        chead.append(keep)
+    # The link belongs beside the heading, not inside the chapter number.
+    # '.chead > div' matched .cnum first, so it landed in the numeral.
+    h2_el = who.find('h2')
+    host = h2_el.parent if h2_el is not None else who.select_one('.chead')
+    if host is not None:
+        host.append(keep)
+
+    # The body paragraphs moved to about.html, so the left column of .whogrid
+    # is now empty. An empty grid cell is a hole, not whitespace.
+    main_col = who.select_one('.whomain')
+    if main_col is not None and not main_col.get_text(strip=True):
+        main_col.decompose()
     open(home_p, 'w', encoding='utf-8').write(str(home))
     print('  index #who reduced to the argument and a link')
 

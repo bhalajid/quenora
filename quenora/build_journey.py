@@ -42,6 +42,29 @@ from bs4 import BeautifulSoup as BS
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
+RAIL_JS = """<script>
+/* The rail draws itself when the chapter arrives, once. An observer rather
+   than a scroll handler, so nothing runs while the reader is elsewhere on a
+   page this long; disconnected after the first hit because a sequence that
+   replays every time you scroll past stops meaning anything. */
+(function(){
+  var rail = document.querySelector('.ph');
+  if (!rail || typeof IntersectionObserver !== 'function') { if (rail) rail.classList.add('go'); return; }
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    rail.classList.add('go'); return;
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      e.target.classList.add('go');
+      io.disconnect();
+    });
+  }, { threshold: 0.25 });
+  io.observe(rail);
+})();
+</script>"""
+
+
 # Each phase gets a mark built from the same vocabulary as the wordmark —
 # circles and a single stroke — so they read as a family rather than as
 # clip-art. They carry meaning rather than decoration: a target being found, a
@@ -177,8 +200,11 @@ def main():
     if sec is None or sec.select_one('.ph'):
         print('  index: nothing to do')
     elif home_rail(soup, sec):
-        open(p, 'w', encoding='utf-8').write(str(soup))
-        print('  index #journey is a six-stop rail')
+        html = str(soup)
+        if 'RAIL:JS' not in html:
+            html = html.replace('</body>', '<!--RAIL:JS-->' + RAIL_JS + '</body>', 1)
+        open(p, 'w', encoding='utf-8').write(html)
+        print('  index #journey is a six-stop rail, and draws itself')
     else:
         ok = False
 

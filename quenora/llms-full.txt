@@ -68,6 +68,10 @@ Correct, and we won’t invent them. Quenora is a founder-led firm in its early 
 Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it.
 Still holding an objection we haven’t answered? Put it in the first message — a direct answer is more useful to both of us than a proposal.
 
+## Who you’re actually hiring.
+
+The previous chapter argues you shouldn’t default to a large consultancy. That obliges us to say plainly who you get instead — including the size of us, which is the first thing a procurement team will ask.
+
 ## How this is priced.
 
 Stated here rather than after three meetings, because finding out late wastes your quarter and ours.

@@ -527,40 +527,6 @@ header .navlinks a[aria-current="page"]{
 header .navlinks a.on::after,
 header .navlinks a[aria-current="page"]::after{width:0}
 /*/NAV:CSS*/
-/* ── six exits ─────────────────────────────────────────────────────────
-   PREVIEW (branch: infographics). The method is this page's job, so the
-   detail lives here rather than being told twice. Each gate carries an id so
-   the home page's rail can link straight into it. */
-.ex{list-style:none;margin:var(--sp4,40px) 0 0;padding:0;position:relative}
-.ex::before{content:'';position:absolute;left:7px;top:10px;bottom:30px;width:1px;
-  background:linear-gradient(180deg,var(--copper) 0%,rgba(201,122,60,.55) 55%,
-    rgba(201,122,60,.12) 100%)}
-.ex-step{position:relative;padding-left:38px;padding-bottom:26px;scroll-margin-top:110px}
-.ex-step:last-child{padding-bottom:0}
-.ex-step:target .ex-title{color:var(--copper-lt)}
-.ex-node{position:absolute;left:0;top:8px;width:15px;height:15px;border-radius:50%;
-  background:var(--copper);box-shadow:0 0 0 5px var(--ink)}
-.ex-step.last .ex-node{background:transparent;border:1.5px solid var(--copper)}
-.ex-row{border-bottom:1px solid var(--line)}
-.ex-step:last-child .ex-row{border-bottom:0}
-.ex-sum{cursor:pointer;list-style:none;padding:2px 0 16px;display:block}
-.ex-sum::-webkit-details-marker{display:none}
-.ex-sum:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
-.ex-title{display:block;font-size:1.24rem;font-weight:600;color:var(--white);
-  letter-spacing:-.015em;margin-bottom:8px}
-.ex-row[open] .ex-title{color:var(--copper-lt)}
-.ex-title em{font-family:var(--serif);font-style:italic;color:var(--ember)}
-.ex-cond{color:var(--grey);font-size:.95rem;max-width:66ch;margin:0}
-.ex-cond b{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--grey-d);font-weight:400;margin-bottom:5px}
-.ex-detail{padding:0 0 16px}
-.ex-detail > p{color:var(--grey);margin:0 0 12px;max-width:66ch;font-size:.95rem}
-@media(max-width:560px){
-  .ex-step{padding-left:30px}
-  .ex-node{width:13px;height:13px}
-  .ex::before{left:6px}
-  .ex-title{font-size:1.1rem}
-}
 /*PREVIEW:CSS*/
 /* ── six exits ─────────────────────────────────────────────────────────
    The method is this page's job, so the detail lives here rather than being

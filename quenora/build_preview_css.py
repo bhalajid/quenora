@@ -180,6 +180,78 @@ a.ch-card:hover .ch-title{color:var(--copper-lt)}
 .cap.core .cap-name{color:var(--t1);font-weight:500}
 '''
 
+RAIL_ANIM = '''
+/* ── the rail draws itself ─────────────────────────────────────────────
+   The six stops arrive in order when the chapter comes into view: the line
+   draws left to right and each stop lands as the line reaches it. It is the
+   one chapter where motion means something — the content is a sequence, and
+   the animation is that sequence.
+
+   The line stops at the sixth stop and the last dot stays hollow. Nothing
+   loops: an engagement designed to finish should not animate forever.
+
+   Everything is opt-in through .go, added by an IntersectionObserver, so a
+   reader who never scrolls here pays nothing — and prefers-reduced-motion
+   gets the finished state immediately rather than a degraded one. */
+.ph::before{transform-origin:left center;transform:scaleX(0);
+  transition:transform 1.15s cubic-bezier(.22,1,.36,1)}
+.ph.go::before{transform:scaleX(1)}
+.ph-stop{opacity:0;transform:translateY(6px);
+  transition:opacity .5s var(--e),transform .5s var(--e)}
+.ph.go .ph-stop{opacity:1;transform:none}
+.ph.go .ph-stop:nth-child(1){transition-delay:.10s}
+.ph.go .ph-stop:nth-child(2){transition-delay:.28s}
+.ph.go .ph-stop:nth-child(3){transition-delay:.46s}
+.ph.go .ph-stop:nth-child(4){transition-delay:.64s}
+.ph.go .ph-stop:nth-child(5){transition-delay:.82s}
+.ph.go .ph-stop:nth-child(6){transition-delay:1.00s}
+/* the handover lands, then breathes once and stops */
+.ph.go .ph-stop.last .ph-dot{animation:phlast 1.6s var(--e) 1.15s 1}
+@keyframes phlast{
+  0%{box-shadow:0 0 0 5px var(--void),0 0 0 5px rgba(201,122,60,.55)}
+  70%{box-shadow:0 0 0 5px var(--void),0 0 0 16px rgba(201,122,60,0)}
+  100%{box-shadow:0 0 0 5px var(--void),0 0 0 16px rgba(201,122,60,0)}
+}
+@media(max-width:760px){
+  .ph::before{transform-origin:center top;transform:scaleY(0)}
+  .ph.go::before{transform:scaleY(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  .ph::before,.ph.go::before{transform:none;transition:none}
+  .ph-stop,.ph.go .ph-stop{opacity:1;transform:none;transition:none;
+    transition-delay:0s}
+  .ph.go .ph-stop.last .ph-dot{animation:none}
+}
+'''
+
+WHO = '''
+/* ── chapter 07, once the detail moved to about.html ───────────────────
+   The body paragraphs left with the page. What remained was a two-column
+   grid holding one child — the facts sat in the first column and the second
+   was simply a hole, which is what the blank in the screenshot was.
+
+   The lede lives in the chapter header like every other chapter, so the grid
+   has one job left: the five facts. They run as a strip across the full
+   width, which fills the measure instead of leaving it. */
+#who .whogrid{grid-template-columns:minmax(0,1fr)}
+#who .whofacts{border-left:0;padding-left:0;
+  border-top:1px solid var(--line);padding-top:var(--sp4);
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--sp3)}
+#who .wfact{display:flex;flex-direction:column;gap:6px;
+  border-right:1px solid var(--line);padding-right:var(--sp3)}
+#who .wfact:last-child{border-right:0;padding-right:0}
+#who .wfact span{color:var(--t3);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase}
+#who .wfact b{color:var(--t1);font-weight:500;font-size:1rem;line-height:1.3}
+@media(max-width:900px){
+  #who .whofacts{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp3)}
+  #who .wfact{border-right:0;padding-right:0;
+    border-bottom:1px solid var(--line);padding-bottom:14px}
+  #who .wfact:nth-last-child(-n+1){border-bottom:0;padding-bottom:0}
+}
+@media(max-width:480px){#who .whofacts{grid-template-columns:minmax(0,1fr)}}
+'''
+
 SPINE = '''
 /* ── six exits ─────────────────────────────────────────────────────────
    The method is this page's job, so the detail lives here rather than being
@@ -244,7 +316,7 @@ def splice(path, body):
 
 def main():
     ok = True
-    ok &= splice(os.path.join(ROOT, 'index.html'), RAIL)
+    ok &= splice(os.path.join(ROOT, 'index.html'), RAIL + RAIL_ANIM + WHO)
     ok &= splice(os.path.join(ROOT, 'approach.html'), SPINE)
     if os.path.exists(os.path.join(ROOT, 'about.html')):
         ok &= splice(os.path.join(ROOT, 'about.html'), ABOUT)

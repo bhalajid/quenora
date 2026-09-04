@@ -1249,6 +1249,74 @@ a.ch-card:hover .ch-title{color:var(--copper-lt)}
 .cap-n{color:var(--t3);font-size:.6rem;letter-spacing:.1em;margin:0}
 .cap-name{color:var(--t2);font-size:.92rem;line-height:1.3}
 .cap.core .cap-name{color:var(--t1);font-weight:500}
+
+/* ── the rail draws itself ─────────────────────────────────────────────
+   The six stops arrive in order when the chapter comes into view: the line
+   draws left to right and each stop lands as the line reaches it. It is the
+   one chapter where motion means something — the content is a sequence, and
+   the animation is that sequence.
+
+   The line stops at the sixth stop and the last dot stays hollow. Nothing
+   loops: an engagement designed to finish should not animate forever.
+
+   Everything is opt-in through .go, added by an IntersectionObserver, so a
+   reader who never scrolls here pays nothing — and prefers-reduced-motion
+   gets the finished state immediately rather than a degraded one. */
+.ph::before{transform-origin:left center;transform:scaleX(0);
+  transition:transform 1.15s cubic-bezier(.22,1,.36,1)}
+.ph.go::before{transform:scaleX(1)}
+.ph-stop{opacity:0;transform:translateY(6px);
+  transition:opacity .5s var(--e),transform .5s var(--e)}
+.ph.go .ph-stop{opacity:1;transform:none}
+.ph.go .ph-stop:nth-child(1){transition-delay:.10s}
+.ph.go .ph-stop:nth-child(2){transition-delay:.28s}
+.ph.go .ph-stop:nth-child(3){transition-delay:.46s}
+.ph.go .ph-stop:nth-child(4){transition-delay:.64s}
+.ph.go .ph-stop:nth-child(5){transition-delay:.82s}
+.ph.go .ph-stop:nth-child(6){transition-delay:1.00s}
+/* the handover lands, then breathes once and stops */
+.ph.go .ph-stop.last .ph-dot{animation:phlast 1.6s var(--e) 1.15s 1}
+@keyframes phlast{
+  0%{box-shadow:0 0 0 5px var(--void),0 0 0 5px rgba(201,122,60,.55)}
+  70%{box-shadow:0 0 0 5px var(--void),0 0 0 16px rgba(201,122,60,0)}
+  100%{box-shadow:0 0 0 5px var(--void),0 0 0 16px rgba(201,122,60,0)}
+}
+@media(max-width:760px){
+  .ph::before{transform-origin:center top;transform:scaleY(0)}
+  .ph.go::before{transform:scaleY(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  .ph::before,.ph.go::before{transform:none;transition:none}
+  .ph-stop,.ph.go .ph-stop{opacity:1;transform:none;transition:none;
+    transition-delay:0s}
+  .ph.go .ph-stop.last .ph-dot{animation:none}
+}
+
+/* ── chapter 07, once the detail moved to about.html ───────────────────
+   The body paragraphs left with the page. What remained was a two-column
+   grid holding one child — the facts sat in the first column and the second
+   was simply a hole, which is what the blank in the screenshot was.
+
+   The lede lives in the chapter header like every other chapter, so the grid
+   has one job left: the five facts. They run as a strip across the full
+   width, which fills the measure instead of leaving it. */
+#who .whogrid{grid-template-columns:minmax(0,1fr)}
+#who .whofacts{border-left:0;padding-left:0;
+  border-top:1px solid var(--line);padding-top:var(--sp4);
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--sp3)}
+#who .wfact{display:flex;flex-direction:column;gap:6px;
+  border-right:1px solid var(--line);padding-right:var(--sp3)}
+#who .wfact:last-child{border-right:0;padding-right:0}
+#who .wfact span{color:var(--t3);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase}
+#who .wfact b{color:var(--t1);font-weight:500;font-size:1rem;line-height:1.3}
+@media(max-width:900px){
+  #who .whofacts{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp3)}
+  #who .wfact{border-right:0;padding-right:0;
+    border-bottom:1px solid var(--line);padding-bottom:14px}
+  #who .wfact:nth-last-child(-n+1){border-bottom:0;padding-bottom:0}
+}
+@media(max-width:480px){#who .whofacts{grid-template-columns:minmax(0,1fr)}}
 /*/PREVIEW:CSS*/
 </style>
 <meta content="en_GB" property="og:locale"/><link href="https://quenora.ai/" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/#page","url":"https://quenora.ai/","name":"Most enterprise AI never reaches the work.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"Quenora is an enterprise AI consultancy in Heilbronn. We engineer AI into the platforms and workflows you already run, then hand your team the keys."},{"@type":"FAQPage","@id":"https://quenora.ai/#faq","mainEntity":[{"@type":"Question","name":"Why not a large consultancy?","acceptedAnswer":{"@type":"Answer","text":"You should use one for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, their engagement model costs more than the problem and moves slower than your business does. The people who sell it are also rarely the people who build it."}},{"@type":"Question","name":"Why not build it in-house?","acceptedAnswer":{"@type":"Answer","text":"Often you should, and we’ll say so. Bring us in when your team has the domain knowledge but not the platform experience, or when they’re already fully committed to the systems that keep the business running. The handover phase exists precisely so that in-house becomes the answer at the end."}},{"@type":"Question","name":"Why not just buy a vendor platform?","acceptedAnswer":{"@type":"Answer","text":"If a product genuinely covers your case, buy it — that’s cheaper than anything we’d build. The work we get called for is what remains: connecting that product to systems it was never designed to meet, and producing the governance evidence the vendor doesn’t."}},{"@type":"Question","name":"You have no published case studies.","acceptedAnswer":{"@type":"Answer","text":"Correct, and we won’t invent them. Quenora is a founder-led firm in its early chapter. What we’ll do is arrange a direct conversation with a reference before you commit, and show you the actual architecture and evaluation approach in the first meeting rather than a sales deck."}},{"@type":"Question","name":"What happens if it doesn’t work?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it."}}]}]}</script></head>
@@ -1571,14 +1639,16 @@ you end an engagement with nothing to show for it.</div></details>
 <section id="who">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">07<a class="more" href="about.html">Who you’re hiring, in full</a></div>
+<div class="cnum">07</div>
 <div>
-<h2></h2>
-</div>
+<h2>Who you’re actually <em>hiring</em>.</h2>
+<p class="lede">The previous chapter argues you shouldn’t default to a large
+             consultancy. That obliges us to say plainly who you get instead —
+             including the size of us, which is the first thing a procurement team
+             will ask.</p>
+<a class="more" href="about.html">Who you’re hiring, in full</a></div>
 </div>
 <div class="whogrid">
-<div class="whomain rv">
-</div>
 <div class="whofacts rv" data-d="1">
 <div class="wfact"><span class="mono">Founded</span><b>2025</b></div>
 <div class="wfact"><span class="mono">Based</span><b>Heilbronn, Germany</b></div>
@@ -3936,6 +4006,27 @@ notice</a>.</span></label>
 })();
 </script>
 <!--/NAV:JS-->
+<!--RAIL:JS--><script>
+/* The rail draws itself when the chapter arrives, once. An observer rather
+   than a scroll handler, so nothing runs while the reader is elsewhere on a
+   page this long; disconnected after the first hit because a sequence that
+   replays every time you scroll past stops meaning anything. */
+(function(){
+  var rail = document.querySelector('.ph');
+  if (!rail || typeof IntersectionObserver !== 'function') { if (rail) rail.classList.add('go'); return; }
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    rail.classList.add('go'); return;
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      e.target.classList.add('go');
+      io.disconnect();
+    });
+  }, { threshold: 0.25 });
+  io.observe(rail);
+})();
+</script>
 <script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');

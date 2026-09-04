@@ -224,6 +224,57 @@ RAIL_ANIM = '''
 }
 '''
 
+FIXES = '''
+/* ── three faults found by measuring, not by eye ───────────────────────
+
+   1  THE FOOTER DECLARED THREE COLUMNS AND HAS FOUR CHILDREN
+
+      .fgrid was 2fr 1fr 1fr with brand, Site, Contact and Follow inside it.
+      The fourth wrapped onto a second row at 636px wide, which is why the
+      footer read as collapsed: one wide orphan under three columns, and a
+      large hole beside it. Four children, four columns.
+
+   2  THE PHASE TOOLTIP WAS PAINTED OVER
+
+      It had opacity 1 on hover and sat inside the viewport — but
+      elementFromPoint at its centre returned the section, not the tooltip.
+      z-index:5 was competing at the root because nothing in the rail created
+      a stacking context, so later content in the chapter simply painted on
+      top. That is why it only seemed to appear after a click: the click moved
+      focus and scrolled, changing what overlapped it.
+
+      The rail now owns a stacking context and the hovered stop is lifted
+      above it. The tooltip also opens downward: the rail sits under the lede,
+      so upward it had to fight the text, and below it there is room.
+
+   3  THE CHAPTERS HAD NO SHARED RHYTHM
+
+      Every main > section carried padding 0 and relied on whatever margins
+      its own contents happened to have, so the gap between chapters changed
+      from one to the next. One rule gives them all the same top and bottom,
+      and the hero and the closing chapter keep their own deliberate values.
+*/
+footer .fgrid{grid-template-columns:1.6fr 1fr 1fr 1fr}
+@media(max-width:900px){footer .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){footer .fgrid{grid-template-columns:minmax(0,1fr)}}
+
+/* The tooltip opens downward, which puts it over the NEXT chapter — and a
+   later sibling paints on top of an earlier one no matter what the tooltip's
+   own z-index says. The chapter itself has to win first. */
+main > section#journey{position:relative;z-index:3}
+.ph{position:relative;z-index:2}
+.ph-stop{position:relative;z-index:1}
+.ph-link:hover,.ph-link:focus-within,.ph-link:focus-visible{z-index:40}
+.ph-tip{top:calc(100% - 8px);bottom:auto;transform:translateY(-5px)}
+.ph-link:hover .ph-tip,.ph-link:focus-visible .ph-tip{transform:none}
+
+main > section{padding-block:var(--sp7)}
+main > section.hook{padding-block:168px 64px}
+main > section#climax{padding-block:104px 250px}
+main > section[hidden]{padding-block:0}
+@media(max-width:760px){main > section{padding-block:var(--sp6)}}
+'''
+
 WHO = '''
 /* ── chapter 07, once the detail moved to about.html ───────────────────
    The body paragraphs left with the page. What remained was a two-column
@@ -316,7 +367,7 @@ def splice(path, body):
 
 def main():
     ok = True
-    ok &= splice(os.path.join(ROOT, 'index.html'), RAIL + RAIL_ANIM + WHO)
+    ok &= splice(os.path.join(ROOT, 'index.html'), RAIL + RAIL_ANIM + WHO + FIXES)
     ok &= splice(os.path.join(ROOT, 'approach.html'), SPINE)
     if os.path.exists(os.path.join(ROOT, 'about.html')):
         ok &= splice(os.path.join(ROOT, 'about.html'), ABOUT)

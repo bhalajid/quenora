@@ -1317,6 +1317,55 @@ a.ch-card:hover .ch-title{color:var(--copper-lt)}
   #who .wfact:nth-last-child(-n+1){border-bottom:0;padding-bottom:0}
 }
 @media(max-width:480px){#who .whofacts{grid-template-columns:minmax(0,1fr)}}
+
+/* ── three faults found by measuring, not by eye ───────────────────────
+
+   1  THE FOOTER DECLARED THREE COLUMNS AND HAS FOUR CHILDREN
+
+      .fgrid was 2fr 1fr 1fr with brand, Site, Contact and Follow inside it.
+      The fourth wrapped onto a second row at 636px wide, which is why the
+      footer read as collapsed: one wide orphan under three columns, and a
+      large hole beside it. Four children, four columns.
+
+   2  THE PHASE TOOLTIP WAS PAINTED OVER
+
+      It had opacity 1 on hover and sat inside the viewport — but
+      elementFromPoint at its centre returned the section, not the tooltip.
+      z-index:5 was competing at the root because nothing in the rail created
+      a stacking context, so later content in the chapter simply painted on
+      top. That is why it only seemed to appear after a click: the click moved
+      focus and scrolled, changing what overlapped it.
+
+      The rail now owns a stacking context and the hovered stop is lifted
+      above it. The tooltip also opens downward: the rail sits under the lede,
+      so upward it had to fight the text, and below it there is room.
+
+   3  THE CHAPTERS HAD NO SHARED RHYTHM
+
+      Every main > section carried padding 0 and relied on whatever margins
+      its own contents happened to have, so the gap between chapters changed
+      from one to the next. One rule gives them all the same top and bottom,
+      and the hero and the closing chapter keep their own deliberate values.
+*/
+footer .fgrid{grid-template-columns:1.6fr 1fr 1fr 1fr}
+@media(max-width:900px){footer .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){footer .fgrid{grid-template-columns:minmax(0,1fr)}}
+
+/* The tooltip opens downward, which puts it over the NEXT chapter — and a
+   later sibling paints on top of an earlier one no matter what the tooltip's
+   own z-index says. The chapter itself has to win first. */
+main > section#journey{position:relative;z-index:3}
+.ph{position:relative;z-index:2}
+.ph-stop{position:relative;z-index:1}
+.ph-link:hover,.ph-link:focus-within,.ph-link:focus-visible{z-index:40}
+.ph-tip{top:calc(100% - 8px);bottom:auto;transform:translateY(-5px)}
+.ph-link:hover .ph-tip,.ph-link:focus-visible .ph-tip{transform:none}
+
+main > section{padding-block:var(--sp7)}
+main > section.hook{padding-block:168px 64px}
+main > section#climax{padding-block:104px 250px}
+main > section[hidden]{padding-block:0}
+@media(max-width:760px){main > section{padding-block:var(--sp6)}}
 /*/PREVIEW:CSS*/
 </style>
 <meta content="de_DE" property="og:locale"/><link href="https://quenora.ai/de" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de#page","url":"https://quenora.ai/de","name":"Die meiste Unternehmens-KI erreicht nie die Arbeit.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Quenora ist eine Enterprise-KI-Beratung in Heilbronn. Wir bauen KI in die Plattformen und Arbeitsabläufe ein, die Sie bereits betreiben, und übergeben Ihrem Team anschließend die Schlüssel."},{"@type":"FAQPage","@id":"https://quenora.ai/de#faq","mainEntity":[{"@type":"Question","name":"Warum keine große Beratung?","acceptedAnswer":{"@type":"Answer","text":"Für ein mehrjähriges Programm über mehrere Länder mit tausend Beteiligten sollten Sie eine nehmen — dafür sind sie gebaut und wir nicht. Für ein einzelnes System, das dieses Jahr in den Produktivbetrieb muss, kostet ihr Projektmodell mehr als das Problem und bewegt sich langsamer als Ihr Geschäft. Und die Menschen, die es verkaufen, sind selten die, die es bauen."}},{"@type":"Question","name":"Warum nicht selbst bauen?","acceptedAnswer":{"@type":"Answer","text":"Oft sollten Sie das, und wir sagen es Ihnen auch. Holen Sie uns dann, wenn Ihr Team das Fachwissen hat, aber nicht die Plattformerfahrung — oder wenn es bereits vollständig durch die Systeme gebunden ist, die das Geschäft am Laufen halten. Die Übergabephase gibt es genau deshalb, damit am Ende die eigene Mannschaft die Antwort ist."}},{"@type":"Question","name":"Warum nicht einfach eine Anbieterplattform kaufen?","acceptedAnswer":{"@type":"Answer","text":"Wenn ein Produkt Ihren Fall wirklich abdeckt, kaufen Sie es — das ist günstiger als alles, was wir bauen würden. Wir werden für das gerufen, was danach übrig bleibt: dieses Produkt an Systeme anzubinden, für die es nie gedacht war, und die Governance-Nachweise zu erzeugen, die der Anbieter nicht liefert."}},{"@type":"Question","name":"Sie haben keine veröffentlichten Fallstudien.","acceptedAnswer":{"@type":"Answer","text":"Richtig, und wir erfinden auch keine. Quenora ist ein inhabergeführtes Unternehmen in seinem frühen Kapitel. Was wir tun: Wir vermitteln Ihnen vor einer Zusage ein direktes Gespräch mit einer Referenz und zeigen Ihnen im ersten Termin die tatsächliche Architektur und den Evaluationsansatz statt einer Verkaufspräsentation."}},{"@type":"Question","name":"Was passiert, wenn es nicht funktioniert?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 ist dafür da, das schriftlich zu beantworten, gemessen an der in Phase 01 vereinbarten Zahl. Hat sie sich nicht bewegt, sagen wir das. Der Code, die Dokumentation und das Evaluations-Harness bleiben in jedem Fall bei Ihnen — es gibt kein Szenario, in dem Sie ein Projekt ohne vorzeigbares Ergebnis beenden."}}]}]}</script></head>
@@ -3954,14 +4003,32 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
     rail.classList.add('go'); return;
   }
+  /* The stops start at opacity 0 and only become visible once .go lands.
+     At threshold 0.25 on a chapter this tall, a reader could have the rail
+     under the pointer while a quarter of it was still below the fold — so
+     hovering did nothing, and the first click or scroll that finally tripped
+     the observer made it "start working". That is the bug as reported: the
+     tooltip was never broken, the stops were still invisible.
+
+     A low threshold, a margin so it fires just before the rail arrives, and a
+     timer that gives up waiting. Whatever happens, the rail is never left
+     invisible and unhoverable. */
+  var fired = false;
+  function go(){
+    if (fired) return;
+    fired = true;
+    rail.classList.add('go');
+    io.disconnect();
+  }
   var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if (!e.isIntersecting) return;
-      e.target.classList.add('go');
-      io.disconnect();
-    });
-  }, { threshold: 0.25 });
+    es.forEach(function(e){ if (e.isIntersecting) go(); });
+  }, { threshold: 0 });
+  /* No negative rootMargin. It delayed the reveal until the rail was properly
+     in view, which reopened the exact window this is here to close: a rail on
+     screen whose stops are still at opacity 0, so nothing responds to the
+     pointer. If any part of it is visible, it is live. */
   io.observe(rail);
+  setTimeout(go, 4000);
 })();
 </script>
 <script data-generated="langsel">

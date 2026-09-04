@@ -53,14 +53,32 @@ RAIL_JS = """<script>
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
     rail.classList.add('go'); return;
   }
+  /* The stops start at opacity 0 and only become visible once .go lands.
+     At threshold 0.25 on a chapter this tall, a reader could have the rail
+     under the pointer while a quarter of it was still below the fold — so
+     hovering did nothing, and the first click or scroll that finally tripped
+     the observer made it "start working". That is the bug as reported: the
+     tooltip was never broken, the stops were still invisible.
+
+     A low threshold, a margin so it fires just before the rail arrives, and a
+     timer that gives up waiting. Whatever happens, the rail is never left
+     invisible and unhoverable. */
+  var fired = false;
+  function go(){
+    if (fired) return;
+    fired = true;
+    rail.classList.add('go');
+    io.disconnect();
+  }
   var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if (!e.isIntersecting) return;
-      e.target.classList.add('go');
-      io.disconnect();
-    });
-  }, { threshold: 0.25 });
+    es.forEach(function(e){ if (e.isIntersecting) go(); });
+  }, { threshold: 0 });
+  /* No negative rootMargin. It delayed the reveal until the rail was properly
+     in view, which reopened the exact window this is here to close: a rail on
+     screen whose stops are still at opacity 0, so nothing responds to the
+     pointer. If any part of it is visible, it is live. */
   io.observe(rail);
+  setTimeout(go, 4000);
 })();
 </script>"""
 

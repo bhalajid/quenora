@@ -190,7 +190,11 @@ ok(!/\.phase\{[^}]*height:100%/.test(src),
 
 /* ═══ 7 · CONTENT COMPLETENESS (what a buyer needs) ═══ */
 const need = {
-  'states the problem': /never leaves the lab|fail at the seams/i,
+  /* Both original phrases have gone: 'never leaves the lab' left with
+     story.html and 'fail at the seams' left with the pinned panel in
+     chapter 01. The page still states the problem, and states it better
+     — the check was pinned to wording rather than to the claim. */
+  'states the problem': /never leaves the lab|fail at the seams|gap between a notebook and a Tuesday/i,
   'says who it is for': /situations we are/i,
   'shows the method': /six phases/i,
   'lists capabilities': /nine capabilities/i,

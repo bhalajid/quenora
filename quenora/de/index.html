@@ -564,7 +564,7 @@ body.clg .cur::after{opacity:1}
 .autofig .autolab{color:var(--copper-lt);margin-bottom:var(--sp3)}
 
 /* ── PIN 1: sticky scrub stage ── */
-.pinwrap{height:170vh;position:relative}
+.pinwrap{height:auto;position:relative}/* was 170vh, sized for three panels arriving in sequence. The stage now holds one row of counters, so the pinned scroll had nothing left to reveal and 2815px of chapter was mostly empty. */
 .pin{position:sticky;top:0;height:100svh;display:grid;place-items:center;
   overflow:hidden;border-block:1px solid var(--line);
   background:linear-gradient(180deg,var(--sf1),var(--void))}
@@ -1385,14 +1385,15 @@ main > section .chead + .ch3{margin-top:0}
 <div class="pinwrap" id="pinwrap">
 <div class="pin">
 <div class="inner">
-<h2 class="big" id="pBig">KI-Programme scheitern an <em>den Nahtstellen</em>.</h2>
-<p class="sub" id="pSub">Drei davon — und keines ist ein Forschungsproblem. Jede Naht ist ein Engineering-Problem. Genau deshalb gibt es uns.</p>
-<div class="seams" id="pSeams">
-<div><b>Die Daten</b><span>Systeme, die sich nicht verbinden lassen. Verträge, die niemand geschrieben hat. Datenherkunft, die niemand nachvollziehen kann.</span></div>
-<div><b>Die Integration</b><span>Ein Modell, das im Notebook funktioniert und keinen Weg in den Prozess findet, der es gebraucht hätte.</span></div>
-<div><b>Die Übergabe</b><span>Eine Lösung, die nur die Beratenden betreiben können — und die deshalb still und leise nicht mehr genutzt wird.</span></div>
-</div>
-</div>
+<div class="counters">
+<div class="rv"><b data-count="9">9</b>
+<span>Leistungen. Drei davon sind Kernleistungen — die Arbeit läuft über sie.</span></div>
+<div class="rv" data-d="1"><b data-count="6">6</b>
+<span>Phasen, von der Rahmung bis zur Übergabe — jede mit einer Abschlussbedingung im Leistungsschein.</span></div>
+<div class="rv" data-d="2"><b data-count="0">0</b>
+<span>Projekte ohne Enddatum. Eine Verlängerung ist eine Entscheidung, niemals
+                der Normalfall.</span></div>
+</div></div>
 </div>
 </div>
 </section>
@@ -1447,15 +1448,6 @@ main > section .chead + .ch3{margin-top:0}
 <canvas aria-hidden="true" id="autoCanvas"></canvas>
 <figcaption>Illustrativ, nicht gemessen. Der größte Teil der Arbeit läuft unberührt durch. Der Rest geht bewusst an einen Menschen — eine Automatisierung verdient Vertrauen erst, wenn sie weiß, was sie nicht entscheiden darf, und diese Grenze zu ziehen ist der größere Teil der Arbeit.</figcaption>
 </figure>
-<div class="counters">
-<div class="rv"><b data-count="9">9</b>
-<span>Leistungen. Drei davon sind Kernleistungen — die Arbeit läuft über sie.</span></div>
-<div class="rv" data-d="1"><b data-count="6">6</b>
-<span>Phasen, von der Rahmung bis zur Übergabe — jede mit einer Abschlussbedingung im Leistungsschein.</span></div>
-<div class="rv" data-d="2"><b data-count="0">0</b>
-<span>Projekte ohne Enddatum. Eine Verlängerung ist eine Entscheidung, niemals
-                der Normalfall.</span></div>
-</div>
 </div>
 </section>
 <section id="work">
@@ -3290,7 +3282,13 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 
          The headline is now present the moment the stage is, and scroll is
          spent on the reveal *below* it rather than on the reveal *of* it. */
+      /* The seams panel was removed from this stage, so the three
+         elements this choreography writes to are no longer there.
+         Without this guard the first scroll dereferences null and
+         takes the whole rAF loop with it — progress bar, horizontal
+         track and spotlight all stop. */
       var a = ease(clamp(p / 0.22, 0, 1));
+      if (pBig && pSub) {
       pBig.style.opacity = 1;
       pBig.style.transform = 'scale(' + (0.985 + a * 0.015) + ')';
       var b = ease(clamp(p / 0.16, 0, 1));
@@ -3301,6 +3299,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
         s.style.opacity = 0.12 + c * 0.88;
         s.style.transform = 'translate3d(0,' + (1 - c) * 34 + 'px,0)';
       });
+      }
     }
 
     /* ── PIN 2: horizontal track ── */

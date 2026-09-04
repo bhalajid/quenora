@@ -33,6 +33,7 @@ fi
 # because regenerating the markup means checking the page out from main
 # first, and that silently took hand-added styles with it. Twice.
 "$PY" build_about.py
+"$PY" build_chapter01.py
 "$PY" build_journey.py
 "$PY" build_ticker.py
 "$PY" build_chapters.py

@@ -564,7 +564,7 @@ body.clg .cur::after{opacity:1}
 .autofig .autolab{color:var(--copper-lt);margin-bottom:var(--sp3)}
 
 /* ── PIN 1: sticky scrub stage ── */
-.pinwrap{height:170vh;position:relative}
+.pinwrap{height:auto;position:relative}/* was 170vh, sized for three panels arriving in sequence. The stage now holds one row of counters, so the pinned scroll had nothing left to reveal and 2815px of chapter was mostly empty. */
 .pin{position:sticky;top:0;height:100svh;display:grid;place-items:center;
   overflow:hidden;border-block:1px solid var(--line);
   background:linear-gradient(180deg,var(--sf1),var(--void))}
@@ -1385,14 +1385,15 @@ main > section .chead + .ch3{margin-top:0}
 <div class="pinwrap" id="pinwrap">
 <div class="pin">
 <div class="inner">
-<h2 class="big" id="pBig">Les programmes d'IA échouent aux <em>jointures</em>.</h2>
-<p class="sub" id="pSub">Trois d’entre elles — et aucune n’est un problème de recherche. Chaque jointure est un problème d’ingénierie. C’est la raison de notre existence.</p>
-<div class="seams" id="pSeams">
-<div><b>Les données</b><span>Des systèmes qui ne se joignent pas. Des contrats que personne n'a écrits. Une traçabilité que personne ne peut suivre.</span></div>
-<div><b>L'intégration</b><span>Un modèle qui fonctionne dans un notebook et n'a aucun chemin vers le processus qui en avait besoin.</span></div>
-<div><b>Le transfert</b><span>Une solution que seuls les consultants savent exploiter — et qui cesse discrètement d'être utilisée.</span></div>
-</div>
-</div>
+<div class="counters">
+<div class="rv"><b data-count="9">9</b>
+<span>expertises. Trois sont principales — le travail passe par elles.</span></div>
+<div class="rv" data-d="1"><b data-count="6">6</b>
+<span>phases, du cadrage au transfert — chacune avec une condition de sortie au contrat.</span></div>
+<div class="rv" data-d="2"><b data-count="0">0</b>
+<span>mission sans date de fin. Une prolongation est une décision, jamais
+                un réflexe.</span></div>
+</div></div>
 </div>
 </div>
 </section>
@@ -1447,15 +1448,6 @@ main > section .chead + .ch3{margin-top:0}
 <canvas aria-hidden="true" id="autoCanvas"></canvas>
 <figcaption>À titre d’illustration, non mesuré. L’essentiel du travail se termine sans intervention. Le reste est transmis à une personne, délibérément — une automatisation ne gagne la confiance que lorsqu’elle sait ce qu’elle ne doit pas décider, et tracer cette limite constitue l’essentiel du travail.</figcaption>
 </figure>
-<div class="counters">
-<div class="rv"><b data-count="9">9</b>
-<span>expertises. Trois sont principales — le travail passe par elles.</span></div>
-<div class="rv" data-d="1"><b data-count="6">6</b>
-<span>phases, du cadrage au transfert — chacune avec une condition de sortie au contrat.</span></div>
-<div class="rv" data-d="2"><b data-count="0">0</b>
-<span>mission sans date de fin. Une prolongation est une décision, jamais
-                un réflexe.</span></div>
-</div>
 </div>
 </section>
 <section id="work">
@@ -3290,7 +3282,13 @@ main > section .chead + .ch3{margin-top:0}
 
          The headline is now present the moment the stage is, and scroll is
          spent on the reveal *below* it rather than on the reveal *of* it. */
+      /* The seams panel was removed from this stage, so the three
+         elements this choreography writes to are no longer there.
+         Without this guard the first scroll dereferences null and
+         takes the whole rAF loop with it — progress bar, horizontal
+         track and spotlight all stop. */
       var a = ease(clamp(p / 0.22, 0, 1));
+      if (pBig && pSub) {
       pBig.style.opacity = 1;
       pBig.style.transform = 'scale(' + (0.985 + a * 0.015) + ')';
       var b = ease(clamp(p / 0.16, 0, 1));
@@ -3301,6 +3299,7 @@ main > section .chead + .ch3{margin-top:0}
         s.style.opacity = 0.12 + c * 0.88;
         s.style.transform = 'translate3d(0,' + (1 - c) * 34 + 'px,0)';
       });
+      }
     }
 
     /* ── PIN 2: horizontal track ── */

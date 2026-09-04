@@ -12,10 +12,6 @@ No published case studies yet. We’ll arrange a call with a reference before yo
 AI programmes don’t fail because the model is weak. They fail in the gap between a notebook and a Tuesday afternoon — where the data won’t join, the permissions don’t exist and nobody owns the result.
 Illustrative, not a client portfolio. Every track is a proof of concept that worked. They all stall at the same wall — and the wall is never the model. It’s the missing layer between a working demo and daily production. That layer is Quenora.
 
-## AI programmes fail at the seams.
-
-Three of them — and not one is a research problem. Every seam is an engineering problem. That’s the reason we exist.
-
 ## Three situations we are actually called into.
 
 Not a market segment. The three shapes of problem this firm was built to take on. If none of them describe you, we’re probably not the right firm — and we’d rather you knew that now.

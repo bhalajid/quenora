@@ -1,24 +1,30 @@
 #!/usr/bin/env python3
 """
-build_backto.py — a way back to the exact place you left.
+build_backto.py — one way back to the spot on the home page you left from.
 
-PREVIEW ONLY, on the `infographics` branch.
+THE RULE, WHICH I HAD WRONG
 
-Clicking a phase on the home page takes a reader to approach.html. The browser
-back button returns them to the home page, but the home page sets
-scrollRestoration to manual and scrolls to the top on load — so they arrive
-somewhere they have never been, several thousand pixels above the rail they
-were reading. That is worse than no link at all.
+Back means "return me to the home page, to the place I clicked from". It does
+not mean "the previous page in history", and it has no meaning at all on the
+home page itself — you cannot go back to where you already are.
 
-This records the exact offset at the moment the reader leaves, and offers a
-control on the other side that puts them back on it. It appears only when
-there is somewhere to go back to: arrive at approach.html from a search
-result, a bookmark or the nav, and there is no control, because there is no
-'back' that means anything.
+The first version got all three wrong. It offered the control anywhere a
+previous page had been recorded, including on the home page, and it called
+history.back(), which returns to whatever happened to precede this page rather
+than to the home page. Chain two inner pages and it walked backwards through
+them one at a time.
 
-The position lives in sessionStorage rather than the URL. It belongs to one
-tab and one visit, it never reaches the server, and it disappears when the tab
-does — consistent with a site whose privacy notice says it stores nothing.
+So: the position is recorded only when leaving the home page, the control is
+shown only on pages that are not the home page, and it always goes to the home
+page. history.back() is still used when the browser is one step from home,
+because then it is both correct and pixel-exact; otherwise the recorded anchor
+is restored.
+
+AND IT SITS IN THE FLOW
+
+It was position:sticky at top:88px, which put it on top of the heading of every
+page it appeared on. It is a block above the eyebrow now, so it cannot overlap
+anything.
 """
 import os, sys
 
@@ -39,6 +45,8 @@ JS = """<script>
   if (typeof document === 'undefined' ||
       typeof document.addEventListener !== 'function') return;
   var KEY = 'qn:from';
+  /* '/', '/index.html', '/de', '/de/index.html' and so on */
+  var HOME = /^\/(?:(?:de|fr|es|it)\/?)?(?:index\.html)?$/;
 
   /* leaving: record the offset against the link's destination */
   document.addEventListener('click', function(e){
@@ -47,6 +55,10 @@ JS = """<script>
     var href = a.getAttribute('href') || '';
     if (!/\\.html(#|$)|^\\/(de|fr)\\//.test(href)) return;
     if (a.target === '_blank' || href.charAt(0) === '#') return;
+    /* Only the home page is worth returning to. Recording every page turned
+       Back into a history walk: from capabilities it pointed at approach,
+       the page before it, instead of at the home page it was meant to. */
+    if (!HOME.test(location.pathname)) return;
     try {
       /* Record an ANCHOR, not a pixel — and anchor to the section the
          reader was actually IN, not whichever one happened to be at the top
@@ -72,6 +84,9 @@ JS = """<script>
   var from;
   try { from = JSON.parse(raw); } catch (err) { return; }
   if (!from || !from.url || from.url === location.pathname) return;
+  /* Never on the home page: there is nowhere to go back to from the thing
+     you go back to. */
+  if (HOME.test(location.pathname)) return;
 
   var host = document.querySelector('main .wrap');
   if (!host) return;
@@ -87,10 +102,12 @@ JS = """<script>
        out, because this page keeps growing as its sections reveal and no
        script can chase that reliably. Falling back to the recorded anchor
        only when there is no history entry to step back to. */
+    /* history.back() only when the step behind us really is the home page —
+       then it is exact and free. Otherwise navigate and restore. */
     var ref = document.referrer || '';
-    var sameDoc = ref.indexOf(location.origin) === 0 &&
+    var cameStraightFromHome = ref.indexOf(location.origin) === 0 &&
                   ref.replace(location.origin, '').split('#')[0] === from.url;
-    if (sameDoc && history.length > 1) {
+    if (cameStraightFromHome && history.length > 1) {
       e.preventDefault();
       history.back();
       return;

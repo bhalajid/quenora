@@ -976,6 +976,8 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
   if (typeof document === 'undefined' ||
       typeof document.addEventListener !== 'function') return;
   var KEY = 'qn:from';
+  /* '/', '/index.html', '/de', '/de/index.html' and so on */
+  var HOME = /^\/(?:(?:de|fr|es|it)\/?)?(?:index\.html)?$/;
 
   /* leaving: record the offset against the link's destination */
   document.addEventListener('click', function(e){
@@ -984,6 +986,10 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
     var href = a.getAttribute('href') || '';
     if (!/\.html(#|$)|^\/(de|fr)\//.test(href)) return;
     if (a.target === '_blank' || href.charAt(0) === '#') return;
+    /* Only the home page is worth returning to. Recording every page turned
+       Back into a history walk: from capabilities it pointed at approach,
+       the page before it, instead of at the home page it was meant to. */
+    if (!HOME.test(location.pathname)) return;
     try {
       /* Record an ANCHOR, not a pixel — and anchor to the section the
          reader was actually IN, not whichever one happened to be at the top
@@ -1009,6 +1015,9 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
   var from;
   try { from = JSON.parse(raw); } catch (err) { return; }
   if (!from || !from.url || from.url === location.pathname) return;
+  /* Never on the home page: there is nowhere to go back to from the thing
+     you go back to. */
+  if (HOME.test(location.pathname)) return;
 
   var host = document.querySelector('main .wrap');
   if (!host) return;
@@ -1024,10 +1033,12 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
        out, because this page keeps growing as its sections reveal and no
        script can chase that reliably. Falling back to the recorded anchor
        only when there is no history entry to step back to. */
+    /* history.back() only when the step behind us really is the home page —
+       then it is exact and free. Otherwise navigate and restore. */
     var ref = document.referrer || '';
-    var sameDoc = ref.indexOf(location.origin) === 0 &&
+    var cameStraightFromHome = ref.indexOf(location.origin) === 0 &&
                   ref.replace(location.origin, '').split('#')[0] === from.url;
-    if (sameDoc && history.length > 1) {
+    if (cameStraightFromHome && history.length > 1) {
       e.preventDefault();
       history.back();
       return;

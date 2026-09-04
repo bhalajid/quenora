@@ -395,7 +395,7 @@ BACKTO = '''
    back except the browser button, which on a page this long returns them to
    the top rather than to the rail they were reading. The control only exists
    when there is somewhere to go back TO, and it names it. */
-.backto{position:sticky;top:88px;z-index:20;display:inline-flex;align-items:center;
+.backto{display:inline-flex;align-items:center;
   gap:9px;margin:0 0 var(--sp3);padding:9px 14px;border-radius:2px;
   font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;
   text-transform:uppercase;color:var(--white);text-decoration:none;
@@ -404,7 +404,7 @@ BACKTO = '''
 .backto:hover{border-color:var(--copper);color:var(--copper-lt)}
 .backto:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
 .backto .arw{font-size:.9rem;line-height:1}
-@media(max-width:560px){.backto{top:76px;font-size:.6rem;padding:8px 11px}}
+@media(max-width:560px){.backto{font-size:.6rem;padding:8px 11px}}
 '''
 
 ABOUT = '''

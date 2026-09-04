@@ -470,7 +470,7 @@ header .navlinks a[aria-current="page"]::after{width:0}
    back except the browser button, which on a page this long returns them to
    the top rather than to the rail they were reading. The control only exists
    when there is somewhere to go back TO, and it names it. */
-.backto{position:sticky;top:88px;z-index:20;display:inline-flex;align-items:center;
+.backto{display:inline-flex;align-items:center;
   gap:9px;margin:0 0 var(--sp3);padding:9px 14px;border-radius:2px;
   font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;
   text-transform:uppercase;color:var(--white);text-decoration:none;
@@ -479,7 +479,7 @@ header .navlinks a[aria-current="page"]::after{width:0}
 .backto:hover{border-color:var(--copper);color:var(--copper-lt)}
 .backto:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
 .backto .arw{font-size:.9rem;line-height:1}
-@media(max-width:560px){.backto{top:76px;font-size:.6rem;padding:8px 11px}}
+@media(max-width:560px){.backto{font-size:.6rem;padding:8px 11px}}
 /*/PREVIEW:CSS*/
 /*BRAND:CSS*/
 /* ── the supplied lockup ───────────────────────────────────────────────
@@ -985,6 +985,8 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
   if (typeof document === 'undefined' ||
       typeof document.addEventListener !== 'function') return;
   var KEY = 'qn:from';
+  /* '/', '/index.html', '/de', '/de/index.html' and so on */
+  var HOME = /^\/(?:(?:de|fr|es|it)\/?)?(?:index\.html)?$/;
 
   /* leaving: record the offset against the link's destination */
   document.addEventListener('click', function(e){
@@ -993,6 +995,10 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
     var href = a.getAttribute('href') || '';
     if (!/\.html(#|$)|^\/(de|fr)\//.test(href)) return;
     if (a.target === '_blank' || href.charAt(0) === '#') return;
+    /* Only the home page is worth returning to. Recording every page turned
+       Back into a history walk: from capabilities it pointed at approach,
+       the page before it, instead of at the home page it was meant to. */
+    if (!HOME.test(location.pathname)) return;
     try {
       /* Record an ANCHOR, not a pixel — and anchor to the section the
          reader was actually IN, not whichever one happened to be at the top
@@ -1018,6 +1024,9 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
   var from;
   try { from = JSON.parse(raw); } catch (err) { return; }
   if (!from || !from.url || from.url === location.pathname) return;
+  /* Never on the home page: there is nowhere to go back to from the thing
+     you go back to. */
+  if (HOME.test(location.pathname)) return;
 
   var host = document.querySelector('main .wrap');
   if (!host) return;
@@ -1033,10 +1042,12 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
        out, because this page keeps growing as its sections reveal and no
        script can chase that reliably. Falling back to the recorded anchor
        only when there is no history entry to step back to. */
+    /* history.back() only when the step behind us really is the home page —
+       then it is exact and free. Otherwise navigate and restore. */
     var ref = document.referrer || '';
-    var sameDoc = ref.indexOf(location.origin) === 0 &&
+    var cameStraightFromHome = ref.indexOf(location.origin) === 0 &&
                   ref.replace(location.origin, '').split('#')[0] === from.url;
-    if (sameDoc && history.length > 1) {
+    if (cameStraightFromHome && history.length > 1) {
       e.preventDefault();
       history.back();
       return;

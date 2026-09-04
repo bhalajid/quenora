@@ -322,6 +322,12 @@ SPINE = '''
 .ex-sum{cursor:pointer;list-style:none;padding:2px 0 16px;display:block}
 .ex-sum::-webkit-details-marker{display:none}
 .ex-sum:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+.ex-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;
+  flex-wrap:wrap}
+.ex-eyebrow{color:var(--copper-lt);font-size:.62rem;letter-spacing:.2em;
+  text-transform:uppercase;margin:0}
+.ex-wk{color:var(--grey-d);font-size:.6rem;letter-spacing:.12em;
+  text-transform:uppercase;margin:0}
 .ex-title{display:block;font-size:1.24rem;font-weight:600;color:var(--white);
   letter-spacing:-.015em;margin-bottom:8px}
 .ex-row[open] .ex-title{color:var(--copper-lt)}
@@ -337,6 +343,24 @@ SPINE = '''
   .ex::before{left:6px}
   .ex-title{font-size:1.1rem}
 }
+'''
+
+BACKTO = '''
+/* ── back to where you came from ───────────────────────────────────────
+   A reader who clicked a phase on the home page landed here and had no way
+   back except the browser button, which on a page this long returns them to
+   the top rather than to the rail they were reading. The control only exists
+   when there is somewhere to go back TO, and it names it. */
+.backto{position:sticky;top:88px;z-index:20;display:inline-flex;align-items:center;
+  gap:9px;margin:0 0 var(--sp3);padding:9px 14px;border-radius:2px;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--white);text-decoration:none;
+  background:rgba(20,22,30,.94);border:1px solid var(--line);
+  transition:border-color .2s,color .2s}
+.backto:hover{border-color:var(--copper);color:var(--copper-lt)}
+.backto:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.backto .arw{font-size:.9rem;line-height:1}
+@media(max-width:560px){.backto{top:76px;font-size:.6rem;padding:8px 11px}}
 '''
 
 ABOUT = '''
@@ -368,7 +392,7 @@ def splice(path, body):
 def main():
     ok = True
     ok &= splice(os.path.join(ROOT, 'index.html'), RAIL + RAIL_ANIM + WHO + FIXES)
-    ok &= splice(os.path.join(ROOT, 'approach.html'), SPINE)
+    ok &= splice(os.path.join(ROOT, 'approach.html'), SPINE + BACKTO)
     if os.path.exists(os.path.join(ROOT, 'about.html')):
         ok &= splice(os.path.join(ROOT, 'about.html'), ABOUT)
     print('  preview stylesheet applied')

@@ -546,6 +546,12 @@ header .navlinks a[aria-current="page"]::after{width:0}
 .ex-sum{cursor:pointer;list-style:none;padding:2px 0 16px;display:block}
 .ex-sum::-webkit-details-marker{display:none}
 .ex-sum:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+.ex-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;
+  flex-wrap:wrap}
+.ex-eyebrow{color:var(--copper-lt);font-size:.62rem;letter-spacing:.2em;
+  text-transform:uppercase;margin:0}
+.ex-wk{color:var(--grey-d);font-size:.6rem;letter-spacing:.12em;
+  text-transform:uppercase;margin:0}
 .ex-title{display:block;font-size:1.24rem;font-weight:600;color:var(--white);
   letter-spacing:-.015em;margin-bottom:8px}
 .ex-row[open] .ex-title{color:var(--copper-lt)}
@@ -561,6 +567,22 @@ header .navlinks a[aria-current="page"]::after{width:0}
   .ex::before{left:6px}
   .ex-title{font-size:1.1rem}
 }
+
+/* ── back to where you came from ───────────────────────────────────────
+   A reader who clicked a phase on the home page landed here and had no way
+   back except the browser button, which on a page this long returns them to
+   the top rather than to the rail they were reading. The control only exists
+   when there is somewhere to go back TO, and it names it. */
+.backto{position:sticky;top:88px;z-index:20;display:inline-flex;align-items:center;
+  gap:9px;margin:0 0 var(--sp3);padding:9px 14px;border-radius:2px;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--white);text-decoration:none;
+  background:rgba(20,22,30,.94);border:1px solid var(--line);
+  transition:border-color .2s,color .2s}
+.backto:hover{border-color:var(--copper);color:var(--copper-lt)}
+.backto:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.backto .arw{font-size:.9rem;line-height:1}
+@media(max-width:560px){.backto{top:76px;font-size:.6rem;padding:8px 11px}}
 /*/PREVIEW:CSS*/
 </style>
 <meta content="de_DE" property="og:locale"/><link href="https://quenora.ai/de/approach" rel="canonical"/><link href="https://quenora.ai/approach" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/approach" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/approach" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/approach" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de/approach#page","url":"https://quenora.ai/de/approach","name":"Eine Methode, die dafür gebaut ist zu enden — und nicht dafür, sich selbst zu verlängern.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Ein Vorgehen in sechs Phasen, das damit endet, dass Ihr Team das System selbst betreibt.","breadcrumb":{"@id":"https://quenora.ai/de/approach#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/de/approach#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://quenora.ai/de"},{"@type":"ListItem","position":2,"name":"Eine Methode, die dafür gebaut ist zu enden — und nicht dafür, sich selbst zu verlängern.","item":"https://quenora.ai/de/approach"}]}]}</script></head>
@@ -611,30 +633,7 @@ header .navlinks a[aria-current="page"]::after{width:0}
 <p>Zeitpläne verschieben sich mit dem Umfang — diese Angaben sind Richtwerte, keine Zusagen. Was sich nicht verschiebt,
       ist die Abfolge: diagnostizieren vor dem Zuschnitt, zeigen vor dem Integrieren, übergeben vor dem Gehen.</p>
 </div>
-<div class="step rv">
-<div class="ph">Phase 01 · Rahmung</div>
-<div><ol class="ex"><li class="ex-step" id="phase-1"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Die echte Beschränkung finden</span><p class="ex-cond"><b>Abschlusskriterium</b> Eine schriftliche Position dazu, was zuerst gebaut wird — oder die Empfehlung, nichts zu bauen.</p></summary><div class="ex-detail"><p>Wir verbringen die ersten Wochen damit zu verstehen, was tatsächlich passiert, nicht was die Prozessdokumentation behauptet. Das heißt, sich zu den Menschen zu setzen, die die Arbeit machen. Bei diesem ersten Blick zeigt sich meist die Beschränkung, die niemand erwähnt hat.</p><span class="wk">Wochen 1–2</span></div></details></li><li class="ex-step" id="phase-2"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Die unglamouröse Schicht</span><p class="ex-cond"><b>Abschlusskriterium</b> Baseline-Evaluationswerte, an denen sich jede spätere Änderung messen lässt.</p></summary><div class="ex-detail"><p>Die Datenverknüpfungen, die Berechtigungen, die Evaluations-Baseline. Diese Schicht entscheidet, ob später überhaupt etwas in den Produktivbetrieb gelangt — und genau diese Schicht überspringen die meisten Piloten.</p><span class="wk">Wochen 3–6</span></div></details></li><li class="ex-step" id="phase-3"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">In das, was Sie bereits betreiben</span><p class="ex-cond"><b>Abschlusskriterium</b> Ein stufenweiser Rollout, der mit echten Daten in einer Nicht-Produktivumgebung läuft.</p></summary><div class="ex-detail"><p>Engineering in kurzen Zyklen an Ihren echten Systemen, mit einem vorführbaren Ergebnis am Ende jedes Zyklus. Sie sehen lauffähige Software, keine Statusfolien. Wer die Arbeit zugeschnitten hat, baut sie auch.</p><span class="wk">Wochen 4–10</span></div></details></li><li class="ex-step" id="phase-4"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Unter echter Änderungskontrolle</span><p class="ex-cond"><b>Abschlusskriterium</b> Im Produktivbetrieb, unter Ihren bestehenden Kontrollen — ohne Ausnahmen.</p></summary><div class="ex-detail"><p>In den Produktivbetrieb unter derselben Governance, Prüfung und Freigabe wie alles andere, was Sie betreiben — nicht daneben und nicht als Ausnahme.</p><span class="wk">Wochen 10–12</span></div></details></li><li class="ex-step" id="phase-5"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Gegen die vereinbarte Zahl</span><p class="ex-cond"><b>Abschlusskriterium</b> Ein schriftliches Ergebnis — auch in der unbequemen Fassung, wenn das die Wahrheit ist.</p></summary><div class="ex-detail"><p>Gemessen an der in Phase 01 vereinbarten Zahl, mit dem in Phase 02 gebauten Evaluations-Harness. Hat sie sich nicht bewegt, steht genau das im schriftlichen Ergebnis.</p><span class="wk">Wochen 9–12</span></div></details></li><li class="ex-step last" id="phase-6"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Und dann gehen wir</span><p class="ex-cond"><b>Abschlusskriterium</b> Sie besitzen es, Sie betreiben es, wir sind weg. Das ist die Definition von fertig.</p></summary><div class="ex-detail"><p>Dokumentation, Runbooks, Architecture Decision Records, gemeinsamer Betrieb mit Ihren Engineers und ein benannter Verantwortlicher. Das Projekt ist erst abgeschlossen, wenn Ihr Team es ohne uns betreiben kann.</p><span class="wk">Wochen 12–14</span></div></details></li></ol></div>
-</div>
-<div class="step rv">
-<div class="ph">Phase 02 · Fundament</div>
-<div></div>
-</div>
-<div class="step rv">
-<div class="ph">Phase 03 · Integration</div>
-<div></div>
-</div>
-<div class="step rv">
-<div class="ph">Phase 04 · Inbetriebnahme</div>
-<div></div>
-</div>
-<div class="step rv">
-<div class="ph">Phase 05 · Nachweis</div>
-<div></div>
-</div>
-<div class="step rv">
-<div class="ph">Phase 06 · Übergabe</div>
-<div></div>
-</div>
+<ol class="ex"><li class="ex-step" id="phase-1"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 01 · Rahmung</span><span class="ex-wk mono">Wochen 1–2</span></div><span class="ex-title">Die echte Beschränkung finden</span><p class="ex-cond"><b>Abschlusskriterium</b> Eine schriftliche Position dazu, was zuerst gebaut wird — oder die Empfehlung, nichts zu bauen.</p></summary><div class="ex-detail"><p>Wir verbringen die ersten Wochen damit zu verstehen, was tatsächlich passiert, nicht was die Prozessdokumentation behauptet. Das heißt, sich zu den Menschen zu setzen, die die Arbeit machen. Bei diesem ersten Blick zeigt sich meist die Beschränkung, die niemand erwähnt hat.</p></div></details></li><li class="ex-step" id="phase-2"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 02 · Fundament</span><span class="ex-wk mono">Wochen 3–6</span></div><span class="ex-title">Die unglamouröse Schicht</span><p class="ex-cond"><b>Abschlusskriterium</b> Baseline-Evaluationswerte, an denen sich jede spätere Änderung messen lässt.</p></summary><div class="ex-detail"><p>Die Datenverknüpfungen, die Berechtigungen, die Evaluations-Baseline. Diese Schicht entscheidet, ob später überhaupt etwas in den Produktivbetrieb gelangt — und genau diese Schicht überspringen die meisten Piloten.</p></div></details></li><li class="ex-step" id="phase-3"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 03 · Integration</span><span class="ex-wk mono">Wochen 4–10</span></div><span class="ex-title">In das, was Sie bereits betreiben</span><p class="ex-cond"><b>Abschlusskriterium</b> Ein stufenweiser Rollout, der mit echten Daten in einer Nicht-Produktivumgebung läuft.</p></summary><div class="ex-detail"><p>Engineering in kurzen Zyklen an Ihren echten Systemen, mit einem vorführbaren Ergebnis am Ende jedes Zyklus. Sie sehen lauffähige Software, keine Statusfolien. Wer die Arbeit zugeschnitten hat, baut sie auch.</p></div></details></li><li class="ex-step" id="phase-4"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 04 · Inbetriebnahme</span><span class="ex-wk mono">Wochen 10–12</span></div><span class="ex-title">Unter echter Änderungskontrolle</span><p class="ex-cond"><b>Abschlusskriterium</b> Im Produktivbetrieb, unter Ihren bestehenden Kontrollen — ohne Ausnahmen.</p></summary><div class="ex-detail"><p>In den Produktivbetrieb unter derselben Governance, Prüfung und Freigabe wie alles andere, was Sie betreiben — nicht daneben und nicht als Ausnahme.</p></div></details></li><li class="ex-step" id="phase-5"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 05 · Nachweis</span><span class="ex-wk mono">Wochen 9–12</span></div><span class="ex-title">Gegen die vereinbarte Zahl</span><p class="ex-cond"><b>Abschlusskriterium</b> Ein schriftliches Ergebnis — auch in der unbequemen Fassung, wenn das die Wahrheit ist.</p></summary><div class="ex-detail"><p>Gemessen an der in Phase 01 vereinbarten Zahl, mit dem in Phase 02 gebauten Evaluations-Harness. Hat sie sich nicht bewegt, steht genau das im schriftlichen Ergebnis.</p></div></details></li><li class="ex-step last" id="phase-6"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 06 · Übergabe</span><span class="ex-wk mono">Wochen 12–14</span></div><span class="ex-title">Und dann gehen wir</span><p class="ex-cond"><b>Abschlusskriterium</b> Sie besitzen es, Sie betreiben es, wir sind weg. Das ist die Definition von fertig.</p></summary><div class="ex-detail"><p>Dokumentation, Runbooks, Architecture Decision Records, gemeinsamer Betrieb mit Ihren Engineers und ein benannter Verantwortlicher. Das Projekt ist erst abgeschlossen, wenn Ihr Team es ohne uns betreiben kann.</p></div></details></li></ol>
 </div>
 </section>
 <div class="wrap"><div class="divider"><i></i></div></div>
@@ -1371,9 +1370,21 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
     setTimeout(restore, 400);
   }
 
+  /* 'manual' is right for a fresh load or a reload — it stops the browser
+     dropping the reader into the middle of a chapter whose reveals are spent.
+     It is wrong for back and forward, where restoring the exact position is
+     the whole point, and where the browser does it better than any script
+     could. So: hand history navigation back to the platform. */
+  var navType = '';
+  try {
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    navType = nav ? nav.type : '';
+  } catch (e) {}
+  var isBack = navType === 'back_forward';
   if(typeof history!=='undefined' && 'scrollRestoration' in history){
-    history.scrollRestoration = 'manual';
+    history.scrollRestoration = isBack ? 'auto' : 'manual';
   }
+  if (isBack) return;   /* the browser is putting them back; do not interfere */
 
   /* ── the mobile menu ────────────────────────────────────────────────
      The home page shipped a burger button with no handler behind it — in
@@ -1431,6 +1442,118 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
 })();
 </script>
 <!--/NAV:JS-->
+<!--BACKTO:JS-->
+<script>
+/* Remember where the reader was when they left for another page, so the page
+   they land on can offer a way back to that exact spot rather than to the top
+   of a very long document. sessionStorage: one tab, one visit, never sent. */
+(function(){
+  if (typeof sessionStorage === 'undefined') return;
+  var KEY = 'qn:from';
+
+  /* leaving: record the offset against the link's destination */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (!/\.html(#|$)|^\/(de|fr)\//.test(href)) return;
+    if (a.target === '_blank' || href.charAt(0) === '#') return;
+    try {
+      /* Record an ANCHOR, not a pixel — and anchor to the section the
+         reader was actually IN, not whichever one happened to be at the top
+         of the viewport. This page pins and grows sections as they reveal, so
+         a raw offset landed 758px out and a top-of-viewport anchor still
+         landed 432px out. The section under the click is stable, and its
+         distance from the viewport top is the thing to reproduce. */
+      var host = a.closest('section[id]') || a.closest('[id]');
+      var top = host ? Math.round(host.getBoundingClientRect().top) : null;
+      sessionStorage.setItem(KEY, JSON.stringify({
+        url: location.pathname + location.search,
+        anchor: host ? host.id : '',
+        top: top,
+        y: Math.round(window.scrollY || 0)
+      }));
+    } catch (err) {}
+  }, true);
+
+  /* arriving: if we were sent here from somewhere, offer the way back */
+  var raw = null;
+  try { raw = sessionStorage.getItem(KEY); } catch (err) {}
+  if (!raw) return;
+  var from;
+  try { from = JSON.parse(raw); } catch (err) { return; }
+  if (!from || !from.url || from.url === location.pathname) return;
+
+  var host = document.querySelector('main .wrap');
+  if (!host) return;
+  var a = document.createElement('a');
+  a.className = 'backto';
+  a.href = from.url + '#qn-back';
+  a.innerHTML = '<span class="arw" aria-hidden="true">&#8592;</span>' +
+                (document.documentElement.lang === 'de' ? 'Zur\u00fcck' :
+                 document.documentElement.lang === 'fr' ? 'Retour' : 'Back');
+  a.addEventListener('click', function(e){
+    /* A real history step, when there is one. The browser restores the exact
+       offset itself — my own attempt at reproducing it landed 371 to 500px
+       out, because this page keeps growing as its sections reveal and no
+       script can chase that reliably. Falling back to the recorded anchor
+       only when there is no history entry to step back to. */
+    var ref = document.referrer || '';
+    var sameDoc = ref.indexOf(location.origin) === 0 &&
+                  ref.replace(location.origin, '').split('#')[0] === from.url;
+    if (sameDoc && history.length > 1) {
+      e.preventDefault();
+      history.back();
+      return;
+    }
+    try { sessionStorage.setItem('qn:restore', JSON.stringify(from)); } catch (err) {}
+  });
+  host.insertBefore(a, host.firstChild);
+})();
+
+/* landing back: put the reader on the pixel they left from, before paint */
+(function(){
+  if (typeof sessionStorage === 'undefined') return;
+  var raw = null;
+  try { raw = sessionStorage.getItem('qn:restore'); } catch (err) {}
+  if (!raw) return;
+  try { sessionStorage.removeItem('qn:restore'); } catch (err) {}
+  var want;
+  try { want = JSON.parse(raw); } catch (err) { return; }
+  if (!want) return;
+
+  /* Resolve the anchor every time rather than once: the section moves as the
+     page reveals, so the target is only correct at the moment it is read. */
+  function target(){
+    if (want.anchor && want.top !== null && want.top !== undefined) {
+      var el = document.getElementById(want.anchor);
+      /* put the section back exactly as far down the viewport as it was */
+      if (el) return Math.max(0, el.getBoundingClientRect().top + window.scrollY - want.top);
+    }
+    return want.y > 0 ? want.y : null;
+  }
+  function put(){ var t = target(); if (t !== null) window.scrollTo(0, t); }
+  put();
+
+  /* Keep correcting until the target stops moving, rather than for a fixed
+     number of ticks. This page reveals sections as it goes, so its layout is
+     still settling for a second or two after load — a fixed window gave up
+     early and left the reader 371px adrift. Stop once the computed target has
+     agreed with itself several times, and give up after three seconds so this
+     can never spin. */
+  var last = null, stable = 0, ticks = 0;
+  var iv = setInterval(function(){
+    var t = target();
+    if (t === null) { clearInterval(iv); return; }
+    if (last !== null && Math.abs(t - last) <= 1) { stable++; } else { stable = 0; }
+    last = t;
+    if (Math.abs(window.scrollY - t) > 1) { window.scrollTo(0, t); stable = 0; }
+    if (stable >= 6 || ++ticks > 60) clearInterval(iv);
+  }, 50);
+  addEventListener('load', put);
+})();
+</script>
+<!--/BACKTO:JS-->
 <script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');

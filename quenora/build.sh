@@ -37,6 +37,7 @@ fi
 "$PY" build_ticker.py
 "$PY" build_chapters.py
 "$PY" build_preview_css.py
+"$PY" build_backto.py
 
 "$PY" build_widget.py
 "$PY" build_nav.py

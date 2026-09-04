@@ -157,56 +157,79 @@ def home_rail(soup, sec):
 
 
 def approach_spine(soup):
-    """The detail, on the page whose job it is."""
+    """The detail, on the page whose job it is.
+
+    approach.html holds six <div class="step">, each with a phase eyebrow and
+    an unnamed div containing the heading, the description, the exit condition
+    and the week span. Two earlier versions of this got it wrong in ways worth
+    recording, because both produced a page that looked plausible in the DOM
+    and was broken on screen:
+
+      · reaching for the six <h3> and appending the spine to the parent of the
+        FIRST one put all six gates inside step 01 and left steps 02 to 06 on
+        the page as bare "Phase 02 · Foundation" labels with nothing under them
+      · walking step.find_all(recursive=False) never saw the exit condition,
+        because it is a grandchild rather than a child — every gate was built
+        without the one line the chapter is actually about
+
+    So: consume each block whole, and select what is wanted rather than
+    walking to it.
+    """
     main = soup.find('main')
-    heads = main.find_all('h3')
-    if len(heads) != 6:
-        print('  approach: expected 6 headings, found %d' % len(heads)); return False
+    steps = main.select('.step')
+    if len(steps) != 6:
+        print('  approach: expected 6 .step blocks, found %d' % len(steps))
+        return False
 
     ol = soup.new_tag('ol'); ol['class'] = 'ex'
-    anchor = heads[0].parent
 
-    for i, h in enumerate(heads):
+    for i, step in enumerate(steps):
         li = soup.new_tag('li')
-        li['class'] = 'ex-step' + (' last' if i == len(heads) - 1 else '')
+        li['class'] = 'ex-step' + (' last' if i == len(steps) - 1 else '')
         li['id'] = 'phase-%d' % (i + 1)
-        node = soup.new_tag('span'); node['class'] = 'ex-node'; node['aria-hidden'] = 'true'
+
+        node = soup.new_tag('span'); node['class'] = 'ex-node'
+        node['aria-hidden'] = 'true'
         li.append(node)
 
         row = soup.new_tag('details'); row['class'] = 'ex-row'
         summ = soup.new_tag('summary'); summ['class'] = 'ex-sum'
 
-        # everything up to the next h3 belongs to this phase
-        block = []
-        sib = h.next_sibling
-        while sib is not None and getattr(sib, 'name', None) != 'h3':
-            nxt = sib.next_sibling
-            if getattr(sib, 'name', None):
-                block.append(sib)
-            sib = nxt
+        head = soup.new_tag('div'); head['class'] = 'ex-head'
+        eyebrow = step.select_one('.ph')
+        if eyebrow is not None:
+            e = eyebrow.extract(); e.name = 'span'; e['class'] = 'ex-eyebrow mono'
+            head.append(e)
+        wk = step.select_one('.wk')
+        if wk is not None:
+            w = wk.extract(); w.name = 'span'; w['class'] = 'ex-wk mono'
+            head.append(w)
+        summ.append(head)
 
-        t = h.extract(); t.name = 'span'; t['class'] = 'ex-title'
-        summ.append(t)
+        h3 = step.find('h3')
+        if h3 is not None:
+            t = h3.extract(); t.name = 'span'; t['class'] = 'ex-title'
+            summ.append(t)
 
-        cond = None
-        rest = []
-        for b in block:
-            if b.get_text(strip=True).lower().startswith('exit condition'):
-                cond = b
-            else:
-                rest.append(b)
+        cond = step.select_one('.exit')
         if cond is not None:
-            c = cond.extract(); c['class'] = 'ex-cond'; summ.append(c)
+            c = cond.extract(); c['class'] = 'ex-cond'
+            summ.append(c)
+
         row.append(summ)
 
         det = soup.new_tag('div'); det['class'] = 'ex-detail'
-        for b in rest:
-            det.append(b.extract())
+        for para in list(step.find_all('p')):
+            if para.get_text(strip=True):
+                det.append(para.extract())
         row.append(det)
+
         li.append(row)
         ol.append(li)
 
-    anchor.append(ol)
+    steps[0].insert_before(ol)
+    for step in steps:
+        step.decompose()
     return True
 
 

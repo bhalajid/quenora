@@ -219,9 +219,21 @@ NAV_JS = """<script>
     setTimeout(restore, 400);
   }
 
+  /* 'manual' is right for a fresh load or a reload — it stops the browser
+     dropping the reader into the middle of a chapter whose reveals are spent.
+     It is wrong for back and forward, where restoring the exact position is
+     the whole point, and where the browser does it better than any script
+     could. So: hand history navigation back to the platform. */
+  var navType = '';
+  try {
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    navType = nav ? nav.type : '';
+  } catch (e) {}
+  var isBack = navType === 'back_forward';
   if(typeof history!=='undefined' && 'scrollRestoration' in history){
-    history.scrollRestoration = 'manual';
+    history.scrollRestoration = isBack ? 'auto' : 'manual';
   }
+  if (isBack) return;   /* the browser is putting them back; do not interfere */
 
   /* ── the mobile menu ────────────────────────────────────────────────
      The home page shipped a burger button with no handler behind it — in

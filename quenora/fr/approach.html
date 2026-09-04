@@ -527,6 +527,44 @@ header .navlinks a[aria-current="page"]{
 header .navlinks a.on::after,
 header .navlinks a[aria-current="page"]::after{width:0}
 /*/NAV:CSS*/
+/* ── six exits ─────────────────────────────────────────────────────────
+   PREVIEW (branch: infographics). The method is this page's job, so the
+   detail lives here rather than being told twice. Each gate shows the exit
+   condition — the thing the chapter is actually about — with the description
+   behind a disclosure.
+
+   The spine fades as it descends and stops, and the last gate is drawn
+   hollow: that is the handover, the one place we are no longer in the
+   picture. */
+.ex{list-style:none;margin:var(--sp4,40px) 0 0;padding:0;position:relative}
+.ex::before{content:'';position:absolute;left:7px;top:10px;bottom:30px;width:1px;
+  background:linear-gradient(180deg,var(--copper) 0%,rgba(201,122,60,.55) 55%,
+    rgba(201,122,60,.12) 100%)}
+.ex-step{position:relative;padding-left:38px;padding-bottom:26px}
+.ex-step:last-child{padding-bottom:0}
+.ex-node{position:absolute;left:0;top:8px;width:15px;height:15px;border-radius:50%;
+  background:var(--copper);box-shadow:0 0 0 5px var(--ink)}
+.ex-step.last .ex-node{background:transparent;border:1.5px solid var(--copper)}
+.ex-row{border-bottom:1px solid var(--line)}
+.ex-step:last-child .ex-row{border-bottom:0}
+.ex-sum{cursor:pointer;list-style:none;padding:2px 0 16px;display:block}
+.ex-sum::-webkit-details-marker{display:none}
+.ex-sum:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+.ex-title{display:block;font-size:1.24rem;font-weight:600;color:var(--white);
+  letter-spacing:-.015em;margin-bottom:8px}
+.ex-row[open] .ex-title{color:var(--copper-lt)}
+.ex-title em{font-family:var(--serif);font-style:italic;color:var(--ember)}
+.ex-cond{color:var(--grey);font-size:.95rem;max-width:66ch;margin:0}
+.ex-cond b{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--grey-d);font-weight:400;margin-bottom:5px}
+.ex-detail{padding:0 0 16px}
+.ex-detail > p{color:var(--grey);margin:0 0 12px;max-width:66ch;font-size:.95rem}
+@media(max-width:560px){
+  .ex-step{padding-left:30px}
+  .ex-node{width:13px;height:13px}
+  .ex::before{left:6px}
+  .ex-title{font-size:1.1rem}
+}
 </style>
 <meta content="fr_FR" property="og:locale"/><link href="https://quenora.ai/fr/approach" rel="canonical"/><link href="https://quenora.ai/approach" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/approach" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/approach" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/approach" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR"},{"@type":"WebPage","@id":"https://quenora.ai/fr/approach#page","url":"https://quenora.ai/fr/approach","name":"Une méthode conçue pour s'achever, pas pour se reconduire.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR","description":"Une méthode en six phases conçue pour s'achever lorsque votre équipe exploite le système.","breadcrumb":{"@id":"https://quenora.ai/fr/approach#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/fr/approach#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://quenora.ai/fr"},{"@type":"ListItem","position":2,"name":"Une méthode conçue pour s'achever, pas pour se reconduire.","item":"https://quenora.ai/fr/approach"}]}]}</script></head>
 <body>
@@ -578,27 +616,27 @@ header .navlinks a[aria-current="page"]::after{width:0}
 </div>
 <div class="step rv">
 <div class="ph">Phase 01 · Cadrage</div>
-<div><h3>Trouver la vraie contrainte</h3><p>Nous passons les premières semaines à comprendre ce qui se passe réellement, et non ce que la documentation de processus affirme. Cela suppose de s’asseoir avec les personnes qui font le travail. C’est lors de ce premier regard qu’apparaît généralement la contrainte que personne n’avait mentionnée.</p><p class="exit"><b>Critère de sortie</b> Une position écrite sur ce qu’il faut construire en premier — ou la recommandation de ne rien construire.</p><span class="wk">Semaines 1–2</span></div>
+<div><ol class="ex"><li class="ex-step"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Trouver la vraie contrainte</span><p class="ex-cond"><b>Critère de sortie</b> Une position écrite sur ce qu’il faut construire en premier — ou la recommandation de ne rien construire.</p></summary><div class="ex-detail"><p>Nous passons les premières semaines à comprendre ce qui se passe réellement, et non ce que la documentation de processus affirme. Cela suppose de s’asseoir avec les personnes qui font le travail. C’est lors de ce premier regard qu’apparaît généralement la contrainte que personne n’avait mentionnée.</p><span class="wk">Semaines 1–2</span></div></details></li><li class="ex-step"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">La couche ingrate</span><p class="ex-cond"><b>Critère de sortie</b> Des scores d’évaluation de référence pour juger chaque changement qui suivra.</p></summary><div class="ex-detail"><p>Les jointures de données, les habilitations, la référence d’évaluation. C’est la couche qui détermine si quoi que ce soit atteindra la production par la suite, et c’est celle que la plupart des pilotes sautent.</p><span class="wk">Semaines 3–6</span></div></details></li><li class="ex-step"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Dans ce que vous exploitez déjà</span><p class="ex-cond"><b>Critère de sortie</b> Un déploiement par étapes fonctionnant sur des données réelles dans un environnement hors production.</p></summary><div class="ex-detail"><p>De l’ingénierie en cycles courts sur vos systèmes réels, avec quelque chose de démontrable à la fin de chacun. Vous voyez un logiciel qui fonctionne, pas des présentations d’avancement. Celui qui a cadré le travail est celui qui le construit.</p><span class="wk">Semaines 4–10</span></div></details></li><li class="ex-step"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Sous une vraie gestion des changements</span><p class="ex-cond"><b>Critère de sortie</b> En production, sous vos contrôles existants — sans exception.</p></summary><div class="ex-detail"><p>En production sous la même gouvernance, la même revue et le même processus de mise en service que tout le reste de votre parc — pas à côté, et pas par exception.</p><span class="wk">Semaines 10–12</span></div></details></li><li class="ex-step"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Face au chiffre convenu</span><p class="ex-cond"><b>Critère de sortie</b> Un résultat écrit — y compris dans sa version inconfortable si c’est la vérité.</p></summary><div class="ex-detail"><p>Mesuré face au chiffre convenu en phase 01, à l’aide du harnais d’évaluation construit en phase 02. S’il n’a pas bougé, c’est exactement ce que dit le résultat écrit.</p><span class="wk">Semaines 9–12</span></div></details></li><li class="ex-step last"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Puis nous partons</span><p class="ex-cond"><b>Critère de sortie</b> Vous le possédez, vous l’exploitez, nous sommes partis. C’est la définition de « terminé ».</p></summary><div class="ex-detail"><p>Documentation, runbooks, décisions d’architecture consignées, exploitation en binôme avec vos ingénieurs et un responsable nommé. La mission n’est pas terminée tant que votre équipe ne peut pas l’exploiter sans nous.</p><span class="wk">Semaines 12–14</span></div></details></li></ol></div>
 </div>
 <div class="step rv">
 <div class="ph">Phase 02 · Fondations</div>
-<div><h3>La couche ingrate</h3><p>Les jointures de données, les habilitations, la référence d’évaluation. C’est la couche qui détermine si quoi que ce soit atteindra la production par la suite, et c’est celle que la plupart des pilotes sautent.</p><p class="exit"><b>Critère de sortie</b> Des scores d’évaluation de référence pour juger chaque changement qui suivra.</p><span class="wk">Semaines 3–6</span></div>
+<div></div>
 </div>
 <div class="step rv">
 <div class="ph">Phase 03 · Intégration</div>
-<div><h3>Dans ce que vous exploitez déjà</h3><p>De l’ingénierie en cycles courts sur vos systèmes réels, avec quelque chose de démontrable à la fin de chacun. Vous voyez un logiciel qui fonctionne, pas des présentations d’avancement. Celui qui a cadré le travail est celui qui le construit.</p><p class="exit"><b>Critère de sortie</b> Un déploiement par étapes fonctionnant sur des données réelles dans un environnement hors production.</p><span class="wk">Semaines 4–10</span></div>
+<div></div>
 </div>
 <div class="step rv">
 <div class="ph">Phase 04 · Mise en production</div>
-<div><h3>Sous une vraie gestion des changements</h3><p>En production sous la même gouvernance, la même revue et le même processus de mise en service que tout le reste de votre parc — pas à côté, et pas par exception.</p><p class="exit"><b>Critère de sortie</b> En production, sous vos contrôles existants — sans exception.</p><span class="wk">Semaines 10–12</span></div>
+<div></div>
 </div>
 <div class="step rv">
 <div class="ph">Phase 05 · Preuve</div>
-<div><h3>Face au chiffre convenu</h3><p>Mesuré face au chiffre convenu en phase 01, à l’aide du harnais d’évaluation construit en phase 02. S’il n’a pas bougé, c’est exactement ce que dit le résultat écrit.</p><p class="exit"><b>Critère de sortie</b> Un résultat écrit — y compris dans sa version inconfortable si c’est la vérité.</p><span class="wk">Semaines 9–12</span></div>
+<div></div>
 </div>
 <div class="step rv">
 <div class="ph">Phase 06 · Transfert</div>
-<div><h3>Puis nous partons</h3><p>Documentation, runbooks, décisions d’architecture consignées, exploitation en binôme avec vos ingénieurs et un responsable nommé. La mission n’est pas terminée tant que votre équipe ne peut pas l’exploiter sans nous.</p><p class="exit"><b>Critère de sortie</b> Vous le possédez, vous l’exploitez, nous sommes partis. C’est la définition de « terminé ».</p><span class="wk">Semaines 12–14</span></div>
+<div></div>
 </div>
 </div>
 </section>

@@ -527,6 +527,44 @@ header .navlinks a[aria-current="page"]{
 header .navlinks a.on::after,
 header .navlinks a[aria-current="page"]::after{width:0}
 /*/NAV:CSS*/
+/* ── six exits ─────────────────────────────────────────────────────────
+   PREVIEW (branch: infographics). The method is this page's job, so the
+   detail lives here rather than being told twice. Each gate shows the exit
+   condition — the thing the chapter is actually about — with the description
+   behind a disclosure.
+
+   The spine fades as it descends and stops, and the last gate is drawn
+   hollow: that is the handover, the one place we are no longer in the
+   picture. */
+.ex{list-style:none;margin:var(--sp4,40px) 0 0;padding:0;position:relative}
+.ex::before{content:'';position:absolute;left:7px;top:10px;bottom:30px;width:1px;
+  background:linear-gradient(180deg,var(--copper) 0%,rgba(201,122,60,.55) 55%,
+    rgba(201,122,60,.12) 100%)}
+.ex-step{position:relative;padding-left:38px;padding-bottom:26px}
+.ex-step:last-child{padding-bottom:0}
+.ex-node{position:absolute;left:0;top:8px;width:15px;height:15px;border-radius:50%;
+  background:var(--copper);box-shadow:0 0 0 5px var(--ink)}
+.ex-step.last .ex-node{background:transparent;border:1.5px solid var(--copper)}
+.ex-row{border-bottom:1px solid var(--line)}
+.ex-step:last-child .ex-row{border-bottom:0}
+.ex-sum{cursor:pointer;list-style:none;padding:2px 0 16px;display:block}
+.ex-sum::-webkit-details-marker{display:none}
+.ex-sum:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+.ex-title{display:block;font-size:1.24rem;font-weight:600;color:var(--white);
+  letter-spacing:-.015em;margin-bottom:8px}
+.ex-row[open] .ex-title{color:var(--copper-lt)}
+.ex-title em{font-family:var(--serif);font-style:italic;color:var(--ember)}
+.ex-cond{color:var(--grey);font-size:.95rem;max-width:66ch;margin:0}
+.ex-cond b{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--grey-d);font-weight:400;margin-bottom:5px}
+.ex-detail{padding:0 0 16px}
+.ex-detail > p{color:var(--grey);margin:0 0 12px;max-width:66ch;font-size:.95rem}
+@media(max-width:560px){
+  .ex-step{padding-left:30px}
+  .ex-node{width:13px;height:13px}
+  .ex::before{left:6px}
+  .ex-title{font-size:1.1rem}
+}
 </style>
 <meta content="es_ES" property="og:locale"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/approach#page","url":"https://quenora.ai/approach","name":"A method built to end, not to renew itself.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"A six-phase engagement method designed to end with your team running the system.","breadcrumb":{"@id":"https://quenora.ai/approach#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/approach#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"A method built to end, not to renew itself.","item":"https://quenora.ai/approach"}]}]}</script><link href="https://quenora.ai/es/approach" rel="canonical"/><link href="https://quenora.ai/approach" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/approach" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/approach" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/approach" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/></head>
 <body>
@@ -578,27 +616,27 @@ header .navlinks a[aria-current="page"]::after{width:0}
 </div>
 <div class="step rv">
 <div class="ph">Fase 01 · Encuadre</div>
-<div><h3>Find the real constraint</h3><p>We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface.</p><p class="exit"><b>Exit condition</b> A written position on what to build first — or a recommendation to build nothing.</p><span class="wk">Semanas 1–2</span></div>
+<div><ol class="ex"><li class="ex-step"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Find the real constraint</span><p class="ex-cond"><b>Exit condition</b> A written position on what to build first — or a recommendation to build nothing.</p></summary><div class="ex-detail"><p>We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface.</p><span class="wk">Semanas 1–2</span></div></details></li><li class="ex-step"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">The unglamorous layer</span><p class="ex-cond"><b>Exit condition</b> Baseline evaluation scores to judge every change that follows.</p></summary><div class="ex-detail"><p>The data joins, the permissions, the evaluation baseline. This is the layer that decides whether anything later reaches production, and it is the layer most pilots skip.</p><span class="wk">Semanas 3–6</span></div></details></li><li class="ex-step"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Into what you already run</span><p class="ex-cond"><b>Exit condition</b> A staged rollout running against real data in a non-production environment.</p></summary><div class="ex-detail"><p>Engineering in short cycles against your real systems, with something demonstrable at the end of each. You see working software, not status decks. The person who scoped the work is the person building it.</p><span class="wk">Semanas 4–10</span></div></details></li><li class="ex-step"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Under real change control</span><p class="ex-cond"><b>Exit condition</b> In production, under your existing controls — no exceptions.</p></summary><div class="ex-detail"><p>Into production under the same governance, review and release process as everything else you run — not beside it, and not on an exception.</p><span class="wk">Weeks 10–12</span></div></details></li><li class="ex-step"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">Against the agreed number</span><p class="ex-cond"><b>Exit condition</b> A written result — including the uncomfortable version if that’s the truth.</p></summary><div class="ex-detail"><p>Measured against the number agreed in Phase 01, using the evaluation harness built in Phase 02. If it did not move, that is what the written result says.</p><span class="wk">Semanas 9–12</span></div></details></li><li class="ex-step last"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><span class="ex-title">And then we leave</span><p class="ex-cond"><b>Exit condition</b> You own it, you run it, we’re gone. That’s the definition of done.</p></summary><div class="ex-detail"><p>Documentation, runbooks, architecture decision records, paired operation with your engineers, and a named owner. The engagement is not finished until your team can run it without us.</p><span class="wk">Semanas 12–14</span></div></details></li></ol></div>
 </div>
 <div class="step rv">
 <div class="ph">Fase 02 · Cimientos</div>
-<div><h3>The unglamorous layer</h3><p>The data joins, the permissions, the evaluation baseline. This is the layer that decides whether anything later reaches production, and it is the layer most pilots skip.</p><p class="exit"><b>Exit condition</b> Baseline evaluation scores to judge every change that follows.</p><span class="wk">Semanas 3–6</span></div>
+<div></div>
 </div>
 <div class="step rv">
 <div class="ph">Fase 03 · Integración</div>
-<div><h3>Into what you already run</h3><p>Engineering in short cycles against your real systems, with something demonstrable at the end of each. You see working software, not status decks. The person who scoped the work is the person building it.</p><p class="exit"><b>Exit condition</b> A staged rollout running against real data in a non-production environment.</p><span class="wk">Semanas 4–10</span></div>
+<div></div>
 </div>
 <div class="step rv">
 <div class="ph">Fase 04 · Puesta en producción</div>
-<div><h3>Under real change control</h3><p>Into production under the same governance, review and release process as everything else you run — not beside it, and not on an exception.</p><p class="exit"><b>Exit condition</b> In production, under your existing controls — no exceptions.</p><span class="wk">Weeks 10–12</span></div>
+<div></div>
 </div>
 <div class="step rv">
 <div class="ph">Fase 05 · Demostración</div>
-<div><h3>Against the agreed number</h3><p>Measured against the number agreed in Phase 01, using the evaluation harness built in Phase 02. If it did not move, that is what the written result says.</p><p class="exit"><b>Exit condition</b> A written result — including the uncomfortable version if that’s the truth.</p><span class="wk">Semanas 9–12</span></div>
+<div></div>
 </div>
 <div class="step rv">
 <div class="ph">Fase 06 · Traspaso</div>
-<div><h3>And then we leave</h3><p>Documentation, runbooks, architecture decision records, paired operation with your engineers, and a named owner. The engagement is not finished until your team can run it without us.</p><p class="exit"><b>Exit condition</b> You own it, you run it, we’re gone. That’s the definition of done.</p><span class="wk">Semanas 12–14</span></div>
+<div></div>
 </div>
 </div>
 </section>

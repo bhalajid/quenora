@@ -35,18 +35,6 @@ Something is live, procurement or risk is now asking questions, and the evidence
 ## Six phases. Designed to finish.
 
 Most consultancies are designed to keep the engagement going. Ours is designed to bring it to a clean close — each phase carries an exit condition, agreed and written into the statement of work.
-Phase 01 · Frame Weeks 1–2 Find the real constraint Exit condition A written position on what to build first — or a recommendation to build nothing. We spend the first weeks understanding what actually happens, not what the documentation says should. That first look is where the real constraint tends to surface. Process walkthrough with the people doing the work Data and systems inventory The constraint nobody mentioned
-We spend the first weeks understanding what actually happens, not what the documentation says should. That first look is where the real constraint tends to surface.
-Phase 02 · Foundation Weeks 3–6 The unglamorous layer Exit condition Baseline evaluation scores to judge every change that follows. The work that decides whether anything after it survives contact with production. Environments and access model, documented Data contracts, with owners named Evaluation harness built on your actual data
-The work that decides whether anything after it survives contact with production.
-Phase 03 · Integrate Weeks 4–10 Into what you already run Exit condition A staged rollout running against real data in a non-production environment. Connected to the systems that hold the data and run the work, with the failure paths designed rather than discovered in production. Connectors into ERP, CRM, Service Desk Permission model and audit trail Failure and rollback paths, mapped
-Connected to the systems that hold the data and run the work, with the failure paths designed rather than discovered in production.
-Phase 04 · Ship Weeks 10–12 Under real change control Exit condition In production, under your existing controls — no exceptions. It goes live the same way every other system does — same approvals, same controls. No parallel universe. No permanent pilot. Release behind your existing change control Monitoring, alerting, cost ceilings Rollback rehearsed, not theorised
-It goes live the same way every other system does — same approvals, same controls. No parallel universe. No permanent pilot.
-Phase 05 · Prove Weeks 9–12 Against the agreed number Exit condition A written result — including the uncomfortable version if that’s the truth. Back to the number we set in Frame — did it move or not? That conversation is the product. Measurement against the Frame number What moved, what didn’t, and why Honest recommendation on continuing
-Back to the number we set in Frame — did it move or not? That conversation is the product.
-Phase 06 · Hand over Weeks 12–14 And then we leave Exit condition You own it, you run it, we’re gone. That’s the definition of done. We work ourselves out of the job — a date after which your team runs it without us. The engagement is designed to end. Runbooks and architecture decision records Paired operation with your engineers Named owner and a handover date
-We work ourselves out of the job — a date after which your team runs it without us. The engagement is designed to end.
 Recognise the shape of your problem in those six phases? Two paragraphs on what’s stuck is enough to start — no brief, no NDA.
 
 ## Nine capabilities. One team.
@@ -422,36 +410,24 @@ Most consultancies are structured to extend the engagement. This one is structur
 ## Six phases, fourteen weeks, one handover.
 
 Timelines shift with scope — these are indicative, not promises. What does not shift is the shape: diagnose before scoping, demonstrate before integrating, transfer before leaving.
-
-## Find the real constraint
-
-We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface.
+Find the real constraint Exit condition A written position on what to build first — or a recommendation to build nothing. We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface. Weeks 1–2
 Exit condition A written position on what to build first — or a recommendation to build nothing.
-
-## The unglamorous layer
-
-The data joins, the permissions, the evaluation baseline. This is the layer that decides whether anything later reaches production, and it is the layer most pilots skip.
+We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface.
+The unglamorous layer Exit condition Baseline evaluation scores to judge every change that follows. The data joins, the permissions, the evaluation baseline. This is the layer that decides whether anything later reaches production, and it is the layer most pilots skip. Weeks 3–6
 Exit condition Baseline evaluation scores to judge every change that follows.
-
-## Into what you already run
-
-Engineering in short cycles against your real systems, with something demonstrable at the end of each. You see working software, not status decks. The person who scoped the work is the person building it.
+The data joins, the permissions, the evaluation baseline. This is the layer that decides whether anything later reaches production, and it is the layer most pilots skip.
+Into what you already run Exit condition A staged rollout running against real data in a non-production environment. Engineering in short cycles against your real systems, with something demonstrable at the end of each. You see working software, not status decks. The person who scoped the work is the person building it. Weeks 4–10
 Exit condition A staged rollout running against real data in a non-production environment.
-
-## Under real change control
-
-Into production under the same governance, review and release process as everything else you run — not beside it, and not on an exception.
+Engineering in short cycles against your real systems, with something demonstrable at the end of each. You see working software, not status decks. The person who scoped the work is the person building it.
+Under real change control Exit condition In production, under your existing controls — no exceptions. Into production under the same governance, review and release process as everything else you run — not beside it, and not on an exception. Weeks 10–12
 Exit condition In production, under your existing controls — no exceptions.
-
-## Against the agreed number
-
-Measured against the number agreed in Phase 01, using the evaluation harness built in Phase 02. If it did not move, that is what the written result says.
+Into production under the same governance, review and release process as everything else you run — not beside it, and not on an exception.
+Against the agreed number Exit condition A written result — including the uncomfortable version if that’s the truth. Measured against the number agreed in Phase 01, using the evaluation harness built in Phase 02. If it did not move, that is what the written result says. Weeks 9–12
 Exit condition A written result — including the uncomfortable version if that’s the truth.
-
-## And then we leave
-
-Documentation, runbooks, architecture decision records, paired operation with your engineers, and a named owner. The engagement is not finished until your team can run it without us.
+Measured against the number agreed in Phase 01, using the evaluation harness built in Phase 02. If it did not move, that is what the written result says.
+And then we leave Exit condition You own it, you run it, we’re gone. That’s the definition of done. Documentation, runbooks, architecture decision records, paired operation with your engineers, and a named owner. The engagement is not finished until your team can run it without us. Weeks 12–14
 Exit condition You own it, you run it, we’re gone. That’s the definition of done.
+Documentation, runbooks, architecture decision records, paired operation with your engineers, and a named owner. The engagement is not finished until your team can run it without us.
 
 ## Four positions we will not negotiate
 

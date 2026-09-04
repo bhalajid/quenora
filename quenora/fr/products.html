@@ -11,7 +11,6 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <meta content="#0A0A0B" name="theme-color"/>
-<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='12' cy='161.71' r='3' fill='%23C97A3C'/%3E%3Ccircle cx='21.64' cy='161.34' r='3.95' fill='%23C97A3C'/%3E%3Ccircle cx='33.39' cy='159.88' r='5.2' fill='%23C97A3C'/%3E%3Ccircle cx='47.73' cy='156.52' r='6.84' fill='%23C97A3C'/%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
 <meta content="Quenora Consulting" property="og:site_name"/>
 <meta content="Quenora Consulting — Produits &amp; frameworks" property="og:title"/>
@@ -552,8 +551,24 @@ header .navlinks a[aria-current="page"]{
 header .navlinks a.on::after,
 header .navlinks a[aria-current="page"]::after{width:0}
 /*/NAV:CSS*/
+/*BRAND:CSS*/
+/* ── the supplied lockup ───────────────────────────────────────────────
+   One file, referenced everywhere, rather than nine inline circles repeated
+   in twenty-four pages. Height is set and width follows the ratio, so the
+   mark never distorts and never reflows the header when it loads. */
+.brandimg{display:block;height:34px;width:auto;flex:none}
+.brand.lg .brandimg{height:46px}
+@media(max-width:900px){.brandimg{height:30px}.brand.lg .brandimg{height:40px}}
+@media(max-width:560px){.brandimg{height:26px}.brand.lg .brandimg{height:36px}}
+/*/BRAND:CSS*/
 </style>
-<meta content="fr_FR" property="og:locale"/><link href="https://quenora.ai/fr/products" rel="canonical"/><link href="https://quenora.ai/products" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/products" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/products" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/products" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR"},{"@type":"WebPage","@id":"https://quenora.ai/fr/products#page","url":"https://quenora.ai/fr/products","name":"Ce que nous avons construit, pour que vous ne le reconstruisiez pas.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR","description":"Accélérateurs d’IA, frameworks d’agents et boîtes à outils de gouvernance de Quenora Consulting — déployés dans votre environnement et détenus par votre équipe.","breadcrumb":{"@id":"https://quenora.ai/fr/products#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/fr/products#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://quenora.ai/fr"},{"@type":"ListItem","position":2,"name":"Ce que nous avons construit, pour que vous ne le reconstruisiez pas.","item":"https://quenora.ai/fr/products"}]}]}</script></head>
+<meta content="fr_FR" property="og:locale"/>
+<link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
+<link href="/assets/brand/quenora-icon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/brand/quenora-icon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/brand/quenora-icon-180.png" rel="apple-touch-icon"/>
+<link href="/assets/brand/quenora-icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/><link href="https://quenora.ai/fr/products" rel="canonical"/><link href="https://quenora.ai/products" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/products" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/products" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/products" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR"},{"@type":"WebPage","@id":"https://quenora.ai/fr/products#page","url":"https://quenora.ai/fr/products","name":"Ce que nous avons construit, pour que vous ne le reconstruisiez pas.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR","description":"Accélérateurs d’IA, frameworks d’agents et boîtes à outils de gouvernance de Quenora Consulting — déployés dans votre environnement et détenus par votre équipe.","breadcrumb":{"@id":"https://quenora.ai/fr/products#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/fr/products#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://quenora.ai/fr"},{"@type":"ListItem","position":2,"name":"Ce que nous avons construit, pour que vous ne le reconstruisiez pas.","item":"https://quenora.ai/fr/products"}]}]}</script></head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0">
 <symbol id="mark9" viewbox="0 0 187.71 174.29">
@@ -574,9 +589,7 @@ header .navlinks a[aria-current="page"]::after{width:0}
 <div class="wrap">
 <nav>
 <a class="brand" href="/fr/index.html">
-<svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
-<b><em>q</em>uenora</b>
-</a>
+<img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/></a>
 <div class="navlinks" id="navLinks"><a href="/fr/approach.html">Méthode</a><a href="/fr/capabilities.html">Expertises</a><a href="/fr/engineering.html">Ingénierie</a><a href="/fr/work.html">Missions</a><a href="/fr/about.html">À propos</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choisir la langue" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>FR</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/products.html" hreflang="en" lang="en">English</a></li><li><a href="/de/products.html" hreflang="de" lang="de">Deutsch</a></li><li><a aria-current="true" href="/fr/products.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 <a class="btn btn-primary navcta" href="/fr/index.html#climax"><span class="cta-long">Engager la conversation</span><span class="cta-short">Contact</span></a>
 <button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
@@ -1480,7 +1493,13 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
    they land on can offer a way back to that exact spot rather than to the top
    of a very long document. sessionStorage: one tab, one visit, never sent. */
 (function(){
+  /* The headless harness that verifies the work page's field figure runs every
+     script against a minimal DOM stub, where document exists but
+     addEventListener does not. Guard on the capability, not on the object —
+     this is the third time that stub has caught a script assuming a browser. */
   if (typeof sessionStorage === 'undefined') return;
+  if (typeof document === 'undefined' ||
+      typeof document.addEventListener !== 'function') return;
   var KEY = 'qn:from';
 
   /* leaving: record the offset against the link's destination */
@@ -1546,6 +1565,8 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
 /* landing back: put the reader on the pixel they left from, before paint */
 (function(){
   if (typeof sessionStorage === 'undefined') return;
+  if (typeof window === 'undefined' ||
+      typeof window.addEventListener !== 'function') return;
   var raw = null;
   try { raw = sessionStorage.getItem('qn:restore'); } catch (err) {}
   if (!raw) return;

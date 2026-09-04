@@ -11,7 +11,6 @@
 <meta content="website" property="og:type"/>
 <meta content="fr_FR" property="og:locale"/>
 <meta content="https://quenora.ai/fr/engineering" property="og:url"/>
-<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='9 9 169.71 155.71'%3E%3Cg fill='%23C97A3C'%3E%3Ccircle cx='12' cy='161.71' r='3'/%3E%3Ccircle cx='21.64' cy='161.34' r='3.95'/%3E%3Ccircle cx='33.39' cy='159.88' r='5.2'/%3E%3Ccircle cx='47.73' cy='156.52' r='6.84'/%3E%3Ccircle cx='65.05' cy='149.97' r='9'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52'/%3E%3Ccircle cx='151.71' cy='36' r='27'/%3E%3C/g%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Playfair+Display:ital,wght@1,400&amp;display=swap" rel="stylesheet"/>
@@ -458,21 +457,30 @@ header .navlinks a[aria-current="page"]{
 header .navlinks a.on::after,
 header .navlinks a[aria-current="page"]::after{width:0}
 /*/NAV:CSS*/
+/*BRAND:CSS*/
+/* ── the supplied lockup ───────────────────────────────────────────────
+   One file, referenced everywhere, rather than nine inline circles repeated
+   in twenty-four pages. Height is set and width follows the ratio, so the
+   mark never distorts and never reflows the header when it loads. */
+.brandimg{display:block;height:34px;width:auto;flex:none}
+.brand.lg .brandimg{height:46px}
+@media(max-width:900px){.brandimg{height:30px}.brand.lg .brandimg{height:40px}}
+@media(max-width:560px){.brandimg{height:26px}.brand.lg .brandimg{height:36px}}
+/*/BRAND:CSS*/
 </style>
-<link href="https://quenora.ai/fr/engineering" rel="canonical"/><link href="https://quenora.ai/engineering" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/engineering" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/engineering" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/engineering" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR"},{"@type":"WebPage","@id":"https://quenora.ai/fr/engineering#page","url":"https://quenora.ai/fr/engineering","name":"La plupart des pilotes n’échouent pas sur le modèle. Ils s’arrêtent à cinq couches.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR","description":"Comment Quenora met l’IA en production et la gouverne une fois là : où les pilotes s’arrêtent, ce que mesure le harnais d’évaluation, et les décisions de gouvernance à prendre avant toute mise en service.","breadcrumb":{"@id":"https://quenora.ai/fr/engineering#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/fr/engineering#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://quenora.ai/fr"},{"@type":"ListItem","position":2,"name":"La plupart des pilotes n’échouent pas sur le modèle. Ils s’arrêtent à cinq couches.","item":"https://quenora.ai/fr/engineering"}]}]}</script></head>
+<link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
+<link href="/assets/brand/quenora-icon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/brand/quenora-icon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/brand/quenora-icon-180.png" rel="apple-touch-icon"/>
+<link href="/assets/brand/quenora-icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/><link href="https://quenora.ai/fr/engineering" rel="canonical"/><link href="https://quenora.ai/engineering" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/engineering" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/engineering" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/engineering" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR"},{"@type":"WebPage","@id":"https://quenora.ai/fr/engineering#page","url":"https://quenora.ai/fr/engineering","name":"La plupart des pilotes n’échouent pas sur le modèle. Ils s’arrêtent à cinq couches.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR","description":"Comment Quenora met l’IA en production et la gouverne une fois là : où les pilotes s’arrêtent, ce que mesure le harnais d’évaluation, et les décisions de gouvernance à prendre avant toute mise en service.","breadcrumb":{"@id":"https://quenora.ai/fr/engineering#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/fr/engineering#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://quenora.ai/fr"},{"@type":"ListItem","position":2,"name":"La plupart des pilotes n’échouent pas sur le modèle. Ils s’arrêtent à cinq couches.","item":"https://quenora.ai/fr/engineering"}]}]}</script></head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
 <header class="nav" id="nav">
 <div class="wrap">
 <a aria-label="Quenora home" class="brand" href="/fr/index.html">
-<svg aria-hidden="true" class="mk" fill="currentColor" viewbox="9 9 169.71 155.71">
-<circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
-<circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
-<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
-<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
-<circle cx="151.71" cy="36" r="27"></circle>
-</svg>quenora
-</a>
+quenora
+<img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/></a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
 <nav aria-label="Main" class="navlinks" id="navLinks">
 <a href="/fr/approach.html">Méthode</a>
@@ -713,13 +721,7 @@ Deux paragraphes sur ce qui bloque suffisent pour commencer.</p>
 <div>
 <div class="lockup" style="margin-bottom:var(--sp3)">
 <span class="brand lg">
-<svg aria-hidden="true" class="mk" fill="currentColor" viewbox="9 9 169.71 155.71">
-<circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
-<circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
-<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
-<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
-<circle cx="151.71" cy="36" r="27"></circle>
-</svg>quenora</span>
+quenora<img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/></span>
 <span class="desc">Conseil</span>
 </div>
 <p style="max-width:35ch;color:var(--t2);font-size:.96rem">
@@ -1562,7 +1564,13 @@ L’IA d’entreprise, conçue pour fonctionner. Intégrée à ce que vous explo
    they land on can offer a way back to that exact spot rather than to the top
    of a very long document. sessionStorage: one tab, one visit, never sent. */
 (function(){
+  /* The headless harness that verifies the work page's field figure runs every
+     script against a minimal DOM stub, where document exists but
+     addEventListener does not. Guard on the capability, not on the object —
+     this is the third time that stub has caught a script assuming a browser. */
   if (typeof sessionStorage === 'undefined') return;
+  if (typeof document === 'undefined' ||
+      typeof document.addEventListener !== 'function') return;
   var KEY = 'qn:from';
 
   /* leaving: record the offset against the link's destination */
@@ -1628,6 +1636,8 @@ L’IA d’entreprise, conçue pour fonctionner. Intégrée à ce que vous explo
 /* landing back: put the reader on the pixel they left from, before paint */
 (function(){
   if (typeof sessionStorage === 'undefined') return;
+  if (typeof window === 'undefined' ||
+      typeof window.addEventListener !== 'function') return;
   var raw = null;
   try { raw = sessionStorage.getItem('qn:restore'); } catch (err) {}
   if (!raw) return;

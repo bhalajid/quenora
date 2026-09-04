@@ -31,7 +31,13 @@ JS = """<script>
    they land on can offer a way back to that exact spot rather than to the top
    of a very long document. sessionStorage: one tab, one visit, never sent. */
 (function(){
+  /* The headless harness that verifies the work page's field figure runs every
+     script against a minimal DOM stub, where document exists but
+     addEventListener does not. Guard on the capability, not on the object —
+     this is the third time that stub has caught a script assuming a browser. */
   if (typeof sessionStorage === 'undefined') return;
+  if (typeof document === 'undefined' ||
+      typeof document.addEventListener !== 'function') return;
   var KEY = 'qn:from';
 
   /* leaving: record the offset against the link's destination */
@@ -97,6 +103,8 @@ JS = """<script>
 /* landing back: put the reader on the pixel they left from, before paint */
 (function(){
   if (typeof sessionStorage === 'undefined') return;
+  if (typeof window === 'undefined' ||
+      typeof window.addEventListener !== 'function') return;
   var raw = null;
   try { raw = sessionStorage.getItem('qn:restore'); } catch (err) {}
   if (!raw) return;

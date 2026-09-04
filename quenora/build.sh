@@ -39,6 +39,7 @@ fi
 "$PY" build_preview_css.py
 "$PY" build_backto.py
 
+"$PY" build_brand.py
 "$PY" build_widget.py
 "$PY" build_nav.py
 "$PY" build_i18n.py

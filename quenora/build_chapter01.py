@@ -151,6 +151,22 @@ def main():
         s = str(soup3)
         print('  chapter 01: %d count(s) now link to the page they name' % wrapped)
 
+
+    # ── the inline call to action ──────────────────────────────────────
+    # "Start a conversation" is the header button's words, and the sentence
+    # beside it already says what the ask is: two paragraphs on what is stuck.
+    # Repeating the generic label wastes the one line a reader has already
+    # been persuaded by. The button now says the thing the sentence set up.
+    soup4 = BS(s, 'html.parser')
+    changed = 0
+    for a in soup4.select('.cta-inline a, .cta-inline .btn'):
+        if a.get_text(strip=True) == 'Start a conversation':
+            a.string = "Tell us what's stuck"
+            changed += 1
+    if changed:
+        s = str(soup4)
+        print('  the inline CTA says what the sentence set up (%d)' % changed)
+
     open(p, 'w', encoding='utf-8').write(s)
     return 0
 

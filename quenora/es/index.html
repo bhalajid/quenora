@@ -1303,6 +1303,48 @@ main > section .chead + .ch3{margin-top:0}
 .cnt-link:hover{transform:translateY(-2px)}
 .cnt-link:focus-visible{outline:2px solid var(--signal);outline-offset:4px;
   border-radius:2px}
+
+/* ── 1 · the gutter between chapters ───────────────────────────────────
+   Uniform at 168px top and bottom, which meant 336px of dead space between
+   any two chapters — even and far too generous. 104 each side gives 208,
+   which still separates them without a screen of nothing in between. */
+main > section{padding-block:var(--sp6)}
+main > section.hook{padding-block:168px 64px}
+main > section#climax{padding-block:104px 250px}
+main > section[hidden]{padding-block:0}
+@media(max-width:760px){main > section{padding-block:var(--sp5)}}
+
+/* ── 2 · the hub's dots have to line up ────────────────────────────────
+   The left column was flex with row-reverse, so each dot sat wherever its
+   own label ended: measured at x=404, 447 and 446 for the three rows while
+   the right column held a straight 948. A grid puts the dot in a column of
+   its own, so the label length stops moving it. */
+.orb-ring li{display:grid;align-items:center;column-gap:9px}
+.orb-ring li:nth-child(-n+3){grid-template-columns:1fr auto auto;
+  justify-items:end;text-align:right}
+.orb-ring li:nth-child(-n+3) .orb-name{grid-column:1}
+.orb-ring li:nth-child(-n+3) .orb-n{grid-column:2}
+.orb-ring li:nth-child(-n+3) .orb-dot{grid-column:3}
+.orb-ring li:nth-child(n+4){grid-template-columns:auto auto 1fr;
+  justify-items:start;text-align:left}
+.orb-ring li:nth-child(n+4) .orb-dot{grid-column:1}
+.orb-ring li:nth-child(n+4) .orb-n{grid-column:2}
+.orb-ring li:nth-child(n+4) .orb-name{grid-column:3}
+@media(max-width:900px){
+  .orb-ring li,.orb-ring li:nth-child(-n+3),.orb-ring li:nth-child(n+4){
+    grid-template-columns:auto auto 1fr;justify-items:start;text-align:left}
+  .orb-ring li:nth-child(-n+3) .orb-dot{grid-column:1}
+  .orb-ring li:nth-child(-n+3) .orb-n{grid-column:2}
+  .orb-ring li:nth-child(-n+3) .orb-name{grid-column:3}
+}
+
+/* ── 3 · the cursor ring goes ──────────────────────────────────────────
+   A 76px dashed circle trailing the pointer, with a 5px ember dot inside it.
+   It reads as a loading spinner or a rendering artefact rather than as a
+   cursor — it turns up in every screenshot as a stray unfinished circle, and
+   it is the first thing anyone asks about. It also costs a pointer listener
+   and a transform on every frame for no function at all. */
+.cur,.cdot{display:none!important}
 /*/PREVIEW:CSS*/
 /*BRAND:CSS*/
 /* ── the supplied lockup ───────────────────────────────────────────────
@@ -1455,7 +1497,7 @@ evidence to answer them was never captured.</p></div></div>
 <div class="wrap">
 <div class="cta-inline rv">
 <p><b>Recognise the shape of your problem in those six phases?</b> Two paragraphs on what’s stuck is enough to start — no brief, no NDA.</p>
-<a href="#climax">Iniciar una conversación</a>
+<a href="#climax">Tell us what's stuck</a>
 </div>
 </div>
 </section>
@@ -1775,7 +1817,7 @@ address and the email, in one tap.</p>
 </div>
 <div class="cfield">
 <label for="cfPhone">Teléfono <span class="opt">(optional)</span></label>
-<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" title="Digits and the usual separators: + ( ) / - and spaces." type="tel"/>
+<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" placeholder="+49 152 3392 7436" title="Digits and the usual separators: + ( ) / - and spaces." type="tel"/>
 </div>
 <div class="cfield">
 <label for="cfMsg">What’s stuck?</label>

@@ -71,7 +71,26 @@ def place(s, marks, body, before):
 
 def main():
     css, html, js = read("assistant.css"), read("assistant.html"), read("assistant.js")
-    js_block = "<script>\n" + js + "\n</script>"
+
+    # ── the widget is served, not inlined ──────────────────────────────
+    # 27KB of CSS and JS inlined into 24 pages is 658KB of the same bytes,
+    # and it pushed the home page over the 220KB budget stage 8 enforces.
+    # Same-origin files, so the CSP's 'self' covers them and the rule this
+    # site actually holds — no third-party CDN, nothing that dies on a
+    # locked-down corporate network — is untouched. One request, cached once,
+    # reused by every page and every language.
+    out = os.path.join(ROOT, "assets")
+    os.makedirs(out, exist_ok=True)
+    open(os.path.join(out, "nora.css"), "w", encoding="utf-8").write(css)
+    open(os.path.join(out, "nora.js"), "w", encoding="utf-8").write(js)
+    # A <link> in <head>, not @import. @import is only valid before any other
+    # rule, and this is spliced into the middle of an existing stylesheet — so
+    # it was dropped silently and Nora rendered as an unstyled grey button,
+    # position:static, in the flow. Verified by reading the computed style
+    # rather than by looking at the file.
+    css = ''
+    js_block = '<script defer src="/assets/nora.js"></script>'
+
 
     done = 0
     for page in PAGES:
@@ -83,6 +102,9 @@ def main():
         before = len(s)
 
         s, ok1 = place(s, CSS_M, css, "</style>")
+        link = '<link href="/assets/nora.css" rel="stylesheet"/>'
+        if link not in s and '</head>' in s:
+            s = s.replace('</head>', link + '\n</head>', 1)
         s, ok2 = place(s, HTML_M, html, "</body>")
         s, ok3 = place(s, JS_M, js_block, "</body>")
 

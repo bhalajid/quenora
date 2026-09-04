@@ -133,7 +133,22 @@ soft(longSentences.length === 0, 'no sentence over 45 words',
      longSentences.length + ' found');
 
 /* ═══ 6 · LAYOUT & PERFORMANCE ═══ */
-ok(!/<script[^>]*\bsrc=/.test(src), 'no external scripts (CDN-independent)');
+/* The rule is CDN-independence, not "no src at all". It exists because an
+   earlier build loaded GSAP and Three.js from a CDN and the hero was simply
+   dead on locked-down corporate networks — which is the audience. A
+   root-relative /assets/... file is served by the same host as the page: if
+   it cannot load, the page did not load either. So: same-origin is fine,
+   anything with a scheme or a protocol-relative // is not. */
+const foreignScript = [...src.matchAll(/<script[^>]*\bsrc=["']([^"']+)["']/g)]
+  .map(m => m[1])
+  .filter(u => /^(https?:)?\/\//i.test(u));
+ok(foreignScript.length === 0, 'no third-party scripts (CDN-independent)',
+   foreignScript.join(', '));
+const foreignStyle = [...src.matchAll(/<link[^>]+rel=["']stylesheet["'][^>]*>/gi)]
+  .map(m => (m[0].match(/href=["']([^"']+)["']/) || [])[1] || '')
+  .filter(u => /^(https?:)?\/\//i.test(u) && !/fonts\.googleapis\.com/.test(u));
+ok(foreignStyle.length === 0, 'no third-party stylesheets',
+   foreignStyle.join(', '));
 ok(!/THREE\./.test(src), 'no Three.js dependency');
 const kb = Buffer.byteLength(src) / 1024;
 ok(kb < 220, 'page under 220 KB', kb.toFixed(0) + ' KB');

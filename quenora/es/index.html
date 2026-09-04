@@ -1093,35 +1093,66 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 /* ── the six phases, summarised ────────────────────────────────────────
    PREVIEW (branch: infographics). The home page used to retell the whole
    method — 432 words whose titles and exit conditions are word for word the
-   same as approach.html. This is a summary instead: six stops, their names
-   and their weeks, and a link. The detail lives on the page whose job it is.
+   same as approach.html. This is a summary: six stops, a mark, a name, the
+   weeks, and the title on hover. The detail lives on the page whose job it is.
 
-   Horizontal on a desktop, vertical on a phone — the same six stops either
-   way, with nothing hidden at either size. */
+   Each stop is a link into its gate on approach.html, which is also how the
+   tooltip works on a phone: there is no hover there, so the content it holds
+   has to be reachable by tapping. */
 .ph{list-style:none;margin:var(--sp5) 0 0;padding:0;display:grid;
   grid-template-columns:repeat(6,minmax(0,1fr));position:relative}
 .ph::before{content:'';position:absolute;left:7px;right:7px;top:7px;height:1px;
-  background:linear-gradient(90deg,var(--copper) 0%,rgba(201,122,60,.5) 60%,
-    rgba(201,122,60,.12) 100%)}
-.ph-stop{position:relative;padding:26px 14px 0 0;display:flex;
-  flex-direction:column;gap:5px}
+  background:linear-gradient(90deg,var(--copper) 0%,rgba(201,122,60,.5) 62%,
+    rgba(201,122,60,.10) 100%)}
+.ph-stop{position:relative}
+.ph-link{position:relative;display:flex;flex-direction:column;gap:5px;
+  padding:26px 16px 14px 0;text-decoration:none;border-radius:3px}
 .ph-dot{position:absolute;left:0;top:0;width:15px;height:15px;border-radius:50%;
-  background:var(--copper);box-shadow:0 0 0 5px var(--void)}
+  background:var(--copper);box-shadow:0 0 0 5px var(--void);
+  transition:transform .2s var(--e)}
 .ph-stop.last .ph-dot{background:transparent;border:1.5px solid var(--copper)}
+.ph-mark{width:22px;height:22px;color:var(--t3);margin-bottom:2px;
+  transition:color .2s var(--e),transform .2s var(--e)}
 .ph-name{color:var(--t1);font-size:.66rem;letter-spacing:.14em;
   text-transform:uppercase;margin:0}
 .ph-dur{color:var(--t3);font-size:.6rem;letter-spacing:.12em;
   text-transform:uppercase;margin:0}
 
+.ph-link:hover .ph-dot,.ph-link:focus-visible .ph-dot{transform:scale(1.25)}
+.ph-link:hover .ph-mark,.ph-link:focus-visible .ph-mark{
+  color:var(--copper-lt);transform:translateY(-1px)}
+.ph-link:hover .ph-name,.ph-link:focus-visible .ph-name{color:var(--copper-lt)}
+.ph-link:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+
+/* the title, on hover and on keyboard focus */
+.ph-tip{position:absolute;left:0;bottom:calc(100% - 18px);z-index:5;
+  min-width:190px;max-width:250px;
+  background:rgba(20,22,30,.97);border:1px solid var(--line2);border-radius:3px;
+  padding:9px 12px;font-size:.86rem;line-height:1.35;color:var(--t1);
+  opacity:0;transform:translateY(5px);pointer-events:none;
+  transition:opacity .18s var(--e),transform .18s var(--e)}
+.ph-tip em{font-family:'Playfair Display',Georgia,serif;font-style:italic;
+  color:var(--ember)}
+.ph-link:hover .ph-tip,.ph-link:focus-visible .ph-tip{opacity:1;transform:none}
+/* the last two would run off the right edge */
+.ph-stop:nth-child(n+5) .ph-tip{left:auto;right:16px}
+
 @media(max-width:760px){
-  /* the same six stops, turned on their side — nothing is dropped */
+  /* the same six stops, turned on their side. No hover on a phone, so the
+     title is simply shown — the tooltip becomes a line of text. */
   .ph{grid-template-columns:minmax(0,1fr);row-gap:0}
   .ph::before{left:7px;right:auto;top:7px;bottom:22px;height:auto;width:1px;
-    background:linear-gradient(180deg,var(--copper) 0%,rgba(201,122,60,.5) 60%,
-      rgba(201,122,60,.12) 100%)}
-  .ph-stop{padding:0 0 20px 30px;flex-direction:row;align-items:baseline;
-    gap:12px;flex-wrap:wrap}
-  .ph-stop:last-child{padding-bottom:0}
+    background:linear-gradient(180deg,var(--copper) 0%,rgba(201,122,60,.5) 62%,
+      rgba(201,122,60,.10) 100%)}
+  .ph-link{padding:0 0 20px 30px;display:grid;
+    grid-template-columns:auto 1fr auto;align-items:center;gap:4px 12px}
+  .ph-mark{grid-row:1 / span 2;width:20px;height:20px;margin:0}
+  .ph-name{grid-column:2}
+  .ph-dur{grid-column:3;grid-row:1}
+  .ph-tip{position:static;opacity:1;transform:none;grid-column:2 / -1;
+    background:none;border:0;padding:0;min-width:0;max-width:none;
+    font-size:.92rem;color:var(--t2)}
+  .ph-stop:last-child .ph-link{padding-bottom:0}
 }
 </style>
 <meta content="es_ES" property="og:locale"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/#page","url":"https://quenora.ai/","name":"Most enterprise AI never reaches the work.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"Quenora is an enterprise AI consultancy in Heilbronn. We engineer AI into the platforms and workflows you already run, then hand your team the keys."},{"@type":"FAQPage","@id":"https://quenora.ai/#faq","mainEntity":[{"@type":"Question","name":"Why not a large consultancy?","acceptedAnswer":{"@type":"Answer","text":"You should use one for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, their engagement model costs more than the problem and moves slower than your business does. The people who sell it are also rarely the people who build it."}},{"@type":"Question","name":"Why not build it in-house?","acceptedAnswer":{"@type":"Answer","text":"Often you should, and we’ll say so. Bring us in when your team has the domain knowledge but not the platform experience, or when they’re already fully committed to the systems that keep the business running. The handover phase exists precisely so that in-house becomes the answer at the end."}},{"@type":"Question","name":"Why not just buy a vendor platform?","acceptedAnswer":{"@type":"Answer","text":"If a product genuinely covers your case, buy it — that’s cheaper than anything we’d build. The work we get called for is what remains: connecting that product to systems it was never designed to meet, and producing the governance evidence the vendor doesn’t."}},{"@type":"Question","name":"You have no published case studies.","acceptedAnswer":{"@type":"Answer","text":"Correct, and we won’t invent them. Quenora is a founder-led firm in its early chapter. What we’ll do is arrange a direct conversation with a reference before you commit, and show you the actual architecture and evaluation approach in the first meeting rather than a sales deck."}},{"@type":"Question","name":"What happens if it doesn’t work?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it."}}]}]}</script><link href="https://quenora.ai/es" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/></head>
@@ -1272,7 +1303,7 @@ evidence to answer them was never captured.</p></article>
 </div>
 </div>
 </div>
-<ol class="ph wrap rv"><li class="ph-stop"><span aria-hidden="true" class="ph-dot"></span><p class="ph-name mono">Fase 01 · Encuadre</p><p class="ph-dur mono">Semanas 1–2</p></li><li class="ph-stop"><span aria-hidden="true" class="ph-dot"></span><p class="ph-name mono">Fase 02 · Cimientos</p><p class="ph-dur mono">Semanas 3–6</p></li><li class="ph-stop"><span aria-hidden="true" class="ph-dot"></span><p class="ph-name mono">Fase 03 · Integración</p><p class="ph-dur mono">Semanas 4–10</p></li><li class="ph-stop"><span aria-hidden="true" class="ph-dot"></span><p class="ph-name mono">Fase 04 · Puesta en producción</p><p class="ph-dur mono">Weeks 10–12</p></li><li class="ph-stop"><span aria-hidden="true" class="ph-dot"></span><p class="ph-name mono">Fase 05 · Demostración</p><p class="ph-dur mono">Semanas 9–12</p></li><li class="ph-stop last"><span aria-hidden="true" class="ph-dot"></span><p class="ph-name mono">Fase 06 · Traspaso</p><p class="ph-dur mono">Semanas 12–14</p></li></ol>
+<ol class="ph wrap rv"><li class="ph-stop"><a class="ph-link" href="/es/approach.html#phase-1"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" fill="currentColor" r="2.2" stroke="none"></circle></svg><p class="ph-name mono">Fase 01 · Encuadre</p><p class="ph-dur mono">Semanas 1–2</p><span class="ph-tip">Encontrar la <em>verdadera</em> restricción</span></a></li><li class="ph-stop"><a class="ph-link" href="/es/approach.html#phase-2"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><line x1="4" x2="20" y1="17" y2="17"></line><circle cx="9" cy="11" r="3"></circle><circle cx="16" cy="11" r="3"></circle></svg><p class="ph-name mono">Fase 02 · Cimientos</p><p class="ph-dur mono">Semanas 3–6</p><span class="ph-tip">La capa <em>poco vistosa</em> pero decisiva</span></a></li><li class="ph-stop"><a class="ph-link" href="/es/approach.html#phase-3"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="8.5" cy="12" r="4.5"></circle><circle cx="15.5" cy="12" r="4.5"></circle></svg><p class="ph-name mono">Fase 03 · Integración</p><p class="ph-dur mono">Semanas 4–10</p><span class="ph-tip">En lo que usted <em>ya utiliza</em></span></a></li><li class="ph-stop"><a class="ph-link" href="/es/approach.html#phase-4"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><line x1="7" x2="7" y1="4" y2="20"></line><circle cx="15" cy="12" r="4"></circle><line x1="11" x2="19" y1="12" y2="12"></line></svg><p class="ph-name mono">Fase 04 · Puesta en producción</p><p class="ph-dur mono">Weeks 10–12</p><span class="ph-tip">Bajo un verdadero <em>control de cambios</em></span></a></li><li class="ph-stop"><a class="ph-link" href="/es/approach.html#phase-5"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="13" r="6.5"></circle><line x1="12" x2="16" y1="13" y2="9"></line></svg><p class="ph-name mono">Fase 05 · Demostración</p><p class="ph-dur mono">Semanas 9–12</p><span class="ph-tip">Frente a la <em>cifra</em> acordada</span></a></li><li class="ph-stop last"><a class="ph-link" href="/es/approach.html#phase-6"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><line x1="12" x2="21" y1="12" y2="6"></line></svg><p class="ph-name mono">Fase 06 · Traspaso</p><p class="ph-dur mono">Semanas 12–14</p><span class="ph-tip">Y entonces nos <em>vamos</em></span></a></li></ol>
 <div class="wrap">
 <div class="cta-inline rv">
 <p><b>Recognise the shape of your problem in those six phases?</b> Two paragraphs on what’s stuck is enough to start — no brief, no NDA.</p>

@@ -42,25 +42,70 @@ from bs4 import BeautifulSoup as BS
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
+# Each phase gets a mark built from the same vocabulary as the wordmark —
+# circles and a single stroke — so they read as a family rather than as
+# clip-art. They carry meaning rather than decoration: a target being found, a
+# base being laid, two systems joining, a threshold crossed, a measurement
+# taken, and a circle that is no longer filled.
+GLYPHS = {
+ 1: '<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/>',
+ 2: '<line x1="4" y1="17" x2="20" y2="17"/><circle cx="9" cy="11" r="3"/><circle cx="16" cy="11" r="3"/>',
+ 3: '<circle cx="8.5" cy="12" r="4.5"/><circle cx="15.5" cy="12" r="4.5"/>',
+ 4: '<line x1="7" y1="4" x2="7" y2="20"/><circle cx="15" cy="12" r="4"/><line x1="11" y1="12" x2="19" y2="12"/>',
+ 5: '<circle cx="12" cy="13" r="6.5"/><line x1="12" y1="13" x2="16" y2="9"/>',
+ 6: '<circle cx="12" cy="12" r="7"/><line x1="12" y1="12" x2="21" y2="6"/>',
+}
+
+
+def glyph(soup, n):
+    svg = BS('<svg class="ph-mark" viewBox="0 0 24 24" fill="none" '
+             'stroke="currentColor" stroke-width="1.4" stroke-linecap="round" '
+             'aria-hidden="true">' + GLYPHS[n] + '</svg>', 'html.parser')
+    return svg
+
+
+
 
 def home_rail(soup, sec):
-    """A summary, not a second telling: six stops, names and weeks only."""
+    """A summary, not a second telling: six stops with a mark, a name, the
+    week span, and the phase title revealed on hover and on keyboard focus.
+
+    Each stop is a link into the matching gate on approach.html, so the
+    summary is a way in rather than a dead end — and so the tooltip's content
+    is reachable by tapping, on a phone where there is no hover at all."""
     phases = sec.select('.phase')
     if len(phases) != 6:
         print('  index: expected 6 phases, found %d' % len(phases)); return False
 
     rail = soup.new_tag('ol'); rail['class'] = 'ph wrap rv'
     for i, art in enumerate(phases):
+        n = i + 1
         li = soup.new_tag('li')
-        li['class'] = 'ph-stop' + (' last' if i == len(phases) - 1 else '')
+        li['class'] = 'ph-stop' + (' last' if n == 6 else '')
+
+        a = soup.new_tag('a'); a['class'] = 'ph-link'
+        a['href'] = 'approach.html#phase-%d' % n
+
         dot = soup.new_tag('span'); dot['class'] = 'ph-dot'; dot['aria-hidden'] = 'true'
-        li.append(dot)
+        a.append(dot)
+        a.append(glyph(soup, n))
+
         eyebrow = art.select_one('.mono')
         if eyebrow:
-            e = eyebrow.extract(); e['class'] = 'ph-name mono'; li.append(e)
+            e = eyebrow.extract(); e['class'] = 'ph-name mono'; a.append(e)
         dur = art.select_one('.dur')
         if dur:
-            d = dur.extract(); d['class'] = 'ph-dur mono'; li.append(d)
+            d = dur.extract(); d['class'] = 'ph-dur mono'; a.append(d)
+
+        # the title is the tooltip. It is a real element rather than a title
+        # attribute, so it can be styled, translated, read by a screen reader
+        # and — because the stop is a link — reached without a mouse.
+        h3 = art.find('h3')
+        if h3:
+            t = h3.extract(); t.name = 'span'; t['class'] = 'ph-tip'
+            a.append(t)
+
+        li.append(a)
         rail.append(li)
 
     old = sec.select_one('.hwrap')
@@ -83,6 +128,7 @@ def approach_spine(soup):
     for i, h in enumerate(heads):
         li = soup.new_tag('li')
         li['class'] = 'ex-step' + (' last' if i == len(heads) - 1 else '')
+        li['id'] = 'phase-%d' % (i + 1)
         node = soup.new_tag('span'); node['class'] = 'ex-node'; node['aria-hidden'] = 'true'
         li.append(node)
 

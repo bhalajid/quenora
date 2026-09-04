@@ -1578,7 +1578,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <div class="cfrow">
 <div class="cfield">
 <label for="cfName">Ihr Name</label>
-<input autocomplete="name" id="cfName" name="name" required="" type="text"/>
+<input autocomplete="name" id="cfName" name="name" pattern="[^0-9]{2,}" required="" title="Bitte einen Namen — Buchstaben, Leerzeichen, Bindestriche und Apostrophe. Keine Ziffern." type="text"/>
 </div>
 <div class="cfield">
 <label for="cfEmail">Geschäftliche E-Mail</label>
@@ -1591,7 +1591,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 </div>
 <div class="cfield">
 <label for="cfPhone">Telefon <span class="opt">(optional)</span></label>
-<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" type="tel"/>
+<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" title="Ziffern und die üblichen Trennzeichen: + ( ) / - und Leerzeichen." type="tel"/>
 </div>
 <div class="cfield">
 <label for="cfMsg">Was steckt fest?</label>

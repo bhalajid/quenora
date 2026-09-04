@@ -129,7 +129,7 @@ h2{font-size:clamp(1.7rem,3.3vw,2.6rem);font-weight:700;letter-spacing:-.028em;
   line-height:1.1;margin:0 0 var(--sp4);text-wrap:balance;max-width:20ch}
 h3{font-size:1.06rem;font-weight:700;margin:0 0 10px;letter-spacing:-.005em}
 p{color:var(--t2);font-size:1.02rem;margin:0 0 var(--sp3);max-width:62ch}
-.lede{font-size:clamp(1.1rem,1.9vw,1.35rem);color:var(--t2);max-width:56ch;line-height:1.55}
+.lede{font-size:17.5px;font-weight:300;color:var(--t2);max-width:60ch;line-height:1.75}/* was clamp(1.1rem,1.9vw,1.35rem) at weight 400, which resolves to 21.6px on a desktop against 17.5px on approach, capabilities, work, contact and products — a different size, a different weight and a measure 100px wider. Five pages agreeing and one not. Reported from the live site as "the font style and/or size appears different from the other tabs". */
 strong{color:var(--t1);font-weight:600}
 ::selection{background:var(--ember);color:var(--void)}
 .hero{padding:82px 0 0;min-height:auto}/* was var(--sp7), 168px. Every other inner page opens its headline at 223px; this one opened it at 309. Two reasons it is a different number here: this section starts 84px down, below the header, where the .phero family starts at 0 and runs behind it, and its eyebrow carries more space beneath it. Set from the measured headline position, not from the padding. A first attempt used 108px, matching a 249px reading that turned out to be wrong — the browser audit measured every page instead of a sample and found the real figure. */
@@ -488,7 +488,7 @@ header .navlinks a[aria-current="page"]::after{width:0}
 <section class="hero">
 <div class="wrap">
 <p class="ch">Ingénierie &amp; gouvernance de l’IA</p>
-<h1>La plupart des pilotes n’échouent pas sur le modèle. Ils s’arrêtent à <em>cinq couches</em>.</h1>
+<h1>La plupart des pilotes n’échouent pas sur le modèle. Ils s’arrêtent à <em>cinq couches.</em></h1>
 <p class="lede">Une démo répond à des questions. Un système en production doit y répondre pour des personnes autorisées à les poser, à partir de données à jour, et dire quelque chose d’utile lorsqu’il ne sait pas — tout en laissant une trace que quelqu’un puisse auditer. Cette page suit trois problèmes travaillés à travers les couches où ce travail s’arrête réellement, puis énonce les décisions de gouvernance que chacun impose.</p>
 </div>
 </section>

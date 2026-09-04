@@ -1578,7 +1578,7 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 <div class="cfrow">
 <div class="cfield">
 <label for="cfName">Votre nom</label>
-<input autocomplete="name" id="cfName" name="name" required="" type="text"/>
+<input autocomplete="name" id="cfName" name="name" pattern="[^0-9]{2,}" required="" title="Un nom, s’il vous plaît — lettres, espaces, traits d’union et apostrophes. Pas de chiffres." type="text"/>
 </div>
 <div class="cfield">
 <label for="cfEmail">E-mail professionnel</label>
@@ -1591,7 +1591,7 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 </div>
 <div class="cfield">
 <label for="cfPhone">Téléphone <span class="opt">(facultatif)</span></label>
-<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" type="tel"/>
+<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" title="Des chiffres et les séparateurs habituels : + ( ) / - et des espaces." type="tel"/>
 </div>
 <div class="cfield">
 <label for="cfMsg">Qu’est-ce qui bloque ?</label>

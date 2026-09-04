@@ -1659,7 +1659,7 @@ address and the email, in one tap.</p>
 <div class="cfrow">
 <div class="cfield">
 <label for="cfName">Su nombre</label>
-<input autocomplete="name" id="cfName" name="name" required="" type="text"/>
+<input autocomplete="name" id="cfName" name="name" pattern="[^0-9]{2,}" required="" title="A name, please — letters, spaces, hyphens and apostrophes. No digits." type="text"/>
 </div>
 <div class="cfield">
 <label for="cfEmail">Correo profesional</label>
@@ -1672,7 +1672,7 @@ address and the email, in one tap.</p>
 </div>
 <div class="cfield">
 <label for="cfPhone">Teléfono <span class="opt">(optional)</span></label>
-<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" type="tel"/>
+<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" title="Digits and the usual separators: + ( ) / - and spaces." type="tel"/>
 </div>
 <div class="cfield">
 <label for="cfMsg">What’s stuck?</label>

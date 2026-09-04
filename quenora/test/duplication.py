@@ -28,7 +28,7 @@ from bs4 import BeautifulSoup as BS
 
 ROOT = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else '..')
 PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
-         "approach.html", "work.html", "contact.html", "story.html"]
+         "approach.html", "work.html", "contact.html", "about.html"]
 MIN_WORDS = 6          # below this, repetition is usually a label, not a claim
 NEAR = 0.86            # similarity at which two sentences are the same claim
 

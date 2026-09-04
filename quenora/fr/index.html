@@ -1090,15 +1090,13 @@ a.qrcode{display:block;text-decoration:none;border-radius:4px;
   transition:transform .2s var(--e),box-shadow .2s var(--e)}
 a.qrcode:hover{transform:scale(1.03)}
 a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+/*PREVIEW:CSS*/
 /* ── the six phases, summarised ────────────────────────────────────────
-   PREVIEW (branch: infographics). The home page used to retell the whole
-   method — 432 words whose titles and exit conditions are word for word the
-   same as approach.html. This is a summary: six stops, a mark, a name, the
-   weeks, and the title on hover. The detail lives on the page whose job it is.
-
-   Each stop is a link into its gate on approach.html, which is also how the
-   tooltip works on a phone: there is no hover there, so the content it holds
-   has to be reachable by tapping. */
+   The home page used to retell the whole method: 432 words whose titles and
+   exit conditions are word for word the same as approach.html. This is a
+   summary — six stops, a mark, a name, the weeks, the title on hover — and
+   each stop links into its gate on approach.html. That link is also how the
+   tooltip works on a phone, where there is no hover to give. */
 .ph{list-style:none;margin:var(--sp5) 0 0;padding:0;display:grid;
   grid-template-columns:repeat(6,minmax(0,1fr));position:relative}
 .ph::before{content:'';position:absolute;left:7px;right:7px;top:7px;height:1px;
@@ -1117,29 +1115,20 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
   text-transform:uppercase;margin:0}
 .ph-dur{color:var(--t3);font-size:.6rem;letter-spacing:.12em;
   text-transform:uppercase;margin:0}
-
 .ph-link:hover .ph-dot,.ph-link:focus-visible .ph-dot{transform:scale(1.25)}
-.ph-link:hover .ph-mark,.ph-link:focus-visible .ph-mark{
-  color:var(--copper-lt);transform:translateY(-1px)}
+.ph-link:hover .ph-mark,.ph-link:focus-visible .ph-mark{color:var(--copper-lt)}
 .ph-link:hover .ph-name,.ph-link:focus-visible .ph-name{color:var(--copper-lt)}
 .ph-link:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
-
-/* the title, on hover and on keyboard focus */
 .ph-tip{position:absolute;left:0;bottom:calc(100% - 18px);z-index:5;
-  min-width:190px;max-width:250px;
-  background:rgba(20,22,30,.97);border:1px solid var(--line2);border-radius:3px;
-  padding:9px 12px;font-size:.86rem;line-height:1.35;color:var(--t1);
-  opacity:0;transform:translateY(5px);pointer-events:none;
+  min-width:190px;max-width:250px;background:rgba(20,22,30,.97);
+  border:1px solid var(--line2);border-radius:3px;padding:9px 12px;
+  font-size:.86rem;line-height:1.35;color:var(--t1);opacity:0;
+  transform:translateY(5px);pointer-events:none;
   transition:opacity .18s var(--e),transform .18s var(--e)}
-.ph-tip em{font-family:'Playfair Display',Georgia,serif;font-style:italic;
-  color:var(--ember)}
+.ph-tip em{font-family:'Playfair Display',Georgia,serif;font-style:italic;color:var(--ember)}
 .ph-link:hover .ph-tip,.ph-link:focus-visible .ph-tip{opacity:1;transform:none}
-/* the last two would run off the right edge */
 .ph-stop:nth-child(n+5) .ph-tip{left:auto;right:16px}
-
 @media(max-width:760px){
-  /* the same six stops, turned on their side. No hover on a phone, so the
-     title is simply shown — the tooltip becomes a line of text. */
   .ph{grid-template-columns:minmax(0,1fr);row-gap:0}
   .ph::before{left:7px;right:auto;top:7px;bottom:22px;height:auto;width:1px;
     background:linear-gradient(180deg,var(--copper) 0%,rgba(201,122,60,.5) 62%,
@@ -1154,6 +1143,44 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
     font-size:.92rem;color:var(--t2)}
   .ph-stop:last-child .ph-link{padding-bottom:0}
 }
+
+/* ── chapters 02, 04, 05 ───────────────────────────────────────────────
+   Marks in the wordmark's vocabulary — circles and one stroke — so they read
+   as a family rather than icons bought by the set. */
+.ch3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp3);
+  margin-top:var(--sp5)}
+@media(max-width:820px){.ch3{grid-template-columns:minmax(0,1fr);gap:var(--sp2)}}
+.ch-card{border-top:1px solid var(--line2);padding:20px 0 0;display:block;
+  text-decoration:none}
+a.ch-card{transition:border-color .2s var(--e)}
+a.ch-card:hover{border-top-color:var(--copper)}
+a.ch-card:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+.ch-mark{width:24px;height:24px;color:var(--copper);margin-bottom:14px;display:block;
+  transition:color .2s var(--e)}
+a.ch-card:hover .ch-mark{color:var(--copper-lt)}
+.ch-eyebrow{color:var(--t3);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;margin:0 0 8px}
+.ch-title{font-size:1.06rem;font-weight:600;color:var(--t1);margin:0;
+  letter-spacing:-.01em;line-height:1.3}
+a.ch-card:hover .ch-title{color:var(--copper-lt)}
+.ch-body{color:var(--t2);font-size:.93rem;margin:10px 0 0;max-width:44ch}
+
+/* nine capabilities: a grid, not a screenful of rows. The three core are
+   filled and the six are hollow, which is what the "Core" badge said in
+   words. */
+.caps{list-style:none;margin:var(--sp5) 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:2px 0}
+@media(max-width:820px){.caps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.caps{grid-template-columns:minmax(0,1fr)}}
+.cap{display:grid;grid-template-columns:auto auto 1fr;align-items:center;
+  gap:10px;padding:13px 18px 13px 0}
+.cap-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--copper);
+  background:transparent}
+.cap.core .cap-dot{background:var(--copper)}
+.cap-n{color:var(--t3);font-size:.6rem;letter-spacing:.1em;margin:0}
+.cap-name{color:var(--t2);font-size:.92rem;line-height:1.3}
+.cap.core .cap-name{color:var(--t1);font-weight:500}
+/*/PREVIEW:CSS*/
 </style>
 <meta content="fr_FR" property="og:locale"/><link href="https://quenora.ai/fr" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR"},{"@type":"WebPage","@id":"https://quenora.ai/fr#page","url":"https://quenora.ai/fr","name":"La plupart de l'IA d'entreprise n'atteint jamais le travail.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR","description":"Quenora est un cabinet de conseil en IA d’entreprise établi à Heilbronn. Nous intégrons l’IA dans les plateformes et les flux de travail que vous exploitez déjà, puis nous en remettons les clés à votre équipe."},{"@type":"FAQPage","@id":"https://quenora.ai/fr#faq","mainEntity":[{"@type":"Question","name":"Pourquoi pas un grand cabinet ?","acceptedAnswer":{"@type":"Answer","text":"Pour un programme pluriannuel, multipays, avec un millier de parties prenantes, vous devriez en prendre un — ils sont faits pour cela, nous ne le sommes pas. Pour un système unique qui doit atteindre la production cette année, leur modèle de mission coûte plus cher que le problème et avance plus lentement que votre entreprise. Et ceux qui le vendent sont rarement ceux qui le construisent."}},{"@type":"Question","name":"Pourquoi ne pas le construire en interne ?","acceptedAnswer":{"@type":"Answer","text":"Souvent, vous devriez, et nous vous le dirons. Faites-nous intervenir lorsque votre équipe possède la connaissance métier mais pas l’expérience plateforme, ou lorsqu’elle est déjà entièrement mobilisée par les systèmes qui font tourner l’entreprise. La phase de transfert existe précisément pour qu’à la fin, l’interne soit la réponse."}},{"@type":"Question","name":"Pourquoi ne pas simplement acheter une plateforme du marché ?","acceptedAnswer":{"@type":"Answer","text":"Si un produit couvre réellement votre cas, achetez-le — cela coûtera moins cher que tout ce que nous construirions. Ce pour quoi on nous appelle, c’est ce qui reste : raccorder ce produit à des systèmes pour lesquels il n’a jamais été conçu, et produire les preuves de gouvernance que l’éditeur ne fournit pas."}},{"@type":"Question","name":"Vous n’avez aucune étude de cas publiée.","acceptedAnswer":{"@type":"Answer","text":"C’est exact, et nous n’en inventerons pas. Quenora est un cabinet dirigé par son fondateur, à ses débuts. Ce que nous ferons : organiser un échange direct avec une référence avant tout engagement de votre part, et vous montrer dès le premier rendez-vous l’architecture réelle et la démarche d’évaluation plutôt qu’une présentation commerciale."}},{"@type":"Question","name":"Que se passe-t-il si cela ne fonctionne pas ?","acceptedAnswer":{"@type":"Answer","text":"La phase 05 existe pour y répondre par écrit, face au chiffre convenu en phase 01. S’il n’a pas bougé, nous le disons. Le code, la documentation et le harnais d’évaluation vous restent dans tous les cas — il n’existe aucun scénario où vous terminez une mission sans rien à montrer."}}]}]}</script></head>
 <body class="no-js">
@@ -1182,7 +1209,7 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 <a href="/fr/capabilities.html">Expertises</a>
 <a href="/fr/engineering.html">Ingénierie</a>
 <a href="/fr/work.html">Missions</a>
-<a href="#who">À propos</a>
+<a href="/fr/about.html">À propos</a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choisir la langue" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>FR</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/index.html" hreflang="en" lang="en">English</a></li><li><a href="/de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a aria-current="true" href="/fr/index.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 <a class="navcta" href="#climax"><span class="cta-long">Engager la conversation</span><span class="cta-short">Contact</span></a>
 </div>
@@ -1264,17 +1291,7 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 <p class="lede">Pas un segment de marché. Les trois formes de problème pour lesquelles ce cabinet a été bâti. Si aucune ne vous correspond, nous ne sommes probablement pas le bon cabinet — et nous préférons que vous le sachiez maintenant.</p>
 </div>
 </div>
-<div class="fit">
-<article class="rv"><span class="tick">Situation 01</span>
-<h3>Le pilote qui s’est enlisé</h3>
-<p>Cela fonctionnait en démo. Six mois plus tard, c’est toujours une démo, parce que la plateforme en dessous n’a jamais été construite et que personne n’assume l’écart.</p></article>
-<article class="rv" data-d="1"><span class="tick">Situation 02</span>
-<h3>Une recherche qui ment</h3>
-<p>L’assistant répond avec assurance et se trompe assez souvent pour que plus personne ne lui fasse confiance. Le modèle n’est pas en cause. Le contrat de données, si.</p></article>
-<article class="rv" data-d="2"><span class="tick">Situation 03</span>
-<h3>La gouvernance arrive trop tard</h3>
-<p>Quelque chose est en production, les achats ou les risques posent maintenant des questions, et les preuves permettant d’y répondre n’ont jamais été collectées.</p></article>
-</div>
+<div class="ch3 wrap rv"><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><line x1="12" x2="12" y1="8" y2="12"></line></svg><span class="ch-eyebrow mono">Situation 01</span><h3 class="ch-title">Le pilote qui s’est enlisé</h3><p class="ch-body">Cela fonctionnait en démo. Six mois plus tard, c’est toujours une démo, parce que la plateforme en dessous n’a jamais été construite et que personne n’assume l’écart.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><line x1="8.5" x2="15.5" y1="14" y2="10"></line></svg><span class="ch-eyebrow mono">Situation 02</span><h3 class="ch-title">Une recherche qui ment</h3><p class="ch-body">L’assistant répond avec assurance et se trompe assez souvent pour que plus personne ne lui fasse confiance. Le modèle n’est pas en cause. Le contrat de données, si.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><line x1="12" x2="16" y1="12" y2="14"></line><line x1="12" x2="12" y1="7.5" y2="12"></line></svg><span class="ch-eyebrow mono">Situation 03</span><h3 class="ch-title">La gouvernance arrive trop tard</h3><p class="ch-body">Quelque chose est en production, les achats ou les risques posent maintenant des questions, et les preuves permettant d’y répondre n’ont jamais été collectées.</p></div></div>
 </div>
 </section>
 <section id="journey">
@@ -1310,17 +1327,7 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 <a class="more" href="/fr/capabilities.html">Les neuf en détail</a>
 </div>
 </div>
-<div class="nine">
-<div class="nrow rv"><span class="i">01</span><h3>Ingénierie de plateforme &amp; de déploiement</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">02</span><h3>Automatisation des processus &amp; des flux</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">03</span><h3>Intégration de l'IA</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">04</span><h3>Stratégie et conseil en IA</h3><span></span></div>
-<div class="nrow rv"><span class="i">05</span><h3>Ingénierie des données et analytique</h3><span></span></div>
-<div class="nrow rv"><span class="i">06</span><h3>Agents et copilotes d'IA sur mesure</h3><span></span></div>
-<div class="nrow rv"><span class="i">07</span><h3>Gouvernance, sécurité et conformité de l'IA</h3><span></span></div>
-<div class="nrow rv"><span class="i">08</span><h3>Exploitation infogérée de l'IA</h3><span></span></div>
-<div class="nrow rv"><span class="i">09</span><h3>Conduite du changement et montée en compétences</h3><span></span></div>
-</div>
+<ol class="caps wrap rv"><li class="cap core"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">01</span><span class="cap-name">Ingénierie de plateforme &amp; de déploiement</span></li><li class="cap core"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">02</span><span class="cap-name">Automatisation des processus &amp; des flux</span></li><li class="cap core"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">03</span><span class="cap-name">Intégration de l'IA</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">04</span><span class="cap-name">Stratégie et conseil en IA</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">05</span><span class="cap-name">Ingénierie des données et analytique</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">06</span><span class="cap-name">Agents et copilotes d'IA sur mesure</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">07</span><span class="cap-name">Gouvernance, sécurité et conformité de l'IA</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">08</span><span class="cap-name">Exploitation infogérée de l'IA</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">09</span><span class="cap-name">Conduite du changement et montée en compétences</span></li></ol>
 <figure class="autofig rv">
 <p class="mono autolab">Compétence 02 · à quoi ressemble l’automatisation en pratique</p>
 <canvas aria-hidden="true" id="autoCanvas"></canvas>
@@ -1349,23 +1356,7 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 À essayer : la même question, répondue deux fois</a></div>
 </div>
 </div>
-<div class="shapes">
-<article class="shape rv">
-<p class="mono">Schéma 01 · Services financiers</p>
-<h3>Traitement des factures sur trois instances ERP</h3>
-<p>De forts volumes de factures répartis sur trois ERP non intégrés, avec une équipe finance qui rapproche les données à la main. La mission a porté sur la couche d’intégration plutôt que sur le remplacement de l’un des trois.</p>
-</article>
-<article class="shape rv" data-d="1">
-<p class="mono">Schéma 02 · Industrie</p>
-<h3>Tri du support et recherche de connaissances</h3>
-<p>Un service desk qui répartit les tickets à la main et perd son savoir interne à mesure que les collaborateurs expérimentés partent en retraite. Une couche de recherche sur vingt ans de tickets résolus, raccordée au service desk existant plutôt que de le remplacer.</p>
-</article>
-<article class="shape rv" data-d="2">
-<p class="mono">Schéma 03 · Logistique</p>
-<h3>Modernisation du legacy et planification prédictive</h3>
-<p>Une planification qui tourne sur un système plus ancien que la majorité des équipes. Plutôt qu’une réécriture, une couche d’intégration et de données qui permet à des modèles prédictifs modernes d’atteindre le cœur historique en toute sécurité.</p>
-</article>
-</div>
+<div class="ch3 wrap rv"><a class="ch-card ch-link" href="/fr/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="7" cy="9" r="3"></circle><circle cx="17" cy="9" r="3"></circle><circle cx="12" cy="16" r="3"></circle></svg><p class="ch-eyebrow mono">Schéma 01 · Services financiers</p><h3 class="ch-title">Traitement des factures sur trois instances ERP</h3></a><a class="ch-card ch-link" href="/fr/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="10" r="4"></circle><line x1="6" x2="18" y1="18" y2="18"></line></svg><p class="ch-eyebrow mono">Schéma 02 · Industrie</p><h3 class="ch-title">Tri du support et recherche de connaissances</h3></a><a class="ch-card ch-link" href="/fr/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="9" cy="12" r="5"></circle><line x1="14" x2="20" y1="12" y2="12"></line><circle cx="20" cy="12" fill="currentColor" r="1.6" stroke="none"></circle></svg><p class="ch-eyebrow mono">Schéma 03 · Logistique</p><h3 class="ch-title">Modernisation du legacy et planification prédictive</h3></a></div>
 <p class="shapes-note">Structures de mission représentatives, issues des secteurs dans lesquels nous travaillons. Les chiffres figurant sur la page de détail illustrent le schéma et ne sont pas des résultats audités d’un client nommé.</p>
 </div>
 </section>
@@ -1468,18 +1459,13 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 <section id="who">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">07</div>
+<div class="cnum">07<a class="more" href="/fr/about.html">Qui vous engagez, en détail</a></div>
 <div>
-<h2>Qui vous engagez <em>réellement</em>.</h2>
-<p class="lede">Le chapitre précédent soutient qu’un grand cabinet ne devrait pas être le choix par défaut. Cela nous oblige à dire clairement qui vous obtenez à la place — y compris notre taille, la première chose que demandera un service achats.</p>
+<h2></h2>
 </div>
 </div>
 <div class="whogrid">
 <div class="whomain rv">
-<p>Quenora est dirigée par son fondateur. Celui qui cadre votre mission est celui qui réalise le travail et celui que vous appelez quand quelque chose casse — aucune couche commerciale entre les deux, et personne que vous n’avez pas rencontré ne touche au travail.</p>
-<p>Fondée en 2025 par Balaji Durai. Avant Quenora, il a piloté des travaux de transformation pour des industriels multinationaux, des banques de détail et des groupes des sciences de la vie — le type de programme où plusieurs technologies doivent d’abord être mises d’accord entre elles avant que quoi que ce soit n’atteigne un utilisateur.</p>
-<p>Ces systèmes ont ensuite été utilisés par plus de 100 000 personnes, et la mesure qui comptait n’a jamais été la mise en service. C’était de savoir si la journée de travail devenait plus calme ensuite. C’est toujours le critère ici, et c’est pourquoi l’un des neuf principes derrière la marque s’appelle « Humain » plutôt que quelque chose sur les modèles.</p>
-<p>Le cabinet est petit et grandit en gagnant en profondeur, non en atteignant un objectif d’effectifs. C’est une contrainte réelle, et elle détermine ce que nous acceptons : des systèmes uniques qui doivent atteindre la production cette année, pas des programmes pluriannuels et multipays. Le chapitre ci-dessus dit la même chose dans l’autre sens.</p>
 </div>
 <div class="whofacts rv" data-d="1">
 <div class="wfact"><span class="mono">Fondée</span><b>2025</b></div>
@@ -1489,7 +1475,6 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 <div class="wfact"><span class="mono">Langues</span><b>Allemand · Français · Anglais</b></div>
 </div>
 </div>
-<p class="whonote">L’expérience sectorielle et le chiffre ci-dessus décrivent des travaux réalisés avant la création de Quenora en 2025. Ce ne sont pas des résultats obtenus pour des clients de Quenora, et rien sur cette page ne prétend le contraire.</p>
 </div>
 </section>
 <section id="commercial">
@@ -1657,7 +1642,7 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 <div><h3>Navigation</h3><nav aria-label="Footer">
 <a href="/fr/index.html">Accueil</a><a href="/fr/approach.html">Méthode</a>
 <a href="/fr/capabilities.html">Expertises</a><a href="/fr/engineering.html">Ingénierie</a><a href="/fr/work.html">Missions</a>
-<a href="#who">À propos</a><a href="#climax">Contact</a></nav></div>
+<a href="/fr/about.html">À propos</a><a href="#climax">Contact</a></nav></div>
 <div><h3>Contact</h3><nav aria-label="Contact">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
 <a href="/impressum.html">Mentions légales</a>

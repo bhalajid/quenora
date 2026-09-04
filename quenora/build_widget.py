@@ -34,7 +34,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 # Every page a visitor can land on. products is unlisted but still generated,
 # and someone holding its URL should get the same assistant.
 PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
-         "approach.html", "work.html", "contact.html", "story.html",
+         "approach.html", "work.html", "contact.html", "about.html",
          "impressum.html", "privacy.html"]
 
 CSS_M  = ("/*WIDGET:CSS*/",  "/*/WIDGET:CSS*/")

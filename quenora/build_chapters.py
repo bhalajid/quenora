@@ -1,0 +1,231 @@
+#!/usr/bin/env python3
+"""
+build_chapters.py — chapters 02, 04, 05 and 08, minimal and marked.
+
+PREVIEW ONLY, on the `infographics` branch.
+
+The same rule each time: the home page carries the argument and a way in; the
+detail lives on the page whose job it is. Where the audit found the detail was
+already on that page word for word, the home page stops repeating it.
+
+  02  #fit          three situations, each given a mark. The one-line
+                    diagnoses stay — they are how a visitor recognises
+                    themselves, which is the whole point of the chapter.
+
+  04  #solution     nine capability names took a full screen as a list, each
+                    row about a hundred pixels tall, and 33% of them are
+                    repeated on capabilities.html. Now a grid: three core
+                    filled, six hollow, names only. The "Core" badges go —
+                    once the core three are drawn differently the badge is
+                    saying it twice.
+
+  05  #work         the three pattern descriptions match work.html at 94-96%,
+                    with tense drift between the copies ("an integration layer
+                    that lets" against "we built an integration layer that
+                    let"). The home page keeps the sector, the pattern and a
+                    mark; the descriptions stay on work.html, which is where
+                    the figures and the caveats already are.
+
+  08  #commercial   the pricing stays, compact. The four steps of "what
+                    happens when you get in touch" move to contact.html —
+                    they describe what happens after you write, so they belong
+                    beside the form rather than on the home page.
+
+Every string is moved, never retyped, so the translations follow.
+"""
+import os, sys
+from bs4 import BeautifulSoup as BS
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# marks in the wordmark's vocabulary: circles and a stroke
+G = {
+ 'stall':  '<circle cx="12" cy="12" r="7"/><line x1="12" y1="8" x2="12" y2="12"/>',
+ 'lie':    '<circle cx="12" cy="12" r="7"/><line x1="8.5" y1="14" x2="15.5" y2="10"/>',
+ 'late':   '<circle cx="12" cy="12" r="7"/><line x1="12" y1="12" x2="16" y2="14"/><line x1="12" y1="7.5" x2="12" y2="12"/>',
+ 'erp':    '<circle cx="7" cy="9" r="3"/><circle cx="17" cy="9" r="3"/><circle cx="12" cy="16" r="3"/>',
+ 'desk':   '<circle cx="12" cy="10" r="4"/><line x1="6" y1="18" x2="18" y2="18"/>',
+ 'legacy': '<circle cx="9" cy="12" r="5"/><line x1="14" y1="12" x2="20" y2="12"/><circle cx="20" cy="12" r="1.6" fill="currentColor" stroke="none"/>',
+}
+FIT = ['stall', 'lie', 'late']
+WORK = ['erp', 'desk', 'legacy']
+
+
+def mark(soup, key, cls='ch-mark'):
+    return BS('<svg class="%s" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+              'stroke-width="1.4" stroke-linecap="round" aria-hidden="true">%s</svg>'
+              % (cls, G[key]), 'html.parser')
+
+
+def fit(soup, sec):
+    cards = sec.select('.shape, .card, .fitcard') or []
+    if not cards:
+        # the three h3s and their siblings
+        hs = sec.find_all('h3')
+        if len(hs) != 3:
+            print('  #fit: expected 3, found %d' % len(hs)); return False
+        holder, at = anchor_for(sec, hs[0])   # while hs[0] is still in the tree
+        grid = soup.new_tag('div'); grid['class'] = 'ch3 wrap rv'
+        for i, h in enumerate(hs):
+            card = soup.new_tag('div'); card['class'] = 'ch-card'
+            card.append(mark(soup, FIT[i]))
+            tick = h.find_previous(class_='tick')
+            if tick:
+                t = tick.extract(); t['class'] = 'ch-eyebrow mono'; card.append(t)
+            p = card_body(soup, h)          # before extracting h
+            hh = h.extract(); hh.name = 'h3'; hh['class'] = 'ch-title'
+            card.append(hh)
+            if p is not None:
+                p['class'] = 'ch-body'
+                card.append(p)
+            grid.append(card)
+        holder = hs[0] if hs else None
+        if at is not None:
+            at.insert_before(grid)
+        else:
+            holder.append(grid)
+        strip_empties(sec)
+        return True
+    return False
+
+
+def anchor_for(sec, first):
+    """Where the replaced block used to sit.
+
+    Appending to the wrap put the new grid after everything else in the
+    chapter — the nine capabilities landed below the automation figure and the
+    counters, which is not where the list was. Insert at the position of the
+    top-level ancestor the original content occupied instead."""
+    holder = sec.find('div', class_='wrap') or sec
+    node = first
+    while node is not None and node.parent is not holder:
+        node = node.parent
+    return holder, node
+
+
+def strip_empties(sec):
+    """The cards were lifted out of their old wrappers; what is left behind is
+    empty scaffolding that still takes vertical space."""
+    for _ in range(4):
+        for el in sec.find_all(['article', 'div', 'li', 'section']):
+            if el.select_one('.ch-card, .caps, .ch3'):
+                continue
+            if not el.get_text(strip=True) and not el.find(['svg', 'img', 'canvas', 'input']):
+                el.decompose()
+
+
+def card_body(soup, h):
+    sib = h.next_sibling
+    while sib is not None and getattr(sib, 'name', None) is None:
+        sib = sib.next_sibling
+    if sib is not None and sib.name == 'p':
+        return sib.extract()
+    return None
+
+
+def solution(soup, sec):
+    hs = sec.find_all('h3')
+    if len(hs) != 9:
+        print('  #solution: expected 9, found %d' % len(hs)); return False
+    holder, at = anchor_for(sec, hs[0])   # while hs[0] is still in the tree
+    grid = soup.new_tag('ol'); grid['class'] = 'caps wrap rv'
+    for i, h in enumerate(hs):
+        core = i < 3
+        li = soup.new_tag('li'); li['class'] = 'cap' + (' core' if core else '')
+        dot = soup.new_tag('span'); dot['class'] = 'cap-dot'; dot['aria-hidden'] = 'true'
+        li.append(dot)
+        num = h.find_previous(class_='i')
+        if num:
+            n = num.extract(); n['class'] = 'cap-n mono'; li.append(n)
+        t = h.extract(); t.name = 'span'; t['class'] = 'cap-name'
+        li.append(t)
+        # the Core badge is saying twice what the filled mark already says
+        badge = li.find_next(class_='tag')
+        grid.append(li)
+    for tag in sec.select('.tag'):
+        tag.decompose()
+    if at is not None:
+        at.insert_before(grid)
+    else:
+        holder.append(grid)
+    strip_empties(sec)
+    return True
+
+
+def work(soup, sec):
+    hs = sec.find_all('h3')
+    if len(hs) != 3:
+        print('  #work: expected 3, found %d' % len(hs)); return False
+    holder, at = anchor_for(sec, hs[0])   # while hs[0] is still in the tree
+    grid = soup.new_tag('div'); grid['class'] = 'ch3 wrap rv'
+    for i, h in enumerate(hs):
+        card = soup.new_tag('a'); card['class'] = 'ch-card ch-link'
+        card['href'] = 'work.html'
+        card.append(mark(soup, WORK[i]))
+        eb = h.find_previous('p', class_='mono')
+        if eb:
+            e = eb.extract(); e['class'] = 'ch-eyebrow mono'; card.append(e)
+        # the description is on work.html already, at 94-96% the same words.
+        # Take it out before detaching the heading, or next_sibling is gone.
+        p = card_body(soup, h)
+        hh = h.extract(); hh.name = 'h3'; hh['class'] = 'ch-title'
+        card.append(hh)
+        if p is not None:
+            p.decompose()
+        grid.append(card)
+    if at is not None:
+        at.insert_before(grid)
+    else:
+        holder.append(grid)
+    strip_empties(sec)
+    return True
+
+
+def commercial(soup, sec, contact_soup):
+    """Pricing stays. The four steps after you get in touch move to contact."""
+    steps = sec.select('.steps li') or []
+    if not steps:
+        # the four <b> + <span> pairs
+        holder = None
+        lab = sec.find('p', class_='mono')
+        if lab is None:
+            print('  #commercial: no step list found'); return False
+        holder = lab.parent
+        moved = soup.new_tag('div')
+        moved.append(lab.extract())
+        for b in list(holder.find_all('b')):
+            wrap = b.parent
+            if wrap is holder:
+                continue
+            moved.append(wrap.extract())
+        cmain = contact_soup.find('main')
+        sect = contact_soup.new_tag('section'); sect['class'] = 'section-pad'
+        w = contact_soup.new_tag('div'); w['class'] = 'wrap'
+        w.append(BS(str(moved), 'html.parser'))
+        sect.append(w)
+        cmain.append(sect)
+        return True
+    return False
+
+
+def main():
+    p = os.path.join(ROOT, 'index.html')
+    soup = BS(open(p, encoding='utf-8').read(), 'html.parser')
+    cp = os.path.join(ROOT, 'contact.html')
+    csoup = BS(open(cp, encoding='utf-8').read(), 'html.parser')
+
+    done = []
+    if soup.find(id='fit') and not soup.select_one('#fit .ch3'):
+        if fit(soup, soup.find(id='fit')): done.append('02 #fit')
+    if soup.find(id='solution') and not soup.select_one('#solution .caps'):
+        if solution(soup, soup.find(id='solution')): done.append('04 #solution')
+    if soup.find(id='work') and not soup.select_one('#work .ch3'):
+        if work(soup, soup.find(id='work')): done.append('05 #work')
+
+    open(p, 'w', encoding='utf-8').write(str(soup))
+    print('  rebuilt: %s' % (', '.join(done) if done else 'nothing'))
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

@@ -40,35 +40,14 @@ Recognise the shape of your problem in those six phases? Two paragraphs on what�
 ## Nine capabilities. One team.
 
 Three are core, because everything runs through them. The other six step in only when the work needs them — never to pad a proposal. Nothing is handed to a subcontractor you’ve never met.
-
-## Platform & Deployment Engineering
-
-
-## Process & Workflow Automation
-
-
-## AI Integration
-
-
-## Change Management & Enablement
-
 Illustrative, not measured. Most work completes untouched. The rest is sent to a person by design — an automation earns trust only when it knows what it shouldn’t decide, and drawing that line is most of the job.
 
 ## The space is wide. These three recur.
 
 Not a client list, and not a menu. Nine capabilities can be pointed at more problems than any page could list, so what follows is three shapes we are called into most often — described by their shape rather than by whose logo is on them. If yours is not one of the three, that is not a scoping problem; it is the usual case.
 
-## Invoice processing across three ERP instances
-
-High invoice volumes across three unintegrated ERP systems, with a finance team reconciling between them by hand. The engagement went at the integration layer rather than replacing any of the three.
-
-## Support triage and knowledge retrieval
-
-A service desk routing tickets by hand and losing institutional knowledge as experienced staff retired. A retrieval layer over two decades of resolved tickets, wired into the existing service desk rather than replacing it.
-
 ## Legacy modernisation and predictive scheduling
 
-Scheduling running on a system older than most of the staff. Rather than a rewrite, an integration and data layer that lets modern predictive models reach the legacy core safely.
 Representative engagement structures drawn from the sectors we work in. Any figures on the detail page are illustrative of the pattern rather than audited results from a named client.
 
 ## What is running, and what is built.
@@ -88,15 +67,6 @@ If a product genuinely covers your case, buy it — that’s cheaper than anythi
 Correct, and we won’t invent them. Quenora is a founder-led firm in its early chapter. What we’ll do is arrange a direct conversation with a reference before you commit, and show you the actual architecture and evaluation approach in the first meeting rather than a sales deck.
 Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it.
 Still holding an objection we haven’t answered? Put it in the first message — a direct answer is more useful to both of us than a proposal.
-
-## Who you’re actually hiring.
-
-The previous chapter argues you shouldn’t default to a large consultancy. That obliges us to say plainly who you get instead — including the size of us, which is the first thing a procurement team will ask.
-Quenora is founder-led. The person who scopes your engagement is the person who does the work and the person you call when it breaks — there’s no account layer between the two, and no one you haven’t met ever touches the work.
-Founded in 2025 by Balaji Durai. Before Quenora, he ran transformation work for multinational manufacturers, retail banking and life sciences groups — the kind of programme where several technologies have to be made to agree with each other before anything reaches a user at all.
-Those systems went on to be used by more than 100,000 people, and the measure that mattered was never the launch. It was whether the working day got quieter afterwards. That’s still the test here, and it’s why one of the nine principles behind the mark is Human rather than something about models.
-The firm is small, and grows by adding depth, not by hitting a headcount target. That’s a real constraint, and it shapes what we take on: single systems that need to reach production this year, not multi-year, multi-country programmes. The chapter above says the same thing from the other direction.
-The sector experience and the figure above describe work done before Quenora was founded in 2025. They’re not Quenora client results, and nothing on this page claims otherwise.
 
 ## How this is priced.
 

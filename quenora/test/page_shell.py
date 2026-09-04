@@ -84,7 +84,7 @@ for lang in LANGS:
                             "overrides the shared container" % where)
 
         # 4 — one language switcher, so a visitor is never stranded
-        if lang or page not in ("story.html",):
+        if lang or page not in ("about.html",):
             if soup.find(class_="langsel") is None:
                 fail.append("%s: no language switcher in the header" % where)
 

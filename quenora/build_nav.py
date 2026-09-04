@@ -48,7 +48,7 @@ from bs4 import BeautifulSoup as BS
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
-         "approach.html", "work.html", "contact.html", "story.html",
+         "approach.html", "work.html", "contact.html", "about.html",
          "impressum.html", "privacy.html"]
 
 # One label, one destination. About has no page of its own, so it stays a
@@ -72,20 +72,21 @@ PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
 # from the home page: routing Capabilities to #solution keeps you on
 # index.html, so no tab is ever the current one.
 #
-# About is the exception, and it is a translation exception rather than a
-# design one. story.html is English-only and carries a different header with
-# no language switcher, so linking it would strand a German or French visitor
-# on an English page with no way back. Until it is translated, About stays the
-# home page chapter, which does exist in all three languages.
+# About used to point at a home-page chapter, because the only About-ish page
+# was story.html: English-only, with a different header and no language
+# switcher, so linking it would have stranded a German or French visitor. That
+# page is gone — it was a stale copy of the home page, 52% of it duplicated —
+# and about.html replaces it on the standard shell, in all three languages. So
+# there is no exception left: five labels, one behaviour.
 DEST_HOME = {
     "Approach": "approach.html", "Capabilities": "capabilities.html",
     "Engineering": "engineering.html", "Work": "work.html",
-    "About": "#who", "Contact": "#climax", "Home": "index.html",
+    "About": "about.html", "Contact": "#climax", "Home": "index.html",
 }
 DEST_INNER = {
     "Approach": "approach.html", "Capabilities": "capabilities.html",
     "Engineering": "engineering.html", "Work": "work.html",
-    "About": "index.html#who", "Contact": "index.html#climax",
+    "About": "about.html", "Contact": "index.html#climax",
     "Home": "index.html",
 }
 
@@ -95,6 +96,7 @@ CURRENT = {
     "engineering.html":  "Engineering",
     "work.html":         "Work",
     "contact.html":      "Contact",
+    "about.html":        "About",
 }
 
 CSS_M = ("/*NAV:CSS*/", "/*/NAV:CSS*/")

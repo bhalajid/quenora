@@ -1090,15 +1090,13 @@ a.qrcode{display:block;text-decoration:none;border-radius:4px;
   transition:transform .2s var(--e),box-shadow .2s var(--e)}
 a.qrcode:hover{transform:scale(1.03)}
 a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+/*PREVIEW:CSS*/
 /* ── the six phases, summarised ────────────────────────────────────────
-   PREVIEW (branch: infographics). The home page used to retell the whole
-   method — 432 words whose titles and exit conditions are word for word the
-   same as approach.html. This is a summary: six stops, a mark, a name, the
-   weeks, and the title on hover. The detail lives on the page whose job it is.
-
-   Each stop is a link into its gate on approach.html, which is also how the
-   tooltip works on a phone: there is no hover there, so the content it holds
-   has to be reachable by tapping. */
+   The home page used to retell the whole method: 432 words whose titles and
+   exit conditions are word for word the same as approach.html. This is a
+   summary — six stops, a mark, a name, the weeks, the title on hover — and
+   each stop links into its gate on approach.html. That link is also how the
+   tooltip works on a phone, where there is no hover to give. */
 .ph{list-style:none;margin:var(--sp5) 0 0;padding:0;display:grid;
   grid-template-columns:repeat(6,minmax(0,1fr));position:relative}
 .ph::before{content:'';position:absolute;left:7px;right:7px;top:7px;height:1px;
@@ -1117,29 +1115,20 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
   text-transform:uppercase;margin:0}
 .ph-dur{color:var(--t3);font-size:.6rem;letter-spacing:.12em;
   text-transform:uppercase;margin:0}
-
 .ph-link:hover .ph-dot,.ph-link:focus-visible .ph-dot{transform:scale(1.25)}
-.ph-link:hover .ph-mark,.ph-link:focus-visible .ph-mark{
-  color:var(--copper-lt);transform:translateY(-1px)}
+.ph-link:hover .ph-mark,.ph-link:focus-visible .ph-mark{color:var(--copper-lt)}
 .ph-link:hover .ph-name,.ph-link:focus-visible .ph-name{color:var(--copper-lt)}
 .ph-link:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
-
-/* the title, on hover and on keyboard focus */
 .ph-tip{position:absolute;left:0;bottom:calc(100% - 18px);z-index:5;
-  min-width:190px;max-width:250px;
-  background:rgba(20,22,30,.97);border:1px solid var(--line2);border-radius:3px;
-  padding:9px 12px;font-size:.86rem;line-height:1.35;color:var(--t1);
-  opacity:0;transform:translateY(5px);pointer-events:none;
+  min-width:190px;max-width:250px;background:rgba(20,22,30,.97);
+  border:1px solid var(--line2);border-radius:3px;padding:9px 12px;
+  font-size:.86rem;line-height:1.35;color:var(--t1);opacity:0;
+  transform:translateY(5px);pointer-events:none;
   transition:opacity .18s var(--e),transform .18s var(--e)}
-.ph-tip em{font-family:'Playfair Display',Georgia,serif;font-style:italic;
-  color:var(--ember)}
+.ph-tip em{font-family:'Playfair Display',Georgia,serif;font-style:italic;color:var(--ember)}
 .ph-link:hover .ph-tip,.ph-link:focus-visible .ph-tip{opacity:1;transform:none}
-/* the last two would run off the right edge */
 .ph-stop:nth-child(n+5) .ph-tip{left:auto;right:16px}
-
 @media(max-width:760px){
-  /* the same six stops, turned on their side. No hover on a phone, so the
-     title is simply shown — the tooltip becomes a line of text. */
   .ph{grid-template-columns:minmax(0,1fr);row-gap:0}
   .ph::before{left:7px;right:auto;top:7px;bottom:22px;height:auto;width:1px;
     background:linear-gradient(180deg,var(--copper) 0%,rgba(201,122,60,.5) 62%,
@@ -1154,6 +1143,44 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
     font-size:.92rem;color:var(--t2)}
   .ph-stop:last-child .ph-link{padding-bottom:0}
 }
+
+/* ── chapters 02, 04, 05 ───────────────────────────────────────────────
+   Marks in the wordmark's vocabulary — circles and one stroke — so they read
+   as a family rather than icons bought by the set. */
+.ch3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp3);
+  margin-top:var(--sp5)}
+@media(max-width:820px){.ch3{grid-template-columns:minmax(0,1fr);gap:var(--sp2)}}
+.ch-card{border-top:1px solid var(--line2);padding:20px 0 0;display:block;
+  text-decoration:none}
+a.ch-card{transition:border-color .2s var(--e)}
+a.ch-card:hover{border-top-color:var(--copper)}
+a.ch-card:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+.ch-mark{width:24px;height:24px;color:var(--copper);margin-bottom:14px;display:block;
+  transition:color .2s var(--e)}
+a.ch-card:hover .ch-mark{color:var(--copper-lt)}
+.ch-eyebrow{color:var(--t3);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;margin:0 0 8px}
+.ch-title{font-size:1.06rem;font-weight:600;color:var(--t1);margin:0;
+  letter-spacing:-.01em;line-height:1.3}
+a.ch-card:hover .ch-title{color:var(--copper-lt)}
+.ch-body{color:var(--t2);font-size:.93rem;margin:10px 0 0;max-width:44ch}
+
+/* nine capabilities: a grid, not a screenful of rows. The three core are
+   filled and the six are hollow, which is what the "Core" badge said in
+   words. */
+.caps{list-style:none;margin:var(--sp5) 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:2px 0}
+@media(max-width:820px){.caps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.caps{grid-template-columns:minmax(0,1fr)}}
+.cap{display:grid;grid-template-columns:auto auto 1fr;align-items:center;
+  gap:10px;padding:13px 18px 13px 0}
+.cap-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--copper);
+  background:transparent}
+.cap.core .cap-dot{background:var(--copper)}
+.cap-n{color:var(--t3);font-size:.6rem;letter-spacing:.1em;margin:0}
+.cap-name{color:var(--t2);font-size:.92rem;line-height:1.3}
+.cap.core .cap-name{color:var(--t1);font-weight:500}
+/*/PREVIEW:CSS*/
 </style>
 <meta content="es_ES" property="og:locale"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/#page","url":"https://quenora.ai/","name":"Most enterprise AI never reaches the work.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"Quenora is an enterprise AI consultancy in Heilbronn. We engineer AI into the platforms and workflows you already run, then hand your team the keys."},{"@type":"FAQPage","@id":"https://quenora.ai/#faq","mainEntity":[{"@type":"Question","name":"Why not a large consultancy?","acceptedAnswer":{"@type":"Answer","text":"You should use one for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, their engagement model costs more than the problem and moves slower than your business does. The people who sell it are also rarely the people who build it."}},{"@type":"Question","name":"Why not build it in-house?","acceptedAnswer":{"@type":"Answer","text":"Often you should, and we’ll say so. Bring us in when your team has the domain knowledge but not the platform experience, or when they’re already fully committed to the systems that keep the business running. The handover phase exists precisely so that in-house becomes the answer at the end."}},{"@type":"Question","name":"Why not just buy a vendor platform?","acceptedAnswer":{"@type":"Answer","text":"If a product genuinely covers your case, buy it — that’s cheaper than anything we’d build. The work we get called for is what remains: connecting that product to systems it was never designed to meet, and producing the governance evidence the vendor doesn’t."}},{"@type":"Question","name":"You have no published case studies.","acceptedAnswer":{"@type":"Answer","text":"Correct, and we won’t invent them. Quenora is a founder-led firm in its early chapter. What we’ll do is arrange a direct conversation with a reference before you commit, and show you the actual architecture and evaluation approach in the first meeting rather than a sales deck."}},{"@type":"Question","name":"What happens if it doesn’t work?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it."}}]}]}</script><link href="https://quenora.ai/es" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/></head>
 <body class="no-js">
@@ -1182,7 +1209,7 @@ a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 <a href="/es/capabilities.html">Capacidades</a>
 <a href="/es/engineering.html">Engineering</a>
 <a href="/es/work.html">Proyectos</a>
-<a href="#who">About</a>
+<a href="/es/about.html">About</a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Elegir idioma" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>ES</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/index.html" hreflang="en" lang="en">English</a></li><li><a href="/de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/index.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 <a class="navcta" href="#climax"><span class="cta-long">Iniciar una conversación</span><span class="cta-short">Contacto</span></a>
 </div>
@@ -1274,20 +1301,10 @@ firm was built to take on. If none of them describe you, we’re probably not th
 firm — and we’d rather you knew that now.</p>
 </div>
 </div>
-<div class="fit">
-<article class="rv"><span class="tick">Situation 01</span>
-<h3>The pilot that stalled</h3>
-<p>It worked in the demo. Six months later it’s still a demo, because the
-platform underneath it was never built and nobody owns the gap.</p></article>
-<article class="rv" data-d="1"><span class="tick">Situation 02</span>
-<h3>Retrieval that lies</h3>
-<p>The assistant answers confidently and is wrong often enough that people
-stopped trusting it. The model is fine. The data contract isn’t.</p></article>
-<article class="rv" data-d="2"><span class="tick">Situation 03</span>
-<h3>Governance arriving late</h3>
-<p>Something is live, procurement or risk is now asking questions, and the
-evidence to answer them was never captured.</p></article>
-</div>
+<div class="ch3 wrap rv"><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><line x1="12" x2="12" y1="8" y2="12"></line></svg><span class="ch-eyebrow mono">Situation 01</span><h3 class="ch-title">The pilot that stalled</h3><p class="ch-body">It worked in the demo. Six months later it’s still a demo, because the
+platform underneath it was never built and nobody owns the gap.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><line x1="8.5" x2="15.5" y1="14" y2="10"></line></svg><span class="ch-eyebrow mono">Situation 02</span><h3 class="ch-title">Retrieval that lies</h3><p class="ch-body">The assistant answers confidently and is wrong often enough that people
+stopped trusting it. The model is fine. The data contract isn’t.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><line x1="12" x2="16" y1="12" y2="14"></line><line x1="12" x2="12" y1="7.5" y2="12"></line></svg><span class="ch-eyebrow mono">Situation 03</span><h3 class="ch-title">Governance arriving late</h3><p class="ch-body">Something is live, procurement or risk is now asking questions, and the
+evidence to answer them was never captured.</p></div></div>
 </div>
 </section>
 <section id="journey">
@@ -1323,17 +1340,7 @@ evidence to answer them was never captured.</p></article>
 <a class="more" href="/es/capabilities.html">All nine in detail</a>
 </div>
 </div>
-<div class="nine">
-<div class="nrow rv"><span class="i">01</span><h3>Platform &amp; Deployment Engineering</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">02</span><h3>Process &amp; Workflow Automation</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">03</span><h3>Integración de IA</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">04</span><h3>Estrategia y asesoramiento en IA</h3><span></span></div>
-<div class="nrow rv"><span class="i">05</span><h3>Ingeniería de datos y analítica</h3><span></span></div>
-<div class="nrow rv"><span class="i">06</span><h3>Agentes y copilotos de IA a medida</h3><span></span></div>
-<div class="nrow rv"><span class="i">07</span><h3>Gobernanza, seguridad y cumplimiento de la IA</h3><span></span></div>
-<div class="nrow rv"><span class="i">08</span><h3>Operación gestionada de IA</h3><span></span></div>
-<div class="nrow rv"><span class="i">09</span><h3>Gestión del cambio y capacitación</h3><span></span></div>
-</div>
+<ol class="caps wrap rv"><li class="cap core"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">01</span><span class="cap-name">Platform &amp; Deployment Engineering</span></li><li class="cap core"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">02</span><span class="cap-name">Process &amp; Workflow Automation</span></li><li class="cap core"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">03</span><span class="cap-name">Integración de IA</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">04</span><span class="cap-name">Estrategia y asesoramiento en IA</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">05</span><span class="cap-name">Ingeniería de datos y analítica</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">06</span><span class="cap-name">Agentes y copilotos de IA a medida</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">07</span><span class="cap-name">Gobernanza, seguridad y cumplimiento de la IA</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">08</span><span class="cap-name">Operación gestionada de IA</span></li><li class="cap"><span aria-hidden="true" class="cap-dot"></span><span class="cap-n mono">09</span><span class="cap-name">Gestión del cambio y capacitación</span></li></ol>
 <figure class="autofig rv">
 <p class="mono autolab">Capability 02 · what automation looks like in practice</p>
 <canvas aria-hidden="true" id="autoCanvas"></canvas>
@@ -1368,29 +1375,7 @@ knows what it shouldn’t decide, and drawing that line is most of the job.</fig
 Try it: the same question, answered twice</a></div>
 </div>
 </div>
-<div class="shapes">
-<article class="shape rv">
-<p class="mono">Pattern 01 · Financial services</p>
-<h3>Procesamiento de facturas en tres instancias de ERP</h3>
-<p>High invoice volumes across three unintegrated ERP systems, with a finance
-team reconciling between them by hand. The engagement went at the integration
-layer rather than replacing any of the three.</p>
-</article>
-<article class="shape rv" data-d="1">
-<p class="mono">Pattern 02 · Manufacturing</p>
-<h3>Clasificación de soporte y recuperación de conocimiento</h3>
-<p>A service desk routing tickets by hand and losing institutional knowledge as
-experienced staff retired. A retrieval layer over two decades of resolved
-tickets, wired into the existing service desk rather than replacing it.</p>
-</article>
-<article class="shape rv" data-d="2">
-<p class="mono">Pattern 03 · Logistics</p>
-<h3>Modernización de sistemas heredados y planificación predictiva</h3>
-<p>Scheduling running on a system older than most of the staff. Rather than a
-rewrite, an integration and data layer that lets modern predictive models reach
-the legacy core safely.</p>
-</article>
-</div>
+<div class="ch3 wrap rv"><a class="ch-card ch-link" href="/es/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="7" cy="9" r="3"></circle><circle cx="17" cy="9" r="3"></circle><circle cx="12" cy="16" r="3"></circle></svg><p class="ch-eyebrow mono">Pattern 01 · Financial services</p><h3 class="ch-title">Procesamiento de facturas en tres instancias de ERP</h3></a><a class="ch-card ch-link" href="/es/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="10" r="4"></circle><line x1="6" x2="18" y1="18" y2="18"></line></svg><p class="ch-eyebrow mono">Pattern 02 · Manufacturing</p><h3 class="ch-title">Clasificación de soporte y recuperación de conocimiento</h3></a><a class="ch-card ch-link" href="/es/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="9" cy="12" r="5"></circle><line x1="14" x2="20" y1="12" y2="12"></line><circle cx="20" cy="12" fill="currentColor" r="1.6" stroke="none"></circle></svg><p class="ch-eyebrow mono">Pattern 03 · Logistics</p><h3 class="ch-title">Modernización de sistemas heredados y planificación predictiva</h3></a></div>
 <p class="shapes-note">Representative engagement structures drawn from the
 sectors we work in. Any figures on the detail page are illustrative of the
 pattern rather than audited results from a named client.</p>
@@ -1517,32 +1502,13 @@ you end an engagement with nothing to show for it.</div></details>
 <section id="who">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">07</div>
+<div class="cnum">07<a class="more" href="/es/about.html">Who you’re hiring, in full</a></div>
 <div>
-<h2>Who you’re actually <em>hiring</em>.</h2>
-<p class="lede">The previous chapter argues you shouldn’t default to a large
-             consultancy. That obliges us to say plainly who you get instead —
-             including the size of us, which is the first thing a procurement team
-             will ask.</p>
+<h2></h2>
 </div>
 </div>
 <div class="whogrid">
 <div class="whomain rv">
-<p>Quenora is founder-led. The person who scopes your engagement is the person
-who does the work and the person you call when it breaks — there’s no account
-layer between the two, and no one you haven’t met ever touches the work.</p>
-<p>Founded in 2025 by Balaji Durai. Before Quenora, he ran transformation work
-for multinational manufacturers, retail banking and life sciences groups — the
-kind of programme where several technologies have to be made to agree with each
-other before anything reaches a user at all.</p>
-<p>Those systems went on to be used by more than 100,000 people, and the
-measure that mattered was never the launch. It was whether the working day got
-quieter afterwards. That’s still the test here, and it’s why one of the nine
-principles behind the mark is Human rather than something about models.</p>
-<p>The firm is small, and grows by adding depth, not by hitting a headcount
-target. That’s a real constraint, and it shapes what we take on: single systems
-that need to reach production this year, not multi-year, multi-country
-programmes. The chapter above says the same thing from the other direction.</p>
 </div>
 <div class="whofacts rv" data-d="1">
 <div class="wfact"><span class="mono">Founded</span><b>2025</b></div>
@@ -1552,9 +1518,6 @@ programmes. The chapter above says the same thing from the other direction.</p>
 <div class="wfact"><span class="mono">Languages</span><b>German · French · English</b></div>
 </div>
 </div>
-<p class="whonote">The sector experience and the figure above describe work done
-before Quenora was founded in 2025. They’re not Quenora client results, and
-nothing on this page claims otherwise.</p>
 </div>
 </section>
 <section id="commercial">
@@ -1739,7 +1702,7 @@ notice</a>.</span></label>
 <div><h3>Navegación</h3><nav aria-label="Footer">
 <a href="/es/index.html">Inicio</a><a href="/es/approach.html">Método</a>
 <a href="/es/capabilities.html">Capacidades</a><a href="/es/engineering.html">Engineering</a><a href="/es/work.html">Proyectos</a>
-<a href="#who">About</a><a href="#climax">Contacto</a></nav></div>
+<a href="/es/about.html">About</a><a href="#climax">Contacto</a></nav></div>
 <div><h3>Contacto</h3><nav aria-label="Contacto">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
 <a href="/impressum.html">Legal notice · Impressum</a>

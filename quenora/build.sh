@@ -28,6 +28,15 @@ if ! "$PY" -c 'import bs4' 2>/dev/null; then
   exit 1
 fi
 
+# PREVIEW (branch: infographics) — markup generators, then the stylesheet.
+# The CSS is injected between markers rather than pasted in by hand,
+# because regenerating the markup means checking the page out from main
+# first, and that silently took hand-added styles with it. Twice.
+"$PY" build_about.py
+"$PY" build_journey.py
+"$PY" build_chapters.py
+"$PY" build_preview_css.py
+
 "$PY" build_widget.py
 "$PY" build_nav.py
 "$PY" build_i18n.py

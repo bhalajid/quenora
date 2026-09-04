@@ -1997,7 +1997,7 @@ main > section[hidden]{padding-block:0}
     var lastY = w.scrollY, boost = 1;
     w.addEventListener('scroll', function () {
       var v = Math.abs(w.scrollY - lastY); lastY = w.scrollY;
-      boost = clamp(1 + v / 26, 1, 6);
+      boost = clamp(1 + v / 220, 1, 1.35);   /* a nudge, not a whip: v/26 capped at 6 reached ~280px/s on an ordinary flick */
       tkWake();
     }, { passive: true });
     /* boost decays toward 1 and then stays there, so this was writing the
@@ -2005,11 +2005,20 @@ main > section[hidden]{padding-block:0}
        open — a style recalculation per frame for no change. It now stops
        when it has settled and the scroll handler wakes it. */
     var tkRaf = null;
+    /* Rewriting animation-duration re-computes the animation's position as
+       elapsed/duration, so every change jumped the band sideways — the faster
+       it went, the more it stuttered. updatePlaybackRate changes speed without
+       moving anything. Kept the old write as a fallback. */
+    var tkAnim = (tt.getAnimations && tt.getAnimations()[0]) || null;
+    function tkRate(r) {
+      if (tkAnim && tkAnim.updatePlaybackRate) { tkAnim.updatePlaybackRate(r); }
+      else { tt.style.animationDuration = (38 / r) + 's'; }
+    }
     function tk() {
       boost = lerp(boost, 1, 0.06);
-      tt.style.animationDuration = (38 / boost) + 's';
+      tkRate(boost);
       if (Math.abs(boost - 1) > 0.002) { tkRaf = requestAnimationFrame(tk); }
-      else { tt.style.animationDuration = '38s'; tkRaf = null; }
+      else { tkRate(1); tkRaf = null; }
     }
     function tkWake() { if (!tkRaf) tkRaf = requestAnimationFrame(tk); }
     tk();

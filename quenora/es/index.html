@@ -1083,6 +1083,13 @@ header .navlinks a[aria-current="page"]::after{width:0}
     width:100%;max-width:1240px;margin-inline:auto;
     padding-left:40px;padding-right:40px}
 }
+/* The code itself is the obvious thing to tap, and on a phone it was the one
+   thing you could not use: you cannot scan your own screen, and it was a div.
+   It is a link now, so tapping it does what scanning it would. */
+a.qrcode{display:block;text-decoration:none;border-radius:4px;
+  transition:transform .2s var(--e),box-shadow .2s var(--e)}
+a.qrcode:hover{transform:scale(1.03)}
+a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 </style>
 <meta content="es_ES" property="og:locale"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/#page","url":"https://quenora.ai/","name":"Most enterprise AI never reaches the work.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"Quenora is an enterprise AI consultancy in Heilbronn. We engineer AI into the platforms and workflows you already run, then hand your team the keys."},{"@type":"FAQPage","@id":"https://quenora.ai/#faq","mainEntity":[{"@type":"Question","name":"Why not a large consultancy?","acceptedAnswer":{"@type":"Answer","text":"You should use one for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, their engagement model costs more than the problem and moves slower than your business does. The people who sell it are also rarely the people who build it."}},{"@type":"Question","name":"Why not build it in-house?","acceptedAnswer":{"@type":"Answer","text":"Often you should, and we’ll say so. Bring us in when your team has the domain knowledge but not the platform experience, or when they’re already fully committed to the systems that keep the business running. The handover phase exists precisely so that in-house becomes the answer at the end."}},{"@type":"Question","name":"Why not just buy a vendor platform?","acceptedAnswer":{"@type":"Answer","text":"If a product genuinely covers your case, buy it — that’s cheaper than anything we’d build. The work we get called for is what remains: connecting that product to systems it was never designed to meet, and producing the governance evidence the vendor doesn’t."}},{"@type":"Question","name":"You have no published case studies.","acceptedAnswer":{"@type":"Answer","text":"Correct, and we won’t invent them. Quenora is a founder-led firm in its early chapter. What we’ll do is arrange a direct conversation with a reference before you commit, and show you the actual architecture and evaluation approach in the first meeting rather than a sales deck."}},{"@type":"Question","name":"What happens if it doesn’t work?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it."}}]}]}</script><link href="https://quenora.ai/es" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/></head>
 <body class="no-js">
@@ -1630,7 +1637,7 @@ was drawn, and the standard we hold the work to.</p>
      Quenora Consulting. The numbers are written out underneath because a QR
      is useless to anyone reading this on the device they would scan it with. -->
 <div class="qrcard rv" data-d="1">
-<div class="qrcode"><svg viewbox="0 0 37 37" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5h7m1 0h1m1 0h5m1 0h2m1 0h2m1 0h7m-29 1h1m5 0h1m2 0h4m2 0h1m4 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m5 0h1m1 0h1m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m6 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h3m2 0h1m2 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h4m3 0h4m1 0h1m-16 1h2m2 0h1m1 0h1m1 0h3m6 0h1m1 0h1m1 0h1m1 0h1m-29 1h3m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1m5 0h1m1 0h2m-28 1h2m3 0h2m1 0h2m1 0h1m3 0h3m1 0h1m1 0h4m1 0h1m-27 1h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m1 0h1m2 0h1m-25 1h7m3 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m-28 1h1m3 0h2m1 0h1m3 0h5m2 0h3m1 0h1m1 0h2m1 0h2m-28 1h1m4 0h3m1 0h1m2 0h1m1 0h4m1 0h1m1 0h2m-23 1h4m2 0h2m2 0h1m4 0h2m2 0h2m2 0h4m-26 1h1m1 0h1m1 0h3m1 0h1m2 0h1m2 0h3m6 0h2m1 0h1m-29 1h1m2 0h1m3 0h1m3 0h4m7 0h3m3 0h1m-29 1h3m2 0h2m1 0h3m2 0h1m3 0h4m3 0h1m1 0h1m1 0h1m-29 1h1m1 0h2m1 0h1m2 0h3m1 0h3m3 0h1m2 0h2m1 0h1m-25 1h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h1m1 0h5m1 0h1m-19 1h3m2 0h1m1 0h1m1 0h1m1 0h2m3 0h3m-27 1h7m2 0h1m2 0h2m3 0h4m1 0h1m1 0h1m-25 1h1m5 0h1m1 0h3m1 0h2m3 0h4m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m4 0h6m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h4m3 0h2m2 0h1m1 0h3m-28 1h1m1 0h3m1 0h1m3 0h1m1 0h1m2 0h1m2 0h7m1 0h2m-28 1h1m5 0h1m2 0h2m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h7m4 0h1m1 0h1m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1" stroke="#07070a"></path></svg></div>
+<a aria-label="Save Quenora Consulting to your phone" class="qrcode" href="/c"><svg viewbox="0 0 37 37" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5h7m1 0h1m1 0h5m1 0h2m1 0h2m1 0h7m-29 1h1m5 0h1m2 0h4m2 0h1m4 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m5 0h1m1 0h1m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m6 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h3m2 0h1m2 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h4m3 0h4m1 0h1m-16 1h2m2 0h1m1 0h1m1 0h3m6 0h1m1 0h1m1 0h1m1 0h1m-29 1h3m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1m5 0h1m1 0h2m-28 1h2m3 0h2m1 0h2m1 0h1m3 0h3m1 0h1m1 0h4m1 0h1m-27 1h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m1 0h1m2 0h1m-25 1h7m3 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m-28 1h1m3 0h2m1 0h1m3 0h5m2 0h3m1 0h1m1 0h2m1 0h2m-28 1h1m4 0h3m1 0h1m2 0h1m1 0h4m1 0h1m1 0h2m-23 1h4m2 0h2m2 0h1m4 0h2m2 0h2m2 0h4m-26 1h1m1 0h1m1 0h3m1 0h1m2 0h1m2 0h3m6 0h2m1 0h1m-29 1h1m2 0h1m3 0h1m3 0h4m7 0h3m3 0h1m-29 1h3m2 0h2m1 0h3m2 0h1m3 0h4m3 0h1m1 0h1m1 0h1m-29 1h1m1 0h2m1 0h1m2 0h3m1 0h3m3 0h1m2 0h2m1 0h1m-25 1h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h1m1 0h5m1 0h1m-19 1h3m2 0h1m1 0h1m1 0h1m1 0h2m3 0h3m-27 1h7m2 0h1m2 0h2m3 0h4m1 0h1m1 0h1m-25 1h1m5 0h1m1 0h3m1 0h2m3 0h4m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m4 0h6m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h4m3 0h2m2 0h1m1 0h3m-28 1h1m1 0h3m1 0h1m3 0h1m1 0h1m2 0h1m2 0h7m1 0h2m-28 1h1m5 0h1m2 0h2m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h7m4 0h1m1 0h1m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1" stroke="#07070a"></path></svg></a>
 <div class="qrsay">
 <p class="mono">Take the card first</p>
 <p>Scan to save <b>Quenora Consulting</b> to your phone — both numbers, the
@@ -3824,6 +3831,46 @@ notice</a>.</span></label>
   if(typeof history!=='undefined' && 'scrollRestoration' in history){
     history.scrollRestoration = 'manual';
   }
+
+  /* ── the mobile menu ────────────────────────────────────────────────
+     The home page shipped a burger button with no handler behind it — in
+     every language, since the page was written. The CSS was all there:
+     .navlinks.open, the three bars folding into a cross, the blur behind the
+     panel. Only the JavaScript was missing, so on a phone the home page had
+     no navigation at all and the button did nothing when tapped.
+
+     Rather than paste a copy into the one page that lacked it, the button is
+     replaced by a clone here — which drops any listener already attached —
+     and then wired exactly once. This script is injected last, after every
+     page's own scripts, so it always wins. That ordering is the point: the
+     alternative is two handlers both toggling the same class, which this site
+     has already shipped once, on the language switcher, where the menu opened
+     and closed again on a single click. */
+  (function(){
+    var b = document.getElementById('burger'),
+        n = document.getElementById('navLinks');
+    if(!b || !n) return;
+    var fresh = b.cloneNode(true);
+    b.parentNode.replaceChild(fresh, b);
+    fresh.addEventListener('click', function(){
+      var open = n.classList.toggle('open');
+      fresh.classList.toggle('open', open);
+      fresh.setAttribute('aria-expanded', open ? 'true' : 'false');
+      /* the inner pages darken the bar behind the open panel; the home page
+         has no such class, so this is a no-op there rather than a crash */
+      var hdr = document.querySelector('header');
+      if(hdr && hdr.id === 'siteHeader') hdr.classList.toggle('solid', open);
+    });
+    /* a tap on a link inside the panel should close it, or the menu stays
+       open over the page it just navigated to */
+    n.addEventListener('click', function(e){
+      if(e.target.closest('a') && n.classList.contains('open')){
+        n.classList.remove('open');
+        fresh.classList.remove('open');
+        fresh.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
 
   window.addEventListener('load', function(){
     var hash = location.hash;

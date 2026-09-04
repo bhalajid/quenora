@@ -1083,6 +1083,13 @@ header .navlinks a[aria-current="page"]::after{width:0}
     width:100%;max-width:1240px;margin-inline:auto;
     padding-left:40px;padding-right:40px}
 }
+/* The code itself is the obvious thing to tap, and on a phone it was the one
+   thing you could not use: you cannot scan your own screen, and it was a div.
+   It is a link now, so tapping it does what scanning it would. */
+a.qrcode{display:block;text-decoration:none;border-radius:4px;
+  transition:transform .2s var(--e),box-shadow .2s var(--e)}
+a.qrcode:hover{transform:scale(1.03)}
+a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 </style>
 <meta content="fr_FR" property="og:locale"/><link href="https://quenora.ai/fr" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR"},{"@type":"WebPage","@id":"https://quenora.ai/fr#page","url":"https://quenora.ai/fr","name":"La plupart de l'IA d'entreprise n'atteint jamais le travail.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR","description":"Quenora est un cabinet de conseil en IA d’entreprise établi à Heilbronn. Nous intégrons l’IA dans les plateformes et les flux de travail que vous exploitez déjà, puis nous en remettons les clés à votre équipe."},{"@type":"FAQPage","@id":"https://quenora.ai/fr#faq","mainEntity":[{"@type":"Question","name":"Pourquoi pas un grand cabinet ?","acceptedAnswer":{"@type":"Answer","text":"Pour un programme pluriannuel, multipays, avec un millier de parties prenantes, vous devriez en prendre un — ils sont faits pour cela, nous ne le sommes pas. Pour un système unique qui doit atteindre la production cette année, leur modèle de mission coûte plus cher que le problème et avance plus lentement que votre entreprise. Et ceux qui le vendent sont rarement ceux qui le construisent."}},{"@type":"Question","name":"Pourquoi ne pas le construire en interne ?","acceptedAnswer":{"@type":"Answer","text":"Souvent, vous devriez, et nous vous le dirons. Faites-nous intervenir lorsque votre équipe possède la connaissance métier mais pas l’expérience plateforme, ou lorsqu’elle est déjà entièrement mobilisée par les systèmes qui font tourner l’entreprise. La phase de transfert existe précisément pour qu’à la fin, l’interne soit la réponse."}},{"@type":"Question","name":"Pourquoi ne pas simplement acheter une plateforme du marché ?","acceptedAnswer":{"@type":"Answer","text":"Si un produit couvre réellement votre cas, achetez-le — cela coûtera moins cher que tout ce que nous construirions. Ce pour quoi on nous appelle, c’est ce qui reste : raccorder ce produit à des systèmes pour lesquels il n’a jamais été conçu, et produire les preuves de gouvernance que l’éditeur ne fournit pas."}},{"@type":"Question","name":"Vous n’avez aucune étude de cas publiée.","acceptedAnswer":{"@type":"Answer","text":"C’est exact, et nous n’en inventerons pas. Quenora est un cabinet dirigé par son fondateur, à ses débuts. Ce que nous ferons : organiser un échange direct avec une référence avant tout engagement de votre part, et vous montrer dès le premier rendez-vous l’architecture réelle et la démarche d’évaluation plutôt qu’une présentation commerciale."}},{"@type":"Question","name":"Que se passe-t-il si cela ne fonctionne pas ?","acceptedAnswer":{"@type":"Answer","text":"La phase 05 existe pour y répondre par écrit, face au chiffre convenu en phase 01. S’il n’a pas bougé, nous le disons. Le code, la documentation et le harnais d’évaluation vous restent dans tous les cas — il n’existe aucun scénario où vous terminez une mission sans rien à montrer."}}]}]}</script></head>
 <body class="no-js">
@@ -1550,7 +1557,7 @@ header .navlinks a[aria-current="page"]::after{width:0}
      Quenora Consulting. The numbers are written out underneath because a QR
      is useless to anyone reading this on the device they would scan it with. -->
 <div class="qrcard rv" data-d="1">
-<div class="qrcode"><svg viewbox="0 0 37 37" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5h7m1 0h1m1 0h5m1 0h2m1 0h2m1 0h7m-29 1h1m5 0h1m2 0h4m2 0h1m4 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m5 0h1m1 0h1m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m6 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h3m2 0h1m2 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h4m3 0h4m1 0h1m-16 1h2m2 0h1m1 0h1m1 0h3m6 0h1m1 0h1m1 0h1m1 0h1m-29 1h3m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1m5 0h1m1 0h2m-28 1h2m3 0h2m1 0h2m1 0h1m3 0h3m1 0h1m1 0h4m1 0h1m-27 1h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m1 0h1m2 0h1m-25 1h7m3 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m-28 1h1m3 0h2m1 0h1m3 0h5m2 0h3m1 0h1m1 0h2m1 0h2m-28 1h1m4 0h3m1 0h1m2 0h1m1 0h4m1 0h1m1 0h2m-23 1h4m2 0h2m2 0h1m4 0h2m2 0h2m2 0h4m-26 1h1m1 0h1m1 0h3m1 0h1m2 0h1m2 0h3m6 0h2m1 0h1m-29 1h1m2 0h1m3 0h1m3 0h4m7 0h3m3 0h1m-29 1h3m2 0h2m1 0h3m2 0h1m3 0h4m3 0h1m1 0h1m1 0h1m-29 1h1m1 0h2m1 0h1m2 0h3m1 0h3m3 0h1m2 0h2m1 0h1m-25 1h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h1m1 0h5m1 0h1m-19 1h3m2 0h1m1 0h1m1 0h1m1 0h2m3 0h3m-27 1h7m2 0h1m2 0h2m3 0h4m1 0h1m1 0h1m-25 1h1m5 0h1m1 0h3m1 0h2m3 0h4m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m4 0h6m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h4m3 0h2m2 0h1m1 0h3m-28 1h1m1 0h3m1 0h1m3 0h1m1 0h1m2 0h1m2 0h7m1 0h2m-28 1h1m5 0h1m2 0h2m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h7m4 0h1m1 0h1m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1" stroke="#07070a"></path></svg></div>
+<a aria-label="Enregistrer Quenora Consulting dans votre téléphone" class="qrcode" href="/c"><svg viewbox="0 0 37 37" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5h7m1 0h1m1 0h5m1 0h2m1 0h2m1 0h7m-29 1h1m5 0h1m2 0h4m2 0h1m4 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m5 0h1m1 0h1m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m6 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h3m2 0h1m2 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h4m3 0h4m1 0h1m-16 1h2m2 0h1m1 0h1m1 0h3m6 0h1m1 0h1m1 0h1m1 0h1m-29 1h3m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1m5 0h1m1 0h2m-28 1h2m3 0h2m1 0h2m1 0h1m3 0h3m1 0h1m1 0h4m1 0h1m-27 1h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m1 0h1m2 0h1m-25 1h7m3 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m-28 1h1m3 0h2m1 0h1m3 0h5m2 0h3m1 0h1m1 0h2m1 0h2m-28 1h1m4 0h3m1 0h1m2 0h1m1 0h4m1 0h1m1 0h2m-23 1h4m2 0h2m2 0h1m4 0h2m2 0h2m2 0h4m-26 1h1m1 0h1m1 0h3m1 0h1m2 0h1m2 0h3m6 0h2m1 0h1m-29 1h1m2 0h1m3 0h1m3 0h4m7 0h3m3 0h1m-29 1h3m2 0h2m1 0h3m2 0h1m3 0h4m3 0h1m1 0h1m1 0h1m-29 1h1m1 0h2m1 0h1m2 0h3m1 0h3m3 0h1m2 0h2m1 0h1m-25 1h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h1m1 0h5m1 0h1m-19 1h3m2 0h1m1 0h1m1 0h1m1 0h2m3 0h3m-27 1h7m2 0h1m2 0h2m3 0h4m1 0h1m1 0h1m-25 1h1m5 0h1m1 0h3m1 0h2m3 0h4m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m4 0h6m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h4m3 0h2m2 0h1m1 0h3m-28 1h1m1 0h3m1 0h1m3 0h1m1 0h1m2 0h1m2 0h7m1 0h2m-28 1h1m5 0h1m2 0h2m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h7m4 0h1m1 0h1m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1" stroke="#07070a"></path></svg></a>
 <div class="qrsay">
 <p class="mono">Prenez d’abord la carte</p>
 <p>Scannez pour enregistrer <b>Quenora Consulting</b>  dans votre téléphone — les deux numéros, l’adresse et l’e-mail, en une fois.</p>
@@ -3740,6 +3747,46 @@ header .navlinks a[aria-current="page"]::after{width:0}
   if(typeof history!=='undefined' && 'scrollRestoration' in history){
     history.scrollRestoration = 'manual';
   }
+
+  /* ── the mobile menu ────────────────────────────────────────────────
+     The home page shipped a burger button with no handler behind it — in
+     every language, since the page was written. The CSS was all there:
+     .navlinks.open, the three bars folding into a cross, the blur behind the
+     panel. Only the JavaScript was missing, so on a phone the home page had
+     no navigation at all and the button did nothing when tapped.
+
+     Rather than paste a copy into the one page that lacked it, the button is
+     replaced by a clone here — which drops any listener already attached —
+     and then wired exactly once. This script is injected last, after every
+     page's own scripts, so it always wins. That ordering is the point: the
+     alternative is two handlers both toggling the same class, which this site
+     has already shipped once, on the language switcher, where the menu opened
+     and closed again on a single click. */
+  (function(){
+    var b = document.getElementById('burger'),
+        n = document.getElementById('navLinks');
+    if(!b || !n) return;
+    var fresh = b.cloneNode(true);
+    b.parentNode.replaceChild(fresh, b);
+    fresh.addEventListener('click', function(){
+      var open = n.classList.toggle('open');
+      fresh.classList.toggle('open', open);
+      fresh.setAttribute('aria-expanded', open ? 'true' : 'false');
+      /* the inner pages darken the bar behind the open panel; the home page
+         has no such class, so this is a no-op there rather than a crash */
+      var hdr = document.querySelector('header');
+      if(hdr && hdr.id === 'siteHeader') hdr.classList.toggle('solid', open);
+    });
+    /* a tap on a link inside the panel should close it, or the menu stays
+       open over the page it just navigated to */
+    n.addEventListener('click', function(e){
+      if(e.target.closest('a') && n.classList.contains('open')){
+        n.classList.remove('open');
+        fresh.classList.remove('open');
+        fresh.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
 
   window.addEventListener('load', function(){
     var hash = location.hash;

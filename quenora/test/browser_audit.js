@@ -75,7 +75,13 @@ const note = (where, what) => findings.push({ where, what });
 
   for (const vp of VIEWPORTS) {
     geometry[vp.name] = [];
-    const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
+    /* the phone pass needs real touch, or page.tap throws and the burger is
+       never exercised — which is how the broken one survived */
+    const ctx = await browser.newContext({
+      viewport: { width: vp.width, height: vp.height },
+      hasTouch: vp.name === 'phone',
+      isMobile: vp.name === 'phone',
+    });
 
     for (const lang of LANGS) {
       for (const page of PAGES) {
@@ -158,6 +164,56 @@ const note = (where, what) => findings.push({ where, what });
 
         const wantLang = lang || 'en';
         if (m.lang !== wantLang) note(where, `<html lang> is "${m.lang}", expected "${wantLang}"`);
+
+        /* ── the mobile menu, tapped for real ───────────────────────
+           The home page shipped a burger with no handler behind it, in every
+           language, since the page was written — the CSS was all present, so
+           nothing static could see it. Tapping twice also proves there is
+           exactly one handler: two would close and reopen, leaving it open. */
+        if (vp.name === 'phone') {
+          const has = await pg.$('#burger');
+          if (!has) note(where, 'no burger button on a phone');
+          else {
+            await pg.tap('#burger');
+            await pg.waitForTimeout(420);
+            const o = await pg.evaluate(() => {
+              const n = document.getElementById('navLinks'), b = document.getElementById('burger');
+              const r = n.getBoundingClientRect();
+              const a = n.querySelector('a'), ar = a ? a.getBoundingClientRect() : null;
+              const hit = ar ? document.elementFromPoint(ar.left + 8, ar.top + ar.height / 2) : null;
+              return { open: n.classList.contains('open'), h: Math.round(r.height),
+                aria: b.getAttribute('aria-expanded'),
+                tappable: hit ? !!hit.closest('a') : false };
+            });
+            if (!o.open || o.h < 100) note(where, 'the burger does not open the menu');
+            else if (o.aria !== 'true') note(where, 'the open menu has aria-expanded=' + o.aria);
+            else if (!o.tappable) note(where, 'menu links are not tappable when open');
+            else {
+              await pg.tap('#burger');
+              await pg.waitForTimeout(360);
+              const shut = await pg.evaluate(() =>
+                !document.getElementById('navLinks').classList.contains('open'));
+              if (!shut) note(where, 'a second tap does not close the menu — two handlers');
+            }
+          }
+        }
+
+        /* ── the contact QR has to be usable on the device showing it ──
+           You cannot scan your own screen, so on a phone the code must be a
+           link. It was a plain div. */
+        const qr = await pg.$('.qrcode');
+        if (qr) {
+          const q = await pg.evaluate(() => {
+            const e = document.querySelector('.qrcode');
+            return { tag: e.tagName, href: e.getAttribute('href'),
+                     label: e.getAttribute('aria-label'),
+                     svg: !!e.querySelector('svg') };
+          });
+          if (q.tag !== 'A') note(where, 'the QR code is a ' + q.tag + ', not a link');
+          if (q.href !== '/c') note(where, 'the QR links to ' + q.href + ', expected /c');
+          if (!q.label) note(where, 'the QR link has no accessible name');
+          if (!q.svg) note(where, 'the QR graphic is missing');
+        }
 
         if (SHOTS && vp.name === 'desktop')
           await pg.screenshot({ path: path.join(SHOT_DIR, rel.replace(/\//g, '_') + '.png') });

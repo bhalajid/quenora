@@ -1488,6 +1488,46 @@ L’IA d’entreprise, conçue pour fonctionner. Intégrée à ce que vous explo
     history.scrollRestoration = 'manual';
   }
 
+  /* ── the mobile menu ────────────────────────────────────────────────
+     The home page shipped a burger button with no handler behind it — in
+     every language, since the page was written. The CSS was all there:
+     .navlinks.open, the three bars folding into a cross, the blur behind the
+     panel. Only the JavaScript was missing, so on a phone the home page had
+     no navigation at all and the button did nothing when tapped.
+
+     Rather than paste a copy into the one page that lacked it, the button is
+     replaced by a clone here — which drops any listener already attached —
+     and then wired exactly once. This script is injected last, after every
+     page's own scripts, so it always wins. That ordering is the point: the
+     alternative is two handlers both toggling the same class, which this site
+     has already shipped once, on the language switcher, where the menu opened
+     and closed again on a single click. */
+  (function(){
+    var b = document.getElementById('burger'),
+        n = document.getElementById('navLinks');
+    if(!b || !n) return;
+    var fresh = b.cloneNode(true);
+    b.parentNode.replaceChild(fresh, b);
+    fresh.addEventListener('click', function(){
+      var open = n.classList.toggle('open');
+      fresh.classList.toggle('open', open);
+      fresh.setAttribute('aria-expanded', open ? 'true' : 'false');
+      /* the inner pages darken the bar behind the open panel; the home page
+         has no such class, so this is a no-op there rather than a crash */
+      var hdr = document.querySelector('header');
+      if(hdr && hdr.id === 'siteHeader') hdr.classList.toggle('solid', open);
+    });
+    /* a tap on a link inside the panel should close it, or the menu stays
+       open over the page it just navigated to */
+    n.addEventListener('click', function(e){
+      if(e.target.closest('a') && n.classList.contains('open')){
+        n.classList.remove('open');
+        fresh.classList.remove('open');
+        fresh.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+
   window.addEventListener('load', function(){
     var hash = location.hash;
     if(!hash || hash === '#'){

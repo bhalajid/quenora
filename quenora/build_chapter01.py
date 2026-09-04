@@ -94,6 +94,63 @@ def main():
                       'was mostly empty. */', 1)
         print('  chapter 01: the pinned height released')
 
+
+    # ── the panel was a full-viewport stage ────────────────────────────
+    # .pin is position:sticky with height:100svh and place-items:center —
+    # right when it held a headline, a subtitle and three cards arriving in
+    # sequence. It now holds one row of counters 321px tall inside 900px of
+    # sticky viewport, which is the black gap: 348px above and 231px below.
+    if '.pin{position:sticky;top:0;height:100svh' in s:
+        s = s.replace('.pin{position:sticky;top:0;height:100svh;display:grid;place-items:center;',
+                      '.pin{position:static;height:auto;display:grid;place-items:center;'
+                      'padding:var(--sp5) 0;', 1)
+        print('  chapter 01: the full-viewport stage released')
+
+    # ── "0 engagements" reads as no engagements ────────────────────────
+    # The claim is good and the framing is not: a visitor scanning three big
+    # numerals reads 9, 6, 0 and the last one lands as a firm with no work.
+    # It is also the one line that is not a count of something — it counts
+    # what does NOT happen. One handover counts the thing that does, mirrors
+    # approach.html's own "Six phases, fourteen weeks, one handover", and
+    # makes the row read 9 · 6 · 1.
+    # Parse, do not regex. The sentence wraps across a newline in the source,
+    # so a pattern written against the rendered text never matched and the
+    # swap silently did nothing.
+    soup2 = BS(s, 'html.parser')
+    zero = soup2.select_one('.counters b[data-count="0"]')
+    if zero is not None:
+        zero['data-count'] = '1'
+        zero.string = '1'
+        span = zero.find_next_sibling('span')
+        if span is not None:
+            span.string = ('handover, agreed before the work starts and written '
+                           'into the statement of work.')
+        s = str(soup2)
+        print('  chapter 01: "0 engagements" is now "1 handover"')
+
+    # ── the counts that name a page link to it ─────────────────────────
+    # Done by parsing, and guarded on the tree rather than on a substring.
+    # The first version tested for 'href="x" class="cnt-link"' in the raw
+    # HTML while BeautifulSoup writes class before href, so the guard never
+    # matched: every build wrapped the numerals again and the row ended up
+    # with six anchors, three of them empty.
+    soup3 = BS(s, 'html.parser')
+    targets = {'9': 'capabilities.html', '6': 'approach.html', '1': 'approach.html'}
+    wrapped = 0
+    for b in soup3.select('.counters b[data-count]'):
+        if b.find_parent('a', class_='cnt-link'):
+            continue
+        href = targets.get(b.get('data-count'))
+        if not href:
+            continue
+        a = soup3.new_tag('a', href=href)
+        a['class'] = 'cnt-link'
+        b.wrap(a)
+        wrapped += 1
+    if wrapped:
+        s = str(soup3)
+        print('  chapter 01: %d count(s) now link to the page they name' % wrapped)
+
     open(p, 'w', encoding='utf-8').write(s)
     return 0
 

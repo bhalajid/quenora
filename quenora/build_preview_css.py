@@ -299,6 +299,26 @@ main > section .chead + .ch3{margin-top:0}
 }
 '''
 
+CNT = '''
+/* The counters kept a 168px top margin from where they used to sit, under the
+   hub in #solution. As the only thing in chapter 01's panel that margin was
+   pure gap: .pin measured 624px around 326px of content, and 168 of the 298
+   left over was this one rule. */
+#problem .counters{margin-top:0}
+/* ── the counts lead somewhere ─────────────────────────────────────────
+   Nine capabilities and six phases both name a page. Making the numeral a
+   link is the shortest route to it, and it is where a reader's eye already
+   is. Underlined only on hover so the row still reads as three figures
+   rather than three links. */
+.cnt-link{display:inline-block;text-decoration:none;
+  transition:transform .2s var(--e)}
+.cnt-link b{transition:color .2s var(--e)}
+.cnt-link:hover b,.cnt-link:focus-visible b{color:var(--copper-lt)}
+.cnt-link:hover{transform:translateY(-2px)}
+.cnt-link:focus-visible{outline:2px solid var(--signal);outline-offset:4px;
+  border-radius:2px}
+'''
+
 WHO = '''
 /* ── chapter 07, once the detail moved to about.html ───────────────────
    The body paragraphs left with the page. What remained was a two-column
@@ -415,7 +435,7 @@ def splice(path, body):
 
 def main():
     ok = True
-    ok &= splice(os.path.join(ROOT, 'index.html'), RAIL + RAIL_ANIM + WHO + FIXES + RHYTHM)
+    ok &= splice(os.path.join(ROOT, 'index.html'), RAIL + RAIL_ANIM + WHO + FIXES + RHYTHM + CNT)
     ok &= splice(os.path.join(ROOT, 'approach.html'), SPINE + BACKTO)
     if os.path.exists(os.path.join(ROOT, 'about.html')):
         ok &= splice(os.path.join(ROOT, 'about.html'), ABOUT)

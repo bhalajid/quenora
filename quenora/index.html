@@ -565,7 +565,7 @@ body.clg .cur::after{opacity:1}
 
 /* ── PIN 1: sticky scrub stage ── */
 .pinwrap{height:auto;position:relative}/* was 170vh, sized for three panels arriving in sequence. The stage now holds one row of counters, so the pinned scroll had nothing left to reveal and 2815px of chapter was mostly empty. */
-.pin{position:sticky;top:0;height:100svh;display:grid;place-items:center;
+.pin{position:static;height:auto;display:grid;place-items:center;padding:var(--sp5) 0;
   overflow:hidden;border-block:1px solid var(--line);
   background:linear-gradient(180deg,var(--sf1),var(--void))}
 .pin .inner{width:min(100% - var(--sp4),var(--wrap));text-align:center}
@@ -1285,6 +1285,24 @@ main > section .chead + .ch3{margin-top:0}
 @media(max-width:760px){
   main > section .chead{margin-bottom:44px}
 }
+
+/* The counters kept a 168px top margin from where they used to sit, under the
+   hub in #solution. As the only thing in chapter 01's panel that margin was
+   pure gap: .pin measured 624px around 326px of content, and 168 of the 298
+   left over was this one rule. */
+#problem .counters{margin-top:0}
+/* ── the counts lead somewhere ─────────────────────────────────────────
+   Nine capabilities and six phases both name a page. Making the numeral a
+   link is the shortest route to it, and it is where a reader's eye already
+   is. Underlined only on hover so the row still reads as three figures
+   rather than three links. */
+.cnt-link{display:inline-block;text-decoration:none;
+  transition:transform .2s var(--e)}
+.cnt-link b{transition:color .2s var(--e)}
+.cnt-link:hover b,.cnt-link:focus-visible b{color:var(--copper-lt)}
+.cnt-link:hover{transform:translateY(-2px)}
+.cnt-link:focus-visible{outline:2px solid var(--signal);outline-offset:4px;
+  border-radius:2px}
 /*/PREVIEW:CSS*/
 /*BRAND:CSS*/
 /* ── the supplied lockup ───────────────────────────────────────────────
@@ -1393,13 +1411,12 @@ That layer is Quenora.</figcaption>
 <div class="pin">
 <div class="inner">
 <div class="counters">
-<div class="rv"><b data-count="9">9</b>
+<div class="rv"><a class="cnt-link" href="capabilities.html"><b data-count="9">9</b></a>
 <span>capabilities. Three are core — the work runs through them.</span></div>
-<div class="rv" data-d="1"><b data-count="6">6</b>
+<div class="rv" data-d="1"><a class="cnt-link" href="approach.html"><b data-count="6">6</b></a>
 <span>phases, framing to handover — each with an exit condition in the statement of work.</span></div>
-<div class="rv" data-d="2"><b data-count="0">0</b>
-<span>engagements without an end date. An extension is a decision, never
-                the default.</span></div>
+<div class="rv" data-d="2"><a class="cnt-link" href="approach.html"><b data-count="1">1</b></a>
+<span>handover, agreed before the work starts and written into the statement of work.</span></div>
 </div></div>
 </div>
 </div>

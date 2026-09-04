@@ -47,6 +47,7 @@ RAIL = '''
 .ph-link:hover .ph-dot,.ph-link:focus-visible .ph-dot{transform:scale(1.25)}
 .ph-link:hover .ph-mark,.ph-link:focus-visible .ph-mark{color:var(--copper-lt)}
 .ph-link:hover .ph-name,.ph-link:focus-visible .ph-name{color:var(--copper-lt)}
+.ph-link:hover .ph-dur,.ph-link:focus-visible .ph-dur{color:var(--t2)}
 .ph-link:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
 .ph-tip{position:absolute;left:0;bottom:calc(100% - 18px);z-index:5;
   min-width:190px;max-width:250px;background:rgba(20,22,30,.97);
@@ -81,11 +82,17 @@ RAIL = '''
 @media(max-width:820px){.ch3{grid-template-columns:minmax(0,1fr);gap:var(--sp2)}}
 .ch-card{border-top:1px solid var(--line2);padding:20px 0 0;display:block;
   text-decoration:none}
-a.ch-card{transition:border-color .2s var(--e)}
-a.ch-card:hover{border-top-color:var(--copper)}
+/* every card responds to the pointer, whether or not it leads anywhere. The
+   three situations in chapter 02 are a diagnosis, not a destination, so they
+   light up without pretending to be links. */
+.ch-card{transition:border-color .2s var(--e)}
+.ch-card:hover{border-top-color:var(--copper)}
+.ch-card:hover .ch-mark{color:var(--copper-lt);transform:translateY(-2px)}
+.ch-card:hover .ch-title{color:var(--copper-lt)}
+.ch-card:hover .ch-eyebrow{color:var(--copper)}
 a.ch-card:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 .ch-mark{width:24px;height:24px;color:var(--copper);margin-bottom:14px;display:block;
-  transition:color .2s var(--e)}
+  transition:color .2s var(--e),transform .2s var(--e)}
 a.ch-card:hover .ch-mark{color:var(--copper-lt)}
 .ch-eyebrow{color:var(--t3);font-size:.6rem;letter-spacing:.2em;
   text-transform:uppercase;margin:0 0 8px}
@@ -94,7 +101,69 @@ a.ch-card:hover .ch-mark{color:var(--copper-lt)}
 a.ch-card:hover .ch-title{color:var(--copper-lt)}
 .ch-body{color:var(--t2);font-size:.93rem;margin:10px 0 0;max-width:44ch}
 
-/* nine capabilities: a grid, not a screenful of rows. The three core are
+
+/* ── nine capabilities, as a hub ───────────────────────────────────────
+   A grid said the same thing as the rail and the card rows — everything on
+   this page had become a line or a list. The shape has to carry the claim:
+   three the work runs through, six that come in when the work needs them.
+
+   The first attempt put the six on a true ring, by angle. It collided:
+   "Change Management & Enablement" ran straight through "Data Engineering &
+   Analytics", because a 212px label cannot sit on a 106px radius. Real names
+   are the constraint, so the six are split three and three either side of the
+   core instead — still a hub, no longer a heap.
+
+   On a phone it becomes two columns, filled then hollow: the same nine, the
+   same grouping, rearranged. That is the test the Gantt failed. */
+.orb{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  gap:0 var(--sp4);margin:var(--sp5) auto 0;max-width:1000px;position:relative}
+.orb-ring,.orb-core{list-style:none;margin:0;padding:0}
+.orb-item{display:flex;align-items:center;gap:9px}
+.orb-dot{width:9px;height:9px;border-radius:50%;flex:none;
+  border:1.5px solid var(--copper);background:transparent;
+  transition:transform .2s var(--e),background .2s var(--e)}
+.orb-item.core .orb-dot{background:var(--copper);width:11px;height:11px}
+.orb-n{color:var(--t3);font-size:.58rem;letter-spacing:.1em;margin:0;flex:none}
+.orb-name{color:var(--t2);font-size:.9rem;line-height:1.25}
+.orb-item.core .orb-name{color:var(--t1);font-weight:500;font-size:1rem}
+
+/* the six: three down the left, three down the right */
+.orb-ring{display:contents}
+.orb-ring li{padding:11px 0}
+.orb-ring li:nth-child(-n+3){grid-column:1;justify-content:flex-end;
+  text-align:right;flex-direction:row-reverse}
+.orb-ring li:nth-child(-n+3) .orb-name{text-align:right}
+.orb-ring li:nth-child(n+4){grid-column:3}
+.orb-ring li:nth-child(1){grid-row:1}
+.orb-ring li:nth-child(2){grid-row:2}
+.orb-ring li:nth-child(3){grid-row:3}
+.orb-ring li:nth-child(4){grid-row:1}
+.orb-ring li:nth-child(5){grid-row:2}
+.orb-ring li:nth-child(6){grid-row:3}
+
+/* the three, together, ringed */
+.orb-core{grid-column:2;grid-row:1 / span 3;display:flex;flex-direction:column;
+  gap:12px;padding:26px 30px;border:1px dashed rgba(201,122,60,.28);
+  border-radius:200px;
+  background:radial-gradient(ellipse at 50% 50%,rgba(201,122,60,.10),transparent 72%)}
+
+.orb-item:hover .orb-dot{transform:scale(1.4);background:var(--copper)}
+.orb-item:hover .orb-name{color:var(--copper-lt)}
+.orb-item:hover .orb-n{color:var(--copper)}
+
+@media(max-width:900px){
+  .orb{grid-template-columns:minmax(0,1fr);gap:0}
+  .orb-core{grid-column:1;grid-row:auto;border-radius:14px;padding:20px 22px;
+    margin-bottom:16px}
+  .orb-ring{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 20px}
+  .orb-ring li,.orb-ring li:nth-child(-n+3),.orb-ring li:nth-child(n+4){
+    grid-column:auto;grid-row:auto;justify-content:flex-start;text-align:left;
+    flex-direction:row}
+  .orb-ring li:nth-child(-n+3) .orb-name{text-align:left}
+}
+@media(max-width:520px){.orb-ring{grid-template-columns:minmax(0,1fr)}}
+
+/* (superseded) nine capabilities as a grid — The three core are
    filled and the six are hollow, which is what the "Core" badge said in
    words. */
 .caps{list-style:none;margin:var(--sp5) 0 0;padding:0;display:grid;

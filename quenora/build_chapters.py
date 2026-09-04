@@ -39,10 +39,14 @@ from bs4 import BeautifulSoup as BS
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # marks in the wordmark's vocabulary: circles and a stroke
+# The three situations are the same mark failing in three different ways,
+# rather than three interchangeable icons: an arc that stops before it closes,
+# a ring that has drifted off the thing it is supposed to be centred on, and a
+# ring that closes only after the gap has opened.
 G = {
- 'stall':  '<circle cx="12" cy="12" r="7"/><line x1="12" y1="8" x2="12" y2="12"/>',
- 'lie':    '<circle cx="12" cy="12" r="7"/><line x1="8.5" y1="14" x2="15.5" y2="10"/>',
- 'late':   '<circle cx="12" cy="12" r="7"/><line x1="12" y1="12" x2="16" y2="14"/><line x1="12" y1="7.5" x2="12" y2="12"/>',
+ 'stall':  '<path d="M19 12a7 7 0 1 0-4 6.3"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/>',
+ 'lie':    '<circle cx="10" cy="12" r="6"/><circle cx="15" cy="12" r="1.7" fill="currentColor" stroke="none"/>',
+ 'late':   '<path d="M12 5a7 7 0 1 1-5 11.9"/><line x1="5.6" y1="8.2" x2="9" y2="5.6"/>',
  'erp':    '<circle cx="7" cy="9" r="3"/><circle cx="17" cy="9" r="3"/><circle cx="12" cy="16" r="3"/>',
  'desk':   '<circle cx="12" cy="10" r="4"/><line x1="6" y1="18" x2="18" y2="18"/>',
  'legacy': '<circle cx="9" cy="12" r="5"/><line x1="14" y1="12" x2="20" y2="12"/><circle cx="20" cy="12" r="1.6" fill="currentColor" stroke="none"/>',
@@ -124,30 +128,50 @@ def card_body(soup, h):
 
 
 def solution(soup, sec):
+    """Three core at the centre, six in orbit around them.
+
+    A grid said the same thing as the rail and the card rows: everything on
+    this page had become a line or a list. The shape here carries the actual
+    claim — three capabilities the work runs through, six that come in when
+    the work needs them — which a nine-row list cannot say at all.
+
+    On a phone the ring becomes two columns, filled and hollow. That is a
+    different arrangement of the same information, not less of it: the Gantt
+    was dropped precisely because its mobile form dropped the axis."""
     hs = sec.find_all('h3')
     if len(hs) != 9:
         print('  #solution: expected 9, found %d' % len(hs)); return False
-    holder, at = anchor_for(sec, hs[0])   # while hs[0] is still in the tree
-    grid = soup.new_tag('ol'); grid['class'] = 'caps wrap rv'
+    holder, at = anchor_for(sec, hs[0])
+
+    fig = soup.new_tag('div'); fig['class'] = 'orb wrap rv'
+
+    core = soup.new_tag('ol'); core['class'] = 'orb-core'
+    ring = soup.new_tag('ol'); ring['class'] = 'orb-ring'
+
     for i, h in enumerate(hs):
-        core = i < 3
-        li = soup.new_tag('li'); li['class'] = 'cap' + (' core' if core else '')
-        dot = soup.new_tag('span'); dot['class'] = 'cap-dot'; dot['aria-hidden'] = 'true'
+        is_core = i < 3
+        li = soup.new_tag('li')
+        li['class'] = 'orb-item' + (' core' if is_core else '')
+        if not is_core:
+            li['style'] = '--i:%d' % (i - 3)
+        dot = soup.new_tag('span'); dot['class'] = 'orb-dot'; dot['aria-hidden'] = 'true'
         li.append(dot)
         num = h.find_previous(class_='i')
         if num:
-            n = num.extract(); n['class'] = 'cap-n mono'; li.append(n)
-        t = h.extract(); t.name = 'span'; t['class'] = 'cap-name'
+            n = num.extract(); n['class'] = 'orb-n mono'; li.append(n)
+        t = h.extract(); t.name = 'span'; t['class'] = 'orb-name'
         li.append(t)
-        # the Core badge is saying twice what the filled mark already says
-        badge = li.find_next(class_='tag')
-        grid.append(li)
+        (core if is_core else ring).append(li)
+
     for tag in sec.select('.tag'):
         tag.decompose()
+
+    fig.append(ring)
+    fig.append(core)
     if at is not None:
-        at.insert_before(grid)
+        at.insert_before(fig)
     else:
-        holder.append(grid)
+        holder.append(fig)
     strip_empties(sec)
     return True
 

@@ -1,131 +1,108 @@
 #!/usr/bin/env python3
 """
-build_journey.py — the six phases as a timeline instead of 432 words.
+build_journey.py — six exits, not a Gantt chart.
 
-PREVIEW ONLY. This lives on the `infographics` branch so the idea can be
-looked at without touching the site.
+PREVIEW ONLY, on the `infographics` branch.
 
-WHAT IT CHANGES
+WHY THE FIRST ATTEMPT WAS WRONG
 
-#journey was the heaviest chapter on the home page: 432 words, 8 paragraphs
-and 18 bullets, inside a pinned horizontal scroller you had to drag through to
-reach phase six. It describes a sequence with durations, which is the one shape
-prose is genuinely worse at than a picture.
+I drew the six phases as bars on a 14-week axis. Two things were wrong with it.
 
-It also hid something. The week ranges overlap — Integrate runs weeks 4-10
-while Foundation runs 3-6, and Prove starts in week 9 while Ship is still
-going to week 12. Read as paragraphs that reads as six things one after
-another. Drawn on an axis you can see the engagement is concurrent, which is a
-more honest picture of how the work actually runs and a better answer to "how
-long will this take".
+It does not survive a phone. The axis has to be hidden below about 820px or
+the ticks collapse to four pixels each, and a bar with no axis behind it is
+decoration: measured on an iPhone the six bars were 50 to 175px wide against
+nothing at all. Half the traffic would have seen a chart that means nothing.
 
-WHY IT IS BUILT FROM THE EXISTING MARKUP
+More importantly it foregrounded the wrong thing. Read the chapter's own lede:
+"Most consultancies are designed to keep the engagement going. Ours is designed
+to bring it to a clean close — each phase carries an exit condition, agreed and
+written into the statement of work." The argument is the exit conditions. A
+Gantt puts duration first, which is the least distinctive thing here — every
+consultancy has a timeline; almost none of them publish what has to be true
+before they are allowed to move on, or leave.
 
-Every sentence is lifted from the current DOM rather than retyped. The strings
-therefore still match the translation dictionary exactly, so German and French
-survive untouched — retyping even one of them would have silently dropped it
-back to English. Only the new furniture needs new words.
+WHAT THIS DRAWS INSTEAD
 
-WHY CSS GRID AND NOT SVG
+A vertical spine of six gates. Each one shows the phase, its title and the
+exit condition that has to be met to pass it; the description and the three
+bullets sit behind a disclosure. Duration becomes a small chip rather than the
+organising idea.
 
-The labels stay real text: selectable, translatable by build_i18n, readable by
-a screen reader, and present in the assistant index and llms-full.txt. A
-diagram that hides its content from a machine would undo the work that just
-went into being agent-readable.
+Vertical is the point: it is the same shape at 375px and at 1600px, so nothing
+is hidden on a phone and there is no scale to lose.
+
+The spine fades as it descends and stops at a terminal mark. The engagement
+winds down to nothing, and the last gate — "You own it, you run it, we're
+gone" — is drawn hollow, because that is the one where the firm is no longer
+in the picture. That is the chapter's claim, made by the drawing rather than
+asserted again in a sentence.
+
+Every string is lifted from the existing DOM, so the German and French
+translations still match. No number, ratio or proportion is invented anywhere:
+the only quantities drawn are the week ranges the page already stated.
 """
 import os, re, sys
 from bs4 import BeautifulSoup as BS
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-WEEKS = 14
-
-
-def parse_phases(sec):
-    out = []
-    for art in sec.select('.phase'):
-        eyebrow = art.select_one('.mono')
-        dur = art.select_one('.dur')
-        h3 = art.find('h3')
-        body = art.find('p', class_=None)
-        exit_ = art.select_one('.exit')
-        bullets = [li for li in art.find_all('li')]
-        m = re.search(r'(\d+)\D+(\d+)', dur.get_text() if dur else '')
-        out.append({
-            'eyebrow': eyebrow, 'title': h3, 'body': body, 'exit': exit_,
-            'bullets': bullets, 'dur': dur,
-            'from': int(m.group(1)) if m else 1,
-            'to': int(m.group(2)) if m else 2,
-        })
-    return out
 
 
 def build(soup, sec):
-    phases = parse_phases(sec)
+    phases = sec.select('.phase')
     if len(phases) != 6:
-        print('  expected 6 phases, found %d — leaving it alone' % len(phases))
-        return False
+        print('  expected 6 phases, found %d' % len(phases)); return False
 
-    wrap = soup.new_tag('div'); wrap['class'] = 'tl wrap rv'
+    ol = soup.new_tag('ol'); ol['class'] = 'ex wrap rv'
 
-    # The axis has to sit in the same two-column grid as every row, or the
-    # ticks span the whole width while the bars only span the right-hand
-    # column — week 1 then draws under the "6" and the chart lies.
-    axis = soup.new_tag('div'); axis['class'] = 'tl-axis'
-    axis['aria-hidden'] = 'true'
-    lbl = soup.new_tag('p'); lbl['class'] = 'tl-unit mono'
-    lbl.string = 'Weeks'
-    axis.append(lbl)
-    ticks = soup.new_tag('div'); ticks['class'] = 'tl-ticks'
-    for w in range(1, WEEKS + 1):
-        t = soup.new_tag('span')
-        t['class'] = 'tl-w' + (' on' if w % 2 == 0 else '')
-        t.string = str(w) if w % 2 == 0 else ''
-        ticks.append(t)
-    axis.append(ticks)
-    wrap.append(axis)
+    for i, art in enumerate(phases):
+        li = soup.new_tag('li'); li['class'] = 'ex-step' + (' last' if i == len(phases) - 1 else '')
 
-    for i, p in enumerate(phases, 1):
-        row = soup.new_tag('details'); row['class'] = 'tl-row'
-        summ = soup.new_tag('summary'); summ['class'] = 'tl-sum'
+        node = soup.new_tag('span'); node['class'] = 'ex-node'
+        node['aria-hidden'] = 'true'
+        li.append(node)
 
-        head = soup.new_tag('div'); head['class'] = 'tl-head'
-        if p['eyebrow']:
-            e = p['eyebrow'].extract(); e['class'] = 'tl-eyebrow mono'
-            head.append(e)
-        if p['title']:
-            t = p['title'].extract()
-            t.name = 'span'; t['class'] = 'tl-title'
-            head.append(t)
-        summ.append(head)
+        row = soup.new_tag('details'); row['class'] = 'ex-row'
+        summ = soup.new_tag('summary'); summ['class'] = 'ex-sum'
 
-        track = soup.new_tag('div'); track['class'] = 'tl-track'
-        bar = soup.new_tag('div'); bar['class'] = 'tl-bar'
-        bar['style'] = ('grid-column:%d / %d' % (p['from'], p['to'] + 1))
-        if p['dur']:
-            d = p['dur'].extract(); d['class'] = 'tl-dur mono'
-            bar.append(d)
-        track.append(bar)
-        summ.append(track)
+        top = soup.new_tag('div'); top['class'] = 'ex-top'
+        eyebrow = art.select_one('.mono')
+        if eyebrow:
+            e = eyebrow.extract(); e['class'] = 'ex-eyebrow mono'; top.append(e)
+        dur = art.select_one('.dur')
+        if dur:
+            d = dur.extract(); d['class'] = 'ex-dur mono'; top.append(d)
+        summ.append(top)
+
+        h3 = art.find('h3')
+        if h3:
+            t = h3.extract(); t.name = 'span'; t['class'] = 'ex-title'
+            summ.append(t)
+
+        exit_ = art.select_one('.exit')
+        if exit_:
+            x = exit_.extract(); x['class'] = 'ex-cond'
+            summ.append(x)
+
         row.append(summ)
 
-        det = soup.new_tag('div'); det['class'] = 'tl-detail'
-        if p['body']:
-            det.append(p['body'].extract())
-        if p['bullets']:
-            ul = soup.new_tag('ul'); ul['class'] = 'tl-list'
-            for li in p['bullets']:
-                ul.append(li.extract())
+        det = soup.new_tag('div'); det['class'] = 'ex-detail'
+        body = art.find('p', class_=None)
+        if body:
+            det.append(body.extract())
+        lis = art.find_all('li')
+        if lis:
+            ul = soup.new_tag('ul'); ul['class'] = 'ex-list'
+            for l in lis:
+                ul.append(l.extract())
             det.append(ul)
-        if p['exit']:
-            det.append(p['exit'].extract())
         row.append(det)
-        wrap.append(row)
+        li.append(row)
+        ol.append(li)
 
     old = sec.select_one('.hwrap')
     if old is None:
-        print('  no .hwrap to replace')
-        return False
-    old.replace_with(wrap)
+        print('  no .hwrap'); return False
+    old.replace_with(ol)
     return True
 
 
@@ -135,12 +112,12 @@ def main():
     sec = soup.find(id='journey')
     if sec is None:
         print('  no #journey'); return 1
-    if sec.select_one('.tl'):
+    if sec.select_one('.ex'):
         print('  already built'); return 0
     if not build(soup, sec):
         return 1
     open(p, 'w', encoding='utf-8').write(str(soup))
-    print('  #journey is a timeline')
+    print('  #journey is six gates on a spine')
     return 0
 
 

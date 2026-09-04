@@ -275,6 +275,30 @@ main > section[hidden]{padding-block:0}
 @media(max-width:760px){main > section{padding-block:var(--sp6)}}
 '''
 
+RHYTHM = '''
+/* ── one gap between a chapter's head and its content ──────────────────
+   The chapters themselves were already even — 168px top and bottom, heading
+   169px in. The unevenness was inside them: measured across the home page,
+   the gap between the heading block and the first block of content came out
+   at 64px on five chapters, 63px on two, and 40px on #honest and
+   #commercial. Two chapters opening 24px tighter than the rest is exactly
+   the "not uniform" that was reported, and it is invisible until you measure
+   because no two of them sit next to each other.
+
+   One value, set on the head and cancelled on whatever follows so the two
+   cannot add up. */
+main > section .chead{margin-bottom:64px}
+main > section .chead + *{margin-top:0}
+main > section .chead + .obj,
+main > section .chead + .money,
+main > section .chead + .nine,
+main > section .chead + .whogrid,
+main > section .chead + .ch3{margin-top:0}
+@media(max-width:760px){
+  main > section .chead{margin-bottom:44px}
+}
+'''
+
 WHO = '''
 /* ── chapter 07, once the detail moved to about.html ───────────────────
    The body paragraphs left with the page. What remained was a two-column
@@ -391,7 +415,7 @@ def splice(path, body):
 
 def main():
     ok = True
-    ok &= splice(os.path.join(ROOT, 'index.html'), RAIL + RAIL_ANIM + WHO + FIXES)
+    ok &= splice(os.path.join(ROOT, 'index.html'), RAIL + RAIL_ANIM + WHO + FIXES + RHYTHM)
     ok &= splice(os.path.join(ROOT, 'approach.html'), SPINE + BACKTO)
     if os.path.exists(os.path.join(ROOT, 'about.html')):
         ok &= splice(os.path.join(ROOT, 'about.html'), ABOUT)

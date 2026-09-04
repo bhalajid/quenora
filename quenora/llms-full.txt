@@ -35,29 +35,11 @@ Something is live, procurement or risk is now asking questions, and the evidence
 ## Six phases. Designed to finish.
 
 Most consultancies are designed to keep the engagement going. Ours is designed to bring it to a clean close — each phase carries an exit condition, agreed and written into the statement of work.
-
-## Find the real constraint
-
 We spend the first weeks understanding what actually happens, not what the documentation says should. That first look is where the real constraint tends to surface.
-
-## The unglamorous layer
-
 The work that decides whether anything after it survives contact with production.
-
-## Into what you already run
-
 Connected to the systems that hold the data and run the work, with the failure paths designed rather than discovered in production.
-
-## Under real change control
-
 It goes live the same way every other system does — same approvals, same controls. No parallel universe. No permanent pilot.
-
-## Against the agreed number
-
 Back to the number we set in Frame — did it move or not? That conversation is the product.
-
-## And then we leave
-
 We work ourselves out of the job — a date after which your team runs it without us. The engagement is designed to end.
 Recognise the shape of your problem in those six phases? Two paragraphs on what’s stuck is enough to start — no brief, no NDA.
 

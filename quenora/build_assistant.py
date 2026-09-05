@@ -116,6 +116,18 @@ def chunks_for(path, page_url, lang="en"):
             continue
         cls = el.get("class") or []
         is_chip = el.name == "span" and ("tag" in cls or "chip" in cls)
+        # <strong> is a label only where it stands on its own. On the
+        # engineering and privacy pages it is an inline lead-in inside a
+        # paragraph or a list item — "What it cost." — and that text is
+        # already carried by the passage for the element around it. Taken
+        # as a tag as well, it produced three passages whose whole body was
+        # "Covers: What it cost.." under three different headings: junk that
+        # retrieval could still return as an answer. The pricing card labels
+        # this was added for sit in a bare div beside the body <p>, so they
+        # have no such ancestor and are kept.
+        if el.name == "strong" and el.find_parent(
+                ("p", "li", "td", "th", "dd", "dt", "figcaption")):
+            continue
         if el.name == "span" and not is_chip:
             continue
         text = _tidy(el.get_text(" "))

@@ -40,7 +40,7 @@
      "Automation is capability 02 and one of the three core ones. We automate the processes a business repeats — approvals, handoffs, reconciliations, the reporting someone does on a Tuesday. The part that matters is the exceptions: an automation is only trustworthy if it knows which cases it should not decide, and drawing that line is most of the work."],
     [['what do you','services','offer','do you do','capabilit','quenora do','what does quenora'],
      "Nine capabilities. Three are core — platform and deployment engineering, process and workflow automation, and AI integration — because everything runs through them. The other six step in only when the work needs them. Nothing is handed to a subcontractor you’ve never met."],
-    [['who are you','about you','about quenora','founder','balaji','team','how big','size'],
+    [['who are you','about you','about us|','about quenora','founder','balaji','team','how big','size'],
      "Quenora is founder-led, founded in 2025 by Balaji Durai. Before Quenora he ran transformation work for multinational manufacturers, retail banking and life sciences groups; those systems went on to be used by more than 100,000 people. We work from Heilbronn, internationally, in German, French and English."],
     [['different','why you','compare','competitor','large consult','big four'],
      "Use a large consultancy for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, the person who scopes your engagement is the person who does the work and the person you call when it breaks."],
@@ -328,6 +328,23 @@
     bot(html);
   }
 
+  /* Keys are matched as substrings, and most of them want that: 'capabilit'
+     has to reach both "capability" and "capabilities", 'govern' has to reach
+     "governance", 'large consult' has to reach "large consultancy". A few
+     phrases must not run on into the next word, though — a bare 'about' sent
+     "what about governance" to the founder bio, and narrowing it to
+     'about us' only narrowed the failure, because "about using" contains that
+     too. A trailing | marks a key that has to end on a word boundary. It is
+     opt-in per key, so every prefix key above keeps matching as it did. */
+  function keyHit(q, k){
+    if(k.charAt(k.length-1) !== '|') return q.indexOf(k) > -1;
+    k = k.slice(0, -1);
+    for(var at = q.indexOf(k); at > -1; at = q.indexOf(k, at + 1)){
+      if(!/[a-z0-9]/.test(q.charAt(at + k.length))) return true;
+    }
+    return false;
+  }
+
   function ask(q){
     q=(q||'').trim(); if(!q) return;
     add(q,'user');
@@ -341,7 +358,7 @@
     var kq = LANG==='en' ? q.toLowerCase() : '\u0000';
     for(var ci=0; ci<A.length; ci++){
       for(var cj=0; cj<A[ci][0].length; cj++){
-        if(kq.indexOf(A[ci][0][cj]) > -1){
+        if(keyHit(kq, A[ci][0][cj])){
           bot(esc(A[ci][1]) + '<span class="ai-foot">' + UI.team
             + ' <a href="mailto:info@quenora.ai">' + UI.more + '</a>.</span>');
           return;

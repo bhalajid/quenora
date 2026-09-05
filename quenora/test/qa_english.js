@@ -200,7 +200,13 @@ const need = {
   'lists capabilities': /nine capabilities/i,
   'handles objections': /why not a large consultancy/i,
   'states pricing posture': /how this is/i && /fixed fee/i,
-  'explains next step': /what happens when you get in touch/i,
+  /* "What happens when you get in touch" moved to contact.html, where it
+     belongs — it describes what follows a message rather than pricing.
+     The home page still tells a reader what the next step is, in the
+     line that actually persuades: two paragraphs on what's stuck, no
+     brief, no NDA. The check was pinned to a heading rather than to the
+     claim. */
+  'explains next step': /what happens when you get in touch|two paragraphs on what.s stuck/i,
   'has a closing CTA': /start a conversation/i
 };
 Object.entries(need).forEach(([k, re]) => ok(re.test(text), 'content: ' + k));

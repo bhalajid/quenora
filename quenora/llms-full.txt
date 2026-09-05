@@ -74,10 +74,6 @@ Stated here rather than after three meetings, because finding out late wastes yo
 Two to three weeks, agreed before we start. You keep the written position whether or not you engage us for anything after it.
 Priced against a written scope with an explicit list of what’s excluded. Changes are re-scoped in the open, not absorbed quietly into the timeline.
 Never a separate line item. An engagement that ends without a working handover isn’t finished, so we don’t charge you twice to finish it.
-You write two paragraphs What’s not working, and what you’ve already tried. No brief required, no NDA needed to have the first conversation.
-We reply within one working day Either with a time, or with an honest note that this isn’t our problem to solve and a pointer to someone better placed.
-Forty-five minutes, no deck Your systems, your constraint, our read on it. You’ll get a technical opinion in that call, not a follow-up proposal.
-A written position What we’d build first, what it would cost, and what we wouldn’t build. Yours to take to your board, or to another firm.
 
 ## The principles behind the mark.
 

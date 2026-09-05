@@ -1346,6 +1346,25 @@ main > section[hidden]{padding-block:0}
 @media(max-width:900px){.brandimg{height:30px}.brand.lg .brandimg{height:40px}}
 @media(max-width:560px){.brandimg{height:26px}.brand.lg .brandimg{height:36px}}
 /*/BRAND:CSS*/
+/*CLIMAX:CSS*/
+/* the eyebrow, centred between two rules */
+.hook .eyebrow{display:flex;align-items:center;justify-content:center;gap:18px;
+  width:100%;max-width:none}
+.hook .eyebrow::before,.hook .eyebrow::after{content:'';height:1px;flex:1;
+  max-width:180px;background:linear-gradient(90deg,transparent,var(--copper))}
+.hook .eyebrow::after{background:linear-gradient(270deg,transparent,var(--copper))}
+/* land on the card, with the closing line still above it */
+#talk{scroll-margin-top:200px}
+@media(max-width:760px){#talk{scroll-margin-top:120px}}
+/*/CLIMAX:CSS*/
+/*FORM:CSS*/
+.phonerow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px}
+.phonerow select{font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:16px;color:var(--t1);background:rgba(20,22,30,.6);
+  border:1px solid var(--line2);border-radius:2px;padding:0 10px;height:100%;
+  min-height:46px;cursor:pointer}
+.phonerow select:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+/*/FORM:CSS*/
 </style>
 <meta content="it_IT" property="og:locale"/>
 <link href="/assets/nora.css" rel="stylesheet"/>
@@ -1375,14 +1394,14 @@ main > section[hidden]{padding-block:0}
 <a href="/it/work.html">Progetti</a>
 <a href="/it/about.html">About</a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Scegli la lingua" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>IT</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/index.html" hreflang="en" lang="en">English</a></li><li><a href="/de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/index.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
-<a class="navcta" href="#climax"><span class="cta-long">Iniziamo a parlarne</span><span class="cta-short">Contatti</span></a>
+<a class="navcta" href="#talk"><span class="cta-long">Iniziamo a parlarne</span><span class="cta-short">Contatti</span></a>
 </div>
 </header>
 <main id="main">
 <section class="hook">
 <canvas aria-hidden="true" id="heroCanvas"></canvas>
 <div class="wrap">
-<p class="mono eyebrow">Enterprise AI &amp; automation · Working internationally</p>
+<p class="mono eyebrow">Enterprise AI &amp; automation</p>
 <h1>
 <span class="ln"><span class="w">La maggior</span> <span class="w">parte dell'IA</span></span>
 <span class="ln"><span class="w">aziendale</span> <span class="w">non lascia</span> <span class="w">reaches</span></span>
@@ -1487,7 +1506,7 @@ evidence to answer them was never captured.</p></div></div>
 <div class="wrap">
 <div class="cta-inline rv">
 <p><b>Recognise the shape of your problem in those six phases?</b> Two paragraphs on what’s stuck is enough to start — no brief, no NDA.</p>
-<a href="#climax">Tell us what's stuck</a>
+<a href="#talk">Tell us what's stuck</a>
 </div>
 </div>
 </section>
@@ -1648,7 +1667,7 @@ documentation and the evaluation harness regardless — there’s no scenario wh
 you end an engagement with nothing to show for it.</div></details>
 <div class="cta-inline rv">
 <p><b>Still holding an objection we haven’t answered?</b> Put it in the first message — a direct answer is more useful to both of us than a proposal.</p>
-<a href="#climax">Ask it directly</a>
+<a href="#talk">Ask it directly</a>
 </div>
 </div>
 </div>
@@ -1771,7 +1790,7 @@ was drawn, and the standard we hold the work to.</p>
      opens /c, which counts the scan and hands over a vCard filed under
      Quenora Consulting. The numbers are written out underneath because a QR
      is useless to anyone reading this on the device they would scan it with. -->
-<div class="qrcard rv" data-d="1">
+<div class="qrcard rv" data-d="1" id="talk">
 <a aria-label="Save Quenora Consulting to your phone" class="qrcode" href="/c"><svg viewbox="0 0 37 37" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5h7m1 0h1m1 0h5m1 0h2m1 0h2m1 0h7m-29 1h1m5 0h1m2 0h4m2 0h1m4 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m5 0h1m1 0h1m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m6 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h3m2 0h1m2 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h4m3 0h4m1 0h1m-16 1h2m2 0h1m1 0h1m1 0h3m6 0h1m1 0h1m1 0h1m1 0h1m-29 1h3m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1m5 0h1m1 0h2m-28 1h2m3 0h2m1 0h2m1 0h1m3 0h3m1 0h1m1 0h4m1 0h1m-27 1h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m1 0h1m2 0h1m-25 1h7m3 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m-28 1h1m3 0h2m1 0h1m3 0h5m2 0h3m1 0h1m1 0h2m1 0h2m-28 1h1m4 0h3m1 0h1m2 0h1m1 0h4m1 0h1m1 0h2m-23 1h4m2 0h2m2 0h1m4 0h2m2 0h2m2 0h4m-26 1h1m1 0h1m1 0h3m1 0h1m2 0h1m2 0h3m6 0h2m1 0h1m-29 1h1m2 0h1m3 0h1m3 0h4m7 0h3m3 0h1m-29 1h3m2 0h2m1 0h3m2 0h1m3 0h4m3 0h1m1 0h1m1 0h1m-29 1h1m1 0h2m1 0h1m2 0h3m1 0h3m3 0h1m2 0h2m1 0h1m-25 1h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h1m1 0h5m1 0h1m-19 1h3m2 0h1m1 0h1m1 0h1m1 0h2m3 0h3m-27 1h7m2 0h1m2 0h2m3 0h4m1 0h1m1 0h1m-25 1h1m5 0h1m1 0h3m1 0h2m3 0h4m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m4 0h6m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h4m3 0h2m2 0h1m1 0h3m-28 1h1m1 0h3m1 0h1m3 0h1m1 0h1m2 0h1m2 0h7m1 0h2m-28 1h1m5 0h1m2 0h2m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h7m4 0h1m1 0h1m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1" stroke="#07070a"></path></svg></a>
 <div class="qrsay">
 <p class="mono">Take the card first</p>
@@ -1807,7 +1826,7 @@ address and the email, in one tap.</p>
 </div>
 <div class="cfield">
 <label for="cfPhone">Telefono <span class="opt">(optional)</span></label>
-<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" placeholder="+49 152 3392 7436" title="Digits and the usual separators: + ( ) / - and spaces." type="tel"/>
+<div class="phonerow"><label class="vh" for="cfCode">Country code</label><select id="cfCode"><option selected="" value="+49">+49  Germany</option><option value="+43">+43  Austria</option><option value="+41">+41  Switzerland</option><option value="+33">+33  France</option><option value="+31">+31  Netherlands</option><option value="+32">+32  Belgium</option><option value="+44">+44  United Kingdom</option><option value="+1">+1  United States / Canada</option><option value="">Other</option></select><input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" placeholder="+49 152 3392 7436" title="Digits and the usual separators: + ( ) / - and spaces." type="tel"/></div>
 </div>
 <div class="cfield">
 <label for="cfMsg">What’s stuck?</label>
@@ -1851,7 +1870,7 @@ notice</a>.</span></label>
 <div><h3>Navigazione</h3><nav aria-label="Footer">
 <a href="/it/index.html">Home</a><a href="/it/approach.html">Metodo</a>
 <a href="/it/capabilities.html">Competenze</a><a href="/it/engineering.html">Engineering</a><a href="/it/work.html">Progetti</a>
-<a href="/it/about.html">About</a><a href="#climax">Contatti</a></nav></div>
+<a href="/it/about.html">About</a><a href="#talk">Contatti</a></nav></div>
 <div><h3>Contatti</h3><nav aria-label="Contatti">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
 <a href="/impressum.html">Legal notice · Impressum</a>
@@ -3831,6 +3850,26 @@ notice</a>.</span></label>
 })();
 </script>
 <!--/BACKTO:JS-->
+<script>
+/* The select writes into the phone field rather than submitting on its own,
+   so the endpoint still receives one string and nothing downstream changes. */
+(function(){
+  if (typeof document === 'undefined' ||
+      typeof document.addEventListener !== 'function') return;
+  var sel = document.getElementById('cfCode');
+  var tel = document.getElementById('cfPhone');
+  if (!sel || !tel) return;
+  function apply(){
+    var code = sel.value;
+    var rest = tel.value.replace(/^\s*\+\d{1,3}\s*/, '').trim();
+    tel.value = code ? (code + ' ' + rest).trim() : rest;
+  }
+  sel.addEventListener('change', apply);
+  tel.addEventListener('blur', function(){
+    if (sel.value && tel.value && tel.value.charAt(0) !== '+') apply();
+  });
+})();
+</script>
 <script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');

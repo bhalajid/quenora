@@ -35,6 +35,7 @@ fi
 "$PY" build_about.py
 "$PY" build_chapter01.py
 "$PY" build_form.py
+"$PY" build_climax.py
 "$PY" build_journey.py
 "$PY" build_ticker.py
 "$PY" build_chapters.py

@@ -1346,6 +1346,25 @@ main > section[hidden]{padding-block:0}
 @media(max-width:900px){.brandimg{height:30px}.brand.lg .brandimg{height:40px}}
 @media(max-width:560px){.brandimg{height:26px}.brand.lg .brandimg{height:36px}}
 /*/BRAND:CSS*/
+/*CLIMAX:CSS*/
+/* the eyebrow, centred between two rules */
+.hook .eyebrow{display:flex;align-items:center;justify-content:center;gap:18px;
+  width:100%;max-width:none}
+.hook .eyebrow::before,.hook .eyebrow::after{content:'';height:1px;flex:1;
+  max-width:180px;background:linear-gradient(90deg,transparent,var(--copper))}
+.hook .eyebrow::after{background:linear-gradient(270deg,transparent,var(--copper))}
+/* land on the card, with the closing line still above it */
+#talk{scroll-margin-top:200px}
+@media(max-width:760px){#talk{scroll-margin-top:120px}}
+/*/CLIMAX:CSS*/
+/*FORM:CSS*/
+.phonerow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px}
+.phonerow select{font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:16px;color:var(--t1);background:rgba(20,22,30,.6);
+  border:1px solid var(--line2);border-radius:2px;padding:0 10px;height:100%;
+  min-height:46px;cursor:pointer}
+.phonerow select:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+/*/FORM:CSS*/
 </style>
 <meta content="de_DE" property="og:locale"/>
 <link href="/assets/nora.css" rel="stylesheet"/>
@@ -1375,14 +1394,14 @@ main > section[hidden]{padding-block:0}
 <a href="/de/work.html">Projekte</a>
 <a href="/de/about.html">Über uns</a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Sprache wählen" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>DE</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/index.html" hreflang="en" lang="en">English</a></li><li><a aria-current="true" href="/de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/index.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
-<a class="navcta" href="#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a>
+<a class="navcta" href="#talk"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a>
 </div>
 </header>
 <main id="main">
 <section class="hook">
 <canvas aria-hidden="true" id="heroCanvas"></canvas>
 <div class="wrap">
-<p class="mono eyebrow">Enterprise-KI &amp; Automatisierung · International tätig</p>
+<p class="mono eyebrow">Enterprise-KI &amp; Automatisierung</p>
 <h1>
 <span class="ln"><span class="w">Die</span> <span class="w">meiste</span></span>
 <span class="ln"><span class="w">Unternehmens-KI</span> <span class="w">erreicht</span> <span class="w">nie</span></span>
@@ -1475,7 +1494,7 @@ main > section[hidden]{padding-block:0}
 <div class="wrap">
 <div class="cta-inline rv">
 <p><b>Erkennen Sie die Form Ihres Problems in diesen sechs Phasen?</b> Zwei Absätze darüber, was feststeckt, genügen für den Anfang — kein Briefing, keine Geheimhaltungsvereinbarung.</p>
-<a href="#climax">Sagen Sie uns, was klemmt</a>
+<a href="#talk">Sagen Sie uns, was klemmt</a>
 </div>
 </div>
 </section>
@@ -1606,7 +1625,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <div class="ans">Phase 05 ist dafür da, das schriftlich zu beantworten, gemessen an der in Phase 01 vereinbarten Zahl. Hat sie sich nicht bewegt, sagen wir das. Der Code, die Dokumentation und das Evaluations-Harness bleiben in jedem Fall bei Ihnen — es gibt kein Szenario, in dem Sie ein Projekt ohne vorzeigbares Ergebnis beenden.</div></details>
 <div class="cta-inline rv">
 <p><b>Haben Sie noch einen Einwand, den wir nicht beantwortet haben?</b> Schreiben Sie es in die erste Nachricht — eine direkte Antwort nützt uns beiden mehr als ein Angebot.</p>
-<a href="#climax">Fragen Sie direkt</a>
+<a href="#talk">Fragen Sie direkt</a>
 </div>
 </div>
 </div>
@@ -1713,7 +1732,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
      opens /c, which counts the scan and hands over a vCard filed under
      Quenora Consulting. The numbers are written out underneath because a QR
      is useless to anyone reading this on the device they would scan it with. -->
-<div class="qrcard rv" data-d="1">
+<div class="qrcard rv" data-d="1" id="talk">
 <a aria-label="Quenora Consulting im Telefon speichern" class="qrcode" href="/c"><svg viewbox="0 0 37 37" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5h7m1 0h1m1 0h5m1 0h2m1 0h2m1 0h7m-29 1h1m5 0h1m2 0h4m2 0h1m4 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m5 0h1m1 0h1m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m6 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h3m2 0h1m2 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h4m3 0h4m1 0h1m-16 1h2m2 0h1m1 0h1m1 0h3m6 0h1m1 0h1m1 0h1m1 0h1m-29 1h3m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1m5 0h1m1 0h2m-28 1h2m3 0h2m1 0h2m1 0h1m3 0h3m1 0h1m1 0h4m1 0h1m-27 1h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m1 0h1m2 0h1m-25 1h7m3 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m-28 1h1m3 0h2m1 0h1m3 0h5m2 0h3m1 0h1m1 0h2m1 0h2m-28 1h1m4 0h3m1 0h1m2 0h1m1 0h4m1 0h1m1 0h2m-23 1h4m2 0h2m2 0h1m4 0h2m2 0h2m2 0h4m-26 1h1m1 0h1m1 0h3m1 0h1m2 0h1m2 0h3m6 0h2m1 0h1m-29 1h1m2 0h1m3 0h1m3 0h4m7 0h3m3 0h1m-29 1h3m2 0h2m1 0h3m2 0h1m3 0h4m3 0h1m1 0h1m1 0h1m-29 1h1m1 0h2m1 0h1m2 0h3m1 0h3m3 0h1m2 0h2m1 0h1m-25 1h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h1m1 0h5m1 0h1m-19 1h3m2 0h1m1 0h1m1 0h1m1 0h2m3 0h3m-27 1h7m2 0h1m2 0h2m3 0h4m1 0h1m1 0h1m-25 1h1m5 0h1m1 0h3m1 0h2m3 0h4m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m4 0h6m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h4m3 0h2m2 0h1m1 0h3m-28 1h1m1 0h3m1 0h1m3 0h1m1 0h1m2 0h1m2 0h7m1 0h2m-28 1h1m5 0h1m2 0h2m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h7m4 0h1m1 0h1m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1" stroke="#07070a"></path></svg></a>
 <div class="qrsay">
 <p class="mono">Nehmen Sie zuerst die Karte</p>
@@ -1748,7 +1767,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 </div>
 <div class="cfield">
 <label for="cfPhone">Telefon <span class="opt">(optional)</span></label>
-<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" placeholder="+49 152 3392 7436" title="Ziffern und die üblichen Trennzeichen: + ( ) / - und Leerzeichen." type="tel"/>
+<div class="phonerow"><label class="vh" for="cfCode">Ländervorwahl</label><select id="cfCode"><option selected="" value="+49">+49  Deutschland</option><option value="+43">+43  Österreich</option><option value="+41">+41  Schweiz</option><option value="+33">+33  Frankreich</option><option value="+31">+31  Niederlande</option><option value="+32">+32  Belgien</option><option value="+44">+44  Vereinigtes Königreich</option><option value="+1">+1  USA / Kanada</option><option value="">Andere</option></select><input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" placeholder="+49 152 3392 7436" title="Ziffern und die üblichen Trennzeichen: + ( ) / - und Leerzeichen." type="tel"/></div>
 </div>
 <div class="cfield">
 <label for="cfMsg">Was steckt fest?</label>
@@ -1789,7 +1808,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <div><h3>Navigation</h3><nav aria-label="Footer">
 <a href="/de/index.html">Start</a><a href="/de/approach.html">Vorgehen</a>
 <a href="/de/capabilities.html">Leistungen</a><a href="/de/engineering.html">KI-Engineering</a><a href="/de/work.html">Projekte</a>
-<a href="/de/about.html">Über uns</a><a href="#climax">Kontakt</a></nav></div>
+<a href="/de/about.html">Über uns</a><a href="#talk">Kontakt</a></nav></div>
 <div><h3>Kontakt</h3><nav aria-label="Kontakt">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
 <a href="/impressum.html">Impressum</a>
@@ -3769,6 +3788,26 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 })();
 </script>
 <!--/BACKTO:JS-->
+<script>
+/* The select writes into the phone field rather than submitting on its own,
+   so the endpoint still receives one string and nothing downstream changes. */
+(function(){
+  if (typeof document === 'undefined' ||
+      typeof document.addEventListener !== 'function') return;
+  var sel = document.getElementById('cfCode');
+  var tel = document.getElementById('cfPhone');
+  if (!sel || !tel) return;
+  function apply(){
+    var code = sel.value;
+    var rest = tel.value.replace(/^\s*\+\d{1,3}\s*/, '').trim();
+    tel.value = code ? (code + ' ' + rest).trim() : rest;
+  }
+  sel.addEventListener('change', apply);
+  tel.addEventListener('blur', function(){
+    if (sel.value && tel.value && tel.value.charAt(0) !== '+') apply();
+  });
+})();
+</script>
 <script data-generated="langsel">
 (function(){
   var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');

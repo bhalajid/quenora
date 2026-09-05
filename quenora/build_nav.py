@@ -81,12 +81,12 @@ PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
 DEST_HOME = {
     "Approach": "approach.html", "Capabilities": "capabilities.html",
     "Engineering": "engineering.html", "Work": "work.html",
-    "About": "about.html", "Contact": "#climax", "Home": "index.html",
+    "About": "about.html", "Contact": "#talk", "Home": "index.html",
 }
 DEST_INNER = {
     "Approach": "approach.html", "Capabilities": "capabilities.html",
     "Engineering": "engineering.html", "Work": "work.html",
-    "About": "about.html", "Contact": "index.html#climax",
+    "About": "about.html", "Contact": "index.html#talk",
     "Home": "index.html",
 }
 
@@ -307,6 +307,15 @@ def retarget_and_mark(soup, page):
     """Put every nav label back on its one destination for this page, and flag
     the label this page IS. Header and footer both, because the release gate
     requires them to agree and a visitor reads whichever is nearer."""
+    # The closing chapter's landing point moved from the top of #climax to
+    # the contact card inside it, because #climax put the card 850px below the
+    # fold. build_climax only rewrites the home page, so every other page's
+    # header CTA still pointed at the old anchor while its own footer had
+    # moved — the gate caught the two disagreeing.
+    for a in soup.find_all('a', href=True):
+        if a['href'].endswith('#climax'):
+            a['href'] = a['href'][:-len('#climax')] + '#talk'
+
     dest = DEST_HOME if page == "index.html" else DEST_INNER
     here = CURRENT.get(page)
     changed = marked = 0

@@ -23,6 +23,29 @@ code(){ curl -sS -o /dev/null -w '%{http_code}' --max-time 8 "$1" 2>/dev/null; }
 loc(){  curl -sS -o /dev/null -w '%{redirect_url}' --max-time 8 "$1" 2>/dev/null; }
 hdr(){  curl -sSI --max-time 8 "$1" 2>/dev/null | tr -d '\r'; }
 
+check_qr(){
+  # The printed codes encode https://quenora.ai/c and nothing else. Until the
+  # domain answers, every card and every stand code is a dead link, and a scan
+  # gives a browser error rather than a contact. This cannot be caught from the
+  # repo — the URL is correct there — so it is checked here, against the world.
+  sect "the contact QR resolves"
+  for u in "https://$LIVE/c" "https://$LIVE/c?k=card" "https://$LIVE/c?k=event"; do
+    c=$(code "$u")
+    if [ "$c" = "200" ]; then
+      ct=$(hdr "$u" | grep -i '^content-type:' | head -1)
+      case "$ct" in
+        *vcard*) ok "$u -> 200, text/vcard" ;;
+        *)       no "$u -> 200 but $ct — a scanner will not offer to save it" ;;
+      esac
+    else
+      no "$u -> $c — every printed code points here"
+    fi
+  done
+  c=$(code "https://$LIVE/w?probe=1")
+  [ "$c" = "200" ] && ok "https://$LIVE/w?probe=1 -> 200" \
+    || no "https://$LIVE/w?probe=1 -> $c — the wallet probe logs an error on every home page load"
+}
+
 sect "the domain answers"
 c=$(code "https://$LIVE/")
 [ "$c" = "200" ] && ok "https://$LIVE/ -> 200" || no "https://$LIVE/ -> $c (DNS not pointed, or TLS not issued yet)"
@@ -94,6 +117,8 @@ h=$(hdr "https://$LIVE/")
 for k in "strict-transport-security" "content-security-policy" "x-content-type-options"; do
   printf '%s' "$h" | grep -qi "^$k:" && ok "$k present" || no "$k missing"
 done
+
+check_qr
 
 printf '\n\033[1m%d passed, %d failed\033[0m\n' "$pass" "$fail"
 [ "$fail" -eq 0 ] || exit 1

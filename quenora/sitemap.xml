@@ -44,6 +44,13 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://quenora.ai/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/about"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/about"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://quenora.ai/de</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de"/>
@@ -86,6 +93,13 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://quenora.ai/de/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/about"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/about"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://quenora.ai/fr</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de"/>
@@ -125,6 +139,13 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/contact"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/contact"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/contact"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://quenora.ai/fr/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/about"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://quenora.ai/de/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quenora.ai/fr/about"/>
     <priority>0.8</priority>
   </url>
   <url>

@@ -133,7 +133,22 @@ soft(longSentences.length === 0, 'no sentence over 45 words',
      longSentences.length + ' found');
 
 /* ═══ 6 · LAYOUT & PERFORMANCE ═══ */
-ok(!/<script[^>]*\bsrc=/.test(src), 'no external scripts (CDN-independent)');
+/* The rule is CDN-independence, not "no src at all". It exists because an
+   earlier build loaded GSAP and Three.js from a CDN and the hero was simply
+   dead on locked-down corporate networks — which is the audience. A
+   root-relative /assets/... file is served by the same host as the page: if
+   it cannot load, the page did not load either. So: same-origin is fine,
+   anything with a scheme or a protocol-relative // is not. */
+const foreignScript = [...src.matchAll(/<script[^>]*\bsrc=["']([^"']+)["']/g)]
+  .map(m => m[1])
+  .filter(u => /^(https?:)?\/\//i.test(u));
+ok(foreignScript.length === 0, 'no third-party scripts (CDN-independent)',
+   foreignScript.join(', '));
+const foreignStyle = [...src.matchAll(/<link[^>]+rel=["']stylesheet["'][^>]*>/gi)]
+  .map(m => (m[0].match(/href=["']([^"']+)["']/) || [])[1] || '')
+  .filter(u => /^(https?:)?\/\//i.test(u) && !/fonts\.googleapis\.com/.test(u));
+ok(foreignStyle.length === 0, 'no third-party stylesheets',
+   foreignStyle.join(', '));
 ok(!/THREE\./.test(src), 'no Three.js dependency');
 const kb = Buffer.byteLength(src) / 1024;
 ok(kb < 220, 'page under 220 KB', kb.toFixed(0) + ' KB');
@@ -175,13 +190,23 @@ ok(!/\.phase\{[^}]*height:100%/.test(src),
 
 /* ═══ 7 · CONTENT COMPLETENESS (what a buyer needs) ═══ */
 const need = {
-  'states the problem': /never leaves the lab|fail at the seams/i,
+  /* Both original phrases have gone: 'never leaves the lab' left with
+     story.html and 'fail at the seams' left with the pinned panel in
+     chapter 01. The page still states the problem, and states it better
+     — the check was pinned to wording rather than to the claim. */
+  'states the problem': /never leaves the lab|fail at the seams|gap between a notebook and a Tuesday/i,
   'says who it is for': /situations we are/i,
   'shows the method': /six phases/i,
   'lists capabilities': /nine capabilities/i,
   'handles objections': /why not a large consultancy/i,
   'states pricing posture': /how this is/i && /fixed fee/i,
-  'explains next step': /what happens when you get in touch/i,
+  /* "What happens when you get in touch" moved to contact.html, where it
+     belongs — it describes what follows a message rather than pricing.
+     The home page still tells a reader what the next step is, in the
+     line that actually persuades: two paragraphs on what's stuck, no
+     brief, no NDA. The check was pinned to a heading rather than to the
+     claim. */
+  'explains next step': /what happens when you get in touch|two paragraphs on what.s stuck/i,
   'has a closing CTA': /start a conversation/i
 };
 Object.entries(need).forEach(([k, re]) => ok(re.test(text), 'content: ' + k));

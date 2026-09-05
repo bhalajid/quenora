@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Quenora Consulting — About</title>
+<meta content="Quenora is founder-led, based in Heilbronn and working internationally. Who you are actually hiring." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<meta content="#0A0A0B" name="theme-color"/>
+<meta content="website" property="og:type"/>
+<meta content="Quenora Consulting" property="og:site_name"/>
+<meta content="Quenora Consulting — Capabilities" property="og:title"/>
+<meta content="Quenora is founder-led, based in Heilbronn and working internationally. Who you are actually hiring." property="og:description"/>
+<meta content="https://quenora.ai/es/about" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Quenora Consulting — Capabilities" name="twitter:title"/>
+<meta content="Las nueve capacidades de Quenora, desde la ingeniería de plataforma hasta la gobernanza de la IA." name="twitter:description"/>
+<style>
+:root{
+  /* Grounds are deliberately NEUTRAL (no blue bias). An earlier palette had
+     +10 to +31 more blue than red in every dark tone, which compounded with
+     the blue backlight bleed of cheap/uncalibrated laptop panels and made the
+     whole site read as navy/purple rather than near-black. */
+  --ink:#07070A; --ink-2:#0A0B10; --surface:#0D0E13; --surface-2:#14161E;
+  --copper:#C97A3C; --copper-lt:#E9A063; --copper-dk:#8A4E20;
+  --copper-dim:rgba(201,122,60,.13); --copper-glow:rgba(201,122,60,.45);
+  --ember:#FF7043;--signal:#5BD7F5;
+  --serif:'Playfair Display',Georgia,serif;
+  --white:#F2EFE8; --grey:#A8AEBB; --grey-d:#7C8290;
+  --line:rgba(242,239,232,.09); --line-2:rgba(242,239,232,.05);
+  /* the home page's stack, so a page falls back the same way if Inter
+     does not load */
+  --font:Inter,system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --radius:14px; --maxw:1240px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+/* Interactive controls opt out of double-tap-to-zoom, so a second tap on a
+   button is a second tap rather than a zoom gesture. */
+a,button,input,select,textarea,summary,[role="button"]{touch-action:manipulation}
+/* Below 16px iOS zooms the viewport when a field takes focus, which throws the
+   page off centre mid-form. */
+input,select,textarea{font-size:16px}
+html{scroll-behavior:smooth}
+/* 17px/1.62, the home page's base. These pages inherited the browser
+   default 16px at 1.6, so body copy was a step smaller and a shade
+   tighter than on the page that links to them. */
+body{background:var(--ink);color:var(--white);font-family:var(--font);
+  font-weight:400;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+a{color:inherit;text-decoration:none}
+section{position:relative}
+::selection{background:var(--ember);color:var(--ink)}
+
+/* ambient grain + grid */
+body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 75%)}
+
+/* ---------- nav ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:300;padding:20px 0;
+  transition:background .35s ease,border-color .35s ease,padding .35s ease;
+  border-bottom:1px solid transparent}
+header.solid{background:rgba(10,10,11,.85);backdrop-filter:blur(16px) saturate(140%);
+  border-color:var(--line);padding:13px 0}
+nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
+/* The lockup is set to the same spec as the home page: mark 40px, wordmark
+   Inter 500 at 1.36rem, no glow behind the mark and no copper initial. Two
+   pages reached from the same header should not carry two wordmarks. */
+.brand{display:flex;align-items:center;gap:15px;flex:none;line-height:1}
+.brand svg{width:40px;height:auto}
+.brand b{font-size:1.36rem;font-weight:500;letter-spacing:-.008em;
+  white-space:nowrap;color:var(--white)}
+.brand b em{font-style:normal;color:inherit}
+.navlinks{display:flex;gap:30px;font-size:13.5px;color:var(--grey)}
+.navlinks a{position:relative;padding:4px 0;transition:color .2s}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+  background:var(--copper);transition:width .28s ease}
+.navlinks a:hover,.navlinks a.on{color:var(--white)}
+.navlinks a:hover::after,.navlinks a.on::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:550;
+  padding:11px 22px;border-radius:8px;border:1px solid transparent;white-space:nowrap;
+  cursor:pointer;transition:all .22s ease;font-family:inherit}
+.btn-primary{background:var(--copper);color:var(--ink);
+  box-shadow:0 6px 24px -8px var(--copper-glow)}
+.btn-primary:hover{background:var(--copper-lt);transform:translateY(-1px);
+  box-shadow:0 10px 30px -8px var(--copper-glow)}
+.btn-ghost{border-color:var(--line);color:var(--white);background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:var(--copper);background:var(--copper-dim)}
+/* The CTA used to be hidden below 1000px, so on every phone and tablet the
+   one conversion control disappeared from the header — while index.html and
+   engineering.html keep theirs at every width. It stays now, dropping to its
+   short label at 560 like the rest of the site. */
+.navcta{display:inline-flex}
+.cta-short{display:none}
+@media(max-width:560px){
+  .cta-long{display:none}.cta-short{display:inline}
+  .navcta{padding:9px 14px}
+}
+@media(max-width:400px){
+  nav{gap:10px}
+  .brand{gap:10px}
+  .brand svg{width:32px}
+  .brand b{font-size:1.06rem}
+  .navcta{padding:8px 11px;font-size:12.5px}
+}
+
+/* hamburger + collapsible nav */
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;
+  padding:8px;flex:none}
+.burger i{display:block;width:22px;height:1.5px;background:var(--white);transition:.28s ease}
+.burger.open i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open i:nth-child(2){opacity:0}
+.burger.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+@media(max-width:880px){
+  .burger{display:flex}
+  nav{flex-wrap:wrap}
+  .navlinks{order:3;flex-basis:100%;flex-direction:column;gap:0;
+    max-height:0;overflow:hidden;transition:max-height .35s ease,margin .35s ease;margin-top:0}
+  .navlinks.open{max-height:340px;margin-top:14px}
+  .navlinks a{padding:13px 2px;border-bottom:1px solid var(--line-2);font-size:15px}
+  .navlinks a::after{display:none}
+}
+
+/* ---------- accessibility ---------- */
+.skip{position:absolute;left:-9999px;top:0;z-index:600;background:var(--copper);
+  color:var(--ink);padding:12px 20px;border-radius:0 0 8px 0;font-weight:600;font-size:14px}
+.skip:focus{left:0}
+:focus-visible{outline:2px solid var(--copper);outline-offset:3px;border-radius:4px}
+.btn:focus-visible,.demo-tab:focus-visible{outline-offset:2px}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .rv{opacity:1!important;transform:none!important}
+  .nine-row{opacity:1!important;transform:none!important}
+  .nine-row .nc{transform:scale(1)!important}
+  .divider::after{width:100%!important}
+}
+
+/* ---------- scroll progress bar ---------- */
+.progress{position:fixed;top:0;left:0;height:2px;width:0%;z-index:500;
+  background:linear-gradient(90deg,var(--copper-dk),var(--copper),var(--copper-lt));
+  box-shadow:0 0 12px var(--copper-glow);transition:width .08s linear}
+
+/* ---------- animated section divider ---------- */
+.divider{position:relative;height:1px;background:var(--line-2);overflow:visible}
+.divider::after{content:"";position:absolute;left:50%;top:0;height:1px;width:0;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,var(--copper),transparent);
+  transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+.divider.in::after{width:100%}
+.divider i{position:absolute;left:50%;top:50%;width:5px;height:5px;border-radius:50%;
+  background:var(--copper);transform:translate(-50%,-50%) scale(0);
+  box-shadow:0 0 14px var(--copper);transition:transform .6s cubic-bezier(.34,1.56,.64,1) .5s}
+.divider.in i{transform:translate(-50%,-50%) scale(1)}
+
+/* ---------- text scramble ---------- */
+.scramble{font-variant-ligatures:none}
+/* Emphasis in a heading is set in the same italic serif as the home page.
+   The h1 here is a .scramble target, whose JS rewrites the text node, so
+   markup inside it would not survive — this applies to h2/h3 emphasis. */
+/* --ember, not --copper-lt. The home page, engineering and story all set
+   heading emphasis in ember; picking the lighter copper here meant the same
+   italic serif came out a different colour depending on which page you were
+   reading, which reads as two brands rather than one accent. Letter-spacing
+   matches the home page's em rule too. */
+h1 em,h2 em,h3 em{font-family:var(--serif);font-style:italic;
+  font-weight:400;letter-spacing:-.02em;color:var(--ember)}
+.scramble .sc-ghost{color:var(--copper);opacity:.85}
+
+/* ---------- typography ---------- */
+.kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  /* --copper-lt, matching the section eyebrows on the home page. These were
+     the darker --copper, so the small mono label above every heading came out
+     a different colour depending which page you were on. */
+  color:var(--copper-lt);margin-bottom:16px;display:flex;align-items:center;gap:11px}
+.kicker::before{content:"";width:20px;height:1px;background:var(--copper-lt);flex:none}
+h1{font-size:clamp(40px,5.4vw,74px);font-weight:700;letter-spacing:-.035em;line-height:1.03}
+h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-height:1.12}
+.section-pad{padding:120px 0;position:relative;z-index:2}
+.section-head{max-width:680px;margin-bottom:60px}
+.section-head p{margin-top:16px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:56ch}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+/* the home page's stagger, so a heading and its lede arrive in the same
+   rhythm here as they do there */
+.rv[data-d="1"]{transition-delay:.08s}
+.rv[data-d="2"]{transition-delay:.16s}
+
+/* ---------- cards ---------- */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.card{background:var(--surface);padding:38px 34px;display:flex;flex-direction:column;
+  min-height:230px;position:relative;transition:background .3s ease}
+.card::after{content:"";position:absolute;inset:0;opacity:0;pointer-events:none;
+  background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),var(--copper-dim),transparent 60%);
+  transition:opacity .35s ease}
+.card:hover{background:var(--surface-2)}
+.card:hover::after{opacity:1}
+.card .num{font-family:var(--mono);font-size:11.5px;color:var(--copper);margin-bottom:22px;
+  letter-spacing:.1em}
+.card h3{font-size:19px;font-weight:700;letter-spacing:-.015em;margin-bottom:11px}
+.card h4{font-size:16.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:9px}
+.card p{font-size:14px;color:var(--grey);line-height:1.68;margin-top:auto;padding-top:6px;font-weight:300}
+@media(max-width:900px){.grid-3,.grid-2{grid-template-columns:1fr}}
+
+/* ---------- stat cards ---------- */
+.stat b{display:block;font-size:42px;font-weight:600;letter-spacing:-.03em;color:var(--copper);
+  margin-bottom:8px;font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--grey-d);letter-spacing:.02em}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-index:2;
+  background:linear-gradient(180deg,transparent,rgba(201,122,60,.03))}
+/* space-between across a wrapping flex row put the last two columns against
+   opposite edges of the second line, which is the ragged footer that got
+   flagged. A grid gives four columns that line up, and collapses cleanly. */
+.foot-row{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));
+  gap:56px 40px}
+/* The header sets a bare `nav{display:flex}`, which also caught the footer's
+   own <nav> elements and laid seven site links out in a single row — that is
+   what pushed the columns to 103/545/279/184 instead of 1.6/1/1/1. */
+footer nav{display:block}
+@media(max-width:900px){.foot-row{grid-template-columns:1fr 1fr;gap:40px 32px}}
+@media(max-width:560px){.foot-row{grid-template-columns:1fr;gap:32px}}
+.foot-col h5{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--grey-d);font-weight:500;margin:0 0 16px}
+.foot-brand{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.foot-brand svg{width:26px}
+.foot-brand b{font-size:16.5px;font-weight:600}
+.foot-col h5{font-size:11px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--grey-d);margin-bottom:16px}
+.foot-col a,.foot-col p{display:block;font-size:13.5px;color:var(--grey);margin-bottom:10px;font-weight:300}
+.foot-col a:hover{color:var(--copper)}
+.foot-line{margin-top:52px;padding-top:26px;border-top:1px solid var(--line-2);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--grey-d)}
+
+
+
+@media(max-width:700px){
+  .wrap{padding:0 24px}
+  .section-pad{padding:80px 0}
+  .card{padding:28px 24px;min-height:auto}
+  .phero{padding:140px 0 70px}
+  .phero p{font-size:15.5px}
+  #pCanvas{opacity:.85}
+  .svc-detail{padding:32px 0}
+  .step{padding:32px 0}
+  .case{padding:28px 22px}
+  .case .metrics{gap:22px}
+  .contact-side{padding:26px}
+  .qr-mini{flex-direction:column;align-items:flex-start}
+}
+.phero{padding:190px 0 90px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.phero::before{content:"";position:absolute;top:-50%;right:-15%;width:70%;height:200%;
+  background:radial-gradient(circle,rgba(201,122,60,.09),transparent 62%);pointer-events:none}
+.phero h1{font-size:clamp(36px,4.6vw,62px);max-width:19ch}
+.phero p{margin-top:22px;color:var(--grey);font-size:17.5px;font-weight:300;max-width:60ch;line-height:1.75}
+#pCanvas{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.62}
+.phero .wrap{position:relative;z-index:3}
+
+.svc-detail{display:grid;grid-template-columns:76px 1fr;gap:30px;padding:46px 0;
+  border-bottom:1px solid var(--line-2);align-items:start}
+@media(max-width:760px){.svc-detail{grid-template-columns:1fr;gap:14px}}
+.svc-detail /* .74rem / .15em, matching .nrow .i on the home page, which numbers the same
+   nine capabilities. The glowing dot that used to sit in front of it is gone:
+   the nine-circle gesture belongs to the mark, not to a list bullet. */
+.idx{font-family:var(--mono);font-size:.74rem;color:var(--copper);padding-top:5px;
+  letter-spacing:.15em;display:flex;align-items:center;gap:12px}
+.svc-detail 
+.svc-detail h3{font-size:23px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+.svc-detail .body{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:68ch}
+.svc-detail ul{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;list-style:none}
+.svc-detail li{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:7px 13px;border:1px solid var(--line);border-radius:20px;color:var(--grey-d);
+  background:rgba(255,255,255,.02);transition:.22s}
+.svc-detail:hover li{border-color:rgba(201,122,60,.28);color:var(--grey)}
+
+.step{display:grid;grid-template-columns:110px 1fr;gap:32px;padding:44px 0;
+  border-bottom:1px solid var(--line-2);align-items:start}
+@media(max-width:760px){.step{grid-template-columns:1fr;gap:12px}}
+.step .ph{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--copper)}
+.step h3{font-size:21px;font-weight:700;letter-spacing:-.018em;margin-bottom:11px}
+.step p{color:var(--grey);font-size:15px;font-weight:300;line-height:1.78;max-width:66ch}
+.step .wk{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:11px;
+  color:var(--grey-d);padding:6px 12px;border:1px solid var(--line);border-radius:6px}
+
+.case{background:linear-gradient(150deg,var(--surface),var(--ink-2));border:1px solid var(--line);
+  border-radius:var(--radius);padding:40px;position:relative;overflow:hidden}
+.case::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--copper),transparent);opacity:.5}
+.case .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:18px}
+.case h3{font-size:21px;font-weight:700;letter-spacing:-.018em;margin-bottom:14px;line-height:1.28}
+.case p{color:var(--grey);font-size:14.5px;font-weight:300;line-height:1.75}
+.case .metrics{display:flex;gap:34px;margin-top:26px;padding-top:24px;
+  border-top:1px solid var(--line-2);flex-wrap:wrap}
+.case .metrics div b{display:block;font-size:26px;font-weight:600;color:var(--copper);
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.case .metrics div span{font-size:11.5px;color:var(--grey-d)}
+.placeholder-note{background:rgba(201,122,60,.06);border:1px dashed rgba(201,122,60,.3);
+  border-radius:var(--radius);padding:28px 32px;margin-top:44px}
+.placeholder-note h4{font-size:15px;font-weight:600;margin-bottom:9px;color:var(--copper)}
+.placeholder-note p{color:var(--grey);font-size:14px;font-weight:300;line-height:1.72;max-width:70ch}
+
+.contact-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.field{margin-bottom:20px}
+.field label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grey-d);margin-bottom:9px}
+.field input,.field textarea,.field select{width:100%;background:rgba(255,255,255,.03);
+  border:1px solid var(--line);border-radius:9px;padding:14px 16px;color:var(--white);
+  font-family:inherit;font-size:14.5px;transition:.22s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--copper);
+  background:rgba(201,122,60,.05);box-shadow:0 0 0 3px rgba(201,122,60,.08)}
+.field textarea{min-height:130px;resize:vertical}
+.field select option{background:var(--surface);color:var(--white)}
+.contact-side{background:linear-gradient(150deg,var(--surface),var(--ink-2));
+  border:1px solid var(--line);border-radius:var(--radius);padding:36px}
+.contact-side h4{font-size:17px;font-weight:600;margin-bottom:20px}
+.contact-side .row{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid var(--line-2);
+  align-items:flex-start}
+.contact-side .row:last-child{border:none}
+.contact-side .row i{color:var(--copper);font-size:15px;flex:none;font-style:normal}
+.contact-side .row div b{display:block;font-size:13.5px;font-weight:550;margin-bottom:3px}
+.contact-side .row div span{font-size:13px;color:var(--grey);font-weight:300}
+.qr-mini{margin-top:26px;padding-top:24px;border-top:1px solid var(--line-2);
+  display:flex;gap:18px;align-items:center}
+.qr-mini img{width:92px;height:92px;background:#fff;padding:7px;border-radius:9px;flex:none}
+.qr-mini p{font-size:12.5px;color:var(--grey-d);font-weight:300;line-height:1.65}
+.form-note{margin-top:16px;font-size:12.5px;color:var(--grey-d)}
+
+.langsel{position:relative;margin-left:14px}
+.langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
+  padding:0 12px;background:transparent;border:1px solid var(--line);
+  border-radius:3px;color:var(--grey);font:inherit;font-size:12px;
+  letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
+.langsel>button:hover{border-color:var(--copper);color:var(--white)}
+.langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
+  margin:0;padding:6px;list-style:none;background:var(--ink-2);
+  border:1px solid var(--line);border-radius:4px;display:none;z-index:120;
+  box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.langmenu.open{display:block}
+.langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
+  color:var(--grey);transition:background .2s,color .2s}
+.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white)}
+.langmenu a[aria-current=true]{color:var(--copper-lt)}
+@media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
+  .langsel>button span{display:none}}
+/*WIDGET:CSS*/
+
+/*/WIDGET:CSS*/
+/*NAV:CSS*/
+/* ── one header, on every page ──────────────────────────────────────────
+   This site grew two header systems. The home page and engineering.html
+   space the links with var(--sp3) and mark the current page by turning it
+   copper, through a bare [aria-current=page] rule. approach, capabilities,
+   work and contact use a 30px gap, a smaller type size, and mark the current
+   page white with a growing underline. Same nav, same words, three different
+   treatments depending on where you happened to be standing — and the links
+   sat at a different x on each page, so they visibly jumped as you clicked
+   through.
+
+   Everything below is the single treatment. It is injected last, so it wins
+   on order rather than on !important, and the desktop metrics are scoped
+   above the 880px breakpoint that both families already use for the burger,
+   so the mobile drawer keeps its own larger tap targets. */
+
+/* The inner pages spread five header children with space-between, which put
+   the links in the middle of the bar while the home page pushed them right. */
+.navlinks{margin-left:auto}
+
+/* Same container, so the header sits at the same x on every page. The three
+   families each defined .wrap differently — width:min(100% - 40px, W) with no
+   padding, max-width with 20px of padding, and max-width with 40px — so even
+   after the max-width was unified the CONTENT box was 1240, 1200 and 1160.
+   That is the last of the shifting. Scoped to desktop so each page keeps the
+   mobile gutter it was designed with. */
+@media(min-width:881px){
+  /* width:100%, not auto. The home page's hero section is display:flex, and
+     on a flex item width:auto shrink-wraps to the content — the wrap collapsed
+     to 1055px and margin-inline:auto then centred it, putting the headline
+     92px to the RIGHT of the logo. 100% behaves in both a block and a flex
+     parent. */
+  header .wrap, main section > .wrap{width:100%;max-width:1240px;
+    margin-inline:auto;padding-left:40px;padding-right:40px}
+}
+
+@media(min-width:881px){
+  /* The header's own flex container: a div.wrap on the home page and inner
+     engineering, a nav on the rest. Their gaps were 24px and 30px, and with
+     three items to the right of the links that is a 12px difference in where
+     the links end — the last of the movement between pages. */
+  header > .wrap, header nav{gap:26px}
+  .navlinks{gap:26px;align-items:center}
+  .navlinks a,.navlinks>a{font-size:14px;padding:4px 0;border-bottom:0}
+  .navcta{padding:9px 16px;font-size:12.5px}
+}
+
+/* The current page: white, over a copper rule. Drawn as a background image
+   rather than a border or an ::after, because one family already owns the
+   ::after for its hover underline and a border-bottom is taken by the mobile
+   drawer — this collides with neither. */
+header .navlinks a.on,
+header .navlinks a[aria-current="page"]{
+  color:#F2EFE8;
+  background-image:linear-gradient(#C97A3C,#C97A3C);
+  background-size:100% 2px;
+  background-repeat:no-repeat;
+  background-position:0 100%;
+}
+/* and suppress the other family's underline, so the active tab never wears
+   two of them at once */
+header .navlinks a.on::after,
+header .navlinks a[aria-current="page"]::after{width:0}
+/*/NAV:CSS*/
+/*BRAND:CSS*/
+/* ── the supplied lockup ───────────────────────────────────────────────
+   One file, referenced everywhere, rather than nine inline circles repeated
+   in twenty-four pages. Height is set and width follows the ratio, so the
+   mark never distorts and never reflows the header when it loads. */
+.brandimg{display:block;height:34px;width:auto;flex:none}
+.brand.lg .brandimg{height:46px}
+@media(max-width:900px){.brandimg{height:30px}.brand.lg .brandimg{height:40px}}
+@media(max-width:560px){.brandimg{height:26px}.brand.lg .brandimg{height:36px}}
+/*/BRAND:CSS*/
+/*PREVIEW:CSS*/
+/* the About page's fact list */
+.ab-facts{display:grid;grid-template-columns:auto 1fr;gap:10px 22px;
+  margin:var(--sp4,40px) 0 0;max-width:52ch}
+.ab-facts dt{color:var(--grey-d);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;align-self:center}
+.ab-facts dd{margin:0;color:var(--white);font-size:.98rem}
+/*/PREVIEW:CSS*/
+</style>
+<meta content="es_ES" property="og:locale"/>
+<link href="/assets/nora.css" rel="stylesheet"/>
+<script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/capabilities#page","url":"https://quenora.ai/capabilities","name":"Nine capabilities. One team behind all of them.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"All nine Quenora capabilities, from platform engineering to AI governance.","breadcrumb":{"@id":"https://quenora.ai/capabilities#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/capabilities#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"Nine capabilities. One team behind all of them.","item":"https://quenora.ai/capabilities"}]},{"@type":"ItemList","@id":"https://quenora.ai/capabilities#services","name":"Nine capabilities. One team behind all of them.","numberOfItems":9,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Service","@id":"https://quenora.ai/capabilities#service-1","name":"Platform & Deployment Engineering","description":"The foundation every AI initiative silently depends on, and the path into production at the end of it. We design the data architecture, provision the infrastructure, and build the internal platforms that let your teams ship AI repeatedly rather than once — then deploy on them, with monitoring and handover…","serviceType":"Platform & Deployment Engineering","provider":{"@id":"https://quenora.ai/#org"},"areaServed":{"@type":"Place","name":"Europe"},"availableLanguage":["en","de","fr"]}},{"@type":"ListItem","position":2,"item":{"@type":"Service","@id":"https://quenora.ai/capabilities#service-2","name":"Process & Workflow Automation","description":"The work itself, running without hands on it. We automate the processes your business repeats — the approvals, the handoffs, the reconciliations, the reporting somebody currently does on a Tuesday afternoon. This is where an AI capability stops being a capability and becomes throughput.","serviceType":"Process & Workflow Automation","provider":{"@id":"https://quenora.ai/#org"},"areaServed":{"@type":"Place","name":"Europe"},"availableLanguage":["en","de","fr"]}},{"@type":"ListItem","position":3,"item":{"@type":"Service","@id":"https://quenora.ai/capabilities#service-3","name":"AI Integration","description":"Models connected into the systems your business already runs on — CRM, ERP, service desks, operations tooling. The hard part is almost never the model; it is the plumbing, the permissions, and the edge cases nobody documented. We attach to what is already moving rather than proposing you replace it.","serviceType":"AI Integration","provider":{"@id":"https://quenora.ai/#org"},"areaServed":{"@type":"Place","name":"Europe"},"availableLanguage":["en","de","fr"]}},{"@type":"ListItem","position":4,"item":{"@type":"Service","@id":"https://quenora.ai/capabilities#service-4","name":"AI Strategy & Advisory","description":"Roadmaps, build-versus-buy decisions, and honest feasibility assessments from people who have shipped rather than only presented. This includes telling you when AI is the wrong answer for a problem — advice that is worth more than a workstream you did not need.","serviceType":"AI Strategy & Advisory","provider":{"@id":"https://quenora.ai/#org"},"areaServed":{"@type":"Place","name":"Europe"},"availableLanguage":["en","de","fr"]}},{"@type":"ListItem","position":5,"item":{"@type":"Service","@id":"https://quenora.ai/capabilities#service-5","name":"Data Engineering & Analytics","description":"Pipelines, warehouses, and quality controls that make data model-ready. This is the least glamorous line on this page and the one that determines whether everything above it works. Most failed AI programmes are actually failed data programmes.","serviceType":"Data Engineering & Analytics","provider":{"@id":"https://quenora.ai/#org"},"areaServed":{"@type":"Place","name":"Europe"},"availableLanguage":["en","de","fr"]}},{"@type":"ListItem","position":6,"item":{"@type":"Service","@id":"https://quenora.ai/capabilities#service-6","name":"Custom AI Agents & Copilots","description":"Purpose-built agents wired into real workflows, with defined scope, guardrails, and escalation paths to humans. Not a chatbot bolted onto a homepage — systems that take an action, log what they did, and hand off cleanly when they hit their limits.","serviceType":"Custom AI Agents & Copilots","provider":{"@id":"https://quenora.ai/#org"},"areaServed":{"@type":"Place","name":"Europe"},"availableLanguage":["en","de","fr"]}},{"@type":"ListItem","position":7,"item":{"@type":"Service","@id":"https://quenora.ai/capabilities#service-7","name":"AI Governance, Security & Compliance","description":"Model risk, data privacy, access control, and audit trails built in from day one. For European clients that means GDPR and EU AI Act alignment treated as part of the engineering work, not as a document produced afterwards to satisfy a regulator.","serviceType":"AI Governance, Security & Compliance","provider":{"@id":"https://quenora.ai/#org"},"areaServed":{"@type":"Place","name":"Europe"},"availableLanguage":["en","de","fr"]}},{"@type":"ListItem","position":8,"item":{"@type":"Service","@id":"https://quenora.ai/capabilities#service-8","name":"Managed AI Operations","description":"Monitoring, retraining, incident response, and ongoing support after go-live. Models drift, upstream systems change, and volumes grow. Someone has to own that, and if your team is not ready to yet, we can — on a defined runway towards them taking it over.","serviceType":"Managed AI Operations","provider":{"@id":"https://quenora.ai/#org"},"areaServed":{"@type":"Place","name":"Europe"},"availableLanguage":["en","de","fr"]}},{"@type":"ListItem","position":9,"item":{"@type":"Service","@id":"https://quenora.ai/capabilities#service-9","name":"Change Management & Enablement","description":"Training, documentation, and adoption support so the people who have to live with the system actually use it. The most common cause of a failed AI rollout is not technical. It is a team that was never brought along and quietly routed around the new thing.","serviceType":"Change Management & Enablement","provider":{"@id":"https://quenora.ai/#org"},"areaServed":{"@type":"Place","name":"Europe"},"availableLanguage":["en","de","fr"]}}]}]}</script>
+<link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
+<link href="/assets/brand/quenora-icon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/brand/quenora-icon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/brand/quenora-icon-180.png" rel="apple-touch-icon"/>
+<link href="/assets/brand/quenora-icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/><link href="https://quenora.ai/es/about" rel="canonical"/><link href="https://quenora.ai/about" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/about" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/about" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/about" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/></head>
+<body>
+<svg aria-hidden="true" height="0" style="position:absolute" width="0">
+<symbol id="mark9" viewbox="0 0 187.71 174.29">
+<circle cx="12.0" cy="161.71" fill="#C97A3C" r="3.0"></circle>
+<circle cx="21.64" cy="161.34" fill="#C97A3C" r="3.95"></circle>
+<circle cx="33.39" cy="159.88" fill="#C97A3C" r="5.2"></circle>
+<circle cx="47.73" cy="156.52" fill="#C97A3C" r="6.84"></circle>
+<circle cx="65.05" cy="149.97" fill="#C97A3C" r="9.0"></circle>
+<circle cx="85.34" cy="138.1" fill="#C97A3C" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" fill="#C97A3C" r="15.59"></circle>
+<circle cx="127.81" cy="84.89" fill="#C97A3C" r="20.52"></circle>
+<circle cx="151.71" cy="36.0" fill="#C97A3C" r="27.0"></circle>
+</symbol>
+</svg>
+<a class="skip" href="#main">Ir al contenido</a>
+<div class="progress" id="progressBar"></div>
+<header id="siteHeader">
+<div class="wrap">
+<nav>
+<a class="brand" href="/es/index.html">
+<img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/></a>
+<div class="navlinks" id="navLinks"><a href="/es/approach.html">Método</a><a href="/es/capabilities.html">Capacidades</a><a href="/es/engineering.html">Engineering</a><a href="/es/work.html">Proyectos</a><a aria-current="page" class="on" href="/es/about.html">About</a></div><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Elegir idioma" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>ES</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/about.html" hreflang="en" lang="en">English</a></li><li><a href="/de/about.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/about.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
+<a class="btn btn-primary navcta" href="/es/index.html#talk"><span class="cta-long">Iniciar una conversación</span><span class="cta-short">Contacto</span></a>
+<button aria-expanded="false" aria-label="Menú" class="burger" id="burger">
+<i></i><i></i><i></i>
+</button>
+</nav>
+</div>
+</header>
+<main id="main"><section class="phero"><div class="wrap"><div class="kicker">About</div><h1 class="rv" data-d="1">Who you’re actually <em>hiring</em>.</h1><p class="lede">The previous chapter argues you shouldn’t default to a large
+             consultancy. That obliges us to say plainly who you get instead —
+             including the size of us, which is the first thing a procurement team
+             will ask.</p></div></section><section class="section-pad"><div class="wrap"><dl class="ab-facts"><dt class="mono">Founded</dt><dd>2025</dd><dt class="mono">Based</dt><dd>Heilbronn, Germany</dd><dt class="mono">Working</dt><dd>Internationally</dd><dt class="mono">Team</dt><dd>Founder-led, growing</dd><dt class="mono">Languages</dt><dd>German · French · English</dd></dl></div></section></main>
+<footer>
+<div class="wrap">
+<div class="foot-row">
+<div class="foot-col" style="max-width:300px">
+<div class="foot-brand">
+<svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
+<b>quenora</b>
+</div>
+<p style="color:var(--grey-d);font-size:13px">Enterprise AI, engineered to operate.
+        Built into what you already run, then handed over.</p>
+</div>
+<!-- The footer mirrors this page's header, target for target. It used to run a
+     map of its own - Core capabilities, Firm, four links that all went to the
+     same page - so a word in the header and the same word in the footer led
+     somewhere different. One page, one map. -->
+<div class="foot-col">
+<h5>Navegación</h5>
+<nav aria-label="Footer">
+<a href="/es/index.html">Inicio</a>
+<a href="/es/approach.html">Método</a>
+<a href="/es/capabilities.html">Capacidades</a>
+<a href="/es/engineering.html">Engineering</a>
+<a href="/es/work.html">Proyectos</a>
+<a aria-current="page" class="on" href="/es/about.html">About</a>
+<a href="/es/index.html#talk">Contacto</a>
+</nav>
+</div>
+<div class="foot-col">
+<h5>Contacto</h5>
+<nav aria-label="Contacto">
+<a href="mailto:info@quenora.ai">info@quenora.ai</a>
+<a href="/impressum.html">Legal notice · Impressum</a>
+<a href="/privacy.html">Privacy notice</a>
+</nav>
+</div>
+<div class="foot-col">
+<h5>Follow</h5>
+<nav aria-label="Social">
+<a href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank">LinkedIn</a>
+<a href="https://x.com/quenora_ai" rel="noopener me" target="_blank">X</a>
+<a href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank">Instagram</a>
+</nav>
+</div>
+</div>
+<div class="foot-line">
+<span>© 2026 Quenora Consulting</span>
+<span>Heilbronn, Germany · <a href="/impressum.html">Legal notice</a> · <a href="/privacy.html">Privacy</a></span>
+</div>
+</div>
+</footer>
+<script>
+// nav solidify
+const hdr=document.getElementById('siteHeader');
+addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40));
+
+// mobile nav
+(function(){
+  const b=document.getElementById('burger'),n=document.getElementById('navLinks');
+  if(!b||!n)return;
+  b.addEventListener('click',()=>{
+    const open=n.classList.toggle('open');
+    b.classList.toggle('open',open);
+    b.setAttribute('aria-expanded',open);
+    if(open)hdr.classList.add('solid');
+  });
+})();
+
+// scroll progress bar
+(function(){
+  const bar=document.getElementById('progressBar');if(!bar)return;
+  let tick=false;
+  function upd(){
+    const h=document.documentElement.scrollHeight-innerHeight;
+    bar.style.width=(h>0?(scrollY/h)*100:0)+'%';tick=false;
+  }
+  addEventListener('scroll',()=>{if(!tick){requestAnimationFrame(upd);tick=true;}});
+  upd();
+})();
+
+// animated dividers
+(function(){
+  const ds=document.querySelectorAll('.divider');if(!ds.length)return;
+  const o=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target);}
+  }),{threshold:.5});
+  ds.forEach(d=>o.observe(d));
+})();
+
+// text scramble on headings
+//
+// Scheduling is by ELAPSED TIME, not by requestAnimationFrame count.
+//
+// The previous version gave each character a start and end expressed as a
+// frame number (i*1.6, +8..19 frames). That silently assumed 60fps. rAF makes
+// no such promise: browsers throttle it hard in a background tab and pause it
+// outright in a hidden one. Because the loop had no clock and no deadline, the
+// reveal simply stopped part-way and left the heading showing scrambled
+// characters — "One conversation. No deck required from THAO" — for as long as
+// the tab stayed unfocused. Measured on this page: 61fps focused (1.4s, fine)
+// against 34fps hidden and unresolved after 2s.
+//
+// Time-based scheduling fixes it by construction: while the tab is hidden the
+// clock keeps running, so the first frame after the reader returns finds every
+// character past its deadline and writes the finished text immediately.
+//
+// Two further guarantees, because the animation must never be the only way to
+// read the heading:
+//   * every element gets a fallback timer at setup, so the text appears even
+//     if the IntersectionObserver never fires or run() throws;
+//   * each run carries its own deadline, so it completes even if rAF never
+//     delivers another frame.
+(function(){
+  var CH='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/\\';
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=[].slice.call(document.querySelectorAll('.scramble'));
+  if(!els.length)return;
+
+  var TOTAL=700;      /* whole reveal, ms — the audit asked for 600–800 */
+  var CHAR_MIN=150;   /* how long one character stays scrambled */
+  var CHAR_MAX=260;
+  var SAFETY=2500;    /* text appears by now no matter what happens */
+
+  function finish(el){
+    if(el.__scDone)return;
+    el.__scDone=true;
+    clearTimeout(el.__scT);
+    el.textContent=el.dataset.txt;
+  }
+
+  function run(el){
+    if(el.__scDone)return;
+    clearTimeout(el.__scT);
+    var txt=el.dataset.txt;
+    if(reduce){finish(el);return;}
+
+    var chars=txt.split('');
+    var len=chars.length;
+    /* Spread the starts so the last character still lands inside TOTAL. */
+    var span=CHAR_MIN+Math.round((CHAR_MAX-CHAR_MIN)/2);
+    var stagger=len>1?Math.max(0,(TOTAL-span)/(len-1)):0;
+    var queue=chars.map(function(c,i){
+      var start=i*stagger;
+      return {c:c,start:start,
+              end:Math.min(TOTAL,start+CHAR_MIN+Math.random()*(CHAR_MAX-CHAR_MIN))};
+    });
+
+    var t0=performance.now();
+    /* Independent of rAF entirely: setTimeout is throttled in background tabs
+       but never paused, so this always lands. */
+    el.__scT=setTimeout(function(){finish(el);},TOTAL+400);
+
+    (function tick(){
+      if(el.__scDone)return;
+      var t=performance.now()-t0;
+      if(t>=TOTAL){finish(el);return;}
+      var out='',done=0,i,q;
+      for(i=0;i<len;i++){
+        q=queue[i];
+        if(t>=q.end){done++;out+=q.c;}
+        else if(t>=q.start){
+          out+='<span class="sc-ghost">'+
+            (q.c===' '?' ':CH[Math.floor(Math.random()*CH.length)])+'</span>';
+        } else out+=q.c===' '?' ':'<span style="opacity:0">'+q.c+'</span>';
+      }
+      if(done>=len){finish(el);return;}
+      el.innerHTML=out;
+      requestAnimationFrame(tick);
+    })();
+  }
+
+  els.forEach(function(el){
+    el.dataset.txt=el.textContent.trim();
+    el.innerHTML='<span style="opacity:0">'+el.dataset.txt+'</span>';
+    el.__scT=setTimeout(function(){finish(el);},SAFETY);
+  });
+
+  var o=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){run(e.target);o.unobserve(e.target);}
+    });
+  },{threshold:.6});
+  els.forEach(function(el){o.observe(el);});
+
+  /* Coming back to a parked tab must never reveal a half-scrambled heading. */
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden)return;
+    els.forEach(function(el){
+      if(!el.__scDone&&el.dataset.txt)finish(el);
+    });
+  });
+})();
+
+// scroll reveal
+const rio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target);}
+}),{threshold:.15,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.rv').forEach((el,i)=>{
+  if(!el.dataset.d)el.style.transitionDelay=(i%3*80)+'ms';rio.observe(el);
+});
+
+// card spotlight
+document.querySelectorAll('.card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect();
+    c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+    c.style.setProperty('--my',(e.clientY-r.top)+'px');
+  });
+});
+
+// count-up stats
+const sio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return; sio.unobserve(e.target);
+  const el=e.target, raw=el.dataset.count, suf=el.dataset.suffix||'';
+  const target=parseFloat(raw); let n=0; const dur=1100, t0=performance.now();
+  (function step(t){
+    const p=Math.min((t-t0)/dur,1), e2=1-Math.pow(1-p,3);
+    n=target*e2;
+    el.textContent=(target%1?n.toFixed(1):Math.round(n))+suf;
+    if(p<1)requestAnimationFrame(step);
+  })(t0);
+}),{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
+
+
+
+// (page-header WebGL block removed — no Three.js dependency remains)
+</script>
+<!--WIDGET:HTML-->
+<button aria-controls="aiPanel" aria-expanded="false" aria-label="Ask Nora" class="ai-fab" id="aiFab" type="button">
+<!-- The wordmark's five largest circles. Below about 20px the four smallest
+     are sub-pixel and only muddy the shape, so the arc is cropped rather
+     than shrunk — it stays the same mark, still legible at 24px. -->
+<svg aria-hidden="true" class="ai-mk" fill="#07070A" viewbox="56 9 123 150">
+<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
+<circle cx="151.71" cy="36" r="27"></circle>
+</svg>
+<span aria-hidden="true" class="ai-tip">Ask Nora</span>
+</button>
+<div aria-label="Nora, the Quenora assistant" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
+<div class="ai-head"><div aria-hidden="true" class="ai-dot"></div>
+<div><b>Ask Nora</b><span>Answers from this site only — passages, matched to your question</span></div>
+</div>
+<div aria-live="polite" class="ai-body" id="aiBody" role="log"></div>
+<!-- The opening line lives here, not in the script, because build_i18n
+     translates text nodes and cannot reach a JavaScript string literal. It
+     was greeting German and French visitors in English on every open. -->
+<p class="ai-greet" hidden="" id="aiGreet">I am Nora. Ask anything about Quenora and I will show you what this site says about it, in its own words, with a link to where it sits. I do not generate answers — if it is not written here, I will tell you that instead of guessing.</p>
+<div class="ai-suggest" id="aiSuggest">
+<button class="ai-chip" data-q="¿Qué hacen exactamente?" type="button">¿Qué hacen exactamente?</button>
+<button class="ai-chip" data-q="What is automation here?" type="button">Automation?</button>
+<button class="ai-chip" data-q="How long does an engagement take?" type="button">How long?</button>
+<button class="ai-chip" data-q="¿Cuánto cuesta?" type="button">¿Cuánto cuesta?</button>
+<button class="ai-chip" data-q="Who are you?" type="button">Who are you?</button>
+<button class="ai-chip" data-act="contact" type="button">Talk to a person</button>
+</div>
+<form class="ai-form" id="aiForm">
+<label class="vh" for="aiInput">Ask a question</label>
+<input autocomplete="off" id="aiInput" placeholder="Ask Nora a question…" type="text"/>
+<button type="submit">Ask</button>
+</form>
+<div class="ai-foot">Search over this site · no model, nothing invented</div>
+</div>
+<!--/WIDGET:HTML-->
+<!--WIDGET:JS-->
+<script defer="" src="/assets/nora.js"></script>
+<!--/WIDGET:JS-->
+<!--NAV:JS-->
+<script>
+/* Two things about arriving at this page, both about scroll.
+
+   ONE — ARRIVING AT AN ANCHOR FROM ANOTHER PAGE
+
+   html{scroll-behavior:smooth} is right for a nav click inside the page: the
+   reader keeps their bearings while the page glides. It is wrong on arrival.
+   Following Approach from an inner page loads the home page at the top and
+   then smooth-scrolls all the way down to the chapter — so the reader watches
+   the chapter numbers count past, 01, 02, 03, before the page settles. It
+   looks like the site loaded the wrong page and corrected itself.
+
+   The fix is to make only the first jump instant, then hand smooth back, so
+   every later click behaves as before.
+
+   TWO — A RELOAD
+
+   The browser restores scroll position by default. On a chaptered page whose
+   sections reveal on scroll, that drops the reader into the middle of a
+   narrative with the reveals already spent. A reload returns to the top —
+   unless the URL carries an anchor, which is an explicit request for a place.
+
+   The work page's field figure is verified by a headless harness with no
+   history and no window, so this must not throw there. */
+(function(){
+  if(typeof window==='undefined'||typeof document==='undefined') return;
+  /* The harness defines window and document but not the bare globals a page
+     normally inherits from window, so reach for them explicitly and check. */
+  if(typeof window.addEventListener!=='function'
+     || typeof window.requestAnimationFrame!=='function') return;
+  var root = document.documentElement;
+  if(!root||!root.style) return;
+
+  function instantly(fn){
+    var had = root.style.scrollBehavior, done = false;
+    root.style.scrollBehavior = 'auto';
+    fn();
+    /* Give the jump a frame to land before smooth is allowed back, or the
+       browser applies the restored value to the scroll still in flight.
+       The timer is not belt and braces: requestAnimationFrame does not run in
+       a background tab, and a page opened in one would have kept smooth
+       scrolling switched off until it was looked at. */
+    function restore(){
+      if(done) return;
+      done = true;
+      root.style.scrollBehavior = had;
+    }
+    window.requestAnimationFrame(function(){
+      window.requestAnimationFrame(restore);
+    });
+    setTimeout(restore, 400);
+  }
+
+  /* 'manual' is right for a fresh load or a reload — it stops the browser
+     dropping the reader into the middle of a chapter whose reveals are spent.
+     It is wrong for back and forward, where restoring the exact position is
+     the whole point, and where the browser does it better than any script
+     could. So: hand history navigation back to the platform. */
+  var navType = '';
+  try {
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    navType = nav ? nav.type : '';
+  } catch (e) {}
+  var isBack = navType === 'back_forward';
+  if(typeof history!=='undefined' && 'scrollRestoration' in history){
+    history.scrollRestoration = isBack ? 'auto' : 'manual';
+  }
+  if (isBack) return;   /* the browser is putting them back; do not interfere */
+
+  /* ── the mobile menu ────────────────────────────────────────────────
+     The home page shipped a burger button with no handler behind it — in
+     every language, since the page was written. The CSS was all there:
+     .navlinks.open, the three bars folding into a cross, the blur behind the
+     panel. Only the JavaScript was missing, so on a phone the home page had
+     no navigation at all and the button did nothing when tapped.
+
+     Rather than paste a copy into the one page that lacked it, the button is
+     replaced by a clone here — which drops any listener already attached —
+     and then wired exactly once. This script is injected last, after every
+     page's own scripts, so it always wins. That ordering is the point: the
+     alternative is two handlers both toggling the same class, which this site
+     has already shipped once, on the language switcher, where the menu opened
+     and closed again on a single click. */
+  (function(){
+    var b = document.getElementById('burger'),
+        n = document.getElementById('navLinks');
+    if(!b || !n) return;
+    var fresh = b.cloneNode(true);
+    b.parentNode.replaceChild(fresh, b);
+    fresh.addEventListener('click', function(){
+      var open = n.classList.toggle('open');
+      fresh.classList.toggle('open', open);
+      fresh.setAttribute('aria-expanded', open ? 'true' : 'false');
+      /* the inner pages darken the bar behind the open panel; the home page
+         has no such class, so this is a no-op there rather than a crash */
+      var hdr = document.querySelector('header');
+      if(hdr && hdr.id === 'siteHeader') hdr.classList.toggle('solid', open);
+    });
+    /* a tap on a link inside the panel should close it, or the menu stays
+       open over the page it just navigated to */
+    n.addEventListener('click', function(e){
+      if(e.target.closest('a') && n.classList.contains('open')){
+        n.classList.remove('open');
+        fresh.classList.remove('open');
+        fresh.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+
+  window.addEventListener('load', function(){
+    var hash = location.hash;
+    if(!hash || hash === '#'){
+      instantly(function(){ window.scrollTo(0, 0); });
+      return;
+    }
+    var target;
+    try { target = document.querySelector(hash); } catch(e){ target = null; }
+    if(!target) return;
+    instantly(function(){
+      target.scrollIntoView({behavior: 'auto', block: 'start'});
+    });
+  });
+})();
+</script>
+<!--/NAV:JS-->
+<!--BACKTO:JS-->
+<script>
+/* Remember where the reader was when they left for another page, so the page
+   they land on can offer a way back to that exact spot rather than to the top
+   of a very long document. sessionStorage: one tab, one visit, never sent. */
+(function(){
+  /* The headless harness that verifies the work page's field figure runs every
+     script against a minimal DOM stub, where document exists but
+     addEventListener does not. Guard on the capability, not on the object —
+     this is the third time that stub has caught a script assuming a browser. */
+  if (typeof sessionStorage === 'undefined') return;
+  if (typeof document === 'undefined' ||
+      typeof document.addEventListener !== 'function') return;
+  var KEY = 'qn:from';
+  /* '/', '/index.html', '/de', '/de/index.html' and so on */
+  var HOME = /^\/(?:(?:de|fr|es|it)\/?)?(?:index\.html)?$/;
+
+  /* leaving: record the offset against the link's destination */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (!/\.html(#|$)|^\/(de|fr)\//.test(href)) return;
+    if (a.target === '_blank' || href.charAt(0) === '#') return;
+    /* Only the home page is worth returning to. Recording every page turned
+       Back into a history walk: from capabilities it pointed at approach,
+       the page before it, instead of at the home page it was meant to. */
+    if (!HOME.test(location.pathname)) return;
+    try {
+      /* Record an ANCHOR, not a pixel — and anchor to the section the
+         reader was actually IN, not whichever one happened to be at the top
+         of the viewport. This page pins and grows sections as they reveal, so
+         a raw offset landed 758px out and a top-of-viewport anchor still
+         landed 432px out. The section under the click is stable, and its
+         distance from the viewport top is the thing to reproduce. */
+      var host = a.closest('section[id]') || a.closest('[id]');
+      var top = host ? Math.round(host.getBoundingClientRect().top) : null;
+      sessionStorage.setItem(KEY, JSON.stringify({
+        url: location.pathname + location.search,
+        anchor: host ? host.id : '',
+        top: top,
+        y: Math.round(window.scrollY || 0)
+      }));
+    } catch (err) {}
+  }, true);
+
+  /* arriving: if we were sent here from somewhere, offer the way back */
+  var raw = null;
+  try { raw = sessionStorage.getItem(KEY); } catch (err) {}
+  if (!raw) return;
+  var from;
+  try { from = JSON.parse(raw); } catch (err) { return; }
+  if (!from || !from.url || from.url === location.pathname) return;
+  /* Never on the home page: there is nowhere to go back to from the thing
+     you go back to. */
+  if (HOME.test(location.pathname)) return;
+
+  var host = document.querySelector('main .wrap');
+  if (!host) return;
+  var a = document.createElement('a');
+  a.className = 'backto';
+  a.href = from.url + '#qn-back';
+  a.innerHTML = '<span class="arw" aria-hidden="true">&#8592;</span>' +
+                (document.documentElement.lang === 'de' ? 'Zur\u00fcck' :
+                 document.documentElement.lang === 'fr' ? 'Retour' : 'Back');
+  a.addEventListener('click', function(e){
+    /* A real history step, when there is one. The browser restores the exact
+       offset itself — my own attempt at reproducing it landed 371 to 500px
+       out, because this page keeps growing as its sections reveal and no
+       script can chase that reliably. Falling back to the recorded anchor
+       only when there is no history entry to step back to. */
+    /* history.back() only when the step behind us really is the home page —
+       then it is exact and free. Otherwise navigate and restore. */
+    var ref = document.referrer || '';
+    var cameStraightFromHome = ref.indexOf(location.origin) === 0 &&
+                  ref.replace(location.origin, '').split('#')[0] === from.url;
+    if (cameStraightFromHome && history.length > 1) {
+      e.preventDefault();
+      history.back();
+      return;
+    }
+    try { sessionStorage.setItem('qn:restore', JSON.stringify(from)); } catch (err) {}
+  });
+  host.insertBefore(a, host.firstChild);
+})();
+
+/* landing back: put the reader on the pixel they left from, before paint */
+(function(){
+  if (typeof sessionStorage === 'undefined') return;
+  if (typeof window === 'undefined' ||
+      typeof window.addEventListener !== 'function') return;
+  var raw = null;
+  try { raw = sessionStorage.getItem('qn:restore'); } catch (err) {}
+  if (!raw) return;
+  try { sessionStorage.removeItem('qn:restore'); } catch (err) {}
+  var want;
+  try { want = JSON.parse(raw); } catch (err) { return; }
+  if (!want) return;
+
+  /* Resolve the anchor every time rather than once: the section moves as the
+     page reveals, so the target is only correct at the moment it is read. */
+  function target(){
+    if (want.anchor && want.top !== null && want.top !== undefined) {
+      var el = document.getElementById(want.anchor);
+      /* put the section back exactly as far down the viewport as it was */
+      if (el) return Math.max(0, el.getBoundingClientRect().top + window.scrollY - want.top);
+    }
+    return want.y > 0 ? want.y : null;
+  }
+  function put(){ var t = target(); if (t !== null) window.scrollTo(0, t); }
+  put();
+
+  /* Keep correcting until the target stops moving, rather than for a fixed
+     number of ticks. This page reveals sections as it goes, so its layout is
+     still settling for a second or two after load — a fixed window gave up
+     early and left the reader 371px adrift. Stop once the computed target has
+     agreed with itself several times, and give up after three seconds so this
+     can never spin. */
+  var last = null, stable = 0, ticks = 0;
+  var iv = setInterval(function(){
+    var t = target();
+    if (t === null) { clearInterval(iv); return; }
+    if (last !== null && Math.abs(t - last) <= 1) { stable++; } else { stable = 0; }
+    last = t;
+    if (Math.abs(window.scrollY - t) > 1) { window.scrollTo(0, t); stable = 0; }
+    if (stable >= 6 || ++ticks > 60) clearInterval(iv);
+  }, 50);
+  addEventListener('load', put);
+})();
+</script>
+<!--/BACKTO:JS-->
+<script data-generated="langsel">
+(function(){
+  var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
+  if(!b||!m)return;
+  b.addEventListener('click',function(e){
+    e.stopPropagation();
+    var o=m.classList.toggle('open');
+    b.setAttribute('aria-expanded',o?'true':'false');
+  });
+  document.addEventListener('click',function(){
+    m.classList.remove('open');b.setAttribute('aria-expanded','false');
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){m.classList.remove('open');
+      b.setAttribute('aria-expanded','false');}
+  });
+})();
+</script>
+</body>
+</html>

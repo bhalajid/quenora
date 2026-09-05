@@ -9,7 +9,6 @@
 <title>Quenora — Conseil et ingénierie en IA d’entreprise</title>
 <meta content="Quenora est un cabinet de conseil en IA d’entreprise établi à Heilbronn. Nous intégrons l’IA dans les plateformes et les flux de travail que vous exploitez déjà, puis nous en remettons les clés à votre équipe." name="description"/>
 <meta content="#07070A" name="theme-color"/>
-<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
 <meta content="Quenora Consulting" property="og:site_name"/>
 <meta content="Quenora — La plupart de l’IA d’entreprise n’atteint jamais le travail" property="og:title"/>
@@ -526,82 +525,10 @@ body.clg .cur::after{opacity:1}
 .vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
-/* ── the assistant ──────────────────────────────────────────────────────
-   Ported from the inner pages, which had suggestion chips but no way to type.
-   It runs entirely in the page: keyword match over a written answer set, no
-   network call, no key, nothing to leak. The footer says what it is. */
-.ai-fab{position:fixed;bottom:26px;right:26px;z-index:400;width:56px;height:56px;
-  border-radius:50%;background:var(--copper);display:flex;align-items:center;
-  justify-content:center;cursor:pointer;border:none;
-  box-shadow:0 12px 36px -8px rgba(201,122,60,.45);transition:transform .25s var(--e)}
-.ai-fab:hover{transform:scale(1.07) rotate(90deg)}
-.ai-fab svg{width:23px;height:23px}
-.ai-fab::before{content:'';position:absolute;inset:-6px;border-radius:50%;
-  border:1px solid var(--copper);opacity:.5;animation:aipulse 2.6s ease-out infinite}
-@keyframes aipulse{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.35);opacity:0}}
-.ai-panel{position:fixed;bottom:96px;right:26px;z-index:400;width:370px;
-  max-width:calc(100vw - 36px);background:rgba(20,22,30,.97);
-  backdrop-filter:blur(20px);border:1px solid var(--line2);border-radius:14px;
-  overflow:hidden;box-shadow:0 30px 70px -12px rgba(0,0,0,.75);
-  opacity:0;transform:translateY(14px) scale(.97);pointer-events:none;
-  transition:.28s var(--e)}
-.ai-panel.open{opacity:1;transform:none;pointer-events:auto}
-.ai-head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;
-  align-items:center;gap:11px}
-.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--copper);flex:none;
-  box-shadow:0 0 10px var(--copper);animation:aibreathe 2s ease-in-out infinite}
-@keyframes aibreathe{0%,100%{opacity:1}50%{opacity:.35}}
-.ai-head b{font-size:.85rem;font-weight:600;display:block;color:var(--t1)}
-.ai-head span{font-family:'JetBrains Mono',monospace;font-size:.58rem;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--t3)}
-.ai-body{padding:16px 18px;max-height:280px;overflow-y:auto;display:flex;
-  flex-direction:column;gap:10px}
-.ai-body::-webkit-scrollbar{width:4px}
-.ai-body::-webkit-scrollbar-thumb{background:var(--line2);border-radius:2px}
-.ai-msg{font-size:.85rem;line-height:1.6;max-width:88%}
-.ai-msg.bot{color:var(--t1);background:rgba(242,239,232,.05);padding:10px 13px;
-  border-radius:11px 11px 11px 3px;align-self:flex-start}
-.ai-msg.user{color:var(--void);background:var(--copper);padding:10px 13px;
-  border-radius:11px 11px 3px 11px;align-self:flex-end;font-weight:500}
-.ai-suggest{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 12px}
-.ai-chip{font-size:.72rem;padding:6px 12px;border-radius:20px;
-  border:1px solid var(--line);color:var(--t2);cursor:pointer;
-  background:none;font-family:inherit;transition:.2s}
-.ai-chip:hover{border-color:var(--copper);color:var(--t1);background:rgba(201,122,60,.13)}
-/* Every answer names where it came from, because a passage without a source
-   is indistinguishable from something invented. */
-.ai-first,.ai-more{display:block}
-.ai-more{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);color:var(--t2)}
-.ai-src{display:block;margin-top:7px;font-family:'JetBrains Mono',monospace;
-  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--copper-lt);border-bottom:none}
-.ai-foot{display:block;margin-top:12px;padding-top:9px;
-  border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;
-  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
-.ai-foot a{color:var(--copper-lt)}
-.ai-form{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--line)}
-.ai-form input{flex:1;background:rgba(242,239,232,.05);border:1px solid var(--line);
-  border-radius:9px;padding:9px 12px;color:var(--t1);font-family:inherit;
-  /* 16px, not .85rem: below 16 iOS zooms the viewport when the field takes
-     focus, and this one sits inside a fixed panel, so the zoom strands it. */
-  font-size:16px;min-width:0}
-.ai-form input::placeholder{color:var(--t3)}
-.ai-form input:focus{border-color:var(--copper)}
-.ai-form button{flex:none;background:var(--copper);color:var(--void);border:none;
-  border-radius:9px;padding:0 14px;font-family:inherit;font-weight:600;
-  font-size:.85rem;cursor:pointer;transition:background .2s}
-.ai-form button:hover{background:var(--copper-lt)}
-.ai-foot{padding:10px 18px;border-top:1px solid var(--line);
-  font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--t3);text-align:center}
-.ai-typing{display:inline-flex;gap:4px;padding:10px 13px}
-.ai-typing i{width:5px;height:5px;border-radius:50%;background:var(--t3);
-  animation:aiblink 1.3s infinite}
-.ai-typing i:nth-child(2){animation-delay:.18s}
-.ai-typing i:nth-child(3){animation-delay:.36s}
-@keyframes aiblink{0%,80%,100%{opacity:.25}40%{opacity:1}}
-@media(max-width:560px){.ai-fab{bottom:18px;right:18px}.ai-panel{bottom:84px;right:18px}}
-@media(prefers-reduced-motion:reduce){.ai-fab::before,.ai-dot,.ai-typing i{animation:none}}
+/*WIDGET:CSS*/
+
+/*/WIDGET:CSS*/
+
 
 /* ── chapter 07: who you are hiring ── */
 .whogrid{display:grid;grid-template-columns:1.55fr 1fr;gap:var(--sp5);
@@ -637,8 +564,8 @@ body.clg .cur::after{opacity:1}
 .autofig .autolab{color:var(--copper-lt);margin-bottom:var(--sp3)}
 
 /* ── PIN 1: sticky scrub stage ── */
-.pinwrap{height:170vh;position:relative}
-.pin{position:sticky;top:0;height:100svh;display:grid;place-items:center;
+.pinwrap{height:auto;position:relative}/* was 170vh, sized for three panels arriving in sequence. The stage now holds one row of counters, so the pinned scroll had nothing left to reveal and 2815px of chapter was mostly empty. */
+.pin{position:static;height:auto;display:grid;place-items:center;padding:var(--sp5) 0;
   overflow:hidden;border-block:1px solid var(--line);
   background:linear-gradient(180deg,var(--sf1),var(--void))}
 .pin .inner{width:min(100% - var(--sp4),var(--wrap));text-align:center}
@@ -970,8 +897,483 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   flex:none;animation:livepulse 2.4s var(--e) infinite}
 @keyframes livepulse{0%,100%{opacity:1}50%{opacity:.28}}
 @media(prefers-reduced-motion:reduce){.livelink .dot{animation:none}}
+/*NAV:CSS*/
+/* ── one header, on every page ──────────────────────────────────────────
+   This site grew two header systems. The home page and engineering.html
+   space the links with var(--sp3) and mark the current page by turning it
+   copper, through a bare [aria-current=page] rule. approach, capabilities,
+   work and contact use a 30px gap, a smaller type size, and mark the current
+   page white with a growing underline. Same nav, same words, three different
+   treatments depending on where you happened to be standing — and the links
+   sat at a different x on each page, so they visibly jumped as you clicked
+   through.
+
+   Everything below is the single treatment. It is injected last, so it wins
+   on order rather than on !important, and the desktop metrics are scoped
+   above the 880px breakpoint that both families already use for the burger,
+   so the mobile drawer keeps its own larger tap targets. */
+
+/* The inner pages spread five header children with space-between, which put
+   the links in the middle of the bar while the home page pushed them right. */
+.navlinks{margin-left:auto}
+
+/* Same container, so the header sits at the same x on every page. The three
+   families each defined .wrap differently — width:min(100% - 40px, W) with no
+   padding, max-width with 20px of padding, and max-width with 40px — so even
+   after the max-width was unified the CONTENT box was 1240, 1200 and 1160.
+   That is the last of the shifting. Scoped to desktop so each page keeps the
+   mobile gutter it was designed with. */
+@media(min-width:881px){
+  /* width:100%, not auto. The home page's hero section is display:flex, and
+     on a flex item width:auto shrink-wraps to the content — the wrap collapsed
+     to 1055px and margin-inline:auto then centred it, putting the headline
+     92px to the RIGHT of the logo. 100% behaves in both a block and a flex
+     parent. */
+  header .wrap, main section > .wrap{width:100%;max-width:1240px;
+    margin-inline:auto;padding-left:40px;padding-right:40px}
+}
+
+@media(min-width:881px){
+  /* The header's own flex container: a div.wrap on the home page and inner
+     engineering, a nav on the rest. Their gaps were 24px and 30px, and with
+     three items to the right of the links that is a 12px difference in where
+     the links end — the last of the movement between pages. */
+  header > .wrap, header nav{gap:26px}
+  .navlinks{gap:26px;align-items:center}
+  .navlinks a,.navlinks>a{font-size:14px;padding:4px 0;border-bottom:0}
+  .navcta{padding:9px 16px;font-size:12.5px}
+}
+
+/* The current page: white, over a copper rule. Drawn as a background image
+   rather than a border or an ::after, because one family already owns the
+   ::after for its hover underline and a border-bottom is taken by the mobile
+   drawer — this collides with neither. */
+header .navlinks a.on,
+header .navlinks a[aria-current="page"]{
+  color:#F2EFE8;
+  background-image:linear-gradient(#C97A3C,#C97A3C);
+  background-size:100% 2px;
+  background-repeat:no-repeat;
+  background-position:0 100%;
+}
+/* and suppress the other family's underline, so the active tab never wears
+   two of them at once */
+header .navlinks a.on::after,
+header .navlinks a[aria-current="page"]::after{width:0}
+/*/NAV:CSS*/
+/* ── one container width, except the hero ──────────────────────────────
+   The chapters now match the inner pages and the header: 1240 with a 40px
+   gutter, so the logo, the nav and the body text all start at the same x
+   whichever page you are on.
+
+   The hero's TEXT is in this too, so the logo sits directly above the
+   headline instead of 160px to the right of it. The mark is a canvas outside
+   .wrap and keeps the wider grid: it is not a column of text, it is a
+   measured composition: the mark's height equals the headline's, its right
+   edge sits on grid line 6, and its left edge has to clear the widest line
+   of type by 24px. The headline is sized by clamp() against the VIEWPORT,
+   so narrowing the grid under it does not narrow the type — on a 1080p
+   screen and wider the mark and the headline collided. The release gate
+   caught it; this is why the hero is exempt rather than why it was skipped. */
+@media(min-width:881px){
+  main section > .wrap{
+    width:100%;max-width:1240px;margin-inline:auto;
+    padding-left:40px;padding-right:40px}
+}
+/* The code itself is the obvious thing to tap, and on a phone it was the one
+   thing you could not use: you cannot scan your own screen, and it was a div.
+   It is a link now, so tapping it does what scanning it would. */
+a.qrcode{display:block;text-decoration:none;border-radius:4px;
+  transition:transform .2s var(--e),box-shadow .2s var(--e)}
+a.qrcode:hover{transform:scale(1.03)}
+a.qrcode:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+/*PREVIEW:CSS*/
+/* ── the six phases, summarised ────────────────────────────────────────
+   The home page used to retell the whole method: 432 words whose titles and
+   exit conditions are word for word the same as approach.html. This is a
+   summary — six stops, a mark, a name, the weeks, the title on hover — and
+   each stop links into its gate on approach.html. That link is also how the
+   tooltip works on a phone, where there is no hover to give. */
+.ph{list-style:none;margin:var(--sp5) 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));position:relative}
+.ph::before{content:'';position:absolute;left:7px;right:7px;top:7px;height:1px;
+  background:linear-gradient(90deg,var(--copper) 0%,rgba(201,122,60,.5) 62%,
+    rgba(201,122,60,.10) 100%)}
+.ph-stop{position:relative}
+.ph-link{position:relative;display:flex;flex-direction:column;gap:5px;
+  padding:26px 16px 14px 0;text-decoration:none;border-radius:3px}
+.ph-dot{position:absolute;left:0;top:0;width:15px;height:15px;border-radius:50%;
+  background:var(--copper);box-shadow:0 0 0 5px var(--void);
+  transition:transform .2s var(--e)}
+.ph-stop.last .ph-dot{background:transparent;border:1.5px solid var(--copper)}
+.ph-mark{width:22px;height:22px;color:var(--t3);margin-bottom:2px;
+  transition:color .2s var(--e),transform .2s var(--e)}
+.ph-name{color:var(--t1);font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;margin:0}
+.ph-dur{color:var(--t3);font-size:.6rem;letter-spacing:.12em;
+  text-transform:uppercase;margin:0}
+.ph-link:hover .ph-dot,.ph-link:focus-visible .ph-dot{transform:scale(1.25)}
+.ph-link:hover .ph-mark,.ph-link:focus-visible .ph-mark{color:var(--copper-lt)}
+.ph-link:hover .ph-name,.ph-link:focus-visible .ph-name{color:var(--copper-lt)}
+.ph-link:hover .ph-dur,.ph-link:focus-visible .ph-dur{color:var(--t2)}
+.ph-link:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.ph-tip{position:absolute;left:0;bottom:calc(100% - 18px);z-index:5;
+  min-width:190px;max-width:250px;background:rgba(20,22,30,.97);
+  border:1px solid var(--line2);border-radius:3px;padding:9px 12px;
+  font-size:.86rem;line-height:1.35;color:var(--t1);opacity:0;
+  transform:translateY(5px);pointer-events:none;
+  transition:opacity .18s var(--e),transform .18s var(--e)}
+.ph-tip em{font-family:'Playfair Display',Georgia,serif;font-style:italic;color:var(--ember)}
+.ph-link:hover .ph-tip,.ph-link:focus-visible .ph-tip{opacity:1;transform:none}
+.ph-stop:nth-child(n+5) .ph-tip{left:auto;right:16px}
+@media(max-width:760px){
+  .ph{grid-template-columns:minmax(0,1fr);row-gap:0}
+  .ph::before{left:7px;right:auto;top:7px;bottom:22px;height:auto;width:1px;
+    background:linear-gradient(180deg,var(--copper) 0%,rgba(201,122,60,.5) 62%,
+      rgba(201,122,60,.10) 100%)}
+  .ph-link{padding:0 0 20px 30px;display:grid;
+    grid-template-columns:auto 1fr auto;align-items:center;gap:4px 12px}
+  .ph-mark{grid-row:1 / span 2;width:20px;height:20px;margin:0}
+  .ph-name{grid-column:2}
+  .ph-dur{grid-column:3;grid-row:1}
+  .ph-tip{position:static;opacity:1;transform:none;grid-column:2 / -1;
+    background:none;border:0;padding:0;min-width:0;max-width:none;
+    font-size:.92rem;color:var(--t2)}
+  .ph-stop:last-child .ph-link{padding-bottom:0}
+}
+
+/* ── chapters 02, 04, 05 ───────────────────────────────────────────────
+   Marks in the wordmark's vocabulary — circles and one stroke — so they read
+   as a family rather than icons bought by the set. */
+.ch3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp3);
+  margin-top:var(--sp5)}
+@media(max-width:820px){.ch3{grid-template-columns:minmax(0,1fr);gap:var(--sp2)}}
+.ch-card{border-top:1px solid var(--line2);padding:20px 0 0;display:block;
+  text-decoration:none}
+/* every card responds to the pointer, whether or not it leads anywhere. The
+   three situations in chapter 02 are a diagnosis, not a destination, so they
+   light up without pretending to be links. */
+.ch-card{transition:border-color .2s var(--e)}
+.ch-card:hover{border-top-color:var(--copper)}
+.ch-card:hover .ch-mark{color:var(--copper-lt);transform:translateY(-2px)}
+.ch-card:hover .ch-title{color:var(--copper-lt)}
+.ch-card:hover .ch-eyebrow{color:var(--copper)}
+a.ch-card:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+.ch-mark{width:24px;height:24px;color:var(--copper);margin-bottom:14px;display:block;
+  transition:color .2s var(--e),transform .2s var(--e)}
+a.ch-card:hover .ch-mark{color:var(--copper-lt)}
+.ch-eyebrow{color:var(--t3);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;margin:0 0 8px}
+.ch-title{font-size:1.06rem;font-weight:600;color:var(--t1);margin:0;
+  letter-spacing:-.01em;line-height:1.3}
+a.ch-card:hover .ch-title{color:var(--copper-lt)}
+.ch-body{color:var(--t2);font-size:.93rem;margin:10px 0 0;max-width:44ch}
+
+
+/* ── nine capabilities, as a hub ───────────────────────────────────────
+   A grid said the same thing as the rail and the card rows — everything on
+   this page had become a line or a list. The shape has to carry the claim:
+   three the work runs through, six that come in when the work needs them.
+
+   The first attempt put the six on a true ring, by angle. It collided:
+   "Change Management & Enablement" ran straight through "Data Engineering &
+   Analytics", because a 212px label cannot sit on a 106px radius. Real names
+   are the constraint, so the six are split three and three either side of the
+   core instead — still a hub, no longer a heap.
+
+   On a phone it becomes two columns, filled then hollow: the same nine, the
+   same grouping, rearranged. That is the test the Gantt failed. */
+.orb{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  gap:0 var(--sp4);margin:var(--sp5) auto 0;max-width:1000px;position:relative}
+.orb-ring,.orb-core{list-style:none;margin:0;padding:0}
+.orb-item{display:flex;align-items:center;gap:9px}
+.orb-dot{width:9px;height:9px;border-radius:50%;flex:none;
+  border:1.5px solid var(--copper);background:transparent;
+  transition:transform .2s var(--e),background .2s var(--e)}
+.orb-item.core .orb-dot{background:var(--copper);width:11px;height:11px}
+.orb-n{color:var(--t3);font-size:.58rem;letter-spacing:.1em;margin:0;flex:none}
+.orb-name{color:var(--t2);font-size:.9rem;line-height:1.25}
+.orb-item.core .orb-name{color:var(--t1);font-weight:500;font-size:1rem}
+
+/* the six: three down the left, three down the right */
+.orb-ring{display:contents}
+.orb-ring li{padding:11px 0}
+.orb-ring li:nth-child(-n+3){grid-column:1;justify-content:flex-end;
+  text-align:right;flex-direction:row-reverse}
+.orb-ring li:nth-child(-n+3) .orb-name{text-align:right}
+.orb-ring li:nth-child(n+4){grid-column:3}
+.orb-ring li:nth-child(1){grid-row:1}
+.orb-ring li:nth-child(2){grid-row:2}
+.orb-ring li:nth-child(3){grid-row:3}
+.orb-ring li:nth-child(4){grid-row:1}
+.orb-ring li:nth-child(5){grid-row:2}
+.orb-ring li:nth-child(6){grid-row:3}
+
+/* the three, together, ringed */
+.orb-core{grid-column:2;grid-row:1 / span 3;display:flex;flex-direction:column;
+  gap:12px;padding:26px 30px;border:1px dashed rgba(201,122,60,.28);
+  border-radius:200px;
+  background:radial-gradient(ellipse at 50% 50%,rgba(201,122,60,.10),transparent 72%)}
+
+.orb-item:hover .orb-dot{transform:scale(1.4);background:var(--copper)}
+.orb-item:hover .orb-name{color:var(--copper-lt)}
+.orb-item:hover .orb-n{color:var(--copper)}
+
+@media(max-width:900px){
+  .orb{grid-template-columns:minmax(0,1fr);gap:0}
+  .orb-core{grid-column:1;grid-row:auto;border-radius:14px;padding:20px 22px;
+    margin-bottom:16px}
+  .orb-ring{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 20px}
+  .orb-ring li,.orb-ring li:nth-child(-n+3),.orb-ring li:nth-child(n+4){
+    grid-column:auto;grid-row:auto;justify-content:flex-start;text-align:left;
+    flex-direction:row}
+  .orb-ring li:nth-child(-n+3) .orb-name{text-align:left}
+}
+@media(max-width:520px){.orb-ring{grid-template-columns:minmax(0,1fr)}}
+
+/* (superseded) nine capabilities as a grid — The three core are
+   filled and the six are hollow, which is what the "Core" badge said in
+   words. */
+.caps{list-style:none;margin:var(--sp5) 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:2px 0}
+@media(max-width:820px){.caps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.caps{grid-template-columns:minmax(0,1fr)}}
+.cap{display:grid;grid-template-columns:auto auto 1fr;align-items:center;
+  gap:10px;padding:13px 18px 13px 0}
+.cap-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--copper);
+  background:transparent}
+.cap.core .cap-dot{background:var(--copper)}
+.cap-n{color:var(--t3);font-size:.6rem;letter-spacing:.1em;margin:0}
+.cap-name{color:var(--t2);font-size:.92rem;line-height:1.3}
+.cap.core .cap-name{color:var(--t1);font-weight:500}
+
+/* ── the rail draws itself ─────────────────────────────────────────────
+   The six stops arrive in order when the chapter comes into view: the line
+   draws left to right and each stop lands as the line reaches it. It is the
+   one chapter where motion means something — the content is a sequence, and
+   the animation is that sequence.
+
+   The line stops at the sixth stop and the last dot stays hollow. Nothing
+   loops: an engagement designed to finish should not animate forever.
+
+   Everything is opt-in through .go, added by an IntersectionObserver, so a
+   reader who never scrolls here pays nothing — and prefers-reduced-motion
+   gets the finished state immediately rather than a degraded one. */
+.ph::before{transform-origin:left center;transform:scaleX(0);
+  transition:transform 1.15s cubic-bezier(.22,1,.36,1)}
+.ph.go::before{transform:scaleX(1)}
+.ph-stop{opacity:0;transform:translateY(6px);
+  transition:opacity .5s var(--e),transform .5s var(--e)}
+.ph.go .ph-stop{opacity:1;transform:none}
+.ph.go .ph-stop:nth-child(1){transition-delay:.10s}
+.ph.go .ph-stop:nth-child(2){transition-delay:.28s}
+.ph.go .ph-stop:nth-child(3){transition-delay:.46s}
+.ph.go .ph-stop:nth-child(4){transition-delay:.64s}
+.ph.go .ph-stop:nth-child(5){transition-delay:.82s}
+.ph.go .ph-stop:nth-child(6){transition-delay:1.00s}
+/* the handover lands, then breathes once and stops */
+.ph.go .ph-stop.last .ph-dot{animation:phlast 1.6s var(--e) 1.15s 1}
+@keyframes phlast{
+  0%{box-shadow:0 0 0 5px var(--void),0 0 0 5px rgba(201,122,60,.55)}
+  70%{box-shadow:0 0 0 5px var(--void),0 0 0 16px rgba(201,122,60,0)}
+  100%{box-shadow:0 0 0 5px var(--void),0 0 0 16px rgba(201,122,60,0)}
+}
+@media(max-width:760px){
+  .ph::before{transform-origin:center top;transform:scaleY(0)}
+  .ph.go::before{transform:scaleY(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  .ph::before,.ph.go::before{transform:none;transition:none}
+  .ph-stop,.ph.go .ph-stop{opacity:1;transform:none;transition:none;
+    transition-delay:0s}
+  .ph.go .ph-stop.last .ph-dot{animation:none}
+}
+
+/* ── chapter 07, once the detail moved to about.html ───────────────────
+   The body paragraphs left with the page. What remained was a two-column
+   grid holding one child — the facts sat in the first column and the second
+   was simply a hole, which is what the blank in the screenshot was.
+
+   The lede lives in the chapter header like every other chapter, so the grid
+   has one job left: the five facts. They run as a strip across the full
+   width, which fills the measure instead of leaving it. */
+#who .whogrid{grid-template-columns:minmax(0,1fr)}
+#who .whofacts{border-left:0;padding-left:0;
+  border-top:1px solid var(--line);padding-top:var(--sp4);
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--sp3)}
+#who .wfact{display:flex;flex-direction:column;gap:6px;
+  border-right:1px solid var(--line);padding-right:var(--sp3)}
+#who .wfact:last-child{border-right:0;padding-right:0}
+#who .wfact span{color:var(--t3);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase}
+#who .wfact b{color:var(--t1);font-weight:500;font-size:1rem;line-height:1.3}
+@media(max-width:900px){
+  #who .whofacts{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp3)}
+  #who .wfact{border-right:0;padding-right:0;
+    border-bottom:1px solid var(--line);padding-bottom:14px}
+  #who .wfact:nth-last-child(-n+1){border-bottom:0;padding-bottom:0}
+}
+@media(max-width:480px){#who .whofacts{grid-template-columns:minmax(0,1fr)}}
+
+/* ── three faults found by measuring, not by eye ───────────────────────
+
+   1  THE FOOTER DECLARED THREE COLUMNS AND HAS FOUR CHILDREN
+
+      .fgrid was 2fr 1fr 1fr with brand, Site, Contact and Follow inside it.
+      The fourth wrapped onto a second row at 636px wide, which is why the
+      footer read as collapsed: one wide orphan under three columns, and a
+      large hole beside it. Four children, four columns.
+
+   2  THE PHASE TOOLTIP WAS PAINTED OVER
+
+      It had opacity 1 on hover and sat inside the viewport — but
+      elementFromPoint at its centre returned the section, not the tooltip.
+      z-index:5 was competing at the root because nothing in the rail created
+      a stacking context, so later content in the chapter simply painted on
+      top. That is why it only seemed to appear after a click: the click moved
+      focus and scrolled, changing what overlapped it.
+
+      The rail now owns a stacking context and the hovered stop is lifted
+      above it. The tooltip also opens downward: the rail sits under the lede,
+      so upward it had to fight the text, and below it there is room.
+
+   3  THE CHAPTERS HAD NO SHARED RHYTHM
+
+      Every main > section carried padding 0 and relied on whatever margins
+      its own contents happened to have, so the gap between chapters changed
+      from one to the next. One rule gives them all the same top and bottom,
+      and the hero and the closing chapter keep their own deliberate values.
+*/
+footer .fgrid{grid-template-columns:1.6fr 1fr 1fr 1fr}
+@media(max-width:900px){footer .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){footer .fgrid{grid-template-columns:minmax(0,1fr)}}
+
+/* The tooltip opens downward, which puts it over the NEXT chapter — and a
+   later sibling paints on top of an earlier one no matter what the tooltip's
+   own z-index says. The chapter itself has to win first. */
+main > section#journey{position:relative;z-index:3}
+.ph{position:relative;z-index:2}
+.ph-stop{position:relative;z-index:1}
+.ph-link:hover,.ph-link:focus-within,.ph-link:focus-visible{z-index:40}
+.ph-tip{top:calc(100% - 8px);bottom:auto;transform:translateY(-5px)}
+.ph-link:hover .ph-tip,.ph-link:focus-visible .ph-tip{transform:none}
+
+main > section{padding-block:var(--sp7)}
+main > section.hook{padding-block:168px 64px}
+main > section#climax{padding-block:104px 250px}
+main > section[hidden]{padding-block:0}
+@media(max-width:760px){main > section{padding-block:var(--sp6)}}
+
+/* ── one gap between a chapter's head and its content ──────────────────
+   The chapters themselves were already even — 168px top and bottom, heading
+   169px in. The unevenness was inside them: measured across the home page,
+   the gap between the heading block and the first block of content came out
+   at 64px on five chapters, 63px on two, and 40px on #honest and
+   #commercial. Two chapters opening 24px tighter than the rest is exactly
+   the "not uniform" that was reported, and it is invisible until you measure
+   because no two of them sit next to each other.
+
+   One value, set on the head and cancelled on whatever follows so the two
+   cannot add up. */
+main > section .chead{margin-bottom:64px}
+main > section .chead + *{margin-top:0}
+main > section .chead + .obj,
+main > section .chead + .money,
+main > section .chead + .nine,
+main > section .chead + .whogrid,
+main > section .chead + .ch3{margin-top:0}
+@media(max-width:760px){
+  main > section .chead{margin-bottom:44px}
+}
+
+/* The counters kept a 168px top margin from where they used to sit, under the
+   hub in #solution. As the only thing in chapter 01's panel that margin was
+   pure gap: .pin measured 624px around 326px of content, and 168 of the 298
+   left over was this one rule. */
+#problem .counters{margin-top:0}
+/* ── the counts lead somewhere ─────────────────────────────────────────
+   Nine capabilities and six phases both name a page. Making the numeral a
+   link is the shortest route to it, and it is where a reader's eye already
+   is. Underlined only on hover so the row still reads as three figures
+   rather than three links. */
+.cnt-link{display:inline-block;text-decoration:none;
+  transition:transform .2s var(--e)}
+.cnt-link b{transition:color .2s var(--e)}
+.cnt-link:hover b,.cnt-link:focus-visible b{color:var(--copper-lt)}
+.cnt-link:hover{transform:translateY(-2px)}
+.cnt-link:focus-visible{outline:2px solid var(--signal);outline-offset:4px;
+  border-radius:2px}
+
+/* ── 1 · the gutter between chapters ───────────────────────────────────
+   Uniform at 168px top and bottom, which meant 336px of dead space between
+   any two chapters — even and far too generous. 104 each side gives 208,
+   which still separates them without a screen of nothing in between. */
+main > section{padding-block:var(--sp6)}
+main > section.hook{padding-block:168px 64px}
+main > section#climax{padding-block:104px 250px}
+main > section[hidden]{padding-block:0}
+@media(max-width:760px){main > section{padding-block:var(--sp5)}}
+
+/* ── 2 · the hub, one shape on both sides ──────────────────────────────
+   Two goes at this. The first left the dots floating with the label width —
+   404, 447, 446 on the left against a straight 948 on the right. The second
+   used a mirrored grid, and the left column wrapped: dot on one line, number
+   under it, name under that. Mirroring was the mistake.
+
+   Both sides now read the same way — dot, number, name, left to right — so
+   the two columns are the same object rather than reflections of it. */
+.orb-ring li{display:grid;grid-template-columns:auto auto 1fr;
+  align-items:center;column-gap:9px;justify-items:start;text-align:left}
+.orb-ring li .orb-dot{grid-column:1}
+.orb-ring li .orb-n{grid-column:2}
+.orb-ring li .orb-name{grid-column:3}
+
+/* ── 3 · the cursor ring goes ──────────────────────────────────────────
+   A 76px dashed circle trailing the pointer, with a 5px ember dot inside it.
+   It reads as a loading spinner or a rendering artefact rather than as a
+   cursor — it turns up in every screenshot as a stray unfinished circle, and
+   it is the first thing anyone asks about. It also costs a pointer listener
+   and a transform on every frame for no function at all. */
+.cur,.cdot{display:none!important}
+/*/PREVIEW:CSS*/
+/*BRAND:CSS*/
+/* ── the supplied lockup ───────────────────────────────────────────────
+   One file, referenced everywhere, rather than nine inline circles repeated
+   in twenty-four pages. Height is set and width follows the ratio, so the
+   mark never distorts and never reflows the header when it loads. */
+.brandimg{display:block;height:34px;width:auto;flex:none}
+.brand.lg .brandimg{height:46px}
+@media(max-width:900px){.brandimg{height:30px}.brand.lg .brandimg{height:40px}}
+@media(max-width:560px){.brandimg{height:26px}.brand.lg .brandimg{height:36px}}
+/*/BRAND:CSS*/
+/*CLIMAX:CSS*/
+/* the eyebrow, centred between two rules */
+.hook .eyebrow{display:flex;align-items:center;justify-content:center;gap:18px;
+  width:100%;max-width:none}
+.hook .eyebrow::before,.hook .eyebrow::after{content:'';height:1px;flex:1;
+  max-width:180px;background:linear-gradient(90deg,transparent,var(--copper))}
+.hook .eyebrow::after{background:linear-gradient(270deg,transparent,var(--copper))}
+/* land on the card, with the closing line still above it */
+#talk{scroll-margin-top:200px}
+@media(max-width:760px){#talk{scroll-margin-top:120px}}
+/*/CLIMAX:CSS*/
+/*FORM:CSS*/
+.phonerow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px}
+.phonerow select{font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:16px;color:var(--t1);background:rgba(20,22,30,.6);
+  border:1px solid var(--line2);border-radius:2px;padding:0 10px;height:100%;
+  min-height:46px;cursor:pointer}
+.phonerow select:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+/*/FORM:CSS*/
 </style>
-<meta content="fr_FR" property="og:locale"/><link href="https://quenora.ai/fr" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR"},{"@type":"WebPage","@id":"https://quenora.ai/fr#page","url":"https://quenora.ai/fr","name":"La plupart de l'IA d'entreprise n'atteint jamais le travail.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR","description":"Quenora est un cabinet de conseil en IA d’entreprise établi à Heilbronn. Nous intégrons l’IA dans les plateformes et les flux de travail que vous exploitez déjà, puis nous en remettons les clés à votre équipe."},{"@type":"FAQPage","@id":"https://quenora.ai/fr#faq","mainEntity":[{"@type":"Question","name":"Pourquoi pas un grand cabinet ?","acceptedAnswer":{"@type":"Answer","text":"Pour un programme pluriannuel, multipays, avec un millier de parties prenantes, vous devriez en prendre un — ils sont faits pour cela, nous ne le sommes pas. Pour un système unique qui doit atteindre la production cette année, leur modèle de mission coûte plus cher que le problème et avance plus lentement que votre entreprise. Et ceux qui le vendent sont rarement ceux qui le construisent."}},{"@type":"Question","name":"Pourquoi ne pas le construire en interne ?","acceptedAnswer":{"@type":"Answer","text":"Souvent, vous devriez, et nous vous le dirons. Faites-nous intervenir lorsque votre équipe possède la connaissance métier mais pas l’expérience plateforme, ou lorsqu’elle est déjà entièrement mobilisée par les systèmes qui font tourner l’entreprise. La phase de transfert existe précisément pour qu’à la fin, l’interne soit la réponse."}},{"@type":"Question","name":"Pourquoi ne pas simplement acheter une plateforme du marché ?","acceptedAnswer":{"@type":"Answer","text":"Si un produit couvre réellement votre cas, achetez-le — cela coûtera moins cher que tout ce que nous construirions. Ce pour quoi on nous appelle, c’est ce qui reste : raccorder ce produit à des systèmes pour lesquels il n’a jamais été conçu, et produire les preuves de gouvernance que l’éditeur ne fournit pas."}},{"@type":"Question","name":"Vous n’avez aucune étude de cas publiée.","acceptedAnswer":{"@type":"Answer","text":"C’est exact, et nous n’en inventerons pas. Quenora est un cabinet dirigé par son fondateur, à ses débuts. Ce que nous ferons : organiser un échange direct avec une référence avant tout engagement de votre part, et vous montrer dès le premier rendez-vous l’architecture réelle et la démarche d’évaluation plutôt qu’une présentation commerciale."}},{"@type":"Question","name":"Que se passe-t-il si cela ne fonctionne pas ?","acceptedAnswer":{"@type":"Answer","text":"La phase 05 existe pour y répondre par écrit, face au chiffre convenu en phase 01. S’il n’a pas bougé, nous le disons. Le code, la documentation et le harnais d’évaluation vous restent dans tous les cas — il n’existe aucun scénario où vous terminez une mission sans rien à montrer."}}]}]}</script></head>
+<meta content="fr_FR" property="og:locale"/>
+<link href="/assets/nora.css" rel="stylesheet"/>
+<link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
+<link href="/assets/brand/quenora-icon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/brand/quenora-icon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/brand/quenora-icon-180.png" rel="apple-touch-icon"/>
+<link href="/assets/brand/quenora-icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/><link href="https://quenora.ai/fr" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR"},{"@type":"WebPage","@id":"https://quenora.ai/fr#page","url":"https://quenora.ai/fr","name":"La plupart de l'IA d'entreprise n'atteint jamais le travail.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR","description":"Quenora est un cabinet de conseil en IA d’entreprise établi à Heilbronn. Nous intégrons l’IA dans les plateformes et les flux de travail que vous exploitez déjà, puis nous en remettons les clés à votre équipe."},{"@type":"FAQPage","@id":"https://quenora.ai/fr#faq","mainEntity":[{"@type":"Question","name":"Pourquoi pas un grand cabinet ?","acceptedAnswer":{"@type":"Answer","text":"Pour un programme pluriannuel, multipays, avec un millier de parties prenantes, vous devriez en prendre un — ils sont faits pour cela, nous ne le sommes pas. Pour un système unique qui doit atteindre la production cette année, leur modèle de mission coûte plus cher que le problème et avance plus lentement que votre entreprise. Et ceux qui le vendent sont rarement ceux qui le construisent."}},{"@type":"Question","name":"Pourquoi ne pas le construire en interne ?","acceptedAnswer":{"@type":"Answer","text":"Souvent, vous devriez, et nous vous le dirons. Faites-nous intervenir lorsque votre équipe possède la connaissance métier mais pas l’expérience plateforme, ou lorsqu’elle est déjà entièrement mobilisée par les systèmes qui font tourner l’entreprise. La phase de transfert existe précisément pour qu’à la fin, l’interne soit la réponse."}},{"@type":"Question","name":"Pourquoi ne pas simplement acheter une plateforme du marché ?","acceptedAnswer":{"@type":"Answer","text":"Si un produit couvre réellement votre cas, achetez-le — cela coûtera moins cher que tout ce que nous construirions. Ce pour quoi on nous appelle, c’est ce qui reste : raccorder ce produit à des systèmes pour lesquels il n’a jamais été conçu, et produire les preuves de gouvernance que l’éditeur ne fournit pas."}},{"@type":"Question","name":"Vous n’avez aucune étude de cas publiée.","acceptedAnswer":{"@type":"Answer","text":"C’est exact, et nous n’en inventerons pas. Quenora est un cabinet dirigé par son fondateur, à ses débuts. Ce que nous ferons : organiser un échange direct avec une référence avant tout engagement de votre part, et vous montrer dès le premier rendez-vous l’architecture réelle et la démarche d’évaluation plutôt qu’une présentation commerciale."}},{"@type":"Question","name":"Que se passe-t-il si cela ne fonctionne pas ?","acceptedAnswer":{"@type":"Answer","text":"La phase 05 existe pour y répondre par écrit, face au chiffre convenu en phase 01. S’il n’a pas bougé, nous le disons. Le code, la documentation et le harnais d’évaluation vous restent dans tous les cas — il n’existe aucun scénario où vous terminez une mission sans rien à montrer."}}]}]}</script></head>
 <body class="no-js">
 <a class="skip" href="#main">Aller au contenu</a>
 <div aria-hidden="true" id="ld"><div class="n">01</div><div class="bar"></div></div>
@@ -983,31 +1385,23 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div aria-hidden="true" class="cdot" id="cdot"></div>
 <header class="nav" id="nav">
 <div class="wrap">
-<a aria-label="Quenora home" class="brand" href="/fr/index.html">
-<svg aria-hidden="true" class="mk" fill="currentColor" viewbox="9 9 169.71 155.71">
-<circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
-<circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
-<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
-<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
-<circle cx="151.71" cy="36" r="27"></circle>
-</svg>quenora
-    </a>
+<a aria-label="Quenora home" class="brand" href="/fr/index.html"><img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/></a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
 <nav aria-label="Main" class="navlinks" id="navLinks">
-<a href="#journey">Méthode</a>
-<a href="#solution">Expertises</a>
+<a href="/fr/approach.html">Méthode</a>
+<a href="/fr/capabilities.html">Expertises</a>
 <a href="/fr/engineering.html">Ingénierie</a>
-<a href="#work">Missions</a>
-<a href="#who">À propos</a>
+<a href="/fr/work.html">Missions</a>
+<a href="/fr/about.html">À propos</a>
 </nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Choisir la langue" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>FR</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/index.html" hreflang="en" lang="en">English</a></li><li><a href="/de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a aria-current="true" href="/fr/index.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
-<a class="navcta" href="#climax"><span class="cta-long">Engager la conversation</span><span class="cta-short">Contact</span></a>
+<a class="navcta" href="#talk"><span class="cta-long">Engager la conversation</span><span class="cta-short">Contact</span></a>
 </div>
 </header>
 <main id="main">
 <section class="hook">
 <canvas aria-hidden="true" id="heroCanvas"></canvas>
 <div class="wrap">
-<p class="mono eyebrow">IA d’entreprise &amp; automatisation · Présence internationale</p>
+<p class="mono eyebrow">IA &amp; automatisation d’entreprise</p>
 <h1>
 <span class="ln"><span class="w">La plupart</span> <span class="w">de l'IA</span></span>
 <span class="ln"><span class="w">d'entreprise</span> <span class="w">n'atteint</span> <span class="w">jamais</span></span>
@@ -1060,14 +1454,14 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="pinwrap" id="pinwrap">
 <div class="pin">
 <div class="inner">
-<h2 class="big" id="pBig">Les programmes d'IA échouent aux <em>jointures</em>.</h2>
-<p class="sub" id="pSub">Trois d’entre elles — et aucune n’est un problème de recherche. Chaque jointure est un problème d’ingénierie. C’est la raison de notre existence.</p>
-<div class="seams" id="pSeams">
-<div><b>Les données</b><span>Des systèmes qui ne se joignent pas. Des contrats que personne n'a écrits. Une traçabilité que personne ne peut suivre.</span></div>
-<div><b>L'intégration</b><span>Un modèle qui fonctionne dans un notebook et n'a aucun chemin vers le processus qui en avait besoin.</span></div>
-<div><b>Le transfert</b><span>Une solution que seuls les consultants savent exploiter — et qui cesse discrètement d'être utilisée.</span></div>
-</div>
-</div>
+<div class="counters">
+<div class="rv"><a class="cnt-link" href="/fr/capabilities.html"><b data-count="9">9</b></a>
+<span>expertises. Trois sont principales — le travail passe par elles.</span></div>
+<div class="rv" data-d="1"><a class="cnt-link" href="/fr/approach.html"><b data-count="6">6</b></a>
+<span>phases, du cadrage au transfert — chacune avec une condition de sortie au contrat.</span></div>
+<div class="rv" data-d="2"><a class="cnt-link" href="/fr/approach.html"><b data-count="1">1</b></a>
+<span>transfert, convenu avant le début des travaux et inscrit au contrat de mission.</span></div>
+</div></div>
 </div>
 </div>
 </section>
@@ -1080,17 +1474,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <p class="lede">Pas un segment de marché. Les trois formes de problème pour lesquelles ce cabinet a été bâti. Si aucune ne vous correspond, nous ne sommes probablement pas le bon cabinet — et nous préférons que vous le sachiez maintenant.</p>
 </div>
 </div>
-<div class="fit">
-<article class="rv"><span class="tick">Situation 01</span>
-<h3>Le pilote qui s’est enlisé</h3>
-<p>Cela fonctionnait en démo. Six mois plus tard, c’est toujours une démo, parce que la plateforme en dessous n’a jamais été construite et que personne n’assume l’écart.</p></article>
-<article class="rv" data-d="1"><span class="tick">Situation 02</span>
-<h3>Une recherche qui ment</h3>
-<p>L’assistant répond avec assurance et se trompe assez souvent pour que plus personne ne lui fasse confiance. Le modèle n’est pas en cause. Le contrat de données, si.</p></article>
-<article class="rv" data-d="2"><span class="tick">Situation 03</span>
-<h3>La gouvernance arrive trop tard</h3>
-<p>Quelque chose est en production, les achats ou les risques posent maintenant des questions, et les preuves permettant d’y répondre n’ont jamais été collectées.</p></article>
-</div>
+<div class="ch3 wrap rv"><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="10" cy="12" r="5.5"></circle><line x1="19" x2="19" y1="5" y2="19"></line></svg><span class="ch-eyebrow mono">Situation 01</span><h3 class="ch-title">Le pilote qui s’est enlisé</h3><p class="ch-body">Cela fonctionnait en démo. Six mois plus tard, c’est toujours une démo, parce que la plateforme en dessous n’a jamais été construite et que personne n’assume l’écart.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><circle cx="14.6" cy="12" r="2.4"></circle></svg><span class="ch-eyebrow mono">Situation 02</span><h3 class="ch-title">Une recherche qui ment</h3><p class="ch-body">L’assistant répond avec assurance et se trompe assez souvent pour que plus personne ne lui fasse confiance. Le modèle n’est pas en cause. Le contrat de données, si.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><line x1="12" x2="12" y1="12" y2="7.6"></line><line x1="12" x2="15.6" y1="12" y2="14"></line></svg><span class="ch-eyebrow mono">Situation 03</span><h3 class="ch-title">La gouvernance arrive trop tard</h3><p class="ch-body">Quelque chose est en production, les achats ou les risques posent maintenant des questions, et les preuves permettant d’y répondre n’ont jamais été collectées.</p></div></div>
 </div>
 </section>
 <section id="journey">
@@ -1102,61 +1486,15 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <p class="lede">La plupart des cabinets sont organisés pour prolonger la mission.
              Celui-ci est organisé pour la terminer — chaque phase porte une condition
              de sortie inscrite au contrat.</p>
-<a class="more" href="/fr/approach.html">La méthode en détail</a>
+<a class="more" href="/fr/approach.html">L’approche en détail</a>
 </div>
 </div>
 </div>
-<div class="hwrap" id="hwrap">
-<div class="hpin">
-<div class="htrack" id="htrack">
-<article class="phase" data-n="01"><p class="mono">Phase 01 · Cadrage</p>
-<h3>Trouver la <em>vraie</em> contrainte</h3>
-<p>Nous passons les premières semaines à comprendre ce qui se passe réellement, et non ce que la documentation prévoit. C’est lors de ce premier regard que la vraie contrainte apparaît généralement.</p>
-<ul><li>Revue du processus avec les personnes qui font le travail</li><li>Inventaire des données et des systèmes</li><li>La contrainte que personne n’a mentionnée</li></ul>
-<div class="exit"><b>Critère de sortie</b>Une position écrite sur ce qu’il faut construire en premier — ou la recommandation de ne rien construire.</div>
-<p class="dur mono">Semaines 1–2</p></article>
-<article class="phase" data-n="02"><p class="mono">Phase 02 · Fondations</p>
-<h3>La couche <em>ingrate</em> mais décisive</h3>
-<p>Environnements, contrats de données, modèle d'accès, banc d'évaluation. Le travail
-               qui décide si tout ce qui suit résistera à la production.</p>
-<ul><li>Environnements et modèle d’accès, documentés</li><li>Contrats de données, avec responsables nommés</li><li>Harnais d’évaluation construit sur vos données réelles</li></ul>
-<div class="exit"><b>Critère de sortie</b>Des scores d’évaluation de référence pour juger chaque changement qui suivra.</div>
-<p class="dur mono">Semaines 3–6</p></article>
-<article class="phase" data-n="03"><p class="mono">Phase 03 · Intégration</p>
-<h3>Dans ce que vous <em>exploitez déjà</em></h3>
-<p>Raccordé aux systèmes qui détiennent les données et font le travail, avec des
-               chemins d'échec conçus plutôt que découverts en production.</p>
-<ul><li>Connecteurs vers l’ERP, le CRM et le service desk</li><li>Modèle d’habilitations et piste d’audit</li><li>Chemins d’échec et de retour arrière, cartographiés</li></ul>
-<div class="exit"><b>Critère de sortie</b>Un déploiement par étapes fonctionnant sur des données réelles dans un environnement hors production.</div>
-<p class="dur mono">Semaines 4–10</p></article>
-<article class="phase" data-n="04"><p class="mono">Phase 04 · Mise en production</p>
-<h3>Sous un véritable <em>contrôle du changement</em></h3>
-<p>La mise en production suit le même chemin que n'importe quel autre système —
-               mêmes validations, mêmes contrôles. Pas d'univers parallèle. Pas de pilote permanent.</p>
-<ul><li>Mise en service derrière votre gestion des changements existante</li><li>Supervision, alertes, plafonds de coûts</li><li>Retour arrière répété, non théorisé</li></ul>
-<div class="exit"><b>Critère de sortie</b>En production, sous vos contrôles existants — sans exception.</div>
-<p class="dur mono">Semaines 10–12</p></article>
-<article class="phase" data-n="05"><p class="mono">Phase 05 · Preuve</p>
-<h3>Face au <em>chiffre</em> convenu</h3>
-<p>Retour au chiffre fixé lors du cadrage — a-t-il bougé ou non ? Cette conversation
-               est le livrable.</p>
-<ul><li>Mesure face au chiffre de la phase Cadrage</li><li>Ce qui a bougé, ce qui n’a pas bougé, et pourquoi</li><li>Recommandation honnête sur la suite</li></ul>
-<div class="exit"><b>Critère de sortie</b>Un résultat écrit — y compris dans sa version inconfortable si c’est la vérité.</div>
-<p class="dur mono">Semaines 9–12</p></article>
-<article class="phase" data-n="06"><p class="mono">Phase 06 · Transfert</p>
-<h3>Et ensuite nous <em>partons</em></h3>
-<p>Nous nous rendons inutiles — une date à partir de laquelle votre équipe
-               l'exploite sans nous. La mission est conçue pour s'achever.</p>
-<ul><li>Runbooks et décisions d’architecture consignées</li><li>Exploitation en binôme avec vos ingénieurs</li><li>Responsable nommé et date de transfert</li></ul>
-<div class="exit"><b>Critère de sortie</b>Vous le possédez, vous l’exploitez, nous sommes partis. C’est la définition de « terminé ».</div>
-<p class="dur mono">Semaines 12–14</p></article>
-</div>
-</div>
-</div>
+<ol class="ph wrap rv"><li class="ph-stop"><a class="ph-link" href="/fr/approach.html#phase-1"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" fill="currentColor" r="2.2" stroke="none"></circle></svg><p class="ph-name mono">Phase 01 · Cadrage</p><p class="ph-dur mono">Semaines 1–2</p><span class="ph-tip">Trouver la <em>vraie</em> contrainte</span></a></li><li class="ph-stop"><a class="ph-link" href="/fr/approach.html#phase-2"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><line x1="4" x2="20" y1="17" y2="17"></line><circle cx="9" cy="11" r="3"></circle><circle cx="16" cy="11" r="3"></circle></svg><p class="ph-name mono">Phase 02 · Fondations</p><p class="ph-dur mono">Semaines 3–6</p><span class="ph-tip">La couche <em>ingrate</em> mais décisive</span></a></li><li class="ph-stop"><a class="ph-link" href="/fr/approach.html#phase-3"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="8.5" cy="12" r="4.5"></circle><circle cx="15.5" cy="12" r="4.5"></circle></svg><p class="ph-name mono">Phase 03 · Intégration</p><p class="ph-dur mono">Semaines 4–10</p><span class="ph-tip">Dans ce que vous <em>exploitez déjà</em></span></a></li><li class="ph-stop"><a class="ph-link" href="/fr/approach.html#phase-4"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><line x1="7" x2="7" y1="4" y2="20"></line><circle cx="15" cy="12" r="4"></circle><line x1="11" x2="19" y1="12" y2="12"></line></svg><p class="ph-name mono">Phase 04 · Mise en production</p><p class="ph-dur mono">Semaines 10–12</p><span class="ph-tip">Sous un véritable <em>contrôle du changement</em></span></a></li><li class="ph-stop"><a class="ph-link" href="/fr/approach.html#phase-5"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="13" r="6.5"></circle><line x1="12" x2="16" y1="13" y2="9"></line></svg><p class="ph-name mono">Phase 05 · Preuve</p><p class="ph-dur mono">Semaines 9–12</p><span class="ph-tip">Face au <em>chiffre</em> convenu</span></a></li><li class="ph-stop last"><a class="ph-link" href="/fr/approach.html#phase-6"><span aria-hidden="true" class="ph-dot"></span><svg aria-hidden="true" class="ph-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><line x1="12" x2="21" y1="12" y2="6"></line></svg><p class="ph-name mono">Phase 06 · Transfert</p><p class="ph-dur mono">Semaines 12–14</p><span class="ph-tip">Et ensuite nous <em>partons</em></span></a></li></ol>
 <div class="wrap">
 <div class="cta-inline rv">
-<p><b>Reconnaissez-vous la forme de votre problème dans ces six phases ?</b> Deux paragraphes sur ce qui bloque suffisent pour commencer — sans cahier des charges, sans accord de confidentialité.</p>
-<a href="#climax">Engager la conversation</a>
+<p><b>Reconnaissez-vous la forme de votre problème dans ces six phases ?</b> Deux paragraphes sur ce qui bloque suffisent pour commencer — sans cahier des charges, sans accord de confidentialité.</p>
+<a href="#talk">Dites-nous ce qui bloque</a>
 </div>
 </div>
 </section>
@@ -1172,31 +1510,12 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <a class="more" href="/fr/capabilities.html">Les neuf en détail</a>
 </div>
 </div>
-<div class="nine">
-<div class="nrow rv"><span class="i">01</span><h3>Ingénierie de plateforme &amp; de déploiement</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">02</span><h3>Automatisation des processus &amp; des flux</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">03</span><h3>Intégration de l'IA</h3><span class="tag">Core</span></div>
-<div class="nrow rv"><span class="i">04</span><h3>Stratégie et conseil en IA</h3><span></span></div>
-<div class="nrow rv"><span class="i">05</span><h3>Ingénierie des données et analytique</h3><span></span></div>
-<div class="nrow rv"><span class="i">06</span><h3>Agents et copilotes d'IA sur mesure</h3><span></span></div>
-<div class="nrow rv"><span class="i">07</span><h3>Gouvernance, sécurité et conformité de l'IA</h3><span></span></div>
-<div class="nrow rv"><span class="i">08</span><h3>Exploitation infogérée de l'IA</h3><span></span></div>
-<div class="nrow rv"><span class="i">09</span><h3>Conduite du changement et montée en compétences</h3><span></span></div>
-</div>
+<div class="orb wrap rv"><ol class="orb-ring"><li class="orb-item" style="--i:0"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">04</span><span class="orb-name">Stratégie et conseil en IA</span></li><li class="orb-item" style="--i:1"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">05</span><span class="orb-name">Ingénierie des données et analytique</span></li><li class="orb-item" style="--i:2"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">06</span><span class="orb-name">Agents et copilotes d'IA sur mesure</span></li><li class="orb-item" style="--i:3"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">07</span><span class="orb-name">Gouvernance, sécurité et conformité de l'IA</span></li><li class="orb-item" style="--i:4"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">08</span><span class="orb-name">Exploitation infogérée de l'IA</span></li><li class="orb-item" style="--i:5"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">09</span><span class="orb-name">Conduite du changement et montée en compétences</span></li></ol><ol class="orb-core"><li class="orb-item core"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">01</span><span class="orb-name">Ingénierie de plateforme &amp; de déploiement</span></li><li class="orb-item core"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">02</span><span class="orb-name">Automatisation des processus &amp; des flux</span></li><li class="orb-item core"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">03</span><span class="orb-name">Intégration de l'IA</span></li></ol></div>
 <figure class="autofig rv">
 <p class="mono autolab">Compétence 02 · à quoi ressemble l’automatisation en pratique</p>
 <canvas aria-hidden="true" id="autoCanvas"></canvas>
 <figcaption>À titre d’illustration, non mesuré. L’essentiel du travail se termine sans intervention. Le reste est transmis à une personne, délibérément — une automatisation ne gagne la confiance que lorsqu’elle sait ce qu’elle ne doit pas décider, et tracer cette limite constitue l’essentiel du travail.</figcaption>
 </figure>
-<div class="counters">
-<div class="rv"><b data-count="9">9</b>
-<span>expertises. Trois sont principales — le travail passe par elles.</span></div>
-<div class="rv" data-d="1"><b data-count="6">6</b>
-<span>phases, du cadrage au transfert — chacune avec une condition de sortie au contrat.</span></div>
-<div class="rv" data-d="2"><b data-count="0">0</b>
-<span>mission sans date de fin. Une prolongation est une décision, jamais
-                un réflexe.</span></div>
-</div>
 </div>
 </section>
 <section id="work">
@@ -1205,29 +1524,13 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="cnum">05</div>
 <div>
 <h2>L’espace est vaste. Ces <em>trois</em> reviennent.</h2>
-<p class="lede">Ni une liste de clients, ni une carte de menu. Neuf expertises peuvent porter sur plus de problèmes qu’une page ne saurait énumérer ; voici donc trois formes pour lesquelles on nous appelle le plus souvent — décrites par leur forme plutôt que par le logo qui s’y trouve. Si la vôtre n’en fait pas partie, ce n’est pas un problème de périmètre ; c’est le cas habituel.</p>
-<a class="more" href="/fr/work.html">La vue d’ensemble et les chiffres</a>
+<p class="lede">Ni une liste de clients, ni une carte de menu. Neuf expertises peuvent porter sur plus de problèmes qu’une page ne saurait énumérer ; voici donc trois formes pour lesquelles on nous appelle le plus souvent — décrites par leur forme plutôt que par le logo qui s’y trouve. Si la vôtre n’en fait pas partie, ce n’est pas un problème de périmètre ; c’est le cas habituel.</p>
+<a class="more" href="/fr/work.html">La carte élargie, et les chiffres</a>
 <div><a class="livelink" href="/fr/work.html#governed"><span class="dot"></span>
 À essayer : la même question, répondue deux fois</a></div>
 </div>
 </div>
-<div class="shapes">
-<article class="shape rv">
-<p class="mono">Schéma 01 · Services financiers</p>
-<h3>Traitement des factures sur trois instances ERP</h3>
-<p>De forts volumes de factures répartis sur trois ERP non intégrés, avec une équipe finance qui rapproche les données à la main. La mission a porté sur la couche d’intégration plutôt que sur le remplacement de l’un des trois.</p>
-</article>
-<article class="shape rv" data-d="1">
-<p class="mono">Schéma 02 · Industrie</p>
-<h3>Tri du support et recherche de connaissances</h3>
-<p>Un service desk qui répartit les tickets à la main et perd son savoir interne à mesure que les collaborateurs expérimentés partent en retraite. Une couche de recherche sur vingt ans de tickets résolus, raccordée au service desk existant plutôt que de le remplacer.</p>
-</article>
-<article class="shape rv" data-d="2">
-<p class="mono">Schéma 03 · Logistique</p>
-<h3>Modernisation de l’existant et planification prédictive</h3>
-<p>Une planification qui tourne sur un système plus ancien que la majorité des équipes. Plutôt qu’une réécriture, une couche d’intégration et de données qui permet à des modèles prédictifs modernes d’atteindre le cœur historique en toute sécurité.</p>
-</article>
-</div>
+<div class="ch3 wrap rv"><a class="ch-card ch-link" href="/fr/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="7" cy="9" r="3"></circle><circle cx="17" cy="9" r="3"></circle><circle cx="12" cy="16" r="3"></circle></svg><p class="ch-eyebrow mono">Schéma 01 · Services financiers</p><h3 class="ch-title">Traitement des factures sur trois instances ERP</h3></a><a class="ch-card ch-link" href="/fr/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="10" r="4"></circle><line x1="6" x2="18" y1="18" y2="18"></line></svg><p class="ch-eyebrow mono">Schéma 02 · Industrie</p><h3 class="ch-title">Tri du support et recherche de connaissances</h3></a><a class="ch-card ch-link" href="/fr/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="9" cy="12" r="5"></circle><line x1="14" x2="20" y1="12" y2="12"></line><circle cx="20" cy="12" fill="currentColor" r="1.6" stroke="none"></circle></svg><p class="ch-eyebrow mono">Schéma 03 · Logistique</p><h3 class="ch-title">Modernisation du legacy et planification prédictive</h3></a></div>
 <p class="shapes-note">Structures de mission représentatives, issues des secteurs dans lesquels nous travaillons. Les chiffres figurant sur la page de détail illustrent le schéma et ne sont pas des résultats audités d’un client nommé.</p>
 </div>
 </section>
@@ -1254,7 +1557,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="cnum">06</div>
 <div>
 <h2>Ce qui est <em>l'an</em> et ce qui est construit.</h2>
-<p class="lede">Les missions en cours par forme et par étape, et les frameworks issus des précédentes. Les projets sont décrits sans nom de client ; les produits vous appartiennent au lieu d’être des licences louées.</p>
+<p class="lede">Les missions en cours par forme et par étape, et les frameworks issus des précédentes. Les projets sont décrits sans nom de client ; les produits vous appartiennent au lieu d’être des licences louées.</p>
 <a class="more" href="/fr/products.html">Les cinq produits en détail</a>
 </div>
 </div>
@@ -1310,19 +1613,19 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 </div>
 </div>
 <div class="obj rv">
-<details><summary>Pourquoi pas un grand cabinet ?<span aria-hidden="true" class="pm"></span></summary>
+<details><summary>Pourquoi pas un grand cabinet ?<span aria-hidden="true" class="pm"></span></summary>
 <div class="ans">Pour un programme pluriannuel, multipays, avec un millier de parties prenantes, vous devriez en prendre un — ils sont faits pour cela, nous ne le sommes pas. Pour un système unique qui doit atteindre la production cette année, leur modèle de mission coûte plus cher que le problème et avance plus lentement que votre entreprise. Et ceux qui le vendent sont rarement ceux qui le construisent.</div></details>
-<details><summary>Pourquoi ne pas le construire en interne ?<span aria-hidden="true" class="pm"></span></summary>
+<details><summary>Pourquoi ne pas le construire en interne ?<span aria-hidden="true" class="pm"></span></summary>
 <div class="ans">Souvent, vous devriez, et nous vous le dirons. Faites-nous intervenir lorsque votre équipe possède la connaissance métier mais pas l’expérience plateforme, ou lorsqu’elle est déjà entièrement mobilisée par les systèmes qui font tourner l’entreprise. La phase de transfert existe précisément pour qu’à la fin, l’interne soit la réponse.</div></details>
-<details><summary>Pourquoi ne pas simplement acheter une plateforme du marché ?<span aria-hidden="true" class="pm"></span></summary>
-<div class="ans">Si un produit couvre réellement votre cas, achetez-le — cela coûtera moins cher que tout ce que nous construirions. Ce pour quoi on nous appelle, c’est ce qui reste : raccorder ce produit à des systèmes pour lesquels il n’a jamais été conçu, et produire les preuves de gouvernance que l’éditeur ne fournit pas.</div></details>
+<details><summary>Pourquoi ne pas simplement acheter une plateforme du marché ?<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">Si un produit couvre réellement votre cas, achetez-le — cela coûtera moins cher que tout ce que nous construirions. Ce pour quoi on nous appelle, c’est ce qui reste : raccorder ce produit à des systèmes pour lesquels il n’a jamais été conçu, et produire les preuves de gouvernance que l’éditeur ne fournit pas.</div></details>
 <details><summary>Vous n’avez aucune étude de cas publiée.<span aria-hidden="true" class="pm"></span></summary>
-<div class="ans">C’est exact, et nous n’en inventerons pas. Quenora est un cabinet dirigé par son fondateur, à ses débuts. Ce que nous ferons : organiser un échange direct avec une référence avant tout engagement de votre part, et vous montrer dès le premier rendez-vous l’architecture réelle et la démarche d’évaluation plutôt qu’une présentation commerciale.</div></details>
-<details><summary>Que se passe-t-il si cela ne fonctionne pas ?<span aria-hidden="true" class="pm"></span></summary>
+<div class="ans">C’est exact, et nous n’en inventerons pas. Quenora est un cabinet dirigé par son fondateur, à ses débuts. Ce que nous ferons : organiser un échange direct avec une référence avant tout engagement de votre part, et vous montrer dès le premier rendez-vous l’architecture réelle et la démarche d’évaluation plutôt qu’une présentation commerciale.</div></details>
+<details><summary>Que se passe-t-il si cela ne fonctionne pas ?<span aria-hidden="true" class="pm"></span></summary>
 <div class="ans">La phase 05 existe pour y répondre par écrit, face au chiffre convenu en phase 01. S’il n’a pas bougé, nous le disons. Le code, la documentation et le harnais d’évaluation vous restent dans tous les cas — il n’existe aucun scénario où vous terminez une mission sans rien à montrer.</div></details>
 <div class="cta-inline rv">
-<p><b>Une objection à laquelle nous n’avons pas répondu ?</b> Indiquez-le dès le premier message — une réponse directe nous sera plus utile à tous les deux qu’une proposition.</p>
-<a href="#climax">Posez-la directement</a>
+<p><b>Une objection à laquelle nous n’avons pas répondu ?</b> Indiquez-le dès le premier message — une réponse directe nous sera plus utile à tous les deux qu’une proposition.</p>
+<a href="#talk">Posez-la directement</a>
 </div>
 </div>
 </div>
@@ -1334,15 +1637,9 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div>
 <h2>Qui vous engagez <em>réellement</em>.</h2>
 <p class="lede">Le chapitre précédent soutient qu’un grand cabinet ne devrait pas être le choix par défaut. Cela nous oblige à dire clairement qui vous obtenez à la place — y compris notre taille, la première chose que demandera un service achats.</p>
-</div>
+<a class="more" href="/fr/about.html">Qui vous engagez, en détail</a></div>
 </div>
 <div class="whogrid">
-<div class="whomain rv">
-<p>Quenora est dirigée par son fondateur. Celui qui cadre votre mission est celui qui réalise le travail et celui que vous appelez quand quelque chose casse — aucune couche commerciale entre les deux, et personne que vous n’avez pas rencontré ne touche au travail.</p>
-<p>Fondée en 2025 par Balaji Durai. Avant Quenora, il a piloté des travaux de transformation pour des industriels multinationaux, des banques de détail et des groupes des sciences de la vie — le type de programme où plusieurs technologies doivent d’abord être mises d’accord entre elles avant que quoi que ce soit n’atteigne un utilisateur.</p>
-<p>Ces systèmes ont ensuite été utilisés par plus de 100 000 personnes, et la mesure qui comptait n’a jamais été la mise en service. C’était de savoir si la journée de travail devenait plus calme ensuite. C’est toujours le critère ici, et c’est pourquoi l’un des neuf principes derrière la marque s’appelle « Humain » plutôt que quelque chose sur les modèles.</p>
-<p>Le cabinet est petit et grandit en gagnant en profondeur, non en atteignant un objectif d’effectifs. C’est une contrainte réelle, et elle détermine ce que nous acceptons : des systèmes uniques qui doivent atteindre la production cette année, pas des programmes pluriannuels et multipays. Le chapitre ci-dessus dit la même chose dans l’autre sens.</p>
-</div>
 <div class="whofacts rv" data-d="1">
 <div class="wfact"><span class="mono">Fondée</span><b>2025</b></div>
 <div class="wfact"><span class="mono">Siège</span><b>Heilbronn, Allemagne</b></div>
@@ -1351,7 +1648,6 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="wfact"><span class="mono">Langues</span><b>Allemand · Français · Anglais</b></div>
 </div>
 </div>
-<p class="whonote">L’expérience sectorielle et le chiffre ci-dessus décrivent des travaux réalisés avant la création de Quenora en 2025. Ce ne sont pas des résultats obtenus pour des clients de Quenora, et rien sur cette page ne prétend le contraire.</p>
 </div>
 </section>
 <section id="commercial">
@@ -1369,16 +1665,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div><b>Phases 02–05 · Construction</b><strong>Périmètre fixe</strong>
 <p>Chiffré sur un périmètre écrit assorti d’une liste explicite des exclusions. Les changements sont recadrés ouvertement, non absorbés discrètement dans le planning.</p></div>
 <div><b>Phase 06 · Transfert</b><strong>Inclus</strong>
-<p>Jamais une ligne séparée. Une mission qui se termine sans transfert opérationnel n’est pas terminée ; nous ne vous facturons donc pas deux fois pour la terminer.</p></div>
-</div>
-<div class="rv" style="margin-top:var(--sp6)">
-<p class="mono" style="color:var(--copper-lt);margin-bottom:var(--sp3)">Ce qui se passe quand vous nous contactez</p>
-<ol class="steps">
-<li><b>Vous écrivez deux paragraphes</b><span>Ce qui ne fonctionne pas, et ce que vous avez déjà essayé. Aucun cahier des charges requis, aucun accord de confidentialité pour un premier échange.</span></li>
-<li><b>Nous répondons sous un jour ouvré</b><span>Soit avec un créneau, soit avec un mot honnête indiquant que ce n’est pas à nous de le résoudre, et une orientation vers quelqu’un de mieux placé.</span></li>
-<li><b>Quarante-cinq minutes, sans présentation</b><span>Vos systèmes, votre contrainte, notre lecture de la situation. Vous obtiendrez un avis technique pendant cet échange, pas une proposition de suivi.</span></li>
-<li><b>Une position écrite</b><span>Ce que nous construirions en premier, ce que cela coûterait, et ce que nous ne construirions pas. À vous de l’emporter devant votre conseil, ou chez un autre cabinet.</span></li>
-</ol>
+<p>Jamais une ligne séparée. Une mission qui se termine sans transfert opérationnel n’est pas terminée ; nous ne vous facturons donc pas deux fois pour la terminer.</p></div>
 </div>
 </div>
 </section>
@@ -1436,8 +1723,8 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
      opens /c, which counts the scan and hands over a vCard filed under
      Quenora Consulting. The numbers are written out underneath because a QR
      is useless to anyone reading this on the device they would scan it with. -->
-<div class="qrcard rv" data-d="1">
-<div class="qrcode"><svg viewbox="0 0 37 37" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5h7m1 0h1m1 0h5m1 0h2m1 0h2m1 0h7m-29 1h1m5 0h1m2 0h4m2 0h1m4 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m5 0h1m1 0h1m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m6 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h3m2 0h1m2 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h4m3 0h4m1 0h1m-16 1h2m2 0h1m1 0h1m1 0h3m6 0h1m1 0h1m1 0h1m1 0h1m-29 1h3m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1m5 0h1m1 0h2m-28 1h2m3 0h2m1 0h2m1 0h1m3 0h3m1 0h1m1 0h4m1 0h1m-27 1h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m1 0h1m2 0h1m-25 1h7m3 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m-28 1h1m3 0h2m1 0h1m3 0h5m2 0h3m1 0h1m1 0h2m1 0h2m-28 1h1m4 0h3m1 0h1m2 0h1m1 0h4m1 0h1m1 0h2m-23 1h4m2 0h2m2 0h1m4 0h2m2 0h2m2 0h4m-26 1h1m1 0h1m1 0h3m1 0h1m2 0h1m2 0h3m6 0h2m1 0h1m-29 1h1m2 0h1m3 0h1m3 0h4m7 0h3m3 0h1m-29 1h3m2 0h2m1 0h3m2 0h1m3 0h4m3 0h1m1 0h1m1 0h1m-29 1h1m1 0h2m1 0h1m2 0h3m1 0h3m3 0h1m2 0h2m1 0h1m-25 1h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h1m1 0h5m1 0h1m-19 1h3m2 0h1m1 0h1m1 0h1m1 0h2m3 0h3m-27 1h7m2 0h1m2 0h2m3 0h4m1 0h1m1 0h1m-25 1h1m5 0h1m1 0h3m1 0h2m3 0h4m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m4 0h6m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h4m3 0h2m2 0h1m1 0h3m-28 1h1m1 0h3m1 0h1m3 0h1m1 0h1m2 0h1m2 0h7m1 0h2m-28 1h1m5 0h1m2 0h2m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h7m4 0h1m1 0h1m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1" stroke="#07070a"></path></svg></div>
+<div class="qrcard rv" data-d="1" id="talk">
+<a aria-label="Enregistrer Quenora Consulting dans votre téléphone" class="qrcode" href="/c"><svg viewbox="0 0 37 37" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5h7m1 0h1m1 0h5m1 0h2m1 0h2m1 0h7m-29 1h1m5 0h1m2 0h4m2 0h1m4 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m5 0h1m1 0h1m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m6 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h3m2 0h1m2 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h4m3 0h4m1 0h1m-16 1h2m2 0h1m1 0h1m1 0h3m6 0h1m1 0h1m1 0h1m1 0h1m-29 1h3m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1m5 0h1m1 0h2m-28 1h2m3 0h2m1 0h2m1 0h1m3 0h3m1 0h1m1 0h4m1 0h1m-27 1h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m1 0h1m2 0h1m-25 1h7m3 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m-28 1h1m3 0h2m1 0h1m3 0h5m2 0h3m1 0h1m1 0h2m1 0h2m-28 1h1m4 0h3m1 0h1m2 0h1m1 0h4m1 0h1m1 0h2m-23 1h4m2 0h2m2 0h1m4 0h2m2 0h2m2 0h4m-26 1h1m1 0h1m1 0h3m1 0h1m2 0h1m2 0h3m6 0h2m1 0h1m-29 1h1m2 0h1m3 0h1m3 0h4m7 0h3m3 0h1m-29 1h3m2 0h2m1 0h3m2 0h1m3 0h4m3 0h1m1 0h1m1 0h1m-29 1h1m1 0h2m1 0h1m2 0h3m1 0h3m3 0h1m2 0h2m1 0h1m-25 1h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h1m1 0h5m1 0h1m-19 1h3m2 0h1m1 0h1m1 0h1m1 0h2m3 0h3m-27 1h7m2 0h1m2 0h2m3 0h4m1 0h1m1 0h1m-25 1h1m5 0h1m1 0h3m1 0h2m3 0h4m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m4 0h6m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h4m3 0h2m2 0h1m1 0h3m-28 1h1m1 0h3m1 0h1m3 0h1m1 0h1m2 0h1m2 0h7m1 0h2m-28 1h1m5 0h1m2 0h2m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h7m4 0h1m1 0h1m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1" stroke="#07070a"></path></svg></a>
 <div class="qrsay">
 <p class="mono">Prenez d’abord la carte</p>
 <p>Scannez pour enregistrer <b>Quenora Consulting</b>  dans votre téléphone — les deux numéros, l’adresse et l’e-mail, en une fois.</p>
@@ -1458,7 +1745,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="cfrow">
 <div class="cfield">
 <label for="cfName">Votre nom</label>
-<input autocomplete="name" id="cfName" name="name" required="" type="text"/>
+<input autocomplete="name" id="cfName" name="name" pattern="[^0-9]{2,}" required="" title="Un nom, s’il vous plaît — lettres, espaces, traits d’union et apostrophes. Pas de chiffres." type="text"/>
 </div>
 <div class="cfield">
 <label for="cfEmail">E-mail professionnel</label>
@@ -1471,10 +1758,10 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 </div>
 <div class="cfield">
 <label for="cfPhone">Téléphone <span class="opt">(facultatif)</span></label>
-<input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" type="tel"/>
+<div class="phonerow"><label class="vh" for="cfCode">Indicatif pays</label><select id="cfCode"><option selected="" value="+49">+49  Allemagne</option><option value="+43">+43  Autriche</option><option value="+41">+41  Suisse</option><option value="+33">+33  France</option><option value="+31">+31  Pays-Bas</option><option value="+32">+32  Belgique</option><option value="+44">+44  Royaume-Uni</option><option value="+1">+1  États-Unis / Canada</option><option value="">Autre</option></select><input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" placeholder="+49 152 3392 7436" title="Des chiffres et les séparateurs habituels : + ( ) / - et des espaces." type="tel"/></div>
 </div>
 <div class="cfield">
-<label for="cfMsg">Qu’est-ce qui bloque ?</label>
+<label for="cfMsg">Qu’est-ce qui bloque ?</label>
 <textarea id="cfMsg" name="message" placeholder="Le pilote qui s’est enlisé, le système qui refuse de se connecter, le processus que personne n’assume…" required="" rows="4"></textarea>
 </div>
 <div aria-hidden="true" class="hp"><label>Ne remplissez pas ce champ
@@ -1494,14 +1781,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 <div class="fgrid">
 <div>
 <div class="lockup" style="margin-bottom:var(--sp3)">
-<span class="brand lg">
-<svg aria-hidden="true" class="mk" fill="currentColor" viewbox="9 9 169.71 155.71">
-<circle cx="12" cy="161.71" r="3"></circle><circle cx="21.64" cy="161.34" r="3.95"></circle>
-<circle cx="33.39" cy="159.88" r="5.2"></circle><circle cx="47.73" cy="156.52" r="6.84"></circle>
-<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
-<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
-<circle cx="151.71" cy="36" r="27"></circle>
-</svg>quenora</span>
+<span class="brand lg"><img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/></span>
 <span class="desc">Conseil</span>
 </div>
 <p style="max-width:35ch;color:var(--t2);font-size:.96rem">
@@ -1517,9 +1797,9 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
      (scope-2), both navigations point at the same places. About was missing
      here entirely and is restored. -->
 <div><h3>Navigation</h3><nav aria-label="Footer">
-<a href="/fr/index.html">Accueil</a><a href="#journey">Méthode</a>
-<a href="#solution">Expertises</a><a href="/fr/engineering.html">Ingénierie</a><a href="#work">Missions</a>
-<a href="#who">À propos</a><a href="#climax">Contact</a></nav></div>
+<a href="/fr/index.html">Accueil</a><a href="/fr/approach.html">Méthode</a>
+<a href="/fr/capabilities.html">Expertises</a><a href="/fr/engineering.html">Ingénierie</a><a href="/fr/work.html">Missions</a>
+<a href="/fr/about.html">À propos</a><a href="#talk">Contact</a></nav></div>
 <div><h3>Contact</h3><nav aria-label="Contact">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
 <a href="/impressum.html">Mentions légales</a>
@@ -1537,29 +1817,43 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 </div>
 </div>
 </footer>
-<button aria-controls="aiPanel" aria-expanded="false" aria-label="Ouvrir l’assistant" class="ai-fab" id="aiFab" type="button">
-<svg aria-hidden="true" fill="none" viewbox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" stroke="#07070A" stroke-linecap="round" stroke-width="2"></path><circle cx="12" cy="12" fill="#07070A" r="3.2"></circle></svg>
+<!--WIDGET:HTML-->
+<button aria-controls="aiPanel" aria-expanded="false" aria-label="Demander à Nora" class="ai-fab" id="aiFab" type="button">
+<!-- The wordmark's five largest circles. Below about 20px the four smallest
+     are sub-pixel and only muddy the shape, so the arc is cropped rather
+     than shrunk — it stays the same mark, still legible at 24px. -->
+<svg aria-hidden="true" class="ai-mk" fill="#07070A" viewbox="56 9 123 150">
+<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
+<circle cx="151.71" cy="36" r="27"></circle>
+</svg>
+<span aria-hidden="true" class="ai-tip">Demander à Nora</span>
 </button>
-<div aria-label="Assistant Quenora" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
+<div aria-label="Nora, l’assistante de Quenora" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
 <div class="ai-head"><div aria-hidden="true" class="ai-dot"></div>
-<div><b>Poser une question sur Quenora</b><span>Passages de ce site, appariés à votre question</span></div>
+<div><b>Demander à Nora</b><span>Des réponses tirées uniquement de ce site — des passages, appariés à votre question</span></div>
 </div>
 <div aria-live="polite" class="ai-body" id="aiBody" role="log"></div>
+<!-- The opening line lives here, not in the script, because build_i18n
+     translates text nodes and cannot reach a JavaScript string literal. It
+     was greeting German and French visitors in English on every open. -->
+<p class="ai-greet" hidden="" id="aiGreet">Je suis Nora. Posez-moi n’importe quelle question sur Quenora et je vous montrerai ce que ce site en dit, dans ses propres mots, avec un lien vers l’endroit exact. Je ne génère pas de réponses : si ce n’est pas écrit ici, je vous le dirai plutôt que de deviner.</p>
 <div class="ai-suggest" id="aiSuggest">
-<button class="ai-chip" data-q="Que faites-vous concrètement ?" type="button">Que faites-vous concrètement ?</button>
-<button class="ai-chip" data-q="Qu'est-ce que l'automatisation ici ?" type="button">Automatisation ?</button>
-<button class="ai-chip" data-q="Combien de temps dure une mission ?" type="button">Combien de temps ?</button>
-<button class="ai-chip" data-q="Quel est le coût ?" type="button">Quel est le coût ?</button>
-<button class="ai-chip" data-q="Qui êtes-vous ?" type="button">Qui êtes-vous ?</button>
+<button class="ai-chip" data-q="Que faites-vous concrètement ?" type="button">Que faites-vous concrètement ?</button>
+<button class="ai-chip" data-q="Qu'est-ce que l'automatisation ici ?" type="button">Automatisation ?</button>
+<button class="ai-chip" data-q="Combien de temps dure une mission ?" type="button">Combien de temps ?</button>
+<button class="ai-chip" data-q="Quel est le coût ?" type="button">Quel est le coût ?</button>
+<button class="ai-chip" data-q="Qui êtes-vous ?" type="button">Qui êtes-vous ?</button>
 <button class="ai-chip" data-act="contact" type="button">Parler à une personne</button>
 </div>
 <form class="ai-form" id="aiForm">
 <label class="vh" for="aiInput">Posez une question</label>
-<input autocomplete="off" id="aiInput" placeholder="Posez une question…" type="text"/>
+<input autocomplete="off" id="aiInput" placeholder="Posez une question à Nora…" type="text"/>
 <button type="submit">Envoyer</button>
 </form>
 <div class="ai-foot">Recherche sur ce site · aucun modèle, rien d’inventé</div>
 </div>
+<!--/WIDGET:HTML-->
 <script>
 /* ═══════════════════════════════════════════════════════════════════
    All motion, hand-written. No library, no CDN, nothing to block.
@@ -1675,7 +1969,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
     var lastY = w.scrollY, boost = 1;
     w.addEventListener('scroll', function () {
       var v = Math.abs(w.scrollY - lastY); lastY = w.scrollY;
-      boost = clamp(1 + v / 26, 1, 6);
+      boost = clamp(1 + v / 220, 1, 1.35);   /* a nudge, not a whip: v/26 capped at 6 reached ~280px/s on an ordinary flick */
       tkWake();
     }, { passive: true });
     /* boost decays toward 1 and then stays there, so this was writing the
@@ -1683,11 +1977,20 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
        open — a style recalculation per frame for no change. It now stops
        when it has settled and the scroll handler wakes it. */
     var tkRaf = null;
+    /* Rewriting animation-duration re-computes the animation's position as
+       elapsed/duration, so every change jumped the band sideways — the faster
+       it went, the more it stuttered. updatePlaybackRate changes speed without
+       moving anything. Kept the old write as a fallback. */
+    var tkAnim = (tt.getAnimations && tt.getAnimations()[0]) || null;
+    function tkRate(r) {
+      if (tkAnim && tkAnim.updatePlaybackRate) { tkAnim.updatePlaybackRate(r); }
+      else { tt.style.animationDuration = (38 / r) + 's'; }
+    }
     function tk() {
       boost = lerp(boost, 1, 0.06);
-      tt.style.animationDuration = (38 / boost) + 's';
+      tkRate(boost);
       if (Math.abs(boost - 1) > 0.002) { tkRaf = requestAnimationFrame(tk); }
-      else { tt.style.animationDuration = '38s'; tkRaf = null; }
+      else { tkRate(1); tkRaf = null; }
     }
     function tkWake() { if (!tkRaf) tkRaf = requestAnimationFrame(tk); }
     tk();
@@ -3038,7 +3341,13 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
 
          The headline is now present the moment the stage is, and scroll is
          spent on the reveal *below* it rather than on the reveal *of* it. */
+      /* The seams panel was removed from this stage, so the three
+         elements this choreography writes to are no longer there.
+         Without this guard the first scroll dereferences null and
+         takes the whole rAF loop with it — progress bar, horizontal
+         track and spotlight all stop. */
       var a = ease(clamp(p / 0.22, 0, 1));
+      if (pBig && pSub) {
       pBig.style.opacity = 1;
       pBig.style.transform = 'scale(' + (0.985 + a * 0.015) + ')';
       var b = ease(clamp(p / 0.16, 0, 1));
@@ -3049,6 +3358,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
         s.style.opacity = 0.12 + c * 0.88;
         s.style.transform = 'translate3d(0,' + (1 - c) * 34 + 'px,0)';
       });
+      }
     }
 
     /* ── PIN 2: horizontal track ── */
@@ -3170,415 +3480,322 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   });
 })();
 
+</script>
+<!--WIDGET:JS-->
+<script defer="" src="/assets/nora.js"></script>
+<!--/WIDGET:JS-->
+<!--NAV:JS-->
+<script>
+/* Two things about arriving at this page, both about scroll.
+
+   ONE — ARRIVING AT AN ANCHOR FROM ANOTHER PAGE
+
+   html{scroll-behavior:smooth} is right for a nav click inside the page: the
+   reader keeps their bearings while the page glides. It is wrong on arrival.
+   Following Approach from an inner page loads the home page at the top and
+   then smooth-scrolls all the way down to the chapter — so the reader watches
+   the chapter numbers count past, 01, 02, 03, before the page settles. It
+   looks like the site loaded the wrong page and corrected itself.
+
+   The fix is to make only the first jump instant, then hand smooth back, so
+   every later click behaves as before.
+
+   TWO — A RELOAD
+
+   The browser restores scroll position by default. On a chaptered page whose
+   sections reveal on scroll, that drops the reader into the middle of a
+   narrative with the reveals already spent. A reload returns to the top —
+   unless the URL carries an anchor, which is an explicit request for a place.
+
+   The work page's field figure is verified by a headless harness with no
+   history and no window, so this must not throw there. */
 (function(){
-  var fab=document.getElementById('aiFab'), panel=document.getElementById('aiPanel'),
-      body=document.getElementById('aiBody'), form=document.getElementById('aiForm'),
-      input=document.getElementById('aiInput'), sug=document.getElementById('aiSuggest');
-  if(!fab||!panel||!body) return;
-  var opened=false;
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(typeof window==='undefined'||typeof document==='undefined') return;
+  /* The harness defines window and document but not the bare globals a page
+     normally inherits from window, so reach for them explicitly and check. */
+  if(typeof window.addEventListener!=='function'
+     || typeof window.requestAnimationFrame!=='function') return;
+  var root = document.documentElement;
+  if(!root||!root.style) return;
 
-  function add(t,who,html){
-    var m=document.createElement('div');
-    m.className='ai-msg '+who;
-    /* Anything a visitor typed goes in as text, always — that is the XSS
-       guard and it does not move. Only the panel's own markup, built here
-       from esc()'d passages, is allowed in as HTML. */
-    if(html && who==='bot') m.innerHTML=t; else m.textContent=t;
-    body.appendChild(m); body.scrollTop=body.scrollHeight;
+  function instantly(fn){
+    var had = root.style.scrollBehavior, done = false;
+    root.style.scrollBehavior = 'auto';
+    fn();
+    /* Give the jump a frame to land before smooth is allowed back, or the
+       browser applies the restored value to the scroll still in flight.
+       The timer is not belt and braces: requestAnimationFrame does not run in
+       a background tab, and a page opened in one would have kept smooth
+       scrolling switched off until it was looked at. */
+    function restore(){
+      if(done) return;
+      done = true;
+      root.style.scrollBehavior = had;
+    }
+    window.requestAnimationFrame(function(){
+      window.requestAnimationFrame(restore);
+    });
+    setTimeout(restore, 400);
   }
-  function bot(t){
-    if(reduce){ add(t,'bot',true); return; }
-    var w=document.createElement('div');
-    w.className='ai-msg bot';
-    w.innerHTML='<span class="ai-typing"><i></i><i></i><i></i></span>';
-    body.appendChild(w); body.scrollTop=body.scrollHeight;
-    setTimeout(function(){ w.remove(); add(t,'bot',true); }, 420+Math.random()*260);
+
+  /* 'manual' is right for a fresh load or a reload — it stops the browser
+     dropping the reader into the middle of a chapter whose reveals are spent.
+     It is wrong for back and forward, where restoring the exact position is
+     the whole point, and where the browser does it better than any script
+     could. So: hand history navigation back to the platform. */
+  var navType = '';
+  try {
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    navType = nav ? nav.type : '';
+  } catch (e) {}
+  var isBack = navType === 'back_forward';
+  if(typeof history!=='undefined' && 'scrollRestoration' in history){
+    history.scrollRestoration = isBack ? 'auto' : 'manual';
   }
+  if (isBack) return;   /* the browser is putting them back; do not interfere */
 
-  var A=[
-    [['automation','automate','workflow','process','unattended','rpa'],
-     "Automation is capability 02 and one of the three core ones. We automate the processes a business repeats — approvals, handoffs, reconciliations, the reporting someone does on a Tuesday. The part that matters is the exceptions: an automation is only trustworthy if it knows which cases it should not decide, and drawing that line is most of the work."],
-    [['what do you','services','offer','do you do','capabilit','quenora do','what does quenora'],
-     "Nine capabilities. Three are core — platform and deployment engineering, process and workflow automation, and AI integration — because everything runs through them. The other six step in only when the work needs them. Nothing is handed to a subcontractor you’ve never met."],
-    [['who are you','about you','about quenora','founder','balaji','team','how big','size'],
-     "Quenora is founder-led, founded in 2025 by Balaji Durai. Before Quenora he ran transformation work for multinational manufacturers, retail banking and life sciences groups; those systems went on to be used by more than 100,000 people. We work from Heilbronn, internationally, in German, French and English."],
-    [['different','why you','compare','competitor','large consult','big four'],
-     "Use a large consultancy for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, the person who scopes your engagement is the person who does the work and the person you call when it breaks."],
-    [['long','time','timeline','how fast','duration','weeks'],
-     "Six phases, from framing to handover, and each carries an exit condition written into the statement of work. Most engagements run twelve to fourteen weeks end to end, with a working pilot well before that. The engagement is designed to end."],
-    [['cost','price','pricing','budget','how much','rate'],
-     "Scoped to outcomes rather than day rates. Chapter 08 on the homepage states how it’s priced rather than making you sit through three meetings to find out. A briefing gives you a real number, not a range designed to get a second meeting."],
-    [['does not work',"doesn’t work",'if it fails','if this fails','goes wrong','not work out','guarantee'],
-     "Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it."],
-    [['work','case','client','example','project','reference'],
-     "Three patterns come up most: invoice processing across unintegrated ERP instances, support triage with knowledge retrieval, and legacy modernisation with predictive scheduling. They are described by shape rather than by client name, and the figures on the Work page are illustrative of the pattern rather than audited results."],
-    [['product','framework','accelerator','toolkit','blueprint'],
-     "Five: the Automation Accelerator, the Enterprise Agent Framework, the AI Readiness Assessment, the Governance Toolkit and the Platform Blueprint. They are frameworks you own rather than licences you rent. The Products page has the detail."],
-    [['platform','infrastructure','data','deploy'],
-     "Platform and deployment engineering is capability 01 and core: data architecture, infrastructure and the internal platforms that make AI repeatable rather than a one-off — then deployment onto them, with monitoring and handover documentation that survives contact with reality."],
-    [['govern','security','compliance','risk','gdpr','eu ai act','audit'],
-     "Model risk, data privacy and audit trails are built in from the start rather than added as a separate workstream. For European clients that includes GDPR and EU AI Act alignment."],
-    [['agent','copilot','chatbot','llm','model'],
-     "Purpose-built agents wired into the systems that actually hold the work — ERP, CRM, service desk — rather than a chatbot bolted onto a homepage. The hard part is almost never the model."],
-    [['contact','talk','call','briefing','email','reach'],
-     "Start a conversation from the button in the header, or email info@quenora.ai. A first call is a briefing, not a pitch."],
-    [['language','german','french','english','deutsch'],
-     "German, French and English."],
-    [['where','located','based','heilbronn','germany','office'],
-     "Based in Heilbronn, Germany, working internationally."]
-  ];
+  /* ── the mobile menu ────────────────────────────────────────────────
+     The home page shipped a burger button with no handler behind it — in
+     every language, since the page was written. The CSS was all there:
+     .navlinks.open, the three bars folding into a cross, the blur behind the
+     panel. Only the JavaScript was missing, so on a phone the home page had
+     no navigation at all and the button did nothing when tapped.
 
-  /* ═══ RETRIEVAL ═══════════════════════════════════════════════════════
-     Answers are passages from this site, ranked against the question with
-     BM25. No model, so it cannot invent a capability the firm does not have
-     — which is the failure the whole page argues against — and no third
-     party ever sees what a visitor typed, so the privacy notice stays true.
-
-     The index is fetched the first time the panel opens, not on page load:
-     it costs a visitor who never asks anything nothing at all. */
-  var IDX = null, IDXSTATE = 'cold';
-
-  /* Everything inside a <script> is invisible to the localisation build, so
-     without this the German page refused in English and matched on English
-     synonyms — "wer seid ihr" and "wo sitzt ihr" both came back empty. Same
-     mechanism as the engineering page's figure labels. */
-  var LANG = document.documentElement.lang || 'en';
-  var UI = {
-    en:{ none:'Nothing on this site matches that, and I would rather say so than find words in common and call it an answer. Email <a href="mailto:info@quenora.ai">info@quenora.ai</a>, or press Start a conversation below.',
-         many:function(n){ return n+' passages from this site.'; },
-         one:'One passage from this site.',
-         notit:'Not what you asked?', email:'Email us',
-         team:'Written by the team.', more:'Ask something else',
-         greet:'Ask anything about Quenora and I will show you what this site says about it, in its own words, with a link to where it sits. I do not generate answers — if it is not written here, I will tell you that instead of guessing.' },
-    de:{ none:'Dazu steht nichts auf dieser Website, und das sage ich Ihnen lieber, als gemeinsame Wörter zu finden und es eine Antwort zu nennen. Schreiben Sie an <a href="mailto:info@quenora.ai">info@quenora.ai</a> oder starten Sie unten ein Gespräch.',
-         many:function(n){ return n+' Passagen von dieser Website.'; },
-         one:'Eine Passage von dieser Website.',
-         notit:'Nicht das, was Sie gefragt haben?', email:'Schreiben Sie uns',
-         team:'Vom Team geschrieben.', more:'Fragen Sie etwas anderes',
-         greet:'Fragen Sie alles über Quenora, und ich zeige Ihnen, was diese Website dazu sagt — in ihren eigenen Worten, mit einem Link zur Fundstelle. Ich erzeuge keine Antworten: Steht es hier nicht, sage ich Ihnen das, statt zu raten.' },
-    fr:{ none:'Rien sur ce site ne correspond, et je préfère vous le dire plutôt que de trouver des mots en commun et d’appeler cela une réponse. Écrivez à <a href="mailto:info@quenora.ai">info@quenora.ai</a>, ou engagez la conversation ci-dessous.',
-         many:function(n){ return n+' passages de ce site.'; },
-         one:'Un passage de ce site.',
-         notit:'Ce n’est pas votre question ?', email:'Écrivez-nous',
-         team:'Écrit par l’équipe.', more:'Posez une autre question',
-         greet:'Posez n’importe quelle question sur Quenora et je vous montrerai ce que ce site en dit, dans ses propres mots, avec un lien vers l’endroit exact. Je ne génère pas de réponses : si ce n’est pas écrit ici, je vous le dirai plutôt que de deviner.' }
-  }[LANG] || null;
-  if(!UI) UI = { none:'Nothing on this site matches that.', many:function(n){return n+' passages.';},
-                 one:'One passage.', notit:'', email:'Email', team:'', more:'',
-                 greet:'Ask anything about Quenora and I will show you what this site says about it, in its own words, with a link to where it sits. I do not generate answers — if it is not written here, I will tell you that instead of guessing.' };
-
-  function fold(s){
-    return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
-  }
-  var STOP = ('a an and are as at be but by for from has have if in into is it its of on or '
-    +'that the their then there these this to was were what when which will with you your '
-    +'our we us how why can does do not no der die das den dem des ein eine einer eines und '
-    +'oder aber ist sind war waren sein ihre ihr wir uns sie ihnen mit von zu im am auf fur '
-    +'als auch nicht kein wie wenn dann dass le la les un une des du de et ou mais '
-    +'est sont etait etaient etre leur nos nous vous avec pour dans sur comme aussi ne pas '
-    +'que quoi quand comment si').split(' ');
-  var STOPSET = {}; STOP.forEach(function(w){ STOPSET[w]=1; });
-
-  function terms(s){
-    var out=[], parts=fold(s).split(/[^a-z0-9]+/);
-    for(var i=0;i<parts.length;i++){
-      var t=parts[i];
-      if(t.length>2 && !STOPSET[t]){
-        out.push(t);
-        /* one suffix strip, not a stemmer: "certifications" has to reach
-           "certification", and "weeks" has to reach "week". Anything more
-           aggressive starts matching words that only look alike. */
-        if(t.length>4 && /(s|es)$/.test(t)) out.push(t.replace(/(es|s)$/,''));
+     Rather than paste a copy into the one page that lacked it, the button is
+     replaced by a clone here — which drops any listener already attached —
+     and then wired exactly once. This script is injected last, after every
+     page's own scripts, so it always wins. That ordering is the point: the
+     alternative is two handlers both toggling the same class, which this site
+     has already shipped once, on the language switcher, where the menu opened
+     and closed again on a single click. */
+  (function(){
+    var b = document.getElementById('burger'),
+        n = document.getElementById('navLinks');
+    if(!b || !n) return;
+    var fresh = b.cloneNode(true);
+    b.parentNode.replaceChild(fresh, b);
+    fresh.addEventListener('click', function(){
+      var open = n.classList.toggle('open');
+      fresh.classList.toggle('open', open);
+      fresh.setAttribute('aria-expanded', open ? 'true' : 'false');
+      /* the inner pages darken the bar behind the open panel; the home page
+         has no such class, so this is a no-op there rather than a crash */
+      var hdr = document.querySelector('header');
+      if(hdr && hdr.id === 'siteHeader') hdr.classList.toggle('solid', open);
+    });
+    /* a tap on a link inside the panel should close it, or the menu stays
+       open over the page it just navigated to */
+    n.addEventListener('click', function(e){
+      if(e.target.closest('a') && n.classList.contains('open')){
+        n.classList.remove('open');
+        fresh.classList.remove('open');
+        fresh.setAttribute('aria-expanded', 'false');
       }
-    }
-    return out;
-  }
-
-  /* BM25 is lexical: it cannot know that "how long" is asking about the
-     fourteen weeks, or that "who owns the code" is answered by "you keep
-     everything". This is the bridge — the words buyers use, mapped to the
-     words the site uses. Query side only, so it never distorts a passage.
-     Hand-written and short on purpose: a wrong synonym here surfaces the
-     wrong passage, which is the one failure this design exists to avoid. */
-  var ALIAS = {
-    long:['weeks','phases','fourteen'],
-    duration:['weeks','phases','fourteen'], timeline:['weeks','phases'],
-    take:['weeks','phases'], time:['weeks','phases'],
-    own:['keep','yours','handover','owner'], owns:['keep','yours','owner'],
-    owner:['keep','yours','handover'], ownership:['keep','yours','handover'],
-    keep:['yours','own','handover'], afterwards:['handover','leave','ends'],
-    cost:['priced','costs'],
-    price:['priced','cost'], pricing:['priced','cost'],
-    fee:['priced','cost','fixed'], budget:['priced','cost'],
-    charge:['priced','cost'], expensive:['priced','cost'],
-    change:['governance','control','approvals'],
-    security:['governance','permission','audit','access'],
-    gdpr:['privacy','data','governance'], privacy:['data','governance'],
-    team:['who','firm','founder','size'], size:['firm','team','who'],
-    hire:['firm','team','who'], support:['operations','monitoring','runbook'],
-    start:['frame','first','begin'], contract:['statement','work','exit'],
-    guarantee:['exit','condition','number','measure'],
-    proof:['harness','measure','number','evidence'],
-    references:['reference','case','studies','call'],
-    certification:['iso','soc','attestations'],
-    certifications:['iso','soc','attestations'],
-    certified:['iso','soc','attestations'], compliance:['governance','iso','soc'],
-    big:['firm','small','size','depth'], many:['firm','small','size'],
-    people:['firm','team','size','depth'], headcount:['firm','size','depth'],
-    staff:['firm','team','size'],
-    who:['hiring','founder','firm','balaji','founded'],
-    where:['heilbronn','germany','based'],
-    you:['quenora','firm','hiring'], about:['hiring','founder','firm','founded'],
-    behind:['founder','hiring','balaji'], founder:['balaji','hiring','founded'],
-    based:['heilbronn','germany','where'], where:['heilbronn','germany','based'],
-    located:['heilbronn','germany','based'], office:['heilbronn','germany','based'],
-    country:['heilbronn','germany'], languages:['german','french','english'],
-    language:['german','french','english']
-  };
-  /* the same bridge in the two other published languages */
-  var ALIAS_DE = {
-    wer:['balaji','inhabergefuhrt','firma','gegrundet'],
-    wo:['heilbronn','deutschland','sitz'],
-    seid:['quenora','firma'], sitzt:['heilbronn','deutschland','sitz'],
-    sitz:['heilbronn','deutschland'], standort:['heilbronn','deutschland','sitz'],
-    kostet:['kosten','gekostet','zusammensetzt'], kosten:['kostet','gekostet'],
-    lange:['wochen','phasen','vierzehn','dauert'],
-    dauer:['wochen','phasen','dauert'], dauert:['wochen','phasen'],
-    team:['firma','inhabergefuhrt'], gehort:['ubergabe','ihnen'],
-    sicherheit:['governance','zugriff','audit'],
-    zertifizierung:['iso','soc'], zertifiziert:['iso','soc'],
-    /* widened to match the English table's reach: it had 45 bridges to
-       German's 16, and the localised table is merged INTO the English one,
-       so most of a German visitor's coverage was English words their
-       question would never contain. Every target verified present in the
-       German index. */
-    eigentum:['ubergabe','gehort'], besitzt:['ubergabe','gehort'],
-    behalten:['ubergabe','code'], garantie:['zahl','messen'],
-    nachweis:['harness','evaluations','messen','zahl'],
-    beleg:['harness','evaluations','nachweis'],
-    referenzen:['referenz','fallstudien','gesprach'],
-    fallstudien:['referenz','fallstudie'],
-    vertrag:['leistungsschein','umfang'],
-    datenschutz:['dsgvo','daten','governance'],
-    dsgvo:['datenschutz','daten','governance'],
-    anderung:['governance','freigabe','anderungskontrolle'],
-    mitarbeiter:['firma','inhabergefuhrt','team'],
-    gross:['firma','klein','tiefe'], beginn:['rahmung','erste'],
-    support:['betrieb','monitoring','runbook'],
-    betrieb:['monitoring','runbook','ubergabe'],
-    compliance:['governance','iso','soc'],
-    rollback:['rollback','zuruck'],
-    sprachen:['deutsch','franzosisch','englisch'],
-    sprache:['deutsch','franzosisch','englisch']
-  };
-  var ALIAS_FR = {
-    qui:['balaji','fondateur','cabinet','dirige'],
-    etes:['quenora','cabinet','dirige'],
-    situes:['heilbronn','allemagne','siege'], situe:['heilbronn','allemagne','siege'],
-    base:['heilbronn','allemagne','siege'], siege:['heilbronn','allemagne'],
-    coute:['tarife','cout'], cout:['tarife'], couts:['tarife','cout'],
-    tarif:['tarife','cout'], budget:['tarife','cout'],
-    duree:['semaines','phases'], temps:['semaines','phases'],
-    longtemps:['semaines','phases'],
-    equipe:['cabinet','fondateur'], appartient:['transmission','appartiennent'],
-    certification:['iso','soc'], securite:['gouvernance','acces'],
-    /* the French page says 'retour arriere'; a French CTO still types
-       'rollback', which matched nothing once 'comment' became a stopword */
-    rollback:['retour','arriere'],
-    /* same widening on the French side, every target verified present in
-       the French index */
-    propriete:['transmission','appartient','appartiennent'],
-    garantie:['condition','sortie','chiffre','mesure'],
-    preuve:['harnais','evaluation','mesure','chiffre'],
-    references:['reference','cas','echange'],
-    contrat:['perimetre','condition','sortie'],
-    confidentialite:['rgpd','donnees','gouvernance'],
-    rgpd:['confidentialite','donnees','gouvernance'],
-    changement:['gouvernance','controle'],
-    effectif:['cabinet','petit','profondeur'],
-    taille:['cabinet','petit','equipe'],
-    demarrer:['cadrage','premier','commencer'],
-    support:['exploitation','supervision','runbook'],
-    exploitation:['supervision','runbook','transmission'],
-    conformite:['gouvernance','iso','soc'],
-    combien:['tarife','cout','semaines'],
-    langues:['allemand','francais','anglais'],
-    langue:['allemand','francais','anglais']
-  };
-  if(LANG==='de') for(var dk in ALIAS_DE) ALIAS[dk]=ALIAS_DE[dk];
-  if(LANG==='fr') for(var fk in ALIAS_FR) ALIAS[fk]=ALIAS_FR[fk];
-  function expand(qs){
-    var seen={}, out=[];
-    qs.forEach(function(t){
-      if(!seen[t]){ seen[t]=1; out.push(t); }
-      (ALIAS[t]||[]).forEach(function(a){ if(!seen[a]){ seen[a]=1; out.push(a); } });
     });
-    return out;
-  }
+  })();
 
-  function indexDocs(docs){
-    var df={}, total=0;
-    docs.forEach(function(d){
-      d.f={}; d.hf={};
-      terms(d.h).forEach(function(t){ d.hf[t]=1; });
-      var ts=terms(d.h+' '+d.t);
-      ts.forEach(function(t){ d.f[t]=(d.f[t]||0)+1; });
-      d.l=ts.length; total+=d.l;
-      for(var t in d.f) df[t]=(df[t]||0)+1;
-    });
-    var N=docs.length, idf={};
-    for(var t in df) idf[t]=Math.log(1+(N-df[t]+0.5)/(df[t]+0.5));
-    return {docs:docs, idf:idf, avg:total/Math.max(1,N)};
-  }
-
-  /* BM25, the standard parameters. k1 damps a term repeated many times in one
-     passage; b normalises for passage length so a long chapter does not win
-     on volume alone. */
-  function rank(q){
-    if(!IDX) return [];
-    var raw=terms(q);
-    /* "who are you" is three stopwords, so the query came out empty and the
-       panel refused to answer the most basic question a visitor asks. When
-       stripping leaves nothing, keep the words. */
-    if(!raw.length){
-      raw = fold(q).split(/[^a-z0-9]+/).filter(function(t){ return t.length>2; });
-    }
-    var qs=expand(raw), k1=1.5, b=0.75, out=[];
-    if(!raw.length) return [];
-    IDX.docs.forEach(function(d){
-      var sc=0, hit=0;
-      qs.forEach(function(t){
-        var f=d.f[t]; if(!f) return;
-        hit++;
-        var idf=IDX.idf[t]||0;
-        sc += idf * (f*(k1+1)) / (f + k1*(1-b+b*d.l/IDX.avg));
-        /* A question that names the heading is asking for that section. The
-           body alone ranked "what does it cost" onto a paragraph about the
-           cost of a bad design, over the chapter actually headed pricing. */
-        if(d.hf[t]) sc += idf * 1.8;
-      });
-      if(hit) out.push({d:d, s:sc, hit:hit/raw.length});
-    });
-    out.sort(function(a,b2){ return b2.s-a.s; });
-    return out;
-  }
-
-  function esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
-
-  function answer(q){
-    var hits = rank(q);
-    if(!hits.length){
-      bot(UI.none);
+  window.addEventListener('load', function(){
+    var hash = location.hash;
+    if(!hash || hash === '#'){
+      instantly(function(){ window.scrollTo(0, 0); });
       return;
     }
-    /* Measuring this made the design decision. "can you build me a chatbot for
-       my shop" scored 7.62 — higher than "what does it cost" at 3.40 — because
-       score is dominated by rare terms, not by whether the question was
-       answered. No threshold separates the two. So this stops asserting an
-       answer and shows what it found, which is what it actually has: a search
-       over the site's own sentences, with the reader judging relevance. */
-    var top = hits.slice(0, 3).filter(function(h, i){
-      return i === 0 || h.s > hits[0].s * 0.42;
+    var target;
+    try { target = document.querySelector(hash); } catch(e){ target = null; }
+    if(!target) return;
+    instantly(function(){
+      target.scrollIntoView({behavior: 'auto', block: 'start'});
     });
-    var html = '';
-    var lastHead = null;
-    top.forEach(function(h, i){
-      html += (i ? '<span class="ai-more">' : '<span class="ai-first">') + esc(h.d.t);
-      /* three passages from one chapter repeated its name three times */
-      if(h.d.h !== lastHead){
-        html += '<a class="ai-src" href="' + h.d.u + '">' + esc(h.d.h) + '</a>';
-        lastHead = h.d.h;
-      }
-      html += '</span>';
-    });
-    html += '<span class="ai-foot">'
-         +  (top.length > 1 ? UI.many(top.length) : UI.one)
-         +  ' ' + UI.notit + ' <a href="mailto:info@quenora.ai">' + UI.email + '</a>.</span>';
-    bot(html);
-  }
-
-  function ask(q){
-    q=(q||'').trim(); if(!q) return;
-    add(q,'user');
-    /* The curated answers were written for the questions buyers actually ask
-       and are better than any passage retrieval can surface for them. The
-       rewrite left them unused; they belong in front of it, with retrieval
-       carrying everything they do not cover. */
-    /* the curated answers are English prose and were never translated,
-       so a German visitor got English text. Retrieval covers those pages,
-       and its passages are already in their language. */
-    var kq = LANG==='en' ? q.toLowerCase() : '\u0000';
-    for(var ci=0; ci<A.length; ci++){
-      for(var cj=0; cj<A[ci][0].length; cj++){
-        if(kq.indexOf(A[ci][0][cj]) > -1){
-          bot(esc(A[ci][1]) + '<span class="ai-foot">' + UI.team
-            + ' <a href="mailto:info@quenora.ai">' + UI.more + '</a>.</span>');
-          return;
-        }
-      }
-    }
-    if(IDX){ answer(q); return; }
-    if(IDXSTATE==='failed'){ answer(q); return; }
-    /* No placeholder bubble: bot() already shows a typing indicator, and the
-       earlier version removed body.lastChild, which during that animation is
-       the indicator rather than the placeholder — so the '…' stayed. */
-    loadIndex().then(function(){ answer(q); });
-  }
-
-  function loadIndex(){
-    if(IDXSTATE==='loading' || IDXSTATE==='ready') return IDXSTATE_P;
-    IDXSTATE='loading';
-    IDXSTATE_P = fetch(ASSET_BASE+'assistant.json')
-      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-      .then(function(j){ IDX=indexDocs(j.docs); IDXSTATE='ready'; })
-      .catch(function(){ IDXSTATE='failed'; });
-    return IDXSTATE_P;
-  }
-  var IDXSTATE_P = null;
-  /* /de/ and /fr/ each ship their own index; the page knows which it is */
-  var ASSET_BASE = (location.pathname.match(/^\/(de|fr)(?:\/|$)/) || [null,''])[1];
-  ASSET_BASE = ASSET_BASE ? '/'+ASSET_BASE+'/' : '/';
-
-  function toggle(){
-    var open=panel.classList.toggle('open');
-    fab.setAttribute('aria-expanded', open?'true':'false');
-    if(open && !opened){
-      opened=true;
-      setTimeout(function(){
-        bot(UI.greet);
-      }, 260);
-    }
-    if(open) setTimeout(function(){ input && input.focus(); }, 320);
-  }
-
-  fab.addEventListener('click', toggle);
-  if(form) form.addEventListener('submit', function(e){
-    e.preventDefault(); ask(input.value); input.value='';
   });
-  if(sug) sug.addEventListener('click', function(e){
-    var c=e.target.closest('.ai-chip'); if(!c) return;
-    /* the assistant's job is to hand over, not to hold on to people */
-    if(c.getAttribute('data-act')==='contact'){
-      panel.classList.remove('open');
-      fab.setAttribute('aria-expanded','false');
-      var cl=document.getElementById('climax');
-      if(cl){
-        cl.scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
-        setTimeout(function(){
-          var f=document.getElementById('cfName'); if(f) f.focus();
-        }, reduce?0:700);
-      }
+})();
+</script>
+<!--/NAV:JS-->
+<!--RAIL:JS--><script>
+/* The rail draws itself when the chapter arrives, once. An observer rather
+   than a scroll handler, so nothing runs while the reader is elsewhere on a
+   page this long; disconnected after the first hit because a sequence that
+   replays every time you scroll past stops meaning anything. */
+(function(){
+  var rail = document.querySelector('.ph');
+  if (!rail || typeof IntersectionObserver !== 'function') { if (rail) rail.classList.add('go'); return; }
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    rail.classList.add('go'); return;
+  }
+  /* The stops start at opacity 0 and only become visible once .go lands.
+     At threshold 0.25 on a chapter this tall, a reader could have the rail
+     under the pointer while a quarter of it was still below the fold — so
+     hovering did nothing, and the first click or scroll that finally tripped
+     the observer made it "start working". That is the bug as reported: the
+     tooltip was never broken, the stops were still invisible.
+
+     A low threshold, a margin so it fires just before the rail arrives, and a
+     timer that gives up waiting. Whatever happens, the rail is never left
+     invisible and unhoverable. */
+  var fired = false;
+  function go(){
+    if (fired) return;
+    fired = true;
+    rail.classList.add('go');
+    io.disconnect();
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) go(); });
+  }, { threshold: 0 });
+  /* No negative rootMargin. It delayed the reveal until the rail was properly
+     in view, which reopened the exact window this is here to close: a rail on
+     screen whose stops are still at opacity 0, so nothing responds to the
+     pointer. If any part of it is visible, it is live. */
+  io.observe(rail);
+  setTimeout(go, 4000);
+})();
+</script><!--BACKTO:JS-->
+<script>
+/* Remember where the reader was when they left for another page, so the page
+   they land on can offer a way back to that exact spot rather than to the top
+   of a very long document. sessionStorage: one tab, one visit, never sent. */
+(function(){
+  /* The headless harness that verifies the work page's field figure runs every
+     script against a minimal DOM stub, where document exists but
+     addEventListener does not. Guard on the capability, not on the object —
+     this is the third time that stub has caught a script assuming a browser. */
+  if (typeof sessionStorage === 'undefined') return;
+  if (typeof document === 'undefined' ||
+      typeof document.addEventListener !== 'function') return;
+  var KEY = 'qn:from';
+  /* '/', '/index.html', '/de', '/de/index.html' and so on */
+  var HOME = /^\/(?:(?:de|fr|es|it)\/?)?(?:index\.html)?$/;
+
+  /* leaving: record the offset against the link's destination */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (!/\.html(#|$)|^\/(de|fr)\//.test(href)) return;
+    if (a.target === '_blank' || href.charAt(0) === '#') return;
+    /* Only the home page is worth returning to. Recording every page turned
+       Back into a history walk: from capabilities it pointed at approach,
+       the page before it, instead of at the home page it was meant to. */
+    if (!HOME.test(location.pathname)) return;
+    try {
+      /* Record an ANCHOR, not a pixel — and anchor to the section the
+         reader was actually IN, not whichever one happened to be at the top
+         of the viewport. This page pins and grows sections as they reveal, so
+         a raw offset landed 758px out and a top-of-viewport anchor still
+         landed 432px out. The section under the click is stable, and its
+         distance from the viewport top is the thing to reproduce. */
+      var host = a.closest('section[id]') || a.closest('[id]');
+      var top = host ? Math.round(host.getBoundingClientRect().top) : null;
+      sessionStorage.setItem(KEY, JSON.stringify({
+        url: location.pathname + location.search,
+        anchor: host ? host.id : '',
+        top: top,
+        y: Math.round(window.scrollY || 0)
+      }));
+    } catch (err) {}
+  }, true);
+
+  /* arriving: if we were sent here from somewhere, offer the way back */
+  var raw = null;
+  try { raw = sessionStorage.getItem(KEY); } catch (err) {}
+  if (!raw) return;
+  var from;
+  try { from = JSON.parse(raw); } catch (err) { return; }
+  if (!from || !from.url || from.url === location.pathname) return;
+  /* Never on the home page: there is nowhere to go back to from the thing
+     you go back to. */
+  if (HOME.test(location.pathname)) return;
+
+  var host = document.querySelector('main .wrap');
+  if (!host) return;
+  var a = document.createElement('a');
+  a.className = 'backto';
+  a.href = from.url + '#qn-back';
+  a.innerHTML = '<span class="arw" aria-hidden="true">&#8592;</span>' +
+                (document.documentElement.lang === 'de' ? 'Zur\u00fcck' :
+                 document.documentElement.lang === 'fr' ? 'Retour' : 'Back');
+  a.addEventListener('click', function(e){
+    /* A real history step, when there is one. The browser restores the exact
+       offset itself — my own attempt at reproducing it landed 371 to 500px
+       out, because this page keeps growing as its sections reveal and no
+       script can chase that reliably. Falling back to the recorded anchor
+       only when there is no history entry to step back to. */
+    /* history.back() only when the step behind us really is the home page —
+       then it is exact and free. Otherwise navigate and restore. */
+    var ref = document.referrer || '';
+    var cameStraightFromHome = ref.indexOf(location.origin) === 0 &&
+                  ref.replace(location.origin, '').split('#')[0] === from.url;
+    if (cameStraightFromHome && history.length > 1) {
+      e.preventDefault();
+      history.back();
       return;
     }
-    ask(c.getAttribute('data-q'));
+    try { sessionStorage.setItem('qn:restore', JSON.stringify(from)); } catch (err) {}
   });
-  addEventListener('keydown', function(e){
-    if(e.key==='Escape' && panel.classList.contains('open')){
-      panel.classList.remove('open');
-      fab.setAttribute('aria-expanded','false');
-      fab.focus();
+  host.insertBefore(a, host.firstChild);
+})();
+
+/* landing back: put the reader on the pixel they left from, before paint */
+(function(){
+  if (typeof sessionStorage === 'undefined') return;
+  if (typeof window === 'undefined' ||
+      typeof window.addEventListener !== 'function') return;
+  var raw = null;
+  try { raw = sessionStorage.getItem('qn:restore'); } catch (err) {}
+  if (!raw) return;
+  try { sessionStorage.removeItem('qn:restore'); } catch (err) {}
+  var want;
+  try { want = JSON.parse(raw); } catch (err) { return; }
+  if (!want) return;
+
+  /* Resolve the anchor every time rather than once: the section moves as the
+     page reveals, so the target is only correct at the moment it is read. */
+  function target(){
+    if (want.anchor && want.top !== null && want.top !== undefined) {
+      var el = document.getElementById(want.anchor);
+      /* put the section back exactly as far down the viewport as it was */
+      if (el) return Math.max(0, el.getBoundingClientRect().top + window.scrollY - want.top);
     }
+    return want.y > 0 ? want.y : null;
+  }
+  function put(){ var t = target(); if (t !== null) window.scrollTo(0, t); }
+  put();
+
+  /* Keep correcting until the target stops moving, rather than for a fixed
+     number of ticks. This page reveals sections as it goes, so its layout is
+     still settling for a second or two after load — a fixed window gave up
+     early and left the reader 371px adrift. Stop once the computed target has
+     agreed with itself several times, and give up after three seconds so this
+     can never spin. */
+  var last = null, stable = 0, ticks = 0;
+  var iv = setInterval(function(){
+    var t = target();
+    if (t === null) { clearInterval(iv); return; }
+    if (last !== null && Math.abs(t - last) <= 1) { stable++; } else { stable = 0; }
+    last = t;
+    if (Math.abs(window.scrollY - t) > 1) { window.scrollTo(0, t); stable = 0; }
+    if (stable >= 6 || ++ticks > 60) clearInterval(iv);
+  }, 50);
+  addEventListener('load', put);
+})();
+</script>
+<!--/BACKTO:JS-->
+<script>
+/* The select writes into the phone field rather than submitting on its own,
+   so the endpoint still receives one string and nothing downstream changes. */
+(function(){
+  if (typeof document === 'undefined' ||
+      typeof document.addEventListener !== 'function') return;
+  var sel = document.getElementById('cfCode');
+  var tel = document.getElementById('cfPhone');
+  if (!sel || !tel) return;
+  function apply(){
+    var code = sel.value;
+    var rest = tel.value.replace(/^\s*\+\d{1,3}\s*/, '').trim();
+    tel.value = code ? (code + ' ' + rest).trim() : rest;
+  }
+  sel.addEventListener('change', apply);
+  tel.addEventListener('blur', function(){
+    if (sel.value && tel.value && tel.value.charAt(0) !== '+') apply();
   });
 })();
 </script>

@@ -1,6 +1,12 @@
 {
   "name": "quenora-tests",
   "private": true,
-  "scripts": { "test": "./release.sh" },
-  "dependencies": { "jsdom": "^24.0.0", "three": "0.128.0" }
+  "scripts": {
+    "test": "./release.sh"
+  },
+  "dependencies": {
+    "jsdom": "^24.0.0",
+    "playwright": "^1.62.1",
+    "three": "0.128.0"
+  }
 }

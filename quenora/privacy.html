@@ -10,7 +10,6 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <meta content="#0A0A0B" name="theme-color"/>
-<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 187.71 174.29'%3E%3Ccircle cx='12' cy='161.71' r='3' fill='%23C97A3C'/%3E%3Ccircle cx='21.64' cy='161.34' r='3.95' fill='%23C97A3C'/%3E%3Ccircle cx='33.39' cy='159.88' r='5.2' fill='%23C97A3C'/%3E%3Ccircle cx='47.73' cy='156.52' r='6.84' fill='%23C97A3C'/%3E%3Ccircle cx='65.05' cy='149.97' r='9' fill='%23C97A3C'/%3E%3Ccircle cx='85.34' cy='138.1' r='11.84' fill='%23C97A3C'/%3E%3Ccircle cx='107.49' cy='117.76' r='15.59' fill='%23C97A3C'/%3E%3Ccircle cx='127.81' cy='84.89' r='20.52' fill='%23C97A3C'/%3E%3Ccircle cx='151.71' cy='36' r='27' fill='%23C97A3C'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <meta content="website" property="og:type"/>
 <meta content="Quenora Consulting" property="og:site_name"/>
 <meta content="Quenora Consulting — Privacy notice" property="og:title"/>
@@ -392,8 +391,91 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 .legal dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--grey-d);margin-top:16px}
 .legal dd{margin:3px 0 0;color:var(--white);font-size:15px;font-weight:400}
+/*WIDGET:CSS*/
+
+/*/WIDGET:CSS*/
+/*NAV:CSS*/
+/* ── one header, on every page ──────────────────────────────────────────
+   This site grew two header systems. The home page and engineering.html
+   space the links with var(--sp3) and mark the current page by turning it
+   copper, through a bare [aria-current=page] rule. approach, capabilities,
+   work and contact use a 30px gap, a smaller type size, and mark the current
+   page white with a growing underline. Same nav, same words, three different
+   treatments depending on where you happened to be standing — and the links
+   sat at a different x on each page, so they visibly jumped as you clicked
+   through.
+
+   Everything below is the single treatment. It is injected last, so it wins
+   on order rather than on !important, and the desktop metrics are scoped
+   above the 880px breakpoint that both families already use for the burger,
+   so the mobile drawer keeps its own larger tap targets. */
+
+/* The inner pages spread five header children with space-between, which put
+   the links in the middle of the bar while the home page pushed them right. */
+.navlinks{margin-left:auto}
+
+/* Same container, so the header sits at the same x on every page. The three
+   families each defined .wrap differently — width:min(100% - 40px, W) with no
+   padding, max-width with 20px of padding, and max-width with 40px — so even
+   after the max-width was unified the CONTENT box was 1240, 1200 and 1160.
+   That is the last of the shifting. Scoped to desktop so each page keeps the
+   mobile gutter it was designed with. */
+@media(min-width:881px){
+  /* width:100%, not auto. The home page's hero section is display:flex, and
+     on a flex item width:auto shrink-wraps to the content — the wrap collapsed
+     to 1055px and margin-inline:auto then centred it, putting the headline
+     92px to the RIGHT of the logo. 100% behaves in both a block and a flex
+     parent. */
+  header .wrap, main section > .wrap{width:100%;max-width:1240px;
+    margin-inline:auto;padding-left:40px;padding-right:40px}
+}
+
+@media(min-width:881px){
+  /* The header's own flex container: a div.wrap on the home page and inner
+     engineering, a nav on the rest. Their gaps were 24px and 30px, and with
+     three items to the right of the links that is a 12px difference in where
+     the links end — the last of the movement between pages. */
+  header > .wrap, header nav{gap:26px}
+  .navlinks{gap:26px;align-items:center}
+  .navlinks a,.navlinks>a{font-size:14px;padding:4px 0;border-bottom:0}
+  .navcta{padding:9px 16px;font-size:12.5px}
+}
+
+/* The current page: white, over a copper rule. Drawn as a background image
+   rather than a border or an ::after, because one family already owns the
+   ::after for its hover underline and a border-bottom is taken by the mobile
+   drawer — this collides with neither. */
+header .navlinks a.on,
+header .navlinks a[aria-current="page"]{
+  color:#F2EFE8;
+  background-image:linear-gradient(#C97A3C,#C97A3C);
+  background-size:100% 2px;
+  background-repeat:no-repeat;
+  background-position:0 100%;
+}
+/* and suppress the other family's underline, so the active tab never wears
+   two of them at once */
+header .navlinks a.on::after,
+header .navlinks a[aria-current="page"]::after{width:0}
+/*/NAV:CSS*/
+/*BRAND:CSS*/
+/* ── the supplied lockup ───────────────────────────────────────────────
+   One file, referenced everywhere, rather than nine inline circles repeated
+   in twenty-four pages. Height is set and width follows the ratio, so the
+   mark never distorts and never reflows the header when it loads. */
+.brandimg{display:block;height:34px;width:auto;flex:none}
+.brand.lg .brandimg{height:46px}
+@media(max-width:900px){.brandimg{height:30px}.brand.lg .brandimg{height:40px}}
+@media(max-width:560px){.brandimg{height:26px}.brand.lg .brandimg{height:36px}}
+/*/BRAND:CSS*/
 </style>
-<script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/privacy#page","url":"https://quenora.ai/privacy","name":"Privacy notice","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"What quenora.ai collects, why, for how long, who it reaches, and the rights you hold under the GDPR.","breadcrumb":{"@id":"https://quenora.ai/privacy#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/privacy#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"Privacy notice","item":"https://quenora.ai/privacy"}]}]}</script></head>
+<link href="/assets/nora.css" rel="stylesheet"/>
+<link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
+<link href="/assets/brand/quenora-icon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/assets/brand/quenora-icon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/brand/quenora-icon-180.png" rel="apple-touch-icon"/>
+<link href="/assets/brand/quenora-icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","addressLocality":"Heilbronn","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/privacy#page","url":"https://quenora.ai/privacy","name":"Privacy notice","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"What quenora.ai collects, why, for how long, who it reaches, and the rights you hold under the GDPR.","breadcrumb":{"@id":"https://quenora.ai/privacy#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/privacy#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"Privacy notice","item":"https://quenora.ai/privacy"}]}]}</script></head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0">
 <symbol id="mark9" viewbox="0 0 187.71 174.29">
@@ -414,11 +496,9 @@ footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-
 <div class="wrap">
 <nav>
 <a class="brand" href="index.html">
-<svg preserveaspectratio="xMidYMid meet" viewbox="0 0 187.71 174.29"><use href="#mark9"></use></svg>
-<b><em>q</em>uenora</b>
-</a>
-<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="capabilities.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="products.html">Products</a><a href="approach.html">Approach</a><a href="work.html">Work</a><a href="index.html#climax">Contact</a></div>
-<a class="btn btn-primary navcta" href="index.html#climax"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
+<img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/></a>
+<div class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="capabilities.html">Capabilities</a><a href="engineering.html">Engineering</a><a href="products.html">Products</a><a href="approach.html">Approach</a><a href="work.html">Work</a><a href="index.html#talk">Contact</a></div>
+<a class="btn btn-primary navcta" href="index.html#talk"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
 <button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <i></i><i></i><i></i>
 </button>
@@ -468,7 +548,7 @@ Baden-Württemberg, Germany<br/>
 <p><strong>Purpose and legal basis.</strong> Consistent typography across devices. The legal basis is Article 6 (1) (f) GDPR. Google states that font requests are kept separate from authenticated Google accounts and that no cookies are set by the font delivery domains.</p>
 <p><strong>What we intend to change.</strong> Self-hosting these fonts would remove the transfer entirely. It is on our list. Until it is done, this paragraph tells you what actually happens rather than what we would prefer to be true. Google's own privacy information is at <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">policies.google.com/privacy</a>.</p>
 <h2>Contact form and email</h2>
-<p>The form on the <a href="index.html#climax">contact page</a> is not yet connected to a server. When you submit it, the details you typed are handed to the email client on your own device as a pre-filled message. <strong>Nothing reaches us until you send that email yourself</strong>, and no copy of the form is stored on this site or by the hosting provider.</p>
+<p>The form on the <a href="index.html#talk">contact page</a> is not yet connected to a server. When you submit it, the details you typed are handed to the email client on your own device as a pre-filled message. <strong>Nothing reaches us until you send that email yourself</strong>, and no copy of the form is stored on this site or by the hosting provider.</p>
 <p>Once you do send it — or if you email us directly — we process the data in your message: your name, your email address, your organisation and role where you give them, and whatever you tell us about the problem.</p>
 <p><strong>Purpose and legal basis.</strong> Answering your enquiry and, where it leads somewhere, taking steps at your request prior to entering into a contract. The legal basis is Article 6 (1) (b) GDPR for enquiries with a contractual purpose, and Article 6 (1) (f) GDPR for general correspondence.</p>
 <p><strong>Retention.</strong> Correspondence is kept for as long as it is needed to deal with your enquiry and for any subsequent engagement, then deleted — subject to the retention periods that German commercial and tax law impose on business correspondence, which run to six or ten years depending on the document.</p>
@@ -535,7 +615,7 @@ Lautenschlagerstraße 20<br/>
 <h5>Firm</h5>
 <a href="approach.html">Our approach</a>
 <a href="work.html">Work</a>
-<a href="index.html#climax">Contact</a>
+<a href="index.html#talk">Contact</a>
 </div>
 <div class="foot-col">
 <h5>Legal</h5>
@@ -586,5 +666,171 @@ addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40));
   upd();
 })();
 </script>
+<!--WIDGET:HTML-->
+<button aria-controls="aiPanel" aria-expanded="false" aria-label="Ask Nora" class="ai-fab" id="aiFab" type="button">
+<!-- The wordmark's five largest circles. Below about 20px the four smallest
+     are sub-pixel and only muddy the shape, so the arc is cropped rather
+     than shrunk — it stays the same mark, still legible at 24px. -->
+<svg aria-hidden="true" class="ai-mk" fill="#07070A" viewbox="56 9 123 150">
+<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
+<circle cx="151.71" cy="36" r="27"></circle>
+</svg>
+<span aria-hidden="true" class="ai-tip">Ask Nora</span>
+</button>
+<div aria-label="Nora, the Quenora assistant" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
+<div class="ai-head"><div aria-hidden="true" class="ai-dot"></div>
+<div><b>Ask Nora</b><span>Answers from this site only — passages, matched to your question</span></div>
+</div>
+<div aria-live="polite" class="ai-body" id="aiBody" role="log"></div>
+<!-- The opening line lives here, not in the script, because build_i18n
+     translates text nodes and cannot reach a JavaScript string literal. It
+     was greeting German and French visitors in English on every open. -->
+<p class="ai-greet" hidden="" id="aiGreet">I am Nora. Ask anything about Quenora and I will show you what this site says about it, in its own words, with a link to where it sits. I do not generate answers — if it is not written here, I will tell you that instead of guessing.</p>
+<div class="ai-suggest" id="aiSuggest">
+<button class="ai-chip" data-q="What do you actually do?" type="button">What do you actually do?</button>
+<button class="ai-chip" data-q="What is automation here?" type="button">Automation?</button>
+<button class="ai-chip" data-q="How long does an engagement take?" type="button">How long?</button>
+<button class="ai-chip" data-q="What does it cost?" type="button">What does it cost?</button>
+<button class="ai-chip" data-q="Who are you?" type="button">Who are you?</button>
+<button class="ai-chip" data-act="contact" type="button">Talk to a person</button>
+</div>
+<form class="ai-form" id="aiForm">
+<label class="vh" for="aiInput">Ask a question</label>
+<input autocomplete="off" id="aiInput" placeholder="Ask Nora a question…" type="text"/>
+<button type="submit">Ask</button>
+</form>
+<div class="ai-foot">Search over this site · no model, nothing invented</div>
+</div>
+<!--/WIDGET:HTML-->
+<!--WIDGET:JS-->
+<script defer="" src="/assets/nora.js"></script>
+<!--/WIDGET:JS-->
+<!--NAV:JS-->
+<script>
+/* Two things about arriving at this page, both about scroll.
+
+   ONE — ARRIVING AT AN ANCHOR FROM ANOTHER PAGE
+
+   html{scroll-behavior:smooth} is right for a nav click inside the page: the
+   reader keeps their bearings while the page glides. It is wrong on arrival.
+   Following Approach from an inner page loads the home page at the top and
+   then smooth-scrolls all the way down to the chapter — so the reader watches
+   the chapter numbers count past, 01, 02, 03, before the page settles. It
+   looks like the site loaded the wrong page and corrected itself.
+
+   The fix is to make only the first jump instant, then hand smooth back, so
+   every later click behaves as before.
+
+   TWO — A RELOAD
+
+   The browser restores scroll position by default. On a chaptered page whose
+   sections reveal on scroll, that drops the reader into the middle of a
+   narrative with the reveals already spent. A reload returns to the top —
+   unless the URL carries an anchor, which is an explicit request for a place.
+
+   The work page's field figure is verified by a headless harness with no
+   history and no window, so this must not throw there. */
+(function(){
+  if(typeof window==='undefined'||typeof document==='undefined') return;
+  /* The harness defines window and document but not the bare globals a page
+     normally inherits from window, so reach for them explicitly and check. */
+  if(typeof window.addEventListener!=='function'
+     || typeof window.requestAnimationFrame!=='function') return;
+  var root = document.documentElement;
+  if(!root||!root.style) return;
+
+  function instantly(fn){
+    var had = root.style.scrollBehavior, done = false;
+    root.style.scrollBehavior = 'auto';
+    fn();
+    /* Give the jump a frame to land before smooth is allowed back, or the
+       browser applies the restored value to the scroll still in flight.
+       The timer is not belt and braces: requestAnimationFrame does not run in
+       a background tab, and a page opened in one would have kept smooth
+       scrolling switched off until it was looked at. */
+    function restore(){
+      if(done) return;
+      done = true;
+      root.style.scrollBehavior = had;
+    }
+    window.requestAnimationFrame(function(){
+      window.requestAnimationFrame(restore);
+    });
+    setTimeout(restore, 400);
+  }
+
+  /* 'manual' is right for a fresh load or a reload — it stops the browser
+     dropping the reader into the middle of a chapter whose reveals are spent.
+     It is wrong for back and forward, where restoring the exact position is
+     the whole point, and where the browser does it better than any script
+     could. So: hand history navigation back to the platform. */
+  var navType = '';
+  try {
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    navType = nav ? nav.type : '';
+  } catch (e) {}
+  var isBack = navType === 'back_forward';
+  if(typeof history!=='undefined' && 'scrollRestoration' in history){
+    history.scrollRestoration = isBack ? 'auto' : 'manual';
+  }
+  if (isBack) return;   /* the browser is putting them back; do not interfere */
+
+  /* ── the mobile menu ────────────────────────────────────────────────
+     The home page shipped a burger button with no handler behind it — in
+     every language, since the page was written. The CSS was all there:
+     .navlinks.open, the three bars folding into a cross, the blur behind the
+     panel. Only the JavaScript was missing, so on a phone the home page had
+     no navigation at all and the button did nothing when tapped.
+
+     Rather than paste a copy into the one page that lacked it, the button is
+     replaced by a clone here — which drops any listener already attached —
+     and then wired exactly once. This script is injected last, after every
+     page's own scripts, so it always wins. That ordering is the point: the
+     alternative is two handlers both toggling the same class, which this site
+     has already shipped once, on the language switcher, where the menu opened
+     and closed again on a single click. */
+  (function(){
+    var b = document.getElementById('burger'),
+        n = document.getElementById('navLinks');
+    if(!b || !n) return;
+    var fresh = b.cloneNode(true);
+    b.parentNode.replaceChild(fresh, b);
+    fresh.addEventListener('click', function(){
+      var open = n.classList.toggle('open');
+      fresh.classList.toggle('open', open);
+      fresh.setAttribute('aria-expanded', open ? 'true' : 'false');
+      /* the inner pages darken the bar behind the open panel; the home page
+         has no such class, so this is a no-op there rather than a crash */
+      var hdr = document.querySelector('header');
+      if(hdr && hdr.id === 'siteHeader') hdr.classList.toggle('solid', open);
+    });
+    /* a tap on a link inside the panel should close it, or the menu stays
+       open over the page it just navigated to */
+    n.addEventListener('click', function(e){
+      if(e.target.closest('a') && n.classList.contains('open')){
+        n.classList.remove('open');
+        fresh.classList.remove('open');
+        fresh.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+
+  window.addEventListener('load', function(){
+    var hash = location.hash;
+    if(!hash || hash === '#'){
+      instantly(function(){ window.scrollTo(0, 0); });
+      return;
+    }
+    var target;
+    try { target = document.querySelector(hash); } catch(e){ target = null; }
+    if(!target) return;
+    instantly(function(){
+      target.scrollIntoView({behavior: 'auto', block: 'start'});
+    });
+  });
+})();
+</script>
+<!--/NAV:JS-->
 </body>
 </html>

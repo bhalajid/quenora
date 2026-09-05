@@ -1,0 +1,35 @@
+<button aria-controls="aiPanel" aria-expanded="false" aria-label="Ask Nora" class="ai-fab" id="aiFab" type="button">
+<!-- The wordmark's five largest circles. Below about 20px the four smallest
+     are sub-pixel and only muddy the shape, so the arc is cropped rather
+     than shrunk — it stays the same mark, still legible at 24px. -->
+<svg aria-hidden="true" class="ai-mk" fill="#07070A" viewbox="56 9 123 150">
+<circle cx="65.05" cy="149.97" r="9"></circle><circle cx="85.34" cy="138.1" r="11.84"></circle>
+<circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
+<circle cx="151.71" cy="36" r="27"></circle>
+</svg>
+<span aria-hidden="true" class="ai-tip">Ask Nora</span>
+</button>
+<div aria-label="Nora, the Quenora assistant" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
+<div class="ai-head"><div aria-hidden="true" class="ai-dot"></div>
+<div><b>Ask Nora</b><span>Answers from this site only — passages, matched to your question</span></div>
+</div>
+<div aria-live="polite" class="ai-body" id="aiBody" role="log"></div>
+<!-- The opening line lives here, not in the script, because build_i18n
+     translates text nodes and cannot reach a JavaScript string literal. It
+     was greeting German and French visitors in English on every open. -->
+<p class="ai-greet" hidden="" id="aiGreet">I am Nora. Ask anything about Quenora and I will show you what this site says about it, in its own words, with a link to where it sits. I do not generate answers — if it is not written here, I will tell you that instead of guessing.</p>
+<div class="ai-suggest" id="aiSuggest">
+<button class="ai-chip" data-q="What do you actually do?" type="button">What do you actually do?</button>
+<button class="ai-chip" data-q="What is automation here?" type="button">Automation?</button>
+<button class="ai-chip" data-q="How long does an engagement take?" type="button">How long?</button>
+<button class="ai-chip" data-q="What does it cost?" type="button">What does it cost?</button>
+<button class="ai-chip" data-q="Who are you?" type="button">Who are you?</button>
+<button class="ai-chip" data-act="contact" type="button">Talk to a person</button>
+</div>
+<form class="ai-form" id="aiForm">
+<label class="vh" for="aiInput">Ask a question</label>
+<input autocomplete="off" id="aiInput" placeholder="Ask Nora a question…" type="text"/>
+<button type="submit">Ask</button>
+</form>
+<div class="ai-foot">Search over this site · no model, nothing invented</div>
+</div>

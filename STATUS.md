@@ -27,7 +27,7 @@ Each was released as its own commit so it can be reverted alone.
 
 | # | Feature | State | Commit |
 |---|---------|-------|--------|
-| 1 | Site assistant (real chatbot, no tokens burned) | **Done** | `00cd8e7` + 3 fixes |
+| 1 | **Nora** — site assistant, floating on every page | **Done** | `00cd8e7` + fixes, widget `1d12458` |
 | 2 | Contact QR → vCard + scan count | **Done** | `c3f7fcd` |
 | 3 | `llms.txt` / agent-readable structure | **Done** | `2dda952` |
 | 4 | Wallet pass | **Google done, Apple blocked** | `983294f` |
@@ -44,6 +44,17 @@ lazily, one index per language.
 
 If it cannot match, it says so and points at the form. That is the honest
 failure, and it is deliberate.
+
+**Nora** is the assistant's name. She floats bottom-right on all 24 pages,
+labelled "Ask Nora" on hover and on keyboard focus, with the wordmark's five
+largest circles as her icon. One source in `widget/`, injected by
+`build_widget.py`; there is no second copy to drift.
+
+**Known gap:** the canned fallback answers — used only when `assistant.json`
+fails to load — are still English in every language, because they live in
+JavaScript string literals that `build_i18n` cannot reach. The greeting was in
+the same position and has been moved into the DOM. Moving the remaining twelve
+is mechanical but not yet done.
 
 ### #2 — The contact QR
 
@@ -244,8 +255,15 @@ it needs eyes.
 
 - Self-host the fonts. Lighthouse prices Google Fonts as render-blocking at
   **2,050 ms** — the single largest remaining performance item.
-- Inner pages are 1240 px wide, the homepage 1480 px.
-- `story.html` has no DE/FR version.
+- ~~Inner pages 1240px, homepage 1480px~~ — **closed.** Header, nav and body
+  now start at the same x on every page. The hero keeps 1480 deliberately: its
+  mark is tied to the headline height and a grid line, and the headline is
+  sized against the viewport, so narrowing the grid made them collide.
+- **`story.html` — the last nav exception.** It is English-only AND carries a
+  different header with no language switcher, so "About" points at the home
+  page chapter instead of at it. Translating it and giving it the standard
+  header would make all five nav labels behave identically; until then About
+  is the one tab that opens a chapter rather than a page.
 - Spanish and Italian are ~45% translated and currently unlisted.
 
 **Yours, decisions**
@@ -262,7 +280,10 @@ it needs eyes.
   speech, translation, recommendation, anomaly detection, fine-tuning, LLM
   evaluation, MLOps.
 - Terms of Service; accessibility statement.
-- The hidden `#build` section (needs chapters renumbered 06–09 → 07–10).
+- The hidden `#build` section. **Two sections both claim chapter 06** —
+  `#build` and `#honest`. Invisible today only because `#build` carries a
+  `hidden` attribute; taking that attribute off publishes the duplicate.
+  Renumber 06–09 → 07–10 in the same change.
 - Copy: "0 engagements" reads as *zero engagements*.
 
 ---

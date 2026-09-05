@@ -9,7 +9,12 @@
 .env.*
 
 # dependencies
+# No trailing slash: with one, the pattern matches a directory but not a
+# SYMLINK of the same name — which is how a test/node_modules symlink ended up
+# committed, and how a merge then replaced the real directory with it.
+node_modules
 node_modules/
+test/node_modules
 test/node_modules/
 
 # python
@@ -17,6 +22,9 @@ __pycache__/
 *.pyc
 
 # build scratch
+# screenshots from the browser audit — regenerate with:
+#   cd test && node browser_audit.js .. --shots
+test/shots/
 _strings.json
 _untranslated.json
 _keys.json

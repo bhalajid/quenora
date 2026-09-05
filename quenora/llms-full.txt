@@ -12,10 +12,6 @@ No published case studies yet. We’ll arrange a call with a reference before yo
 AI programmes don’t fail because the model is weak. They fail in the gap between a notebook and a Tuesday afternoon — where the data won’t join, the permissions don’t exist and nobody owns the result.
 Illustrative, not a client portfolio. Every track is a proof of concept that worked. They all stall at the same wall — and the wall is never the model. It’s the missing layer between a working demo and daily production. That layer is Quenora.
 
-## AI programmes fail at the seams.
-
-Three of them — and not one is a research problem. Every seam is an engineering problem. That’s the reason we exist.
-
 ## Three situations we are actually called into.
 
 Not a market segment. The three shapes of problem this firm was built to take on. If none of them describe you, we’re probably not the right firm — and we’d rather you knew that now.
@@ -35,64 +31,19 @@ Something is live, procurement or risk is now asking questions, and the evidence
 ## Six phases. Designed to finish.
 
 Most consultancies are designed to keep the engagement going. Ours is designed to bring it to a clean close — each phase carries an exit condition, agreed and written into the statement of work.
-
-## Find the real constraint
-
-We spend the first weeks understanding what actually happens, not what the documentation says should. That first look is where the real constraint tends to surface.
-
-## The unglamorous layer
-
-The work that decides whether anything after it survives contact with production.
-
-## Into what you already run
-
-Connected to the systems that hold the data and run the work, with the failure paths designed rather than discovered in production.
-
-## Under real change control
-
-It goes live the same way every other system does — same approvals, same controls. No parallel universe. No permanent pilot.
-
-## Against the agreed number
-
-Back to the number we set in Frame — did it move or not? That conversation is the product.
-
-## And then we leave
-
-We work ourselves out of the job — a date after which your team runs it without us. The engagement is designed to end.
 Recognise the shape of your problem in those six phases? Two paragraphs on what’s stuck is enough to start — no brief, no NDA.
 
 ## Nine capabilities. One team.
 
 Three are core, because everything runs through them. The other six step in only when the work needs them — never to pad a proposal. Nothing is handed to a subcontractor you’ve never met.
-
-## Platform & Deployment Engineering
-
-
-## Process & Workflow Automation
-
-
-## AI Integration
-
-
-## Change Management & Enablement
-
 Illustrative, not measured. Most work completes untouched. The rest is sent to a person by design — an automation earns trust only when it knows what it shouldn’t decide, and drawing that line is most of the job.
 
 ## The space is wide. These three recur.
 
 Not a client list, and not a menu. Nine capabilities can be pointed at more problems than any page could list, so what follows is three shapes we are called into most often — described by their shape rather than by whose logo is on them. If yours is not one of the three, that is not a scoping problem; it is the usual case.
 
-## Invoice processing across three ERP instances
-
-High invoice volumes across three unintegrated ERP systems, with a finance team reconciling between them by hand. The engagement went at the integration layer rather than replacing any of the three.
-
-## Support triage and knowledge retrieval
-
-A service desk routing tickets by hand and losing institutional knowledge as experienced staff retired. A retrieval layer over two decades of resolved tickets, wired into the existing service desk rather than replacing it.
-
 ## Legacy modernisation and predictive scheduling
 
-Scheduling running on a system older than most of the staff. Rather than a rewrite, an integration and data layer that lets modern predictive models reach the legacy core safely.
 Representative engagement structures drawn from the sectors we work in. Any figures on the detail page are illustrative of the pattern rather than audited results from a named client.
 
 ## What is running, and what is built.
@@ -116,11 +67,6 @@ Still holding an objection we haven’t answered? Put it in the first message �
 ## Who you’re actually hiring.
 
 The previous chapter argues you shouldn’t default to a large consultancy. That obliges us to say plainly who you get instead — including the size of us, which is the first thing a procurement team will ask.
-Quenora is founder-led. The person who scopes your engagement is the person who does the work and the person you call when it breaks — there’s no account layer between the two, and no one you haven’t met ever touches the work.
-Founded in 2025 by Balaji Durai. Before Quenora, he ran transformation work for multinational manufacturers, retail banking and life sciences groups — the kind of programme where several technologies have to be made to agree with each other before anything reaches a user at all.
-Those systems went on to be used by more than 100,000 people, and the measure that mattered was never the launch. It was whether the working day got quieter afterwards. That’s still the test here, and it’s why one of the nine principles behind the mark is Human rather than something about models.
-The firm is small, and grows by adding depth, not by hitting a headcount target. That’s a real constraint, and it shapes what we take on: single systems that need to reach production this year, not multi-year, multi-country programmes. The chapter above says the same thing from the other direction.
-The sector experience and the figure above describe work done before Quenora was founded in 2025. They’re not Quenora client results, and nothing on this page claims otherwise.
 
 ## How this is priced.
 
@@ -128,10 +74,6 @@ Stated here rather than after three meetings, because finding out late wastes yo
 Two to three weeks, agreed before we start. You keep the written position whether or not you engage us for anything after it.
 Priced against a written scope with an explicit list of what’s excluded. Changes are re-scoped in the open, not absorbed quietly into the timeline.
 Never a separate line item. An engagement that ends without a working handover isn’t finished, so we don’t charge you twice to finish it.
-You write two paragraphs What’s not working, and what you’ve already tried. No brief required, no NDA needed to have the first conversation.
-We reply within one working day Either with a time, or with an honest note that this isn’t our problem to solve and a pointer to someone better placed.
-Forty-five minutes, no deck Your systems, your constraint, our read on it. You’ll get a technical opinion in that call, not a follow-up proposal.
-A written position What we’d build first, what it would cost, and what we wouldn’t build. Yours to take to your board, or to another firm.
 
 ## The principles behind the mark.
 
@@ -169,6 +111,10 @@ The exact midpoint of the climb — built to last, not to trend.
 
 One focused conversation about where intelligence can remove friction or risk and add confidence in your operations. No deck. No discovery invoice.
 Scan to save Quenora Consulting to your phone — both numbers, the address and the email, in one tap.
+
+## Who you’re actually hiring.
+
+The previous chapter argues you shouldn’t default to a large consultancy. That obliges us to say plainly who you get instead — including the size of us, which is the first thing a procurement team will ask.
 
 ## Most pilots don’t fail at the model. They stop at five layers.
 
@@ -399,16 +345,27 @@ Finance, healthcare, logistics and manufacturing, where governance and auditabil
 
 And if it does not, that is the usual case rather than a problem — the map above is wider than the three written up here.
 “Invoice INV-88214, €48,900 from Rehder GmbH. It doesn’t match the PO. Can I post it?”
+Not reproducible. Ask next quarter, get a different tolerance.
 AP Manual v6.1 · §4.3 · revised 2026-05-02 Price variance is auto-cleared to 1% or €250, whichever is lower. Anything above requires the originating buyer’s approval.
 ERP query · 3 instances · live INV-88214 is present in NAV-DE and SAP-AT. The Austrian instance already shows it as parked.
 “Employee in Germany is asking about parental leave. What are they entitled to, and do we top it up?”
+Statute and policy blurred. The law is right; the company part is invented.
+No jurisdiction check. It never confirmed which entity employs them.
+Nothing for an auditor, and this one ends up in an employment file.
 BEEG §15 · statutory · consolidated 2026-01 Entitlement to up to three years of Elternzeit per child, of which 24 months may be taken between the third and eighth birthday.
 Betriebsvereinbarung 2024-07 · §9 Covers unpaid leave scheduling and return-to-work rights. No pay supplement is defined.
 “Can I send our customer list to the new analytics vendor for the pilot?”
+Legally wrong, and fluent about it. Pseudonymised data is still personal data.
+Invented threshold. There is no pilot exemption from Art. 28.
+Nothing for an auditor — the one answer here a regulator would ask to see.
 retrieving · processor agreement · transfer · pseudonymisation
 GDPR Art. 4(5) and Recital 26 Pseudonymised data that can be attributed to a person using additional information remains personal data.
 Vendor register · queried live No processor agreement is recorded for this vendor. Status: not approved.
 “Customer says we breached the four-hour response SLA twice this month. Do we owe them credits?”
+No contract read. It never checked which tier this customer is on.
+Invented figures. The 5% and the threshold came from nowhere.
+No clock definition. Response time from ticket creation, or from triage?
+Nothing for an auditor, and credits are a revenue adjustment.
 MSA Schedule 2 · Business tier · signed 2025-11 Response target four business hours. Credits accrue from the third breach in a calendar month, at 2% of monthly fee per breach.
 Ticket log · queried live Two breaches recorded this month. Both measured from first human response.
 Sources shown. Both passages above, with section and revision date.
@@ -423,36 +380,24 @@ Most consultancies are structured to extend the engagement. This one is structur
 ## Six phases, fourteen weeks, one handover.
 
 Timelines shift with scope — these are indicative, not promises. What does not shift is the shape: diagnose before scoping, demonstrate before integrating, transfer before leaving.
-
-## Find the real constraint
-
-We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface.
+Phase 01 · Frame Weeks 1–2 Find the real constraint Exit condition A written position on what to build first — or a recommendation to build nothing. We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface.
 Exit condition A written position on what to build first — or a recommendation to build nothing.
-
-## The unglamorous layer
-
-The data joins, the permissions, the evaluation baseline. This is the layer that decides whether anything later reaches production, and it is the layer most pilots skip.
+We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface.
+Phase 02 · Foundation Weeks 3–6 The unglamorous layer Exit condition Baseline evaluation scores to judge every change that follows. The data joins, the permissions, the evaluation baseline. This is the layer that decides whether anything later reaches production, and it is the layer most pilots skip.
 Exit condition Baseline evaluation scores to judge every change that follows.
-
-## Into what you already run
-
-Engineering in short cycles against your real systems, with something demonstrable at the end of each. You see working software, not status decks. The person who scoped the work is the person building it.
+The data joins, the permissions, the evaluation baseline. This is the layer that decides whether anything later reaches production, and it is the layer most pilots skip.
+Phase 03 · Integrate Weeks 4–10 Into what you already run Exit condition A staged rollout running against real data in a non-production environment. Engineering in short cycles against your real systems, with something demonstrable at the end of each. You see working software, not status decks. The person who scoped the work is the person building it.
 Exit condition A staged rollout running against real data in a non-production environment.
-
-## Under real change control
-
-Into production under the same governance, review and release process as everything else you run — not beside it, and not on an exception.
+Engineering in short cycles against your real systems, with something demonstrable at the end of each. You see working software, not status decks. The person who scoped the work is the person building it.
+Phase 04 · Ship Weeks 10–12 Under real change control Exit condition In production, under your existing controls — no exceptions. Into production under the same governance, review and release process as everything else you run — not beside it, and not on an exception.
 Exit condition In production, under your existing controls — no exceptions.
-
-## Against the agreed number
-
-Measured against the number agreed in Phase 01, using the evaluation harness built in Phase 02. If it did not move, that is what the written result says.
+Into production under the same governance, review and release process as everything else you run — not beside it, and not on an exception.
+Phase 05 · Prove Weeks 9–12 Against the agreed number Exit condition A written result — including the uncomfortable version if that’s the truth. Measured against the number agreed in Phase 01, using the evaluation harness built in Phase 02. If it did not move, that is what the written result says.
 Exit condition A written result — including the uncomfortable version if that’s the truth.
-
-## And then we leave
-
-Documentation, runbooks, architecture decision records, paired operation with your engineers, and a named owner. The engagement is not finished until your team can run it without us.
+Measured against the number agreed in Phase 01, using the evaluation harness built in Phase 02. If it did not move, that is what the written result says.
+Phase 06 · Hand over Weeks 12–14 And then we leave Exit condition You own it, you run it, we’re gone. That’s the definition of done. Documentation, runbooks, architecture decision records, paired operation with your engineers, and a named owner. The engagement is not finished until your team can run it without us.
 Exit condition You own it, you run it, we’re gone. That’s the definition of done.
+Documentation, runbooks, architecture decision records, paired operation with your engineers, and a named owner. The engagement is not finished until your team can run it without us.
 
 ## Four positions we will not negotiate
 

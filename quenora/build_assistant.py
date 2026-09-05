@@ -75,6 +75,16 @@ def chunks_for(path, page_url, lang="en"):
     soup = BeautifulSoup(html, "html.parser")
     for bad in soup(["script", "style", "nav", "header", "footer"]):
         bad.decompose()
+    # The ungoverned half of the governed-vs-ungoverned demo is written
+    # to be wrong: fluent, specific and invented, with its fabrications
+    # labelled as fabrications. Indexed, those labels became answers.
+    # "Gibt es einen Festpreis?" returned "Erfundene Schwelle. Eine
+    # Pilot-Ausnahme von Art. 28 gibt es nicht." as its first passage,
+    # with a source link, to a buyer asking about price. Site text
+    # rather than a hallucination, which is what made it worse: the
+    # honesty architecture held and the answer was still damaging.
+    for bad in soup.select(".gd-bad, .gd-d-bad, .gd-d-cost, .gd-d-flags"):
+        bad.decompose()
     main = soup.find("main") or soup.body
     if not main:
         return []
@@ -86,8 +96,13 @@ def chunks_for(path, page_url, lang="en"):
     # dt/dd hold the About facts — Founded 2025, Based Heilbronn — and td/th
     # the release-gate table. Both were outside the element list, so "where
     # are you based" had nothing to find.
+    # <strong> carries the pricing card labels — Fixed fee, Fixed scope,
+    # Included — which sit in a div beside the body <p> and were in no
+    # element list here, so the headline commercial term on the site
+    # appeared zero times in all three indexes and "Y a-t-il un forfait ?"
+    # matched nothing at all.
     for el in main.find_all(["h1", "h2", "h3", "p", "li", "figcaption", "span",
-                             "div", "dt", "dd", "td", "th"]):
+                             "div", "dt", "dd", "td", "th", "strong"]):
         if el.name == "div" and el.find(True) is not None:
             # A div whose children are all inline is a labelled fact, not a
             # layout container: <div class="wfact"><span>Based</span><b>
@@ -120,7 +135,7 @@ def chunks_for(path, page_url, lang="en"):
             # pair the value with the label it answers
             cur["tags"].append(cur["dl"].pop() + ": " + text)
             continue
-        if (is_chip or el.name in ("li", "td", "th")) and len(text) < 60:
+        if (is_chip or el.name in ("li", "td", "th", "strong")) and len(text) < 60:
             if cur is not None:
                 cur["tags"].append(text)
             continue

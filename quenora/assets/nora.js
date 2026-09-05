@@ -38,9 +38,9 @@
   var A=[
     [['automation','automate','workflow','process','unattended','rpa'],
      "Automation is capability 02 and one of the three core ones. We automate the processes a business repeats — approvals, handoffs, reconciliations, the reporting someone does on a Tuesday. The part that matters is the exceptions: an automation is only trustworthy if it knows which cases it should not decide, and drawing that line is most of the work."],
-    [['what do you','services','offer','do you do','capabilit'],
+    [['what do you','services','offer','do you do','capabilit','quenora do','what does quenora'],
      "Nine capabilities. Three are core — platform and deployment engineering, process and workflow automation, and AI integration — because everything runs through them. The other six step in only when the work needs them. Nothing is handed to a subcontractor you’ve never met."],
-    [['who are you','about','founder','balaji','team','how big','size'],
+    [['who are you','about you','about quenora','founder','balaji','team','how big','size'],
      "Quenora is founder-led, founded in 2025 by Balaji Durai. Before Quenora he ran transformation work for multinational manufacturers, retail banking and life sciences groups; those systems went on to be used by more than 100,000 people. We work from Heilbronn, internationally, in German, French and English."],
     [['different','why you','compare','competitor','large consult','big four'],
      "Use a large consultancy for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, the person who scopes your engagement is the person who does the work and the person you call when it breaks."],
@@ -48,6 +48,8 @@
      "Six phases, from framing to handover, and each carries an exit condition written into the statement of work. Most engagements run twelve to fourteen weeks end to end, with a working pilot well before that. The engagement is designed to end."],
     [['cost','price','pricing','budget','how much','rate'],
      "Scoped to outcomes rather than day rates. Chapter 08 on the homepage states how it’s priced rather than making you sit through three meetings to find out. A briefing gives you a real number, not a range designed to get a second meeting."],
+    [['does not work',"doesn’t work",'if it fails','if this fails','goes wrong','not work out','guarantee'],
+     "Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it."],
     [['work','case','client','example','project','reference'],
      "Three patterns come up most: invoice processing across unintegrated ERP instances, support triage with knowledge retrieval, and legacy modernisation with predictive scheduling. They are described by shape rather than by client name, and the figures on the Work page are illustrative of the pattern rather than audited results."],
     [['product','framework','accelerator','toolkit','blueprint'],
@@ -108,9 +110,9 @@
     +'that the their then there these this to was were what when which will with you your '
     +'our we us how why can does do not no der die das den dem des ein eine einer eines und '
     +'oder aber ist sind war waren sein ihre ihr wir uns sie ihnen mit von zu im am auf fur '
-    +'als auch nicht kein wie wer wo wenn dann dass le la les un une des du de et ou mais '
+    +'als auch nicht kein wie wenn dann dass le la les un une des du de et ou mais '
     +'est sont etait etaient etre leur nos nous vous avec pour dans sur comme aussi ne pas '
-    +'que quoi quand si').split(' ');
+    +'que quoi quand comment si').split(' ');
   var STOPSET = {}; STOP.forEach(function(w){ STOPSET[w]=1; });
 
   function terms(s){
@@ -157,13 +159,13 @@
     certification:['iso','soc','attestations'],
     certifications:['iso','soc','attestations'],
     certified:['iso','soc','attestations'], compliance:['governance','iso','soc'],
-    big:['firm','small','size','depth'], many:['firm','small','size'],
-    people:['firm','team','size','depth'], headcount:['firm','size','depth'],
+    big:['firm','small','size'], many:['firm','small','size'],
+    people:['firm','team','size','person'], headcount:['firm','size','small'],
     staff:['firm','team','size'],
-    who:['hiring','founder','firm','balaji','founded'],
+    who:['hiring','founder','firm','founded'],
     where:['heilbronn','germany','based'],
     you:['quenora','firm','hiring'], about:['hiring','founder','firm','founded'],
-    behind:['founder','hiring','balaji'], founder:['balaji','hiring','founded'],
+    behind:['founder','hiring','founded'], founder:['hiring','founded','led'],
     based:['heilbronn','germany','where'], where:['heilbronn','germany','based'],
     located:['heilbronn','germany','based'], office:['heilbronn','germany','based'],
     country:['heilbronn','germany'], languages:['german','french','english'],
@@ -171,7 +173,7 @@
   };
   /* the same bridge in the two other published languages */
   var ALIAS_DE = {
-    wer:['balaji','inhabergefuhrt','firma','gegrundet'],
+    wer:['inhabergefuhrt','firma','gegrundet'],
     wo:['heilbronn','deutschland','sitz'],
     seid:['quenora','firma'], sitzt:['heilbronn','deutschland','sitz'],
     sitz:['heilbronn','deutschland'], standort:['heilbronn','deutschland','sitz'],
@@ -181,11 +183,30 @@
     team:['firma','inhabergefuhrt'], gehort:['ubergabe','ihnen'],
     sicherheit:['governance','zugriff','audit'],
     zertifizierung:['iso','soc'], zertifiziert:['iso','soc'],
+    /* widened toward the English table's reach: 53 bridges there to 18 here, and this table is merged INTO the English one, so most of a German visitor's coverage was English words. Targets verified against the German index */
+    anderung:['governance','freigabe','anderungskontrolle'],
+    beginn:['rahmung','erste'],
+    behalten:['ubergabe','code'],
+    beleg:['harness','evaluations','nachweis'],
+    besitzt:['ubergabe','gehort'],
+    betrieb:['monitoring','runbook','ubergabe'],
+    compliance:['governance','iso','soc'],
+    datenschutz:['dsgvo','daten','governance'],
+    dsgvo:['datenschutz','daten','governance'],
+    eigentum:['ubergabe','gehort'],
+    fallstudien:['referenz','fallstudie'],
+    garantie:['zahl','messen'],
+    gross:['firma','klein'],
+    mitarbeiter:['firma','inhabergefuhrt','team'],
+    nachweis:['harness','evaluations','messen','zahl'],
+    referenzen:['referenz','fallstudien','gesprach'],
+    support:['betrieb','monitoring','runbook'],
+    vertrag:['leistungsschein','umfang'],
     sprachen:['deutsch','franzosisch','englisch'],
     sprache:['deutsch','franzosisch','englisch']
   };
   var ALIAS_FR = {
-    qui:['balaji','fondateur','cabinet','dirige'],
+    qui:['fondateur','cabinet','dirige'],
     etes:['quenora','cabinet','dirige'],
     situes:['heilbronn','allemagne','siege'], situe:['heilbronn','allemagne','siege'],
     base:['heilbronn','allemagne','siege'], siege:['heilbronn','allemagne'],
@@ -195,6 +216,23 @@
     longtemps:['semaines','phases'],
     equipe:['cabinet','fondateur'], appartient:['transmission','appartiennent'],
     certification:['iso','soc'], securite:['gouvernance','acces'],
+    /* same widening on the French side, verified against the French index. rollback is here because the page says 'retour arriere' and a French CTO still types the English word */
+    changement:['gouvernance','controle'],
+    combien:['tarife','cout','semaines'],
+    confidentialite:['rgpd','donnees','gouvernance'],
+    conformite:['gouvernance','iso','soc'],
+    contrat:['perimetre','condition','sortie'],
+    demarrer:['cadrage','premier','commencer'],
+    effectif:['cabinet','petit'],
+    exploitation:['supervision','runbook','transmission'],
+    garantie:['condition','sortie','chiffre','mesure'],
+    preuve:['harnais','evaluation','mesure','chiffre'],
+    propriete:['transmission','appartient','appartiennent'],
+    references:['reference','cas','echange'],
+    rgpd:['confidentialite','donnees','gouvernance'],
+    rollback:['retour','arriere'],
+    support:['exploitation','supervision','runbook'],
+    taille:['cabinet','petit','equipe'],
     langues:['allemand','francais','anglais'],
     langue:['allemand','francais','anglais']
   };

@@ -53,7 +53,13 @@ def tables(html):
     return found
 
 
-html = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+_widget = os.path.join(ROOT, "widget", "assistant.js")
+_source = _widget if os.path.exists(_widget) else os.path.join(ROOT, "index.html")
+html = open(_source, encoding="utf-8").read()
+if not tables(html):
+    print("   the alias tables are not in %s — this stage was testing nothing"
+          % os.path.basename(_source))
+    sys.exit(1)
 maps = tables(html)
 paths = {"en": "assistant.json", "de": "de/assistant.json", "fr": "fr/assistant.json"}
 

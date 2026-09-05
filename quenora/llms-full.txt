@@ -345,27 +345,16 @@ Finance, healthcare, logistics and manufacturing, where governance and auditabil
 
 And if it does not, that is the usual case rather than a problem — the map above is wider than the three written up here.
 “Invoice INV-88214, €48,900 from Rehder GmbH. It doesn’t match the PO. Can I post it?”
-Not reproducible. Ask next quarter, get a different tolerance.
 AP Manual v6.1 · §4.3 · revised 2026-05-02 Price variance is auto-cleared to 1% or €250, whichever is lower. Anything above requires the originating buyer’s approval.
 ERP query · 3 instances · live INV-88214 is present in NAV-DE and SAP-AT. The Austrian instance already shows it as parked.
 “Employee in Germany is asking about parental leave. What are they entitled to, and do we top it up?”
-Statute and policy blurred. The law is right; the company part is invented.
-No jurisdiction check. It never confirmed which entity employs them.
-Nothing for an auditor, and this one ends up in an employment file.
 BEEG §15 · statutory · consolidated 2026-01 Entitlement to up to three years of Elternzeit per child, of which 24 months may be taken between the third and eighth birthday.
 Betriebsvereinbarung 2024-07 · §9 Covers unpaid leave scheduling and return-to-work rights. No pay supplement is defined.
 “Can I send our customer list to the new analytics vendor for the pilot?”
-Legally wrong, and fluent about it. Pseudonymised data is still personal data.
-Invented threshold. There is no pilot exemption from Art. 28.
-Nothing for an auditor — the one answer here a regulator would ask to see.
 retrieving · processor agreement · transfer · pseudonymisation
 GDPR Art. 4(5) and Recital 26 Pseudonymised data that can be attributed to a person using additional information remains personal data.
 Vendor register · queried live No processor agreement is recorded for this vendor. Status: not approved.
 “Customer says we breached the four-hour response SLA twice this month. Do we owe them credits?”
-No contract read. It never checked which tier this customer is on.
-Invented figures. The 5% and the threshold came from nowhere.
-No clock definition. Response time from ticket creation, or from triage?
-Nothing for an auditor, and credits are a revenue adjustment.
 MSA Schedule 2 · Business tier · signed 2025-11 Response target four business hours. Credits accrue from the third breach in a calendar month, at 2% of monthly fee per breach.
 Ticket log · queried live Two breaches recorded this month. Both measured from first human response.
 Sources shown. Both passages above, with section and revision date.

@@ -110,7 +110,7 @@
     +'that the their then there these this to was were what when which will with you your '
     +'our we us how why can does do not no der die das den dem des ein eine einer eines und '
     +'oder aber ist sind war waren sein ihre ihr wir uns sie ihnen mit von zu im am auf fur '
-    +'als auch nicht kein wie wenn dann dass le la les un une des du de et ou mais '
+    +'als auch nicht kein wie wer wo wenn dann dass le la les un une des du de et ou mais '
     +'est sont etait etaient etre leur nos nous vous avec pour dans sur comme aussi ne pas '
     +'que quoi quand comment si').split(' ');
   var STOPSET = {}; STOP.forEach(function(w){ STOPSET[w]=1; });
@@ -276,6 +276,25 @@
     }
     var qs=expand(raw), k1=1.5, b=0.75, out=[];
     if(!raw.length) return [];
+    /* Interrogatives have to stay stopwords, because terms() builds the
+       index as well as the query: the moment one is indexable, the 1.8x
+       heading bonus hands every question containing it to whichever passage
+       happens to be headed with it. "Wer sind Sie?" returned "Wer was sehen
+       darf" — the one heading on the German site carrying that word, so its
+       idf was maximal — instead of the About facts. But an interrogative is
+       also exactly the word that needs a bridge, and stripping it before
+       expand() left ALIAS_DE.wer firing only when the question reduced to
+       nothing. So the bridge now reads the whole question while scoring
+       stays on the stripped terms: it fires for every phrasing, and the
+       word itself still never scores. */
+    fold(q).split(/[^a-z0-9]+/).forEach(function(w){
+      /* every word the stripping dropped, not just the stopwords: "wo" is
+         two letters and terms() discards it on length alone, so a guard of
+         w.length>2 here silently bridged nothing for it. */
+      if(w && raw.indexOf(w) < 0){
+        (ALIAS[w]||[]).forEach(function(a){ if(qs.indexOf(a)<0) qs.push(a); });
+      }
+    });
     IDX.docs.forEach(function(d){
       var sc=0, hit=0;
       qs.forEach(function(t){

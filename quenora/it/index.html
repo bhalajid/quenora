@@ -1314,29 +1314,19 @@ main > section#climax{padding-block:104px 250px}
 main > section[hidden]{padding-block:0}
 @media(max-width:760px){main > section{padding-block:var(--sp5)}}
 
-/* ── 2 · the hub's dots have to line up ────────────────────────────────
-   The left column was flex with row-reverse, so each dot sat wherever its
-   own label ended: measured at x=404, 447 and 446 for the three rows while
-   the right column held a straight 948. A grid puts the dot in a column of
-   its own, so the label length stops moving it. */
-.orb-ring li{display:grid;align-items:center;column-gap:9px}
-.orb-ring li:nth-child(-n+3){grid-template-columns:1fr auto auto;
-  justify-items:end;text-align:right}
-.orb-ring li:nth-child(-n+3) .orb-name{grid-column:1}
-.orb-ring li:nth-child(-n+3) .orb-n{grid-column:2}
-.orb-ring li:nth-child(-n+3) .orb-dot{grid-column:3}
-.orb-ring li:nth-child(n+4){grid-template-columns:auto auto 1fr;
-  justify-items:start;text-align:left}
-.orb-ring li:nth-child(n+4) .orb-dot{grid-column:1}
-.orb-ring li:nth-child(n+4) .orb-n{grid-column:2}
-.orb-ring li:nth-child(n+4) .orb-name{grid-column:3}
-@media(max-width:900px){
-  .orb-ring li,.orb-ring li:nth-child(-n+3),.orb-ring li:nth-child(n+4){
-    grid-template-columns:auto auto 1fr;justify-items:start;text-align:left}
-  .orb-ring li:nth-child(-n+3) .orb-dot{grid-column:1}
-  .orb-ring li:nth-child(-n+3) .orb-n{grid-column:2}
-  .orb-ring li:nth-child(-n+3) .orb-name{grid-column:3}
-}
+/* ── 2 · the hub, one shape on both sides ──────────────────────────────
+   Two goes at this. The first left the dots floating with the label width —
+   404, 447, 446 on the left against a straight 948 on the right. The second
+   used a mirrored grid, and the left column wrapped: dot on one line, number
+   under it, name under that. Mirroring was the mistake.
+
+   Both sides now read the same way — dot, number, name, left to right — so
+   the two columns are the same object rather than reflections of it. */
+.orb-ring li{display:grid;grid-template-columns:auto auto 1fr;
+  align-items:center;column-gap:9px;justify-items:start;text-align:left}
+.orb-ring li .orb-dot{grid-column:1}
+.orb-ring li .orb-n{grid-column:2}
+.orb-ring li .orb-name{grid-column:3}
 
 /* ── 3 · the cursor ring goes ──────────────────────────────────────────
    A 76px dashed circle trailing the pointer, with a 5px ember dot inside it.
@@ -1474,9 +1464,9 @@ firm was built to take on. If none of them describe you, we’re probably not th
 firm — and we’d rather you knew that now.</p>
 </div>
 </div>
-<div class="ch3 wrap rv"><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><path d="M19 12a7 7 0 1 0-4 6.3"></path><circle cx="12" cy="12" fill="currentColor" r="1.7" stroke="none"></circle></svg><span class="ch-eyebrow mono">Situation 01</span><h3 class="ch-title">The pilot that stalled</h3><p class="ch-body">It worked in the demo. Six months later it’s still a demo, because the
-platform underneath it was never built and nobody owns the gap.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="10" cy="12" r="6"></circle><circle cx="15" cy="12" fill="currentColor" r="1.7" stroke="none"></circle></svg><span class="ch-eyebrow mono">Situation 02</span><h3 class="ch-title">Retrieval that lies</h3><p class="ch-body">The assistant answers confidently and is wrong often enough that people
-stopped trusting it. The model is fine. The data contract isn’t.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><path d="M12 5a7 7 0 1 1-5 11.9"></path><line x1="5.6" x2="9" y1="8.2" y2="5.6"></line></svg><span class="ch-eyebrow mono">Situation 03</span><h3 class="ch-title">Governance arriving late</h3><p class="ch-body">Something is live, procurement or risk is now asking questions, and the
+<div class="ch3 wrap rv"><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="10" cy="12" r="5.5"></circle><line x1="19" x2="19" y1="5" y2="19"></line></svg><span class="ch-eyebrow mono">Situation 01</span><h3 class="ch-title">The pilot that stalled</h3><p class="ch-body">It worked in the demo. Six months later it’s still a demo, because the
+platform underneath it was never built and nobody owns the gap.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><circle cx="14.6" cy="12" r="2.4"></circle></svg><span class="ch-eyebrow mono">Situation 02</span><h3 class="ch-title">Retrieval that lies</h3><p class="ch-body">The assistant answers confidently and is wrong often enough that people
+stopped trusting it. The model is fine. The data contract isn’t.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><line x1="12" x2="12" y1="12" y2="7.6"></line><line x1="12" x2="15.6" y1="12" y2="14"></line></svg><span class="ch-eyebrow mono">Situation 03</span><h3 class="ch-title">Governance arriving late</h3><p class="ch-body">Something is live, procurement or risk is now asking questions, and the
 evidence to answer them was never captured.</p></div></div>
 </div>
 </section>

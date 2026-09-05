@@ -330,29 +330,19 @@ main > section#climax{padding-block:104px 250px}
 main > section[hidden]{padding-block:0}
 @media(max-width:760px){main > section{padding-block:var(--sp5)}}
 
-/* ── 2 · the hub's dots have to line up ────────────────────────────────
-   The left column was flex with row-reverse, so each dot sat wherever its
-   own label ended: measured at x=404, 447 and 446 for the three rows while
-   the right column held a straight 948. A grid puts the dot in a column of
-   its own, so the label length stops moving it. */
-.orb-ring li{display:grid;align-items:center;column-gap:9px}
-.orb-ring li:nth-child(-n+3){grid-template-columns:1fr auto auto;
-  justify-items:end;text-align:right}
-.orb-ring li:nth-child(-n+3) .orb-name{grid-column:1}
-.orb-ring li:nth-child(-n+3) .orb-n{grid-column:2}
-.orb-ring li:nth-child(-n+3) .orb-dot{grid-column:3}
-.orb-ring li:nth-child(n+4){grid-template-columns:auto auto 1fr;
-  justify-items:start;text-align:left}
-.orb-ring li:nth-child(n+4) .orb-dot{grid-column:1}
-.orb-ring li:nth-child(n+4) .orb-n{grid-column:2}
-.orb-ring li:nth-child(n+4) .orb-name{grid-column:3}
-@media(max-width:900px){
-  .orb-ring li,.orb-ring li:nth-child(-n+3),.orb-ring li:nth-child(n+4){
-    grid-template-columns:auto auto 1fr;justify-items:start;text-align:left}
-  .orb-ring li:nth-child(-n+3) .orb-dot{grid-column:1}
-  .orb-ring li:nth-child(-n+3) .orb-n{grid-column:2}
-  .orb-ring li:nth-child(-n+3) .orb-name{grid-column:3}
-}
+/* ── 2 · the hub, one shape on both sides ──────────────────────────────
+   Two goes at this. The first left the dots floating with the label width —
+   404, 447, 446 on the left against a straight 948 on the right. The second
+   used a mirrored grid, and the left column wrapped: dot on one line, number
+   under it, name under that. Mirroring was the mistake.
+
+   Both sides now read the same way — dot, number, name, left to right — so
+   the two columns are the same object rather than reflections of it. */
+.orb-ring li{display:grid;grid-template-columns:auto auto 1fr;
+  align-items:center;column-gap:9px;justify-items:start;text-align:left}
+.orb-ring li .orb-dot{grid-column:1}
+.orb-ring li .orb-n{grid-column:2}
+.orb-ring li .orb-name{grid-column:3}
 
 /* ── 3 · the cursor ring goes ──────────────────────────────────────────
    A 76px dashed circle trailing the pointer, with a 5px ember dot inside it.

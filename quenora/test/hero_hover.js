@@ -23,8 +23,31 @@ const src = fs.readFileSync(path.join(DIR, 'index.html'), 'utf8');
 const HALO = parseFloat(src.match(/var HALO = ([\d.]+)/)[1]);
 const PAD = 27 * HALO;
 
-const ARC = [...src.matchAll(/<circle cx="([\d.]+)" cy="([\d.]+)" r="([\d.]+)"/g)]
-  .slice(0, 9).map(m => ({ x: +m[1], y: +m[2], r: +m[3] }));
+/* Read the arc the hero actually draws — `var ARC = [[x,y,r], ...]` in the
+   page's own script — rather than scraping <circle> elements and taking the
+   first nine.
+
+   That scrape was written when the nine-dot mark was inline SVG at the top of
+   every page, so the first nine circles in the file really were the arc. The
+   mark is now an <img> pointing at the supplied logo file, so there were no
+   arc circles left to find: the test had been silently reading the language
+   button's globe and the chapter glyphs and calling them spheres. It passed
+   only because whatever it picked up happened not to tie. Changing three
+   chapter icons moved which circles came first and produced 11,674 ties,
+   which is how a harness reading the wrong input finally announced itself. */
+const ARC = (() => {
+  const m = src.match(/var ARC = (\[[\s\S]*?\]);/);
+  if (!m) {
+    console.error('   hero_hover: no `var ARC` in index.html — cannot test the arc');
+    process.exit(2);
+  }
+  const rows = JSON.parse(m[1].replace(/\s+/g, ''));
+  if (rows.length !== 9) {
+    console.error('   hero_hover: expected 9 spheres, found ' + rows.length);
+    process.exit(2);
+  }
+  return rows.map(r => ({ x: r[0], y: r[1], r: r[2] }));
+})();
 
 const B = [Math.min(...ARC.map(c => c.x - c.r)), Math.max(...ARC.map(c => c.x + c.r)),
            Math.min(...ARC.map(c => c.y - c.r)), Math.max(...ARC.map(c => c.y + c.r))];

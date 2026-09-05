@@ -39,14 +39,23 @@ from bs4 import BeautifulSoup as BS
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # marks in the wordmark's vocabulary: circles and a stroke
-# The three situations are the same mark failing in three different ways,
-# rather than three interchangeable icons: an arc that stops before it closes,
-# a ring that has drifted off the thing it is supposed to be centred on, and a
-# ring that closes only after the gap has opened.
+# Closed shapes. The first set drew the mark failing three different ways —
+# an arc stopping before it closed, a ring drifted off centre, a ring closing
+# late. The idea was that the mark itself carried the fault. It did not read
+# that way: an unclosed circle reads as a half-loaded spinner, and it was
+# reported as "unfinished" twice. A mark that makes the reader wonder whether
+# the page is broken has failed whatever it was trying to say.
+#
+# These are complete forms, and the meaning sits in what is beside the circle
+# rather than in what is missing from it.
 G = {
- 'stall':  '<path d="M19 12a7 7 0 1 0-4 6.3"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/>',
- 'lie':    '<circle cx="10" cy="12" r="6"/><circle cx="15" cy="12" r="1.7" fill="currentColor" stroke="none"/>',
- 'late':   '<path d="M12 5a7 7 0 1 1-5 11.9"/><line x1="5.6" y1="8.2" x2="9" y2="5.6"/>',
+ # a circle stopped against a wall — the pilot that went no further
+ 'stall':  '<circle cx="10" cy="12" r="5.5"/><line x1="19" y1="5" x2="19" y2="19"/>',
+ # two circles that should be concentric and are not — confident, and off
+ 'lie':    '<circle cx="12" cy="12" r="7"/><circle cx="14.6" cy="12" r="2.4"/>',
+ # a closed circle and a hand already past the hour — governance, arriving late
+ 'late':   '<circle cx="12" cy="12" r="7"/><line x1="12" y1="12" x2="12" y2="7.6"/>'
+           '<line x1="12" y1="12" x2="15.6" y2="14"/>',
  'erp':    '<circle cx="7" cy="9" r="3"/><circle cx="17" cy="9" r="3"/><circle cx="12" cy="16" r="3"/>',
  'desk':   '<circle cx="12" cy="10" r="4"/><line x1="6" y1="18" x2="18" y2="18"/>',
  'legacy': '<circle cx="9" cy="12" r="5"/><line x1="14" y1="12" x2="20" y2="12"/><circle cx="20" cy="12" r="1.6" fill="currentColor" stroke="none"/>',
@@ -232,9 +241,39 @@ def commercial(soup, sec, contact_soup):
     return False
 
 
+def refresh_marks(soup):
+    """Rewrite the glyphs in place on every run.
+
+    The chapter builders are guarded: once a chapter has been rebuilt they
+    skip it, which is what makes them safe to run repeatedly. The side effect
+    is that changing a glyph changes nothing — the new shapes sat in this file
+    for a whole build while the page still drew the old arcs. The marks are
+    cheap, so they are re-rendered every time rather than only on first
+    build.
+    """
+    n = 0
+    for sec_id, keys in (('fit', FIT), ('work', WORK)):
+        sec = soup.find(id=sec_id)
+        if sec is None:
+            continue
+        marks = sec.select('.ch-mark')
+        for i, sv in enumerate(marks):
+            if i >= len(keys):
+                break
+            fresh = mark(soup, keys[i]).find('svg')
+            sv.clear()
+            for child in list(fresh.contents):
+                sv.append(child)
+            n += 1
+    if n:
+        print('  %d chapter mark(s) redrawn' % n)
+    return n
+
+
 def main():
     p = os.path.join(ROOT, 'index.html')
     soup = BS(open(p, encoding='utf-8').read(), 'html.parser')
+    refresh_marks(soup)
     cp = os.path.join(ROOT, 'contact.html')
     csoup = BS(open(cp, encoding='utf-8').read(), 'html.parser')
 

@@ -1,290 +1,203 @@
 # Quenora — build status and handover
 
-Updated 2 September 2026. Written so a fresh conversation can pick the work
-up without re-reading anything else. Read this file first.
+Updated 5 September 2026. Written so a fresh conversation can pick the work up
+without reading anything else. **Read this file first.**
 
 ---
 
 ## 1. What this is
 
 A static marketing site for Quenora Consulting (Heilbronn), launching on
-**quenora.ai**. Currently deployed at `quenora.vercel.app`.
+**quenora.ai**. Currently deployed at `quenora.vercel.app` from `main`.
 
-**The one architectural rule:** every page is a single self-contained HTML
-file — inline `<style>`, inline `<script>`, no framework, no bundler, no
-third-party JavaScript. This is not minimalism for its own sake. An earlier
-version loaded GSAP and Three.js from a CDN and the hero was simply dead on
-locked-down corporate networks, which is exactly the audience. Nothing may
-reintroduce a runtime CDN dependency.
+**The one architectural rule:** every page is a single self-contained HTML file
+— inline `<style>`, inline `<script>`, no framework, no bundler, no
+third-party JavaScript. Not minimalism for its own sake: an earlier version
+loaded GSAP and Three.js from a CDN and the hero was dead on locked-down
+corporate networks, which is exactly the audience. **Nothing may reintroduce a
+runtime CDN dependency.**
 
-Fonts are the one remaining exception (Google Fonts), and are an open item.
-
----
-
-## 2. The five features, in the order they were asked for
-
-Each was released as its own commit so it can be reverted alone.
-
-| # | Feature | State | Commit |
-|---|---------|-------|--------|
-| 1 | **Nora** — site assistant, floating on every page | **Done** | `00cd8e7` + fixes, widget `1d12458` |
-| 2 | Contact QR → vCard + scan count | **Done** | `c3f7fcd` |
-| 3 | `llms.txt` / agent-readable structure | **Done** | `2dda952` |
-| 4 | Wallet pass | **Google done, Apple blocked** | `983294f` |
-| 5 | Governed-vs-ungoverned demo | **Done** | `f2e5a66` |
-
-### #1 — The assistant
-
-Answers **only from sentences already on the site**. There is no model and no
-API key, so it costs nothing per question and cannot invent a claim about the
-firm. It is BM25 retrieval (the ranking classic search engines used) over a
-pre-built index of every paragraph, built at build time by
-`build_assistant.py` into `assistant.json` — about 10 KB gzipped, fetched
-lazily, one index per language.
-
-If it cannot match, it says so and points at the form. That is the honest
-failure, and it is deliberate.
-
-**Nora** is the assistant's name. She floats bottom-right on all 24 pages,
-labelled "Ask Nora" on hover and on keyboard focus, with the wordmark's five
-largest circles as her icon. One source in `widget/`, injected by
-`build_widget.py`; there is no second copy to drift.
-
-**Known gap:** the canned fallback answers — used only when `assistant.json`
-fails to load — are still English in every language, because they live in
-JavaScript string literals that `build_i18n` cannot reach. The greeting was in
-the same position and has been moved into the DOM. Moving the remaining twelve
-is mechanical but not yet done.
-
-### #2 — The contact QR
-
-`/c` counts the scan, then hands over a vCard filed under **Quenora
-Consulting** — the company name, because that is what someone searches for
-eight months later. Three printed codes exist (`/c`, `/c?k=card`,
-`/c?k=event`) so you can tell which run was scanned.
-
-**It counts how many, never who.** A day and a code. No IP, no user agent,
-no cookie — which is what the privacy notice promises.
-
-The QR sits **above** the enquiry form: one scan beats eleven fields.
-
-### #5 — The governed-vs-ungoverned demo
-
-Lives on the work page at `/work#governed`, in all three languages, with a
-small pulsing link to it from chapter 05 of the homepage.
-
-Four questions people actually put to an internal assistant — a finance clerk,
-an HR business partner, a data lead, a support manager. Each is answered twice,
-side by side.
-
-**The left panel is never a straw man.** Every ungoverned answer is fluent,
-specific and plausible; the invented figures are underlined with a dashed rule.
-Three of the four would cost money and one is a reportable data protection
-incident. That is the argument: the danger is not that ungoverned AI is stupid,
-it is that it is persuasive and unaccountable.
-
-The governed panel shows retrieval, quotes both sources with section and
-revision date, pins the versions, and ends each answer with what it will **not**
-say.
-
-Both panels run in the browser from fixed data — no API, no key, no
-per-visitor cost. Every class is prefixed `gd-`, because the work page already
-has `.card`, `.num` and `.step`.
-
-**The original idea was dropped deliberately.** Scanning the QR to silently do
-something on a visitor's phone is the behaviour the firm sells protection
-against; a prospect sharp enough to buy would read it as a stunt.
-
-### #3 — Agent-readable structure
-
-Generated by `build_seo.py`, so none of it is maintained by hand:
-
-- **JSON-LD on all 23 pages** (was 1), each declaring **its own** served URL
-  and **its own** language. Previously `/de` and `/fr` both claimed
-  `inLanguage: en-GB` and the English canonical — every localised page was
-  telling machines it was the English homepage.
-- **Nine `Service` entries** on capabilities, **`FAQPage`** from the
-  objections chapter, **`BreadcrumbList`** on every inner page.
-- **`/llms.txt`** — a briefing, not a sitemap: what the firm is, what it does,
-  where the substance lives, in ~5 KB.
-- **`/llms-full.txt`** — the whole site as plain text (33 KB), built from the
-  assistant index that already existed, so an agent needs no scraping.
-- Gate stage **4h** guards it; verified to reproduce the German defect on the
-  previous commit.
-
-### #4 — The wallet pass, explained
-
-A vCard lands in **Contacts**. A wallet pass is a different object: a card in
-the phone's card stack, which survives a phone migration and — the only
-reason it is worth building — **can be changed after you have handed it
-over.** Change a number, and every pass ever saved changes with it. Paper
-cannot do that, and neither can a vCard. So it is not a replacement for #2,
-it is the second half.
-
-- **Google Wallet: implemented in full.** `/w` signs a JWT and redirects to
-  the save link. Needs a free Google Cloud service account and issuer ID.
-- **Apple Wallet: not implemented, and blocked on you, not on code.** A
-  `.pkpass` must be signed with an Apple Pass Type ID certificate, which
-  requires the **paid Apple Developer Program ($99/yr)**. Roughly an
-  afternoon's work once that certificate exists.
-
-Because nothing is configured today, the page asks `/w?probe=1` first and
-**draws no button at all**. A button that leads to an error is worse than no
-button. Turn Google on by setting `GOOGLE_WALLET_ISSUER_ID`,
-`GOOGLE_WALLET_SA_EMAIL`, `GOOGLE_WALLET_SA_KEY`.
-
-### #5 — The governed-vs-ungoverned demo, explained
-
-**This is the one that is only described, not built.**
-
-The original idea was that scanning the QR would silently do something on the
-visitor's phone, then say *"see, this is why you need Quenora."* That was
-dropped: doing something unannounced on a stranger's device is the exact
-behaviour the firm sells protection against, and a prospect who notices reads
-it as a stunt.
-
-The honest replacement is a **two-panel demo on the work page**: the same
-task, run twice, side by side.
-
-- **Left — ungoverned.** The answer appears. It is fluent. There is no
-  citation, no record of which model version produced it, no note of what was
-  retrieved, nothing to show an auditor, and no way to reproduce it next
-  quarter.
-- **Right — governed.** The same answer, with the retrieved passages shown,
-  the model version pinned, the decision path recorded, the confidence stated,
-  and an explicit *"I don't know"* where the data does not support a claim.
-
-Both run entirely in the browser from canned data — no API, consistent with
-the architecture rule.
-
-The point it makes is the firm's whole thesis: the demo is not the hard part;
-**the evidence around it is.** It is the strongest sales asset on the list,
-and the most work.
+Fonts (Google Fonts) are the one exception, and are an open item.
 
 ---
 
-## 3. Blocking launch
+## 2. Blocking launch — both yours, neither code
 
-Only two things, and **both are yours, not code**:
+1. **Four legal placeholders.** `{{TODO:STREET_AND_NUMBER}}` and
+   `{{TODO:POSTCODE}}`, two each in `impressum.html` and `privacy.html`.
+   German §5 TMG requires a full postal address. **This is the only red stage
+   in the release gate and has been for weeks.** Send the address and it
+   closes in one commit.
+2. **DNS.** `quenora.ai` still resolves to a parking IP. Point it at Vercel.
+   The redirect is deliberately **not** in the repo — adding it before the
+   domain answers would take the site down. The exact block is in `LAUNCH.md`,
+   to be pasted on launch day.
 
-1. **Four legal placeholders** — `{{TODO:STREET_AND_NUMBER}}` and
-   `{{TODO:POSTCODE}}` in `impressum.html` and `privacy.html`. German §5 TMG
-   requires a full postal address. This is the **only red stage in the
-   release gate.** (Telephone is now filled.)
-2. **DNS.** `quenora.ai` still resolves to a parking IP (192.64.119.248) and
-   HTTPS times out. Point it at Vercel. **The redirect is deliberately not in
-   the repo** — adding it before the domain answers would take the site down.
-   The exact block is written out in `LAUNCH.md`, to be pasted on launch day.
-
-`LAUNCH.md` has the five ordered steps. `test/launch_check.sh` runs 20 live
-assertions afterwards.
+`test/launch_check.sh` runs 20 live assertions afterwards.
 
 ---
 
-## 4. How to verify anything
+## 3. How to build and verify
 
 ```bash
+cd quenora && ./build.sh          # order matters, see below
 cd quenora/test && bash release.sh ..
 ```
 
-Seventeen stages. **Every stage exists because a real defect got past me**, and
-each one was proved to reproduce that defect on the commit before its fix.
-Current state: **one red stage, 4b, the legal placeholders above.** Everything
-else green.
-
-Notable stages:
-
-- `4c deployed_links.py` — resolves 835 links against **the deployed URL
-  shape, not the filesystem.** The filesystem lies (see §5).
-- `4f public_urls.py` — 294 URLs must say quenora.ai, never vercel.app.
-- `4g assistant_aliases.py` — every synonym must resolve in the built index,
-  in **each** language.
-- `4d nav_map.py` — header must equal footer, per page, per language.
-
-**Build with `./build.sh`** — the order matters (`build_i18n` overwrites
-`de/` and `fr/` wholesale, so `build_seo` must run after it, or every
-localised page silently loses its structured data).
-
 **The build interpreter is `/tmp/qvenv/bin/python3`** — the system Python has
-no beautifulsoup4 and is blocked by PEP 668. After editing English content:
+no beautifulsoup4 and is blocked by PEP 668. `/tmp` gets cleaned periodically;
+when `bs4` goes missing, rebuild it:
 
 ```bash
-cd quenora && ./build.sh
+rm -rf /tmp/qvenv && python3 -m venv /tmp/qvenv && /tmp/qvenv/bin/pip install -q beautifulsoup4
 ```
 
----
+**Build order is load-bearing.** `build.sh` enforces it; if running steps by
+hand, that is the one rule. `build_i18n` regenerates `de/ fr/ es/ it/` from the
+English source, so anything that writes into a localised page must run *after*
+it, and anything that edits English content must run *before*.
 
-## 5. Two traps that have each cost a production bug
+```
+build_about · build_chapter01 · build_form · build_climax · build_pricing
+build_journey · build_ticker · build_chapters · build_preview_css
+build_backto · build_brand · build_widget · build_nav
+build_i18n · build_assistant · build_seo
+```
 
-**Read these before touching links or paths.**
+### The gate — 19 stages
 
-### cleanUrls means no trailing slash
+Every stage exists because a real defect got past me, and each was verified to
+reproduce that defect on the commit before its fix. Notable ones:
 
-`vercel.json` sets `cleanUrls`, so `/de/index.html` 308-redirects to **`/de`**
-— with no trailing slash. That is the URL visitors actually land on; `/de/` is
-never linked.
+- `4j` **browser_audit.js** — 63 page loads in real Chromium, 7 pages × 3
+  languages × 3 viewports. Asserts no console error, no failed request, no
+  horizontal overflow, an italic Playfair ember word in every headline, the
+  logo on the headline, one current nav tab with `aria-current`, Nora present,
+  correct `<html lang>`, and that logo/header/body/headline position and size
+  do not vary between pages. Then drives Nora in all three languages.
+- `4c deployed_links.py` — resolves 835 links against **the deployed URL
+  shape, not the filesystem**. The filesystem lies.
+- `4h` structured data must match the page's own URL and language.
+- `4i` every page shares one shell: ember headline, one container, a switcher.
+- `4g` every assistant synonym must resolve, in each language.
 
-This has caused two separate production bugs:
-
-1. Relative `href`s resolved against `/` (the directory of `/de`) and sent
-   German visitors to the English site.
-2. `location.pathname.match(/^\/(de|fr)\//)` never matched, so the assistant
-   fetched the English index and **answered French visitors in English**.
-
-Any path match must be `/^\/(de|fr)(?:\/|$)/`. It is invisible locally,
-because a plain file server serves `/de/` happily.
-
-### Every English change must land in DE and FR in the same task
-
-Standing instruction. `build_i18n.py` matches on **exact string equality
-including whitespace**, so re-wrapping a line silently drops its translation.
-Attributes are translated only for `alt`, `aria-label`, `placeholder`,
-`title`, `data-q` — anything else stays English.
-
-Headings with `<em>` are split into **emphasis slots** filled per language.
-Word order differs between languages, so a slot can end up in the wrong
-place: this produced *"Les questions que vous vous déjà posez."* and, earlier,
-a doubled adjective in German Phase 04. There is no automated check for it;
-it needs eyes.
+Playwright is installed under `test/`. Screenshots: `node browser_audit.js .. --shots`.
 
 ---
 
-## 6. Open items, none blocking
+## 4. Traps that have each cost a production bug
+
+**cleanUrls means no trailing slash.** `/de/index.html` 308-redirects to `/de`.
+That is the URL visitors land on; `/de/` is never linked. This has caused two
+separate production bugs — relative links resolving to the English site, and
+the assistant fetching the English index and answering French visitors in
+English. Any path match must be `/^\/(de|fr)(?:\/|$)/`. Invisible locally.
+
+**Every English change must land in DE and FR in the same task.** Standing
+instruction. `build_i18n` matches on **exact string equality including
+whitespace**, so re-wrapping a line silently drops its translation. Attributes
+are translated only for `alt`, `aria-label`, `placeholder`, `title`, `data-q`.
+Headings with `<em>` are split into per-language emphasis slots — word order
+differs, so a slot can land in the wrong place. No automated check for that.
+
+**The harness lies more often than the page does.** Three times this session a
+"defect" was my own test:
+- `elementFromPoint` can never return an element with `pointer-events:none`
+- a scroll-restore test that forced `.rv` reveals on one side and not the other
+  invented a 500px error
+- `hero_hover.js` scraped the first nine `<circle>` elements as the sphere arc;
+  when the logo became an `<img>` it silently started measuring the language
+  button's globe. It reads `var ARC` from the page now and exits loudly.
+
+**Guard scripts on capability, not truthiness.** The headless field-figure
+harness runs every page script against a minimal DOM stub where
+`getElementById` returns something truthy with no methods, and `location`,
+`history` and `addEventListener` may not exist. Four scripts have been caught
+by it.
+
+**A check pinned to wording fails when the wording moves.** Two QA checks have
+had to be repointed from a heading to the claim. The wording is not the thing
+worth protecting.
+
+---
+
+## 5. What the site is now
+
+Ten English pages, fully mirrored into **German and French**; Spanish and
+Italian exist at ~45% and are unlisted.
+
+| page | what it is |
+|---|---|
+| `index.html` | the argument, 9 chapters + hero + closing |
+| `approach.html` | the six phases in full, as a spine of gates |
+| `capabilities.html` | the nine capabilities |
+| `engineering.html` | five layers, three worked problems |
+| `work.html` | engagement patterns + the governed-vs-ungoverned demo |
+| `about.html` | who you are hiring |
+| `contact.html` | contact + what happens when you get in touch |
+| `products.html` | unlisted, noindex |
+| `impressum.html`, `privacy.html` | legal |
+
+### The five features, all shipped
+
+| # | feature | state |
+|---|---|---|
+| 1 | **Nora** — site assistant, floating on all 24 pages | done |
+| 2 | Contact QR → vCard + scan count | done |
+| 3 | `llms.txt` + JSON-LD on every page | done |
+| 4 | Wallet pass | **Google done, Apple blocked on a $99/yr cert** |
+| 5 | Governed-vs-ungoverned demo, 4 scenarios | done |
+
+**Nora** answers only from sentences already on the site — BM25 over a
+pre-built index, no model, no API key, nothing to invent. Says so when she
+cannot match.
+
+### Design decisions worth not re-litigating
+
+- **The nav goes to the page**, from every page, so the current-tab marker can
+  fire. About is the one exception and it is a translation one.
+- **One container**: header, nav and body start at the same x everywhere. The
+  hero keeps 1480 because its mark is tied to the headline height and a grid
+  line; narrowing it made them collide.
+- **The homepage tells the six phases once.** It used to tell them twice, word
+  for word, alongside approach.html.
+- **The custom cursor ring is gone.** It read as a loading spinner.
+- **Chapter marks are closed shapes.** Open arcs read as unfinished — reported
+  twice.
+
+---
+
+## 6. Open items
 
 **Mine, technical**
 
 - Self-host the fonts. Lighthouse prices Google Fonts as render-blocking at
-  **2,050 ms** — the single largest remaining performance item.
-- ~~Inner pages 1240px, homepage 1480px~~ — **closed.** Header, nav and body
-  now start at the same x on every page. The hero keeps 1480 deliberately: its
-  mark is tied to the headline height and a grid line, and the headline is
-  sized against the viewport, so narrowing the grid made them collide.
-- **`story.html` — the last nav exception.** It is English-only AND carries a
-  different header with no language switcher, so "About" points at the home
-  page chapter instead of at it. Translating it and giving it the standard
-  header would make all five nav labels behave identically; until then About
-  is the one tab that opens a chapter rather than a page.
-- Spanish and Italian are ~45% translated and currently unlisted.
+  **2,050 ms** — the largest remaining performance item.
+- The twelve canned fallback answers inside Nora's script are English in all
+  languages. They only appear if `assistant.json` fails to load.
+- Spanish and Italian sit at ~45%.
+- `test/shots/` and `test/node_modules/` are gitignored.
 
 **Yours, decisions**
 
-- **DE/FR have not been read by a native speaker** —
-  `reviewed_by_native_speaker: false` in both dictionaries. Everything above
-  is machine-checked for consistency, not for whether it sounds right to a
-  German buyer. Worth paying someone for one pass before launch.
-- **The word "chatbot" appears once on the site, as a negation** — *"Not a
-  chatbot bolted onto a homepage."* A buyer searching their own word finds a
-  refusal. You said you would come back to this.
-- **Which AI work do you actually take on?** Open, and needed before the work
-  page can claim breadth: vision, forecasting, document processing/IDP,
+- **DE/FR have never been read by a native speaker.**
+  `reviewed_by_native_speaker: false` in both dictionaries. Everything is
+  machine-checked for consistency, not for whether it sounds right to a German
+  buyer. The governed-vs-ungoverned demo is the most legally-flavoured copy on
+  the site (BEEG §15, GDPR Art. 28) and raises what that review is worth.
+- **Apple Wallet** needs the paid developer certificate before it can be built.
+- **"chatbot" appears once on the site, as a negation** — *"Not a chatbot
+  bolted onto a homepage."* A buyer searching their own word finds a refusal.
+- **Which AI work do you actually take on?** Still open, and needed before the
+  work page can claim breadth: vision, forecasting, document processing,
   speech, translation, recommendation, anomaly detection, fine-tuning, LLM
   evaluation, MLOps.
 - Terms of Service; accessibility statement.
-- The hidden `#build` section. **Two sections both claim chapter 06** —
-  `#build` and `#honest`. Invisible today only because `#build` carries a
-  `hidden` attribute; taking that attribute off publishes the duplicate.
-  Renumber 06–09 → 07–10 in the same change.
-- Copy: "0 engagements" reads as *zero engagements*.
+- The hidden `#build` section — **two chapters both claim 06**. Invisible only
+  because `#build` carries `hidden`. Renumber 06–09 → 07–10 in the same change.
+- `/index-old-backup` was deleted after being live and reachable for months.
+  If you want indexed copies gone faster, add a redirect to `/` in
+  `vercel.json`.
 
 ---
 
@@ -295,3 +208,18 @@ Used by `api/card.js`, `api/pass.js`, `impressum.html`:
 - **Quenora Consulting**, Heilbronn, Germany
 - **+49 152 3392 7436** · **+49 152 5643 3329**
 - **info@quenora.ai** · **https://quenora.ai**
+
+---
+
+## 8. Branches
+
+```
+main                     deployed; everything above is on it and pushed
+infographics             a worktree at ../Quenora-infographics, now merged
+                         and behind main. Safe to delete:
+                         git worktree remove ../Quenora-infographics
+                         git branch -D infographics
+```
+
+Local preview servers, both worktrees: `python3 serve-preview.py 8800`
+(cleanUrls, `/c` and `/w` answered the way production does).

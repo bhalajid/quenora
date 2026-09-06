@@ -181,8 +181,17 @@ def organisation(lang):
         "foundingDate": "2025",
         "founder": {"@type": "Person", "name": "Balaji Durai",
                     "jobTitle": "Founder and Principal Consultant"},
+        # The machine-readable postal address has to be the one in the
+        # Impressum, not the city the firm markets itself from. Registered in
+        # Bad Friedrichshall (74117); Heilbronn is 74072-74081 and is ten
+        # kilometres away in the same district. streetAddress is deliberately
+        # absent until the street and number arrive — a partial one would be
+        # worse than none. The rest of the site still says Heilbronn.
         "address": {"@type": "PostalAddress",
-                    "addressLocality": "Heilbronn", "addressCountry": "DE"},
+                    "postalCode": "74117",
+                    "addressLocality": "Bad Friedrichshall",
+                    "addressRegion": "Baden-Wurttemberg",
+                    "addressCountry": "DE"},
         "areaServed": [{"@type": "Place", "name": "Europe"}],
         "availableLanguage": ["en", "de", "fr"],
         "knowsAbout": ["Enterprise AI integration", "Platform engineering",

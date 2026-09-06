@@ -1298,8 +1298,24 @@ main > section .chead{padding-top:0}
   font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;
   text-transform:uppercase;color:var(--t3)}
 .qrsay .qrmail a{color:var(--copper-lt)}
-.qrsay .qrnote{margin-top:var(--sp2);font-style:italic;font-size:.82rem;
-  color:var(--t3)}
+.qrsay .qrnote{margin-top:6px;margin-bottom:var(--sp3);font-style:italic;
+  font-size:.82rem;color:var(--t3)}
+/* The phone numbers, the email and the vCard link are the contact details
+   themselves, not navigation, so they read as text and answer to the pointer
+   rather than announcing themselves in copper before anyone looks. */
+.qrsay .qrtel a,
+.qrsay .qrmail a,
+.qrsay p a[href="/c"]{color:var(--t1);
+  border-bottom-color:rgba(242,239,232,.28);
+  transition:color .25s var(--e),border-color .25s var(--e)}
+.qrsay .qrtel a:hover,
+.qrsay .qrmail a:hover,
+.qrsay p a[href="/c"]:hover,
+.qrsay .qrtel a:focus-visible,
+.qrsay .qrmail a:focus-visible,
+.qrsay p a[href="/c"]:focus-visible{color:var(--copper-lt);
+  border-bottom-color:var(--copper-lt)}
+.qrsay p a[href="/c"]{border-bottom:1px solid rgba(242,239,232,.28)}
 main > section .chead + *{margin-top:0}
 main > section .chead + .obj,
 main > section .chead + .money,
@@ -1403,6 +1419,13 @@ main > section[hidden]{padding-block:0}
   border:1px solid var(--line2);border-radius:2px;padding:0 10px;height:100%;
   min-height:46px;cursor:pointer}
 .phonerow select:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+/* the box that replaces the select when the country is not one of the eight.
+   Same metrics, so the row does not jump when it swaps. */
+.phonerow .codebox{font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:16px;color:var(--t1);background:rgba(20,22,30,.6);
+  border:1px solid var(--line2);border-radius:2px;padding:0 10px;height:100%;
+  min-height:46px;width:7ch}
+.phonerow .codebox:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 /*/FORM:CSS*/
 </style>
 <meta content="fr_FR" property="og:locale"/>
@@ -1759,13 +1782,13 @@ main > section[hidden]{padding-block:0}
 <p>Sur ordinateur : scannez simplement le QR code.<br/>
 Sur mobile : appuyez sur <a href="/c">Enregistrer le contact</a>.</p>
 <p class="mono qrways">Comment nous joindre</p>
+<p class="qrnote">(Nous respectons votre vie privée — rien vous concernant n’est conservé.)</p>
 <p class="qrlabel">Appelez-nous :</p>
 <p class="qrtel"><a href="tel:+4915233927436">+49 152 3392 7436</a>
 <a href="tel:+4915256433329">+49 152 5643 3329</a></p>
 <p class="qrlabel">Écrivez-nous :</p>
 <p class="qrmail"><a href="mailto:info@quenora.ai">info@quenora.ai</a></p>
 <p class="qrlabel">Ou remplissez le formulaire ci-dessous :</p>
-<p class="qrnote">(Nous respectons votre vie privée — rien vous concernant n’est conservé.)</p>
 <p class="qrdl" hidden="" id="wrow"><a href="/w">Ajoutez-la à votre wallet</a> · mise à jour si un numéro change</p>
 </div>
 </div>
@@ -3834,5 +3857,77 @@ Sur mobile : appuyez sur <a href="/c">Enregistrer le contact</a>.</p>
   });
 })();
 </script>
+<script>/*FORM:JS*/
+/* The select writes into the phone field rather than submitting on its own,
+   so the endpoint still receives one string and nothing downstream changes. */
+(function(){
+  if (typeof document === 'undefined' ||
+      typeof document.addEventListener !== 'function') return;
+  var sel = document.getElementById('cfCode');
+  var tel = document.getElementById('cfPhone');
+  if (!sel || !tel) return;
+
+  /* "Other" used to mean no code at all, which left a visitor outside the
+     eight listed countries with nowhere to put theirs. Choosing it swaps the
+     select for a small box that starts at + and takes digits only. Emptying
+     the box, or pressing Escape, brings the list back — otherwise the choice
+     is one-way and the reader is stranded in a field they opened by
+     accident. */
+  var other = document.createElement('input');
+  other.type = 'tel';
+  other.id = 'cfCodeOther';
+  other.className = 'codebox';
+  other.setAttribute('inputmode', 'numeric');
+  other.setAttribute('aria-label', 'Country code');
+  other.setAttribute('maxlength', '5');
+  other.placeholder = '+';
+  other.hidden = true;
+  sel.parentNode.insertBefore(other, sel.nextSibling);
+
+  function usingOther(){ return !other.hidden; }
+  function code(){ return usingOther() ? other.value.trim() : sel.value; }
+
+  function apply(){
+    var c = code();
+    var rest = tel.value.replace(/^\s*\+\d{1,3}\s*/, '').trim();
+    tel.value = (c && c !== '+') ? (c + ' ' + rest).trim() : rest;
+  }
+
+  function showList(){
+    other.hidden = true; sel.hidden = false;
+    sel.value = '+49'; apply();
+  }
+
+  sel.addEventListener('change', function(){
+    if (sel.value === '') {          /* Other */
+      sel.hidden = true; other.hidden = false;
+      other.value = '+';
+      other.focus();
+      var n = other.value.length;
+      try { other.setSelectionRange(n, n); } catch (e) {}
+    } else {
+      apply();
+    }
+  });
+
+  /* digits only, and always exactly one leading + */
+  other.addEventListener('input', function(){
+    var digits = other.value.replace(/[^0-9]/g, '').slice(0, 4);
+    other.value = '+' + digits;
+    apply();
+  });
+  other.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { showList(); sel.focus(); }
+  });
+  other.addEventListener('blur', function(){
+    if (other.value === '' || other.value === '+') showList();
+  });
+
+  tel.addEventListener('blur', function(){
+    var c = code();
+    if (c && c !== '+' && tel.value && tel.value.charAt(0) !== '+') apply();
+  });
+})();
+/*/FORM:JS*/</script>
 </body>
 </html>

@@ -316,8 +316,24 @@ main > section .chead{padding-top:0}
   font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;
   text-transform:uppercase;color:var(--t3)}
 .qrsay .qrmail a{color:var(--copper-lt)}
-.qrsay .qrnote{margin-top:var(--sp2);font-style:italic;font-size:.82rem;
-  color:var(--t3)}
+.qrsay .qrnote{margin-top:6px;margin-bottom:var(--sp3);font-style:italic;
+  font-size:.82rem;color:var(--t3)}
+/* The phone numbers, the email and the vCard link are the contact details
+   themselves, not navigation, so they read as text and answer to the pointer
+   rather than announcing themselves in copper before anyone looks. */
+.qrsay .qrtel a,
+.qrsay .qrmail a,
+.qrsay p a[href="/c"]{color:var(--t1);
+  border-bottom-color:rgba(242,239,232,.28);
+  transition:color .25s var(--e),border-color .25s var(--e)}
+.qrsay .qrtel a:hover,
+.qrsay .qrmail a:hover,
+.qrsay p a[href="/c"]:hover,
+.qrsay .qrtel a:focus-visible,
+.qrsay .qrmail a:focus-visible,
+.qrsay p a[href="/c"]:focus-visible{color:var(--copper-lt);
+  border-bottom-color:var(--copper-lt)}
+.qrsay p a[href="/c"]{border-bottom:1px solid rgba(242,239,232,.28)}
 main > section .chead + *{margin-top:0}
 main > section .chead + .obj,
 main > section .chead + .money,

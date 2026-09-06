@@ -171,6 +171,7 @@ def organisation(lang):
         "email": "info@quenora.ai",
         "telephone": TEL,
         "sameAs": ["https://www.linkedin.com/company/quenora",
+                   "https://www.facebook.com/people/Quenora-Consulting/61593930577480/",
                    "https://x.com/quenora_ai",
                    "https://www.instagram.com/quenora.ai/"],
         "logo":  DOMAIN + "/assets/og-quenora.jpg",

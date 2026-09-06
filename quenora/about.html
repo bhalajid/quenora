@@ -442,6 +442,17 @@ header .navlinks a[aria-current="page"]::after{width:0}
   text-transform:uppercase;align-self:center}
 .ab-facts dd{margin:0;color:var(--white);font-size:.98rem}
 /*/PREVIEW:CSS*/
+/*FOOTER:CSS*/
+/* the social row is a row of marks, not a stack of words */
+.f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.f-social a{display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border:1px solid var(--line,rgba(242,239,232,.09));
+  border-radius:2px;color:var(--t2,#A8AEBB);
+  transition:color .25s ease,border-color .25s ease}
+.f-social a:hover,.f-social a:focus-visible{color:var(--copper-lt,#E9A063);
+  border-color:var(--copper-lt,#E9A063)}
+.f-social svg{width:17px;height:17px;display:block}
+/*/FOOTER:CSS*/
 </style>
 <meta content="en_GB" property="og:locale"/>
 <link href="/assets/nora.css" rel="stylesheet"/>
@@ -500,35 +511,7 @@ header .navlinks a[aria-current="page"]::after{width:0}
      map of its own - Core capabilities, Firm, four links that all went to the
      same page - so a word in the header and the same word in the footer led
      somewhere different. One page, one map. -->
-<div class="foot-col">
-<h5>Site</h5>
-<nav aria-label="Footer">
-<a href="index.html">Home</a>
-<a href="approach.html">Approach</a>
-<a href="capabilities.html">Capabilities</a>
-<a href="engineering.html">Engineering</a>
-<a href="work.html">Work</a>
-<a aria-current="page" class="on" href="about.html">About</a>
-<a href="index.html#climax">Contact</a>
-</nav>
-</div>
-<div class="foot-col">
-<h5>Contact</h5>
-<nav aria-label="Contact">
-<a href="mailto:info@quenora.ai">info@quenora.ai</a>
-<a href="impressum.html">Legal notice · Impressum</a>
-<a href="privacy.html">Privacy notice</a>
-</nav>
-</div>
-<div class="foot-col">
-<h5>Follow</h5>
-<nav aria-label="Social">
-<a href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank">LinkedIn</a>
-<a href="https://x.com/quenora_ai" rel="noopener me" target="_blank">X</a>
-<a href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank">Instagram</a>
-</nav>
-</div>
-</div>
+<div class="foot-col"><h5>Site map</h5><nav aria-label="Footer"><a href="approach.html">Approach</a><a href="capabilities.html">Capabilities</a><a href="index.html#commercial">Pricing</a><a href="work.html">Work</a><a aria-current="page" class="on" href="about.html">About</a><a href="index.html#climax">Contact</a></nav></div><div class="foot-col"><h5>Legal</h5><nav aria-label="Legal"><a href="impressum.html">Legal notice · Impressum</a><a href="privacy.html">Privacy notice</a></nav></div><div class="foot-col"><h5>Follow</h5><nav aria-label="Social" class="f-social"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.4 2.4 4.4 5.5V21h-4v-6.1c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9z"></path></svg></a><a aria-label="Instagram" href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.3" cy="6.7" r="1.3"></circle></svg></a><a aria-label="Facebook" href="https://www.facebook.com/people/Quenora-Consulting/61593930577480/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.3 0-1.7.8-1.7 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12.1z"></path></svg></a><a aria-label="X" href="https://x.com/quenora_ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-5.9l-4.6-6-5.3 6H3l7-8L2.5 3h6l4.2 5.5zm-1 16.2h1.7L7.6 4.7H5.8z"></path></svg></a></nav></div></div>
 <div class="foot-line">
 <span>© 2026 Quenora Consulting</span>
 <span>Bad Friedrichshall, Germany · <a href="impressum.html">Legal notice</a> · <a href="privacy.html">Privacy</a></span>

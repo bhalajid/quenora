@@ -45,6 +45,11 @@ fi
 
 "$PY" build_brand.py
 "$PY" build_widget.py
+# build_footer owns the three footer link columns and must run BEFORE
+# build_nav, which re-points header and footer links from one map and
+# marks the current page. The other way round and build_nav's work is
+# thrown away on every build.
+"$PY" build_footer.py
 "$PY" build_nav.py
 "$PY" build_i18n.py
 "$PY" build_assistant.py

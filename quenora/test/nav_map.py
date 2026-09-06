@@ -138,12 +138,21 @@ for rel in pages():
     for label, target in f.items():
         if label in h and h[label] != target:
             continue  # already reported above
-    # every header destination should be reachable from the footer too
-    missing = [l for l in h if l not in f and l not in ("Home",)]
+    # every header destination should be reachable from the footer too,
+    # except where the two maps deliberately differ. The footer carries the
+    # client's own map now — Approach, Capabilities, Pricing, Work, About,
+    # Contact — so Engineering is a header route and Pricing a footer one.
+    # What this stage is for is one label leading to two different places,
+    # and that is still enforced below; which labels appear in which nav is a
+    # navigation decision rather than a defect.
+    HEAD_ONLY = {"Engineering", "KI-Engineering", "Ingénierie"}
+    missing = [l for l in h
+               if l not in f and l not in ("Home",) and l not in HEAD_ONLY]
     # Home and Contact live in the footer by design: the brand mark is the
     # header's Home, and the header's CTA is its Contact.
     FOOT_ONLY = {"Home", "Start", "Startseite", "Accueil", "Inicio", "Home page",
-                 "Contact", "Kontakt", "Contacto", "Contatti"}
+                 "Contact", "Kontakt", "Contacto", "Contatti",
+                 "Pricing", "Preise", "Tarifs", "Precios", "Prezzi"}
     strays = [l for l in f if l not in h and l not in FOOT_ONLY]
     if missing:
         bad.append("%s: in the header but not the footer: %s" % (rel, ", ".join(sorted(missing))))

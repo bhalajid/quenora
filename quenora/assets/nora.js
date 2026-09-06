@@ -47,7 +47,7 @@
     [['long','time','timeline','how fast','duration','weeks'],
      "Six phases, from framing to handover, and each carries an exit condition written into the statement of work. Most engagements run twelve to fourteen weeks end to end, with a working pilot well before that. The engagement is designed to end."],
     [['cost','price','pricing','budget','how much','rate'],
-     "Scoped to outcomes rather than day rates. Chapter 08 on the homepage states how it’s priced rather than making you sit through three meetings to find out. A briefing gives you a real number, not a range designed to get a second meeting."],
+     "Scoped to outcomes rather than day rates. Chapter 09 on the homepage states how it’s priced rather than making you sit through three meetings to find out. A briefing gives you a real number, not a range designed to get a second meeting."],
     [['work','case','client','example','project','reference'],
      "Three patterns come up most: invoice processing across unintegrated ERP instances, support triage with knowledge retrieval, and legacy modernisation with predictive scheduling. They are described by shape rather than by client name, and the figures on the Work page are illustrative of the pattern rather than audited results."],
     [['product','framework','accelerator','toolkit','blueprint'],

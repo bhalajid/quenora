@@ -288,6 +288,18 @@ RHYTHM = '''
    One value, set on the head and cancelled on whatever follows so the two
    cannot add up. */
 main > section .chead{margin-bottom:64px}
+/* .chead carried padding:104px 0 40px from before the section gutter existed,
+   so every chapter heading sat 104px below the section's own 104px — 208px of
+   gap that only became obvious once a rule was drawn at the boundary. The
+   gutter belongs to the section; the head keeps only its bottom padding.
+   Nothing anchors to .chead, so no scroll offset depends on this. */
+main > section .chead{padding-top:0}
+/* .pin wraps chapter 01's counters and pads 64px top and bottom. The bottom
+   64 sat between the last content and the section's own 104, giving chapter
+   01 a 168px tail where every other chapter has 104. */
+#problem .pin{padding-bottom:0}
+/* and the caption under the gap figure ran straight into the counters */
+#problem .gapfig figcaption{padding-bottom:var(--sp4)}
 main > section .chead + *{margin-top:0}
 main > section .chead + .obj,
 main > section .chead + .money,

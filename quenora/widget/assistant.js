@@ -41,7 +41,7 @@
     [['what do you','services','offer','do you do','capabilit'],
      "Nine capabilities. Three are core — platform and deployment engineering, process and workflow automation, and AI integration — because everything runs through them. The other six step in only when the work needs them. Nothing is handed to a subcontractor you’ve never met."],
     [['who are you','about','founder','balaji','team','how big','size'],
-     "Quenora is founder-led, founded in 2025 by Balaji Durai. Before Quenora he ran transformation work for multinational manufacturers, retail banking and life sciences groups; those systems went on to be used by more than 100,000 people. We work from Heilbronn, internationally, in German, French and English."],
+     "Quenora is founder-led, founded in 2025 by Balaji Durai. Before Quenora he ran transformation work for multinational manufacturers, retail banking and life sciences groups; those systems went on to be used by more than 100,000 people. We work from Bad Friedrichshall, internationally, in German, French and English."],
     [['different','why you','compare','competitor','large consult','big four'],
      "Use a large consultancy for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, the person who scopes your engagement is the person who does the work and the person you call when it breaks."],
     [['long','time','timeline','how fast','duration','weeks'],
@@ -62,8 +62,8 @@
      "Start a conversation from the button in the header, or email info@quenora.ai. A first call is a briefing, not a pitch."],
     [['language','german','french','english','deutsch'],
      "German, French and English."],
-    [['where','located','based','heilbronn','germany','office'],
-     "Based in Heilbronn, Germany, working internationally."]
+    [['where','located','based','friedrichshall','heilbronn','germany','office'],
+     "Based in Bad Friedrichshall, Germany, working internationally."]
   ];
 
   /* ═══ RETRIEVAL ═══════════════════════════════════════════════════════
@@ -161,20 +161,22 @@
     people:['firm','team','size','person'], headcount:['firm','size','small'],
     staff:['firm','team','size'],
     who:['hiring','founder','firm','founded'],
-    where:['heilbronn','germany','based'],
+    where:['friedrichshall','germany','based'],
+    heilbronn:['friedrichshall','germany','based'],
     you:['quenora','firm','hiring'], about:['hiring','founder','firm','founded'],
     behind:['founder','hiring','founded'], founder:['hiring','founded','led'],
-    based:['heilbronn','germany','where'], where:['heilbronn','germany','based'],
-    located:['heilbronn','germany','based'], office:['heilbronn','germany','based'],
-    country:['heilbronn','germany'], languages:['german','french','english'],
+    based:['friedrichshall','germany','where'], where:['friedrichshall','germany','based'],
+    located:['friedrichshall','germany','based'], office:['friedrichshall','germany','based'],
+    country:['friedrichshall','germany'], languages:['german','french','english'],
     language:['german','french','english']
   };
   /* the same bridge in the two other published languages */
   var ALIAS_DE = {
     wer:['inhabergefuhrt','firma','gegrundet'],
-    wo:['heilbronn','deutschland','sitz'],
-    seid:['quenora','firma'], sitzt:['heilbronn','deutschland','sitz'],
-    sitz:['heilbronn','deutschland'], standort:['heilbronn','deutschland','sitz'],
+    wo:['friedrichshall','deutschland','sitz'],
+    heilbronn:['friedrichshall','deutschland','sitz'],
+    seid:['quenora','firma'], sitzt:['friedrichshall','deutschland','sitz'],
+    sitz:['friedrichshall','deutschland'], standort:['friedrichshall','deutschland','sitz'],
     kostet:['kosten','gekostet','zusammensetzt'], kosten:['kostet','gekostet'],
     lange:['wochen','phasen','vierzehn','dauert'],
     dauer:['wochen','phasen','dauert'], dauert:['wochen','phasen'],
@@ -187,8 +189,9 @@
   var ALIAS_FR = {
     qui:['fondateur','cabinet','dirige'],
     etes:['quenora','cabinet','dirige'],
-    situes:['heilbronn','allemagne','siege'], situe:['heilbronn','allemagne','siege'],
-    base:['heilbronn','allemagne','siege'], siege:['heilbronn','allemagne'],
+    situes:['friedrichshall','allemagne','siege'], situe:['friedrichshall','allemagne','siege'],
+    heilbronn:['friedrichshall','allemagne','siege'],
+    base:['friedrichshall','allemagne','siege'], siege:['friedrichshall','allemagne'],
     coute:['tarife','cout'], cout:['tarife'], couts:['tarife','cout'],
     tarif:['tarife','cout'], budget:['tarife','cout'],
     duree:['semaines','phases'], temps:['semaines','phases'],

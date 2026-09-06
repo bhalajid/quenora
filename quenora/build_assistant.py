@@ -83,7 +83,7 @@ def chunks_for(path, page_url, lang="en"):
     # A capability's description is a bare <div>, not a <p>, so every one of
     # the nine sections had an empty body and was dropped whole — keywords
     # included. Leaf divs (no element children) are prose here.
-    # dt/dd hold the About facts — Founded 2025, Based Heilbronn — and td/th
+    # dt/dd hold the About facts — Founded 2025, Based Bad Friedrichshall — and td/th
     # the release-gate table. Both were outside the element list, so "where
     # are you based" had nothing to find.
     for el in main.find_all(["h1", "h2", "h3", "p", "li", "figcaption", "span",
@@ -91,7 +91,7 @@ def chunks_for(path, page_url, lang="en"):
         if el.name == "div" and el.find(True) is not None:
             # A div whose children are all inline is a labelled fact, not a
             # layout container: <div class="wfact"><span>Based</span><b>
-            # Heilbronn, Germany</b></div>. Skipping every div with children
+            # Bad Friedrichshall, Germany</b></div>. Skipping every div with children
             # meant "where are you based" had nothing to find.
             if el.find(["p", "div", "ul", "ol", "dl", "section",
                         "h1", "h2", "h3", "h4"]) is None \

@@ -181,12 +181,11 @@ def organisation(lang):
         "foundingDate": "2025",
         "founder": {"@type": "Person", "name": "Balaji Durai",
                     "jobTitle": "Founder and Principal Consultant"},
-        # The machine-readable postal address has to be the one in the
-        # Impressum, not the city the firm markets itself from. Registered in
-        # Bad Friedrichshall (74117); Heilbronn is 74072-74081 and is ten
-        # kilometres away in the same district. streetAddress is deliberately
-        # absent until the street and number arrive — a partial one would be
-        # worse than none. The rest of the site still says Heilbronn.
+        # The machine-readable postal address is the one in the Impressum.
+        # The whole site now says Bad Friedrichshall — the earlier split, where
+        # the legal pages said one town and the copy said another, is closed.
+        # streetAddress is deliberately absent until the street and number
+        # arrive: a partial postal address is worse than none.
         "address": {"@type": "PostalAddress",
                     "postalCode": "74117",
                     "addressLocality": "Bad Friedrichshall",
@@ -300,7 +299,7 @@ def llms_txt():
     A = L.append
     A("# Quenora Consulting")
     A("")
-    A("> Enterprise AI and automation consultancy in Heilbronn, Germany.")
+    A("> Enterprise AI and automation consultancy in Bad Friedrichshall, Germany.")
     A("> Founder-led. Works in English, German and French across Europe.")
     A("> Engineers AI into the systems a business already runs, then hands")
     A("> the client's own team the keys.")

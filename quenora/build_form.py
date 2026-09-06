@@ -9,7 +9,7 @@ dropdown is a control to operate before you have written anything, and that a
 list of two hundred countries needs localising into three languages for a
 field that is optional. Both are still true of a two-hundred-row list.
 
-They stop being true of a short one. This firm works from Heilbronn into
+They stop being true of a short one. This firm works from Bad Friedrichshall into
 Europe, in German, French and English — so the list is the places it actually
 works, longest-serving first, with a free-text option for everywhere else. It
 is nine rows, the codes are the same characters in every language, and the

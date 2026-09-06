@@ -19,6 +19,9 @@ import sys
 
 ROOT = sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(
     os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import site_langs
+
 SKIP_DIRS = ("test", "node_modules", "api", "assets", "study")
 SKIP_FILES = {"index-old-backup.html"}
 
@@ -29,9 +32,13 @@ def pages():
         dirs[:] = [x for x in dirs if x not in SKIP_DIRS and not x.startswith(".")]
         for f in fs:
             if f.endswith(".html") and f not in SKIP_FILES:
-                out.append(os.path.relpath(os.path.join(d, f), ROOT))
+                out.append(os.path.relpath(os.path.join(d, f), ROOT)
+                           .replace(os.sep, "/"))
     return sorted(out)
 
+
+OFFERED = site_langs.offered(ROOT)
+LOCALISATION_OFF = OFFERED == ["en"]
 
 bad, checked = [], 0
 for rel in pages():
@@ -40,6 +47,16 @@ for rel in pages():
     has_btn = 'id="langBtn"' in html
     has_menu = 'id="langMenu"' in html
     handlers = len(re.findall(r"getElementById\('langBtn'\)", html))
+
+    if LOCALISATION_OFF:
+        # Only English is offered, so a switcher is a control with one
+        # destination. Verify it is gone rather than skipping the page and
+        # reporting that nothing was checked.
+        checked += 1
+        if has_btn or has_menu or handlers:
+            bad.append("%s: still carries a language switcher, but only "
+                       "English is offered" % rel)
+        continue
 
     if not has_btn and not has_menu and handlers == 0:
         continue                      # English-only page, no switcher by design
@@ -56,8 +73,9 @@ for rel in pages():
         bad.append("%s: the button does not point at the menu it controls" % rel)
     if has_menu:
         langs = re.findall(r'<li><a[^>]*hreflang="([^"]+)"', html)
-        if sorted(langs) != ["de", "en", "fr"]:
-            bad.append("%s: menu offers %s, expected de/en/fr" % (rel, langs or "nothing"))
+        if sorted(langs) != sorted(OFFERED):
+            bad.append("%s: menu offers %s, expected %s"
+                       % (rel, langs or "nothing", "/".join(sorted(OFFERED))))
         cur = re.findall(r'aria-current="true"[^>]*hreflang="([^"]+)"'
                          r'|hreflang="([^"]+)"[^>]*aria-current="true"', html)
         flat = [a or b for a, b in cur]
@@ -65,15 +83,22 @@ for rel in pages():
         # es/ and it/ are built but not offered, so the page's own language is
         # not in the menu and nothing there can be marked current. That is
         # correct for a language nobody can navigate to.
-        want = 0 if lang in ("es", "it") else 1
+        want = 1 if lang in OFFERED else 0
         if len(flat) != want:
             bad.append("%s: %d entries marked as the current language, expected %d"
                        % (rel, len(flat), want))
 
-print("  %d page(s) with a language switcher checked" % checked)
+print("  %d page(s) checked (%s)"
+      % (checked, "localisation off — switcher must be absent"
+         if LOCALISATION_OFF else "offering " + "/".join(sorted(OFFERED))))
+if not checked:
+    print("   no pages were checked — this stage was testing nothing")
+    sys.exit(1)
 if bad:
     for b in bad:
         print("   " + b)
     print("  %d problem(s)" % len(bad))
     sys.exit(1)
-print("  one handler, button and menu wired, three languages, one marked current")
+print("  no switcher anywhere, as intended" if LOCALISATION_OFF else
+      "  one handler, button and menu wired, %d languages, one marked current"
+      % len(OFFERED))

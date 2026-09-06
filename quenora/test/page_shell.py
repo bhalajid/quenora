@@ -27,6 +27,10 @@ from bs4 import BeautifulSoup as BS
 
 ROOT = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else "..")
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import site_langs
+LOCALISATION_OFF = site_langs.localisation_is_off(ROOT)
+
 PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
          "approach.html", "work.html", "contact.html"]
 LANGS = ["", "de", "fr"]
@@ -83,8 +87,12 @@ for lang in LANGS:
                 fail.append("%s: a .wrap rule after the generated block "
                             "overrides the shared container" % where)
 
-        # 4 — one language switcher, so a visitor is never stranded
-        if lang or page not in ("about.html",):
+        # 4 — one language switcher, so a visitor is never stranded.
+        # Only while there is somewhere to be stranded from: with localisation
+        # off the switcher is deliberately absent everywhere, and requiring it
+        # would fail a correct build. Stage 4c2 asserts that absence, so the
+        # switcher is checked either way and nothing goes untested.
+        if not LOCALISATION_OFF and (lang or page not in ("about.html",)):
             if soup.find(class_="langsel") is None:
                 fail.append("%s: no language switcher in the header" % where)
 

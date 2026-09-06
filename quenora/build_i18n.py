@@ -46,7 +46,14 @@ LANGS = ["de", "fr", "es", "it"]
 # claimed language coverage that does not exist. They are built rather than
 # deleted so the URLs and the translated string files survive until the
 # expansion, at which point removing a code from this set republishes them.
-UNLISTED_LANGS = {"es", "it"}
+# LOCALISATION IS OFF for the 9 September launch. German and French joined
+# Spanish and Italian here so that the launch sprint is spent on one language
+# instead of four. Everything is still BUILT and still in the repo — the
+# directories, the URLs and the two finished dictionaries are untouched — so
+# turning localisation back on is this line and nothing else. What being
+# unlisted means: out of the switcher, out of the hreflang set, out of the
+# sitemap, and served noindex.
+UNLISTED_LANGS = {"de", "fr", "es", "it"}
 # The languages actually offered. Everything visitor-facing iterates this.
 LISTED_LANGS = [l for l in LANGS if l not in UNLISTED_LANGS]
 LANG_NAMES = {"en": "English", "de": "Deutsch", "fr": "Français",
@@ -372,9 +379,15 @@ def build_lang(lang):
         # visitor could not leave a localised build by the control provided
         # for leaving it. Replace the inherited one instead of skipping it.
         nav = soup.find(class_="navlinks")
-        if nav:
+        existing = soup.find(class_="langsel")
+        if not LISTED_LANGS:
+            # Localisation off: these pages are still built so their URLs and
+            # dictionaries survive, but nothing links to them and they carry
+            # no control for leaving the language they are in.
+            if existing:
+                existing.decompose()
+        elif nav:
             frag = BeautifulSoup(switcher(lang, page), "html.parser")
-            existing = soup.find(class_="langsel")
             if existing:
                 existing.replace_with(frag)
             else:
@@ -422,7 +435,10 @@ def build_en_switcher():
             elif sc.string and _norm(sc.string) and _norm(sc.string) in generated:
                 sc.decompose()
         nav = soup.find(class_="navlinks")
-        if nav:
+        # A switcher offering one language is a control that does nothing.
+        # The removal above has already run, so an empty LISTED_LANGS leaves
+        # the page with no switcher and no handler rather than a dead menu.
+        if nav and LISTED_LANGS:
             nav.insert_after(BeautifulSoup(switcher("en", page), "html.parser"))
             soup.body.append(BeautifulSoup(LANG_JS, "html.parser"))
         head_links(soup, "en", page)
@@ -466,7 +482,8 @@ if __name__ == "__main__":
         report[l] = sorted(st["miss"])
         print("%-6s %6.1f%%   %d string(s)" % (l, cov, len(st["miss"])))
     sitemap()
-    json.dump(report, open(os.path.join(ROOT, "_untranslated.json"), "w"),
+    json.dump(report, open(os.path.join(ROOT, "_untranslated.json"), "w",
+                          encoding="utf-8"),
               indent=1, ensure_ascii=False)
     print("\nsitemap.xml rewritten with hreflang alternates")
     print("gaps listed in _untranslated.json")

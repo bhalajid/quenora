@@ -443,13 +443,6 @@ header .navlinks a[aria-current="page"]::after{width:0}
 .ab-facts dd{margin:0;color:var(--white);font-size:.98rem}
 /*/PREVIEW:CSS*/
 /*FOOTER:CSS*/
-/* Self-contained on purpose — see the module docstring. Every value carries a
-   fallback so this renders the same on a page that defines the new tokens and
-   on one that does not. */
-/* The two generations framed the footer differently: the home page's .wrap
-   runs full width with a 20px margin and no padding, the inner pages' has
-   max-width:1240px and 40px of padding — so the same footer started at a
-   different place depending on the page. One frame for both. */
 footer .wrap{max-width:1240px;margin-inline:auto;padding-inline:24px;width:100%}
 footer .f-grid{display:grid;gap:38px;
   grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))}
@@ -464,14 +457,13 @@ footer .f-blurb{max-width:35ch;font-size:.96rem;color:var(--t2,#A8AEBB);margin:0
 footer .f-where{font-family:'JetBrains Mono',ui-monospace,monospace;
   font-size:11px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--t3,#7C8290);margin:14px 0 0}
-/* The link columns stack. impressum.html and privacy.html style footer navs
-   as flex ROWS, so the site map ran across the page and straight through the
-   Legal column — one page's stylesheet deciding the shape of a footer this
-   file is supposed to own. Stated here, it is the same on all eleven. */
+footer .f-grid h3,footer .f-grid h4,footer .f-grid h5{
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;
+  font-weight:500;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--copper-lt,#E9A063);margin:0 0 16px}
 footer nav[aria-label="Footer"],
 footer nav[aria-label="Legal"]{display:flex;flex-direction:column;
   align-items:flex-start;gap:14px}
-/* the social row is a row of marks, not a stack of words */
 .f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;
   width:34px;height:34px;border:1px solid var(--line,rgba(242,239,232,.09));
@@ -498,6 +490,25 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 .backto .arw{transition:transform .25s ease}
 .backto:hover .arw{transform:translateX(-3px)}
 /*/BACKTO:CSS*/
+
+/*PRICING:CSS*/
+.ptable-wrap{overflow-x:auto;margin:var(--sp4,28px) 0 var(--sp5,40px)}
+.ptable{width:100%;border-collapse:collapse;min-width:34rem;text-align:left}
+.ptable caption{text-align:left;font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--t3,#7C8290);padding-bottom:14px}
+.ptable th,.ptable td{padding:16px 20px;vertical-align:top;
+  border-bottom:1px solid var(--line,rgba(242,239,232,.09))}
+.ptable thead th{font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--t3,#7C8290);border-bottom-color:var(--copper,#C97A3C)}
+.ptable tbody th.pph{font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--copper-lt,#E9A063);white-space:nowrap}
+.ptable td.pbasis{font-weight:600;color:var(--t1,#F2EFE8);white-space:nowrap}
+.ptable td{color:var(--t2,#A8AEBB);font-size:.97rem;line-height:1.6}
+.ptable tbody tr:last-child th,.ptable tbody tr:last-child td{border-bottom:0}
+/*/PRICING:CSS*/
 </style>
 <meta content="en_GB" property="og:locale"/>
 <link href="/assets/nora.css" rel="stylesheet"/>
@@ -506,7 +517,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <link href="/assets/brand/quenora-icon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/assets/brand/quenora-icon-180.png" rel="apple-touch-icon"/>
 <link href="/assets/brand/quenora-icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
-<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/><link href="https://quenora.ai/pricing" rel="canonical"/><link href="https://quenora.ai/pricing" hreflang="en" rel="alternate"/><link href="https://quenora.ai/pricing" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/pricing#page","url":"https://quenora.ai/pricing","name":"How this is priced.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"How Quenora prices: a fixed fee to frame, fixed scope to build, handover included. Scoped to outcomes rather than day rates.","breadcrumb":{"@id":"https://quenora.ai/pricing#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/pricing#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"How this is priced.","item":"https://quenora.ai/pricing"}]}]}</script></head>
+<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/><link href="https://quenora.ai/pricing" rel="canonical"/><link href="https://quenora.ai/pricing" hreflang="en" rel="alternate"/><link href="https://quenora.ai/pricing" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/pricing#page","url":"https://quenora.ai/pricing","name":"What it costs, and when you find out.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"How Quenora prices: a fixed fee to frame, fixed scope to build, handover included. Scoped to outcomes rather than day rates.","breadcrumb":{"@id":"https://quenora.ai/pricing#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/pricing#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"What it costs, and when you find out.","item":"https://quenora.ai/pricing"}]}]}</script></head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0">
 <symbol id="mark9" viewbox="0 0 187.71 174.29">
@@ -536,20 +547,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 </nav>
 </div>
 </header>
-<main id="main"><section class="phero"><div class="wrap"><div class="kicker">Pricing</div><h1 class="rv" data-d="1">How this is <em>priced</em>.</h1><p class="lede">Stated here rather than after three meetings, because finding
-out late wastes your quarter and ours.</p></div></section><section class="section-pad"><div class="wrap">
-<div class="money rv">
-<div><b>Phase 01 · Frame</b><strong>Fixed fee</strong>
-<p>Two to three weeks, agreed before we start. You keep the written position
-whether or not you engage us for anything after it.</p></div>
-<div><b>Phases 02–05 · Build</b><strong>Fixed scope</strong>
-<p>Priced against a written scope with an explicit list of what’s excluded.
-Changes are re-scoped in the open, not absorbed quietly into the timeline.</p></div>
-<div><b>Phase 06 · Handover</b><strong>Included</strong>
-<p>Never a separate line item. An engagement that ends without a working handover
-isn’t finished, so we don’t charge you twice to finish it.</p></div>
-</div>
-</div></section></main>
+<main id="main"><section class="phero"><div class="wrap"><div class="kicker">Pricing</div><h1 class="rv" data-d="1">What it costs, and when you <em>find out</em>.</h1><p class="lede">There are no figures on this page, and that is deliberate — a number without a scope attached is a guess with a currency symbol in front of it. What is here is how the number is arrived at, what it is fixed against, and the point in the engagement at which you have it in writing.</p></div></section><section class="section-pad"><div class="wrap"><h2>Priced to a scope, not to a day rate.</h2><p class="lede">A day rate prices our time. It tells you what a week of us costs and nothing about whether the thing you wanted will exist at the end of it, and it pays us more the longer the work takes. Everything below is priced against a written scope instead, so the number moves when the scope moves and at no other time.</p><h2>The three commitments</h2><div class="ptable-wrap"><table class="ptable"><caption>How each part of an engagement is priced</caption><thead><tr><th scope="col">Phase</th><th scope="col">Basis</th><th scope="col">What that means for you</th></tr></thead><tbody><tr><th class="pph" scope="row">Phase 01 · Frame</th><td class="pbasis">Fixed fee</td><td>Two to three weeks, agreed before we start. You keep the written position whether or not you engage us for anything after it.</td></tr><tr><th class="pph" scope="row">Phases 02–05 · Build</th><td class="pbasis">Fixed scope</td><td>Priced against a written scope with an explicit list of what is excluded. Changes are re-scoped in the open, not absorbed quietly into the timeline.</td></tr><tr><th class="pph" scope="row">Phase 06 · Handover</th><td class="pbasis">Included</td><td>Never a separate line item. An engagement that ends without a working handover is not finished, so we do not charge you twice to finish it.</td></tr></tbody></table></div><h2>What you keep</h2><p>The written position from Phase 01, the code, the documentation and the evaluation harness. That holds whether the engagement runs to handover or stops at the end of the framing phase — there is no version of this where you pay and leave with nothing you can use.</p><h2>How you get a number</h2><p>A first conversation is a briefing rather than a pitch, and it is not invoiced. Two paragraphs about what is stuck is enough to start. If the shape is one we can help with, the framing phase produces the scope and the figure together, in writing, before any build work is agreed.</p><a class="more" href="index.html#climax">Start a conversation</a></div></section></main>
 <footer>
 <div class="wrap">
 <div class="foot-row f-grid">

@@ -115,6 +115,15 @@ footer .f-blurb{max-width:35ch;font-size:.96rem;color:var(--t2,#A8AEBB);margin:0
 footer .f-where{font-family:'JetBrains Mono',ui-monospace,monospace;
   font-size:11px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--t3,#7C8290);margin:14px 0 0}
+/* The column headings. The home page styled them copper at 10px; the inner
+   pages styled the same headings grey at 11px, because each page's own
+   stylesheet was deciding. Stated here, so "SITE MAP" reads the same on all
+   eleven. The heading LEVEL still follows the page — h3 here, h5 there — so
+   nothing else that targets those elements is disturbed. */
+footer .f-grid h3,footer .f-grid h4,footer .f-grid h5{
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;
+  font-weight:500;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--copper-lt,#E9A063);margin:0 0 16px}
 /* The link columns stack. impressum.html and privacy.html style footer navs
    as flex ROWS, so the site map ran across the page and straight through the
    Legal column — one page's stylesheet deciding the shape of a footer this
@@ -136,6 +145,21 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
   border-top:1px solid var(--line,rgba(242,239,232,.09));
   font-size:.84rem;color:var(--t3,#7C8290)}
 /*/FOOTER:CSS*/"""
+
+
+
+def emit(css):
+    """The stylesheet without its commentary.
+
+    The rationale for each rule belongs in this file, where someone changing it
+    will read it. Shipped, it is bytes on every page of the site that nobody
+    sees — and stage 8 caps the home page at 220 KB, which those comments were
+    quietly eating into. The delimiters stay: they are how the block is found
+    and replaced on the next run.
+    """
+    body = re.sub(r"/\*(?!/?FOOTER:CSS\*/).*?\*/", "", css, flags=re.S)
+    return re.sub(r"\n\s*\n+", "\n", body)
+
 
 
 def cols(footer):
@@ -267,7 +291,7 @@ def build(path, page):
 
     s = str(soup)
     if "/*FOOTER:CSS*/" in s:
-        s = re.sub(r"/\*FOOTER:CSS\*/.*?/\*/FOOTER:CSS\*/", lambda _m: CSS, s, flags=re.S)
+        s = re.sub(r"/\*FOOTER:CSS\*/.*?/\*/FOOTER:CSS\*/", lambda _m: emit(CSS), s, flags=re.S)
     elif "</style>" in s:
         i = s.rindex("</style>")
         s = s[:i] + CSS + "\n" + s[i:]

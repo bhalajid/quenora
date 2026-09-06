@@ -47,7 +47,7 @@ Illustrative, not measured. Most work completes untouched. The rest is sent to a
 
 ## Who you’re actually hiring.
 
-We argue you shouldn’t default to a large consultancy. What you get instead is a focused team of AI experts, direct access to senior practitioners, and a delivery model designed around accountability rather than scale.
+We argue you shouldn’t default to a large consultancy. What you get instead is a focused team of senior AI practitioners, and a delivery model designed around accountability rather than scale.
 
 ## The principles behind the mark.
 
@@ -409,9 +409,24 @@ Success is your team running the system without us. We would rather be recommend
 ## Want to test this against your actual problem?
 
 
-## How this is priced.
+## What it costs, and when you find out.
 
-Stated here rather than after three meetings, because finding out late wastes your quarter and ours.
+There are no figures on this page, and that is deliberate — a number without a scope attached is a guess with a currency symbol in front of it. What is here is how the number is arrived at, what it is fixed against, and the point in the engagement at which you have it in writing.
+
+## Priced to a scope, not to a day rate.
+
+A day rate prices our time. It tells you what a week of us costs and nothing about whether the thing you wanted will exist at the end of it, and it pays us more the longer the work takes. Everything below is priced against a written scope instead, so the number moves when the scope moves and at no other time.
+
+## The three commitments
+
 Two to three weeks, agreed before we start. You keep the written position whether or not you engage us for anything after it.
-Priced against a written scope with an explicit list of what’s excluded. Changes are re-scoped in the open, not absorbed quietly into the timeline.
-Never a separate line item. An engagement that ends without a working handover isn’t finished, so we don’t charge you twice to finish it.
+Priced against a written scope with an explicit list of what is excluded. Changes are re-scoped in the open, not absorbed quietly into the timeline.
+Never a separate line item. An engagement that ends without a working handover is not finished, so we do not charge you twice to finish it.
+
+## What you keep
+
+The written position from Phase 01, the code, the documentation and the evaluation harness. That holds whether the engagement runs to handover or stops at the end of the framing phase — there is no version of this where you pay and leave with nothing you can use.
+
+## How you get a number
+
+A first conversation is a briefing rather than a pitch, and it is not invoiced. Two paragraphs about what is stuck is enough to start. If the shape is one we can help with, the framing phase produces the scope and the figure together, in writing, before any build work is agreed.

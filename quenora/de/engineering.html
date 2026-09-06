@@ -366,13 +366,6 @@ header .navlinks a[aria-current="page"]::after{width:0}
 @media(max-width:560px){.brandimg{height:26px}.brand.lg .brandimg{height:36px}}
 /*/BRAND:CSS*/
 /*FOOTER:CSS*/
-/* Self-contained on purpose — see the module docstring. Every value carries a
-   fallback so this renders the same on a page that defines the new tokens and
-   on one that does not. */
-/* The two generations framed the footer differently: the home page's .wrap
-   runs full width with a 20px margin and no padding, the inner pages' has
-   max-width:1240px and 40px of padding — so the same footer started at a
-   different place depending on the page. One frame for both. */
 footer .wrap{max-width:1240px;margin-inline:auto;padding-inline:24px;width:100%}
 footer .f-grid{display:grid;gap:38px;
   grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))}
@@ -387,14 +380,13 @@ footer .f-blurb{max-width:35ch;font-size:.96rem;color:var(--t2,#A8AEBB);margin:0
 footer .f-where{font-family:'JetBrains Mono',ui-monospace,monospace;
   font-size:11px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--t3,#7C8290);margin:14px 0 0}
-/* The link columns stack. impressum.html and privacy.html style footer navs
-   as flex ROWS, so the site map ran across the page and straight through the
-   Legal column — one page's stylesheet deciding the shape of a footer this
-   file is supposed to own. Stated here, it is the same on all eleven. */
+footer .f-grid h3,footer .f-grid h4,footer .f-grid h5{
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;
+  font-weight:500;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--copper-lt,#E9A063);margin:0 0 16px}
 footer nav[aria-label="Footer"],
 footer nav[aria-label="Legal"]{display:flex;flex-direction:column;
   align-items:flex-start;gap:14px}
-/* the social row is a row of marks, not a stack of words */
 .f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;
   width:34px;height:34px;border:1px solid var(--line,rgba(242,239,232,.09));

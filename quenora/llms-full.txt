@@ -402,3 +402,10 @@ Success is your team running the system without us. We would rather be recommend
 
 ## Want to test this against your actual problem?
 
+
+## How this is priced.
+
+Stated here rather than after three meetings, because finding out late wastes your quarter and ours.
+Two to three weeks, agreed before we start. You keep the written position whether or not you engage us for anything after it.
+Priced against a written scope with an explicit list of what’s excluded. Changes are re-scoped in the open, not absorbed quietly into the timeline.
+Never a separate line item. An engagement that ends without a working handover isn’t finished, so we don’t charge you twice to finish it.

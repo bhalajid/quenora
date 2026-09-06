@@ -41,16 +41,17 @@ from bs4 import BeautifulSoup as BS
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SKIP = {"index-old-backup.html", "story.html"}
 
-# Pricing has no page yet. The client is writing one; until it exists this
-# points at the pricing chapter on the home page, which is where that content
-# lives today. A footer link to a page that does not exist is a 404 on every
-# page of the site, and stage 4c fails the build on it. One line to switch.
+# The footer maps the HOME PAGE, chapter by chapter; the header routes to the
+# standalone pages. That is why the two use different words for the same
+# subject — "Approach" here against "Phased Approach" in the header. One label
+# meaning two different places on one page is the defect stage 4d exists to
+# catch, and it is a bug this footer actually shipped once.
 MAP = [
-    ("Approach",     "approach.html"),
-    ("Capabilities", "capabilities.html"),
-    ("Pricing",      "index.html#commercial"),
-    ("Work",         "work.html"),
-    ("About",        "about.html"),
+    ("Approach",     "index.html#journey"),      # chapter 04
+    ("Capabilities", "index.html#solution"),     # chapter 05
+    ("Pricing",      "index.html#commercial"),   # chapter 09
+    ("Work",         "index.html#problem"),      # chapter 01
+    ("About",        "index.html#who"),          # chapter 06
     ("Contact",      "index.html#climax"),
 ]
 
@@ -75,10 +76,14 @@ SOCIAL = [
     ("Facebook", "https://www.facebook.com/people/Quenora-Consulting/61593930577480/",
      '<path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 '
      '2.2.2v2.5h-1.2c-1.3 0-1.7.8-1.7 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12.1z"/>'),
+    # Outline body plus a solid triangle, the same construction as the
+    # Instagram mark. The first attempt was a single path whose arc command
+    # read "a3 3 0 0 2.1-2.1" — five numbers where an arc needs seven, so the
+    # sweep flag got 2.1 and the browser rejected the whole path. It rendered
+    # as an empty rounded box and only the console said why.
     ("YouTube", "https://www.youtube.com/@quenora-ai",
-     '<path d="M23 12s0-3.9-.5-5.7a3 3 0 0 0-2.1-2.1C18.6 3.6 12 3.6 12 3.6s-6.6 0-8.4.6a3 3 0 0 '
-     '0-2.1 2.1C1 8.1 1 12 1 12s0 3.9.5 5.7a3 3 0 0 0 2.1 2.1c1.8.6 8.4.6 8.4.6s6.6 0 8.4-.6a3 3 0 '
-     '0 2.1-2.1c.5-1.8.5-5.7.5-5.7zM9.8 15.4V8.6l5.7 3.4z"/>'),
+     '<rect x="1.6" y="4.6" width="20.8" height="14.8" rx="4" fill="none" '
+     'stroke="currentColor" stroke-width="2"/><path d="M10.2 9.1v5.8l5-2.9z"/>'),
     ("X", "https://x.com/quenora_ai",
      '<path d="M17.5 3h3l-6.6 7.5L21.8 21h-5.9l-4.6-6-5.3 6H3l7-8L2.5 3h6l4.2 5.5zm-1 16.2h1.7L7.6 '
      '4.7H5.8z"/>'),
@@ -92,6 +97,11 @@ CSS = """/*FOOTER:CSS*/
 /* Self-contained on purpose — see the module docstring. Every value carries a
    fallback so this renders the same on a page that defines the new tokens and
    on one that does not. */
+/* The two generations framed the footer differently: the home page's .wrap
+   runs full width with a 20px margin and no padding, the inner pages' has
+   max-width:1240px and 40px of padding — so the same footer started at a
+   different place depending on the page. One frame for both. */
+footer .wrap{max-width:1240px;margin-inline:auto;padding-inline:24px;width:100%}
 footer .f-grid{display:grid;gap:38px;
   grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))}
 @media(max-width:900px){footer .f-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}

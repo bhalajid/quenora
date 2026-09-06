@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 
-<html lang="de">
+<html lang="fr">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Quenora Consulting — Kontakt</title>
-<meta content="Beginnen Sie ein Gespräch mit Quenora Consulting. Europa und weltweit remote." name="description"/>
+<title>Quenora Consulting — Tarifs</title>
+<meta content="Comment Quenora facture : un forfait pour le cadrage, un périmètre fixe pour la construction, transmission comprise. Calibré sur les résultats plutôt que sur des taux journaliers." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <meta content="#0A0A0B" name="theme-color"/>
 <meta content="website" property="og:type"/>
 <meta content="Quenora Consulting" property="og:site_name"/>
-<meta content="Quenora Consulting — Kontakt" property="og:title"/>
-<meta content="Beginnen Sie ein Gespräch mit Quenora Consulting. Europa und weltweit remote." property="og:description"/>
-<meta content="https://quenora.ai/de/contact" property="og:url"/>
+<meta content="Quenora Consulting — Tarifs" property="og:title"/>
+<meta content="Calibré sur les résultats plutôt que sur des taux journaliers." property="og:description"/>
+<meta content="https://quenora.ai/fr/pricing" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Quenora Consulting — Kontakt" name="twitter:title"/>
-<meta content="Beginnen Sie ein Gespräch mit Quenora Consulting. Europa und weltweit remote." name="twitter:description"/>
+<meta content="Quenora Consulting — Compétences" name="twitter:title"/>
+<meta content="Les neuf expertises de Quenora, de l'ingénierie de plateforme à la gouvernance de l'IA." name="twitter:description"/>
 <style>
 :root{
   /* Grounds are deliberately NEUTRAL (no blue bias). An earlier palette had
@@ -70,8 +70,8 @@ header.solid{background:rgba(10,10,11,.85);backdrop-filter:blur(16px) saturate(1
   border-color:var(--line);padding:13px 0}
 nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
 /* The lockup is set to the same spec as the home page: mark 40px, wordmark
-   Inter 500 at 1.36rem, no glow behind the mark and no copper initial. Three
-   pages reached from the same header should not carry three wordmarks. */
+   Inter 500 at 1.36rem, no glow behind the mark and no copper initial. Two
+   pages reached from the same header should not carry two wordmarks. */
 .brand{display:flex;align-items:center;gap:15px;flex:none;line-height:1}
 .brand svg{width:40px;height:auto}
 .brand b{font-size:1.36rem;font-weight:500;letter-spacing:-.008em;
@@ -92,8 +92,9 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
   box-shadow:0 10px 30px -8px var(--copper-glow)}
 .btn-ghost{border-color:var(--line);color:var(--white);background:rgba(255,255,255,.02)}
 .btn-ghost:hover{border-color:var(--copper);background:var(--copper-dim)}
-/* The CTA used to be hidden below 1000px, so on every phone and tablet the one
-   conversion control disappeared from the header. It stays now, dropping to its
+/* The CTA used to be hidden below 1000px, so on every phone and tablet the
+   one conversion control disappeared from the header — while index.html and
+   engineering.html keep theirs at every width. It stays now, dropping to its
    short label at 560 like the rest of the site. */
 .navcta{display:inline-flex}
 .cta-short{display:none}
@@ -161,9 +162,13 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
 /* ---------- text scramble ---------- */
 .scramble{font-variant-ligatures:none}
 /* Emphasis in a heading is set in the same italic serif as the home page.
-   The h1 is a .scramble target, whose JS rewrites the text node, so markup
-   inside it would not survive — this applies to h2/h3 emphasis. */
-/* --ember, not --copper-lt: heading emphasis is one accent across the site. */
+   The h1 here is a .scramble target, whose JS rewrites the text node, so
+   markup inside it would not survive — this applies to h2/h3 emphasis. */
+/* --ember, not --copper-lt. The home page, engineering and story all set
+   heading emphasis in ember; picking the lighter copper here meant the same
+   italic serif came out a different colour depending on which page you were
+   reading, which reads as two brands rather than one accent. Letter-spacing
+   matches the home page's em rule too. */
 h1 em,h2 em,h3 em{font-family:var(--serif);font-style:italic;
   font-weight:400;letter-spacing:-.02em;color:var(--ember)}
 .scramble .sc-ghost{color:var(--copper);opacity:.85}
@@ -217,7 +222,8 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-
 footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-index:2;
   background:linear-gradient(180deg,transparent,rgba(201,122,60,.03))}
 /* space-between across a wrapping flex row put the last two columns against
-   opposite edges of the second line. A grid gives four columns that line up. */
+   opposite edges of the second line, which is the ragged footer that got
+   flagged. A grid gives four columns that line up, and collapses cleanly. */
 .foot-row{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));
   gap:56px 40px}
 /* The header sets a bare `nav{display:flex}`, which also caught the footer's
@@ -333,11 +339,6 @@ footer nav{display:block}
 .qr-mini img{width:92px;height:92px;background:#fff;padding:7px;border-radius:9px;flex:none}
 .qr-mini p{font-size:12.5px;color:var(--grey-d);font-weight:300;line-height:1.65}
 .form-note{margin-top:16px;font-size:12.5px;color:var(--grey-d)}
-/* GDPR Art. 13 asks for this at the point of collection, so it sits with
-   the Send button rather than in the footer. */
-.form-privacy{margin:20px 0 14px;font-size:12.5px;line-height:1.6;color:var(--grey)}
-.form-privacy a{color:var(--copper);border-bottom:1px solid var(--copper-dim)}
-.form-privacy a:hover{border-bottom-color:var(--copper)}
 
 .langsel{position:relative;margin-left:14px}
 .langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
@@ -433,6 +434,14 @@ header .navlinks a[aria-current="page"]::after{width:0}
 @media(max-width:900px){.brandimg{height:30px}.brand.lg .brandimg{height:40px}}
 @media(max-width:560px){.brandimg{height:26px}.brand.lg .brandimg{height:36px}}
 /*/BRAND:CSS*/
+/*PREVIEW:CSS*/
+/* the About page's fact list */
+.ab-facts{display:grid;grid-template-columns:auto 1fr;gap:10px 22px;
+  margin:var(--sp4,40px) 0 0;max-width:52ch}
+.ab-facts dt{color:var(--grey-d);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;align-self:center}
+.ab-facts dd{margin:0;color:var(--white);font-size:.98rem}
+/*/PREVIEW:CSS*/
 /*FOOTER:CSS*/
 /* Self-contained on purpose — see the module docstring. Every value carries a
    fallback so this renders the same on a page that defines the new tokens and
@@ -470,14 +479,14 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
   font-size:.84rem;color:var(--t3,#7C8290)}
 /*/FOOTER:CSS*/
 </style>
-<meta content="de_DE" property="og:locale"/>
+<meta content="fr_FR" property="og:locale"/>
 <link href="/assets/nora.css" rel="stylesheet"/>
 <link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
 <link href="/assets/brand/quenora-icon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/assets/brand/quenora-icon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/assets/brand/quenora-icon-180.png" rel="apple-touch-icon"/>
 <link href="/assets/brand/quenora-icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
-<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/><link href="https://quenora.ai/de/contact" rel="canonical"/><link href="https://quenora.ai/contact" hreflang="en" rel="alternate"/><link href="https://quenora.ai/contact" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de/contact#page","url":"https://quenora.ai/de/contact","name":"Ein Gespräch. Von Ihnen wird keine Präsentation erwartet.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Beginnen Sie ein Gespräch mit Quenora Consulting. Europa und weltweit remote.","breadcrumb":{"@id":"https://quenora.ai/de/contact#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/de/contact#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://quenora.ai/de"},{"@type":"ListItem","position":2,"name":"Ein Gespräch. Von Ihnen wird keine Präsentation erwartet.","item":"https://quenora.ai/de/contact"}]}]}</script></head>
+<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/><link href="https://quenora.ai/fr/pricing" rel="canonical"/><link href="https://quenora.ai/pricing" hreflang="en" rel="alternate"/><link href="https://quenora.ai/pricing" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR"},{"@type":"WebPage","@id":"https://quenora.ai/fr/pricing#page","url":"https://quenora.ai/fr/pricing","name":"Comment cela est tarifé.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"fr-FR","description":"Comment Quenora facture : un forfait pour le cadrage, un périmètre fixe pour la construction, transmission comprise. Calibré sur les résultats plutôt que sur des taux journaliers.","breadcrumb":{"@id":"https://quenora.ai/fr/pricing#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/fr/pricing#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://quenora.ai/fr"},{"@type":"ListItem","position":2,"name":"Comment cela est tarifé.","item":"https://quenora.ai/fr/pricing"}]}]}</script></head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0">
 <symbol id="mark9" viewbox="0 0 187.71 174.29">
@@ -492,91 +501,40 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <circle cx="151.71" cy="36.0" fill="#C97A3C" r="27.0"></circle>
 </symbol>
 </svg>
-<a class="skip" href="#main">Zum Inhalt springen</a>
+<a class="skip" href="#main">Aller au contenu</a>
 <div class="progress" id="progressBar"></div>
 <header id="siteHeader">
 <div class="wrap">
 <nav>
-<a class="brand" href="/de/index.html">
+<a class="brand" href="/fr/index.html">
 <img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/></a>
-<div class="navlinks" id="navLinks"><a href="/de/approach.html">Vorgehen in Phasen</a><a href="/de/capabilities.html">Neun Leistungen</a><a href="/de/work.html">Was wir tun</a><a href="/de/about.html">Wer wir sind</a><a href="/de/pricing.html">Preise ansehen</a><a href="/de/engineering.html">KI-Engineering</a></div>
-<a class="btn btn-primary navcta" href="/de/index.html#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a>
-<button aria-expanded="false" aria-label="Menü" class="burger" id="burger">
+<div class="navlinks" id="navLinks"><a href="/fr/approach.html">Méthode en phases</a><a href="/fr/capabilities.html">Neuf expertises</a><a href="/fr/work.html">Ce que nous faisons</a><a href="/fr/about.html">Qui nous sommes</a><a aria-current="page" class="on" href="/fr/pricing.html">Voir les tarifs</a><a href="/fr/engineering.html">Ingénierie</a></div>
+<a class="btn btn-primary navcta" href="/fr/index.html#climax"><span class="cta-long">Engager la conversation</span><span class="cta-short">Contact</span></a>
+<button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <i></i><i></i><i></i>
 </button>
 </nav>
 </div>
 </header>
-<main id="main"><section class="phero">
-<canvas aria-hidden="true" id="pCanvas"></canvas>
-<div class="wrap">
-<div class="kicker rv">Kontakt</div>
-<h1 class="rv" data-d="1">Ein Gespräch. Von Ihnen wird keine Präsentation <em>erwartet</em> .</h1>
-<p class="rv" data-d="2">Beschreiben Sie grob, wie das Problem aussieht. Sind wir nicht das richtige Unternehmen dafür, sagen wir das und verweisen Sie an eine bessere Adresse — das kostet uns nichts und erspart Ihnen ein Quartal.</p>
+<main id="main"><section class="phero"><div class="wrap"><div class="kicker">Tarifs</div><h1 class="rv" data-d="1">Comment cela est <em>tarifé</em>.</h1><p class="lede">Indiqué ici plutôt qu’après trois rendez-vous, car l’apprendre tard gâche votre trimestre et le nôtre.</p></div></section><section class="section-pad"><div class="wrap">
+<div class="money rv">
+<div><b>Phase 01 · Cadrage</b><strong>Forfait</strong>
+<p>Deux à trois semaines, convenues avant de commencer. La position écrite vous reste, que vous nous confiiez la suite ou non.</p></div>
+<div><b>Phases 02–05 · Construction</b><strong>Périmètre fixe</strong>
+<p>Chiffré sur un périmètre écrit assorti d’une liste explicite des exclusions. Les changements sont recadrés ouvertement, non absorbés discrètement dans le planning.</p></div>
+<div><b>Phase 06 · Transfert</b><strong>Inclus</strong>
+<p>Jamais une ligne séparée. Une mission qui se termine sans transfert opérationnel n’est pas terminée ; nous ne vous facturons donc pas deux fois pour la terminer.</p></div>
 </div>
-</section>
-<section class="section-pad">
-<div class="wrap">
-<div class="contact-grid">
-<div class="rv">
-<h2 style="margin-bottom:12px;font-size:28px">Gespräch beginnen</h2>
-<p style="color:var(--grey);font-size:15px;font-weight:300;margin-bottom:34px;max-width:50ch">
-          Ein 45-minütiges Gespräch über Ihre Systeme und darüber, wo die echten Gewinne liegen.
-          Kostenlos, unverbindlich und ohne Foliensatz am Ende, sofern Sie keinen wünschen.</p>
-<form id="briefForm">
-<div class="field"><label for="f-name">Name</label>
-<input autocomplete="name" id="f-name" name="name" placeholder="Ihr Name" required="" type="text"/></div>
-<div class="field"><label for="f-email">Geschäftliche E-Mail</label>
-<input autocomplete="email" id="f-email" name="email" placeholder="sie@unternehmen.de" required="" type="email"/></div>
-<div class="field"><label for="f-co">Unternehmen</label>
-<input autocomplete="organization" id="f-co" name="company" placeholder="Firmenname" type="text"/></div>
-<div class="field"><label for="f-int">Was ist der Ausgangspunkt?</label>
-<select id="f-int" name="interest">
-<option>Noch unklar — ich möchte es besprechen</option>
-<option>Platform Engineering / Grundlagen</option>
-<option>KI-Integration in bestehende Systeme</option>
-<option>Inbetriebnahme eines bestehenden Piloten</option>
-<option>Prozessautomatisierung</option>
-<option>Governance, Sicherheit oder Compliance</option>
-<option>Etwas anderes</option>
-</select></div>
-<div class="field"><label for="f-msg">Wie sieht das Problem aus?</label>
-<textarea autocomplete="off" id="f-msg" name="message" placeholder="Ein paar Sätze genügen."></textarea></div>
-<p class="form-privacy">Wir verwenden diese Angaben ausschließlich zur Beantwortung Ihrer Anfrage — nie für einen Verteiler und nie zur Weitergabe an Dritte. Wie und wie lange sie gespeichert werden, steht in der <a href="/privacy.html">Datenschutzerklärung</a>.</p>
-<button class="btn btn-primary" id="submitBtn" type="submit">Senden →</button>
-<p class="form-note" id="formNote">Dieses Prototyp-Formular ist noch nicht an ein Backend angebunden —
-          es öffnet stattdessen Ihr E-Mail-Programm.</p>
-</form>
-</div>
-<div class="contact-side rv">
-<h4>Direkt</h4>
-<div class="row"><i>✉</i><div><b>info@quenora.ai</b>
-<span>In der Regel innerhalb eines Werktags beantwortet</span></div></div>
-<div class="row"><i>●</i><div><b>Balaji „Guru“ Durai</b>
-<span>Gründer und Principal Consultant</span></div></div>
-<div class="row"><i>⚑</i><div><b>Europa und weltweit remote</b>
-<span>Vor-Ort-Einsatz bei europäischen Projekten möglich</span></div></div>
-<div class="row"><i>↗</i><div><b>quenora.ai</b>
-<span>Quenora Consulting</span></div></div>
-<div class="qr-mini">
-<img alt="QR-Code zu quenora.ai" src="data:image/png;base64,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"/>
-<p>Scannen Sie, um diese Seite mitzunehmen — derselbe Code wie auf unserer Karte und Beschilderung.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="section-pad"><div class="wrap"><div class="kicker">Was passiert, wenn Sie sich melden</div><ol class="steps">
-<li><b>Sie schreiben zwei Absätze</b><span>Was nicht funktioniert und was Sie bereits versucht haben. Kein Briefing nötig, keine Geheimhaltungsvereinbarung für das erste Gespräch.</span></li>
-<li><b>Wir antworten innerhalb eines Arbeitstages</b><span>Entweder mit einem Termin oder mit dem ehrlichen Hinweis, dass dies nicht unser Problem ist, und einem Verweis auf jemanden, der besser passt.</span></li>
-<li><b>Fünfundvierzig Minuten, keine Präsentation</b><span>Ihre Systeme, Ihre Beschränkung, unsere Einschätzung dazu. Sie bekommen in diesem Gespräch eine fachliche Meinung, kein Folgeangebot.</span></li>
-<li><b>Eine schriftliche Position</b><span>Was wir zuerst bauen würden, was es kosten würde und was wir nicht bauen würden. Zur freien Verwendung — in Ihrem Vorstand oder bei einer anderen Firma.</span></li>
-</ol></div></section></main>
+</div></section></main>
 <footer>
 <div class="wrap">
 <div class="foot-row f-grid">
-<div><div class="f-lockup"><img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/><span class="f-desc">Consulting</span></div><p class="f-blurb">Unternehmens-KI, für den Betrieb konstruiert. Eingebaut in das, was Sie bereits betreiben, und dann übergeben.</p><p class="f-where">International tätig</p></div><div class="foot-col"><h5>Sitemap</h5><nav aria-label="Footer"><a href="/de/index.html#journey">Vorgehen</a><a href="/de/index.html#solution">Leistungen</a><a href="/de/index.html#commercial">Preise</a><a href="/de/index.html#problem">Projekte</a><a href="/de/index.html#who">Über uns</a><a href="/de/index.html#climax">Kontakt</a></nav></div><div class="foot-col"><h5>Rechtliches</h5><nav aria-label="Rechtliches"><a href="/impressum.html">Impressum</a><a href="/privacy.html">Datenschutzerklärung</a></nav></div><div class="foot-col"><h5>Folgen</h5><nav aria-label="Social Media" class="f-social"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.4 2.4 4.4 5.5V21h-4v-6.1c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9z"></path></svg></a><a aria-label="Instagram" href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.3" cy="6.7" r="1.3"></circle></svg></a><a aria-label="Facebook" href="https://www.facebook.com/people/Quenora-Consulting/61593930577480/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.3 0-1.7.8-1.7 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12.1z"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@quenora-ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="14.8" rx="4" stroke="currentColor" stroke-width="2" width="20.8" x="1.6" y="4.6"></rect><path d="M10.2 9.1v5.8l5-2.9z"></path></svg></a><a aria-label="X" href="https://x.com/quenora_ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-5.9l-4.6-6-5.3 6H3l7-8L2.5 3h6l4.2 5.5zm-1 16.2h1.7L7.6 4.7H5.8z"></path></svg></a></nav></div></div>
-<div class="f-bot"><span>© 2026 Quenora Consulting</span><span>Bad Friedrichshall, Deutschland · <a href="/impressum.html">Impressum</a> · <a href="/privacy.html">Datenschutz</a></span></div>
+<!-- The footer mirrors this page's header, target for target. It used to run a
+     map of its own - Core capabilities, Firm, four links that all went to the
+     same page - so a word in the header and the same word in the footer led
+     somewhere different. One page, one map. -->
+<div><div class="f-lockup"><img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/><span class="f-desc">Conseil</span></div><p class="f-blurb">IA d’entreprise, conçue pour fonctionner. Intégrée à ce que vous exploitez déjà, puis transmise.</p><p class="f-where">Présence internationale</p></div><div class="foot-col"><h5>Plan du site</h5><nav aria-label="Footer"><a href="/fr/index.html#journey">Méthode</a><a href="/fr/index.html#solution">Expertises</a><a href="/fr/index.html#commercial">Tarifs</a><a href="/fr/index.html#problem">Missions</a><a href="/fr/index.html#who">À propos</a><a href="/fr/index.html#climax">Contact</a></nav></div><div class="foot-col"><h5>Mentions légales</h5><nav aria-label="Mentions légales"><a href="/impressum.html">Mentions légales</a><a href="/privacy.html">Politique de confidentialité</a></nav></div><div class="foot-col"><h5>Suivre</h5><nav aria-label="Réseaux sociaux" class="f-social"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.4 2.4 4.4 5.5V21h-4v-6.1c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9z"></path></svg></a><a aria-label="Instagram" href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.3" cy="6.7" r="1.3"></circle></svg></a><a aria-label="Facebook" href="https://www.facebook.com/people/Quenora-Consulting/61593930577480/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.3 0-1.7.8-1.7 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12.1z"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@quenora-ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="14.8" rx="4" stroke="currentColor" stroke-width="2" width="20.8" x="1.6" y="4.6"></rect><path d="M10.2 9.1v5.8l5-2.9z"></path></svg></a><a aria-label="X" href="https://x.com/quenora_ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-5.9l-4.6-6-5.3 6H3l7-8L2.5 3h6l4.2 5.5zm-1 16.2h1.7L7.6 4.7H5.8z"></path></svg></a></nav></div></div>
+<div class="f-bot"><span>© 2026 Quenora Consulting</span><span>Bad Friedrichshall, Allemagne · <a href="/impressum.html">Mentions légales</a> · <a href="/privacy.html">Confidentialité</a></span></div>
 </div>
 </footer>
 <script>
@@ -755,26 +713,9 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
 
 
 // (page-header WebGL block removed — no Three.js dependency remains)
-
-(function(){
-  const f=document.getElementById('briefForm'); if(!f)return;
-  f.addEventListener('submit',e=>{
-    e.preventDefault();
-    const d=new FormData(f);
-    const body=['Name: '+(d.get('name')||''),'Company: '+(d.get('company')||''),
-      'Email: '+(d.get('email')||''),'Interest: '+(d.get('interest')||''),
-      '','Problem:',d.get('message')||''].join('\n');
-    const note=document.getElementById('formNote');
-    note.textContent='Opening your email client…';
-    note.style.color='var(--copper)';
-    location.href='mailto:info@quenora.ai?subject='+
-      encodeURIComponent('Briefing request — '+(d.get('company')||d.get('name')||'Website'))+
-      '&body='+encodeURIComponent(body);
-  });
-})();
 </script>
 <!--WIDGET:HTML-->
-<button aria-controls="aiPanel" aria-expanded="false" aria-label="Nora fragen" class="ai-fab" id="aiFab" type="button">
+<button aria-controls="aiPanel" aria-expanded="false" aria-label="Demander à Nora" class="ai-fab" id="aiFab" type="button">
 <!-- The wordmark's five largest circles. Below about 20px the four smallest
      are sub-pixel and only muddy the shape, so the arc is cropped rather
      than shrunk — it stays the same mark, still legible at 24px. -->
@@ -783,31 +724,31 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
 <circle cx="107.49" cy="117.76" r="15.59"></circle><circle cx="127.81" cy="84.89" r="20.52"></circle>
 <circle cx="151.71" cy="36" r="27"></circle>
 </svg>
-<span aria-hidden="true" class="ai-tip">Nora fragen</span>
+<span aria-hidden="true" class="ai-tip">Demander à Nora</span>
 </button>
-<div aria-label="Nora, die Quenora-Assistentin" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
+<div aria-label="Nora, l’assistante de Quenora" aria-modal="false" class="ai-panel" id="aiPanel" role="dialog">
 <div class="ai-head"><div aria-hidden="true" class="ai-dot"></div>
-<div><b>Nora fragen</b><span>Antworten ausschließlich von dieser Website — Passagen, passend zu Ihrer Frage</span></div>
+<div><b>Demander à Nora</b><span>Des réponses tirées uniquement de ce site — des passages, appariés à votre question</span></div>
 </div>
 <div aria-live="polite" class="ai-body" id="aiBody" role="log"></div>
 <!-- The opening line lives here, not in the script, because build_i18n
      translates text nodes and cannot reach a JavaScript string literal. It
      was greeting German and French visitors in English on every open. -->
-<p class="ai-greet" hidden="" id="aiGreet">Ich bin Nora. Fragen Sie mich alles über Quenora, und ich zeige Ihnen, was diese Website dazu sagt — in ihren eigenen Worten, mit einem Link zur Fundstelle. Ich erfinde keine Antworten: Steht es hier nicht, sage ich Ihnen das, statt zu raten.</p>
+<p class="ai-greet" hidden="" id="aiGreet">Je suis Nora. Posez-moi n’importe quelle question sur Quenora et je vous montrerai ce que ce site en dit, dans ses propres mots, avec un lien vers l’endroit exact. Je ne génère pas de réponses : si ce n’est pas écrit ici, je vous le dirai plutôt que de deviner.</p>
 <div class="ai-suggest" id="aiSuggest">
-<button class="ai-chip" data-q="Was machen Sie konkret?" type="button">Was machen Sie konkret?</button>
-<button class="ai-chip" data-q="Was bedeutet Automatisierung hier?" type="button">Automatisierung?</button>
-<button class="ai-chip" data-q="Wie lange dauert ein Projekt?" type="button">Wie lange?</button>
-<button class="ai-chip" data-q="Was kostet es?" type="button">Was kostet es?</button>
-<button class="ai-chip" data-q="Wer sind Sie?" type="button">Wer sind Sie?</button>
-<button class="ai-chip" data-act="contact" type="button">Mit einem Menschen sprechen</button>
+<button class="ai-chip" data-q="Que faites-vous concrètement ?" type="button">Que faites-vous concrètement ?</button>
+<button class="ai-chip" data-q="Qu'est-ce que l'automatisation ici ?" type="button">Automatisation ?</button>
+<button class="ai-chip" data-q="Combien de temps dure une mission ?" type="button">Combien de temps ?</button>
+<button class="ai-chip" data-q="Quel est le coût ?" type="button">Quel est le coût ?</button>
+<button class="ai-chip" data-q="Qui êtes-vous ?" type="button">Qui êtes-vous ?</button>
+<button class="ai-chip" data-act="contact" type="button">Parler à une personne</button>
 </div>
 <form class="ai-form" id="aiForm">
-<label class="vh" for="aiInput">Stellen Sie eine Frage</label>
-<input autocomplete="off" id="aiInput" placeholder="Nora etwas fragen…" type="text"/>
-<button type="submit">Fragen</button>
+<label class="vh" for="aiInput">Posez une question</label>
+<input autocomplete="off" id="aiInput" placeholder="Posez une question à Nora…" type="text"/>
+<button type="submit">Envoyer</button>
 </form>
-<div class="ai-foot">Suche auf dieser Website · kein Modell, nichts erfunden</div>
+<div class="ai-foot">Recherche sur ce site · aucun modèle, rien d’inventé</div>
 </div>
 <!--/WIDGET:HTML-->
 <!--WIDGET:JS-->

@@ -54,7 +54,7 @@ from bs4 import BeautifulSoup as BS
 ROOT   = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://quenora.ai"
 
-PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
+PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html", "pricing.html",
          "approach.html", "work.html", "contact.html"]
 EN_ONLY   = ["impressum.html", "privacy.html"]
 UNLISTED  = {"products.html"}

@@ -37,7 +37,7 @@ def _tidy(t):
 ROOT = os.path.dirname(os.path.abspath(__file__))
 LANGS = {"en": "", "de": "de", "fr": "fr"}
 PAGES = ["index.html", "about.html", "engineering.html", "capabilities.html",
-         "work.html", "approach.html"]
+         "work.html", "approach.html", "pricing.html"]
 
 try:
     from bs4 import BeautifulSoup

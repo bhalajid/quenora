@@ -17,6 +17,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://quenora.ai/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/pricing"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://quenora.ai/approach</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://quenora.ai/approach"/>
     <priority>0.8</priority>

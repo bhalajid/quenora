@@ -110,11 +110,11 @@ Founder-led, and specific about what that means: who does the work, what they ha
 ## Balaji Durai
 
 Sixteen years in enterprise IT, most of it inside organisations where a platform going down is a business incident rather than a ticket. Eight certifications across Azure, Citrix and ITIL. He works in German and English, from Bad Friedrichshall.
-At Deutsche Bank, since 2025, he introduced site reliability practice into a heavily regulated end-user computing estate and built the automation around it — Terraform, Kubernetes, Docker, GitHub Actions and LLM tooling — taking operating cost down by 60 per cent.
-At the Schwarz Group, from 2019 to 2025, he designed, migrated and ran the Citrix DaaS and Azure platforms behind LIDL, Kaufland and PreZero, including standing up Azure Virtual Desktop from nothing. More than 80,000 people work on those platforms every day, and the optimisation returned seven-figure savings.
-He works as a GenAI transformation evangelist, putting Azure AI Foundry, OpenAI and Copilot into incident and automation workflows rather than into demonstrations. Earlier engagements were with Olympus, Marks & Spencer, Micron and Yahoo.
+Since 2025, inside a heavily regulated bank, he has introduced site reliability practice into an end-user computing estate and built the automation around it — Terraform, Kubernetes, Docker, GitHub Actions and LLM tooling — taking operating cost down by 60 per cent.
+From 2019 to 2025, at one of Europe’s largest retail groups, he designed, migrated and ran the Citrix DaaS and Azure platforms behind its retail and waste-management businesses, including standing up Azure Virtual Desktop from nothing. More than 80,000 people work on those platforms every day, and the optimisation returned seven-figure savings.
+He works as a GenAI transformation evangelist, putting Azure AI Foundry, OpenAI and Copilot into incident and automation workflows rather than into demonstrations. Earlier engagements spanned medical devices, retail, semiconductors and consumer internet.
 He builds his own systems too. BR Assist is a retrieval-augmented assistant for German works-council law: around 1,200 statutory provisions from twelve federal acts and some 700 Federal Labour Court decisions, indexed in Postgres with pgvector, where every answer carries the provision it came from so a reader can check it. It answers from the statute rather than from what a model remembers — the same argument this firm makes about enterprise AI, built to prove it.
-These are engagements and employers from before Quenora, not Quenora clients.
+This is work from before Quenora. Described by shape rather than by name, the way the rest of this site describes engagements.
 
 ## Most pilots don’t fail at the model. They stop at five layers.
 
@@ -417,7 +417,7 @@ There are no figures on this page, and that is deliberate — a number without a
 
 A day rate prices our time. It tells you what a week of us costs and nothing about whether the thing you wanted will exist at the end of it, and it pays us more the longer the work takes. Everything below is priced against a written scope instead, so the number moves when the scope moves and at no other time.
 
-## The three commitments
+## Three commitments
 
 Two to three weeks, agreed before we start. You keep the written position whether or not you engage us for anything after it.
 Priced against a written scope with an explicit list of what is excluded. Changes are re-scoped in the open, not absorbed quietly into the timeline.

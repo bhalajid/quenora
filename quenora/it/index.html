@@ -1282,6 +1282,24 @@ main > section .chead{padding-top:0}
 #problem .pin{padding-bottom:0}
 /* and the caption under the gap figure ran straight into the counters */
 #problem .gapfig figcaption{padding-bottom:var(--sp4)}
+
+/* ── the closing invitation and the contact card ───────────────────────
+   The three call-to-action links all pointed at #talk, the card itself, so
+   they scrolled past the heading that says what a first conversation is.
+   They open #climax now, and it needs a scroll offset because the header is
+   sticky and would otherwise sit on top of the headline. */
+#climax{scroll-margin-top:96px}
+/* the third beat, in the same ember the headline's accent word carries */
+.reach{color:var(--ember)}
+/* the card is a set of labelled ways to reach a person, so the labels read
+   as labels and the privacy note reads as an aside rather than a claim */
+.qrsay .qrways{margin-top:var(--sp4);color:var(--copper-lt)}
+.qrsay .qrlabel{margin-top:var(--sp3);margin-bottom:4px;
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--t3)}
+.qrsay .qrmail a{color:var(--copper-lt)}
+.qrsay .qrnote{margin-top:var(--sp2);font-style:italic;font-size:.82rem;
+  color:var(--t3)}
 main > section .chead + *{margin-top:0}
 main > section .chead + .obj,
 main > section .chead + .money,
@@ -1415,7 +1433,7 @@ main > section[hidden]{padding-block:0}
 <a href="/it/work.html">Progetti</a>
 <a href="/it/about.html">About</a>
 </nav>
-<a class="navcta" href="#talk"><span class="cta-long">Iniziamo a parlarne</span><span class="cta-short">Contatti</span></a>
+<a class="navcta" href="#climax"><span class="cta-long">Iniziamo a parlarne</span><span class="cta-short">Contatti</span></a>
 </div>
 </header>
 <main id="main">
@@ -1538,7 +1556,7 @@ pattern rather than audited results from a named client.</p>
 <div class="wrap">
 <div class="cta-inline rv">
 <p><b>Recognise the shape of your problem in those six phases?</b> Two paragraphs on what’s stuck is enough to start — no brief, no NDA.</p>
-<a href="#talk">Tell us what's stuck</a>
+<a href="#climax">Tell us what's stuck</a>
 </div>
 </div>
 </section>
@@ -1742,7 +1760,7 @@ documentation and the evaluation harness regardless — there’s no scenario wh
 you end an engagement with nothing to show for it.</div></details>
 <div class="cta-inline rv">
 <p><b>Still holding an objection we haven’t answered?</b> Put it in the first message — a direct answer is more useful to both of us than a proposal.</p>
-<a href="#talk">Ask it directly</a>
+<a href="#climax">Ask it directly</a>
 </div>
 </div>
 </div>
@@ -1778,9 +1796,10 @@ isn’t finished, so we don’t charge you twice to finish it.</p></div>
 <div aria-hidden="true" class="spot" id="spot"></div>
 <div class="wrap">
 <h2 class="rv">Costruite ciò che continua a <em>funzionare</em>.</h2>
-<p class="rv" data-d="1">Una conversazione mirata su dove l'intelligenza può togliere
-         attrito o rischio e dare fiducia nelle vostre operazioni.
-         Nessuna presentazione. Nessuna fattura per l'analisi iniziale.</p>
+<p class="rv" data-d="1">One focused conversation about where intelligence can
+         remove friction or risk and add confidence in your operations.<br/>
+         No deck. No discovery invoice.<br/>
+<span class="reach">Scroll below and reach out to us.</span></p>
 <!-- The card, for the half of a conversation that happens in a room. The QR
      opens /c, which counts the scan and hands over a vCard filed under
      Quenora Consulting. The numbers are written out underneath because a QR
@@ -1788,12 +1807,17 @@ isn’t finished, so we don’t charge you twice to finish it.</p></div>
 <div class="qrcard rv" data-d="1" id="talk">
 <a aria-label="Save Quenora Consulting to your phone" class="qrcode" href="/c"><svg viewbox="0 0 37 37" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5h7m1 0h1m1 0h5m1 0h2m1 0h2m1 0h7m-29 1h1m5 0h1m2 0h4m2 0h1m4 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m5 0h1m1 0h1m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m6 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h3m2 0h1m2 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h4m3 0h4m1 0h1m-16 1h2m2 0h1m1 0h1m1 0h3m6 0h1m1 0h1m1 0h1m1 0h1m-29 1h3m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1m5 0h1m1 0h2m-28 1h2m3 0h2m1 0h2m1 0h1m3 0h3m1 0h1m1 0h4m1 0h1m-27 1h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m1 0h1m2 0h1m-25 1h7m3 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h1m1 0h1m-28 1h1m3 0h2m1 0h1m3 0h5m2 0h3m1 0h1m1 0h2m1 0h2m-28 1h1m4 0h3m1 0h1m2 0h1m1 0h4m1 0h1m1 0h2m-23 1h4m2 0h2m2 0h1m4 0h2m2 0h2m2 0h4m-26 1h1m1 0h1m1 0h3m1 0h1m2 0h1m2 0h3m6 0h2m1 0h1m-29 1h1m2 0h1m3 0h1m3 0h4m7 0h3m3 0h1m-29 1h3m2 0h2m1 0h3m2 0h1m3 0h4m3 0h1m1 0h1m1 0h1m-29 1h1m1 0h2m1 0h1m2 0h3m1 0h3m3 0h1m2 0h2m1 0h1m-25 1h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h1m1 0h5m1 0h1m-19 1h3m2 0h1m1 0h1m1 0h1m1 0h2m3 0h3m-27 1h7m2 0h1m2 0h2m3 0h4m1 0h1m1 0h1m-25 1h1m5 0h1m1 0h3m1 0h2m3 0h4m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m4 0h6m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h4m3 0h2m2 0h1m1 0h3m-28 1h1m1 0h3m1 0h1m3 0h1m1 0h1m2 0h1m2 0h7m1 0h2m-28 1h1m5 0h1m2 0h2m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h7m4 0h1m1 0h1m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1" stroke="#07070a"></path></svg></a>
 <div class="qrsay">
-<p class="mono">Take the card first</p>
-<p>Scan to save <b>Quenora Consulting</b> to your phone — both numbers, the
-address and the email, in one tap.</p>
+<p class="mono">Save our contact</p>
+<p>If you’re on your laptop, just scan the QR.<br/>
+If you’re on your mobile, tap <a href="/c">Save the contact</a>.</p>
+<p class="mono qrways">Ways to reach out to us</p>
+<p class="qrlabel">Call us:</p>
 <p class="qrtel"><a href="tel:+4915233927436">+49 152 3392 7436</a>
 <a href="tel:+4915256433329">+49 152 5643 3329</a></p>
-<p class="qrdl"><a href="/c">Save the contact</a> · nothing is stored about you</p>
+<p class="qrlabel">Email us:</p>
+<p class="qrmail"><a href="mailto:info@quenora.ai">info@quenora.ai</a></p>
+<p class="qrlabel">Fill the form below:</p>
+<p class="qrnote">(We respect privacy, nothing about you is stored.)</p>
 <p class="qrdl" hidden="" id="wrow"><a href="/w">Add it to your wallet</a> · updates if a number ever changes</p>
 </div>
 </div>
@@ -1865,7 +1889,7 @@ notice</a>.</span></label>
 <div><h3>Navigazione</h3><nav aria-label="Footer">
 <a href="/it/index.html">Home</a><a href="/it/approach.html">Metodo</a>
 <a href="/it/capabilities.html">Competenze</a><a href="/it/engineering.html">Engineering</a><a href="/it/work.html">Progetti</a>
-<a href="/it/about.html">About</a><a href="#talk">Contatti</a></nav></div>
+<a href="/it/about.html">About</a><a href="#climax">Contatti</a></nav></div>
 <div><h3>Contatti</h3><nav aria-label="Contatti">
 <a href="mailto:info@quenora.ai">info@quenora.ai</a>
 <a href="/impressum.html">Legal notice · Impressum</a>

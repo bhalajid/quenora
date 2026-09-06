@@ -81,12 +81,12 @@ PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
 DEST_HOME = {
     "Approach": "approach.html", "Capabilities": "capabilities.html",
     "Engineering": "engineering.html", "Work": "work.html",
-    "About": "about.html", "Contact": "#talk", "Home": "index.html",
+    "About": "about.html", "Contact": "#climax", "Home": "index.html",
 }
 DEST_INNER = {
     "Approach": "approach.html", "Capabilities": "capabilities.html",
     "Engineering": "engineering.html", "Work": "work.html",
-    "About": "about.html", "Contact": "index.html#talk",
+    "About": "about.html", "Contact": "index.html#climax",
     "Home": "index.html",
 }
 
@@ -307,14 +307,16 @@ def retarget_and_mark(soup, page):
     """Put every nav label back on its one destination for this page, and flag
     the label this page IS. Header and footer both, because the release gate
     requires them to agree and a visitor reads whichever is nearer."""
-    # The closing chapter's landing point moved from the top of #climax to
-    # the contact card inside it, because #climax put the card 850px below the
-    # fold. build_climax only rewrites the home page, so every other page's
-    # header CTA still pointed at the old anchor while its own footer had
-    # moved — the gate caught the two disagreeing.
-    for a in soup.find_all('a', href=True):
-        if a['href'].endswith('#climax'):
-            a['href'] = a['href'][:-len('#climax')] + '#talk'
+    # This used to force every #climax link to #talk, the contact card inside
+    # it, because landing on #climax put the card 850px below the fold. The
+    # client has now seen both and wants the invitation first: "Build what
+    # keeps working", the sentence saying what a first conversation is, and
+    # only then the card. #climax carries a scroll-margin so the sticky header
+    # does not sit on the headline.
+    #
+    # Header and footer must still agree — stage 4d fails otherwise — so the
+    # destination is changed in one place, the maps below, rather than by
+    # rewriting hrefs after the fact.
 
     dest = DEST_HOME if page == "index.html" else DEST_INNER
     here = CURRENT.get(page)
@@ -324,7 +326,16 @@ def retarget_and_mark(soup, page):
             continue
         for a in root.find_all("a"):
             label = a.get_text(" ", strip=True)
-            want = dest.get(label)
+            # The call to action carries two labels — one for wide screens,
+            # one for narrow — so get_text returns both joined and matches
+            # nothing in the map, which left its href wherever the page's
+            # source happened to put it. It is the Contact destination, and
+            # stage 4d fails the moment it disagrees with the footer's own
+            # Contact link. That is exactly how the two drifted apart.
+            if "navcta" in (a.get("class") or []):
+                want = dest.get("Contact")
+            else:
+                want = dest.get(label)
             if want and a.get("href") != want:
                 a["href"] = want
                 changed += 1

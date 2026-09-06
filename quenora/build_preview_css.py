@@ -300,6 +300,24 @@ main > section .chead{padding-top:0}
 #problem .pin{padding-bottom:0}
 /* and the caption under the gap figure ran straight into the counters */
 #problem .gapfig figcaption{padding-bottom:var(--sp4)}
+
+/* ── the closing invitation and the contact card ───────────────────────
+   The three call-to-action links all pointed at #talk, the card itself, so
+   they scrolled past the heading that says what a first conversation is.
+   They open #climax now, and it needs a scroll offset because the header is
+   sticky and would otherwise sit on top of the headline. */
+#climax{scroll-margin-top:96px}
+/* the third beat, in the same ember the headline's accent word carries */
+.reach{color:var(--ember)}
+/* the card is a set of labelled ways to reach a person, so the labels read
+   as labels and the privacy note reads as an aside rather than a claim */
+.qrsay .qrways{margin-top:var(--sp4);color:var(--copper-lt)}
+.qrsay .qrlabel{margin-top:var(--sp3);margin-bottom:4px;
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--t3)}
+.qrsay .qrmail a{color:var(--copper-lt)}
+.qrsay .qrnote{margin-top:var(--sp2);font-style:italic;font-size:.82rem;
+  color:var(--t3)}
 main > section .chead + *{margin-top:0}
 main > section .chead + .obj,
 main > section .chead + .money,

@@ -47,7 +47,7 @@ Illustrative, not measured. Most work completes untouched. The rest is sent to a
 
 ## Who you’re actually hiring.
 
-We argue you shouldn’t default to a large consultancy. That obliges us to say plainly who you get instead — including the size of us, which is the first thing a procurement team will ask.
+We argue you shouldn’t default to a large consultancy. What you get instead is a focused team of AI experts, direct access to senior practitioners, and a delivery model designed around accountability rather than scale.
 
 ## The principles behind the mark.
 
@@ -97,9 +97,6 @@ Still holding an objection we haven’t answered? Put it in the first message �
 ## How this is priced.
 
 Stated here rather than after three meetings, because finding out late wastes your quarter and ours.
-Two to three weeks, agreed before we start. You keep the written position whether or not you engage us for anything after it.
-Priced against a written scope with an explicit list of what’s excluded. Changes are re-scoped in the open, not absorbed quietly into the timeline.
-Never a separate line item. An engagement that ends without a working handover isn’t finished, so we don’t charge you twice to finish it.
 
 ## Build what keeps working.
 
@@ -108,7 +105,16 @@ If you’re on your laptop, just scan the QR. If you’re on your mobile, tap Sa
 
 ## Who you’re actually hiring.
 
-We argue you shouldn’t default to a large consultancy. That obliges us to say plainly who you get instead — including the size of us, which is the first thing a procurement team will ask.
+Founder-led, and specific about what that means: who does the work, what they have run before, and how big the firm actually is.
+
+## Balaji Durai
+
+Sixteen years in enterprise IT, most of it inside organisations where a platform going down is a business incident rather than a ticket. Eight certifications across Azure, Citrix and ITIL. He works in German and English, from Bad Friedrichshall.
+At Deutsche Bank, since 2025, he introduced site reliability practice into a heavily regulated end-user computing estate and built the automation around it — Terraform, Kubernetes, Docker, GitHub Actions and LLM tooling — taking operating cost down by 60 per cent.
+At the Schwarz Group, from 2019 to 2025, he designed, migrated and ran the Citrix DaaS and Azure platforms behind LIDL, Kaufland and PreZero, including standing up Azure Virtual Desktop from nothing. More than 80,000 people work on those platforms every day, and the optimisation returned seven-figure savings.
+He works as a GenAI transformation evangelist, putting Azure AI Foundry, OpenAI and Copilot into incident and automation workflows rather than into demonstrations. Earlier engagements were with Olympus, Marks & Spencer, Micron and Yahoo.
+He builds his own systems too. BR Assist is a retrieval-augmented assistant for German works-council law: around 1,200 statutory provisions from twelve federal acts and some 700 Federal Labour Court decisions, indexed in Postgres with pgvector, where every answer carries the provision it came from so a reader can check it. It answers from the statute rather than from what a model remembers — the same argument this firm makes about enterprise AI, built to prove it.
+These are engagements and employers from before Quenora, not Quenora clients.
 
 ## Most pilots don’t fail at the model. They stop at five layers.
 

@@ -1449,6 +1449,13 @@ footer .f-blurb{max-width:35ch;font-size:.96rem;color:var(--t2,#A8AEBB);margin:0
 footer .f-where{font-family:'JetBrains Mono',ui-monospace,monospace;
   font-size:11px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--t3,#7C8290);margin:14px 0 0}
+/* The link columns stack. impressum.html and privacy.html style footer navs
+   as flex ROWS, so the site map ran across the page and straight through the
+   Legal column — one page's stylesheet deciding the shape of a footer this
+   file is supposed to own. Stated here, it is the same on all eleven. */
+footer nav[aria-label="Footer"],
+footer nav[aria-label="Legal"]{display:flex;flex-direction:column;
+  align-items:flex-start;gap:14px}
 /* the social row is a row of marks, not a stack of words */
 .f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;
@@ -1463,6 +1470,19 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
   border-top:1px solid var(--line,rgba(242,239,232,.09));
   font-size:.84rem;color:var(--t3,#7C8290)}
 /*/FOOTER:CSS*/
+/*BACKTO:CSS*/
+.backto{display:flex;align-items:center;gap:9px;width:fit-content;
+  margin:0 0 26px auto;padding:9px 15px;
+  border:1px solid var(--line,rgba(242,239,232,.12));border-radius:2px;
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.66rem;
+  letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;
+  color:var(--t2,#A8AEBB);text-decoration:none;
+  transition:color .25s ease,border-color .25s ease}
+.backto:hover,.backto:focus-visible{color:var(--copper-lt,#E9A063);
+  border-color:var(--copper-lt,#E9A063)}
+.backto .arw{transition:transform .25s ease}
+.backto:hover .arw{transform:translateX(-3px)}
+/*/BACKTO:CSS*/
 </style>
 <meta content="es_ES" property="og:locale"/>
 <link href="/assets/nora.css" rel="stylesheet"/>
@@ -1485,7 +1505,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <a aria-label="Quenora home" class="brand" href="/es/index.html"><img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/></a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menú" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
-<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/es/approach.html">Phased Approach</a><a href="/es/capabilities.html">Nine Capabilities</a><a href="/es/work.html">What work we do?</a><a href="/es/about.html">Who are we?</a><a href="/es/pricing.html">View Pricing</a><a href="/es/engineering.html">Engineering</a></nav>
+<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/es/about.html">Who are we?</a><a href="/es/work.html">What work we do?</a><a href="/es/approach.html">Phased Approach</a><a href="/es/capabilities.html">Nine Capabilities</a><a href="/es/pricing.html">View Pricing</a><a href="/es/engineering.html">Engineering</a></nav>
 <a class="navcta" href="#climax"><span class="cta-long">Iniciar una conversación</span><span class="cta-short">Contacto</span></a>
 </div>
 </header>
@@ -1658,10 +1678,7 @@ knows what it shouldn’t decide, and drawing that line is most of the job.</fig
 <div class="cnum"><span class="clabel">Chapter · About</span>06</div>
 <div>
 <h2>Who you’re actually <em>hiring</em>.</h2>
-<p class="lede">We argue you shouldn’t default to a large
-             consultancy. That obliges us to say plainly who you get instead —
-             including the size of us, which is the first thing a procurement team
-             will ask.</p>
+<p class="lede">We argue you shouldn’t default to a large consultancy. What you get instead is a focused team of AI experts, direct access to senior practitioners, and a delivery model designed around accountability rather than scale.</p>
 <a class="more" href="/es/about.html">Know us — in detail</a></div>
 </div>
 <div class="whogrid">
@@ -1774,18 +1791,7 @@ you end an engagement with nothing to show for it.</div></details>
 <h2>How this is <em>priced</em>.</h2>
 <p class="lede">Stated here rather than after three meetings, because finding
 out late wastes your quarter and ours.</p>
-</div>
-</div>
-<div class="money rv">
-<div><b>Fase 01 · Encuadre</b><strong>Fixed fee</strong>
-<p>Two to three weeks, agreed before we start. You keep the written position
-whether or not you engage us for anything after it.</p></div>
-<div><b>Phases 02–05 · Build</b><strong>Fixed scope</strong>
-<p>Priced against a written scope with an explicit list of what’s excluded.
-Changes are re-scoped in the open, not absorbed quietly into the timeline.</p></div>
-<div><b>Phase 06 · Handover</b><strong>Included</strong>
-<p>Never a separate line item. An engagement that ends without a working handover
-isn’t finished, so we don’t charge you twice to finish it.</p></div>
+<a class="more" href="/es/pricing.html">See pricing — in detail</a></div>
 </div>
 </div>
 </section>
@@ -3903,6 +3909,18 @@ notice</a>.</span></label>
   other.addEventListener('blur', function(){
     if (other.value === '' || other.value === '+') {
       other.hidden = true; sel.hidden = false; sel.value = '+49';
+    }
+  });
+
+  /* The number box is the number and nothing else. The country code has its
+     own box beside it, so a + typed here would be a second one. Digits and
+     the separators people actually use; letters never. */
+  tel.addEventListener('input', function(){
+    var clean = tel.value.replace(/[^0-9 ()\/.\-]/g, '');
+    if (clean !== tel.value) {
+      var at = tel.selectionStart;
+      tel.value = clean;
+      try { tel.setSelectionRange(at - 1, at - 1); } catch (e) {}
     }
   });
 

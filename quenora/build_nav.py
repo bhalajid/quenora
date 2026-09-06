@@ -86,12 +86,12 @@ PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
 # Generated from this list rather than edited per page, so all ten pages carry
 # the same header by construction.
 HEADER = [
-    ("Phased Approach",  "approach.html"),
+    ("Who are we?",       "about.html"),
+    ("What work we do?",  "work.html"),
+    ("Phased Approach",   "approach.html"),
     ("Nine Capabilities", "capabilities.html"),
-    ("What work we do?", "work.html"),
-    ("Who are we?",      "about.html"),
-    ("View Pricing",     "pricing.html"),
-    ("Engineering",      "engineering.html"),
+    ("View Pricing",      "pricing.html"),
+    ("Engineering",       "engineering.html"),
 ]
 
 DEST_HOME = {

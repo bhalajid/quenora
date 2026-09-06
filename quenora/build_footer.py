@@ -115,6 +115,13 @@ footer .f-blurb{max-width:35ch;font-size:.96rem;color:var(--t2,#A8AEBB);margin:0
 footer .f-where{font-family:'JetBrains Mono',ui-monospace,monospace;
   font-size:11px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--t3,#7C8290);margin:14px 0 0}
+/* The link columns stack. impressum.html and privacy.html style footer navs
+   as flex ROWS, so the site map ran across the page and straight through the
+   Legal column — one page's stylesheet deciding the shape of a footer this
+   file is supposed to own. Stated here, it is the same on all eleven. */
+footer nav[aria-label="Footer"],
+footer nav[aria-label="Legal"]{display:flex;flex-direction:column;
+  align-items:flex-start;gap:14px}
 /* the social row is a row of marks, not a stack of words */
 .f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;

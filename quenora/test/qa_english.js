@@ -199,7 +199,14 @@ const need = {
   'shows the method': /six phases/i,
   'lists capabilities': /nine capabilities/i,
   'handles objections': /why not a large consultancy/i,
-  'states pricing posture': /how this is/i && /fixed fee/i,
+  /* Was `/how this is/i && /fixed fee/i`. Two regexes joined by && evaluate to
+     the second one — a regex is truthy — so only "fixed fee" was ever tested
+     and the first half had been dead since it was written. And the three fee
+     cards have moved to pricing.html, which is where that detail belongs. The
+     home page still has to take a position on price and offer the way to the
+     rest, which is what this now asks. */
+  'states pricing posture': /how this is priced/i,
+  'routes to the pricing detail': /see pricing/i,
   /* "What happens when you get in touch" moved to contact.html, where it
      belongs — it describes what follows a message rather than pricing.
      The home page still tells a reader what the next step is, in the

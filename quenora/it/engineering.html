@@ -387,6 +387,13 @@ footer .f-blurb{max-width:35ch;font-size:.96rem;color:var(--t2,#A8AEBB);margin:0
 footer .f-where{font-family:'JetBrains Mono',ui-monospace,monospace;
   font-size:11px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--t3,#7C8290);margin:14px 0 0}
+/* The link columns stack. impressum.html and privacy.html style footer navs
+   as flex ROWS, so the site map ran across the page and straight through the
+   Legal column — one page's stylesheet deciding the shape of a footer this
+   file is supposed to own. Stated here, it is the same on all eleven. */
+footer nav[aria-label="Footer"],
+footer nav[aria-label="Legal"]{display:flex;flex-direction:column;
+  align-items:flex-start;gap:14px}
 /* the social row is a row of marks, not a stack of words */
 .f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;
@@ -401,6 +408,19 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
   border-top:1px solid var(--line,rgba(242,239,232,.09));
   font-size:.84rem;color:var(--t3,#7C8290)}
 /*/FOOTER:CSS*/
+/*BACKTO:CSS*/
+.backto{display:flex;align-items:center;gap:9px;width:fit-content;
+  margin:0 0 26px auto;padding:9px 15px;
+  border:1px solid var(--line,rgba(242,239,232,.12));border-radius:2px;
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.66rem;
+  letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;
+  color:var(--t2,#A8AEBB);text-decoration:none;
+  transition:color .25s ease,border-color .25s ease}
+.backto:hover,.backto:focus-visible{color:var(--copper-lt,#E9A063);
+  border-color:var(--copper-lt,#E9A063)}
+.backto .arw{transition:transform .25s ease}
+.backto:hover .arw{transform:translateX(-3px)}
+/*/BACKTO:CSS*/
 </style>
 <link href="/assets/nora.css" rel="stylesheet"/>
 <script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/engineering#page","url":"https://quenora.ai/engineering","name":"Most pilots don’t fail at the model. They stop at five layers.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"How Quenora engineers AI into production and governs it there: where pilots stop, what the evaluation harness measures, and the governance decisions that have to be made before anything ships.","breadcrumb":{"@id":"https://quenora.ai/engineering#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/engineering#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"Most pilots don’t fail at the model. They stop at five layers.","item":"https://quenora.ai/engineering"}]}]}</script><link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
@@ -417,7 +437,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 quenora
 <img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/></a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
-<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/it/approach.html">Phased Approach</a><a href="/it/capabilities.html">Nine Capabilities</a><a href="/it/work.html">What work we do?</a><a href="/it/about.html">Who are we?</a><a href="/it/pricing.html">View Pricing</a><a aria-current="page" class="on" href="/it/engineering.html">Engineering</a></nav>
+<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/it/about.html">Who are we?</a><a href="/it/work.html">What work we do?</a><a href="/it/approach.html">Phased Approach</a><a href="/it/capabilities.html">Nine Capabilities</a><a href="/it/pricing.html">View Pricing</a><a aria-current="page" class="on" href="/it/engineering.html">Engineering</a></nav>
 <a class="navcta" href="/it/index.html#climax"><span class="cta-long">Iniziamo a parlarne</span><span class="cta-short">Contatti</span></a>
 </div>
 </header>

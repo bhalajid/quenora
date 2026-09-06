@@ -109,6 +109,7 @@ DNT = re.compile(
     # platform names are proper nouns — they read the same in every
     # language, and were being counted as translation gaps
     r"LinkedIn|Instagram|Facebook|YouTube|X|"
+    r"Balaji Durai|"
     r"\[[^\]]+\]|Main|Footer|Quenora home|Reg / VAT|Core|Choose language|Sprache w\u00e4hlen|Choisir la langue|Elegir idioma|Scegli la lingua|Deutsch|English|Français|Español|Italiano|EN|DE|FR|ES|IT|AB/\d+|Phase \d+|\d+[\d\s:.,%–—/-]*|00:00|html|uenora|"
     # a telephone number reads the same in every language
     r"\+\d[\d\s/()-]*|"

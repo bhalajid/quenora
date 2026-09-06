@@ -118,6 +118,18 @@ JS = """<script>/*FORM:JS*/
     }
   });
 
+  /* The number box is the number and nothing else. The country code has its
+     own box beside it, so a + typed here would be a second one. Digits and
+     the separators people actually use; letters never. */
+  tel.addEventListener('input', function(){
+    var clean = tel.value.replace(/[^0-9 ()\/.\-]/g, '');
+    if (clean !== tel.value) {
+      var at = tel.selectionStart;
+      tel.value = clean;
+      try { tel.setSelectionRange(at - 1, at - 1); } catch (e) {}
+    }
+  });
+
   /* One number for the wire. The enquiry handler asks for this rather than
      reading the field, so what is sent is always the two boxes joined and
      never half of it. */

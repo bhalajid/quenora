@@ -1428,6 +1428,22 @@ main > section[hidden]{padding-block:0}
 .phonerow .codebox:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 /*/FORM:CSS*/
 /*FOOTER:CSS*/
+/* Self-contained on purpose — see the module docstring. Every value carries a
+   fallback so this renders the same on a page that defines the new tokens and
+   on one that does not. */
+footer .f-grid{display:grid;gap:38px;
+  grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))}
+@media(max-width:900px){footer .f-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media(max-width:560px){footer .f-grid{grid-template-columns:minmax(0,1fr)}}
+footer .f-lockup{display:flex;align-items:baseline;gap:9px;margin-bottom:20px}
+footer .f-lockup img{display:block;width:118px;height:auto}
+footer .f-lockup .f-desc{font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--t3,#7C8290)}
+footer .f-blurb{max-width:35ch;font-size:.96rem;color:var(--t2,#A8AEBB);margin:0}
+footer .f-where{font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--t3,#7C8290);margin:14px 0 0}
 /* the social row is a row of marks, not a stack of words */
 .f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;
@@ -1437,6 +1453,10 @@ main > section[hidden]{padding-block:0}
 .f-social a:hover,.f-social a:focus-visible{color:var(--copper-lt,#E9A063);
   border-color:var(--copper-lt,#E9A063)}
 .f-social svg{width:17px;height:17px;display:block}
+footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
+  justify-content:space-between;margin-top:56px;padding-top:22px;
+  border-top:1px solid var(--line,rgba(242,239,232,.09));
+  font-size:.84rem;color:var(--t3,#7C8290)}
 /*/FOOTER:CSS*/
 </style>
 <meta content="de_DE" property="og:locale"/>
@@ -1446,7 +1466,7 @@ main > section[hidden]{padding-block:0}
 <link href="/assets/brand/quenora-icon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/assets/brand/quenora-icon-180.png" rel="apple-touch-icon"/>
 <link href="/assets/brand/quenora-icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
-<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/><link href="https://quenora.ai/de" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de#page","url":"https://quenora.ai/de","name":"Die meiste Unternehmens-KI erreicht nie die Arbeit.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Quenora ist eine Enterprise-KI-Beratung in Bad Friedrichshall. Wir bauen KI in die Plattformen und Arbeitsabläufe ein, die Sie bereits betreiben, und übergeben Ihrem Team anschließend die Schlüssel."},{"@type":"FAQPage","@id":"https://quenora.ai/de#faq","mainEntity":[{"@type":"Question","name":"Warum keine große Beratung?","acceptedAnswer":{"@type":"Answer","text":"Für ein mehrjähriges Programm über mehrere Länder mit tausend Beteiligten sollten Sie eine nehmen — dafür sind sie gebaut und wir nicht. Für ein einzelnes System, das dieses Jahr in den Produktivbetrieb muss, kostet ihr Projektmodell mehr als das Problem und bewegt sich langsamer als Ihr Geschäft. Und die Menschen, die es verkaufen, sind selten die, die es bauen."}},{"@type":"Question","name":"Warum nicht selbst bauen?","acceptedAnswer":{"@type":"Answer","text":"Oft sollten Sie das, und wir sagen es Ihnen auch. Holen Sie uns dann, wenn Ihr Team das Fachwissen hat, aber nicht die Plattformerfahrung — oder wenn es bereits vollständig durch die Systeme gebunden ist, die das Geschäft am Laufen halten. Die Übergabephase gibt es genau deshalb, damit am Ende die eigene Mannschaft die Antwort ist."}},{"@type":"Question","name":"Warum nicht einfach eine Anbieterplattform kaufen?","acceptedAnswer":{"@type":"Answer","text":"Wenn ein Produkt Ihren Fall wirklich abdeckt, kaufen Sie es — das ist günstiger als alles, was wir bauen würden. Wir werden für das gerufen, was danach übrig bleibt: dieses Produkt an Systeme anzubinden, für die es nie gedacht war, und die Governance-Nachweise zu erzeugen, die der Anbieter nicht liefert."}},{"@type":"Question","name":"Sie haben keine veröffentlichten Fallstudien.","acceptedAnswer":{"@type":"Answer","text":"Richtig, und wir erfinden auch keine. Quenora ist ein inhabergeführtes Unternehmen in seinem frühen Kapitel. Was wir tun: Wir vermitteln Ihnen vor einer Zusage ein direktes Gespräch mit einer Referenz und zeigen Ihnen im ersten Termin die tatsächliche Architektur und den Evaluationsansatz statt einer Verkaufspräsentation."}},{"@type":"Question","name":"Was passiert, wenn es nicht funktioniert?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 ist dafür da, das schriftlich zu beantworten, gemessen an der in Phase 01 vereinbarten Zahl. Hat sie sich nicht bewegt, sagen wir das. Der Code, die Dokumentation und das Evaluations-Harness bleiben in jedem Fall bei Ihnen — es gibt kein Szenario, in dem Sie ein Projekt ohne vorzeigbares Ergebnis beenden."}}]}]}</script></head>
+<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/><link href="https://quenora.ai/de" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de#page","url":"https://quenora.ai/de","name":"Die meiste Unternehmens-KI erreicht nie die Arbeit.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Quenora ist eine Enterprise-KI-Beratung in Bad Friedrichshall. Wir bauen KI in die Plattformen und Arbeitsabläufe ein, die Sie bereits betreiben, und übergeben Ihrem Team anschließend die Schlüssel."},{"@type":"FAQPage","@id":"https://quenora.ai/de#faq","mainEntity":[{"@type":"Question","name":"Warum keine große Beratung?","acceptedAnswer":{"@type":"Answer","text":"Für ein mehrjähriges Programm über mehrere Länder mit tausend Beteiligten sollten Sie eine nehmen — dafür sind sie gebaut und wir nicht. Für ein einzelnes System, das dieses Jahr in den Produktivbetrieb muss, kostet ihr Projektmodell mehr als das Problem und bewegt sich langsamer als Ihr Geschäft. Und die Menschen, die es verkaufen, sind selten die, die es bauen."}},{"@type":"Question","name":"Warum nicht selbst bauen?","acceptedAnswer":{"@type":"Answer","text":"Oft sollten Sie das, und wir sagen es Ihnen auch. Holen Sie uns dann, wenn Ihr Team das Fachwissen hat, aber nicht die Plattformerfahrung — oder wenn es bereits vollständig durch die Systeme gebunden ist, die das Geschäft am Laufen halten. Die Übergabephase gibt es genau deshalb, damit am Ende die eigene Mannschaft die Antwort ist."}},{"@type":"Question","name":"Warum nicht einfach eine Anbieterplattform kaufen?","acceptedAnswer":{"@type":"Answer","text":"Wenn ein Produkt Ihren Fall wirklich abdeckt, kaufen Sie es — das ist günstiger als alles, was wir bauen würden. Wir werden für das gerufen, was danach übrig bleibt: dieses Produkt an Systeme anzubinden, für die es nie gedacht war, und die Governance-Nachweise zu erzeugen, die der Anbieter nicht liefert."}},{"@type":"Question","name":"Sie haben keine veröffentlichten Fallstudien.","acceptedAnswer":{"@type":"Answer","text":"Richtig, und wir erfinden auch keine. Quenora ist ein inhabergeführtes Unternehmen in seinem frühen Kapitel. Was wir tun: Wir vermitteln Ihnen vor einer Zusage ein direktes Gespräch mit einer Referenz und zeigen Ihnen im ersten Termin die tatsächliche Architektur und den Evaluationsansatz statt einer Verkaufspräsentation."}},{"@type":"Question","name":"Was passiert, wenn es nicht funktioniert?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 ist dafür da, das schriftlich zu beantworten, gemessen an der in Phase 01 vereinbarten Zahl. Hat sie sich nicht bewegt, sagen wir das. Der Code, die Dokumentation und das Evaluations-Harness bleiben in jedem Fall bei Ihnen — es gibt kein Szenario, in dem Sie ein Projekt ohne vorzeigbares Ergebnis beenden."}}]}]}</script></head>
 <body class="no-js">
 <a class="skip" href="#main">Zum Inhalt springen</a>
 <div aria-hidden="true" id="ld"><div class="n">01</div><div class="bar"></div></div>
@@ -1496,7 +1516,7 @@ main > section[hidden]{padding-block:0}
 <section id="problem">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum"><span class="clabel">Kapitel</span>01</div>
+<div class="cnum"><span class="clabel">Kapitel · Projekte</span>01</div>
 <div>
 <h2>Die Demo war nie <em>das Schwierige</em>.</h2>
 <p class="lede">Kein KI-Programm scheitert daran, dass das Modell schwach war.
@@ -1531,7 +1551,7 @@ main > section[hidden]{padding-block:0}
 <section id="fit">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum"><span class="clabel">Kapitel</span>02</div>
+<div class="cnum"><span class="clabel">Kapitel · Projekte</span>02</div>
 <div>
 <h2>Drei Situationen, in die wir <em>tatsächlich</em> gerufen werden.</h2>
 <p class="lede">Kein Marktsegment. Die drei Problemformen, für die dieses Unternehmen gebaut wurde. Wenn keine davon auf Sie zutrifft, sind wir vermutlich nicht die richtige Firma — und das sollen Sie jetzt erfahren, nicht später.</p>
@@ -1543,7 +1563,7 @@ main > section[hidden]{padding-block:0}
 <section id="work">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum"><span class="clabel">Kapitel</span>03</div>
+<div class="cnum"><span class="clabel">Kapitel · Projekte</span>03</div>
 <div>
 <h2>Der Raum ist weit. Diese <em>drei</em> kehren wieder.</h2>
 <p class="lede">Keine Kundenliste und keine Speisekarte. Neun Fähigkeiten lassen sich auf mehr Probleme richten, als eine Seite auflisten könnte. Es folgen daher drei Formen, in die wir am häufigsten gerufen werden — beschrieben über ihre Gestalt und nicht darüber, wessen Logo darauf steht. Ist Ihre nicht dabei, ist das kein Zuschnittproblem; das ist der Normalfall.</p>
@@ -1559,7 +1579,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <section id="journey">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum"><span class="clabel">Kapitel</span>04</div>
+<div class="cnum"><span class="clabel">Kapitel · Vorgehen</span>04</div>
 <div>
 <h2>Sechs Phasen.<br/>Ausgelegt zu <em>beenden</em>.</h2>
 <p class="lede">Die meisten Beratungen sind darauf ausgerichtet, das Projekt zu verlängern.
@@ -1580,7 +1600,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <section id="solution">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum"><span class="clabel">Kapitel</span>05</div>
+<div class="cnum"><span class="clabel">Kapitel · Leistungen</span>05</div>
 <div>
 <h2>Neun Leistungen.<br/><em>Ein</em> Team.</h2>
 <p class="lede">Drei sind Kernleistungen, weil alles über sie läuft. Die
@@ -1617,7 +1637,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <section id="who">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum"><span class="clabel">Kapitel</span>06</div>
+<div class="cnum"><span class="clabel">Kapitel · Über uns</span>06</div>
 <div>
 <h2>Wen Sie tatsächlich <em>beauftragen</em>.</h2>
 <p class="lede">Eine große Beratung sollte nicht die Standardwahl sein. Das verpflichtet uns zu sagen, wen Sie stattdessen bekommen — einschließlich unserer Größe, wonach ein Einkaufsteam als Erstes fragt.</p>
@@ -1637,7 +1657,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <section id="principles">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum"><span class="clabel">Kapitel</span>07</div>
+<div class="cnum"><span class="clabel">Kapitel · Über uns</span>07</div>
 <div>
 <h2>Die Prinzipien hinter <em>der Bildmarke</em>.</h2>
 <p class="lede">Neun Kreise auf einem einzigen Bogen, jeder größer als der vorige, Schritt für Schritt wachsend vom ersten bis zum letzten. Jeder Kreis trägt ein Prinzip, auf dem dieses Unternehmen gebaut ist — niedergeschrieben, bevor eine Linie der Marke gezeichnet war, und der Maßstab, an dem wir die Arbeit messen.</p>
@@ -1673,62 +1693,10 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 </div>
 </div>
 </section>
-<section hidden="" id="build">
-<div class="wrap">
-<div class="chead rv">
-<div class="cnum"><span class="clabel">Kapitel</span>06</div>
-<div>
-<h2>Was <em>läuft.</em> und was gebaut ist.</h2>
-<p class="lede">Laufende Projekte nach Form und Phase, dazu die Frameworks, die aus früheren entstanden sind. Projekte werden ohne Kundennamen beschrieben; die Produkte gehören Ihnen, statt gemietete Lizenzen zu sein.</p>
-<a class="more" href="/de/products.html">Alle fünf Produkte im Detail</a>
-</div>
-</div>
-<h3 class="buildhead mono">Laufend</h3>
-<div class="builds">
-<article class="build rv">
-<p class="mono bstat bstat-live">In Umsetzung</p>
-<h4><span class="ph">[Project title]</span></h4>
-<p class="btech mono"><span class="ph">[Tech stack]</span></p>
-<p><span class="ph">[Use case — what it removes, in one sentence]</span></p>
-</article>
-<article class="build rv" data-d="1">
-<p class="mono bstat bstat-live">In Umsetzung</p>
-<h4><span class="ph">[Project title]</span></h4>
-<p class="btech mono"><span class="ph">[Tech stack]</span></p>
-<p><span class="ph">[Use case — what it removes, in one sentence]</span></p>
-</article>
-<article class="build rv" data-d="2">
-<p class="mono bstat bstat-scope">In Zuschnitt</p>
-<h4><span class="ph">[Project title]</span></h4>
-<p class="btech mono"><span class="ph">[Tech stack]</span></p>
-<p><span class="ph">[Use case — what it removes, in one sentence]</span></p>
-</article>
-</div>
-<h3 class="buildhead mono">Geliefert — Frameworks, die Ihnen gehören</h3>
-<div class="builds">
-<article class="build rv"><p class="mono bstat bstat-done">Geliefert</p>
-<h4>Automatisierungs-Beschleuniger</h4>
-<p class="btech mono">Prozess- &amp; Workflow-Automatisierung</p></article>
-<article class="build rv" data-d="1"><p class="mono bstat bstat-done">Geliefert</p>
-<h4>Enterprise-Agenten-Framework</h4>
-<p class="btech mono">Individuelle Agents &amp; Copilots</p></article>
-<article class="build rv" data-d="2"><p class="mono bstat bstat-done">Geliefert</p>
-<h4>KI-Reifegradanalyse</h4>
-<p class="btech mono">Strategie &amp; Beratung</p></article>
-<article class="build rv"><p class="mono bstat bstat-done">Geliefert</p>
-<h4>Governance-Werkzeugkasten</h4>
-<p class="btech mono">Governance, Sicherheit &amp; Compliance</p></article>
-<article class="build rv" data-d="1"><p class="mono bstat bstat-done">Geliefert</p>
-<h4>Plattform-Blaupause</h4>
-<p class="btech mono">Plattform- &amp; Deployment-Engineering</p></article>
-</div>
-<p class="whonote">Laufende Projekte werden ausschließlich nach Form und Phase gezeigt. Auf dieser Seite wird kein Kunde genannt, und keiner wird es ohne schriftliche Zustimmung.</p>
-</div>
-</section>
 <section id="honest">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum"><span class="clabel">Kapitel</span>08</div>
+<div class="cnum"><span class="clabel">Kapitel · Über uns</span>08</div>
 <div>
 <h2>Die Fragen, die Sie sich <em>bereits</em> stellen.</h2>
 <p class="lede">Wir sind ein kleines Unternehmen, das an Organisationen verkauft, die üblicherweise bei großen einkaufen. Dies sind die Einwände, die wir erwarten — hier beantwortet, damit das Gespräch weiter vorn beginnen kann.</p>
@@ -1759,7 +1727,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <section id="commercial">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum"><span class="clabel">Kapitel</span>09</div>
+<div class="cnum"><span class="clabel">Kapitel · Preise</span>09</div>
 <div>
 <h2>Wie sich das <em>zusammensetzt</em>.</h2>
 <p class="lede">Hier genannt statt nach drei Terminen, denn es spät zu erfahren kostet Ihr Quartal und unseres.</p>
@@ -1827,7 +1795,7 @@ Am Handy: tippen Sie auf <a href="/c">Kontakt speichern</a>.</p>
 </div>
 <div class="cfield">
 <label for="cfPhone">Telefon <span class="opt">(optional)</span></label>
-<div class="phonerow"><label class="vh" for="cfCode">Ländervorwahl</label><select id="cfCode"><option selected="" value="+49">+49  Deutschland</option><option value="+43">+43  Österreich</option><option value="+41">+41  Schweiz</option><option value="+33">+33  Frankreich</option><option value="+31">+31  Niederlande</option><option value="+32">+32  Belgien</option><option value="+44">+44  Vereinigtes Königreich</option><option value="+1">+1  USA / Kanada</option><option value="">Andere</option></select><input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" placeholder="152 3392 7436" title="Ziffern und die üblichen Trennzeichen: + ( ) / - und Leerzeichen." type="tel"/></div>
+<div class="phonerow"><label class="vh" for="cfCode">Ländervorwahl</label><select id="cfCode"><option selected="" value="+49">+49  Deutschland</option><option value="+43">+43  Österreich</option><option value="+41">+41  Schweiz</option><option value="+33">+33  Frankreich</option><option value="+31">+31  Niederlande</option><option value="+32">+32  Belgien</option><option value="+44">+44  Vereinigtes Königreich</option><option value="+1">+1  USA / Kanada</option><option value="">Andere</option></select><input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" placeholder="123 45 67 89" title="Ziffern und die üblichen Trennzeichen: + ( ) / - und Leerzeichen." type="tel"/></div>
 </div>
 <div class="cfield">
 <label for="cfMsg">Was steckt fest?</label>
@@ -1847,17 +1815,7 @@ Am Handy: tippen Sie auf <a href="/c">Kontakt speichern</a>.</p>
 </main>
 <footer>
 <div class="wrap">
-<div class="fgrid">
-<div>
-<div class="lockup" style="margin-bottom:var(--sp3)">
-<span class="brand lg"><img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/></span>
-<span class="desc">Consulting</span>
-</div>
-<p style="max-width:35ch;color:var(--t2);font-size:.96rem">
-          Enterprise-KI, für den Betrieb entwickelt. Eingebaut in das, was Sie bereits betreiben,
-          und dann übergeben.</p>
-<p class="mono" style="color:var(--t3)">International tätig</p>
-</div>
+<div class="fgrid f-grid">
 <!-- The footer mirrors the header, target for target. It used to send
      Approach, Capabilities and Work to approach.html, capabilities.html and
      work.html while the header sent the same three words to #journey,
@@ -1865,11 +1823,8 @@ Am Handy: tippen Sie auf <a href="/c">Kontakt speichern</a>.</p>
      landed on the previous design generation. Until those pages are rebuilt
      (scope-2), both navigations point at the same places. About was missing
      here entirely and is restored. -->
-<div><h3>Site map</h3><nav aria-label="Footer"><a href="/de/approach.html">Vorgehen</a><a href="/de/capabilities.html">Leistungen</a><a href="#commercial">Pricing</a><a href="/de/work.html">Projekte</a><a href="/de/about.html">Über uns</a><a href="#climax">Kontakt</a></nav></div><div><h3>Rechtliches</h3><nav aria-label="Rechtliches"><a href="/impressum.html">Impressum</a><a href="/privacy.html">Datenschutzerklärung</a></nav></div><div><h3>Folgen</h3><nav aria-label="Social Media" class="f-social"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.4 2.4 4.4 5.5V21h-4v-6.1c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9z"></path></svg></a><a aria-label="Instagram" href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.3" cy="6.7" r="1.3"></circle></svg></a><a aria-label="Facebook" href="https://www.facebook.com/people/Quenora-Consulting/61593930577480/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.3 0-1.7.8-1.7 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12.1z"></path></svg></a><a aria-label="X" href="https://x.com/quenora_ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-5.9l-4.6-6-5.3 6H3l7-8L2.5 3h6l4.2 5.5zm-1 16.2h1.7L7.6 4.7H5.8z"></path></svg></a></nav></div></div>
-<div class="fbot">
-<span>© 2026 Quenora Consulting</span>
-<span>Bad Friedrichshall, Deutschland · <a href="/impressum.html">Impressum</a> · <a href="/privacy.html">Datenschutz</a></span>
-</div>
+<div><div class="f-lockup"><img alt="Quenora" class="brandimg" decoding="async" height="525" src="/assets/brand/quenora-primary.svg" width="1439"/><span class="f-desc">Consulting</span></div><p class="f-blurb">Enterprise AI, engineered to operate. Built into what you already run, then handed over.</p><p class="f-where">International tätig</p></div><div><h3>Sitemap</h3><nav aria-label="Footer"><a href="/de/approach.html">Vorgehen</a><a href="/de/capabilities.html">Leistungen</a><a href="#commercial">Preise</a><a href="/de/work.html">Projekte</a><a href="/de/about.html">Über uns</a><a href="#climax">Kontakt</a></nav></div><div><h3>Rechtliches</h3><nav aria-label="Rechtliches"><a href="/impressum.html">Impressum</a><a href="/privacy.html">Datenschutzerklärung</a></nav></div><div><h3>Folgen</h3><nav aria-label="Social Media" class="f-social"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.4 2.4 4.4 5.5V21h-4v-6.1c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9z"></path></svg></a><a aria-label="Instagram" href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.3" cy="6.7" r="1.3"></circle></svg></a><a aria-label="Facebook" href="https://www.facebook.com/people/Quenora-Consulting/61593930577480/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.3 0-1.7.8-1.7 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12.1z"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@quenora-ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M23 12s0-3.9-.5-5.7a3 3 0 0 0-2.1-2.1C18.6 3.6 12 3.6 12 3.6s-6.6 0-8.4.6a3 3 0 0 0-2.1 2.1C1 8.1 1 12 1 12s0 3.9.5 5.7a3 3 0 0 0 2.1 2.1c1.8.6 8.4.6 8.4.6s6.6 0 8.4-.6a3 3 0 0 2.1-2.1c.5-1.8.5-5.7.5-5.7zM9.8 15.4V8.6l5.7 3.4z"></path></svg></a><a aria-label="X" href="https://x.com/quenora_ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-5.9l-4.6-6-5.3 6H3l7-8L2.5 3h6l4.2 5.5zm-1 16.2h1.7L7.6 4.7H5.8z"></path></svg></a></nav></div></div>
+<div class="f-bot"><span>© 2026 Quenora Consulting</span><span>Bad Friedrichshall, Deutschland · <a href="/impressum.html">Impressum</a> · <a href="/privacy.html">Datenschutz</a></span></div>
 </div>
 </footer>
 <!--WIDGET:HTML-->
@@ -3496,7 +3451,10 @@ Am Handy: tippen Sie auf <a href="/c">Kontakt speichern</a>.</p>
       name:  form.name.value.trim(),
       email: form.email.value.trim(),
       org:   form.org.value.trim(),
-      phone: form.phone.value.trim(),
+      /* the country code lives in its own box, so ask for the two
+         joined rather than reading half of the pair */
+      phone: (window.quenoraPhone ? window.quenoraPhone()
+                                  : form.phone.value.trim()),
       message: form.message.value.trim(),
       consent: form.consent.checked,
       company_url: form.company_url.value
@@ -3834,29 +3792,15 @@ Am Handy: tippen Sie auf <a href="/c">Kontakt speichern</a>.</p>
 })();
 </script>
 <!--/BACKTO:JS-->
-<script>
-/* The select writes into the phone field rather than submitting on its own,
-   so the endpoint still receives one string and nothing downstream changes. */
-(function(){
-  if (typeof document === 'undefined' ||
-      typeof document.addEventListener !== 'function') return;
-  var sel = document.getElementById('cfCode');
-  var tel = document.getElementById('cfPhone');
-  if (!sel || !tel) return;
-  function apply(){
-    var code = sel.value;
-    var rest = tel.value.replace(/^\s*\+\d{1,3}\s*/, '').trim();
-    tel.value = code ? (code + ' ' + rest).trim() : rest;
-  }
-  sel.addEventListener('change', apply);
-  tel.addEventListener('blur', function(){
-    if (sel.value && tel.value && tel.value.charAt(0) !== '+') apply();
-  });
-})();
-</script>
 <script>/*FORM:JS*/
-/* The select writes into the phone field rather than submitting on its own,
-   so the endpoint still receives one string and nothing downstream changes. */
+/* Two boxes, two jobs. The first is the country code and nothing else — a
+   list of the eight that come up, or a free box for anywhere else. The second
+   is the number on its own.
+
+   They used to be one: choosing a country wrote "+49 " into the number field,
+   so the code appeared twice on screen and a reader who edited around it
+   produced "+49 +49 152...". The two are joined only at the moment the
+   enquiry is sent, as "+49 - 152 92 74 36". */
 (function(){
   if (typeof document === 'undefined' ||
       typeof document.addEventListener !== 'function') return;
@@ -3882,17 +3826,9 @@ Am Handy: tippen Sie auf <a href="/c">Kontakt speichern</a>.</p>
   sel.parentNode.insertBefore(other, sel.nextSibling);
 
   function usingOther(){ return !other.hidden; }
-  function code(){ return usingOther() ? other.value.trim() : sel.value; }
-
-  function apply(){
-    var c = code();
-    var rest = tel.value.replace(/^\s*\+\d{1,3}\s*/, '').trim();
-    tel.value = (c && c !== '+') ? (c + ' ' + rest).trim() : rest;
-  }
-
-  function showList(){
-    other.hidden = true; sel.hidden = false;
-    sel.value = '+49'; apply();
+  function code(){
+    var c = usingOther() ? other.value.trim() : sel.value;
+    return (c && c !== '+') ? c : '';
   }
 
   sel.addEventListener('change', function(){
@@ -3902,28 +3838,33 @@ Am Handy: tippen Sie auf <a href="/c">Kontakt speichern</a>.</p>
       other.focus();
       var n = other.value.length;
       try { other.setSelectionRange(n, n); } catch (e) {}
-    } else {
-      apply();
     }
   });
 
   /* digits only, and always exactly one leading + */
   other.addEventListener('input', function(){
-    var digits = other.value.replace(/[^0-9]/g, '').slice(0, 4);
-    other.value = '+' + digits;
-    apply();
+    other.value = '+' + other.value.replace(/[^0-9]/g, '').slice(0, 4);
   });
   other.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') { showList(); sel.focus(); }
+    if (e.key === 'Escape') {
+      other.hidden = true; sel.hidden = false; sel.value = '+49'; sel.focus();
+    }
   });
   other.addEventListener('blur', function(){
-    if (other.value === '' || other.value === '+') showList();
+    if (other.value === '' || other.value === '+') {
+      other.hidden = true; sel.hidden = false; sel.value = '+49';
+    }
   });
 
-  tel.addEventListener('blur', function(){
+  /* One number for the wire. The enquiry handler asks for this rather than
+     reading the field, so what is sent is always the two boxes joined and
+     never half of it. */
+  window.quenoraPhone = function(){
+    var n = tel.value.trim();
+    if (!n) return '';
     var c = code();
-    if (c && c !== '+' && tel.value && tel.value.charAt(0) !== '+') apply();
-  });
+    return c ? (c + ' - ' + n) : n;
+  };
 })();
 /*/FORM:JS*/</script>
 </body>

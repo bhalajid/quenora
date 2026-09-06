@@ -172,6 +172,7 @@ def organisation(lang):
         "telephone": TEL,
         "sameAs": ["https://www.linkedin.com/company/quenora",
                    "https://www.facebook.com/people/Quenora-Consulting/61593930577480/",
+                   "https://www.youtube.com/@quenora-ai",
                    "https://x.com/quenora_ai",
                    "https://www.instagram.com/quenora.ai/"],
         "logo":  DOMAIN + "/assets/og-quenora.jpg",

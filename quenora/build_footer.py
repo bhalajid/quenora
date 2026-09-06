@@ -12,18 +12,21 @@ be made twice and the two drifted — which is how the audit found a footer
 sending Approach, Capabilities and Work to a previous design generation while
 the header sent the same three words somewhere else.
 
-This generator owns the three link columns — the map, the legal links and the
-social row — and writes the same ones into every page. It deliberately does
-NOT touch the brand column or the bottom bar: those carry each generation's
-own markup (an <img> lockup on the home page, an inline <use href="#mark9">
-on the inner pages), and unifying them means re-theming the inner pages, which
-is scope-2 work and not this.
+This generator owns the WHOLE footer — the brand column, the three link
+columns and the bottom bar — and writes the same one into every page. The home
+page's version is the one that wins.
 
-So: the footer NAVIGATION is identical everywhere by construction. The
-surrounding shell still belongs to whichever generation the page is on.
+It has to be self-contained to do that. The inner pages are still on the older
+design generation and define neither the tokens the home page footer uses
+(--sp3, --t2, --t3) nor its classes (.lockup, .desc, .fbot, .fgrid); all they
+share is .brandimg. So the markup uses its own f- prefixed classes and the
+stylesheet below carries every value with a var() fallback, rather than
+borrowing whatever each page happens to define. A custom property with no
+fallback is invalid at computed-value time and silently takes the initial
+value, which is how the language menu once rendered with no panel at all.
 
-The heading level follows the page's own system rather than being forced, so
-the existing stylesheet keeps applying.
+The heading level still follows the page's own system, so an inner page's
+existing footer heading styles keep applying.
 
 ORDER: this must run BEFORE build_nav.py. build_nav re-points header and
 footer links from one destination map and marks the current page; if it ran
@@ -57,10 +60,10 @@ LEGAL = [
 ]
 
 # Verified reachable before being linked, which is the rule this footer earned
-# the hard way: it once shipped three dead "#" anchors. YouTube is absent on
-# purpose — the URL supplied 404s, and youtube.com/@quenora is a different
-# account ("QUENORA — Honour Thy Self"), so linking it would send visitors to
-# a stranger's channel. It goes in the moment there is a real one.
+# the hard way: it once shipped three dead "#" anchors. YouTube took two
+# tries: the first URL 404d and youtube.com/@quenora turned out to be a
+# different account ("QUENORA — Honour Thy Self"). @quenora-ai is the real one
+# — "Quenora Consulting - YouTube" — and was checked before being linked.
 SOCIAL = [
     ("LinkedIn", "https://www.linkedin.com/company/quenora",
      '<path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 '
@@ -72,13 +75,36 @@ SOCIAL = [
     ("Facebook", "https://www.facebook.com/people/Quenora-Consulting/61593930577480/",
      '<path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 '
      '2.2.2v2.5h-1.2c-1.3 0-1.7.8-1.7 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12.1z"/>'),
+    ("YouTube", "https://www.youtube.com/@quenora-ai",
+     '<path d="M23 12s0-3.9-.5-5.7a3 3 0 0 0-2.1-2.1C18.6 3.6 12 3.6 12 3.6s-6.6 0-8.4.6a3 3 0 0 '
+     '0-2.1 2.1C1 8.1 1 12 1 12s0 3.9.5 5.7a3 3 0 0 0 2.1 2.1c1.8.6 8.4.6 8.4.6s6.6 0 8.4-.6a3 3 0 '
+     '0 2.1-2.1c.5-1.8.5-5.7.5-5.7zM9.8 15.4V8.6l5.7 3.4z"/>'),
     ("X", "https://x.com/quenora_ai",
      '<path d="M17.5 3h3l-6.6 7.5L21.8 21h-5.9l-4.6-6-5.3 6H3l7-8L2.5 3h6l4.2 5.5zm-1 16.2h1.7L7.6 '
      '4.7H5.8z"/>'),
 ]
 
 
+BLURB = ("Enterprise AI, engineered to operate. Built into what you already "
+         "run, then handed over.")
+
 CSS = """/*FOOTER:CSS*/
+/* Self-contained on purpose — see the module docstring. Every value carries a
+   fallback so this renders the same on a page that defines the new tokens and
+   on one that does not. */
+footer .f-grid{display:grid;gap:38px;
+  grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))}
+@media(max-width:900px){footer .f-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media(max-width:560px){footer .f-grid{grid-template-columns:minmax(0,1fr)}}
+footer .f-lockup{display:flex;align-items:baseline;gap:9px;margin-bottom:20px}
+footer .f-lockup img{display:block;width:118px;height:auto}
+footer .f-lockup .f-desc{font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--t3,#7C8290)}
+footer .f-blurb{max-width:35ch;font-size:.96rem;color:var(--t2,#A8AEBB);margin:0}
+footer .f-where{font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--t3,#7C8290);margin:14px 0 0}
 /* the social row is a row of marks, not a stack of words */
 .f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;
@@ -88,6 +114,10 @@ CSS = """/*FOOTER:CSS*/
 .f-social a:hover,.f-social a:focus-visible{color:var(--copper-lt,#E9A063);
   border-color:var(--copper-lt,#E9A063)}
 .f-social svg{width:17px;height:17px;display:block}
+footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
+  justify-content:space-between;margin-top:56px;padding-top:22px;
+  border-top:1px solid var(--line,rgba(242,239,232,.09));
+  font-size:.84rem;color:var(--t3,#7C8290)}
 /*/FOOTER:CSS*/"""
 
 
@@ -118,6 +148,8 @@ def build(path, page):
             heading = h.name
             break
     col_cls = kids[1].get("class") if len(kids) > 1 else None
+    if col_cls and "foot-col" not in col_cls:
+        col_cls = None
 
     def col(title, links, nav_label, social=False):
         d = soup.new_tag("div")
@@ -153,15 +185,68 @@ def build(path, page):
         d.append(nav)
         return d
 
+    def brand():
+        d = soup.new_tag("div")
+        lock = soup.new_tag("div")
+        lock["class"] = ["f-lockup"]
+        img = soup.new_tag("img", src="/assets/brand/quenora-primary.svg")
+        img["alt"] = "Quenora"
+        img["width"] = "1439"
+        img["height"] = "525"
+        img["decoding"] = "async"
+        img["class"] = ["brandimg"]
+        lock.append(img)
+        desc = soup.new_tag("span")
+        desc["class"] = ["f-desc"]
+        desc.string = "Consulting"
+        lock.append(desc)
+        d.append(lock)
+        p = soup.new_tag("p")
+        p["class"] = ["f-blurb"]
+        p.string = BLURB
+        d.append(p)
+        w = soup.new_tag("p")
+        w["class"] = ["f-where"]
+        w.string = "Working internationally"
+        d.append(w)
+        return d
+
     new_cols = [
+        brand(),
         col("Site map", MAP, "Footer"),
         col("Legal", LEGAL, "Legal"),
         col("Follow", SOCIAL, "Social", social=True),
     ]
-    for k in kids[1:]:
+    for k in kids:
         k.extract()
+    cls = row.get("class") or []
+    if "f-grid" not in cls:
+        row["class"] = cls + ["f-grid"]
     for c in new_cols:
         row.append(c)
+
+    # the bottom bar, same one everywhere. .fbot on the home page,
+    # .foot-line on the inner pages — one class now, and one set of contents.
+    bot = footer.select_one(".fbot, .foot-line, .f-bot")
+    nb = soup.new_tag("div")
+    nb["class"] = ["f-bot"]
+    left = soup.new_tag("span")
+    left.string = "© 2026 Quenora Consulting"
+    right = soup.new_tag("span")
+    right.append("Bad Friedrichshall, Germany · ")
+    a1 = soup.new_tag("a", href="impressum.html")
+    a1.string = "Legal notice"
+    right.append(a1)
+    right.append(" · ")
+    a2 = soup.new_tag("a", href="privacy.html")
+    a2.string = "Privacy"
+    right.append(a2)
+    nb.append(left)
+    nb.append(right)
+    if bot is not None:
+        bot.replace_with(nb)
+    else:
+        row.insert_after(nb)
 
     s = str(soup)
     if "/*FOOTER:CSS*/" in s:

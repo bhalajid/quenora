@@ -28,7 +28,7 @@ use, so the field says what it wants before anyone types.
 import os, re, sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-PLACEHOLDER = '152 3392 7436'
+PLACEHOLDER = '123 45 67 89'
 
 # Where the firm actually works, plus a way out. Codes read the same in every
 # language, so this needs no translation beyond the last row.
@@ -55,8 +55,14 @@ SELECT_CSS = """/*FORM:CSS*/
 
 
 JS = """<script>/*FORM:JS*/
-/* The select writes into the phone field rather than submitting on its own,
-   so the endpoint still receives one string and nothing downstream changes. */
+/* Two boxes, two jobs. The first is the country code and nothing else — a
+   list of the eight that come up, or a free box for anywhere else. The second
+   is the number on its own.
+
+   They used to be one: choosing a country wrote "+49 " into the number field,
+   so the code appeared twice on screen and a reader who edited around it
+   produced "+49 +49 152...". The two are joined only at the moment the
+   enquiry is sent, as "+49 - 152 92 74 36". */
 (function(){
   if (typeof document === 'undefined' ||
       typeof document.addEventListener !== 'function') return;
@@ -82,17 +88,9 @@ JS = """<script>/*FORM:JS*/
   sel.parentNode.insertBefore(other, sel.nextSibling);
 
   function usingOther(){ return !other.hidden; }
-  function code(){ return usingOther() ? other.value.trim() : sel.value; }
-
-  function apply(){
-    var c = code();
-    var rest = tel.value.replace(/^\s*\+\d{1,3}\s*/, '').trim();
-    tel.value = (c && c !== '+') ? (c + ' ' + rest).trim() : rest;
-  }
-
-  function showList(){
-    other.hidden = true; sel.hidden = false;
-    sel.value = '+49'; apply();
+  function code(){
+    var c = usingOther() ? other.value.trim() : sel.value;
+    return (c && c !== '+') ? c : '';
   }
 
   sel.addEventListener('change', function(){
@@ -102,28 +100,33 @@ JS = """<script>/*FORM:JS*/
       other.focus();
       var n = other.value.length;
       try { other.setSelectionRange(n, n); } catch (e) {}
-    } else {
-      apply();
     }
   });
 
   /* digits only, and always exactly one leading + */
   other.addEventListener('input', function(){
-    var digits = other.value.replace(/[^0-9]/g, '').slice(0, 4);
-    other.value = '+' + digits;
-    apply();
+    other.value = '+' + other.value.replace(/[^0-9]/g, '').slice(0, 4);
   });
   other.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') { showList(); sel.focus(); }
+    if (e.key === 'Escape') {
+      other.hidden = true; sel.hidden = false; sel.value = '+49'; sel.focus();
+    }
   });
   other.addEventListener('blur', function(){
-    if (other.value === '' || other.value === '+') showList();
+    if (other.value === '' || other.value === '+') {
+      other.hidden = true; sel.hidden = false; sel.value = '+49';
+    }
   });
 
-  tel.addEventListener('blur', function(){
+  /* One number for the wire. The enquiry handler asks for this rather than
+     reading the field, so what is sent is always the two boxes joined and
+     never half of it. */
+  window.quenoraPhone = function(){
+    var n = tel.value.trim();
+    if (!n) return '';
     var c = code();
-    if (c && c !== '+' && tel.value && tel.value.charAt(0) !== '+') apply();
-  });
+    return c ? (c + ' - ' + n) : n;
+  };
 })();
 /*/FORM:JS*/</script>"""
 
@@ -168,6 +171,17 @@ def main():
     # the first time, so any change here never reached a built page — the same
     # trap as the placeholder above. Delimited and idempotent now, the way the
     # widget and the preview stylesheet already are.
+    # Drop any unmarked copy of this script first. The original was inserted
+    # before the marker existed, so the marker-based replace below could not
+    # see it and simply added a second, marked copy alongside — and both ran.
+    # The old one wrote the country code into the number field, which is the
+    # behaviour this change exists to remove, so it kept winning. Exactly the
+    # duplicate the language switcher hit, for exactly the same reason.
+    s = re.sub(
+        r"<script>(?![^<]*?/\*FORM:JS\*/)(?:(?!</script>).)*?"
+        r"getElementById\('cfCode'\)(?:(?!</script>).)*?</script>",
+        '', s, flags=re.S)
+
     if '/*FORM:JS*/' in s:
         s = re.sub(r'<script>/\*FORM:JS\*/.*?/\*/FORM:JS\*/</script>',
                    lambda _m: JS, s, flags=re.S)

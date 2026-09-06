@@ -106,10 +106,16 @@ for f in sorted(glob.glob(os.path.join(d, "*.html")) +
         if re.search(r'<a href="#"[^>]*>[^<]*' + label, h):
             issues.append(n + ": dead legal link (" + label + ")")
     # Every page must be able to reach both legal pages from its own footer.
-    if not re.search(r'href="(\.\./)?impressum\.html"', h):
-        issues.append(n + ": no link to the legal notice")
-    if not re.search(r'href="(\.\./)?privacy\.html"', h):
-        issues.append(n + ": no link to the privacy notice")
+    # The localised pages link root-absolutely — /impressum.html — because
+    # build_i18n.localise_paths rewrites them that way on purpose: under
+    # cleanUrls, /de/index.html is served at /de, whose directory is /, so a
+    # relative hop out of the language folder lands somewhere the author did
+    # not mean. Allowing only the bare and ../ forms reported 64 missing legal
+    # links across de/ fr/ es/ it/ that were all present and all correct, and
+    # it would report them again the moment localisation is switched back on.
+    for page, what in (("impressum", "legal notice"), ("privacy", "privacy notice")):
+        if not re.search(r'href="(\.\./|/)?' + page + r'\.html"', h):
+            issues.append(n + ": no link to the " + what)
 
 print("\n".join("   " + i for i in issues))
 sys.exit(1 if issues else 0)

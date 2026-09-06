@@ -157,13 +157,13 @@
     certification:['iso','soc','attestations'],
     certifications:['iso','soc','attestations'],
     certified:['iso','soc','attestations'], compliance:['governance','iso','soc'],
-    big:['firm','small','size','depth'], many:['firm','small','size'],
-    people:['firm','team','size','depth'], headcount:['firm','size','depth'],
+    big:['firm','small','size'], many:['firm','small','size'],
+    people:['firm','team','size','person'], headcount:['firm','size','small'],
     staff:['firm','team','size'],
-    who:['hiring','founder','firm','balaji','founded'],
+    who:['hiring','founder','firm','founded'],
     where:['heilbronn','germany','based'],
     you:['quenora','firm','hiring'], about:['hiring','founder','firm','founded'],
-    behind:['founder','hiring','balaji'], founder:['balaji','hiring','founded'],
+    behind:['founder','hiring','founded'], founder:['hiring','founded','led'],
     based:['heilbronn','germany','where'], where:['heilbronn','germany','based'],
     located:['heilbronn','germany','based'], office:['heilbronn','germany','based'],
     country:['heilbronn','germany'], languages:['german','french','english'],
@@ -171,7 +171,7 @@
   };
   /* the same bridge in the two other published languages */
   var ALIAS_DE = {
-    wer:['balaji','inhabergefuhrt','firma','gegrundet'],
+    wer:['inhabergefuhrt','firma','gegrundet'],
     wo:['heilbronn','deutschland','sitz'],
     seid:['quenora','firma'], sitzt:['heilbronn','deutschland','sitz'],
     sitz:['heilbronn','deutschland'], standort:['heilbronn','deutschland','sitz'],
@@ -185,7 +185,7 @@
     sprache:['deutsch','franzosisch','englisch']
   };
   var ALIAS_FR = {
-    qui:['balaji','fondateur','cabinet','dirige'],
+    qui:['fondateur','cabinet','dirige'],
     etes:['quenora','cabinet','dirige'],
     situes:['heilbronn','allemagne','siege'], situe:['heilbronn','allemagne','siege'],
     base:['heilbronn','allemagne','siege'], siege:['heilbronn','allemagne'],

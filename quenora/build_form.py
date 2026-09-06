@@ -58,7 +58,10 @@ def main():
     # so that guard also skipped the country select that comes after it — the
     # select sat in this file for a build and never reached a page.
     if 'placeholder=' in tag:
-        new = tag
+        # Normalise rather than leave alone. The field sits behind a country
+        # select that already shows +49, so a placeholder carrying the code as
+        # well told the reader to type it twice.
+        new = re.sub(r'placeholder="[^"]*"', 'placeholder="%s"' % PLACEHOLDER, tag)
     else:
         new = tag.replace('type="tel"', 'type="tel" placeholder="%s"' % PLACEHOLDER)
     s = s.replace(tag, new, 1)

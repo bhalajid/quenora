@@ -1303,6 +1303,21 @@ main > section .chead + .ch3{margin-top:0}
    any two chapters — even and far too generous. 104 each side gives 208,
    which still separates them without a screen of nothing in between. */
 main > section{padding-block:var(--sp6)}
+/* A hairline where one chapter ends and the next begins. The gutter was
+   already uniform — every chapter measures 104px top and bottom — but with
+   nothing drawn at the boundary the eye had no reference, and chapters of
+   very different heights read as unevenly spaced. The rule lands exactly
+   halfway between two chapters. #climax already carried this border; this is
+   the same 1px and the same token, applied to all of them.
+
+   .clabel names what the numerals are, because Nora answers with "chapter
+   08" and nothing on the page connected the two. It has to reset the
+   numeral's own treatment: a transparent fill and an ember stroke are wrong
+   for six characters of mono. */
+main > section:not(.hook){border-top:1px solid var(--line)}
+.clabel{display:block;font-family:'JetBrains Mono',monospace;font-style:normal;
+  font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--t3);-webkit-text-stroke:0;line-height:1;margin-bottom:.5em}
 main > section.hook{padding-block:168px 64px}
 main > section#climax{padding-block:104px 250px}
 main > section[hidden]{padding-block:0}
@@ -1417,7 +1432,7 @@ main > section[hidden]{padding-block:0}
 <section id="problem">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">01</div>
+<div class="cnum"><span class="clabel">Kapitel</span>01</div>
 <div>
 <h2>Die Demo war nie <em>das Schwierige</em>.</h2>
 <p class="lede">Kein KI-Programm scheitert daran, dass das Modell schwach war.
@@ -1452,7 +1467,7 @@ main > section[hidden]{padding-block:0}
 <section id="fit">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">02</div>
+<div class="cnum"><span class="clabel">Kapitel</span>02</div>
 <div>
 <h2>Drei Situationen, in die wir <em>tatsächlich</em> gerufen werden.</h2>
 <p class="lede">Kein Marktsegment. Die drei Problemformen, für die dieses Unternehmen gebaut wurde. Wenn keine davon auf Sie zutrifft, sind wir vermutlich nicht die richtige Firma — und das sollen Sie jetzt erfahren, nicht später.</p>
@@ -1464,13 +1479,13 @@ main > section[hidden]{padding-block:0}
 <section id="journey">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">03</div>
+<div class="cnum"><span class="clabel">Kapitel</span>03</div>
 <div>
-<h2>Sechs Phasen. Ausgelegt zu <em>beenden</em>.</h2>
+<h2>Sechs Phasen.<br/>Ausgelegt zu <em>beenden</em>.</h2>
 <p class="lede">Die meisten Beratungen sind darauf ausgerichtet, das Projekt zu verlängern.
              Diese ist darauf ausgerichtet, es abzuschließen — jede Phase trägt eine
              Abschlussbedingung, die im Leistungsschein festgehalten ist.</p>
-<a class="more" href="/de/approach.html">Das Vorgehen im Detail</a>
+<a class="more" href="/de/approach.html">Sechs Phasen — im Detail</a>
 </div>
 </div>
 </div>
@@ -1485,13 +1500,13 @@ main > section[hidden]{padding-block:0}
 <section id="solution">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">04</div>
+<div class="cnum"><span class="clabel">Kapitel</span>04</div>
 <div>
-<h2>Neun Leistungen. <em>Ein</em> Team.</h2>
+<h2>Neun Leistungen.<br/><em>Ein</em> Team.</h2>
 <p class="lede">Drei sind Kernleistungen, weil alles über sie läuft. Die
              anderen sechs kommen nur hinzu, wenn die Arbeit sie braucht — nie, um ein
              Angebot zu füllen. Nichts wird an einen Subunternehmer gegeben, den Sie nie getroffen haben.</p>
-<a class="more" href="/de/capabilities.html">Alle neun im Detail</a>
+<a class="more" href="/de/capabilities.html">Neun Leistungen — im Detail</a>
 </div>
 </div>
 <div class="orb wrap rv"><ol class="orb-ring"><li class="orb-item" style="--i:0"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">04</span><span class="orb-name">KI-Strategie und Beratung</span></li><li class="orb-item" style="--i:1"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">05</span><span class="orb-name">Data Engineering und Analytics</span></li><li class="orb-item" style="--i:2"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">06</span><span class="orb-name">Individuelle KI-Agenten und Copilots</span></li><li class="orb-item" style="--i:3"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">07</span><span class="orb-name">KI-Governance, Sicherheit und Compliance</span></li><li class="orb-item" style="--i:4"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">08</span><span class="orb-name">Betreuter KI-Betrieb</span></li><li class="orb-item" style="--i:5"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">09</span><span class="orb-name">Change Management und Befähigung</span></li></ol><ol class="orb-core"><li class="orb-item core"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">01</span><span class="orb-name">Plattform- &amp; Deployment-Engineering</span></li><li class="orb-item core"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">02</span><span class="orb-name">Prozess- &amp; Workflow-Automatisierung</span></li><li class="orb-item core"><span aria-hidden="true" class="orb-dot"></span><span class="orb-n mono">03</span><span class="orb-name">KI-Integration</span></li></ol></div>
@@ -1505,7 +1520,7 @@ main > section[hidden]{padding-block:0}
 <section id="work">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">05</div>
+<div class="cnum"><span class="clabel">Kapitel</span>05</div>
 <div>
 <h2>Der Raum ist weit. Diese <em>drei</em> kehren wieder.</h2>
 <p class="lede">Keine Kundenliste und keine Speisekarte. Neun Fähigkeiten lassen sich auf mehr Probleme richten, als eine Seite auflisten könnte. Es folgen daher drei Formen, in die wir am häufigsten gerufen werden — beschrieben über ihre Gestalt und nicht darüber, wessen Logo darauf steht. Ist Ihre nicht dabei, ist das kein Zuschnittproblem; das ist der Normalfall.</p>
@@ -1538,7 +1553,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <section hidden="" id="build">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">06</div>
+<div class="cnum"><span class="clabel">Kapitel</span>06</div>
 <div>
 <h2>Was <em>läuft.</em> und was gebaut ist.</h2>
 <p class="lede">Laufende Projekte nach Form und Phase, dazu die Frameworks, die aus früheren entstanden sind. Projekte werden ohne Kundennamen beschrieben; die Produkte gehören Ihnen, statt gemietete Lizenzen zu sein.</p>
@@ -1590,7 +1605,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <section id="honest">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">06</div>
+<div class="cnum"><span class="clabel">Kapitel</span>06</div>
 <div>
 <h2>Die Fragen, die Sie sich <em>bereits</em> stellen.</h2>
 <p class="lede">Wir sind ein kleines Unternehmen, das an Organisationen verkauft, die üblicherweise bei großen einkaufen. Dies sind die Einwände, die wir erwarten — hier beantwortet, damit das Gespräch weiter vorn beginnen kann.</p>
@@ -1617,7 +1632,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <section id="who">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">07</div>
+<div class="cnum"><span class="clabel">Kapitel</span>07</div>
 <div>
 <h2>Wen Sie tatsächlich <em>beauftragen</em>.</h2>
 <p class="lede">Das vorige Kapitel argumentiert, dass eine große Beratung nicht die Standardwahl sein sollte. Das verpflichtet uns zu sagen, wen Sie stattdessen bekommen — einschließlich unserer Größe, wonach ein Einkaufsteam als Erstes fragt.</p>
@@ -1637,7 +1652,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <section id="commercial">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">08</div>
+<div class="cnum"><span class="clabel">Kapitel</span>08</div>
 <div>
 <h2>Wie sich das <em>zusammensetzt</em>.</h2>
 <p class="lede">Hier genannt statt nach drei Terminen, denn es spät zu erfahren kostet Ihr Quartal und unseres.</p>
@@ -1660,7 +1675,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 <section id="principles">
 <div class="wrap">
 <div class="chead rv">
-<div class="cnum">09</div>
+<div class="cnum"><span class="clabel">Kapitel</span>09</div>
 <div>
 <h2>Die Prinzipien hinter <em>der Bildmarke</em>.</h2>
 <p class="lede">Neun Kreise auf einem einzigen Bogen, jeder größer als der vorige, Schritt für Schritt wachsend vom ersten bis zum letzten. Jeder Kreis trägt ein Prinzip, auf dem dieses Unternehmen gebaut ist — niedergeschrieben, bevor eine Linie der Marke gezeichnet war, und der Maßstab, an dem wir die Arbeit messen.</p>
@@ -1742,7 +1757,7 @@ Ausprobieren: dieselbe Frage, zweimal beantwortet</a></div>
 </div>
 <div class="cfield">
 <label for="cfPhone">Telefon <span class="opt">(optional)</span></label>
-<div class="phonerow"><label class="vh" for="cfCode">Ländervorwahl</label><select id="cfCode"><option selected="" value="+49">+49  Deutschland</option><option value="+43">+43  Österreich</option><option value="+41">+41  Schweiz</option><option value="+33">+33  Frankreich</option><option value="+31">+31  Niederlande</option><option value="+32">+32  Belgien</option><option value="+44">+44  Vereinigtes Königreich</option><option value="+1">+1  USA / Kanada</option><option value="">Andere</option></select><input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" placeholder="+49 152 3392 7436" title="Ziffern und die üblichen Trennzeichen: + ( ) / - und Leerzeichen." type="tel"/></div>
+<div class="phonerow"><label class="vh" for="cfCode">Ländervorwahl</label><select id="cfCode"><option selected="" value="+49">+49  Deutschland</option><option value="+43">+43  Österreich</option><option value="+41">+41  Schweiz</option><option value="+33">+33  Frankreich</option><option value="+31">+31  Niederlande</option><option value="+32">+32  Belgien</option><option value="+44">+44  Vereinigtes Königreich</option><option value="+1">+1  USA / Kanada</option><option value="">Andere</option></select><input autocomplete="tel" id="cfPhone" inputmode="tel" name="phone" pattern="[0-9 +\(\)\/\.\-]{6,}" placeholder="152 3392 7436" title="Ziffern und die üblichen Trennzeichen: + ( ) / - und Leerzeichen." type="tel"/></div>
 </div>
 <div class="cfield">
 <label for="cfMsg">Was steckt fest?</label>

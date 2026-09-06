@@ -40,6 +40,7 @@ const CARD = {
   tel:   ['+4915233927436', '+4915256433329'],
   email: 'info@quenora.ai',
   url:   'https://quenora.ai',
+  post:  '74117',
   city:  'Bad Friedrichshall',
   country: 'Germany'
 };
@@ -60,7 +61,8 @@ function vcard() {
     'TEL;TYPE=WORK,VOICE:' + CARD.tel[1],
     'EMAIL;TYPE=INTERNET,WORK:' + CARD.email,
     'URL:' + CARD.url,
-    'ADR;TYPE=WORK:;;;' + CARD.city + ';;;' + CARD.country,
+    /* ADR fields: po;ext;street;locality;region;postcode;country */
+    'ADR;TYPE=WORK:;;;' + CARD.city + ';;' + CARD.post + ';' + CARD.country,
     'NOTE:We engineer AI into the systems you already run, then hand it over.',
     'END:VCARD'
   ];

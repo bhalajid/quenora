@@ -325,6 +325,21 @@ POLISH = '''
    any two chapters — even and far too generous. 104 each side gives 208,
    which still separates them without a screen of nothing in between. */
 main > section{padding-block:var(--sp6)}
+/* A hairline where one chapter ends and the next begins. The gutter was
+   already uniform — every chapter measures 104px top and bottom — but with
+   nothing drawn at the boundary the eye had no reference, and chapters of
+   very different heights read as unevenly spaced. The rule lands exactly
+   halfway between two chapters. #climax already carried this border; this is
+   the same 1px and the same token, applied to all of them.
+
+   .clabel names what the numerals are, because Nora answers with "chapter
+   08" and nothing on the page connected the two. It has to reset the
+   numeral's own treatment: a transparent fill and an ember stroke are wrong
+   for six characters of mono. */
+main > section:not(.hook){border-top:1px solid var(--line)}
+.clabel{display:block;font-family:'JetBrains Mono',monospace;font-style:normal;
+  font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--t3);-webkit-text-stroke:0;line-height:1;margin-bottom:.5em}
 main > section.hook{padding-block:168px 64px}
 main > section#climax{padding-block:104px 250px}
 main > section[hidden]{padding-block:0}

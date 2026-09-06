@@ -112,7 +112,7 @@
  "All five products in detail": "Alle fünf Produkte im Detail",
  "All nine Quenora capabilities, from platform engineering to AI governance.": "Alle neun Leistungsbereiche von Quenora, von Platform Engineering bis KI-Governance.",
  "All nine capabilities": "Alle neun Leistungen",
- "All nine in detail": "Alle neun im Detail",
+ "Nine capabilities — in detail": "Neun Leistungen — im Detail",
  "All three, with the numbers": "Alle drei, mit den Zahlen",
  "Almost every engagement runs through these three. Most programmes fail at the seams\n      between them — strategy handed to engineering, engineering handed to delivery. We\n      don't have seams: the same team carries the work from architecture through to a system\n      you own. Six further capabilities join when the work calls for them.": "Nahezu jedes Projekt läuft über diese drei. Die meisten Programme scheitern an den Nahtstellen\n      dazwischen — Strategie geht an Engineering, Engineering geht an Delivery. Bei uns gibt es\n      diese Nahtstellen nicht: dasselbe Team trägt die Arbeit von der Architektur bis zu einem\n      System, das Ihnen gehört. Sechs weitere Leistungen kommen hinzu, wenn die Aufgabe es verlangt.",
  "An automation earns trust by knowing what it should not decide.\nDrawing that line is the work; a disclaimer appended afterwards is not the same\nthing.": "Eine Automatisierung verdient Vertrauen, indem sie weiß, was sie nicht entscheiden darf. Diese Linie zu ziehen ist die Arbeit; ein nachträglich angehängter Haftungsausschluss ist nicht dasselbe.",
@@ -668,7 +668,8 @@
  "Six phases, fourteen weeks,": "Sechs Phasen, vierzehn Wochen,",
  "Six phases, fourteen weeks, one handover": "Sechs Phasen, vierzehn Wochen, eine Übergabe",
  "Six phases, twelve weeks, one handover": "Sechs Phasen, zwölf Wochen, eine Übergabe",
- "Six phases. Designed to": "Sechs Phasen. Ausgelegt zu",
+ "Six phases.": "Sechs Phasen.",
+ "Designed to": "Ausgelegt zu",
  "Skip to content": "Zum Inhalt springen",
  "Smoke test, 118 assertions.": "Smoke-Test, 118 Zusicherungen.",
  "So a Quenora engagement produces a harness alongside the system: the test\nset, the metric, the thresholds and the script that runs them. It is what\nPhase 05 measures against, and it is": "Ein Quenora-Projekt erzeugt daher neben dem System ein Harness: das Testset, die Metrik, die Schwellenwerte und das Skript, das sie ausführt. Es ist das, wogegen Phase 05 misst, und es wird",
@@ -713,7 +714,7 @@
  "The": "Die",
  "The 5% and the threshold came from nowhere.": "Die 5 % und die Schwelle kamen aus dem Nichts.",
  "The Quenora mark: nine circles growing ninefold along a 90 degree arc": "Die Bildmarke von Quenora: neun Kreise, die entlang eines 90-Grad-Bogens auf das Neunfache anwachsen",
- "The approach in full": "Das Vorgehen im Detail",
+ "Six phase approach — in detail": "Sechs Phasen — im Detail",
  "The arc the whole identity is constructed on": "Der Bogen, auf dem die gesamte Identität aufgebaut ist",
  "The assistant answers confidently and is wrong often enough that people\nstopped trusting it. The model is fine. The data contract isn’t.": "Der Assistent antwortet souverän und liegt oft genug falsch, dass ihm niemand mehr vertraut. Das Modell ist in Ordnung. Der Datenvertrag nicht.",
  "The code, the documentation and the evaluation harness are yours regardless\nof how the engagement ends. There is no scenario where you finish with nothing\nto show for it.": "Der Code, die Dokumentation und das Evaluations-Harness gehören Ihnen, unabhängig davon, wie das Projekt endet. Es gibt kein Szenario, in dem Sie am Ende nichts vorzuweisen haben.",
@@ -1051,5 +1052,6 @@
  "“Invoice INV-88214, €48,900 from Rehder GmbH. It doesn’t match the PO. Can I post it?”": "„Rechnung INV-88214, 48.900 € von der Rehder GmbH. Sie stimmt nicht mit der Bestellung überein. Kann ich sie buchen?“",
  "“The model is 92% accurate” is not a finding, it is a claim. It becomes a\nfinding when someone else can re-run it next quarter, on new data, and get a\nnumber they can compare.": "„Das Modell ist zu 92 % genau“ ist kein Befund, sondern eine Behauptung. Es wird zu einem Befund, wenn jemand anderes es im nächsten Quartal mit neuen Daten erneut ausführen und eine vergleichbare Zahl erhalten kann.",
  "€2,040 overpaid": "2.040 € zu viel gezahlt",
- "▶ answering": "▶ antwortet"
+ "▶ answering": "▶ antwortet",
+ "Chapter": "Kapitel"
 }

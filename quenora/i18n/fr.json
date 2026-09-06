@@ -112,7 +112,7 @@
  "All five products in detail": "Les cinq produits en détail",
  "All nine Quenora capabilities, from platform engineering to AI governance.": "Les neuf expertises de Quenora, de l'ingénierie de plateforme à la gouvernance de l'IA.",
  "All nine capabilities": "Les neuf expertises",
- "All nine in detail": "Les neuf en détail",
+ "Nine capabilities — in detail": "Neuf expertises — en détail",
  "All three, with the numbers": "Les trois, avec les chiffres",
  "Almost every engagement runs through these three. Most programmes fail at the seams\n      between them — strategy handed to engineering, engineering handed to delivery. We\n      don't have seams: the same team carries the work from architecture through to a system\n      you own. Six further capabilities join when the work calls for them.": "Presque toutes nos missions passent par ces trois expertises. La plupart des programmes échouent aux jointures\n      qui les séparent — la stratégie passée à l'ingénierie, l'ingénierie passée à la livraison. Chez nous,\n      ces jointures n'existent pas : la même équipe porte le travail de l'architecture jusqu'à un système\n      qui vous appartient. Six autres expertises s'y ajoutent lorsque le travail l'exige.",
  "An automation earns trust by knowing what it should not decide.\nDrawing that line is the work; a disclaimer appended afterwards is not the same\nthing.": "Une automatisation gagne la confiance en sachant ce qu’elle ne doit pas décider. Tracer cette limite est le travail ; une clause de non-responsabilité ajoutée après coup n’est pas la même chose.",
@@ -668,7 +668,8 @@
  "Six phases, fourteen weeks,": "Six phases, quatorze semaines,",
  "Six phases, fourteen weeks, one handover": "Six phases, quatorze semaines, un transfert",
  "Six phases, twelve weeks, one handover": "Six phases, douze semaines, un transfert",
- "Six phases. Designed to": "Six phases. Conçues pour",
+ "Six phases.": "Six phases.",
+ "Designed to": "Conçues pour",
  "Skip to content": "Aller au contenu",
  "Smoke test, 118 assertions.": "Test de fumée, 118 assertions.",
  "So a Quenora engagement produces a harness alongside the system: the test\nset, the metric, the thresholds and the script that runs them. It is what\nPhase 05 measures against, and it is": "Une mission Quenora produit donc un harnais en même temps que le système : le jeu de test, la métrique, les seuils et le script qui les exécute. C’est ce par rapport à quoi la phase 05 mesure, et il est",
@@ -713,7 +714,7 @@
  "The": "La couche",
  "The 5% and the threshold came from nowhere.": "Les 5 % et le seuil sortent de nulle part.",
  "The Quenora mark: nine circles growing ninefold along a 90 degree arc": "Le symbole Quenora : neuf cercles dont la taille est multipliée par neuf le long d'un arc de 90 degrés",
- "The approach in full": "L’approche en détail",
+ "Six phase approach — in detail": "Six phases — en détail",
  "The arc the whole identity is constructed on": "L'arc sur lequel toute l'identité est construite",
  "The assistant answers confidently and is wrong often enough that people\nstopped trusting it. The model is fine. The data contract isn’t.": "L’assistant répond avec assurance et se trompe assez souvent pour que plus personne ne lui fasse confiance. Le modèle n’est pas en cause. Le contrat de données, si.",
  "The code, the documentation and the evaluation harness are yours regardless\nof how the engagement ends. There is no scenario where you finish with nothing\nto show for it.": "Le code, la documentation et le harnais d’évaluation vous appartiennent quelle que soit la façon dont la mission se termine. Il n’existe aucun cas où vous repartiez sans rien.",
@@ -1051,5 +1052,6 @@
  "“Invoice INV-88214, €48,900 from Rehder GmbH. It doesn’t match the PO. Can I post it?”": "« Facture INV-88214, 48 900 € de Rehder GmbH. Elle ne correspond pas à la commande. Puis-je la comptabiliser ? »",
  "“The model is 92% accurate” is not a finding, it is a claim. It becomes a\nfinding when someone else can re-run it next quarter, on new data, and get a\nnumber they can compare.": "« Le modèle est exact à 92 % » n’est pas un constat, c’est une affirmation. Cela devient un constat lorsque quelqu’un d’autre peut le réexécuter le trimestre suivant, sur de nouvelles données, et obtenir un chiffre comparable.",
  "€2,040 overpaid": "2 040 € payés en trop",
- "▶ answering": "▶ répond"
+ "▶ answering": "▶ répond",
+ "Chapter": "Chapitre"
 }

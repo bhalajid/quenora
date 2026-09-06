@@ -8,8 +8,10 @@ and German "kostet" at "Preis" — neither of which appears anywhere in the
 localised copy. A synonym aimed at a missing word is worse than none: it adds
 nothing and dilutes the real terms, and nothing failed to say so.
 
-This reads the alias tables out of index.html, tokenises each language's built
-index the same way the browser does, and fails on any target that is absent.
+This reads the alias tables out of widget/assistant.js — falling back to
+index.html, where they used to live — tokenises each language's built index the
+same way the browser does, and fails on any target that is absent. It also
+fails if it finds no tables at all, rather than passing on an empty set.
 """
 import json
 import os
@@ -53,8 +55,18 @@ def tables(html):
     return found
 
 
-html = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+# The tables moved out of index.html into widget/assistant.js. This stage kept
+# reading index.html, found nothing, and reported "0 synonym target(s) checked
+# across 0 language(s)" — then passed. Green, and testing nothing, for as long
+# as the widget has existed. An empty set is now a failure, not a pass.
+_widget = os.path.join(ROOT, "widget", "assistant.js")
+_source = _widget if os.path.exists(_widget) else os.path.join(ROOT, "index.html")
+html = open(_source, encoding="utf-8").read()
 maps = tables(html)
+if not maps:
+    print("   no alias tables found in %s — this stage was testing nothing"
+          % os.path.basename(_source))
+    sys.exit(1)
 paths = {"en": "assistant.json", "de": "de/assistant.json", "fr": "fr/assistant.json"}
 
 bad, checked = [], 0

@@ -105,7 +105,7 @@ def main():
         t.string = 'Quenora Consulting — About'
     for m in shell.find_all('meta'):
         if m.get('name') == 'description' or m.get('property') == 'og:description':
-            m['content'] = ('Quenora is founder-led, based in Heilbronn and working '
+            m['content'] = ('Quenora is founder-led, based in Bad Friedrichshall and working '
                             'internationally. Who you are actually hiring.')
 
     if make_page:

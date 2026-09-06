@@ -4,7 +4,24 @@
 // the interactive features actually work. No browser required.
 // ---------------------------------------------------------------
 const fs=require('fs'), path=require('path');
-const {JSDOM,VirtualConsole}=require('jsdom');
+const {JSDOM,VirtualConsole,ResourceLoader}=require('jsdom');
+
+// The assistant moved out of index.html into /assets/nora.js. With no resource
+// loader jsdom never fetched it, so "assistant opens on click" and everything
+// after it failed against a page that was working. Serving same-origin files
+// off disk runs the real script instead of asserting against its absence.
+// Cross-origin returns null, so the test can never reach the network — a CDN
+// script stays as broken here as it is on the networks this site sells into.
+const ORIGIN='https://quenora.ai';
+class SiteFiles extends ResourceLoader{
+  fetch(url){
+    let u; try{ u=new URL(url); }catch(e){ return null; }
+    if(u.origin!==ORIGIN) return null;
+    const p=path.join(DIR,decodeURIComponent(u.pathname));
+    if(!fs.existsSync(p)||!fs.statSync(p).isFile()) return null;
+    return Promise.resolve(fs.readFileSync(p));
+  }
+}
 
 const DIR=process.argv[2]||'..';
 const PAGES=['index.html','capabilities.html','products.html','approach.html','work.html','contact.html'];
@@ -24,7 +41,7 @@ async function load(file,reduceMotion=false){
   vc.on('error',(...a)=>errors.push(a.join(' ')));
   const dom=new JSDOM(html,{
     runScripts:'dangerously', pretendToBeVisual:true, virtualConsole:vc,
-    resources:undefined, url:'https://quenora.ai/'+file,
+    resources:new SiteFiles(), url:ORIGIN+'/'+file,
     beforeParse(w){
       // stubs jsdom lacks — must exist BEFORE page scripts run
       w.matchMedia=q=>({matches:reduceMotion&&/reduced-motion/.test(q),media:q,
@@ -33,6 +50,21 @@ async function load(file,reduceMotion=false){
         constructor(cb){this.cb=cb;}
         observe(el){setTimeout(()=>this.cb([{isIntersecting:true,target:el}],this),0);}
         unobserve(){} disconnect(){}
+      };
+      // jsdom has no fetch. The assistant fetches its search index the first
+      // time the panel opens, so without this every page threw
+      // ReferenceError before a single assertion ran. Same reasoning as the
+      // canvas stub: serve the real file rather than hide the code path.
+      w.fetch=(u)=>{
+        const rel=String(u).replace(/^https?:\/\/[^/]+\//,'').split('?')[0];
+        const p=path.join(DIR,rel);
+        if(!fs.existsSync(p)) return Promise.resolve({ok:false,status:404,
+          json:()=>Promise.reject(new Error('404 '+rel)),
+          text:()=>Promise.resolve('')});
+        const body=fs.readFileSync(p,'utf8');
+        return Promise.resolve({ok:true,status:200,
+          json:()=>Promise.resolve(JSON.parse(body)),
+          text:()=>Promise.resolve(body)});
       };
       w.requestAnimationFrame=cb=>setTimeout(()=>cb(Date.now()),16);
       w.cancelAnimationFrame=id=>clearTimeout(id);
@@ -169,8 +201,17 @@ for(const page of PAGES){
     check(page,'hero is 2D canvas, not WebGL',
           !/getContext\(\s*['"]webgl/.test(src));
     check(page,'no Three.js dependency',!/THREE\./.test(src));
-    check(page,'no external script tags',!/<script[^>]*\bsrc=/.test(src),
-          'the hero must not depend on a CDN');
+    // The rule this protects is CLAUDE.md's: no CDN scripts. GSAP and
+    // Three.js were both loaded from cdnjs once and both produced a dead hero
+    // on exactly the locked-down corporate networks this site sells into.
+    // A same-origin file has none of that failure mode, and forbidding every
+    // src at all failed the site for serving its own assistant from
+    // /assets/nora.js. Cross-origin is still refused.
+    const offsite=(src.match(/<script[^>]*\bsrc="[^"]*"/g)||[])
+      .map(t=>(t.match(/src="([^"]*)"/)||[])[1])
+      .filter(u=>u&&/^(https?:)?\/\//.test(u));
+    check(page,'no third-party script tags',offsite.length===0,
+          'the hero must not depend on a CDN: '+offsite.join(', '));
     check(page,'reduced-motion honoured',/prefers-reduced-motion/.test(src));
   }
 

@@ -63,12 +63,15 @@ def main():
     if changed:
         s = str(soup)
 
-    # every route to the conversation lands on the card
-    n = s.count('#climax"')
-    if n:
-        s = s.replace('index.html#climax"', 'index.html#talk"')
-        s = s.replace('"#climax"', '"#talk"')
-        changed.append('%d call(s) to action repointed' % n)
+    # REVERSED, deliberately. This used to send every call to action to the
+    # card. The measurement above still stands — from #climax the card is
+    # 619-955px below the fold depending on screen height — but the client has
+    # now seen both landings and chosen the invitation: the headline, the
+    # sentence saying what a first conversation is, and an ember line reading
+    # "Scroll below and reach out to us." That line is the answer to the
+    # objection this rewrite was built on, so the rewrite goes rather than
+    # silently overriding the choice. #climax carries a scroll-margin so the
+    # sticky header stays off the headline.
 
     if '/*CLIMAX:CSS*/' in s:
         s = re.sub(r'/\*CLIMAX:CSS\*/.*?/\*/CLIMAX:CSS\*/', CSS, s, flags=re.S)

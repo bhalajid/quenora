@@ -54,7 +54,7 @@ from bs4 import BeautifulSoup as BS
 ROOT   = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://quenora.ai"
 
-PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
+PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html", "pricing.html",
          "approach.html", "work.html", "contact.html"]
 EN_ONLY   = ["impressum.html", "privacy.html"]
 UNLISTED  = {"products.html"}
@@ -171,6 +171,8 @@ def organisation(lang):
         "email": "info@quenora.ai",
         "telephone": TEL,
         "sameAs": ["https://www.linkedin.com/company/quenora",
+                   "https://www.facebook.com/people/Quenora-Consulting/61593930577480/",
+                   "https://www.youtube.com/@quenora-ai",
                    "https://x.com/quenora_ai",
                    "https://www.instagram.com/quenora.ai/"],
         "logo":  DOMAIN + "/assets/og-quenora.jpg",
@@ -181,8 +183,16 @@ def organisation(lang):
         "foundingDate": "2025",
         "founder": {"@type": "Person", "name": "Balaji Durai",
                     "jobTitle": "Founder and Principal Consultant"},
+        # The machine-readable postal address is the one in the Impressum.
+        # The whole site now says Bad Friedrichshall — the earlier split, where
+        # the legal pages said one town and the copy said another, is closed.
+        # streetAddress is deliberately absent until the street and number
+        # arrive: a partial postal address is worse than none.
         "address": {"@type": "PostalAddress",
-                    "addressLocality": "Heilbronn", "addressCountry": "DE"},
+                    "postalCode": "74117",
+                    "addressLocality": "Bad Friedrichshall",
+                    "addressRegion": "Baden-Wurttemberg",
+                    "addressCountry": "DE"},
         "areaServed": [{"@type": "Place", "name": "Europe"}],
         "availableLanguage": ["en", "de", "fr"],
         "knowsAbout": ["Enterprise AI integration", "Platform engineering",
@@ -291,7 +301,7 @@ def llms_txt():
     A = L.append
     A("# Quenora Consulting")
     A("")
-    A("> Enterprise AI and automation consultancy in Heilbronn, Germany.")
+    A("> Enterprise AI and automation consultancy in Bad Friedrichshall, Germany.")
     A("> Founder-led. Works in English, German and French across Europe.")
     A("> Engineers AI into the systems a business already runs, then hands")
     A("> the client's own team the keys.")

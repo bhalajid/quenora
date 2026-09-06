@@ -1,6 +1,6 @@
 # Quenora Consulting
 
-> Enterprise AI and automation consultancy in Heilbronn, Germany.
+> Enterprise AI and automation consultancy in Bad Friedrichshall, Germany.
 > Founder-led. Works in English, German and French across Europe.
 > Engineers AI into the systems a business already runs, then hands
 > the client's own team the keys.
@@ -21,9 +21,10 @@ Founded 2025. Contact: info@quenora.ai · +49 152 3392 7436 · +49 152 5643 3329
 
 ## Pages
 
-- [Most enterprise AI never reaches the work.](https://quenora.ai/): Quenora is an enterprise AI consultancy in Heilbronn. We engineer AI into the platforms and workflows you already run, then hand your team the keys.
+- [Most enterprise AI never reaches the work.](https://quenora.ai/): Quenora is an enterprise AI consultancy in Bad Friedrichshall. We engineer AI into the platforms and workflows you already run, then hand your team the keys.
 - [Most pilots don’t fail at the model. They stop at five layers.](https://quenora.ai/engineering): How Quenora engineers AI into production and governs it there: where pilots stop, what the evaluation harness measures, and the governance decisions that have to be made before anything ships.
 - [Nine capabilities. One team behind all of them.](https://quenora.ai/capabilities): All nine Quenora capabilities, from platform engineering to AI governance.
+- [What it costs, and when you find out.](https://quenora.ai/pricing): How Quenora prices: a fixed fee to frame, fixed scope to build, handover included. Scoped to outcomes rather than day rates.
 - [A method built to end, not to renew itself.](https://quenora.ai/approach): A six-phase engagement method designed to end with your team running the system.
 - [Engagement patterns, honestly labelled.](https://quenora.ai/work): Engagement patterns and the sectors Quenora Consulting works in.
 - [One conversation. No deck required from you.](https://quenora.ai/contact): Start a conversation with Quenora Consulting. Europe and global remote.

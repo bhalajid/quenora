@@ -288,6 +288,52 @@ RHYTHM = '''
    One value, set on the head and cancelled on whatever follows so the two
    cannot add up. */
 main > section .chead{margin-bottom:64px}
+/* .chead carried padding:104px 0 40px from before the section gutter existed,
+   so every chapter heading sat 104px below the section's own 104px — 208px of
+   gap that only became obvious once a rule was drawn at the boundary. The
+   gutter belongs to the section; the head keeps only its bottom padding.
+   Nothing anchors to .chead, so no scroll offset depends on this. */
+main > section .chead{padding-top:0}
+/* .pin wraps chapter 01's counters and pads 64px top and bottom. The bottom
+   64 sat between the last content and the section's own 104, giving chapter
+   01 a 168px tail where every other chapter has 104. */
+#problem .pin{padding-bottom:0}
+/* and the caption under the gap figure ran straight into the counters */
+#problem .gapfig figcaption{padding-bottom:var(--sp4)}
+
+/* ── the closing invitation and the contact card ───────────────────────
+   The three call-to-action links all pointed at #talk, the card itself, so
+   they scrolled past the heading that says what a first conversation is.
+   They open #climax now, and it needs a scroll offset because the header is
+   sticky and would otherwise sit on top of the headline. */
+#climax{scroll-margin-top:96px}
+/* the third beat, in the same ember the headline's accent word carries */
+.reach{color:var(--ember)}
+/* the card is a set of labelled ways to reach a person, so the labels read
+   as labels and the privacy note reads as an aside rather than a claim */
+.qrsay .qrways{margin-top:var(--sp4);color:var(--copper-lt)}
+.qrsay .qrlabel{margin-top:var(--sp3);margin-bottom:4px;
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--t3)}
+.qrsay .qrmail a{color:var(--copper-lt)}
+.qrsay .qrnote{margin-top:6px;margin-bottom:var(--sp3);font-style:italic;
+  font-size:.82rem;color:var(--t3)}
+/* The phone numbers, the email and the vCard link are the contact details
+   themselves, not navigation, so they read as text and answer to the pointer
+   rather than announcing themselves in copper before anyone looks. */
+.qrsay .qrtel a,
+.qrsay .qrmail a,
+.qrsay p a[href="/c"]{color:var(--t1);
+  border-bottom-color:rgba(242,239,232,.28);
+  transition:color .25s var(--e),border-color .25s var(--e)}
+.qrsay .qrtel a:hover,
+.qrsay .qrmail a:hover,
+.qrsay p a[href="/c"]:hover,
+.qrsay .qrtel a:focus-visible,
+.qrsay .qrmail a:focus-visible,
+.qrsay p a[href="/c"]:focus-visible{color:var(--copper-lt);
+  border-bottom-color:var(--copper-lt)}
+.qrsay p a[href="/c"]{border-bottom:1px solid rgba(242,239,232,.28)}
 main > section .chead + *{margin-top:0}
 main > section .chead + .obj,
 main > section .chead + .money,
@@ -325,6 +371,21 @@ POLISH = '''
    any two chapters — even and far too generous. 104 each side gives 208,
    which still separates them without a screen of nothing in between. */
 main > section{padding-block:var(--sp6)}
+/* A hairline where one chapter ends and the next begins. The gutter was
+   already uniform — every chapter measures 104px top and bottom — but with
+   nothing drawn at the boundary the eye had no reference, and chapters of
+   very different heights read as unevenly spaced. The rule lands exactly
+   halfway between two chapters. #climax already carried this border; this is
+   the same 1px and the same token, applied to all of them.
+
+   .clabel names what the numerals are, because Nora answers with "chapter
+   08" and nothing on the page connected the two. It has to reset the
+   numeral's own treatment: a transparent fill and an ember stroke are wrong
+   for six characters of mono. */
+main > section:not(.hook){border-top:1px solid var(--line)}
+.clabel{display:block;font-family:'JetBrains Mono',monospace;font-style:normal;
+  font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--t3);-webkit-text-stroke:0;line-height:1;margin-bottom:.5em}
 main > section.hook{padding-block:168px 64px}
 main > section#climax{padding-block:104px 250px}
 main > section[hidden]{padding-block:0}

@@ -44,7 +44,7 @@ const CARD = {
   tel:   ['+4915233927436', '+4915256433329'],
   email: 'info@quenora.ai',
   url:   'https://quenora.ai',
-  city:  'Heilbronn',
+  city:  'Bad Friedrichshall',
   country: 'Germany'
 };
 

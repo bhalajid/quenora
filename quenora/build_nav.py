@@ -47,7 +47,7 @@ from bs4 import BeautifulSoup as BS
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
-PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
+PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html", "pricing.html",
          "approach.html", "work.html", "contact.html", "about.html",
          "impressum.html", "privacy.html"]
 
@@ -78,25 +78,42 @@ PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
 # page is gone — it was a stale copy of the home page, 52% of it duplicated —
 # and about.html replaces it on the standard shell, in all three languages. So
 # there is no exception left: five labels, one behaviour.
+# The header's own labels. They are deliberately NOT the footer's words: the
+# header routes to pages, the footer maps the home page's chapters, and a
+# label that means one thing in one nav and another thing in the other is the
+# defect stage 4d exists to catch. Different words, no collision.
+#
+# Generated from this list rather than edited per page, so all ten pages carry
+# the same header by construction.
+HEADER = [
+    ("Who are we?",       "about.html"),
+    ("What work we do?",  "work.html"),
+    ("Phased Approach",   "approach.html"),
+    ("Nine Capabilities", "capabilities.html"),
+    ("View Pricing",      "pricing.html"),
+    ("Engineering",       "engineering.html"),
+]
+
 DEST_HOME = {
     "Approach": "approach.html", "Capabilities": "capabilities.html",
     "Engineering": "engineering.html", "Work": "work.html",
-    "About": "about.html", "Contact": "#talk", "Home": "index.html",
+    "About": "about.html", "Contact": "#climax", "Home": "index.html",
 }
 DEST_INNER = {
     "Approach": "approach.html", "Capabilities": "capabilities.html",
     "Engineering": "engineering.html", "Work": "work.html",
-    "About": "about.html", "Contact": "index.html#talk",
+    "About": "about.html", "Contact": "index.html#climax",
     "Home": "index.html",
 }
 
 CURRENT = {
-    "approach.html":     "Approach",
-    "capabilities.html": "Capabilities",
+    "approach.html":     "Phased Approach",
+    "capabilities.html": "Nine Capabilities",
     "engineering.html":  "Engineering",
-    "work.html":         "Work",
+    "pricing.html":      "View Pricing",
+    "work.html":         "What work we do?",
     "contact.html":      "Contact",
-    "about.html":        "About",
+    "about.html":        "Who are we?",
 }
 
 CSS_M = ("/*NAV:CSS*/", "/*/NAV:CSS*/")
@@ -307,24 +324,59 @@ def retarget_and_mark(soup, page):
     """Put every nav label back on its one destination for this page, and flag
     the label this page IS. Header and footer both, because the release gate
     requires them to agree and a visitor reads whichever is nearer."""
-    # The closing chapter's landing point moved from the top of #climax to
-    # the contact card inside it, because #climax put the card 850px below the
-    # fold. build_climax only rewrites the home page, so every other page's
-    # header CTA still pointed at the old anchor while its own footer had
-    # moved — the gate caught the two disagreeing.
-    for a in soup.find_all('a', href=True):
-        if a['href'].endswith('#climax'):
-            a['href'] = a['href'][:-len('#climax')] + '#talk'
+    # This used to force every #climax link to #talk, the contact card inside
+    # it, because landing on #climax put the card 850px below the fold. The
+    # client has now seen both and wants the invitation first: "Build what
+    # keeps working", the sentence saying what a first conversation is, and
+    # only then the card. #climax carries a scroll-margin so the sticky header
+    # does not sit on the headline.
+    #
+    # Header and footer must still agree — stage 4d fails otherwise — so the
+    # destination is changed in one place, the maps below, rather than by
+    # rewriting hrefs after the fact.
 
     dest = DEST_HOME if page == "index.html" else DEST_INNER
     here = CURRENT.get(page)
     changed = marked = 0
-    for root in (soup.find("header"), soup.find("footer")):
+
+    # Rebuild the header's links from HEADER. Editing them per page is how the
+    # two navigations drifted apart in the first place.
+    nav = soup.select_one("header .navlinks")
+    if nav is not None:
+        keep = {}
+        for a in nav.find_all("a"):
+            keep[a.get("href", "").split("#")[0].split("/")[-1]] = a
+        nav.clear()
+        for label, href in HEADER:
+            a = keep.get(href)
+            if a is None:
+                a = soup.new_tag("a")
+            a.attrs.pop("class", None)
+            a.attrs.pop("aria-current", None)
+            a["href"] = href
+            a.clear()
+            a.string = label
+            nav.append(a)
+            changed += 1
+
+    # Only the header's hrefs are this file's to set. build_footer owns every
+    # footer link, and both writing them was exactly how the header CTA and the
+    # footer's Contact ended up pointing at two different anchors.
+    for root in (soup.find("header"),):
         if root is None:
             continue
         for a in root.find_all("a"):
             label = a.get_text(" ", strip=True)
-            want = dest.get(label)
+            # The call to action carries two labels — one for wide screens,
+            # one for narrow — so get_text returns both joined and matches
+            # nothing in the map, which left its href wherever the page's
+            # source happened to put it. It is the Contact destination, and
+            # stage 4d fails the moment it disagrees with the footer's own
+            # Contact link. That is exactly how the two drifted apart.
+            if "navcta" in (a.get("class") or []):
+                want = dest.get("Contact")
+            else:
+                want = dest.get(label)
             if want and a.get("href") != want:
                 a["href"] = want
                 changed += 1
@@ -340,6 +392,23 @@ def retarget_and_mark(soup, page):
             # Assign unconditionally. Stripping "on" from a link whose only
             # class was "on" left cls empty, and an empty list was silently
             # skipped — so a marker written by a previous run never came off.
+            if cls:
+                a["class"] = cls
+            elif a.get("class") is not None:
+                del a["class"]
+
+    # The current page is still marked in both navigations — that is a
+    # statement about where the reader is, not about where a link goes.
+    foot = soup.find("footer")
+    if foot is not None and here is not None:
+        for a in foot.find_all("a"):
+            cls = [c for c in (a.get("class") or []) if c != "on"]
+            if a.get("href", "").split("#")[0].split("/")[-1] == page:
+                cls.append("on")
+                a["aria-current"] = "page"
+                marked += 1
+            elif a.get("aria-current"):
+                del a["aria-current"]
             if cls:
                 a["class"] = cls
             elif a.get("class") is not None:

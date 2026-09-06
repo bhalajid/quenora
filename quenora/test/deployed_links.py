@@ -59,7 +59,8 @@ def pages():
             continue
         for f in fs:
             if f.endswith(".html") and "backup" not in f:
-                out.append(os.path.relpath(os.path.join(d, f), ROOT))
+                out.append(os.path.relpath(os.path.join(d, f), ROOT)
+                           .replace(os.sep, "/"))
     return sorted(out)
 
 

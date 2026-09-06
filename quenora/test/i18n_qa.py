@@ -30,14 +30,21 @@ from bs4 import BeautifulSoup, Comment
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 PAGES = ["index.html", "capabilities.html", "products.html",
          "approach.html", "work.html", "contact.html"]
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import site_langs
+
 LANGS = ["de", "fr", "es", "it"]
-# es and it are built but deliberately unlisted: noindex, absent from the
-# sitemap and not offered in the switcher. Advertising them in hreflang while
-# telling crawlers not to index them is a contradiction, so build_i18n.py
-# emits alternates for the LISTED languages only. This test predates that
-# decision and required all four, which failed a correct build.
-UNLISTED_LANGS = {"es", "it"}
-LISTED_LANGS = [l for l in LANGS if l not in UNLISTED_LANGS]
+# A language that is built but unlisted is noindex, absent from the sitemap
+# and not offered in the switcher. Advertising it in hreflang while telling
+# crawlers not to index it is a contradiction, so build_i18n.py emits
+# alternates for the LISTED languages only.
+#
+# This file used to keep its own copy of that set, which is exactly how
+# switching localisation off failed a correct build: the generator stopped
+# emitting de and fr alternates while this stage still demanded them.
+# Read the decision, do not restate it.
+LISTED_LANGS = [l for l in site_langs.offered(ROOT) if l != "en"]
+UNLISTED_LANGS = {l for l in LANGS if l not in LISTED_LANGS}
 LOCALE = {"de": "de_DE", "fr": "fr_FR", "es": "es_ES", "it": "it_IT"}
 
 KEEP = ["Quenora Technology Consulting", "quenora.ai", "hello@quenora.ai",

@@ -41,13 +41,13 @@
     [['what do you','services','offer','do you do','capabilit'],
      "Nine capabilities. Three are core — platform and deployment engineering, process and workflow automation, and AI integration — because everything runs through them. The other six step in only when the work needs them. Nothing is handed to a subcontractor you’ve never met."],
     [['who are you','about','founder','balaji','team','how big','size'],
-     "Quenora is founder-led, founded in 2025 by Balaji Durai. Before Quenora he ran transformation work for multinational manufacturers, retail banking and life sciences groups; those systems went on to be used by more than 100,000 people. We work from Heilbronn, internationally, in German, French and English."],
+     "Quenora is founder-led, founded in 2025 by Balaji Durai. Before Quenora he ran transformation work for multinational manufacturers, retail banking and life sciences groups; those systems went on to be used by more than 100,000 people. We work from Bad Friedrichshall, internationally, in German, French and English."],
     [['different','why you','compare','competitor','large consult','big four'],
      "Use a large consultancy for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, the person who scopes your engagement is the person who does the work and the person you call when it breaks."],
     [['long','time','timeline','how fast','duration','weeks'],
      "Six phases, from framing to handover, and each carries an exit condition written into the statement of work. Most engagements run twelve to fourteen weeks end to end, with a working pilot well before that. The engagement is designed to end."],
     [['cost','price','pricing','budget','how much','rate'],
-     "Scoped to outcomes rather than day rates. Chapter 08 on the homepage states how it’s priced rather than making you sit through three meetings to find out. A briefing gives you a real number, not a range designed to get a second meeting."],
+     "Scoped to outcomes rather than day rates. Chapter 09 on the homepage states how it’s priced rather than making you sit through three meetings to find out. A briefing gives you a real number, not a range designed to get a second meeting."],
     [['work','case','client','example','project','reference'],
      "Three patterns come up most: invoice processing across unintegrated ERP instances, support triage with knowledge retrieval, and legacy modernisation with predictive scheduling. They are described by shape rather than by client name, and the figures on the Work page are illustrative of the pattern rather than audited results."],
     [['product','framework','accelerator','toolkit','blueprint'],
@@ -62,8 +62,8 @@
      "Start a conversation from the button in the header, or email info@quenora.ai. A first call is a briefing, not a pitch."],
     [['language','german','french','english','deutsch'],
      "German, French and English."],
-    [['where','located','based','heilbronn','germany','office'],
-     "Based in Heilbronn, Germany, working internationally."]
+    [['where','located','based','friedrichshall','heilbronn','germany','office'],
+     "Based in Bad Friedrichshall, Germany, working internationally."]
   ];
 
   /* ═══ RETRIEVAL ═══════════════════════════════════════════════════════
@@ -157,24 +157,26 @@
     certification:['iso','soc','attestations'],
     certifications:['iso','soc','attestations'],
     certified:['iso','soc','attestations'], compliance:['governance','iso','soc'],
-    big:['firm','small','size','depth'], many:['firm','small','size'],
-    people:['firm','team','size','depth'], headcount:['firm','size','depth'],
+    big:['firm','small','size'], many:['firm','small','size'],
+    people:['firm','team','size','person'], headcount:['firm','size','small'],
     staff:['firm','team','size'],
-    who:['hiring','founder','firm','balaji','founded'],
-    where:['heilbronn','germany','based'],
+    who:['hiring','founder','firm','founded'],
+    where:['friedrichshall','germany','based'],
+    heilbronn:['friedrichshall','germany','based'],
     you:['quenora','firm','hiring'], about:['hiring','founder','firm','founded'],
-    behind:['founder','hiring','balaji'], founder:['balaji','hiring','founded'],
-    based:['heilbronn','germany','where'], where:['heilbronn','germany','based'],
-    located:['heilbronn','germany','based'], office:['heilbronn','germany','based'],
-    country:['heilbronn','germany'], languages:['german','french','english'],
+    behind:['founder','hiring','founded'], founder:['hiring','founded','led'],
+    based:['friedrichshall','germany','where'], where:['friedrichshall','germany','based'],
+    located:['friedrichshall','germany','based'], office:['friedrichshall','germany','based'],
+    country:['friedrichshall','germany'], languages:['german','french','english'],
     language:['german','french','english']
   };
   /* the same bridge in the two other published languages */
   var ALIAS_DE = {
-    wer:['balaji','inhabergefuhrt','firma','gegrundet'],
-    wo:['heilbronn','deutschland','sitz'],
-    seid:['quenora','firma'], sitzt:['heilbronn','deutschland','sitz'],
-    sitz:['heilbronn','deutschland'], standort:['heilbronn','deutschland','sitz'],
+    wer:['inhabergefuhrt','firma','gegrundet'],
+    wo:['friedrichshall','deutschland','sitz'],
+    heilbronn:['friedrichshall','deutschland','sitz'],
+    seid:['quenora','firma'], sitzt:['friedrichshall','deutschland','sitz'],
+    sitz:['friedrichshall','deutschland'], standort:['friedrichshall','deutschland','sitz'],
     kostet:['kosten','gekostet','zusammensetzt'], kosten:['kostet','gekostet'],
     lange:['wochen','phasen','vierzehn','dauert'],
     dauer:['wochen','phasen','dauert'], dauert:['wochen','phasen'],
@@ -185,10 +187,11 @@
     sprache:['deutsch','franzosisch','englisch']
   };
   var ALIAS_FR = {
-    qui:['balaji','fondateur','cabinet','dirige'],
+    qui:['fondateur','cabinet','dirige'],
     etes:['quenora','cabinet','dirige'],
-    situes:['heilbronn','allemagne','siege'], situe:['heilbronn','allemagne','siege'],
-    base:['heilbronn','allemagne','siege'], siege:['heilbronn','allemagne'],
+    situes:['friedrichshall','allemagne','siege'], situe:['friedrichshall','allemagne','siege'],
+    heilbronn:['friedrichshall','allemagne','siege'],
+    base:['friedrichshall','allemagne','siege'], siege:['friedrichshall','allemagne'],
     coute:['tarife','cout'], cout:['tarife'], couts:['tarife','cout'],
     tarif:['tarife','cout'], budget:['tarife','cout'],
     duree:['semaines','phases'], temps:['semaines','phases'],

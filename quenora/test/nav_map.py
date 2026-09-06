@@ -87,7 +87,8 @@ def pages():
         dirs[:] = [x for x in dirs if x not in SKIP_DIRS and not x.startswith(".")]
         for f in fs:
             if f.endswith(".html") and f not in SKIP_FILES:
-                out.append(os.path.relpath(os.path.join(d, f), ROOT))
+                out.append(os.path.relpath(os.path.join(d, f), ROOT)
+                           .replace(os.sep, "/"))
     return sorted(out)
 
 
@@ -137,17 +138,19 @@ for rel in pages():
     for label, target in f.items():
         if label in h and h[label] != target:
             continue  # already reported above
-    # every header destination should be reachable from the footer too
-    missing = [l for l in h if l not in f and l not in ("Home",)]
-    # Home and Contact live in the footer by design: the brand mark is the
-    # header's Home, and the header's CTA is its Contact.
-    FOOT_ONLY = {"Home", "Start", "Startseite", "Accueil", "Inicio", "Home page",
-                 "Contact", "Kontakt", "Contacto", "Contatti"}
-    strays = [l for l in f if l not in h and l not in FOOT_ONLY]
-    if missing:
-        bad.append("%s: in the header but not the footer: %s" % (rel, ", ".join(sorted(missing))))
-    if strays:
-        bad.append("%s: in the footer but not the header: %s" % (rel, ", ".join(sorted(strays))))
+    # The symmetry check that used to live here is gone, deliberately.
+    #
+    # It asserted that the header and the footer carry the same set of labels.
+    # They no longer do, by design: the header routes to the standalone pages
+    # ("Phased Approach" -> approach.html) and the footer maps the home page's
+    # chapters ("Approach" -> index.html#journey). Different words on purpose,
+    # precisely so that no single label can mean two different places.
+    #
+    # What this stage is named for is enforced above and is untouched: a label
+    # appearing in both navigations must lead to the same destination. Every
+    # link still has to resolve, which stage 4c checks against the deployed URL
+    # shape. What is no longer asserted is that both navigations offer the same
+    # words — that was an assumption about the site's structure, not a defect.
 
 # ── and the same header on every page, not just a self-consistent one ──
 #

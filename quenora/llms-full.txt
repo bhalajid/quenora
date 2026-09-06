@@ -5,7 +5,6 @@
 ## Most enterprise AI never reaches the work.
 
 We’re the firm you call when the pilot worked and nothing happened next. Quenora embeds AI and automation into the platforms, workflows and decisions your business already depends on — then equips your team to own it, and moves on. No lock-in. No dependency.
-No published case studies yet. We’ll arrange a call with a reference before you commit.
 
 ## The demo was never the hard part.
 
@@ -28,6 +27,14 @@ The assistant answers confidently and is wrong often enough that people stopped 
 
 Something is live, procurement or risk is now asking questions, and the evidence to answer them was never captured.
 
+## The space is wide. These three recur.
+
+Not a client list, and not a menu. Nine capabilities can be pointed at more problems than any page could list, so what follows is three shapes we are called into most often — described by their shape rather than by whose logo is on them. If yours is not one of the three, that is not a scoping problem; it is the usual case.
+
+## Legacy modernisation and predictive scheduling
+
+Representative engagement structures drawn from the sectors we work in. Any figures on the detail page are illustrative of the pattern rather than audited results from a named client.
+
 ## Six phases. Designed to finish.
 
 Most consultancies are designed to keep the engagement going. Ours is designed to bring it to a clean close — each phase carries an exit condition, agreed and written into the statement of work.
@@ -38,42 +45,9 @@ Recognise the shape of your problem in those six phases? Two paragraphs on what�
 Three are core, because everything runs through them. The other six step in only when the work needs them — never to pad a proposal. Nothing is handed to a subcontractor you’ve never met.
 Illustrative, not measured. Most work completes untouched. The rest is sent to a person by design — an automation earns trust only when it knows what it shouldn’t decide, and drawing that line is most of the job.
 
-## The space is wide. These three recur.
-
-Not a client list, and not a menu. Nine capabilities can be pointed at more problems than any page could list, so what follows is three shapes we are called into most often — described by their shape rather than by whose logo is on them. If yours is not one of the three, that is not a scoping problem; it is the usual case.
-
-## Legacy modernisation and predictive scheduling
-
-Representative engagement structures drawn from the sectors we work in. Any figures on the detail page are illustrative of the pattern rather than audited results from a named client.
-
-## What is running, and what is built.
-
-Ongoing engagements by shape and stage, and the frameworks that came out of earlier ones. Projects are described without client names; the products are yours to own rather than licences to rent.
-
-## Delivered — frameworks you own
-
-Ongoing engagements are shown by shape and stage only. No client is named anywhere on this page, and none will be without written permission.
-
-## The questions you’re already thinking.
-
-We’re a small firm selling into organisations that usually buy from large ones. These are the objections we expect, answered here so the call can start further along.
-You should use one for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, their engagement model costs more than the problem and moves slower than your business does. The people who sell it are also rarely the people who build it.
-Often you should, and we’ll say so. Bring us in when your team has the domain knowledge but not the platform experience, or when they’re already fully committed to the systems that keep the business running. The handover phase exists precisely so that in-house becomes the answer at the end.
-If a product genuinely covers your case, buy it — that’s cheaper than anything we’d build. The work we get called for is what remains: connecting that product to systems it was never designed to meet, and producing the governance evidence the vendor doesn’t.
-Correct, and we won’t invent them. Quenora is a founder-led firm in its early chapter. What we’ll do is arrange a direct conversation with a reference before you commit, and show you the actual architecture and evaluation approach in the first meeting rather than a sales deck.
-Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it.
-Still holding an objection we haven’t answered? Put it in the first message — a direct answer is more useful to both of us than a proposal.
-
 ## Who you’re actually hiring.
 
-The previous chapter argues you shouldn’t default to a large consultancy. That obliges us to say plainly who you get instead — including the size of us, which is the first thing a procurement team will ask.
-
-## How this is priced.
-
-Stated here rather than after three meetings, because finding out late wastes your quarter and ours.
-Two to three weeks, agreed before we start. You keep the written position whether or not you engage us for anything after it.
-Priced against a written scope with an explicit list of what’s excluded. Changes are re-scoped in the open, not absorbed quietly into the timeline.
-Never a separate line item. An engagement that ends without a working handover isn’t finished, so we don’t charge you twice to finish it.
+We argue you shouldn’t default to a large consultancy. What you get instead is a focused team of senior AI practitioners, and a delivery model designed around accountability rather than scale.
 
 ## The principles behind the mark.
 
@@ -107,14 +81,40 @@ The exact midpoint of the climb — built to last, not to trend.
 ## Innovative
 
 
+## Intelligent
+
+
+## The questions you’re already thinking.
+
+We’re a small firm selling into organisations that usually buy from large ones. These are the objections we expect, answered here so the call can start further along.
+You should use one for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, their engagement model costs more than the problem and moves slower than your business does. The people who sell it are also rarely the people who build it.
+Often you should, and we’ll say so. Bring us in when your team has the domain knowledge but not the platform experience, or when they’re already fully committed to the systems that keep the business running. The handover phase exists precisely so that in-house becomes the answer at the end.
+If a product genuinely covers your case, buy it — that’s cheaper than anything we’d build. The work we get called for is what remains: connecting that product to systems it was never designed to meet, and producing the governance evidence the vendor doesn’t.
+Correct, and we won’t invent them. Quenora is a founder-led firm in its early chapter. What we’ll do is arrange a direct conversation with a reference before you commit, and show you the actual architecture and evaluation approach in the first meeting rather than a sales deck.
+Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it.
+Still holding an objection we haven’t answered? Put it in the first message — a direct answer is more useful to both of us than a proposal.
+
+## How this is priced.
+
+Stated here rather than after three meetings, because finding out late wastes your quarter and ours.
+
 ## Build what keeps working.
 
-One focused conversation about where intelligence can remove friction or risk and add confidence in your operations. No deck. No discovery invoice.
-Scan to save Quenora Consulting to your phone — both numbers, the address and the email, in one tap.
+One focused conversation about where intelligence can remove friction or risk and add confidence in your operations. No deck. No discovery invoice. Scroll below and reach out to us.
+If you’re on your laptop, just scan the QR. If you’re on your mobile, tap Save the contact.
 
 ## Who you’re actually hiring.
 
-The previous chapter argues you shouldn’t default to a large consultancy. That obliges us to say plainly who you get instead — including the size of us, which is the first thing a procurement team will ask.
+Founder-led, and specific about what that means: who does the work, what they have run before, and how big the firm actually is.
+
+## Balaji Durai
+
+Sixteen years in enterprise IT, most of it inside organisations where a platform going down is a business incident rather than a ticket. Eight certifications across Azure, Citrix and ITIL. He works in German and English, from Bad Friedrichshall.
+Since 2025, inside a heavily regulated bank, he has introduced site reliability practice into an end-user computing estate and built the automation around it — Terraform, Kubernetes, Docker, GitHub Actions and LLM tooling — taking operating cost down by 60 per cent.
+From 2019 to 2025, at one of Europe’s largest retail groups, he designed, migrated and ran the Citrix DaaS and Azure platforms behind its retail and waste-management businesses, including standing up Azure Virtual Desktop from nothing. More than 80,000 people work on those platforms every day, and the optimisation returned seven-figure savings.
+He works as a GenAI transformation evangelist, putting Azure AI Foundry, OpenAI and Copilot into incident and automation workflows rather than into demonstrations. Earlier engagements spanned medical devices, retail, semiconductors and consumer internet.
+He builds his own systems too. BR Assist is a retrieval-augmented assistant for German works-council law: around 1,200 statutory provisions from twelve federal acts and some 700 Federal Labour Court decisions, indexed in Postgres with pgvector, where every answer carries the provision it came from so a reader can check it. It answers from the statute rather than from what a model remembers — the same argument this firm makes about enterprise AI, built to prove it.
+This is work from before Quenora. Described by shape rather than by name, the way the rest of this site describes engagements.
 
 ## Most pilots don’t fail at the model. They stop at five layers.
 
@@ -408,3 +408,25 @@ Success is your team running the system without us. We would rather be recommend
 
 ## Want to test this against your actual problem?
 
+
+## What it costs, and when you find out.
+
+There are no figures on this page, and that is deliberate — a number without a scope attached is a guess with a currency symbol in front of it. What is here is how the number is arrived at, what it is fixed against, and the point in the engagement at which you have it in writing.
+
+## Priced to a scope, not to a day rate.
+
+A day rate prices our time. It tells you what a week of us costs and nothing about whether the thing you wanted will exist at the end of it, and it pays us more the longer the work takes. Everything below is priced against a written scope instead, so the number moves when the scope moves and at no other time.
+
+## Three commitments
+
+Two to three weeks, agreed before we start. You keep the written position whether or not you engage us for anything after it.
+Priced against a written scope with an explicit list of what is excluded. Changes are re-scoped in the open, not absorbed quietly into the timeline.
+Never a separate line item. An engagement that ends without a working handover is not finished, so we do not charge you twice to finish it.
+
+## What you keep
+
+The written position from Phase 01, the code, the documentation and the evaluation harness. That holds whether the engagement runs to handover or stops at the end of the framing phase — there is no version of this where you pay and leave with nothing you can use.
+
+## How you get a number
+
+A first conversation is a briefing rather than a pitch, and it is not invoiced. Two paragraphs about what is stuck is enough to start. If the shape is one we can help with, the framing phase produces the scope and the figure together, in writing, before any build work is agreed.

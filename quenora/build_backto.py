@@ -31,6 +31,26 @@ import os, sys
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 MARK = ('<!--BACKTO:JS-->', '<!--/BACKTO:JS-->')
+CSSMARK = ('/*BACKTO:CSS*/', '/*/BACKTO:CSS*/')
+
+# The link had no styling at all — it inherited whatever the page gave a bare
+# anchor and sat above the kicker as a loose line of text. It reads as a
+# control now: one line, right-aligned against the page's own measure, in a
+# faded box. Values carry var() fallbacks because the inner pages are on the
+# older generation and define a different token set.
+CSS = '''/*BACKTO:CSS*/
+.backto{display:flex;align-items:center;gap:9px;width:fit-content;
+  margin:0 0 26px auto;padding:9px 15px;
+  border:1px solid var(--line,rgba(242,239,232,.12));border-radius:2px;
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.66rem;
+  letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;
+  color:var(--t2,#A8AEBB);text-decoration:none;
+  transition:color .25s ease,border-color .25s ease}
+.backto:hover,.backto:focus-visible{color:var(--copper-lt,#E9A063);
+  border-color:var(--copper-lt,#E9A063)}
+.backto .arw{transition:transform .25s ease}
+.backto:hover .arw{transform:translateX(-3px)}
+/*/BACKTO:CSS*/'''
 
 JS = """<script>
 /* Remember where the reader was when they left for another page, so the page
@@ -163,6 +183,7 @@ JS = """<script>
 </script>"""
 
 PAGES = ['index.html', 'approach.html', 'capabilities.html', 'engineering.html',
+         'pricing.html',
          'work.html', 'contact.html', 'products.html', 'about.html']
 
 
@@ -181,6 +202,13 @@ def main():
             s = s.replace('</body>', a + '\n' + JS + '\n' + b + '\n</body>', 1)
         else:
             continue
+        ca, cb = CSSMARK
+        if ca in s and cb in s:
+            i, j = s.index(ca), s.index(cb) + len(cb)
+            s = s[:i] + CSS + s[j:]
+        elif '</style>' in s:
+            i = s.rindex('</style>')
+            s = s[:i] + CSS + chr(10) + s[i:]
         open(p, 'w', encoding='utf-8').write(s)
         done += 1
     print('  back-to-where-you-were on %d page(s)' % done)

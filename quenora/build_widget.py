@@ -29,6 +29,9 @@ commits. An injector that is not idempotent is that bug waiting to happen.
 """
 import os, re, sys
 
+# every nora.css link, with or without the ?v= stamp
+NORA_CSS_LINK = r'<link href="/assets/nora\.css(?:\?v=[0-9a-f]+)?" rel="stylesheet"/>\s*'
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Every page a visitor can land on. products is unlisted but still generated,
@@ -103,7 +106,12 @@ def main():
 
         s, ok1 = place(s, CSS_M, css, "</style>")
         link = '<link href="/assets/nora.css" rel="stylesheet"/>'
-        if link not in s and '</head>' in s:
+        # build_asset_versions.py rewrites this href to nora.css?v=HASH after
+        # we have run, so "is the unversioned link already here" was false on
+        # every later build and appended another copy. Pages reached nine.
+        # Strip every copy, versioned or not, then insert exactly one.
+        s = re.sub(NORA_CSS_LINK, '', s)
+        if '</head>' in s:
             s = s.replace('</head>', link + '\n</head>', 1)
         s, ok2 = place(s, HTML_M, html, "</body>")
         s, ok3 = place(s, JS_M, js_block, "</body>")

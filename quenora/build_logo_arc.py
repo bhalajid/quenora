@@ -136,7 +136,7 @@ def ink_top(svg):
 
 
 def rewrite(path):
-    s = open(path).read()
+    s = open(path, encoding="utf-8").read()
     g = re.search(r'(<g class="quenora-rise">)(.*?)(</g>)', s, re.S)
     if not g:
         return None
@@ -183,7 +183,7 @@ def rewrite(path):
     new_top = round(head_y - r - 18)
     s = s.replace('viewBox="%s"' % re.search(r'viewBox="([^"]+)"', s).group(1),
                   'viewBox="%g %g %g %g"' % (vb[0], new_top, vb[2], vb[1] + vb[3] - new_top))
-    open(path, "w").write(s)
+    open(path, "w", encoding="utf-8").write(s)
     return old, (foot_x, head_x), (vb[3], vb[1] + vb[3] - new_top), span
 
 

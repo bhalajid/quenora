@@ -105,16 +105,15 @@ If you’re on your laptop, just scan the QR. If you’re on your mobile, tap Sa
 
 ## Who you’re actually hiring.
 
-Founder-led, and specific about what that means: who does the work, what they have run before, and how big the firm actually is.
+A firm of senior AI and platform practitioners. The people who scope the work are the people who do it.
 
-## Balaji Durai
+## Senior practitioners, and no one junior behind them.
 
-Sixteen years in enterprise IT, most of it inside organisations where a platform going down is a business incident rather than a ticket. Eight certifications across Azure, Citrix and ITIL. He works in German and English, from Bad Friedrichshall.
-Since 2025, inside a heavily regulated bank, he has introduced site reliability practice into an end-user computing estate and built the automation around it — Terraform, Kubernetes, Docker, GitHub Actions and LLM tooling — taking operating cost down by 60 per cent.
-From 2019 to 2025, at one of Europe’s largest retail groups, he designed, migrated and ran the Citrix DaaS and Azure platforms behind its retail and waste-management businesses, including standing up Azure Virtual Desktop from nothing. More than 80,000 people work on those platforms every day, and the optimisation returned seven-figure savings.
-He works as a GenAI transformation evangelist, putting Azure AI Foundry, OpenAI and Copilot into incident and automation workflows rather than into demonstrations. Earlier engagements spanned medical devices, retail, semiconductors and consumer internet.
-He builds his own systems too. BR Assist is a retrieval-augmented assistant for German works-council law: around 1,200 statutory provisions from twelve federal acts and some 700 Federal Labour Court decisions, indexed in Postgres with pgvector, where every answer carries the provision it came from so a reader can check it. It answers from the statute rather than from what a model remembers — the same argument this firm makes about enterprise AI, built to prove it.
-This is work from before Quenora. Described by shape rather than by name, the way the rest of this site describes engagements.
+Quenora is led by a team of senior AI and platform practitioners. Between them they have spent years inside regulated enterprises, where a platform going down is a business incident rather than a ticket, and where an AI system has to survive an audit as well as a demonstration.
+That background sets the standard the firm builds to. We work inside production constraints from the first conversation — access, data residency, change control, and the systems a business already runs — because those are what decide whether a pilot ever reaches the work.
+The people who scope your engagement are the people who deliver it. There is no layer of junior consultants behind the pitch, and no handover to a delivery team you have not met. The firm is deliberately small and grows slowly so that stays true.
+Founded in 2025 and based in Bad Friedrichshall, we work with clients internationally, in German, French and English.
+Engagements are described by shape rather than by client name, the way the rest of this site describes them.
 
 ## Most pilots don’t fail at the model. They stop at five layers.
 
@@ -375,11 +374,11 @@ Audit record written. Who asked, what was read, what was said.
 
 ## A method built to end, not to renew itself.
 
-Most consultancies are structured to extend the engagement. This one is structured to finish it — and the process below is designed around that, from the first diagnosis to the deliberate handover.
+Most consultancies are structured to extend the engagement. Below process is designed so that — Quenora is structured to finish the assignment — from the first diagnosis to the deliberate handover.
 
 ## Six phases, fourteen weeks, one handover.
 
-Timelines shift with scope — these are indicative, not promises. What does not shift is the shape: diagnose before scoping, demonstrate before integrating, transfer before leaving.
+Timelines shift with scope — these are indicative, not promises. What does not shift is the phase: diagnose before scoping, demonstrate before integrating, transfer before leaving.
 Phase 01 · Frame Weeks 1–2 Find the real constraint Exit condition A written position on what to build first — or a recommendation to build nothing. We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface.
 Exit condition A written position on what to build first — or a recommendation to build nothing.
 We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface.

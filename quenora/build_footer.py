@@ -56,6 +56,10 @@ MAP = [
 ]
 
 LEGAL = [
+    # LEGAL no longer renders as a footer column — the client asked for it
+    # played down. Both pages stay reachable from the bottom bar below,
+    # which is what § 5 DDG's "easily recognisable and directly
+    # accessible" requires. Kept here as the single record of the two URLs.
     ("Legal notice · Impressum", "impressum.html"),
     ("Privacy notice",           "privacy.html"),
 ]
@@ -103,7 +107,7 @@ CSS = """/*FOOTER:CSS*/
    different place depending on the page. One frame for both. */
 footer .wrap{max-width:1240px;margin-inline:auto;padding-inline:24px;width:100%}
 footer .f-grid{display:grid;gap:38px;
-  grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))}
+  grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr))}
 @media(max-width:900px){footer .f-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 @media(max-width:560px){footer .f-grid{grid-template-columns:minmax(0,1fr)}}
 footer .f-lockup{display:flex;align-items:baseline;gap:9px;margin-bottom:20px}
@@ -128,8 +132,7 @@ footer .f-grid h3,footer .f-grid h4,footer .f-grid h5{
    as flex ROWS, so the site map ran across the page and straight through the
    Legal column — one page's stylesheet deciding the shape of a footer this
    file is supposed to own. Stated here, it is the same on all eleven. */
-footer nav[aria-label="Footer"],
-footer nav[aria-label="Legal"]{display:flex;flex-direction:column;
+footer nav[aria-label="Footer"]{display:flex;flex-direction:column;
   align-items:flex-start;gap:14px}
 /* the social row is a row of marks, not a stack of words */
 .f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
@@ -255,7 +258,6 @@ def build(path, page):
     new_cols = [
         brand(),
         col("Site map", MAP, "Footer"),
-        col("Legal", LEGAL, "Legal"),
         col("Follow", SOCIAL, "Social", social=True),
     ]
     for k in kids:

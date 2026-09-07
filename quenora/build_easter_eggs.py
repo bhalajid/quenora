@@ -170,7 +170,7 @@ def main():
     budget on index.html that it helped push over."""
     body = re.sub(r'^.*?<script>', '', js, flags=re.S)
     body = re.sub(r'</script>.*$', '', body, flags=re.S)
-    open(os.path.join(ROOT, 'assets', 'eggs.js'), 'w').write(body.strip())
+    open(os.path.join(ROOT, 'assets', 'eggs.js'), 'w', encoding='utf-8').write(body.strip())
     n = 0
     for page in PAGES:
         p = os.path.join(ROOT, page)

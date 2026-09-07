@@ -58,19 +58,23 @@ CSS = """/* ── the supplied lockup ─────────────�
    on the rising arc, so the same 34px left the word nine pixels tall. These
    numbers are chosen so the WORDMARK matches what it measured before, and the
    arc is what grew. */
-.brandimg{display:block;height:56px;width:auto;flex:none}
-.brand.lg .brandimg{height:74px}
-@media(max-width:900px){.brandimg{height:48px}.brand.lg .brandimg{height:64px}}
-@media(max-width:560px){.brandimg{height:42px}.brand.lg .brandimg{height:56px}}"""
+.brandimg{display:block;height:58px;width:auto;flex:none}
+.brand.lg .brandimg{height:96px}
+@media(max-width:900px){.brandimg{height:42px}.brand.lg .brandimg{height:82px}}
+@media(max-width:560px){.brandimg{height:37px}.brand.lg .brandimg{height:72px}}"""
 
 
 def lockup(soup, big=False):
     img = soup.new_tag('img')
     img['class'] = 'brandimg'
-    img['src'] = '/assets/brand/quenora-primary.svg'
+    """The footer takes the full lockup: it is a stacked block with vertical
+    room, so it can carry the long rise and the tagline that the header, capped
+    at 60px by an 85px bar, cannot. Same mark, two crops."""
+    img['src'] = ('/assets/brand/quenora-full.svg' if big
+                  else '/assets/brand/quenora-primary.svg')
     img['alt'] = 'Quenora'
     img['width'] = '1166'
-    img['height'] = '628'
+    img['height'] = '1007' if big else '554'
     img['decoding'] = 'async'
     return img
 

@@ -61,10 +61,10 @@ CSS = """/*LOGOMOTION:CSS*/
    for the other never reflows the header. (Written without the literal tag
    name: stage 4 regexes image tags straight out of the raw HTML, comments
    included, and reported every page as having one with no alt text.) */
-.brandsvg{display:block;height:56px;width:auto;flex:none;overflow:visible}
-.brand.lg .brandsvg{height:74px}
-@media(max-width:900px){.brandsvg{height:48px}.brand.lg .brandsvg{height:64px}}
-@media(max-width:560px){.brandsvg{height:42px}.brand.lg .brandsvg{height:56px}}
+.brandsvg{display:block;height:58px;width:auto;flex:none;overflow:visible}
+.brand.lg .brandsvg{height:96px}
+@media(max-width:900px){.brandsvg{height:42px}.brand.lg .brandsvg{height:56px}}
+@media(max-width:560px){.brandsvg{height:37px}.brand.lg .brandsvg{height:49px}}
 
 /* The sheen. A soft band of white at low alpha, clipped to the Q, crossing
    once and then waiting — a reflection catching the edge, not a shimmer.
@@ -97,17 +97,20 @@ CSS = """/*LOGOMOTION:CSS*/
   .brand:hover .qsheen{animation-duration:2.2s}
 }
 
-/* The cursor: nine translucent spheres, each further behind than the last. */
+/* The cursor: nine translucent spheres, each further behind than the last.
+   A speed-driven version of this was tried and taken out again: brightening
+   the head as the pointer moved turned it into a bright blob leading the
+   cursor rather than a trail behind it. Fixed and faint is the brief. */
 #qtrail{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:0;
   transition:opacity .5s ease}
 body.con #qtrail{opacity:1}
 #qtrail i{position:absolute;top:0;left:0;display:block;border-radius:50%;
   will-change:transform;filter:blur(.3px);
   background:radial-gradient(circle at 32% 29%,
-    rgba(255,226,208,.95) 0%, rgba(255,169,124,.8) 16%,
-    rgba(255,112,67,.62) 46%, rgba(194,72,30,.4) 82%, rgba(94,30,12,.24) 100%)}
-/* Over something clickable the trail tightens and brightens, which is the
-   affordance the old ring carried and the only reason it earned its place. */
+    rgba(245,210,176,.95) 0%, rgba(233,160,99,.8) 16%,
+    rgba(201,122,60,.62) 46%, rgba(158,92,42,.4) 82%, rgba(90,50,20,.24) 100%)}
+/* Over something clickable the trail brightens, which is the affordance the
+   old ring carried and the only reason it earned its place. */
 body.clg #qtrail i{filter:brightness(1.35)}
 @media(hover:none),(pointer:coarse){#qtrail{display:none}}
 
@@ -139,9 +142,8 @@ JS = """<!--LOGOMOTION:JS--><script>
     el.style.width = el.style.height = r.toFixed(2) + 'px';
     el.style.marginLeft = el.style.marginTop = (-r / 2).toFixed(2) + 'px';
     /* Deliberately far below what looks right for ONE sphere. At rest all
-       nine sit on the same point and their alpha compounds; the first tuning
-       turned the pointer into a lamp that washed out whatever it hovered.
-       Faint enough to stack. */
+       nine sit on the same point and their alpha compounds; a brighter tuning
+       turned the pointer into a lamp that washed out whatever it hovered. */
     el.style.opacity = (0.045 + 0.011 * i).toFixed(3);
     wrap.appendChild(el);
     dots.push({ el: el, x: 0, y: 0, k: 0.30 - i * 0.026 });
@@ -240,11 +242,16 @@ def swap(page, svg):
                      new, count=1, flags=re.S)
         s = s[:m.start()] + new + s[m.end():]
 
-    # The footer keeps its <img>, but build_brand stamped the PREVIOUS file's
-    # intrinsic size on it. Left alone, the browser reserves a 2.74:1 box for
-    # a 1.86:1 file and the footer jumps when the SVG lands.
-    s = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)height="525"', r'\1height="628"', s)
-    s = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)width="1439"', r'\1width="1166"', s)
+    """The footer keeps an image tag, but it is now a DIFFERENT file and a
+    different shape: the full lockup, with the long rise and the tagline, in a
+    1166x1007 box. build_brand only writes a lockup where none exists, so a
+    page that already had one kept the old file name and the old intrinsic
+    size — which meant the browser reserved a 2.10:1 box for a 1.16:1 file and
+    the footer jumped when the SVG landed. Restate both here."""
+    s = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)src="/assets/brand/quenora-primary\.svg"',
+               r'\1src="/assets/brand/quenora-full.svg"', s)
+    s = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)height="\d+"', r'\1height="1007"', s)
+    s = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)width="\d+"', r'\1width="1166"', s)
 
     # 2 · CSS, between markers so this is idempotent
     if '/*LOGOMOTION:CSS*/' in s:

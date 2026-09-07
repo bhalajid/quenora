@@ -469,10 +469,10 @@ header .navlinks a[aria-current="page"]::after{width:0}
    on the rising arc, so the same 34px left the word nine pixels tall. These
    numbers are chosen so the WORDMARK matches what it measured before, and the
    arc is what grew. */
-.brandimg{display:block;height:56px;width:auto;flex:none}
-.brand.lg .brandimg{height:74px}
-@media(max-width:900px){.brandimg{height:48px}.brand.lg .brandimg{height:64px}}
-@media(max-width:560px){.brandimg{height:42px}.brand.lg .brandimg{height:56px}}
+.brandimg{display:block;height:58px;width:auto;flex:none}
+.brand.lg .brandimg{height:96px}
+@media(max-width:900px){.brandimg{height:42px}.brand.lg .brandimg{height:82px}}
+@media(max-width:560px){.brandimg{height:37px}.brand.lg .brandimg{height:72px}}
 /*/BRAND:CSS*/
 /*FOOTER:CSS*/
 footer .wrap{max-width:1240px;margin-inline:auto;padding-inline:24px;width:100%}
@@ -515,10 +515,10 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
    for the other never reflows the header. (Written without the literal tag
    name: stage 4 regexes image tags straight out of the raw HTML, comments
    included, and reported every page as having one with no alt text.) */
-.brandsvg{display:block;height:56px;width:auto;flex:none;overflow:visible}
-.brand.lg .brandsvg{height:74px}
-@media(max-width:900px){.brandsvg{height:48px}.brand.lg .brandsvg{height:64px}}
-@media(max-width:560px){.brandsvg{height:42px}.brand.lg .brandsvg{height:56px}}
+.brandsvg{display:block;height:58px;width:auto;flex:none;overflow:visible}
+.brand.lg .brandsvg{height:96px}
+@media(max-width:900px){.brandsvg{height:42px}.brand.lg .brandsvg{height:56px}}
+@media(max-width:560px){.brandsvg{height:37px}.brand.lg .brandsvg{height:49px}}
 
 /* The sheen. A soft band of white at low alpha, clipped to the Q, crossing
    once and then waiting — a reflection catching the edge, not a shimmer.
@@ -551,17 +551,20 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
   .brand:hover .qsheen{animation-duration:2.2s}
 }
 
-/* The cursor: nine translucent spheres, each further behind than the last. */
+/* The cursor: nine translucent spheres, each further behind than the last.
+   A speed-driven version of this was tried and taken out again: brightening
+   the head as the pointer moved turned it into a bright blob leading the
+   cursor rather than a trail behind it. Fixed and faint is the brief. */
 #qtrail{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:0;
   transition:opacity .5s ease}
 body.con #qtrail{opacity:1}
 #qtrail i{position:absolute;top:0;left:0;display:block;border-radius:50%;
   will-change:transform;filter:blur(.3px);
   background:radial-gradient(circle at 32% 29%,
-    rgba(255,226,208,.95) 0%, rgba(255,169,124,.8) 16%,
-    rgba(255,112,67,.62) 46%, rgba(194,72,30,.4) 82%, rgba(94,30,12,.24) 100%)}
-/* Over something clickable the trail tightens and brightens, which is the
-   affordance the old ring carried and the only reason it earned its place. */
+    rgba(245,210,176,.95) 0%, rgba(233,160,99,.8) 16%,
+    rgba(201,122,60,.62) 46%, rgba(158,92,42,.4) 82%, rgba(90,50,20,.24) 100%)}
+/* Over something clickable the trail brightens, which is the affordance the
+   old ring carried and the only reason it earned its place. */
 body.clg #qtrail i{filter:brightness(1.35)}
 @media(hover:none),(pointer:coarse){#qtrail{display:none}}
 
@@ -574,12 +577,13 @@ body.clg #qtrail i{filter:brightness(1.35)}
 /*/LOGOMOTION:CSS*/
 </style>
 <link href="/assets/nora.css" rel="stylesheet"/>
+<script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/impressum#page","url":"https://quenora.ai/impressum","name":"Legal notice","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"Legal notice under § 5 DDG: who operates quenora.ai, how to reach us, and the current registration status of the firm.","breadcrumb":{"@id":"https://quenora.ai/impressum#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/impressum#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"Legal notice","item":"https://quenora.ai/impressum"}]}]}</script>
 
 
 
 
 
-<script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/impressum#page","url":"https://quenora.ai/impressum","name":"Legal notice","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"Legal notice under § 5 DDG: who operates quenora.ai, how to reach us, and the current registration status of the firm.","breadcrumb":{"@id":"https://quenora.ai/impressum#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/impressum#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"Legal notice","item":"https://quenora.ai/impressum"}]}]}</script><link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
+<link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
 <link href="/assets/brand/quenora-icon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/assets/brand/quenora-icon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/assets/brand/quenora-icon-180.png" rel="apple-touch-icon"/>
@@ -604,8 +608,7 @@ body.clg #qtrail i{filter:brightness(1.35)}
 <header id="siteHeader">
 <div class="wrap">
 <nav>
-<a class="brand" href="index.html">
-<!--LOGOMOTION:MARK--><svg class="brandsvg" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1166 628" role="img" aria-label="Quenora logo"><defs><radialGradient id="q79d4b" cx="0.5" cy="0.5" r="0.53" fx="0.32" fy="0.29"><stop offset="0" stop-color="#FFE2D0"/><stop offset="0.16" stop-color="#FFA97C"/><stop offset="0.46" stop-color="#FF7043"/><stop offset="0.82" stop-color="#C2481E"/><stop offset="1" stop-color="#5E1E0C"/></radialGradient><radialGradient id="q79d4r" cx="0.5" cy="0.5" r="0.52" fx="0.76" fy="0.79"><stop offset="0" stop-color="#FFC496" stop-opacity="0.42"/><stop offset="0.5" stop-color="#FFC496" stop-opacity="0.06"/><stop offset="1" stop-color="#FFC496" stop-opacity="0"/></radialGradient><radialGradient id="q79d4h" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.92"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient><clipPath id="qclip"><path d="M 36 430 L 26 440 L 22 447 L 18 460 L 18 536 L 21 546 L 28 558 L 32 562 L 41 568 L 48 571 L 56 572 L 57 573 L 127 573 L 164 620 L 191 620 L 138 552 L 64 552 L 63 551 L 58 551 L 51 548 L 44 542 L 39 530 L 39 465 L 43 455 L 49 448 L 55 445 L 62 444 L 63 443 L 147 443 L 148 444 L 152 444 L 161 449 L 165 453 L 168 458 L 170 465 L 170 475 L 171 476 L 171 481 L 170 482 L 170 499 L 171 500 L 171 523 L 170 524 L 170 531 L 165 542 L 157 549 L 171 566 L 174 564 L 184 553 L 188 544 L 188 541 L 190 536 L 190 529 L 191 528 L 191 464 L 190 463 L 190 458 L 187 448 L 180 436 L 170 428 L 158 423 L 154 423 L 153 422 L 57 422 L 43 426 Z"/></clipPath><linearGradient id="qshine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.42" stop-color="#fff" stop-opacity="0.34"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.62"/><stop offset="0.58" stop-color="#fff" stop-opacity="0.34"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><path d="M 36 430 L 26 440 L 22 447 L 18 460 L 18 536 L 21 546 L 28 558 L 32 562 L 41 568 L 48 571 L 56 572 L 57 573 L 127 573 L 164 620 L 191 620 L 138 552 L 64 552 L 63 551 L 58 551 L 51 548 L 44 542 L 39 530 L 39 465 L 43 455 L 49 448 L 55 445 L 62 444 L 63 443 L 147 443 L 148 444 L 152 444 L 161 449 L 165 453 L 168 458 L 170 465 L 170 475 L 171 476 L 171 481 L 170 482 L 170 499 L 171 500 L 171 523 L 170 524 L 170 531 L 165 542 L 157 549 L 171 566 L 174 564 L 184 553 L 188 544 L 188 541 L 190 536 L 190 529 L 191 528 L 191 464 L 190 463 L 190 458 L 187 448 L 180 436 L 170 428 L 158 423 L 154 423 L 153 422 L 57 422 L 43 426 Z" fill="#FF7043" fill-rule="evenodd"/><path d="M 774 474 L 777 471 L 787 467 L 838 467 L 846 470 L 851 475 L 854 482 L 855 525 L 854 526 L 853 534 L 850 539 L 843 544 L 836 545 L 835 546 L 788 546 L 787 545 L 783 545 L 777 542 L 772 536 L 770 531 L 770 483 L 771 482 L 771 479 Z M 243 450 L 243 527 L 244 528 L 244 535 L 246 542 L 250 550 L 258 558 L 263 561 L 273 564 L 333 564 L 334 563 L 341 562 L 347 559 L 355 552 L 361 541 L 361 538 L 363 533 L 363 450 L 345 450 L 345 531 L 341 539 L 335 544 L 328 546 L 279 546 L 272 544 L 266 539 L 263 534 L 263 531 L 262 530 L 262 450 Z M 1039 449 L 1039 467 L 1114 467 L 1115 468 L 1118 468 L 1123 471 L 1126 474 L 1129 481 L 1129 535 L 1127 539 L 1123 543 L 1114 546 L 1062 546 L 1055 544 L 1049 538 L 1048 535 L 1048 524 L 1050 519 L 1057 513 L 1060 513 L 1061 512 L 1121 512 L 1126 510 L 1125 509 L 1124 502 L 1122 499 L 1118 496 L 1056 496 L 1047 499 L 1042 502 L 1035 509 L 1031 519 L 1031 540 L 1033 547 L 1036 552 L 1042 558 L 1054 563 L 1146 563 L 1146 491 L 1147 490 L 1147 484 L 1146 483 L 1145 471 L 1140 461 L 1131 453 L 1119 449 Z M 997 449 L 954 449 L 953 450 L 948 450 L 937 454 L 927 463 L 922 473 L 921 480 L 920 481 L 920 563 L 938 563 L 938 484 L 942 475 L 946 471 L 953 468 L 992 468 L 993 467 L 998 467 L 998 450 Z M 766 455 L 757 465 L 752 480 L 752 533 L 753 534 L 754 541 L 760 552 L 768 559 L 783 564 L 838 564 L 839 563 L 845 563 L 857 558 L 867 547 L 870 541 L 871 533 L 872 532 L 872 478 L 871 477 L 870 470 L 864 460 L 860 456 L 851 451 L 844 449 L 839 449 L 838 448 L 787 448 L 786 449 L 780 449 Z M 592 460 L 587 469 L 584 479 L 584 563 L 601 563 L 602 562 L 602 482 L 605 475 L 610 470 L 618 467 L 668 467 L 674 469 L 680 475 L 683 482 L 683 562 L 684 563 L 701 563 L 701 478 L 696 464 L 687 454 L 675 449 L 671 449 L 670 448 L 616 448 L 615 449 L 611 449 L 599 454 Z M 428 457 L 422 464 L 417 477 L 417 534 L 420 544 L 424 551 L 433 559 L 443 563 L 449 563 L 450 564 L 511 564 L 512 563 L 531 563 L 531 546 L 453 546 L 443 543 L 438 538 L 435 531 L 435 481 L 437 476 L 443 470 L 450 467 L 504 467 L 509 469 L 514 474 L 516 478 L 516 489 L 514 493 L 510 497 L 506 499 L 444 499 L 443 500 L 443 508 L 444 509 L 444 513 L 446 515 L 508 515 L 509 514 L 516 513 L 522 510 L 528 504 L 532 497 L 533 488 L 534 487 L 534 479 L 533 478 L 532 469 L 527 460 L 522 455 L 517 452 L 508 449 L 479 449 L 478 448 L 453 448 L 452 449 L 445 449 L 438 451 Z" fill="#FFFFFF" fill-rule="evenodd"/><g class="quenora-rise"><g class="qsph" style="--i:0"><circle cx="432.00" cy="377.50" r="5.54" fill="url(#q79d4b)"/><circle cx="432.00" cy="377.50" r="5.54" fill="url(#q79d4r)"/><ellipse cx="430.17" cy="375.28" rx="1.44" ry="0.94" transform="rotate(-31.5 430.17 375.28)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:1"><circle cx="470.10" cy="373.90" r="7.29" fill="url(#q79d4b)"/><circle cx="470.10" cy="373.90" r="7.29" fill="url(#q79d4r)"/><ellipse cx="467.69" cy="370.98" rx="1.90" ry="1.24" transform="rotate(-31.5 467.69 370.98)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:2"><circle cx="520.92" cy="363.58" r="9.60" fill="url(#q79d4b)"/><circle cx="520.92" cy="363.58" r="9.60" fill="url(#q79d4r)"/><ellipse cx="517.75" cy="359.74" rx="2.50" ry="1.63" transform="rotate(-31.5 517.75 359.74)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:3"><circle cx="578.80" cy="347.80" r="12.63" fill="url(#q79d4b)"/><circle cx="578.80" cy="347.80" r="12.63" fill="url(#q79d4r)"/><ellipse cx="574.63" cy="342.75" rx="3.28" ry="2.15" transform="rotate(-31.5 574.63 342.75)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:4"><circle cx="650.62" cy="323.00" r="16.63" fill="url(#q79d4b)"/><circle cx="650.62" cy="323.00" r="16.63" fill="url(#q79d4r)"/><ellipse cx="645.14" cy="316.35" rx="4.32" ry="2.83" transform="rotate(-31.5 645.14 316.35)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:5"><circle cx="728.24" cy="283.67" r="21.88" fill="url(#q79d4b)"/><circle cx="728.24" cy="283.67" r="21.88" fill="url(#q79d4r)"/><ellipse cx="721.02" cy="274.91" rx="5.69" ry="3.72" transform="rotate(-31.5 721.02 274.91)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:6"><circle cx="817.04" cy="231.72" r="28.80" fill="url(#q79d4b)"/><circle cx="817.04" cy="231.72" r="28.80" fill="url(#q79d4r)"/><ellipse cx="807.54" cy="220.20" rx="7.49" ry="4.90" transform="rotate(-31.5 807.54 220.20)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:7"><circle cx="903.03" cy="155.42" r="37.90" fill="url(#q79d4b)"/><circle cx="903.03" cy="155.42" r="37.90" fill="url(#q79d4r)"/><ellipse cx="890.53" cy="140.26" rx="9.85" ry="6.44" transform="rotate(-31.5 890.53 140.26)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:8"><circle cx="982.78" cy="73.16" r="49.88" fill="url(#q79d4b)"/><circle cx="982.78" cy="73.16" r="49.88" fill="url(#q79d4r)"/><ellipse cx="966.32" cy="53.20" rx="12.97" ry="8.48" transform="rotate(-31.5 966.32 53.20)" fill="url(#q79d4h)"/></g></g><g clip-path="url(#qclip)"><rect class="qsheen" x="0" y="404" width="86" height="232" fill="url(#qshine)" transform="translate(-620,0)"/></g></svg><!--/LOGOMOTION:MARK--></a>
+<a class="brand" href="index.html"><!--LOGOMOTION:MARK--><svg class="brandsvg" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 74 1166 554" role="img" aria-label="Quenora logo"><defs><radialGradient id="q79d4b" cx="0.5" cy="0.5" r="0.53" fx="0.32" fy="0.29"><stop offset="0" stop-color="#F7DCC2"/><stop offset="0.18" stop-color="#E9A063"/><stop offset="0.50" stop-color="#C97A3C"/><stop offset="0.85" stop-color="#A55F2A"/><stop offset="1" stop-color="#7E4620"/></radialGradient><radialGradient id="q79d4r" cx="0.5" cy="0.5" r="0.52" fx="0.76" fy="0.79"><stop offset="0" stop-color="#F2CDA4" stop-opacity="0.42"/><stop offset="0.5" stop-color="#F2CDA4" stop-opacity="0.06"/><stop offset="1" stop-color="#F2CDA4" stop-opacity="0"/></radialGradient><radialGradient id="q79d4h" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.92"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient><clipPath id="qclip"><path d="M 36 430 L 26 440 L 22 447 L 18 460 L 18 536 L 21 546 L 28 558 L 32 562 L 41 568 L 48 571 L 56 572 L 57 573 L 127 573 L 164 620 L 191 620 L 138 552 L 64 552 L 63 551 L 58 551 L 51 548 L 44 542 L 39 530 L 39 465 L 43 455 L 49 448 L 55 445 L 62 444 L 63 443 L 147 443 L 148 444 L 152 444 L 161 449 L 165 453 L 168 458 L 170 465 L 170 475 L 171 476 L 171 481 L 170 482 L 170 499 L 171 500 L 171 523 L 170 524 L 170 531 L 165 542 L 157 549 L 171 566 L 174 564 L 184 553 L 188 544 L 188 541 L 190 536 L 190 529 L 191 528 L 191 464 L 190 463 L 190 458 L 187 448 L 180 436 L 170 428 L 158 423 L 154 423 L 153 422 L 57 422 L 43 426 Z"/></clipPath><linearGradient id="qshine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.42" stop-color="#fff" stop-opacity="0.34"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.62"/><stop offset="0.58" stop-color="#fff" stop-opacity="0.34"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><path d="M 36 430 L 26 440 L 22 447 L 18 460 L 18 536 L 21 546 L 28 558 L 32 562 L 41 568 L 48 571 L 56 572 L 57 573 L 127 573 L 164 620 L 191 620 L 138 552 L 64 552 L 63 551 L 58 551 L 51 548 L 44 542 L 39 530 L 39 465 L 43 455 L 49 448 L 55 445 L 62 444 L 63 443 L 147 443 L 148 444 L 152 444 L 161 449 L 165 453 L 168 458 L 170 465 L 170 475 L 171 476 L 171 481 L 170 482 L 170 499 L 171 500 L 171 523 L 170 524 L 170 531 L 165 542 L 157 549 L 171 566 L 174 564 L 184 553 L 188 544 L 188 541 L 190 536 L 190 529 L 191 528 L 191 464 L 190 463 L 190 458 L 187 448 L 180 436 L 170 428 L 158 423 L 154 423 L 153 422 L 57 422 L 43 426 Z" fill="#C97A3C" fill-rule="evenodd"/><path d="M 774 474 L 777 471 L 787 467 L 838 467 L 846 470 L 851 475 L 854 482 L 855 525 L 854 526 L 853 534 L 850 539 L 843 544 L 836 545 L 835 546 L 788 546 L 787 545 L 783 545 L 777 542 L 772 536 L 770 531 L 770 483 L 771 482 L 771 479 Z M 243 450 L 243 527 L 244 528 L 244 535 L 246 542 L 250 550 L 258 558 L 263 561 L 273 564 L 333 564 L 334 563 L 341 562 L 347 559 L 355 552 L 361 541 L 361 538 L 363 533 L 363 450 L 345 450 L 345 531 L 341 539 L 335 544 L 328 546 L 279 546 L 272 544 L 266 539 L 263 534 L 263 531 L 262 530 L 262 450 Z M 1039 449 L 1039 467 L 1114 467 L 1115 468 L 1118 468 L 1123 471 L 1126 474 L 1129 481 L 1129 535 L 1127 539 L 1123 543 L 1114 546 L 1062 546 L 1055 544 L 1049 538 L 1048 535 L 1048 524 L 1050 519 L 1057 513 L 1060 513 L 1061 512 L 1121 512 L 1126 510 L 1125 509 L 1124 502 L 1122 499 L 1118 496 L 1056 496 L 1047 499 L 1042 502 L 1035 509 L 1031 519 L 1031 540 L 1033 547 L 1036 552 L 1042 558 L 1054 563 L 1146 563 L 1146 491 L 1147 490 L 1147 484 L 1146 483 L 1145 471 L 1140 461 L 1131 453 L 1119 449 Z M 997 449 L 954 449 L 953 450 L 948 450 L 937 454 L 927 463 L 922 473 L 921 480 L 920 481 L 920 563 L 938 563 L 938 484 L 942 475 L 946 471 L 953 468 L 992 468 L 993 467 L 998 467 L 998 450 Z M 766 455 L 757 465 L 752 480 L 752 533 L 753 534 L 754 541 L 760 552 L 768 559 L 783 564 L 838 564 L 839 563 L 845 563 L 857 558 L 867 547 L 870 541 L 871 533 L 872 532 L 872 478 L 871 477 L 870 470 L 864 460 L 860 456 L 851 451 L 844 449 L 839 449 L 838 448 L 787 448 L 786 449 L 780 449 Z M 592 460 L 587 469 L 584 479 L 584 563 L 601 563 L 602 562 L 602 482 L 605 475 L 610 470 L 618 467 L 668 467 L 674 469 L 680 475 L 683 482 L 683 562 L 684 563 L 701 563 L 701 478 L 696 464 L 687 454 L 675 449 L 671 449 L 670 448 L 616 448 L 615 449 L 611 449 L 599 454 Z M 428 457 L 422 464 L 417 477 L 417 534 L 420 544 L 424 551 L 433 559 L 443 563 L 449 563 L 450 564 L 511 564 L 512 563 L 531 563 L 531 546 L 453 546 L 443 543 L 438 538 L 435 531 L 435 481 L 437 476 L 443 470 L 450 467 L 504 467 L 509 469 L 514 474 L 516 478 L 516 489 L 514 493 L 510 497 L 506 499 L 444 499 L 443 500 L 443 508 L 444 509 L 444 513 L 446 515 L 508 515 L 509 514 L 516 513 L 522 510 L 528 504 L 532 497 L 533 488 L 534 487 L 534 479 L 533 478 L 532 469 L 527 460 L 522 455 L 517 452 L 508 449 L 479 449 L 478 448 L 453 448 L 452 449 L 445 449 L 438 451 Z" fill="#FFFFFF" fill-rule="evenodd"/><g class="quenora-rise"><g class="qsph" style="--i:0"><circle cx="270.00" cy="374.00" r="5.54" fill="url(#q79d4b)"/><circle cx="270.00" cy="374.00" r="5.54" fill="url(#q79d4r)"/><ellipse cx="268.17" cy="371.78" rx="1.44" ry="0.94" transform="rotate(-31.5 268.17 371.78)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:1"><circle cx="287.80" cy="373.32" r="7.29" fill="url(#q79d4b)"/><circle cx="287.80" cy="373.32" r="7.29" fill="url(#q79d4r)"/><ellipse cx="285.39" cy="370.39" rx="1.90" ry="1.24" transform="rotate(-31.5 285.39 370.39)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:2"><circle cx="309.50" cy="370.62" r="9.60" fill="url(#q79d4b)"/><circle cx="309.50" cy="370.62" r="9.60" fill="url(#q79d4r)"/><ellipse cx="306.33" cy="366.77" rx="2.50" ry="1.63" transform="rotate(-31.5 306.33 366.77)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:3"><circle cx="335.98" cy="364.42" r="12.63" fill="url(#q79d4b)"/><circle cx="335.98" cy="364.42" r="12.63" fill="url(#q79d4r)"/><ellipse cx="331.81" cy="359.35" rx="3.28" ry="2.15" transform="rotate(-31.5 331.81 359.35)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:4"><circle cx="367.97" cy="352.32" r="16.62" fill="url(#q79d4b)"/><circle cx="367.97" cy="352.32" r="16.62" fill="url(#q79d4r)"/><ellipse cx="362.48" cy="345.66" rx="4.32" ry="2.83" transform="rotate(-31.5 362.48 345.66)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:5"><circle cx="405.44" cy="330.40" r="21.86" fill="url(#q79d4b)"/><circle cx="405.44" cy="330.40" r="21.86" fill="url(#q79d4r)"/><ellipse cx="398.22" cy="321.63" rx="5.68" ry="3.72" transform="rotate(-31.5 398.22 321.63)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:6"><circle cx="446.34" cy="292.84" r="28.79" fill="url(#q79d4b)"/><circle cx="446.34" cy="292.84" r="28.79" fill="url(#q79d4r)"/><ellipse cx="436.84" cy="281.29" rx="7.49" ry="4.89" transform="rotate(-31.5 436.84 281.29)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:7"><circle cx="483.86" cy="232.14" r="37.89" fill="url(#q79d4b)"/><circle cx="483.86" cy="232.14" r="37.89" fill="url(#q79d4r)"/><ellipse cx="471.36" cy="216.94" rx="9.85" ry="6.44" transform="rotate(-31.5 471.36 216.94)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:8"><circle cx="528.00" cy="141.85" r="49.86" fill="url(#q79d4b)"/><circle cx="528.00" cy="141.85" r="49.86" fill="url(#q79d4r)"/><ellipse cx="511.55" cy="121.86" rx="12.96" ry="8.48" transform="rotate(-31.5 511.55 121.86)" fill="url(#q79d4h)"/></g></g><g clip-path="url(#qclip)"><rect class="qsheen" x="0" y="404" width="86" height="232" fill="url(#qshine)" transform="translate(-620,0)"/></g></svg><!--/LOGOMOTION:MARK--></a>
 <div class="navlinks" id="navLinks"><a href="about.html">Who are we?</a><a href="work.html">What work we do?</a><a href="approach.html">Phased Approach</a><a href="capabilities.html">Nine Capabilities</a><a href="pricing.html">View Pricing</a><a href="engineering.html">Engineering</a></div>
 <a class="btn btn-primary navcta" href="index.html#climax"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
 <button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
@@ -681,7 +684,7 @@ Address as above
 <footer>
 <div class="wrap">
 <div class="foot-row f-grid">
-<div><div class="f-lockup"><img alt="Quenora" class="brandimg" decoding="async" height="628" src="/assets/brand/quenora-primary.svg" width="1166"/><span class="f-desc">Consulting</span></div><p class="f-blurb">Enterprise AI, engineered to operate. Built into what you already run, then handed over.</p><p class="f-where">Working internationally</p></div><div class="foot-col"><h5>Site map</h5><nav aria-label="Footer"><a href="index.html#journey">Approach</a><a href="index.html#solution">Capabilities</a><a href="index.html#commercial">Pricing</a><a href="index.html#problem">Work</a><a href="index.html#who">About</a><a href="index.html#climax">Contact</a></nav></div><div class="foot-col"><h5>Legal</h5><nav aria-label="Legal"><a href="impressum.html">Legal notice · Impressum</a><a href="privacy.html">Privacy notice</a></nav></div><div class="foot-col"><h5>Follow</h5><nav aria-label="Social" class="f-social"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.4 2.4 4.4 5.5V21h-4v-6.1c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9z"></path></svg></a><a aria-label="Instagram" href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.3" cy="6.7" r="1.3"></circle></svg></a><a aria-label="Facebook" href="https://www.facebook.com/people/Quenora-Consulting/61593930577480/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.3 0-1.7.8-1.7 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12.1z"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@quenora-ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="14.8" rx="4" stroke="currentColor" stroke-width="2" width="20.8" x="1.6" y="4.6"></rect><path d="M10.2 9.1v5.8l5-2.9z"></path></svg></a><a aria-label="X" href="https://x.com/quenora_ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-5.9l-4.6-6-5.3 6H3l7-8L2.5 3h6l4.2 5.5zm-1 16.2h1.7L7.6 4.7H5.8z"></path></svg></a></nav></div></div>
+<div><div class="f-lockup"><img alt="Quenora" class="brandimg" decoding="async" height="1007" src="/assets/brand/quenora-full.svg" width="1166"/><span class="f-desc">Consulting</span></div><p class="f-blurb">Enterprise AI, engineered to operate. Built into what you already run, then handed over.</p><p class="f-where">Working internationally</p></div><div class="foot-col"><h5>Site map</h5><nav aria-label="Footer"><a href="index.html#journey">Approach</a><a href="index.html#solution">Capabilities</a><a href="index.html#commercial">Pricing</a><a href="index.html#problem">Work</a><a href="index.html#who">About</a><a href="index.html#climax">Contact</a></nav></div><div class="foot-col"><h5>Legal</h5><nav aria-label="Legal"><a href="impressum.html">Legal notice · Impressum</a><a href="privacy.html">Privacy notice</a></nav></div><div class="foot-col"><h5>Follow</h5><nav aria-label="Social" class="f-social"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.4 2.4 4.4 5.5V21h-4v-6.1c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9z"></path></svg></a><a aria-label="Instagram" href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.3" cy="6.7" r="1.3"></circle></svg></a><a aria-label="Facebook" href="https://www.facebook.com/people/Quenora-Consulting/61593930577480/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.3 0-1.7.8-1.7 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12.1z"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@quenora-ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="14.8" rx="4" stroke="currentColor" stroke-width="2" width="20.8" x="1.6" y="4.6"></rect><path d="M10.2 9.1v5.8l5-2.9z"></path></svg></a><a aria-label="X" href="https://x.com/quenora_ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-5.9l-4.6-6-5.3 6H3l7-8L2.5 3h6l4.2 5.5zm-1 16.2h1.7L7.6 4.7H5.8z"></path></svg></a></nav></div></div>
 <div class="f-bot"><span>© 2026 Quenora Consulting</span><span>Bad Friedrichshall, Germany · <a href="impressum.html">Legal notice</a> · <a href="privacy.html">Privacy</a></span></div>
 </div>
 </footer>
@@ -880,5 +883,120 @@ addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40));
 })();
 </script>
 <!--/NAV:JS-->
+<!--EGGS:JS--><script>
+/* Four things that reward looking closer. See build_easter_eggs.py for why
+   these four and not funnier ones. Nothing here fires on its own. */
+(function(){
+  var d = document, w = window;
+  /* The work page's field figure is verified by a headless harness that runs
+     this page's scripts against a minimal DOM stub — no matchMedia, no
+     addEventListener, and a getElementById that returns something truthy for
+     every id. Check for the things this code actually calls, the way the
+     assistant does, or the figure's own test dies on our keydown handler. */
+  if (typeof d.addEventListener !== 'function' ||
+      typeof w.matchMedia !== 'function' ||
+      typeof location === 'undefined') return;
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NINE = ['Trustworthy','Human','Confident','Elegant','Timeless','Enterprise','Premium','Innovative','Intelligent'];
+
+  /* 1 ─ the console banner ------------------------------------------------ */
+  /* Newlines are built, not escaped. An earlier version wrote them as a
+     backslash-n inside this template and the generator turned it into a real
+     line break in the middle of a JS string literal, which took the work
+     page's figure test down with a syntax error. */
+  var NL = String.fromCharCode(10);
+  try {
+    var mono = 'ui-monospace,SFMono-Regular,Menlo,monospace';
+    console.log('%c' + [
+      '                                   ●',
+      '                              ●',
+      '                         ●',
+      '                    ●',
+      '               ●',
+      '          ●',
+      '      ●',
+      '   ●',
+      ' ·'
+    ].join(NL), 'color:#FF7043;font-size:11px;line-height:1.15;font-family:' + mono);
+    console.log('%cQuenora%c  ·  enterprise AI, engineered to operate',
+      'color:#FF7043;font:600 15px system-ui', 'color:#A8AEBB;font:400 13px system-ui');
+    console.log('%cNo framework, no bundler, no third-party script. Every page is one '
+      + 'self-contained file — the hero is 2D canvas, the assistant is BM25 over a '
+      + 'prebuilt index, and neither needs a network you do not control.',
+      'color:#7C8290;font:400 12px/1.55 ' + mono);
+    console.log('%cTry: the Konami code  ·  type  nora   ·  add ?grid to the URL',
+      'color:#5BD7F5;font:400 12px ' + mono);
+    console.log('%cinfo@quenora.ai', 'color:#C97A3C;font:400 12px ' + mono);
+  } catch (e) {}
+
+  /* 2 ─ the Konami code, which lights the nine and names them ------------- */
+  var SEQ = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown',
+             'ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  var at = 0;
+  function principles(){
+    var sph = d.querySelectorAll('header .qsph');
+    console.log('%cThe nine circles are nine principles, smallest first:',
+      'color:#FF7043;font:600 13px system-ui');
+    NINE.forEach(function(name, i){
+      setTimeout(function(){
+        console.log('%c' + String(i + 1).padStart(2, '0') + '  %c' + name,
+          'color:#7C8290;font:400 12px ui-monospace,monospace',
+          'color:#F2EFE8;font:400 13px system-ui');
+        var s = sph[i];
+        if (s && !reduced) {
+          s.style.transition = 'transform .45s cubic-bezier(.16,1,.3,1)';
+          s.style.transform = 'scale(1.45)';
+          setTimeout(function(){ s.style.transform = ''; }, 520);
+        }
+      }, reduced ? 0 : i * 160);
+    });
+  }
+
+  /* 3 ─ typing "nora" ------------------------------------------------------ */
+  var typed = '';
+
+  d.addEventListener('keydown', function(e){
+    var t = e.target;
+    /* never while someone is filling in the enquiry form */
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+
+    at = (e.key === SEQ[at]) ? at + 1 : (e.key === SEQ[0] ? 1 : 0);
+    if (at === SEQ.length) { at = 0; principles(); }
+
+    if (e.key && e.key.length === 1) {
+      typed = (typed + e.key.toLowerCase()).slice(-4);
+      if (typed === 'nora') {
+        typed = '';
+        var fab = d.getElementById('aiFab'), panel = d.getElementById('aiPanel');
+        if (fab && panel && !panel.classList.contains('open')) fab.click();
+      }
+    }
+  });
+
+  /* 4 ─ ?grid — the six columns everything is measured against ------------- */
+  if (/[?&]grid/.test(location.search)) {
+    var wrap = d.querySelector('main .wrap') || d.querySelector('.wrap');
+    if (wrap) {
+      var box = wrap.getBoundingClientRect();
+      var g = d.createElement('div');
+      g.setAttribute('aria-hidden', 'true');
+      g.style.cssText = 'position:fixed;top:0;bottom:0;z-index:9999;' +
+        'pointer-events:none;display:grid;grid-template-columns:repeat(6,1fr);' +
+        'gap:24px;left:' + Math.round(box.left) + 'px;width:' + Math.round(box.width) + 'px';
+      for (var i = 0; i < 6; i++) {
+        var col = d.createElement('div');
+        col.style.cssText = 'background:rgba(255,112,67,.07);' +
+          'border-left:1px solid rgba(255,112,67,.22);' +
+          'border-right:1px solid rgba(255,112,67,.22)';
+        g.appendChild(col);
+      }
+      d.body.appendChild(g);
+      console.log('%c?grid  ' + Math.round(box.width) + 'px across six columns, left edge ' +
+        Math.round(box.left) + 'px',
+        'color:#5BD7F5;font:400 12px ui-monospace,monospace');
+    }
+  }
+})();
+</script><!--/EGGS:JS-->
 </body>
 </html>

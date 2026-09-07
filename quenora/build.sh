@@ -48,11 +48,14 @@ fi
 "$PY" build_preview_css.py
 "$PY" build_backto.py
 
+"$PY" build_logo_arc.py     # the nine circles back on the mark's own arc
 "$PY" build_brand.py
 # ...then the motion, which replaces the flat header image build_brand just
 # wrote with an inline copy whose Q can carry a reflection and whose nine
 # spheres can move. The other way round and the flat image wins.
 "$PY" build_logo_motion.py
+# ...and the four easter eggs last, so they sit after every other script.
+"$PY" build_easter_eggs.py
 "$PY" build_widget.py
 # build_footer owns the three footer link columns and must run BEFORE
 # build_nav, which re-points header and footer links from one map and

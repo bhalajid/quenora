@@ -335,8 +335,32 @@
   var ASSET_BASE = (location.pathname.match(/^\/(de|fr)(?:\/|$)/) || [null,''])[1];
   ASSET_BASE = ASSET_BASE ? '/'+ASSET_BASE+'/' : '/';
 
+  /* Nora is fixed at z-index 400; the header, and with it the mobile menu
+     panel, sits at 300. So on a phone or an iPad in portrait, opening the
+     burger while Nora is open drew the menu UNDERNEATH her — five nav links
+     of which the visitor could see one. Neither element moves and nothing
+     is restyled: they simply stop being open at the same time. */
+  var navLinks = document.getElementById('navLinks'),
+      burger   = document.getElementById('burger');
+  function closeMenu(){
+    if(!navLinks || !navLinks.classList.contains('open')) return;
+    navLinks.classList.remove('open');
+    if(burger){
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+    }
+  }
+  if(navLinks && typeof MutationObserver==='function'){
+    /* The burger's own handler replaces the button with a clone to guarantee
+       a single listener, so watch the class it toggles rather than the click. */
+    new MutationObserver(function(){
+      if(navLinks.classList.contains('open') && panel.classList.contains('open')) close();
+    }).observe(navLinks, {attributes:true, attributeFilter:['class']});
+  }
+
   function toggle(){
     var open=panel.classList.toggle('open');
+    if(open) closeMenu();
     fab.classList.toggle('open', open);
     fab.setAttribute('aria-expanded', open?'true':'false');
     if(open && !opened){

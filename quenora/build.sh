@@ -49,6 +49,7 @@ fi
 "$PY" build_backto.py
 
 "$PY" build_logo_arc.py     # the nine circles back on the mark's own arc
+"$PY" build_favicon.py      # ...and the tab icon, derived from the same nine
 "$PY" build_brand.py
 # ...then the motion, which replaces the flat header image build_brand just
 # wrote with an inline copy whose Q can carry a reflection and whose nine

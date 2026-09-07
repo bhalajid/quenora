@@ -46,10 +46,29 @@ src=`, don't; the release gate fails on it.
 
 ## The mark
 
-Nine circles on a 90° arc, growing 9× from first to last (ratio 9^(1/8) =
-1.3161). Coordinates are hardcoded in the viewBox `0 0 187.71 174.29` space
-and **must stay byte-identical everywhere** — nav, footer, favicon, hero
-canvas, and the chapter 07 diagram all derive from the same nine triples.
+There are **two** nine-circle geometries, on purpose. They are not
+interchangeable and neither is a mistake.
+
+**1 · The drawn mark — square contexts.** Nine circles on a 90° arc, growing
+9× from first to last (ratio 9^(1/8) = 1.3161), hardcoded in the viewBox
+`0 0 187.71 174.29` space. Bounding box 1.09:1. This is `var MARK` in
+index.html, and the favicon, the hero canvas, the chapter 07 diagram, Nora's
+button and the pointer trail all derive from the same nine triples. Inside
+that set they **must stay byte-identical**.
+
+**2 · The lockup — the supplied artwork.** `assets/brand/quenora-*.svg` carry
+their own nine, drawn by hand for a 2.41:1 horizontal lockup: bounding box
+2.26:1, 10.72× growth with the step wandering between 1.209 and 1.571, over
+37° rather than 90°. Measured, not guessed. They are the artwork and they are
+not corrected to match the drawn mark — `build_logo_arc.py` did exactly that
+and is retired for it, because the lockup's composition depends on the dots
+spanning its full width.
+
+**Do not try to make these one geometry.** The hero's arc is pinned to the
+headline — as tall as the h1 block, right edge on the wrap's right grid line,
+bottom on the headline's bottom — so aspect ratio decides its width. Giving it
+the lockup's 2.26:1 makes it 2.08× wider at the same height; verified, it then
+overlaps the headline at all six viewports and `test/hero_geometry.js` fails.
 
 The nine circles map to nine principles, in order: Trustworthy, Human,
 Confident, Elegant, Timeless, Enterprise, Premium, Innovative, Intelligent.
@@ -57,8 +76,9 @@ Chapter 07 of the homepage is where they are named.
 
 **Never put text inside the mark.** Tried, rejected — it fails at small sizes.
 
-The nav and footer lockups crop the viewBox to `9 9 169.71 155.71` so the ink
-fills its box. That is a crop, not a coordinate change.
+The favicon crops the drawn mark's viewBox to `9 9 169.71 155.71`, squared, so
+the ink fills its box. That is a crop, not a coordinate change. The header and
+footer use the lockup, not this.
 
 ### Hero geometry — do not "simplify" this
 

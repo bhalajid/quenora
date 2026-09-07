@@ -61,10 +61,10 @@ CSS = """/*LOGOMOTION:CSS*/
    for the other never reflows the header. (Written without the literal tag
    name: stage 4 regexes image tags straight out of the raw HTML, comments
    included, and reported every page as having one with no alt text.) */
-.brandsvg{display:block;height:58px;width:auto;flex:none;overflow:visible}
-.brand.lg .brandsvg{height:96px}
-@media(max-width:900px){.brandsvg{height:42px}.brand.lg .brandsvg{height:56px}}
-@media(max-width:560px){.brandsvg{height:37px}.brand.lg .brandsvg{height:49px}}
+.brandsvg{display:block;height:62px;width:auto;flex:none;overflow:visible}
+.brand.lg .brandsvg{height:94px}
+@media(max-width:900px){.brandsvg{height:54px}.brand.lg .brandsvg{height:82px}}
+@media(max-width:560px){.brandsvg{height:46px}.brand.lg .brandsvg{height:70px}}
 
 /* The sheen. A soft band of white at low alpha, clipped to the Q, crossing
    once and then waiting — a reflection catching the edge, not a shimmer.
@@ -255,7 +255,19 @@ def swap(page, svg):
 
     # 1 · the HEADER lockup only. The footer copy stays an <img>: nobody
     #     hovers it, and two inline copies would collide on the gradient ids.
-    m = re.search(r'<header\b.*?</header>', s, re.S)
+    """Inlining is now OFF by default. It existed so CSS could reach inside
+    the lockup and put a sheen on the squared Q. The supplied calligraphic Q is
+    a 390-point outline — 13KB inlined into every page against a 225KB budget —
+    and the sheen was designed for a letter that is no longer there. Set
+    QUENORA_INLINE_MARK=1 to bring it back."""
+    m = re.search(r'<header\b.*?</header>', s, re.S) if os.environ.get(
+        'QUENORA_INLINE_MARK') == '1' else None
+    if not m:
+        # strip any inline mark a previous run left, and restore the image
+        s = re.sub(r'<!--LOGOMOTION:MARK-->.*?<!--/LOGOMOTION:MARK-->',
+                   '<img alt="Quenora" class="brandimg" decoding="async" '
+                   'height="590" src="/assets/brand/quenora-primary.svg" '
+                   'width="1421"/>', s, flags=re.S)
     if m:
         head = m.group(0)
         new = re.sub(r'<img[^>]*\bclass="brandimg"[^>]*/?>',
@@ -267,16 +279,27 @@ def swap(page, svg):
                      new, count=1, flags=re.S)
         s = s[:m.start()] + new + s[m.end():]
 
-    """The footer keeps an image tag, but it is now a DIFFERENT file and a
-    different shape: the full lockup, with the long rise and the tagline, in a
-    1166x1007 box. build_brand only writes a lockup where none exists, so a
-    page that already had one kept the old file name and the old intrinsic
-    size — which meant the browser reserved a 2.10:1 box for a 1.16:1 file and
-    the footer jumped when the SVG landed. Restate both here."""
-    s = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)src="/assets/brand/quenora-primary\.svg"',
-               r'\1src="/assets/brand/quenora-full.svg"', s)
-    s = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)height="\d+"', r'\1height="1007"', s)
-    s = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)width="\d+"', r'\1width="1166"', s)
+    """The footer takes the full lockup with the tagline; the header takes the
+    primary without it. This fixup used to run over the whole page, so once the
+    header stopped being inlined it rewrote the header's image to the full
+    lockup as well and the tagline appeared twice. Scope each to its own
+    element."""
+    """Both take the primary. The footer was given the full lockup because it
+    looked like it had room — it does not: .f-lockup pins the image to
+    width:118px, which beats the height rules, so it renders 118x49 and the
+    tagline inside the full file comes out about two pixels tall. An
+    illegible line of type is worse than no line, and .f-lockup already
+    carries a "CONSULTING" descriptor beside the mark anyway."""
+    for tag, want in (('footer', 'quenora-primary'), ('header', 'quenora-primary')):
+        m2 = re.search(r'<%s\b.*?</%s>' % (tag, tag), s, re.S)
+        if not m2:
+            continue
+        blk = m2.group(0)
+        blk = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)src="/assets/brand/quenora-[a-z-]+\.svg(?:\?v=[0-9a-f]+)?"',
+                     r'\1src="/assets/brand/%s.svg"' % want, blk)
+        blk = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)height="\d+"', r'\1height="590"', blk)
+        blk = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)width="\d+"', r'\1width="1421"', blk)
+        s = s[:m2.start()] + blk + s[m2.end():]
 
     """2 · CSS and the cursor script are SERVED, not inlined. Inlined they
     cost 3.4KB and 2.3KB on every page, and index.html has a 220KB budget it
@@ -317,11 +340,11 @@ def swap(page, svg):
 
 def main():
     out = os.path.join(ROOT, 'assets')
-    open(os.path.join(out, 'logo.css'), 'w', encoding='utf-8').write(
+    open(os.path.join(out, 'logo.css'), 'w').write(
         CSS.replace('/*LOGOMOTION:CSS*/', '').replace('/*/LOGOMOTION:CSS*/', '').strip())
     body = re.sub(r'^.*?<script>', '', JS, flags=re.S)
     body = re.sub(r'</script>.*$', '', body, flags=re.S)
-    open(os.path.join(out, 'logo.js'), 'w', encoding='utf-8').write(body.strip())
+    open(os.path.join(out, 'logo.js'), 'w').write(body.strip())
 
     svg = animated_svg()
     n = 0

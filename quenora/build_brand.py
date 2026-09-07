@@ -37,9 +37,14 @@ import os, sys, re
 from bs4 import BeautifulSoup as BS
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+# pricing.html was added with the launch release and never got added here, so
+# it kept whatever CSS it was created with and its logo rendered at 34px while
+# every other page moved to 62px. Any new page has to be listed in BOTH this
+# and build_logo_motion.py, which is why they are checked against each other
+# in the gate.
 PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
          "approach.html", "work.html", "contact.html", "about.html",
-         "impressum.html", "privacy.html"]
+         "impressum.html", "privacy.html", "pricing.html"]
 
 ICONS = """<link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
 <link href="/assets/brand/quenora-icon.svg" rel="icon" type="image/svg+xml"/>
@@ -58,10 +63,10 @@ CSS = """/* ── the supplied lockup ─────────────�
    on the rising arc, so the same 34px left the word nine pixels tall. These
    numbers are chosen so the WORDMARK matches what it measured before, and the
    arc is what grew. */
-.brandimg{display:block;height:58px;width:auto;flex:none}
-.brand.lg .brandimg{height:96px}
-@media(max-width:900px){.brandimg{height:42px}.brand.lg .brandimg{height:82px}}
-@media(max-width:560px){.brandimg{height:37px}.brand.lg .brandimg{height:72px}}"""
+.brandimg{display:block;height:62px;width:auto;flex:none}
+.brand.lg .brandimg{height:94px}
+@media(max-width:900px){.brandimg{height:54px}.brand.lg .brandimg{height:82px}}
+@media(max-width:560px){.brandimg{height:46px}.brand.lg .brandimg{height:70px}}"""
 
 
 def lockup(soup, big=False):
@@ -73,8 +78,8 @@ def lockup(soup, big=False):
     img['src'] = ('/assets/brand/quenora-full.svg' if big
                   else '/assets/brand/quenora-primary.svg')
     img['alt'] = 'Quenora'
-    img['width'] = '1166'
-    img['height'] = '1007' if big else '554'
+    img['width'] = '1421'
+    img['height'] = '590'
     img['decoding'] = 'async'
     return img
 

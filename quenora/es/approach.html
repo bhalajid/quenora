@@ -182,6 +182,9 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-
 .section-pad{padding:120px 0;position:relative;z-index:2}
 .section-head{max-width:680px;margin-bottom:60px}
 .section-head p{margin-top:16px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:56ch}
+/* the third line of this one is 636px and 56ch gives 583, so it wrapped.
+   Scoped, so every other section head keeps its 56ch measure. */
+.section-head p.wide{max-width:62ch}
 
 /* reveal on scroll */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
@@ -260,7 +263,9 @@ footer nav{display:block}
 .phero::before{content:"";position:absolute;top:-50%;right:-15%;width:70%;height:200%;
   background:radial-gradient(circle,rgba(201,122,60,.09),transparent 62%);pointer-events:none}
 .phero h1{font-size:clamp(36px,4.6vw,62px);max-width:19ch}
-.phero p{margin-top:22px;color:var(--grey);font-size:17.5px;font-weight:300;max-width:60ch;line-height:1.75}
+/* 66ch, not 60: the second line of the lede is 714px and 60ch gave 662,
+   so it wrapped to a fourth line. Still narrower than the h1 at 794px. */
+.phero p{margin-top:22px;color:var(--grey);font-size:17.5px;font-weight:300;max-width:66ch;line-height:1.75}
 #pCanvas{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.62}
 .phero .wrap{position:relative;z-index:3}
 
@@ -544,10 +549,8 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 /*/BACKTO:CSS*/
 </style>
 <meta content="es_ES" property="og:locale"/>
-<link href="/assets/nora.css?v=a7ad4ee0" rel="stylesheet"/>
-<link href="/assets/nora.css?v=a7ad4ee0" rel="stylesheet"/>
-<link href="/assets/nora.css?v=a7ad4ee0" rel="stylesheet"/>
-<script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/approach#page","url":"https://quenora.ai/approach","name":"A method built to end, not to renew itself.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"A six-phase engagement method designed to end with your team running the system.","breadcrumb":{"@id":"https://quenora.ai/approach#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/approach#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"A method built to end, not to renew itself.","item":"https://quenora.ai/approach"}]}]}</script><link href="/assets/brand/favicon.ico?v=a035e93d" rel="icon" sizes="any"/>
+<script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/approach#page","url":"https://quenora.ai/approach","name":"A method built to end, not to renew itself.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"A six-phase engagement method designed to end with your team running the system.","breadcrumb":{"@id":"https://quenora.ai/approach#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/approach#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"A method built to end, not to renew itself.","item":"https://quenora.ai/approach"}]}]}</script>
+<link href="/assets/brand/favicon.ico?v=a035e93d" rel="icon" sizes="any"/>
 <link href="/assets/brand/quenora-icon.svg?v=878ec304" rel="icon" type="image/svg+xml"/>
 <link href="/assets/brand/quenora-icon-32.png?v=2a9eb619" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/assets/brand/quenora-icon-180.png?v=4c79984a" rel="apple-touch-icon"/>
@@ -586,17 +589,16 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <canvas aria-hidden="true" id="pCanvas"></canvas>
 <div class="wrap">
 <div class="kicker rv">Cómo trabajamos</div>
-<h1 class="rv" data-d="1">A method built to <em>terminar</em>, not to renew itself.</h1>
-<p class="rv" data-d="2">La mayoría de las consultoras están organizadas para prolongar el proyecto. Esta lo está para terminarlo, y el proceso siguiente está diseñado con esa idea, desde el primer diagnóstico hasta el traspaso deliberado.</p>
+<h1 class="rv" data-d="1">A method built to <em>terminar</em>,<br/>not to renew itself.</h1>
+<p class="rv" data-d="2">Most consultancies are structured to extend the engagement.<br/>Below process is designed so that — Quenora is structured to finish the assignment —<br/>from the first diagnosis to the deliberate handover.</p>
 </div>
 </section>
 <section class="section-pad">
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">El proyecto</div>
-<h2>Six phases, fourteen weeks, <em>one handover</em>.</h2>
-<p>Los plazos varían con el alcance: son orientativos, no promesas. Lo que no varía
-      es la secuencia: diagnosticar antes de acotar, demostrar antes de integrar, traspasar antes de marcharse.</p>
+<h2>Six phases,<br/>fourteen weeks, <em>one handover</em>.</h2>
+<p class="wide">Timelines shift with scope — these are indicative, not promises.<br/>What does not shift is the phase:<br/>diagnose before scoping, demonstrate before integrating, transfer before leaving.</p>
 </div>
 <ol class="ex"><li class="ex-step" id="phase-1"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Fase 01 · Encuadre</span><span class="ex-wk mono">Semanas 1–2</span></div><span class="ex-title">Find the real constraint</span><p class="ex-cond"><b>Exit condition</b> A written position on what to build first — or a recommendation to build nothing.</p></summary><div class="ex-detail"><p>We spend the first weeks understanding what actually happens, not what the process documentation says happens. That means sitting with the people doing the work. That first look is where the constraint nobody mentioned tends to surface.</p></div></details></li><li class="ex-step" id="phase-2"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Fase 02 · Cimientos</span><span class="ex-wk mono">Semanas 3–6</span></div><span class="ex-title">The unglamorous layer</span><p class="ex-cond"><b>Exit condition</b> Baseline evaluation scores to judge every change that follows.</p></summary><div class="ex-detail"><p>The data joins, the permissions, the evaluation baseline. This is the layer that decides whether anything later reaches production, and it is the layer most pilots skip.</p></div></details></li><li class="ex-step" id="phase-3"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Fase 03 · Integración</span><span class="ex-wk mono">Semanas 4–10</span></div><span class="ex-title">Into what you already run</span><p class="ex-cond"><b>Exit condition</b> A staged rollout running against real data in a non-production environment.</p></summary><div class="ex-detail"><p>Engineering in short cycles against your real systems, with something demonstrable at the end of each. You see working software, not status decks. The person who scoped the work is the person building it.</p></div></details></li><li class="ex-step" id="phase-4"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Fase 04 · Puesta en producción</span><span class="ex-wk mono">Weeks 10–12</span></div><span class="ex-title">Under real change control</span><p class="ex-cond"><b>Exit condition</b> In production, under your existing controls — no exceptions.</p></summary><div class="ex-detail"><p>Into production under the same governance, review and release process as everything else you run — not beside it, and not on an exception.</p></div></details></li><li class="ex-step" id="phase-5"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Fase 05 · Demostración</span><span class="ex-wk mono">Semanas 9–12</span></div><span class="ex-title">Against the agreed number</span><p class="ex-cond"><b>Exit condition</b> A written result — including the uncomfortable version if that’s the truth.</p></summary><div class="ex-detail"><p>Measured against the number agreed in Phase 01, using the evaluation harness built in Phase 02. If it did not move, that is what the written result says.</p></div></details></li><li class="ex-step last" id="phase-6"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Fase 06 · Traspaso</span><span class="ex-wk mono">Semanas 12–14</span></div><span class="ex-title">And then we leave</span><p class="ex-cond"><b>Exit condition</b> You own it, you run it, we’re gone. That’s the definition of done.</p></summary><div class="ex-detail"><p>Documentation, runbooks, architecture decision records, paired operation with your engineers, and a named owner. The engagement is not finished until your team can run it without us.</p></div></details></li></ol>
 </div>
@@ -606,7 +608,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">En qué creemos</div>
-<h2>Cuatro posturas que no negociamos</h2>
+<h2>Four positions<br/>we will not <em>negotiate</em></h2>
 </div>
 <div class="grid-2 rv">
 <div class="card"><div class="num">01</div><h4>No lo hacemos por usted. Le despejamos el camino.</h4>
@@ -632,7 +634,6 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <h2 style="max-width:18ch;margin:0 auto">¿Quiere contrastarlo con su problema real?</h2>
 <div style="display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap">
 <a class="btn btn-primary" href="/es/index.html#talk">Iniciar una conversación</a>
-<a class="btn btn-ghost" href="/es/capabilities.html">Ver capacidades →</a>
 </div>
 </div>
 </section>

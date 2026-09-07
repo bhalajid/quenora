@@ -182,6 +182,9 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-
 .section-pad{padding:120px 0;position:relative;z-index:2}
 .section-head{max-width:680px;margin-bottom:60px}
 .section-head p{margin-top:16px;color:var(--grey);font-size:16.5px;font-weight:300;max-width:56ch}
+/* the third line of this one is 636px and 56ch gives 583, so it wrapped.
+   Scoped, so every other section head keeps its 56ch measure. */
+.section-head p.wide{max-width:62ch}
 
 /* reveal on scroll */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
@@ -260,7 +263,9 @@ footer nav{display:block}
 .phero::before{content:"";position:absolute;top:-50%;right:-15%;width:70%;height:200%;
   background:radial-gradient(circle,rgba(201,122,60,.09),transparent 62%);pointer-events:none}
 .phero h1{font-size:clamp(36px,4.6vw,62px);max-width:19ch}
-.phero p{margin-top:22px;color:var(--grey);font-size:17.5px;font-weight:300;max-width:60ch;line-height:1.75}
+/* 66ch, not 60: the second line of the lede is 714px and 60ch gave 662,
+   so it wrapped to a fourth line. Still narrower than the h1 at 794px. */
+.phero p{margin-top:22px;color:var(--grey);font-size:17.5px;font-weight:300;max-width:66ch;line-height:1.75}
 #pCanvas{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.62}
 .phero .wrap{position:relative;z-index:3}
 
@@ -544,16 +549,14 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 /*/BACKTO:CSS*/
 </style>
 <meta content="de_DE" property="og:locale"/>
-<link href="/assets/nora.css?v=a7ad4ee0" rel="stylesheet"/>
-<link href="/assets/nora.css?v=a7ad4ee0" rel="stylesheet"/>
-<link href="/assets/nora.css?v=a7ad4ee0" rel="stylesheet"/>
+
 <link href="/assets/brand/favicon.ico?v=a035e93d" rel="icon" sizes="any"/>
 <link href="/assets/brand/quenora-icon.svg?v=878ec304" rel="icon" type="image/svg+xml"/>
 <link href="/assets/brand/quenora-icon-32.png?v=2a9eb619" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/assets/brand/quenora-icon-180.png?v=4c79984a" rel="apple-touch-icon"/>
 <link href="/assets/brand/quenora-icon-192.png?v=df84842a" rel="icon" sizes="192x192" type="image/png"/>
 <link href="/assets/brand/quenora-icon-512.png?v=aa1f72d0" rel="icon" sizes="512x512" type="image/png"/><link href="/assets/logo.css?v=1b1d7ba7" rel="stylesheet"/><link href="/assets/nora.css" rel="stylesheet"/>
-<link href="https://quenora.ai/de/approach" rel="canonical"/><link href="https://quenora.ai/approach" hreflang="en" rel="alternate"/><link href="https://quenora.ai/approach" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de/approach#page","url":"https://quenora.ai/de/approach","name":"Eine Methode, die dafür gebaut ist zu enden — und nicht dafür, sich selbst zu verlängern.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Ein Vorgehen in sechs Phasen, das damit endet, dass Ihr Team das System selbst betreibt.","breadcrumb":{"@id":"https://quenora.ai/de/approach#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/de/approach#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://quenora.ai/de"},{"@type":"ListItem","position":2,"name":"Eine Methode, die dafür gebaut ist zu enden — und nicht dafür, sich selbst zu verlängern.","item":"https://quenora.ai/de/approach"}]}]}</script></head>
+<link href="https://quenora.ai/de/approach" rel="canonical"/><link href="https://quenora.ai/approach" hreflang="en" rel="alternate"/><link href="https://quenora.ai/approach" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de/approach#page","url":"https://quenora.ai/de/approach","name":"Eine Methode, die dafür gebaut ist zu enden, nicht dafür, sich selbst zu verlängern.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Ein Vorgehen in sechs Phasen, das damit endet, dass Ihr Team das System selbst betreibt.","breadcrumb":{"@id":"https://quenora.ai/de/approach#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/de/approach#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://quenora.ai/de"},{"@type":"ListItem","position":2,"name":"Eine Methode, die dafür gebaut ist zu enden, nicht dafür, sich selbst zu verlängern.","item":"https://quenora.ai/de/approach"}]}]}</script></head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0">
 <symbol id="mark9" viewbox="0 0 187.71 174.29">
@@ -586,17 +589,16 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <canvas aria-hidden="true" id="pCanvas"></canvas>
 <div class="wrap">
 <div class="kicker rv">Wie wir arbeiten</div>
-<h1 class="rv" data-d="1">Eine Methode, die dafür gebaut ist zu <em>enden</em> — und nicht dafür, sich selbst zu verlängern.</h1>
-<p class="rv" data-d="2">Die meisten Beratungen sind darauf ausgerichtet, das Projekt zu verlängern. Diese ist darauf ausgerichtet, es abzuschließen — und das folgende Vorgehen ist genau darauf ausgelegt, von der ersten Diagnose bis zur bewussten Übergabe.</p>
+<h1 class="rv" data-d="1">Eine Methode, die dafür gebaut ist zu <em>enden</em>,<br/>nicht dafür, sich selbst zu verlängern.</h1>
+<p class="rv" data-d="2">Die meisten Beratungen sind darauf ausgerichtet, das Projekt zu verlängern.<br/>Below process is designed so that — Quenora is structured to finish the assignment —<br/>von der ersten Diagnose bis zur bewussten Übergabe.</p>
 </div>
 </section>
 <section class="section-pad">
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">Das Projekt</div>
-<h2>Sechs Phasen, vierzehn Wochen, <em>eine Übergabe</em>.</h2>
-<p>Zeitpläne verschieben sich mit dem Umfang — diese Angaben sind Richtwerte, keine Zusagen. Was sich nicht verschiebt,
-      ist die Abfolge: diagnostizieren vor dem Zuschnitt, zeigen vor dem Integrieren, übergeben vor dem Gehen.</p>
+<h2>Sechs Phasen,<br/>vierzehn Wochen, <em>eine Übergabe</em>.</h2>
+<p class="wide">Zeitpläne verschieben sich mit dem Umfang — diese Angaben sind Richtwerte, keine Zusagen.<br/>Was sich nicht verschiebt, ist die Abfolge:<br/>diagnostizieren vor dem Zuschnitt, zeigen vor dem Integrieren, übergeben vor dem Gehen.</p>
 </div>
 <ol class="ex"><li class="ex-step" id="phase-1"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 01 · Rahmung</span><span class="ex-wk mono">Wochen 1–2</span></div><span class="ex-title">Die echte Beschränkung finden</span><p class="ex-cond"><b>Abschlusskriterium</b> Eine schriftliche Position dazu, was zuerst gebaut wird — oder die Empfehlung, nichts zu bauen.</p></summary><div class="ex-detail"><p>Wir verbringen die ersten Wochen damit zu verstehen, was tatsächlich passiert, nicht was die Prozessdokumentation behauptet. Das heißt, sich zu den Menschen zu setzen, die die Arbeit machen. Bei diesem ersten Blick zeigt sich meist die Beschränkung, die niemand erwähnt hat.</p></div></details></li><li class="ex-step" id="phase-2"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 02 · Fundament</span><span class="ex-wk mono">Wochen 3–6</span></div><span class="ex-title">Die unglamouröse Schicht</span><p class="ex-cond"><b>Abschlusskriterium</b> Baseline-Evaluationswerte, an denen sich jede spätere Änderung messen lässt.</p></summary><div class="ex-detail"><p>Die Datenverknüpfungen, die Berechtigungen, die Evaluations-Baseline. Diese Schicht entscheidet, ob später überhaupt etwas in den Produktivbetrieb gelangt — und genau diese Schicht überspringen die meisten Piloten.</p></div></details></li><li class="ex-step" id="phase-3"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 03 · Integration</span><span class="ex-wk mono">Wochen 4–10</span></div><span class="ex-title">In das, was Sie bereits betreiben</span><p class="ex-cond"><b>Abschlusskriterium</b> Ein stufenweiser Rollout, der mit echten Daten in einer Nicht-Produktivumgebung läuft.</p></summary><div class="ex-detail"><p>Engineering in kurzen Zyklen an Ihren echten Systemen, mit einem vorführbaren Ergebnis am Ende jedes Zyklus. Sie sehen lauffähige Software, keine Statusfolien. Wer die Arbeit zugeschnitten hat, baut sie auch.</p></div></details></li><li class="ex-step" id="phase-4"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 04 · Inbetriebnahme</span><span class="ex-wk mono">Wochen 10–12</span></div><span class="ex-title">Unter echter Änderungskontrolle</span><p class="ex-cond"><b>Abschlusskriterium</b> Im Produktivbetrieb, unter Ihren bestehenden Kontrollen — ohne Ausnahmen.</p></summary><div class="ex-detail"><p>In den Produktivbetrieb unter derselben Governance, Prüfung und Freigabe wie alles andere, was Sie betreiben — nicht daneben und nicht als Ausnahme.</p></div></details></li><li class="ex-step" id="phase-5"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 05 · Nachweis</span><span class="ex-wk mono">Wochen 9–12</span></div><span class="ex-title">Gegen die vereinbarte Zahl</span><p class="ex-cond"><b>Abschlusskriterium</b> Ein schriftliches Ergebnis — auch in der unbequemen Fassung, wenn das die Wahrheit ist.</p></summary><div class="ex-detail"><p>Gemessen an der in Phase 01 vereinbarten Zahl, mit dem in Phase 02 gebauten Evaluations-Harness. Hat sie sich nicht bewegt, steht genau das im schriftlichen Ergebnis.</p></div></details></li><li class="ex-step last" id="phase-6"><span aria-hidden="true" class="ex-node"></span><details class="ex-row"><summary class="ex-sum"><div class="ex-head"><span class="ex-eyebrow mono">Phase 06 · Übergabe</span><span class="ex-wk mono">Wochen 12–14</span></div><span class="ex-title">Und dann gehen wir</span><p class="ex-cond"><b>Abschlusskriterium</b> Sie besitzen es, Sie betreiben es, wir sind weg. Das ist die Definition von fertig.</p></summary><div class="ex-detail"><p>Dokumentation, Runbooks, Architecture Decision Records, gemeinsamer Betrieb mit Ihren Engineers und ein benannter Verantwortlicher. Das Projekt ist erst abgeschlossen, wenn Ihr Team es ohne uns betreiben kann.</p></div></details></li></ol>
 </div>
@@ -606,7 +608,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">Woran wir glauben</div>
-<h2>Vier Positionen, über die wir nicht verhandeln</h2>
+<h2>Vier Positionen,<br/>über die wir nicht <em>verhandeln</em></h2>
 </div>
 <div class="grid-2 rv">
 <div class="card"><div class="num">01</div><h4>Wir machen es nicht für Sie. Wir räumen Ihnen den Weg frei.</h4>
@@ -632,7 +634,6 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <h2 style="max-width:18ch;margin:0 auto">Möchten Sie das an Ihrem echten Problem prüfen?</h2>
 <div style="display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap">
 <a class="btn btn-primary" href="/de/index.html#talk">Gespräch beginnen</a>
-<a class="btn btn-ghost" href="/de/capabilities.html">Leistungen ansehen →</a>
 </div>
 </div>
 </section>

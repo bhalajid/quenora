@@ -1481,87 +1481,21 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 .backto .arw{transition:transform .25s ease}
 .backto:hover .arw{transform:translateX(-3px)}
 /*/BACKTO:CSS*/
-/*LOGOMOTION:CSS*/
-/* ── the lockup, moving ────────────────────────────────────────────────
-   Sizes match what build_brand set on the image it replaces, so swapping one
-   for the other never reflows the header. (Written without the literal tag
-   name: stage 4 regexes image tags straight out of the raw HTML, comments
-   included, and reported every page as having one with no alt text.) */
-.brandsvg{display:block;height:58px;width:auto;flex:none;overflow:visible}
-.brand.lg .brandsvg{height:96px}
-@media(max-width:900px){.brandsvg{height:42px}.brand.lg .brandsvg{height:56px}}
-@media(max-width:560px){.brandsvg{height:37px}.brand.lg .brandsvg{height:49px}}
-
-/* The sheen. A soft band of white at low alpha, clipped to the Q, crossing
-   once and then waiting — a reflection catching the edge, not a shimmer.
-
-   The travel is the Q's OWN width, not the canvas width. The first version
-   swept the full 1166-unit viewBox while the clip is a Q occupying x 18..191,
-   so the reflection was on screen for about a third of a second in every six
-   and a half, at an unpredictable moment. It now enters at the Q's left edge
-   and leaves at its right, and the pause is the pause. */
-.qsheen{animation:qsweep 7s cubic-bezier(.36,0,.2,1) infinite}
-@keyframes qsweep{
-  0%,4%{transform:translateX(-110px) skewX(-16deg)}
-  26%{transform:translateX(215px) skewX(-16deg)}
-  100%{transform:translateX(215px) skewX(-16deg)}
-}
-/* Each sphere breathes on its own beat, smallest first, so the arc reads as
-   rising rather than pulsing as one block. */
-.qsph{transform-box:fill-box;transform-origin:center;
-  animation:qbreathe 4.2s ease-in-out infinite;
-  animation-delay:calc(var(--i) * -0.42s)}
-@keyframes qbreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.075)}}
-
-/* Hover: the arc lifts in sequence, largest last, and the ember warms.
-   Pointer-driven only — it must never fire from a tap that was a scroll. */
-@media(hover:hover) and (pointer:fine){
-  .brand:hover .qsph{animation:none;
-    transform:translateY(calc(var(--i) * -0.9px)) scale(calc(1 + var(--i) * 0.02));
-    transition:transform .5s cubic-bezier(.16,1,.3,1);
-    transition-delay:calc(var(--i) * 22ms)}
-  .brand:hover .qsheen{animation-duration:2.2s}
-}
-
-/* The cursor: nine translucent spheres, each further behind than the last.
-   A speed-driven version of this was tried and taken out again: brightening
-   the head as the pointer moved turned it into a bright blob leading the
-   cursor rather than a trail behind it. Fixed and faint is the brief. */
-#qtrail{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:0;
-  transition:opacity .5s ease}
-body.con #qtrail{opacity:1}
-#qtrail i{position:absolute;top:0;left:0;display:block;border-radius:50%;
-  will-change:transform;filter:blur(.3px);
-  background:radial-gradient(circle at 32% 29%,
-    rgba(245,210,176,.95) 0%, rgba(233,160,99,.8) 16%,
-    rgba(201,122,60,.62) 46%, rgba(158,92,42,.4) 82%, rgba(90,50,20,.24) 100%)}
-/* Over something clickable the trail brightens, which is the affordance the
-   old ring carried and the only reason it earned its place. */
-body.clg #qtrail i{filter:brightness(1.35)}
-@media(hover:none),(pointer:coarse){#qtrail{display:none}}
-
-@media(prefers-reduced-motion:reduce){
-  .qsheen{display:none}
-  .qsph{animation:none}
-  .brand:hover .qsph{transform:none}
-  #qtrail{display:none}
-}
-/*/LOGOMOTION:CSS*/
 </style>
 <meta content="en_GB" property="og:locale"/>
-<link href="/assets/nora.css" rel="stylesheet"/>
+<link href="/assets/nora.css?v=b1d50646" rel="stylesheet"/>
 <link href="https://quenora.ai/" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","founder":{"@type":"Person","name":"Balaji Durai","jobTitle":"Founder and Principal Consultant"},"address":{"@type":"PostalAddress","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/#page","url":"https://quenora.ai/","name":"Most enterprise AI never reaches the work.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"Quenora is an enterprise AI consultancy in Bad Friedrichshall. We engineer AI into the platforms and workflows you already run, then hand your team the keys."},{"@type":"FAQPage","@id":"https://quenora.ai/#faq","mainEntity":[{"@type":"Question","name":"Why not a large consultancy?","acceptedAnswer":{"@type":"Answer","text":"You should use one for a multi-year, multi-country programme with a thousand stakeholders — they’re built for that and we’re not. For a single system that needs to reach production this year, their engagement model costs more than the problem and moves slower than your business does. The people who sell it are also rarely the people who build it."}},{"@type":"Question","name":"Why not build it in-house?","acceptedAnswer":{"@type":"Answer","text":"Often you should, and we’ll say so. Bring us in when your team has the domain knowledge but not the platform experience, or when they’re already fully committed to the systems that keep the business running. The handover phase exists precisely so that in-house becomes the answer at the end."}},{"@type":"Question","name":"Why not just buy a vendor platform?","acceptedAnswer":{"@type":"Answer","text":"If a product genuinely covers your case, buy it — that’s cheaper than anything we’d build. The work we get called for is what remains: connecting that product to systems it was never designed to meet, and producing the governance evidence the vendor doesn’t."}},{"@type":"Question","name":"You have no published case studies.","acceptedAnswer":{"@type":"Answer","text":"Correct, and we won’t invent them. Quenora is a founder-led firm in its early chapter. What we’ll do is arrange a direct conversation with a reference before you commit, and show you the actual architecture and evaluation approach in the first meeting rather than a sales deck."}},{"@type":"Question","name":"What happens if it doesn’t work?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 exists to answer that in writing, measured against the number agreed in Phase 01. If it didn’t move, we say so. You keep the code, the documentation and the evaluation harness regardless — there’s no scenario where you end an engagement with nothing to show for it."}}]}]}</script>
 
 
 
 
 
-<link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
-<link href="/assets/brand/quenora-icon.svg" rel="icon" type="image/svg+xml"/>
-<link href="/assets/brand/quenora-icon-32.png" rel="icon" sizes="32x32" type="image/png"/>
-<link href="/assets/brand/quenora-icon-180.png" rel="apple-touch-icon"/>
-<link href="/assets/brand/quenora-icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
-<link href="/assets/brand/quenora-icon-512.png" rel="icon" sizes="512x512" type="image/png"/></head>
+<link href="/assets/brand/favicon.ico?v=a035e93d" rel="icon" sizes="any"/>
+<link href="/assets/brand/quenora-icon.svg?v=878ec304" rel="icon" type="image/svg+xml"/>
+<link href="/assets/brand/quenora-icon-32.png?v=2a9eb619" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/brand/quenora-icon-180.png?v=4c79984a" rel="apple-touch-icon"/>
+<link href="/assets/brand/quenora-icon-192.png?v=df84842a" rel="icon" sizes="192x192" type="image/png"/>
+<link href="/assets/brand/quenora-icon-512.png?v=aa1f72d0" rel="icon" sizes="512x512" type="image/png"/><link href="/assets/logo.css?v=6cb236e7" rel="stylesheet"/></head>
 <body class="no-js">
 <a class="skip" href="#main">Skip to content</a>
 <div aria-hidden="true" id="ld"><div class="n">01</div><div class="bar"></div></div>
@@ -1572,7 +1506,7 @@ body.clg #qtrail i{filter:brightness(1.35)}
 <div aria-hidden="true" id="qtrail"></div>
 <header class="nav" id="nav">
 <div class="wrap">
-<a aria-label="Quenora home" class="brand" href="index.html"><!--LOGOMOTION:MARK--><svg class="brandsvg" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 74 1166 554" role="img" aria-label="Quenora logo"><defs><radialGradient id="q79d4b" cx="0.5" cy="0.5" r="0.53" fx="0.32" fy="0.29"><stop offset="0" stop-color="#F7DCC2"/><stop offset="0.18" stop-color="#E9A063"/><stop offset="0.50" stop-color="#C97A3C"/><stop offset="0.85" stop-color="#A55F2A"/><stop offset="1" stop-color="#7E4620"/></radialGradient><radialGradient id="q79d4r" cx="0.5" cy="0.5" r="0.52" fx="0.76" fy="0.79"><stop offset="0" stop-color="#F2CDA4" stop-opacity="0.42"/><stop offset="0.5" stop-color="#F2CDA4" stop-opacity="0.06"/><stop offset="1" stop-color="#F2CDA4" stop-opacity="0"/></radialGradient><radialGradient id="q79d4h" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.92"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient><clipPath id="qclip"><path d="M 36 430 L 26 440 L 22 447 L 18 460 L 18 536 L 21 546 L 28 558 L 32 562 L 41 568 L 48 571 L 56 572 L 57 573 L 127 573 L 164 620 L 191 620 L 138 552 L 64 552 L 63 551 L 58 551 L 51 548 L 44 542 L 39 530 L 39 465 L 43 455 L 49 448 L 55 445 L 62 444 L 63 443 L 147 443 L 148 444 L 152 444 L 161 449 L 165 453 L 168 458 L 170 465 L 170 475 L 171 476 L 171 481 L 170 482 L 170 499 L 171 500 L 171 523 L 170 524 L 170 531 L 165 542 L 157 549 L 171 566 L 174 564 L 184 553 L 188 544 L 188 541 L 190 536 L 190 529 L 191 528 L 191 464 L 190 463 L 190 458 L 187 448 L 180 436 L 170 428 L 158 423 L 154 423 L 153 422 L 57 422 L 43 426 Z"/></clipPath><linearGradient id="qshine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.42" stop-color="#fff" stop-opacity="0.34"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.62"/><stop offset="0.58" stop-color="#fff" stop-opacity="0.34"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><path d="M 36 430 L 26 440 L 22 447 L 18 460 L 18 536 L 21 546 L 28 558 L 32 562 L 41 568 L 48 571 L 56 572 L 57 573 L 127 573 L 164 620 L 191 620 L 138 552 L 64 552 L 63 551 L 58 551 L 51 548 L 44 542 L 39 530 L 39 465 L 43 455 L 49 448 L 55 445 L 62 444 L 63 443 L 147 443 L 148 444 L 152 444 L 161 449 L 165 453 L 168 458 L 170 465 L 170 475 L 171 476 L 171 481 L 170 482 L 170 499 L 171 500 L 171 523 L 170 524 L 170 531 L 165 542 L 157 549 L 171 566 L 174 564 L 184 553 L 188 544 L 188 541 L 190 536 L 190 529 L 191 528 L 191 464 L 190 463 L 190 458 L 187 448 L 180 436 L 170 428 L 158 423 L 154 423 L 153 422 L 57 422 L 43 426 Z" fill="#C97A3C" fill-rule="evenodd"/><path d="M 774 474 L 777 471 L 787 467 L 838 467 L 846 470 L 851 475 L 854 482 L 855 525 L 854 526 L 853 534 L 850 539 L 843 544 L 836 545 L 835 546 L 788 546 L 787 545 L 783 545 L 777 542 L 772 536 L 770 531 L 770 483 L 771 482 L 771 479 Z M 243 450 L 243 527 L 244 528 L 244 535 L 246 542 L 250 550 L 258 558 L 263 561 L 273 564 L 333 564 L 334 563 L 341 562 L 347 559 L 355 552 L 361 541 L 361 538 L 363 533 L 363 450 L 345 450 L 345 531 L 341 539 L 335 544 L 328 546 L 279 546 L 272 544 L 266 539 L 263 534 L 263 531 L 262 530 L 262 450 Z M 1039 449 L 1039 467 L 1114 467 L 1115 468 L 1118 468 L 1123 471 L 1126 474 L 1129 481 L 1129 535 L 1127 539 L 1123 543 L 1114 546 L 1062 546 L 1055 544 L 1049 538 L 1048 535 L 1048 524 L 1050 519 L 1057 513 L 1060 513 L 1061 512 L 1121 512 L 1126 510 L 1125 509 L 1124 502 L 1122 499 L 1118 496 L 1056 496 L 1047 499 L 1042 502 L 1035 509 L 1031 519 L 1031 540 L 1033 547 L 1036 552 L 1042 558 L 1054 563 L 1146 563 L 1146 491 L 1147 490 L 1147 484 L 1146 483 L 1145 471 L 1140 461 L 1131 453 L 1119 449 Z M 997 449 L 954 449 L 953 450 L 948 450 L 937 454 L 927 463 L 922 473 L 921 480 L 920 481 L 920 563 L 938 563 L 938 484 L 942 475 L 946 471 L 953 468 L 992 468 L 993 467 L 998 467 L 998 450 Z M 766 455 L 757 465 L 752 480 L 752 533 L 753 534 L 754 541 L 760 552 L 768 559 L 783 564 L 838 564 L 839 563 L 845 563 L 857 558 L 867 547 L 870 541 L 871 533 L 872 532 L 872 478 L 871 477 L 870 470 L 864 460 L 860 456 L 851 451 L 844 449 L 839 449 L 838 448 L 787 448 L 786 449 L 780 449 Z M 592 460 L 587 469 L 584 479 L 584 563 L 601 563 L 602 562 L 602 482 L 605 475 L 610 470 L 618 467 L 668 467 L 674 469 L 680 475 L 683 482 L 683 562 L 684 563 L 701 563 L 701 478 L 696 464 L 687 454 L 675 449 L 671 449 L 670 448 L 616 448 L 615 449 L 611 449 L 599 454 Z M 428 457 L 422 464 L 417 477 L 417 534 L 420 544 L 424 551 L 433 559 L 443 563 L 449 563 L 450 564 L 511 564 L 512 563 L 531 563 L 531 546 L 453 546 L 443 543 L 438 538 L 435 531 L 435 481 L 437 476 L 443 470 L 450 467 L 504 467 L 509 469 L 514 474 L 516 478 L 516 489 L 514 493 L 510 497 L 506 499 L 444 499 L 443 500 L 443 508 L 444 509 L 444 513 L 446 515 L 508 515 L 509 514 L 516 513 L 522 510 L 528 504 L 532 497 L 533 488 L 534 487 L 534 479 L 533 478 L 532 469 L 527 460 L 522 455 L 517 452 L 508 449 L 479 449 L 478 448 L 453 448 L 452 449 L 445 449 L 438 451 Z" fill="#FFFFFF" fill-rule="evenodd"/><g class="quenora-rise"><g class="qsph" style="--i:0"><circle cx="270.00" cy="374.00" r="5.54" fill="url(#q79d4b)"/><circle cx="270.00" cy="374.00" r="5.54" fill="url(#q79d4r)"/><ellipse cx="268.17" cy="371.78" rx="1.44" ry="0.94" transform="rotate(-31.5 268.17 371.78)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:1"><circle cx="287.80" cy="373.32" r="7.29" fill="url(#q79d4b)"/><circle cx="287.80" cy="373.32" r="7.29" fill="url(#q79d4r)"/><ellipse cx="285.39" cy="370.39" rx="1.90" ry="1.24" transform="rotate(-31.5 285.39 370.39)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:2"><circle cx="309.50" cy="370.62" r="9.60" fill="url(#q79d4b)"/><circle cx="309.50" cy="370.62" r="9.60" fill="url(#q79d4r)"/><ellipse cx="306.33" cy="366.77" rx="2.50" ry="1.63" transform="rotate(-31.5 306.33 366.77)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:3"><circle cx="335.98" cy="364.42" r="12.63" fill="url(#q79d4b)"/><circle cx="335.98" cy="364.42" r="12.63" fill="url(#q79d4r)"/><ellipse cx="331.81" cy="359.35" rx="3.28" ry="2.15" transform="rotate(-31.5 331.81 359.35)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:4"><circle cx="367.97" cy="352.32" r="16.62" fill="url(#q79d4b)"/><circle cx="367.97" cy="352.32" r="16.62" fill="url(#q79d4r)"/><ellipse cx="362.48" cy="345.66" rx="4.32" ry="2.83" transform="rotate(-31.5 362.48 345.66)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:5"><circle cx="405.44" cy="330.40" r="21.86" fill="url(#q79d4b)"/><circle cx="405.44" cy="330.40" r="21.86" fill="url(#q79d4r)"/><ellipse cx="398.22" cy="321.63" rx="5.68" ry="3.72" transform="rotate(-31.5 398.22 321.63)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:6"><circle cx="446.34" cy="292.84" r="28.79" fill="url(#q79d4b)"/><circle cx="446.34" cy="292.84" r="28.79" fill="url(#q79d4r)"/><ellipse cx="436.84" cy="281.29" rx="7.49" ry="4.89" transform="rotate(-31.5 436.84 281.29)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:7"><circle cx="483.86" cy="232.14" r="37.89" fill="url(#q79d4b)"/><circle cx="483.86" cy="232.14" r="37.89" fill="url(#q79d4r)"/><ellipse cx="471.36" cy="216.94" rx="9.85" ry="6.44" transform="rotate(-31.5 471.36 216.94)" fill="url(#q79d4h)"/></g><g class="qsph" style="--i:8"><circle cx="528.00" cy="141.85" r="49.86" fill="url(#q79d4b)"/><circle cx="528.00" cy="141.85" r="49.86" fill="url(#q79d4r)"/><ellipse cx="511.55" cy="121.86" rx="12.96" ry="8.48" transform="rotate(-31.5 511.55 121.86)" fill="url(#q79d4h)"/></g></g><g clip-path="url(#qclip)"><rect class="qsheen" x="0" y="404" width="86" height="232" fill="url(#qshine)" transform="translate(-620,0)"/></g></svg><!--/LOGOMOTION:MARK--></a>
+<a aria-label="Quenora home" class="brand" href="index.html"><!--LOGOMOTION:MARK--><svg class="brandsvg" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 74 1166 554" role="img" aria-label="Quenora logo"><defs><radialGradient id="a" cx="0.5" cy="0.5" r="0.53" fx="0.32" fy="0.29"><stop offset="0" stop-color="#F7DCC2"/><stop offset="0.18" stop-color="#E9A063"/><stop offset="0.5" stop-color="#C97A3C"/><stop offset="0.85" stop-color="#A55F2A"/><stop offset="1" stop-color="#7E4620"/></radialGradient><radialGradient id="b" cx="0.5" cy="0.5" r="0.52" fx="0.76" fy="0.79"><stop offset="0" stop-color="#F2CDA4" stop-opacity="0.42"/><stop offset="0.5" stop-color="#F2CDA4" stop-opacity="0.06"/><stop offset="1" stop-color="#F2CDA4" stop-opacity="0"/></radialGradient><radialGradient id="c" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.92"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient><clipPath id="d"><use href="#qink"/></clipPath><linearGradient id="e" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.42" stop-color="#fff" stop-opacity="0.34"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.62"/><stop offset="0.58" stop-color="#fff" stop-opacity="0.34"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><path id="qink" d="M36 430 L26 440 L22 447 L18 460 L18 536 L21 546 L28 558 L32 562 L41 568 L48 571 L56 572 L57 573 L127 573 L164 620 L191 620 L138 552 L64 552 L63 551 L58 551 L51 548 L44 542 L39 530 L39 465 L43 455 L49 448 L55 445 L62 444 L63 443 L147 443 L148 444 L152 444 L161 449 L165 453 L168 458 L170 465 L170 475 L171 476 L171 481 L170 482 L170 499 L171 500 L171 523 L170 524 L170 531 L165 542 L157 549 L171 566 L174 564 L184 553 L188 544 L188 541 L190 536 L190 529 L191 528 L191 464 L190 463 L190 458 L187 448 L180 436 L170 428 L158 423 L154 423 L153 422 L57 422 L43 426 Z" fill="#C97A3C" fill-rule="evenodd"/><path d="M774 474 L777 471 L787 467 L838 467 L846 470 L851 475 L854 482 L855 525 L854 526 L853 534 L850 539 L843 544 L836 545 L835 546 L788 546 L787 545 L783 545 L777 542 L772 536 L770 531 L770 483 L771 482 L771 479 ZM243 450 L243 527 L244 528 L244 535 L246 542 L250 550 L258 558 L263 561 L273 564 L333 564 L334 563 L341 562 L347 559 L355 552 L361 541 L361 538 L363 533 L363 450 L345 450 L345 531 L341 539 L335 544 L328 546 L279 546 L272 544 L266 539 L263 534 L263 531 L262 530 L262 450 ZM1039 449 L1039 467 L1114 467 L1115 468 L1118 468 L1123 471 L1126 474 L1129 481 L1129 535 L1127 539 L1123 543 L1114 546 L1062 546 L1055 544 L1049 538 L1048 535 L1048 524 L1050 519 L1057 513 L1060 513 L1061 512 L1121 512 L1126 510 L1125 509 L1124 502 L1122 499 L1118 496 L1056 496 L1047 499 L1042 502 L1035 509 L1031 519 L1031 540 L1033 547 L1036 552 L1042 558 L1054 563 L1146 563 L1146 491 L1147 490 L1147 484 L1146 483 L1145 471 L1140 461 L1131 453 L1119 449 ZM997 449 L954 449 L953 450 L948 450 L937 454 L927 463 L922 473 L921 480 L920 481 L920 563 L938 563 L938 484 L942 475 L946 471 L953 468 L992 468 L993 467 L998 467 L998 450 ZM766 455 L757 465 L752 480 L752 533 L753 534 L754 541 L760 552 L768 559 L783 564 L838 564 L839 563 L845 563 L857 558 L867 547 L870 541 L871 533 L872 532 L872 478 L871 477 L870 470 L864 460 L860 456 L851 451 L844 449 L839 449 L838 448 L787 448 L786 449 L780 449 ZM592 460 L587 469 L584 479 L584 563 L601 563 L602 562 L602 482 L605 475 L610 470 L618 467 L668 467 L674 469 L680 475 L683 482 L683 562 L684 563 L701 563 L701 478 L696 464 L687 454 L675 449 L671 449 L670 448 L616 448 L615 449 L611 449 L599 454 ZM428 457 L422 464 L417 477 L417 534 L420 544 L424 551 L433 559 L443 563 L449 563 L450 564 L511 564 L512 563 L531 563 L531 546 L453 546 L443 543 L438 538 L435 531 L435 481 L437 476 L443 470 L450 467 L504 467 L509 469 L514 474 L516 478 L516 489 L514 493 L510 497 L506 499 L444 499 L443 500 L443 508 L444 509 L444 513 L446 515 L508 515 L509 514 L516 513 L522 510 L528 504 L532 497 L533 488 L534 487 L534 479 L533 478 L532 469 L527 460 L522 455 L517 452 L508 449 L479 449 L478 448 L453 448 L452 449 L445 449 L438 451 Z" fill="#FFFFFF" fill-rule="evenodd"/><g class="quenora-rise"><g class="qsph" style="--i:0"><circle cx="270" cy="374" r="5.54" fill="url(#a)"/><circle cx="270" cy="374" r="5.54" fill="url(#b)"/><ellipse cx="268.17" cy="371.78" rx="1.44" ry="0.94" transform="rotate(-31.5 268.17 371.78)" fill="url(#c)"/></g><g class="qsph" style="--i:1"><circle cx="287.8" cy="373.32" r="7.29" fill="url(#a)"/><circle cx="287.8" cy="373.32" r="7.29" fill="url(#b)"/><ellipse cx="285.39" cy="370.39" rx="1.9" ry="1.24" transform="rotate(-31.5 285.39 370.39)" fill="url(#c)"/></g><g class="qsph" style="--i:2"><circle cx="309.5" cy="370.62" r="9.6" fill="url(#a)"/><circle cx="309.5" cy="370.62" r="9.6" fill="url(#b)"/><ellipse cx="306.33" cy="366.77" rx="2.5" ry="1.63" transform="rotate(-31.5 306.33 366.77)" fill="url(#c)"/></g><g class="qsph" style="--i:3"><circle cx="335.98" cy="364.42" r="12.63" fill="url(#a)"/><circle cx="335.98" cy="364.42" r="12.63" fill="url(#b)"/><ellipse cx="331.81" cy="359.35" rx="3.28" ry="2.15" transform="rotate(-31.5 331.81 359.35)" fill="url(#c)"/></g><g class="qsph" style="--i:4"><circle cx="367.97" cy="352.32" r="16.62" fill="url(#a)"/><circle cx="367.97" cy="352.32" r="16.62" fill="url(#b)"/><ellipse cx="362.48" cy="345.66" rx="4.32" ry="2.83" transform="rotate(-31.5 362.48 345.66)" fill="url(#c)"/></g><g class="qsph" style="--i:5"><circle cx="405.44" cy="330.4" r="21.86" fill="url(#a)"/><circle cx="405.44" cy="330.4" r="21.86" fill="url(#b)"/><ellipse cx="398.22" cy="321.63" rx="5.68" ry="3.72" transform="rotate(-31.5 398.22 321.63)" fill="url(#c)"/></g><g class="qsph" style="--i:6"><circle cx="446.34" cy="292.84" r="28.79" fill="url(#a)"/><circle cx="446.34" cy="292.84" r="28.79" fill="url(#b)"/><ellipse cx="436.84" cy="281.29" rx="7.49" ry="4.89" transform="rotate(-31.5 436.84 281.29)" fill="url(#c)"/></g><g class="qsph" style="--i:7"><circle cx="483.86" cy="232.14" r="37.89" fill="url(#a)"/><circle cx="483.86" cy="232.14" r="37.89" fill="url(#b)"/><ellipse cx="471.36" cy="216.94" rx="9.85" ry="6.44" transform="rotate(-31.5 471.36 216.94)" fill="url(#c)"/></g><g class="qsph" style="--i:8"><circle cx="528" cy="141.85" r="49.86" fill="url(#a)"/><circle cx="528" cy="141.85" r="49.86" fill="url(#b)"/><ellipse cx="511.55" cy="121.86" rx="12.96" ry="8.48" transform="rotate(-31.5 511.55 121.86)" fill="url(#c)"/></g></g><g clip-path="url(#d)"><rect class="qsheen" x="0" y="404" width="86" height="232" fill="url(#e)" transform="translate(-620,0)"/></g></svg><!--/LOGOMOTION:MARK--></a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
 <nav aria-label="Main" class="navlinks" id="navLinks"><a href="about.html">Who are we?</a><a href="work.html">What work we do?</a><a href="approach.html">Phased Approach</a><a href="capabilities.html">Nine Capabilities</a><a href="pricing.html">View Pricing</a><a href="engineering.html">Engineering</a></nav>
 <a class="navcta" href="#climax"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
@@ -1948,7 +1882,7 @@ notice</a>.</span></label>
      landed on the previous design generation. Until those pages are rebuilt
      (scope-2), both navigations point at the same places. About was missing
      here entirely and is restored. -->
-<div><div class="f-lockup"><img alt="Quenora" class="brandimg" decoding="async" height="1007" src="/assets/brand/quenora-full.svg" width="1166"/><span class="f-desc">Consulting</span></div><p class="f-blurb">Enterprise AI, engineered to operate. Built into what you already run, then handed over.</p><p class="f-where">Working internationally</p></div><div><h3>Site map</h3><nav aria-label="Footer"><a href="#journey">Approach</a><a href="#solution">Capabilities</a><a href="#commercial">Pricing</a><a href="#problem">Work</a><a href="#who">About</a><a href="#climax">Contact</a></nav></div><div><h3>Legal</h3><nav aria-label="Legal"><a href="impressum.html">Legal notice · Impressum</a><a href="privacy.html">Privacy notice</a></nav></div><div><h3>Follow</h3><nav aria-label="Social" class="f-social"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.4 2.4 4.4 5.5V21h-4v-6.1c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9z"></path></svg></a><a aria-label="Instagram" href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.3" cy="6.7" r="1.3"></circle></svg></a><a aria-label="Facebook" href="https://www.facebook.com/people/Quenora-Consulting/61593930577480/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.3 0-1.7.8-1.7 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12.1z"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@quenora-ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="14.8" rx="4" stroke="currentColor" stroke-width="2" width="20.8" x="1.6" y="4.6"></rect><path d="M10.2 9.1v5.8l5-2.9z"></path></svg></a><a aria-label="X" href="https://x.com/quenora_ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-5.9l-4.6-6-5.3 6H3l7-8L2.5 3h6l4.2 5.5zm-1 16.2h1.7L7.6 4.7H5.8z"></path></svg></a></nav></div></div>
+<div><div class="f-lockup"><img alt="Quenora" class="brandimg" decoding="async" height="1007" src="/assets/brand/quenora-full.svg?v=4d1f99f1" width="1166"/><span class="f-desc">Consulting</span></div><p class="f-blurb">Enterprise AI, engineered to operate. Built into what you already run, then handed over.</p><p class="f-where">Working internationally</p></div><div><h3>Site map</h3><nav aria-label="Footer"><a href="#journey">Approach</a><a href="#solution">Capabilities</a><a href="#commercial">Pricing</a><a href="#problem">Work</a><a href="#who">About</a><a href="#climax">Contact</a></nav></div><div><h3>Legal</h3><nav aria-label="Legal"><a href="impressum.html">Legal notice · Impressum</a><a href="privacy.html">Privacy notice</a></nav></div><div><h3>Follow</h3><nav aria-label="Social" class="f-social"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/quenora" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.4 2.4 4.4 5.5V21h-4v-6.1c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9z"></path></svg></a><a aria-label="Instagram" href="https://www.instagram.com/quenora.ai/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.3" cy="6.7" r="1.3"></circle></svg></a><a aria-label="Facebook" href="https://www.facebook.com/people/Quenora-Consulting/61593930577480/" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.3 0-1.7.8-1.7 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12.1z"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@quenora-ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="14.8" rx="4" stroke="currentColor" stroke-width="2" width="20.8" x="1.6" y="4.6"></rect><path d="M10.2 9.1v5.8l5-2.9z"></path></svg></a><a aria-label="X" href="https://x.com/quenora_ai" rel="noopener me" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-5.9l-4.6-6-5.3 6H3l7-8L2.5 3h6l4.2 5.5zm-1 16.2h1.7L7.6 4.7H5.8z"></path></svg></a></nav></div></div>
 <div class="f-bot"><span>© 2026 Quenora Consulting</span><span>Bad Friedrichshall, Germany · <a href="impressum.html">Legal notice</a> · <a href="privacy.html">Privacy</a></span></div>
 </div>
 </footer>
@@ -3591,7 +3525,7 @@ notice</a>.</span></label>
 
 </script>
 <!--WIDGET:JS-->
-<script defer="" src="/assets/nora.js"></script>
+<script defer="" src="/assets/nora.js?v=9a92faae"></script>
 <!--/WIDGET:JS-->
 <!--NAV:JS-->
 <script>
@@ -3975,176 +3909,7 @@ notice</a>.</span></label>
   };
 })();
 /*/FORM:JS*/</script>
-<!--LOGOMOTION:JS--><script>
-/* The nine spheres, following the pointer. Replaces the ring-and-dot cursor:
-   same lerp chain, nine of them, each with a slower follow than the one in
-   front so the arc trails out behind a fast movement and collapses back into
-   a single mark when the pointer stops. */
-(function(){
-  var w = window, d = document, body = d.body;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
-  var wrap = d.getElementById('qtrail');
-  if (!wrap) return;
-
-  /* Sizes are the logo's own ratio, 9^(1/8) per step, smallest at the tail. */
-  var N = 9, dots = [], i, el;
-  for (i = 0; i < N; i++) {
-    el = d.createElement('i');
-    var r = 2.8 * Math.pow(1.3161, i);          /* 2.8px -> 24px */
-    el.style.width = el.style.height = r.toFixed(2) + 'px';
-    el.style.marginLeft = el.style.marginTop = (-r / 2).toFixed(2) + 'px';
-    /* Deliberately far below what looks right for ONE sphere. At rest all
-       nine sit on the same point and their alpha compounds; a brighter tuning
-       turned the pointer into a lamp that washed out whatever it hovered. */
-    el.style.opacity = (0.045 + 0.011 * i).toFixed(3);
-    wrap.appendChild(el);
-    dots.push({ el: el, x: 0, y: 0, k: 0.30 - i * 0.026 });
-  }
-
-  var mx = 0, my = 0, seen = false;
-  w.addEventListener('mousemove', function (e) {
-    mx = e.clientX; my = e.clientY;
-    if (!seen) {
-      seen = true;
-      for (var j = 0; j < N; j++) { dots[j].x = mx; dots[j].y = my; }
-      body.classList.add('con');
-    }
-  }, { passive: true });
-
-  (function frame() {
-    for (var j = 0; j < N; j++) {
-      var t = dots[j];
-      t.x += (mx - t.x) * t.k;
-      t.y += (my - t.y) * t.k;
-      t.el.style.transform = 'translate3d(' + t.x.toFixed(1) + 'px,'
-                                            + t.y.toFixed(1) + 'px,0)';
-    }
-    requestAnimationFrame(frame);
-  })();
-
-  d.addEventListener('mouseover', function (e) {
-    if (e.target.closest && e.target.closest('a,button,.nrow')) body.classList.add('clg');
-  });
-  d.addEventListener('mouseout', function (e) {
-    if (e.target.closest && e.target.closest('a,button,.nrow')) body.classList.remove('clg');
-  });
-})();
-</script><!--/LOGOMOTION:JS-->
-<!--EGGS:JS--><script>
-/* Four things that reward looking closer. See build_easter_eggs.py for why
-   these four and not funnier ones. Nothing here fires on its own. */
-(function(){
-  var d = document, w = window;
-  /* The work page's field figure is verified by a headless harness that runs
-     this page's scripts against a minimal DOM stub — no matchMedia, no
-     addEventListener, and a getElementById that returns something truthy for
-     every id. Check for the things this code actually calls, the way the
-     assistant does, or the figure's own test dies on our keydown handler. */
-  if (typeof d.addEventListener !== 'function' ||
-      typeof w.matchMedia !== 'function' ||
-      typeof location === 'undefined') return;
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var NINE = ['Trustworthy','Human','Confident','Elegant','Timeless','Enterprise','Premium','Innovative','Intelligent'];
-
-  /* 1 ─ the console banner ------------------------------------------------ */
-  /* Newlines are built, not escaped. An earlier version wrote them as a
-     backslash-n inside this template and the generator turned it into a real
-     line break in the middle of a JS string literal, which took the work
-     page's figure test down with a syntax error. */
-  var NL = String.fromCharCode(10);
-  try {
-    var mono = 'ui-monospace,SFMono-Regular,Menlo,monospace';
-    console.log('%c' + [
-      '                                   ●',
-      '                              ●',
-      '                         ●',
-      '                    ●',
-      '               ●',
-      '          ●',
-      '      ●',
-      '   ●',
-      ' ·'
-    ].join(NL), 'color:#FF7043;font-size:11px;line-height:1.15;font-family:' + mono);
-    console.log('%cQuenora%c  ·  enterprise AI, engineered to operate',
-      'color:#FF7043;font:600 15px system-ui', 'color:#A8AEBB;font:400 13px system-ui');
-    console.log('%cNo framework, no bundler, no third-party script. Every page is one '
-      + 'self-contained file — the hero is 2D canvas, the assistant is BM25 over a '
-      + 'prebuilt index, and neither needs a network you do not control.',
-      'color:#7C8290;font:400 12px/1.55 ' + mono);
-    console.log('%cTry: the Konami code  ·  type  nora   ·  add ?grid to the URL',
-      'color:#5BD7F5;font:400 12px ' + mono);
-    console.log('%cinfo@quenora.ai', 'color:#C97A3C;font:400 12px ' + mono);
-  } catch (e) {}
-
-  /* 2 ─ the Konami code, which lights the nine and names them ------------- */
-  var SEQ = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown',
-             'ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-  var at = 0;
-  function principles(){
-    var sph = d.querySelectorAll('header .qsph');
-    console.log('%cThe nine circles are nine principles, smallest first:',
-      'color:#FF7043;font:600 13px system-ui');
-    NINE.forEach(function(name, i){
-      setTimeout(function(){
-        console.log('%c' + String(i + 1).padStart(2, '0') + '  %c' + name,
-          'color:#7C8290;font:400 12px ui-monospace,monospace',
-          'color:#F2EFE8;font:400 13px system-ui');
-        var s = sph[i];
-        if (s && !reduced) {
-          s.style.transition = 'transform .45s cubic-bezier(.16,1,.3,1)';
-          s.style.transform = 'scale(1.45)';
-          setTimeout(function(){ s.style.transform = ''; }, 520);
-        }
-      }, reduced ? 0 : i * 160);
-    });
-  }
-
-  /* 3 ─ typing "nora" ------------------------------------------------------ */
-  var typed = '';
-
-  d.addEventListener('keydown', function(e){
-    var t = e.target;
-    /* never while someone is filling in the enquiry form */
-    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-
-    at = (e.key === SEQ[at]) ? at + 1 : (e.key === SEQ[0] ? 1 : 0);
-    if (at === SEQ.length) { at = 0; principles(); }
-
-    if (e.key && e.key.length === 1) {
-      typed = (typed + e.key.toLowerCase()).slice(-4);
-      if (typed === 'nora') {
-        typed = '';
-        var fab = d.getElementById('aiFab'), panel = d.getElementById('aiPanel');
-        if (fab && panel && !panel.classList.contains('open')) fab.click();
-      }
-    }
-  });
-
-  /* 4 ─ ?grid — the six columns everything is measured against ------------- */
-  if (/[?&]grid/.test(location.search)) {
-    var wrap = d.querySelector('main .wrap') || d.querySelector('.wrap');
-    if (wrap) {
-      var box = wrap.getBoundingClientRect();
-      var g = d.createElement('div');
-      g.setAttribute('aria-hidden', 'true');
-      g.style.cssText = 'position:fixed;top:0;bottom:0;z-index:9999;' +
-        'pointer-events:none;display:grid;grid-template-columns:repeat(6,1fr);' +
-        'gap:24px;left:' + Math.round(box.left) + 'px;width:' + Math.round(box.width) + 'px';
-      for (var i = 0; i < 6; i++) {
-        var col = d.createElement('div');
-        col.style.cssText = 'background:rgba(255,112,67,.07);' +
-          'border-left:1px solid rgba(255,112,67,.22);' +
-          'border-right:1px solid rgba(255,112,67,.22)';
-        g.appendChild(col);
-      }
-      d.body.appendChild(g);
-      console.log('%c?grid  ' + Math.round(box.width) + 'px across six columns, left edge ' +
-        Math.round(box.left) + 'px',
-        'color:#5BD7F5;font:400 12px ui-monospace,monospace');
-    }
-  }
-})();
-</script><!--/EGGS:JS-->
+<script defer src="/assets/logo.js?v=fc9bd214"></script>
+<script defer src="/assets/eggs.js?v=e633520f"></script>
 </body>
 </html>

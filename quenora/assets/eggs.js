@@ -1,52 +1,3 @@
-#!/usr/bin/env python3
-"""
-build_easter_eggs.py — four things that reward looking closer.
-
-RUN LAST, after build_logo_motion.py. It appends one script to every page.
-
-WHY THESE FOUR AND NOT FUNNIER ONES
-
-The firm sells not doing gimmicks. So none of these do anything to a visitor
-who did not ask for them: nothing fires on load, nothing moves on its own,
-nothing is logged about anyone. Each one is invisible until deliberately
-triggered, and each one says something true about the work.
-
-  1 · the console banner
-      Whoever opens devtools on a consultancy's site is technical, and is
-      usually deciding whether the people who built it know anything. The
-      mark is drawn in the console, with what the site is built from and how
-      to reach a human. No tracking, no "we're hiring!!!" — one honest note.
-
-  2 · the Konami code -> the nine principles
-      The nine circles ARE nine principles; CLAUDE.md names them in order and
-      chapter 07 spells them out. The code lights each sphere in the header in
-      turn and prints the list. It is the mark explaining itself.
-
-  3 · typing "nora"
-      Opens the assistant. She is the fastest route to an answer on this site
-      and the least discoverable thing on it. Only fires when the keystrokes
-      are not going into a field, so it can never eat someone's enquiry.
-
-  4 · ?grid
-      Not a joke — the layout grid the whole site is built on, drawn over the
-      page. Every alignment defect this project has shipped was a thing sitting
-      half a column off, and this is the tool that shows it. It is behind a
-      query parameter, so it costs a visitor nothing.
-
-ALL OF THEM are inert under prefers-reduced-motion where they animate, and
-none of them touch storage, the network, or the DOM a screen reader walks.
-"""
-import os, re
-
-ROOT = os.path.dirname(os.path.abspath(__file__))
-PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
-         "approach.html", "work.html", "contact.html", "about.html",
-         "impressum.html", "privacy.html", "pricing.html"]
-
-PRINCIPLES = ["Trustworthy", "Human", "Confident", "Elegant", "Timeless",
-              "Enterprise", "Premium", "Innovative", "Intelligent"]
-
-JS = """<!--EGGS:JS--><script>
 /* Four things that reward looking closer. See build_easter_eggs.py for why
    these four and not funnier ones. Nothing here fires on its own. */
 (function(){
@@ -60,7 +11,7 @@ JS = """<!--EGGS:JS--><script>
       typeof w.matchMedia !== 'function' ||
       typeof location === 'undefined') return;
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var NINE = %PRINCIPLES%;
+  var NINE = ['Trustworthy','Human','Confident','Elegant','Timeless','Enterprise','Premium','Innovative','Intelligent'];
 
   /* 1 ─ the console banner ------------------------------------------------ */
   /* Newlines are built, not escaped. An earlier version wrote them as a
@@ -137,7 +88,7 @@ JS = """<!--EGGS:JS--><script>
   });
 
   /* 4 ─ ?grid — the six columns everything is measured against ------------- */
-  if (/[?&]grid\\b/.test(location.search)) {
+  if (/[?&]grid\b/.test(location.search)) {
     var wrap = d.querySelector('main .wrap') || d.querySelector('.wrap');
     if (wrap) {
       var box = wrap.getBoundingClientRect();
@@ -160,35 +111,3 @@ JS = """<!--EGGS:JS--><script>
     }
   }
 })();
-</script><!--/EGGS:JS-->"""
-
-
-def main():
-    js = JS.replace('%PRINCIPLES%',
-                    '[' + ','.join("'%s'" % p for p in PRINCIPLES) + ']')
-    """Served rather than inlined: 5.3KB on every page, against a 220KB
-    budget on index.html that it helped push over."""
-    body = re.sub(r'^.*?<script>', '', js, flags=re.S)
-    body = re.sub(r'</script>.*$', '', body, flags=re.S)
-    open(os.path.join(ROOT, 'assets', 'eggs.js'), 'w').write(body.strip())
-    n = 0
-    for page in PAGES:
-        p = os.path.join(ROOT, page)
-        if not os.path.exists(p):
-            continue
-        s = open(p, encoding='utf-8').read()
-        before = s
-        s = re.sub(r'<!--EGGS:JS-->.*?<!--/EGGS:JS-->\s*', '', s, flags=re.S)
-        # matched with or without the ?v= build_asset_versions adds later,
-        # or every build appends another copy of the tag
-        s = re.sub(r'<script[^>]*src="/assets/eggs\.js(?:\?v=[0-9a-f]+)?"[^>]*>\s*</script>\s*', '', s)
-        s = s.replace('</body>',
-                      '<script defer src="/assets/eggs.js"></script>\n</body>', 1)
-        if s != before:
-            open(p, 'w', encoding='utf-8').write(s)
-            n += 1
-    print('  four easter eggs on %d page(s): console, Konami, "nora", ?grid' % n)
-
-
-if __name__ == '__main__':
-    main()

@@ -57,6 +57,10 @@ fi
 "$PY" build_logo_motion.py
 # ...and the four easter eggs last, so they sit after every other script.
 "$PY" build_easter_eggs.py
+# ...and versioning last of all: vercel.json caches /assets/ for a year as
+# `immutable`, so a changed file only reaches a returning visitor if its URL
+# changed too. This must run after every generator that writes one.
+"$PY" build_asset_versions.py
 "$PY" build_widget.py
 # build_footer owns the three footer link columns and must run BEFORE
 # build_nav, which re-points header and footer links from one map and

@@ -204,15 +204,19 @@ def animated_svg():
 
     # The sheen, clipped to the Q so it can only ever land on ink.
     sheen = (
-        '<clipPath id="qclip"><path d="%s"/></clipPath>'
+        # The Q's path is ~1.4KB and was written twice: once to draw and once
+        # to clip. Same-document <use> clips against the element already there.
+        '<clipPath id="qclip"><use href="#qink"/></clipPath>'
         '<linearGradient id="qshine" x1="0" y1="0" x2="1" y2="0">'
         '<stop offset="0" stop-color="#fff" stop-opacity="0"/>'
         '<stop offset="0.42" stop-color="#fff" stop-opacity="0.34"/>'
         '<stop offset="0.5" stop-color="#fff" stop-opacity="0.62"/>'
         '<stop offset="0.58" stop-color="#fff" stop-opacity="0.34"/>'
         '<stop offset="1" stop-color="#fff" stop-opacity="0"/>'
-        '</linearGradient>') % qd
+        '</linearGradient>')
     src = src.replace('</defs>', sheen + '</defs>', 1)
+    # give the ember path the id the clip refers to
+    src = src.replace(paths[0].group(0), paths[0].group(0).replace('<path ', '<path id="qink" ', 1), 1)
     src = src.replace('</svg>',
                       '<g clip-path="url(#qclip)">'
                       '<rect class="qsheen" x="0" y="404" width="86" height="232" '
@@ -220,7 +224,28 @@ def animated_svg():
                       '</g></svg>', 1)
 
     src = src.replace('<svg ', '<svg class="brandsvg" focusable="false" ', 1)
-    return re.sub(r'\s*\n\s*', '', src).strip()
+    src = re.sub(r'\s*\n\s*', '', src).strip()
+
+    """Then squeeze it. This copy is written into every page, so bytes here
+    are multiplied by eleven, and index.html has a 220KB budget. Nothing
+    below changes a single coordinate — trailing zeros are dropped, and the
+    space after a path command letter is redundant in SVG path grammar."""
+    src = re.sub(r'(\d)\.0+(?=[\s"])', r'\1', src)
+    src = re.sub(r'(\.\d*?)0+(?=[\s"])', r'\1', src)
+    src = re.sub(r'(\d)\.(?=[\s"])', r'\1', src)
+    src = re.sub(r'\bd="([^"]+)"',
+                 lambda m: 'd="%s"' % re.sub(r'([MLZ]) ', r'\1', m.group(1)), src)
+
+    """Finally, shorten the ids. The supplied files carry a random six-character
+    prefix per gradient, and each one is referenced twenty-seven times inside
+    this copy, which is then written into every page. One letter does the same
+    job. Nothing renders differently; the ids are internal to this element and
+    are never referenced from CSS or from another file."""
+    for n, old in enumerate(re.findall(r'<(?:radialGradient|linearGradient|clipPath) id="([^"]+)"', src)):
+        new = 'abcdefgh'[n]
+        src = src.replace('id="%s"' % old, 'id="%s"' % new)
+        src = src.replace('url(#%s)' % old, 'url(#%s)' % new)
+    return src
 
 
 def swap(page, svg):
@@ -253,11 +278,17 @@ def swap(page, svg):
     s = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)height="\d+"', r'\1height="1007"', s)
     s = re.sub(r'(<img[^>]*\bclass="brandimg"[^>]*?)width="\d+"', r'\1width="1166"', s)
 
-    # 2 · CSS, between markers so this is idempotent
-    if '/*LOGOMOTION:CSS*/' in s:
-        s = re.sub(r'/\*LOGOMOTION:CSS\*/.*?/\*/LOGOMOTION:CSS\*/', CSS, s, flags=re.S)
-    else:
-        s = s.replace('</style>', CSS + '\n</style>', 1)
+    """2 · CSS and the cursor script are SERVED, not inlined. Inlined they
+    cost 3.4KB and 2.3KB on every page, and index.html has a 220KB budget it
+    was already close to. Same origin, so the no-CDN rule is untouched — this
+    is exactly what Nora already does."""
+    s = re.sub(r'/\*LOGOMOTION:CSS\*/.*?/\*/LOGOMOTION:CSS\*/\s*', '', s, flags=re.S)
+    """Remove any existing tag before inserting, matching it with or without
+    the ?v= that build_asset_versions adds later. A plain `if tag not in s`
+    stopped matching once the URL was versioned, so every build appended
+    another copy of the tag."""
+    s = re.sub(r'<link[^>]*href="/assets/logo\.css(?:\?v=[0-9a-f]+)?"[^>]*>', '', s)
+    s = s.replace('</head>', '<link href="/assets/logo.css" rel="stylesheet"/></head>', 1)
 
     # 3 · the cursor, homepage only — it is the only page that has one
     if page == 'index.html':
@@ -273,10 +304,10 @@ def swap(page, svg):
             '     spheres trail the pointer instead. See build_logo_motion.py,\n'
             '     which owns that code and the elements it drives. */\n',
             s, count=1, flags=re.S)
-        if '<!--LOGOMOTION:JS-->' in s:
-            s = re.sub(r'<!--LOGOMOTION:JS-->.*?<!--/LOGOMOTION:JS-->', JS, s, flags=re.S)
-        else:
-            s = s.replace('</body>', JS + '\n</body>', 1)
+        s = re.sub(r'<!--LOGOMOTION:JS-->.*?<!--/LOGOMOTION:JS-->\s*', '', s, flags=re.S)
+        s = re.sub(r'<script[^>]*src="/assets/logo\.js(?:\?v=[0-9a-f]+)?"[^>]*>\s*</script>\s*', '', s)
+        s = s.replace('</body>',
+                      '<script defer src="/assets/logo.js"></script>\n</body>', 1)
 
     if s != before:
         open(p, "w", encoding="utf-8").write(s)
@@ -285,6 +316,13 @@ def swap(page, svg):
 
 
 def main():
+    out = os.path.join(ROOT, 'assets')
+    open(os.path.join(out, 'logo.css'), 'w').write(
+        CSS.replace('/*LOGOMOTION:CSS*/', '').replace('/*/LOGOMOTION:CSS*/', '').strip())
+    body = re.sub(r'^.*?<script>', '', JS, flags=re.S)
+    body = re.sub(r'</script>.*$', '', body, flags=re.S)
+    open(os.path.join(out, 'logo.js'), 'w').write(body.strip())
+
     svg = animated_svg()
     n = 0
     for page in PAGES:

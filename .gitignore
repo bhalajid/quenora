@@ -16,3 +16,7 @@
 # Dependencies and tooling output
 node_modules/
 .vercel/
+
+# python build venv (beautifulsoup4); see build.sh
+.venv/
+quenora/.venv/

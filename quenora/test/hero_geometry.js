@@ -36,7 +36,16 @@ const WRAP = g(/--wrap:(\d+)px/, '--wrap');
 const SP4  = g(/--sp4:(\d+)px/, '--sp4');
 const LH   = g(/h1,h2,h3\{[^}]*line-height:([\d.]+)/, 'h1 line-height');
 
-const ARC = [...src.matchAll(/<circle cx="([\d.]+)" cy="([\d.]+)" r="([\d.]+)"/g)]
+/* The first nine circles in the file, which is the hero's own mark — but only
+   once the header lockup is out of the way. build_logo_motion inlines the
+   supplied logo into the header so its Q can carry a reflection and its
+   spheres can move, and that lockup sits ABOVE the hero in the document and
+   is drawn from eighteen <circle> elements in exactly this attribute order.
+   Left in, it supplies all nine matches and this file measures the wrong
+   mark: r9 read 140 where it should read 766, and every viewport reported
+   the hero overlapping the headline. Take it out before counting. */
+const heroSrc = src.replace(/<!--LOGOMOTION:MARK-->[\s\S]*?<!--\/LOGOMOTION:MARK-->/g, '');
+const ARC = [...heroSrc.matchAll(/<circle cx="([\d.]+)" cy="([\d.]+)" r="([\d.]+)"/g)]
   .slice(0, 9).map(m => ({ x: +m[1], y: +m[2], r: +m[3] }));
 
 const B = [Math.min(...ARC.map(c => c.x - c.r)), Math.max(...ARC.map(c => c.x + c.r)),

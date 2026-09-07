@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 # Build the site. The order matters and is the reason this file exists.
 #
+#   build_brand     the supplied lockup and icon set into header, footer, tab.
+#   build_logo_motion  MUST FOLLOW build_brand: inlines the header lockup so
+#                   the Q can carry a sweeping reflection and the nine spheres
+#                   can animate, and replaces the ring cursor with the mark's
+#                   own spheres trailing the pointer.
 #   build_widget    injects Nora (the floating assistant) into the English
 #                   pages from widget/. Must run FIRST, so the localisation
 #                   build carries her into every language.
@@ -44,6 +49,10 @@ fi
 "$PY" build_backto.py
 
 "$PY" build_brand.py
+# ...then the motion, which replaces the flat header image build_brand just
+# wrote with an inline copy whose Q can carry a reflection and whose nine
+# spheres can move. The other way round and the flat image wins.
+"$PY" build_logo_motion.py
 "$PY" build_widget.py
 # build_footer owns the three footer link columns and must run BEFORE
 # build_nav, which re-points header and footer links from one map and

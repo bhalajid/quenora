@@ -13,8 +13,8 @@ brand's own accent, #FF7043. That is ember, the colour the headlines already
 use for emphasis, not copper. Adopting the set therefore moves the mark one
 step warmer, which is the brand file's decision rather than mine.
 
-  header   quenora-primary.svg, 34px tall
-  footer   quenora-primary.svg, 46px tall
+  header   quenora-primary.svg, 56px tall
+  footer   quenora-primary.svg, 74px tall
   tab      favicon.ico for anything old, a 32px PNG for the rest, a 180px
            apple-touch icon, and 192/512 for an installed icon
 
@@ -51,11 +51,17 @@ ICONS = """<link href="/assets/brand/favicon.ico" rel="icon" sizes="any"/>
 CSS = """/* ── the supplied lockup ───────────────────────────────────────────────
    One file, referenced everywhere, rather than nine inline circles repeated
    in twenty-four pages. Height is set and width follows the ratio, so the
-   mark never distorts and never reflows the header when it loads. */
-.brandimg{display:block;height:34px;width:auto;flex:none}
-.brand.lg .brandimg{height:46px}
-@media(max-width:900px){.brandimg{height:30px}.brand.lg .brandimg{height:40px}}
-@media(max-width:560px){.brandimg{height:26px}.brand.lg .brandimg{height:36px}}"""
+   mark never distorts and never reflows the header when it loads.
+
+   The heights went up when the alternate set came in. The previous lockup was
+   2.74:1 and almost all wordmark; this one is 1.86:1 and spends the top half
+   on the rising arc, so the same 34px left the word nine pixels tall. These
+   numbers are chosen so the WORDMARK matches what it measured before, and the
+   arc is what grew. */
+.brandimg{display:block;height:56px;width:auto;flex:none}
+.brand.lg .brandimg{height:74px}
+@media(max-width:900px){.brandimg{height:48px}.brand.lg .brandimg{height:64px}}
+@media(max-width:560px){.brandimg{height:42px}.brand.lg .brandimg{height:56px}}"""
 
 
 def lockup(soup, big=False):
@@ -63,8 +69,8 @@ def lockup(soup, big=False):
     img['class'] = 'brandimg'
     img['src'] = '/assets/brand/quenora-primary.svg'
     img['alt'] = 'Quenora'
-    img['width'] = '1439'
-    img['height'] = '525'
+    img['width'] = '1166'
+    img['height'] = '628'
     img['decoding'] = 'async'
     return img
 

@@ -181,8 +181,6 @@ def organisation(lang):
                         "business already runs, then hands the client's own "
                         "team the keys."),
         "foundingDate": "2025",
-        "founder": {"@type": "Person", "name": "Balaji Durai",
-                    "jobTitle": "Founder and Principal Consultant"},
         # The machine-readable postal address is the one in the Impressum.
         # The whole site now says Bad Friedrichshall — the earlier split, where
         # the legal pages said one town and the copy said another, is closed.

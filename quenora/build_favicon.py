@@ -116,11 +116,11 @@ const svg = fs.readFileSync(svgPath, 'utf8');
 
 
 def main():
-    open(os.path.join(BRAND, "quenora-icon.svg"), "w").write(svg())
+    open(os.path.join(BRAND, "quenora-icon.svg"), "w", encoding="utf-8").write(svg())
     print("  quenora-icon.svg: the nine circles, %d bytes" % len(svg()))
 
     tmp = os.path.join(TEST, "_raster.js")
-    open(tmp, "w").write(RASTER)
+    open(tmp, "w", encoding="utf-8").write(RASTER)
     sizes = sorted(set(PNGS + ICO))
     try:
         r = subprocess.run(

@@ -26,12 +26,21 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-PY=${PY:-/tmp/qvenv/bin/python3}
-if ! "$PY" -c 'import bs4' 2>/dev/null; then
-  echo "  $PY has no beautifulsoup4."
-  echo "  Set PY, or:  python3 -m venv /tmp/qvenv && /tmp/qvenv/bin/pip install beautifulsoup4"
+# /tmp/qvenv was the documented interpreter and macOS clears /tmp, so the build
+# failed on its own and told you to rebuild the venv in the place it will be
+# deleted from again. Prefer one inside the repo (.gitignored); keep the old
+# path as a fallback.
+if [ -z "${PY:-}" ]; then
+  for c in ./.venv/bin/python3 /tmp/qvenv/bin/python3 python3; do
+    if "$c" -c 'import bs4' 2>/dev/null; then PY="$c"; break; fi
+  done
+fi
+if [ -z "${PY:-}" ] || ! "$PY" -c 'import bs4' 2>/dev/null; then
+  echo "  No python here has beautifulsoup4."
+  echo "  Fix with:  python3 -m venv .venv && .venv/bin/pip install beautifulsoup4"
   exit 1
 fi
+echo "  build interpreter: $PY"
 
 # PREVIEW (branch: infographics) — markup generators, then the stylesheet.
 # The CSS is injected between markers rather than pasted in by hand,
@@ -48,7 +57,12 @@ fi
 "$PY" build_preview_css.py
 "$PY" build_backto.py
 
-"$PY" build_logo_arc.py     # the nine circles back on the mark's own arc
+# build_logo_arc is RETIRED and deliberately not run. It mapped the nine
+# circles onto the canonical 90-degree arc, which was right while the site
+# used the alternate squared-Q set. The lockup is now the supplied artwork,
+# whose dots were drawn for a 2.41:1 shape, and running it rewrites them:
+# verified in a scratch worktree, primary.svg went from viewBox "8 9 1421
+# 590" to "8 -199 1421 798" and the mark came apart.
 "$PY" build_favicon.py      # ...and the tab icon, derived from the same nine
 "$PY" build_brand.py
 # ...then the motion, which replaces the flat header image build_brand just

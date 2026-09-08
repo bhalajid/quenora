@@ -28,6 +28,21 @@ const soft = (c, m, det) => { if (!c) warn.push(m + (det ? '  — ' + det : ''))
 const prose = d.body.cloneNode(true);
 prose.querySelectorAll('script,style,noscript').forEach(n => n.remove());
 const text = prose.textContent.replace(/\s+/g, ' ');
+
+/* The same text, but with block boundaries treated as full stops.
+   `textContent` runs every element together, so a run of headings, phase
+   labels or <option>s reads as one enormous sentence: the long-sentence
+   check below was reporting a "77-word sentence" that was in fact the six
+   phase headings — "Phase 01 · Frame Weeks 1–2 ... Phase 06 · Hand over" —
+   with nothing between them. Nothing on the page needed rewriting; the
+   measurement was wrong. Only ever used for sentence splitting. */
+const BLOCK = 'p,li,h1,h2,h3,h4,h5,h6,dt,dd,td,th,caption,figcaption,blockquote,' +
+              'option,label,button,summary,legend,div,section,article,header,' +
+              'footer,nav,aside,tr,form';
+const sentenceSrc = d.body.cloneNode(true);
+sentenceSrc.querySelectorAll('script,style,noscript').forEach(n => n.remove());
+sentenceSrc.querySelectorAll(BLOCK).forEach(n => n.append('. '));
+const sentenceText = sentenceSrc.textContent.replace(/\s+/g, ' ');
 const words = text.trim().split(/\s+/).length;
 
 /* ═══ 1 · STRUCTURE ═══ */
@@ -128,7 +143,7 @@ ok(!/\b(ISO ?27001|SOC ?2|Gartner|Forrester|certified partner)\b/i.test(text),
 // every CTA should say what happens, not "click here"
 ok(!/\bclick here\b/i.test(text), 'no "click here"');
 // long-sentence check on body copy
-const longSentences = text.split(/(?<=[.!?])\s+/).filter(s => s.split(/\s+/).length > 45);
+const longSentences = sentenceText.split(/(?<=[.!?])\s+/).filter(s => s.split(/\s+/).length > 45);
 soft(longSentences.length === 0, 'no sentence over 45 words',
      longSentences.length + ' found');
 

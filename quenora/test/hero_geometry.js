@@ -36,17 +36,28 @@ const WRAP = g(/--wrap:(\d+)px/, '--wrap');
 const SP4  = g(/--sp4:(\d+)px/, '--sp4');
 const LH   = g(/h1,h2,h3\{[^}]*line-height:([\d.]+)/, 'h1 line-height');
 
-/* The first nine circles in the file, which is the hero's own mark — but only
-   once the header lockup is out of the way. build_logo_motion inlines the
-   supplied logo into the header so its Q can carry a reflection and its
-   spheres can move, and that lockup sits ABOVE the hero in the document and
-   is drawn from eighteen <circle> elements in exactly this attribute order.
-   Left in, it supplies all nine matches and this file measures the wrong
-   mark: r9 read 140 where it should read 766, and every viewport reported
-   the hero overlapping the headline. Take it out before counting. */
-const heroSrc = src.replace(/<!--LOGOMOTION:MARK-->[\s\S]*?<!--\/LOGOMOTION:MARK-->/g, '');
-const ARC = [...heroSrc.matchAll(/<circle cx="([\d.]+)" cy="([\d.]+)" r="([\d.]+)"/g)]
-  .slice(0, 9).map(m => ({ x: +m[1], y: +m[2], r: +m[3] }));
+/* THE HERO'S ARC IS `var MARK`, NOT <circle> ELEMENTS.
+
+   This used to take the first nine <circle> elements in index.html. It never
+   measured the hero: the hero draws its arc on a 2D canvas from the MARK
+   array, and the first nine circles in the file are the small .ch-mark and
+   .ph-mark chapter icons at line 1588. The numbers it printed were those
+   icons scaled against the headline — which is how it came to report r9 as
+   766px, a 766-pixel-radius sphere, and still pass. Read the array the hero
+   actually draws from.
+
+   The largest radius is taken from the data too. It was hardcoded as 27,
+   which happens to be MARK's last radius, so a change to the mark would have
+   been reported against the old one. */
+const MARKSRC = src.match(/var MARK=\[([\s\S]*?)\];/);
+if (!MARKSRC) { console.error('   index.html has no var MARK'); process.exit(2); }
+const ARC = [...MARKSRC[1].matchAll(/\[\s*([-\d.]+)\s*,\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\]/g)]
+  .map(m => ({ x: +m[1], y: +m[2], r: +m[3] }));
+if (ARC.length !== 9) {
+  console.error('   expected nine triples in MARK, found ' + ARC.length);
+  process.exit(2);
+}
+const RMAX = Math.max(...ARC.map(c => c.r));
 
 const B = [Math.min(...ARC.map(c => c.x - c.r)), Math.max(...ARC.map(c => c.x + c.r)),
            Math.min(...ARC.map(c => c.y - c.r)), Math.max(...ARC.map(c => c.y + c.r))];
@@ -80,7 +91,7 @@ function layout(W, H) {
   /* the arc is exactly as tall as the headline block, and its right edge
      sits on the wrap's own right grid line — always */
   const SC = h1H / BH;
-  const r9 = 27 * SC;
+  const r9 = RMAX * SC;
   const R = 6;
   const fx1 = line(R), fx0 = fx1 - BW * SC;
   return {

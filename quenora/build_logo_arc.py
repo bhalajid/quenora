@@ -37,8 +37,28 @@ The Q is flat ember and the spheres fell away to near-black at the rim, so
 side by side they read as two different oranges. The gradient now bottoms out
 in a dark ember rather than a brown, which keeps them the same colour while
 still reading as spheres and not as flat dots.
+
+RETIRED
+=======
+
+Not run by build.sh any more, and it should not be run by hand.
+
+It was right while the site carried the alternate squared-Q set: those dots
+were on a 37-degree scatter that did not match the mark, and this put them
+back on the canonical 90-degree arc. The lockup is now the supplied artwork,
+whose dots were drawn for its own 2.41:1 shape. Run against that, this
+rewrites them and takes the box with it — verified in a scratch worktree,
+primary.svg went from viewBox "8 9 1421 590" to "8 -199 1421 798".
+
+Kept rather than deleted because the geometry and the measured highlight
+offsets in it are the reference for the standalone mark, which build_favicon
+still uses. Pass --force if you genuinely mean it.
 """
 import os, re, sys
+
+if "--force" not in sys.argv:
+    sys.exit("  build_logo_arc is retired; it rewrites the supplied lockup. "
+             "Pass --force if you mean it.")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 BRAND = os.path.join(ROOT, "assets", "brand")

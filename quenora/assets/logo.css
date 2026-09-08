@@ -3,10 +3,10 @@
    for the other never reflows the header. (Written without the literal tag
    name: stage 4 regexes image tags straight out of the raw HTML, comments
    included, and reported every page as having one with no alt text.) */
-.brandsvg{display:block;height:58px;width:auto;flex:none;overflow:visible}
-.brand.lg .brandsvg{height:96px}
-@media(max-width:900px){.brandsvg{height:42px}.brand.lg .brandsvg{height:56px}}
-@media(max-width:560px){.brandsvg{height:37px}.brand.lg .brandsvg{height:49px}}
+.brandsvg{display:block;height:62px;width:auto;flex:none;overflow:visible}
+.brand.lg .brandsvg{height:94px}
+@media(max-width:900px){.brandsvg{height:54px}.brand.lg .brandsvg{height:82px}}
+@media(max-width:560px){.brandsvg{height:46px}.brand.lg .brandsvg{height:70px}}
 
 /* The sheen. A soft band of white at low alpha, clipped to the Q, crossing
    once and then waiting — a reflection catching the edge, not a shimmer.

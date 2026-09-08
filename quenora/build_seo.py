@@ -184,9 +184,10 @@ def organisation(lang):
         # The machine-readable postal address is the one in the Impressum.
         # The whole site now says Bad Friedrichshall — the earlier split, where
         # the legal pages said one town and the copy said another, is closed.
-        # streetAddress is deliberately absent until the street and number
-        # arrive: a partial postal address is worse than none.
+        # streetAddress arrived on 9 September, so the machine-readable
+        # address is complete and matches the Impressum exactly.
         "address": {"@type": "PostalAddress",
+                    "streetAddress": "Kleiststr. 12",
                     "postalCode": "74117",
                     "addressLocality": "Bad Friedrichshall",
                     "addressRegion": "Baden-Wurttemberg",

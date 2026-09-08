@@ -182,7 +182,8 @@ JS = """<!--LOGOMOTION:JS--><script>
 
 def animated_svg():
     """The stripped primary, regrouped so its parts can be addressed."""
-    src = open(os.path.join(ROOT, "assets/brand/quenora-primary.svg")).read()
+    src = open(os.path.join(ROOT, "assets/brand/quenora-primary.svg"),
+                encoding="utf-8").read()
 
     # The ember path is the Q; the white one is the wordmark.
     paths = list(re.finditer(r'<path\b[^>]*?d="([^"]+)"[^>]*/>', src))
@@ -340,11 +341,11 @@ def swap(page, svg):
 
 def main():
     out = os.path.join(ROOT, 'assets')
-    open(os.path.join(out, 'logo.css'), 'w').write(
+    open(os.path.join(out, 'logo.css'), 'w', encoding='utf-8').write(
         CSS.replace('/*LOGOMOTION:CSS*/', '').replace('/*/LOGOMOTION:CSS*/', '').strip())
     body = re.sub(r'^.*?<script>', '', JS, flags=re.S)
     body = re.sub(r'</script>.*$', '', body, flags=re.S)
-    open(os.path.join(out, 'logo.js'), 'w').write(body.strip())
+    open(os.path.join(out, 'logo.js'), 'w', encoding='utf-8').write(body.strip())
 
     svg = animated_svg()
     n = 0

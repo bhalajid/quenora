@@ -64,7 +64,10 @@ level, beside `"headers"`:
   ],
 ```
 
-Only the one rule. Add `www.quenora.ai` as a domain in the Vercel dashboard and
+**Two rules, not one.** Vercel's `/:path*` does not match the bare root: with
+only the wildcard, every sub-path on the deployment host redirected and `/`
+kept serving 200. Verified live on 9 September, then a `"source": "/"` rule
+was added above it. Add `www.quenora.ai` as a domain in the Vercel dashboard and
 set it to redirect to the apex there — the dashboard handles www natively, and
 a second vercel.json rule doing the same job is a redirect loop waiting to
 happen.

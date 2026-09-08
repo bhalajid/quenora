@@ -72,6 +72,17 @@
   ],
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<h>.*\\.vercel\\.app)"
+        }
+      ],
+      "destination": "https://quenora.ai/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {

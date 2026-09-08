@@ -262,7 +262,9 @@ footer nav{display:block}
 .phero::before{content:"";position:absolute;top:-50%;right:-15%;width:70%;height:200%;
   background:radial-gradient(circle,rgba(201,122,60,.09),transparent 62%);pointer-events:none}
 .phero h1{font-size:clamp(36px,4.6vw,62px);max-width:19ch}
-.phero p{margin-top:22px;color:var(--grey);font-size:17.5px;font-weight:300;max-width:60ch;line-height:1.75}
+/* 78ch: the first and third lines of the lede measure 826px and 843px, and
+   60ch gave 662, so the three stated lines wrapped into five. */
+.phero p{margin-top:22px;color:var(--grey);font-size:17.5px;font-weight:300;max-width:78ch;line-height:1.75}
 #pCanvas{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.62}
 .phero .wrap{position:relative;z-index:3}
 
@@ -527,8 +529,8 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <canvas aria-hidden="true" id="pCanvas"></canvas>
 <div class="wrap">
 <div class="kicker rv">Competenze</div>
-<h1 class="rv" data-d="1">Nine capabilities. One team behind <em>all of them</em>.</h1>
-<p class="rv" data-d="2">Three of these are core — the work runs through platform and deployment engineering, automation, and AI integration. The other six join when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.</p>
+<h1 class="rv" data-d="1">Nove competenze.<br/>One team behind <em>all of them</em>.</h1>
+<p class="rv" data-d="2">Three are core capabilities — Platform and Deployment Engineering, Automation, and AI Integration.<br/>The other six come into play when the work calls for them.<br/>All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.</p>
 </div>
 </section>
 <section class="section-pad">
@@ -615,7 +617,6 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
       problema, non con una lista della spesa di competenze.</p>
 <div style="display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap">
 <a class="btn btn-primary" href="/it/index.html#talk">Iniziamo a parlarne</a>
-<a class="btn btn-ghost" href="/it/index.html#journey">Come lavoriamo →</a>
 </div>
 </div>
 </section>

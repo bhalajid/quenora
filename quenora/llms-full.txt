@@ -261,7 +261,7 @@ Want to see the shape of this against your own problem? Two paragraphs on what i
 
 ## Nine capabilities. One team behind all of them.
 
-Three of these are core — the work runs through platform and deployment engineering, automation, and AI integration. The other six join when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.
+Three are core capabilities — Platform and Deployment Engineering, Automation, and AI Integration. The other six come into play when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.
 
 ## Platform & Deployment Engineering
 

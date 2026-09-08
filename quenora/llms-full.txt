@@ -105,14 +105,14 @@ If you’re on your laptop, just scan the QR. If you’re on your mobile, tap Sa
 
 ## Who you’re actually hiring.
 
-A firm of senior AI and platform practitioners. The people who scope the work are the people who do it.
+One principal. The person who scopes the work is the person who builds it, and everything built is handed over so it does not depend on him.
 
-## Senior practitioners, and no one junior behind them.
+## One pair of hands, and everything written down.
 
-Quenora is led by a team of senior AI and platform practitioners. Between them they have spent years inside regulated enterprises, where a platform going down is a business incident rather than a ticket, and where an AI system has to survive an audit as well as a demonstration.
-That background sets the standard the firm builds to. We work inside production constraints from the first conversation — access, data residency, change control, and the systems a business already runs — because those are what decide whether a pilot ever reaches the work.
-The people who scope your engagement are the people who deliver it. There is no layer of junior consultants behind the pitch, and no handover to a delivery team you have not met. The firm is deliberately small and grows slowly so that stays true.
-Founded in 2025 and based in Bad Friedrichshall, we work with clients internationally, in German, French and English.
+Quenora is a one-principal firm. That is a decision rather than a stage to grow out of: the person who scopes your engagement is the person who builds it, and there is nobody in between to lose the thread.
+It puts a hard limit on how much work the firm carries at once, and the limit is the point. The work happens inside production constraints from the first conversation — access, data residency, change control, and the systems you already run — because those are what decide whether a pilot ever reaches the work.
+The fair question about a firm this size is what happens if it stops being available. The answer is the same as the answer to lock-in, and it is built into every engagement rather than promised here: you keep the code, the documentation and the evaluation harness, and the handover phase exists so your own team can run what was built without Quenora in the room. Nothing is designed to need one person to keep going.
+Founded in 2025 and based in Bad Friedrichshall, working with clients internationally, in German, French and English. There are no published case studies yet and none will be invented; before you commit, a call with a reference can be arranged instead.
 Engagements are described by shape rather than by client name, the way the rest of this site describes them.
 
 ## Most pilots don’t fail at the model. They stop at five layers.
@@ -261,7 +261,7 @@ Want to see the shape of this against your own problem? Two paragraphs on what i
 
 ## Nine capabilities. One team behind all of them.
 
-Three of these are core — the work runs through platform and deployment engineering, automation, and AI integration. The other six join when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.
+Three are core capabilities — Platform and Deployment Engineering, Automation, and AI Integration. The other six come into play when the work calls for them. All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.
 
 ## Platform & Deployment Engineering
 

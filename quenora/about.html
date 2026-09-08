@@ -187,7 +187,10 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-
 #team h2{max-width:24ch}
 #team p{margin-top:18px;color:var(--grey);font-size:16.5px;font-weight:300;
   line-height:1.78;max-width:66ch}
-#team p.lede{margin-top:24px;color:var(--white);font-size:17.5px;line-height:1.75}
+/* --grey, not --white: the four paragraphs of this section read as one
+   block and the client asked for one colour across them. The lede keeps
+   its larger size; only the colour is levelled. */
+#team p.lede{margin-top:24px;color:var(--grey);font-size:17.5px;line-height:1.75}
 #team p.mono{margin-top:30px;font-family:var(--mono);font-size:12.5px;
   letter-spacing:.04em;color:var(--grey-d);max-width:62ch}
 .section-head{max-width:680px;margin-bottom:60px}
@@ -545,7 +548,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 </nav>
 </div>
 </header>
-<main id="main"><section class="phero"><div class="wrap"><div class="kicker">About</div><h1 class="rv" data-d="1">Who does the <em>work</em>.</h1></div></section><section class="section-pad" id="team"><div class="wrap"><p class="lede">Quenora is built around a focused team of experienced specialists. The people who scope your engagement stay involved in delivering it, so context is not lost between sales, planning and execution.</p><p>That model naturally limits how much work we take on at once, and that is deliberate. From the first conversation, the work is shaped around real production constraints — access, data residency, change control, and the systems you already run — because those are often what determine whether a pilot makes it into day-to-day use.</p><p>A fair question for any specialist firm is what happens if individual team members are unavailable. We address that in the way we work. You keep the code, documentation and evaluation assets, and every engagement includes a structured handover so your own team can operate what has been built without depending on Quenora being in the room.</p><p>Founded in 2025 and based in Bad Friedrichshall, Quenora works with clients internationally in German, French and English. We do not yet publish case studies, and we will not manufacture them. Where appropriate, a reference conversation can be arranged before you commit.</p><p class="mono">Engagements are described by the shape of the problem rather than by client name, in the same way the rest of this site describes our work.</p></div></section></main>
+<main id="main"><section class="phero"><div class="wrap"><div class="kicker">About</div><h1 class="rv" data-d="1">Who does the <em>work</em>.</h1><p class="lede rv" data-d="2">The same people, from scope to delivery.</p></div></section><section class="section-pad" id="team"><div class="wrap"><p class="lede">Quenora is built around a focused team of experienced specialists. The people who scope your engagement stay involved in delivering it, so context is not lost between sales, planning and execution.</p><p>That model naturally limits how much work we take on at once, and that is deliberate. From the first conversation, the work is shaped around real production constraints — access, data residency, change control, and the systems you already run — because those are often what determine whether a pilot makes it into day-to-day use.</p><p>A fair question for any specialist firm is what happens if individual team members are unavailable. We address that in the way we work. You keep the code, documentation and evaluation assets, and every engagement includes a structured handover so your own team can operate what has been built without depending on Quenora being in the room.</p><p>Founded in 2025 and based in Bad Friedrichshall, Quenora works with clients internationally in German, French and English. We do not yet publish case studies, and we will not manufacture them. Where appropriate, a reference conversation can be arranged before you commit.</p><p class="mono">Engagements are described by the shape of the problem rather than by client name, in the same way the rest of this site describes our work.</p></div></section></main>
 <footer>
 <div class="wrap">
 <div class="foot-row f-grid">

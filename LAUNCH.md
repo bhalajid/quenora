@@ -8,43 +8,43 @@ offline for as long as DNS takes to propagate.
 
 ---
 
-## 1 · Fill the Impressum and the privacy notice
+## 1 · Fill the Impressum and the privacy notice — DONE, 9 September
 
-The release gate has one failing stage, 4b, and this is it. German law (§5 DDG)
-requires a postal address and a contact route on the Impressum, so the build
-refuses to pass while placeholders remain.
-
-```bash
-grep -rn "{{TODO:" /Users/balajidurai/Quenora/quenora/*.html
-```
-
-Five placeholders across two files: `{{TODO:STREET_AND_NUMBER}}`,
-`{{TODO:POSTCODE}}`, `{{TODO:TELEPHONE}}`. Replace them, then:
+`Kleiststr. 12` completed the address. No `{{TODO:}}` placeholders remain in
+the repo, and `build_seo.py` now carries `streetAddress` in its PostalAddress
+as well, so the structured data matches the Impressum.
 
 ```bash
-cd /Users/balajidurai/Quenora/quenora/test && bash release.sh ..
+cd quenora/test && PY=python bash release.sh ..
 ```
 
-That should be 14 of 14 green.
+**RELEASE APPROVED — 24 pass, 0 held, 0 fail.** (The gate has nine stages and
+24 assertions now, not the 14 this file used to quote.)
 
 ---
 
-## 2 · Point quenora.ai at Vercel
+## 2 · Point quenora.ai at Vercel — DONE, but pointed the wrong way round
 
-Today the domain resolves but nothing answers:
+DNS resolves and the site is live. **But the apex redirects to www, and this
+repo is built apex-first.**
 
 ```
-quenora.ai          -> 192.64.119.248   (registrar parking)   HTTPS times out
-quenora.vercel.app  -> 64.29.17.3, 216.198.79.3               200 OK
+https://quenora.ai/       308 -> https://www.quenora.ai/
+https://www.quenora.ai/   200, serving the current build
 ```
 
-In the Vercel dashboard, add `quenora.ai` and `www.quenora.ai` as domains on
-the project, then set the DNS records Vercel gives you at the registrar. Wait
-until `curl -sS -o /dev/null -w "%{http_code}\n" https://quenora.ai` returns
-`200` before going on.
+Every canonical, hreflang, og:url and sitemap entry declares
+`https://quenora.ai/...`, and all three printed QR codes encode the apex. So
+the page served at `www` declares a canonical pointing at a URL that redirects
+back to it, and every QR scan takes an extra hop.
 
-Every canonical, hreflang, og:url and sitemap entry in the repo already
-declares `https://quenora.ai/...`, so nothing needs regenerating afterwards.
+**Fix it in the Vercel dashboard, not in code:** set `quenora.ai` as the
+project's primary domain and `www.quenora.ai` to redirect to it. That is the
+arrangement step 3 below already assumes. Nothing in the repo needs
+regenerating either way — it is one dashboard setting.
+
+`test/launch_check.sh` stops on its first assertion until this is swapped: it
+requires the apex to answer 200, and today it answers 308.
 
 ---
 
@@ -69,9 +69,11 @@ set it to redirect to the apex there — the dashboard handles www natively, and
 a second vercel.json rule doing the same job is a redirect loop waiting to
 happen.
 
-This is deliberately **not** in the repo yet. While quenora.ai does not answer,
-quenora.vercel.app is the only working address, and redirecting it to a host
-that times out would take the site down on the next deploy.
+**This is now in `quenora/vercel.json`, added 9 September once the domain
+answered.** It sits first in the `redirects` array so a `.vercel.app` request
+leaves for the real domain before any of the path redirects below it can
+rewrite it on the wrong host. It fires only on `.vercel.app`, so it cannot
+loop with the dashboard's www rule.
 
 Until then the deployment host carries `X-Robots-Tag: noindex, nofollow`, so it
 stays out of search without being broken. Once the redirect is in, that header

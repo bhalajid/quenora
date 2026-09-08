@@ -226,7 +226,11 @@ const need = {
      chapter 01. The page still states the problem, and states it better
      — the check was pinned to wording rather than to the claim. */
   'states the problem': /never leaves the lab|fail at the seams|gap between a notebook and a Tuesday/i,
-  'says who it is for': /situations we are/i,
+  /* Pinned to "situations we are", which stopped matching when the heading
+     became "Situations we're often called into". Same failure mode as the
+     two above: the claim is still on the page, the wording moved. Matches
+     either contraction now, straight or curly. */
+  'says who it is for': /situations we(?: are|['’]re)/i,
   'shows the method': /six phases/i,
   'lists capabilities': /nine capabilities/i,
   'handles objections': /why not a large consultancy/i,

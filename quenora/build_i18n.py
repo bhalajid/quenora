@@ -46,14 +46,14 @@ LANGS = ["de", "fr", "es", "it"]
 # claimed language coverage that does not exist. They are built rather than
 # deleted so the URLs and the translated string files survive until the
 # expansion, at which point removing a code from this set republishes them.
-# LOCALISATION IS OFF for the 9 September launch. German and French joined
-# Spanish and Italian here so that the launch sprint is spent on one language
-# instead of four. Everything is still BUILT and still in the repo — the
-# directories, the URLs and the two finished dictionaries are untouched — so
-# turning localisation back on is this line and nothing else. What being
-# unlisted means: out of the switcher, out of the hreflang set, out of the
-# sitemap, and served noindex.
-UNLISTED_LANGS = {"de", "fr", "es", "it"}
+# German and French were switched back ON after the 9 September launch, at the
+# client's request. Spanish and Italian stay unlisted: both sit near 30 per
+# cent translated, which is not a gap a reader would forgive.
+#
+# What being listed means: in the switcher, in the hreflang set, in the
+# sitemap, and indexable. Read that as a commitment — an unlisted language can
+# be half-finished quietly, a listed one cannot.
+UNLISTED_LANGS = {"es", "it"}
 # The languages actually offered. Everything visitor-facing iterates this.
 LISTED_LANGS = [l for l in LANGS if l not in UNLISTED_LANGS]
 LANG_NAMES = {"en": "English", "de": "Deutsch", "fr": "Français",

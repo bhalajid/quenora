@@ -103,17 +103,13 @@ Stated here rather than after three meetings, because finding out late wastes yo
 One focused conversation about where intelligence can remove friction or risk and add confidence in your operations. No deck. No discovery invoice. Scroll below and reach out to us.
 If you’re on your laptop, just scan the QR. If you’re on your mobile, tap Save the contact.
 
-## Who you’re actually hiring.
+## Who does the work.
 
-One principal. The person who scopes the work is the person who builds it, and everything built is handed over so it does not depend on him.
-
-## One pair of hands, and everything written down.
-
-Quenora is a one-principal firm. That is a decision rather than a stage to grow out of: the person who scopes your engagement is the person who builds it, and there is nobody in between to lose the thread.
-It puts a hard limit on how much work the firm carries at once, and the limit is the point. The work happens inside production constraints from the first conversation — access, data residency, change control, and the systems you already run — because those are what decide whether a pilot ever reaches the work.
-The fair question about a firm this size is what happens if it stops being available. The answer is the same as the answer to lock-in, and it is built into every engagement rather than promised here: you keep the code, the documentation and the evaluation harness, and the handover phase exists so your own team can run what was built without Quenora in the room. Nothing is designed to need one person to keep going.
-Founded in 2025 and based in Bad Friedrichshall, working with clients internationally, in German, French and English. There are no published case studies yet and none will be invented; before you commit, a call with a reference can be arranged instead.
-Engagements are described by shape rather than by client name, the way the rest of this site describes them.
+Quenora is built around a focused team of experienced specialists. The people who scope your engagement stay involved in delivering it, so context is not lost between sales, planning and execution.
+That model naturally limits how much work we take on at once, and that is deliberate. From the first conversation, the work is shaped around real production constraints — access, data residency, change control, and the systems you already run — because those are often what determine whether a pilot makes it into day-to-day use.
+A fair question for any specialist firm is what happens if individual team members are unavailable. We address that in the way we work. You keep the code, documentation and evaluation assets, and every engagement includes a structured handover so your own team can operate what has been built without depending on Quenora being in the room.
+Founded in 2025 and based in Bad Friedrichshall, Quenora works with clients internationally in German, French and English. We do not yet publish case studies, and we will not manufacture them. Where appropriate, a reference conversation can be arranged before you commit.
+Engagements are described by the shape of the problem rather than by client name, in the same way the rest of this site describes our work.
 
 ## Most pilots don’t fail at the model. They stop at five layers.
 

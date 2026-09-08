@@ -941,7 +941,7 @@
  "because it is the least\nconventional and the most revealing. The hero constellation is constructed\nagainst the page’s own six-column grid and the measured height of the headline.\nA test asserts that relationship at eight viewport sizes and fails the build if\nit breaks.": "car c’est la moins conventionnelle et la plus révélatrice. La constellation du hero est construite par rapport à la grille à six colonnes propre à la page et à la hauteur mesurée du titre. Un test garantit cette relation à huit tailles de fenêtre et fait échouer la compilation si elle se rompt.",
  "breach in a calendar month, at": "manquement dans le mois civil, à",
  "breach, at": "manquement, à",
- "called into.": "sommes appelés.",
+ "called into.": "appelés.",
  "capabilities. Three are core — the work runs through them.": "expertises. Trois sont principales — le travail passe par elles.",
  "change control": "contrôle du changement",
  "checking ·": "vérification ·",
@@ -1099,5 +1099,9 @@
  "Three are core capabilities — Platform and Deployment Engineering, Automation, and AI Integration.": "Trois sont des expertises centrales — l’ingénierie de plateforme et de déploiement, l’automatisation et l’intégration d’IA.",
  "The other six come into play when the work calls for them.": "Les six autres s’ajoutent quand le travail l’exige.",
  "All nine are delivered by the same team; none of it is subcontracted out to someone you have not met.": "Les neuf sont assurées par la même équipe ; rien n’est sous-traité à quelqu’un que vous n’avez pas rencontré.",
- "One team behind": "Une seule équipe derrière"
+ "One team behind": "Une seule équipe derrière",
+ "Situations we’re": "Situations dans lesquelles nous sommes",
+ "often": "souvent",
+ "The space is wide. Few shapes that": "L’espace est vaste. Peu de formes qui",
+ "recur": "reviennent"
 }

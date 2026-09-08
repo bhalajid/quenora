@@ -11,9 +11,9 @@ We’re the firm you call when the pilot worked and nothing happened next. Queno
 AI programmes don’t fail because the model is weak. They fail in the gap between a notebook and a Tuesday afternoon — where the data won’t join, the permissions don’t exist and nobody owns the result.
 Illustrative, not a client portfolio. Every track is a proof of concept that worked. They all stall at the same wall — and the wall is never the model. It’s the missing layer between a working demo and daily production. That layer is Quenora.
 
-## Three situations we are actually called into.
+## Situations we’re often called into.
 
-Not a market segment. The three shapes of problem this firm was built to take on. If none of them describe you, we’re probably not the right firm — and we’d rather you knew that now.
+Not a fixed list, and not a boundary around what we do. These are simply a few examples of the problems we’re often asked to help solve.
 
 ## The pilot that stalled
 
@@ -27,7 +27,7 @@ The assistant answers confidently and is wrong often enough that people stopped 
 
 Something is live, procurement or risk is now asking questions, and the evidence to answer them was never captured.
 
-## The space is wide. These three recur.
+## The space is wide. Few shapes that recur.
 
 Not a client list, and not a menu. Nine capabilities can be pointed at more problems than any page could list, so what follows is three shapes we are called into most often — described by their shape rather than by whose logo is on them. If yours is not one of the three, that is not a scoping problem; it is the usual case.
 

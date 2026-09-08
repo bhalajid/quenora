@@ -484,7 +484,7 @@ footer .f-grid h3,footer .f-grid h4,footer .f-grid h5{
   color:var(--copper-lt,#E9A063);margin:0 0 16px}
 footer nav[aria-label="Footer"]{display:flex;flex-direction:column;
   align-items:flex-start;gap:14px}
-.f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.f-social{display:flex;flex-direction:row;flex-wrap:wrap;gap:14px;align-items:center}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;
   width:34px;height:34px;border:1px solid var(--line,rgba(242,239,232,.09));
   border-radius:2px;color:var(--t2,#A8AEBB);
@@ -1034,6 +1034,8 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
 })();
 </script>
 <!--/BACKTO:JS-->
+<div aria-hidden="true" id="qtrail"></div>
+<script defer="" src="/assets/logo.js?v=530ee0cf"></script>
 <script defer="" src="/assets/eggs.js?v=a2e2564d"></script>
 </body>
 </html>

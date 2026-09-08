@@ -135,7 +135,13 @@ footer .f-grid h3,footer .f-grid h4,footer .f-grid h5{
 footer nav[aria-label="Footer"]{display:flex;flex-direction:column;
   align-items:flex-start;gap:14px}
 /* the social row is a row of marks, not a stack of words */
-.f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+/* flex-direction is stated, not left to default. engineering.html carries a
+   page-local `footer nav{flex-direction:column}` from the older generation,
+   and the social row is a nav, so with no direction of its own the five
+   marks stacked into a column on that page and that page only. Same lesson
+   as the legal pages' footer navs: anything written into every page must
+   state its own layout rather than inherit whatever the page already had. */
+.f-social{display:flex;flex-direction:row;flex-wrap:wrap;gap:14px;align-items:center}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;
   width:34px;height:34px;border:1px solid var(--line,rgba(242,239,232,.09));
   border-radius:2px;color:var(--t2,#A8AEBB);

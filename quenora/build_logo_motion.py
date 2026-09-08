@@ -314,11 +314,14 @@ def swap(page, svg):
     s = re.sub(r'<link[^>]*href="/assets/logo\.css(?:\?v=[0-9a-f]+)?"[^>]*>', '', s)
     s = s.replace('</head>', '<link href="/assets/logo.css" rel="stylesheet"/></head>', 1)
 
-    # 3 · the cursor, homepage only — it is the only page that has one
+    # 3 · the cursor trail, on every page. It was the home page alone
+    #     because that is the only page that had a custom cursor to replace.
+    #     The trail itself needs nothing but #qtrail and the body, so there
+    #     was no reason for the other ten pages to go without it.
     if page == 'index.html':
         s = re.sub(r'<div aria-hidden="true" class="cur" id="cur"></div>\s*'
                    r'<div aria-hidden="true" class="cdot" id="cdot"></div>',
-                   '<div aria-hidden="true" id="qtrail"></div>', s)
+                   '', s)
         # neutralise the ring, which would throw now that #cur is gone
         s = re.sub(
             r'/\* ─+ 2 · CURSOR \(ring lags, dot leads\) ─+ \*/\s*'
@@ -329,9 +332,16 @@ def swap(page, svg):
             '     which owns that code and the elements it drives. */\n',
             s, count=1, flags=re.S)
         s = re.sub(r'<!--LOGOMOTION:JS-->.*?<!--/LOGOMOTION:JS-->\s*', '', s, flags=re.S)
-        s = re.sub(r'<script[^>]*src="/assets/logo\.js(?:\?v=[0-9a-f]+)?"[^>]*>\s*</script>\s*', '', s)
-        s = s.replace('</body>',
-                      '<script defer src="/assets/logo.js"></script>\n</body>', 1)
+
+    # Strip and reinsert rather than test-and-append, so a second build does
+    # not leave two of either — the same trap the logo.css link fell
+    # into when build_asset_versions stamped a ?v= onto the href.
+    s = re.sub(r'<div aria-hidden="true" id="qtrail"></div>\s*', '', s)
+    s = s.replace('</body>',
+                  '<div aria-hidden=\"true\" id=\"qtrail\"></div>\n</body>', 1)
+    s = re.sub(r'<script[^>]*src="/assets/logo\.js(?:\?v=[0-9a-f]+)?"[^>]*>\s*</script>\s*', '', s)
+    s = s.replace('</body>',
+                  '<script defer src=\"/assets/logo.js\"></script>\n</body>', 1)
 
     if s != before:
         open(p, "w", encoding="utf-8").write(s)

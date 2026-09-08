@@ -432,8 +432,8 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <a aria-label="Quenora home" class="brand" href="/de/index.html"><img alt="Quenora" class="brandimg" decoding="async" height="590" src="/assets/brand/quenora-primary.svg?v=2259865b" width="1421"/></a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menü" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
-<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/de/about.html">Wer wir sind</a><a href="/de/work.html">Was wir tun</a><a aria-current="page" class="on" href="/de/engineering.html">How we work?</a><a href="/de/approach.html">Vorgehen in Phasen</a><a href="/de/capabilities.html">Neun Leistungen</a><a href="/de/pricing.html">Preise ansehen</a></nav><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Sprache wählen" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>DE</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/engineering.html" hreflang="en" lang="en">English</a></li><li><a aria-current="true" href="/de/engineering.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/engineering.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
-<a class="navcta" href="/de/index.html#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a>
+<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/de/about.html">Wer wir sind</a><a href="/de/work.html">Was wir tun</a><a aria-current="page" class="on" href="/de/engineering.html">Wie wir arbeiten?</a><a href="/de/approach.html">Vorgehen in Phasen</a><a href="/de/capabilities.html">Neun Leistungen</a><a href="/de/pricing.html">Preise ansehen</a></nav>
+<a class="navcta" href="/de/index.html#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Sprache wählen" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>DE</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/engineering.html" hreflang="en" lang="en">English</a></li><li><a aria-current="true" href="/de/engineering.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/engineering.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 </div>
 </header>
 <main id="main">
@@ -441,24 +441,16 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <p class="ch">KI-Engineering &amp; Governance</p>
 <h1>Die meisten Piloten scheitern nicht am Modell. Sie bleiben stehen an <em>fünf Ebenen</em>.</h1>
-<p class="lede">A demo proves that something can work. Production proves that it
-can work safely, reliably and repeatedly. That means answering the right users
-from current data, knowing when not to guess, and leaving a trail that can be
-audited. This page walks through three examples and the governance decisions
-each one brings with it.</p>
+<p class="lede">Eine Demo beweist, dass etwas funktionieren kann. Der Produktivbetrieb beweist, dass es sicher, verlässlich und wiederholbar funktioniert. Das heißt: die richtigen Nutzer aus aktuellen Daten beantworten, wissen, wann man nicht raten darf, und eine prüfbare Spur hinterlassen. Diese Seite geht drei Beispiele durch und die Governance-Entscheidungen, die jedes davon mit sich bringt.</p>
 </div>
 </section>
 <section>
 <div class="wrap">
-<p class="ch">01 · Problem to architecture</p>
-<h2>Where a pilot actually <em>stops</em>.</h2>
+<p class="ch">01 · Vom Problem zur Architektur</p>
+<h2>Wo ein Pilot tatsächlich <em>stehenbleibt</em>.</h2>
 <span class="illus">Illustrativ — kein Kundenprojekt</span>
-<p>This is a worked example, not a case study. It shows the shape of a problem
-we often encounter and how we approach it, using a representative composite
-rather than a named client engagement.</p>
-<p><strong>Der Aufbau:</strong> an internal retrieval assistant that answers
-staff questions from company documentation. It works in the notebook. Eight
-months later, it still has not reached production.</p>
+<p>Das ist ein durchgearbeitetes Beispiel, keine Fallstudie. Es zeigt die Form eines Problems, dem wir oft begegnen, und wie wir es angehen — als repräsentatives Komposit statt als benanntes Kundenprojekt.</p>
+<p><strong>Der Aufbau:</strong> ein interner Retrieval-Assistent, der Mitarbeiterfragen aus der Unternehmensdokumentation beantwortet. Im Notebook funktioniert er. Acht Monate später hat er den Produktivbetrieb immer noch nicht erreicht.</p>
 <figure class="fig">
 <p class="figlab">Eine Anfrage trifft auf eine Ebene, die nie gebaut wurde</p>
 <canvas aria-hidden="true" id="figLayers"></canvas>
@@ -493,43 +485,39 @@ months later, it still has not reached production.</p>
 </div>
 <div class="note">
 <p><strong>Beachten Sie, was nicht auf dieser Liste steht.</strong> Welches Modell, welcher Vektorspeicher, welches Framework. Das sind echte Entscheidungen und sie dauern einen Nachmittag. Die fünf oben dauern das ganze Projekt, und sie falsch zu treffen ist der Grund, warum eine funktionierende Demo acht Monate später immer noch eine Demo ist.</p>
-<p>This is also why Approach Phase 02 — the unglamorous layer — is six weeks and not
-one. Access, ground truth and freshness are the foundation; everything after
-them is comparatively cheap.</p>
+<p>Auch deshalb dauert Approach Phase 02 — die unglamouröse Schicht — sechs Wochen und nicht eine. Zugriff, Referenzwahrheit und Aktualität sind das Fundament; alles danach ist vergleichsweise billig.</p>
 </div>
 </div>
 </section>
 <section>
 <div class="wrap">
-<p class="ch">02 · The evaluation harness</p>
-<h2>Die <em>Teil</em> , den die meisten Angebote auslassen.</h2>
+<p class="ch">02 · Das Evaluations-Harness</p>
+<h2>Der Teil, den die meisten Angebote <em>auslassen</em>.</h2>
 <figure class="fig">
 <p class="figlab">Was ein Schwellenwert mit einer Verteilung von Antworten macht</p>
 <canvas aria-hidden="true" id="figEval"></canvas>
 <figcaption>Jeder Punkt ist eine gegen ein Testset bewertete Antwort. Ohne vereinbarten Schwellenwert ist die Verteilung nur eine Wolke und jede Lesart davon ist vertretbar. Mit einem Schwellenwert teilt sich dieselbe Wolke in ausgeliefert, zurückgehalten und eskaliert — und die Diskussion darüber, ob es funktioniert hat, enthält eine Zahl. Illustrativ.</figcaption>
 </figure>
 <p>„Das Modell ist zu 92 % genau“ ist kein Befund, sondern eine Behauptung. Es wird zu einem Befund, wenn jemand anderes es im nächsten Quartal mit neuen Daten erneut ausführen und eine vergleichbare Zahl erhalten kann.</p>
-<p>So a Quenora engagement produces a harness alongside the system: the test
-set, the metric, the thresholds and the script that runs them. It is what
-Approach Phase 05 measures against, and it is <strong>mit dem Code übergeben</strong> — denn die Frage, auf die es ankommt, ist nicht, ob das System an dem Tag funktioniert hat, an dem wir gegangen sind, sondern ob Ihr Team sechs Monate später feststellen kann, dass es das immer noch tut.</p>
+<p>Ein Quenora-Projekt liefert deshalb ein Harness neben dem System: den Testdatensatz, die Metrik, die Schwellen und das Skript, das sie ausführt. Daran misst Approach Phase 05, und es wird <strong>mit dem Code übergeben</strong> — denn die Frage, auf die es ankommt, ist nicht, ob das System an dem Tag funktioniert hat, an dem wir gegangen sind, sondern ob Ihr Team sechs Monate später feststellen kann, dass es das immer noch tut.</p>
 <p>Es ist zugleich die ehrliche Antwort auf einen berechtigten Einwand. Eine Firma ohne Fallstudien bittet Sie, einer Behauptung zu vertrauen. Eine Firma, die Ihnen die Mittel zur Prüfung ihrer eigenen Arbeit übergibt, bittet um sehr viel weniger.</p>
 </div>
 </section>
 <section>
 <div class="wrap">
 <p class="ch">03 · Prinzipien</p>
-<h2><em>Fünf</em> principles, and what each one is tied to.</h2>
+<h2><em>Fünf</em> Prinzipien, und woran jedes gebunden ist.</h2>
 <p>Prinzipien aufzuzählen ist billig. Jedes hier ist an etwas Konkretes im Ablauf eines Projekts gebunden, damit Sie uns daran messen können.</p>
 <div class="prin">
 <div class="pr">
 <h3>Es muss enden</h3>
 <p>Jede Phase trägt eine Abschlussbedingung, die in die Leistungsbeschreibung geschrieben ist. Die letzte lautet, dass Ihr Team das System ohne uns betreibt.</p>
-<span class="tie">Tied to · Approach Phase 06, handover</span>
+<span class="tie">Gebunden an · Approach Phase 06, Übergabe</span>
 </div>
 <div class="pr">
 <h3>Es muss messbar sein</h3>
 <p>Eine Kennzahl wird in Phase 01 vereinbart. Phase 05 misst schriftlich gegen diese Kennzahl. Hat sie sich nicht bewegt, sagen wir das.</p>
-<span class="tie">Tied to · Approach Phases 01 and 05</span>
+<span class="tie">Gebunden an · Approach Phasen 01 und 05</span>
 </div>
 <div class="pr">
 <h3>Ihnen gehört alles</h3>
@@ -539,12 +527,12 @@ Approach Phase 05 measures against, and it is <strong>mit dem Code übergeben</s
 <div class="pr">
 <h3>Es muss in Ihrer Systemlandschaft laufen</h3>
 <p>Produktion bedeutet die Systeme, die Sie bereits haben, mit den Berechtigungen, die sie bereits durchsetzen. Eine Fähigkeit, die nur im Reinraum funktioniert, hat die Arbeit nicht erreicht.</p>
-<span class="tie">Tied to · Approach Phases 03 and 04</span>
+<span class="tie">Gebunden an · Approach Phasen 03 und 04</span>
 </div>
 <div class="pr">
 <h3>Einfach genug zum Übergeben</h3>
 <p>Der Maßstab eines Entwurfs ist, ob das Team, das ihn erbt, ihn sicher ändern kann. Ein Entwurf, den nur seine Urheberin oder sein Urheber pflegen kann, ist eine Last, die wir Ihnen übergeben würden.</p>
-<span class="tie">Tied to · Approach Phase 06</span>
+<span class="tie">Gebunden an · Approach Phase 06</span>
 </div>
 </div>
 </div>
@@ -553,10 +541,7 @@ Approach Phase 05 measures against, and it is <strong>mit dem Code übergeben</s
 <div class="wrap">
 <p class="ch">04 · Governance</p>
 <h2>Governance ist eine Menge von Entscheidungen, kein <em>Dokument</em>.</h2>
-<p>Most governance material describes a policy. What a production system needs
-is a set of answers wired into the build, because each one changes the
-architecture. These are the questions we settle before anything ships, and
-where in the six Governance Phases each one gets settled.</p>
+<p>Die meisten Governance-Unterlagen beschreiben eine Richtlinie. Was ein Produktivsystem braucht, ist eine Menge von Antworten, die in den Bau eingelassen sind, denn jede davon verändert die Architektur. Das sind die Fragen, die wir klären, bevor etwas ausgeliefert wird, und wo in den sechs Governance-Phasen jede davon geklärt wird.</p>
 <div class="decisions c3">
 <div class="dec">
 <span class="n">01</span>

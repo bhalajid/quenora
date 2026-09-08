@@ -217,7 +217,7 @@ def switcher(lang, page):
 
 
 LANG_CSS = """
-.langsel{position:relative;margin-left:14px}
+.langsel{position:relative;margin-left:14px;order:9}
 .langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
   padding:0 12px;background:transparent;border:1px solid var(--line);
   border-radius:3px;color:var(--grey, var(--t2));font:inherit;font-size:12px;
@@ -395,7 +395,13 @@ def build_lang(lang):
             if existing:
                 existing.replace_with(frag)
             else:
-                nav.insert_after(frag)
+                # After the call to action, not before it. The switcher used to
+                # sit between the nav links and the button; the client wants it
+                # to the right of the button, which is the last thing in the
+                # header, so anchor on .navcta and fall back to the links only
+                # if a page has no button.
+                cta = soup.find(class_="navcta")
+                (cta or nav).insert_after(frag)
         if "id=\"langBtn\"" in str(soup) and "langBtn'" not in str(soup):
             body = soup.body
             body.append(BeautifulSoup(LANG_JS, "html.parser"))
@@ -443,7 +449,10 @@ def build_en_switcher():
         # The removal above has already run, so an empty LISTED_LANGS leaves
         # the page with no switcher and no handler rather than a dead menu.
         if nav and LISTED_LANGS:
-            nav.insert_after(BeautifulSoup(switcher("en", page), "html.parser"))
+            # Same anchor as the localised pages above: right of the button.
+            cta = soup.find(class_="navcta")
+            (cta or nav).insert_after(
+                BeautifulSoup(switcher("en", page), "html.parser"))
             soup.body.append(BeautifulSoup(LANG_JS, "html.parser"))
         head_links(soup, "en", page)
         open(p, "w", encoding="utf-8").write(str(soup))

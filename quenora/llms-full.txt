@@ -152,7 +152,7 @@ This is also why Approach Phase 02 — the unglamorous layer — is six weeks an
 
 Every dot is one answer scored against a test set. Without an agreed threshold the spread is just a cloud and any reading of it is defensible. With one, the same cloud splits into shipped, held and escalated — and the argument about whether it worked has a number in it. Illustrative.
 “The model is 92% accurate” is not a finding, it is a claim. It becomes a finding when someone else can re-run it next quarter, on new data, and get a number they can compare.
-So a Quenora engagement produces a harness alongside the system: the test set, the metric, the thresholds and the script that runs them. It is what Phase 05 measures against, and it is handed over with the code — because the question that matters is not whether the system worked on the day we left, but whether your team can tell six months later that it still does.
+So a Quenora engagement produces a harness alongside the system: the test set, the metric, the thresholds and the script that runs them. It is what Approach Phase 05 measures against, and it is handed over with the code — because the question that matters is not whether the system worked on the day we left, but whether your team can tell six months later that it still does.
 It is also the honest answer to a fair objection. A firm with no case studies is asking you to trust an assertion. A firm that hands you the means to check its own work is asking for something much smaller.
 
 ## Five principles, and what each one is tied to.

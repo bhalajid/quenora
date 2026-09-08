@@ -392,7 +392,7 @@ footer .f-grid h3,footer .f-grid h4,footer .f-grid h5{
   color:var(--copper-lt,#E9A063);margin:0 0 16px}
 footer nav[aria-label="Footer"]{display:flex;flex-direction:column;
   align-items:flex-start;gap:14px}
-.f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.f-social{display:flex;flex-direction:row;flex-wrap:wrap;gap:14px;align-items:center}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;
   width:34px;height:34px;border:1px solid var(--line,rgba(242,239,232,.09));
   border-radius:2px;color:var(--t2,#A8AEBB);
@@ -509,7 +509,9 @@ them is comparatively cheap.</p>
 <figcaption>Chaque point est une réponse évaluée sur un jeu de test. Sans seuil convenu, la dispersion n’est qu’un nuage et toute lecture est défendable. Avec un seuil, ce même nuage se divise en livré, retenu et escaladé — et la discussion sur le résultat contient un chiffre. Illustratif.</figcaption>
 </figure>
 <p>« Le modèle est exact à 92 % » n’est pas un constat, c’est une affirmation. Cela devient un constat lorsque quelqu’un d’autre peut le réexécuter le trimestre suivant, sur de nouvelles données, et obtenir un chiffre comparable.</p>
-<p>Une mission Quenora produit donc un harnais en même temps que le système : le jeu de test, la métrique, les seuils et le script qui les exécute. C’est ce par rapport à quoi la phase 05 mesure, et il est <strong>transmis avec le code</strong> — car la question qui compte n’est pas de savoir si le système fonctionnait le jour de notre départ, mais si votre équipe peut constater six mois plus tard qu’il fonctionne toujours.</p>
+<p>So a Quenora engagement produces a harness alongside the system: the test
+set, the metric, the thresholds and the script that runs them. It is what
+Approach Phase 05 measures against, and it is <strong>transmis avec le code</strong> — car la question qui compte n’est pas de savoir si le système fonctionnait le jour de notre départ, mais si votre équipe peut constater six mois plus tard qu’il fonctionne toujours.</p>
 <p>C’est aussi la réponse honnête à une objection légitime. Un cabinet sans études de cas vous demande de croire une affirmation. Un cabinet qui vous remet les moyens de vérifier son propre travail demande beaucoup moins.</p>
 </div>
 </section>
@@ -1168,6 +1170,8 @@ C’est cela, la conversation — deux paragraphes sur celle qui bloque.</p>
 })();
 </script>
 <!--/BACKTO:JS-->
+<div aria-hidden="true" id="qtrail"></div>
+<script defer="" src="/assets/logo.js?v=530ee0cf"></script>
 <script defer="" src="/assets/eggs.js?v=a2e2564d"></script>
 </body>
 </html>

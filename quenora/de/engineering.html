@@ -392,7 +392,7 @@ footer .f-grid h3,footer .f-grid h4,footer .f-grid h5{
   color:var(--copper-lt,#E9A063);margin:0 0 16px}
 footer nav[aria-label="Footer"]{display:flex;flex-direction:column;
   align-items:flex-start;gap:14px}
-.f-social{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.f-social{display:flex;flex-direction:row;flex-wrap:wrap;gap:14px;align-items:center}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;
   width:34px;height:34px;border:1px solid var(--line,rgba(242,239,232,.09));
   border-radius:2px;color:var(--t2,#A8AEBB);
@@ -509,7 +509,9 @@ them is comparatively cheap.</p>
 <figcaption>Jeder Punkt ist eine gegen ein Testset bewertete Antwort. Ohne vereinbarten Schwellenwert ist die Verteilung nur eine Wolke und jede Lesart davon ist vertretbar. Mit einem Schwellenwert teilt sich dieselbe Wolke in ausgeliefert, zurückgehalten und eskaliert — und die Diskussion darüber, ob es funktioniert hat, enthält eine Zahl. Illustrativ.</figcaption>
 </figure>
 <p>„Das Modell ist zu 92 % genau“ ist kein Befund, sondern eine Behauptung. Es wird zu einem Befund, wenn jemand anderes es im nächsten Quartal mit neuen Daten erneut ausführen und eine vergleichbare Zahl erhalten kann.</p>
-<p>Ein Quenora-Projekt erzeugt daher neben dem System ein Harness: das Testset, die Metrik, die Schwellenwerte und das Skript, das sie ausführt. Es ist das, wogegen Phase 05 misst, und es wird <strong>mit dem Code übergeben</strong> — denn die Frage, auf die es ankommt, ist nicht, ob das System an dem Tag funktioniert hat, an dem wir gegangen sind, sondern ob Ihr Team sechs Monate später feststellen kann, dass es das immer noch tut.</p>
+<p>So a Quenora engagement produces a harness alongside the system: the test
+set, the metric, the thresholds and the script that runs them. It is what
+Approach Phase 05 measures against, and it is <strong>mit dem Code übergeben</strong> — denn die Frage, auf die es ankommt, ist nicht, ob das System an dem Tag funktioniert hat, an dem wir gegangen sind, sondern ob Ihr Team sechs Monate später feststellen kann, dass es das immer noch tut.</p>
 <p>Es ist zugleich die ehrliche Antwort auf einen berechtigten Einwand. Eine Firma ohne Fallstudien bittet Sie, einer Behauptung zu vertrauen. Eine Firma, die Ihnen die Mittel zur Prüfung ihrer eigenen Arbeit übergibt, bittet um sehr viel weniger.</p>
 </div>
 </section>
@@ -1168,6 +1170,8 @@ Das ist das Gespräch — zwei Absätze dazu, welche davon klemmt.</p>
 })();
 </script>
 <!--/BACKTO:JS-->
+<div aria-hidden="true" id="qtrail"></div>
+<script defer="" src="/assets/logo.js?v=530ee0cf"></script>
 <script defer="" src="/assets/eggs.js?v=a2e2564d"></script>
 </body>
 </html>

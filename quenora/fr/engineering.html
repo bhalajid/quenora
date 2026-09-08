@@ -432,7 +432,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <a aria-label="Quenora home" class="brand" href="/fr/index.html"><img alt="Quenora" class="brandimg" decoding="async" height="590" src="/assets/brand/quenora-primary.svg?v=2259865b" width="1421"/></a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
-<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/fr/about.html">Qui nous sommes</a><a href="/fr/work.html">Ce que nous faisons</a><a href="/fr/approach.html">Méthode en phases</a><a href="/fr/capabilities.html">Neuf expertises</a><a href="/fr/pricing.html">Voir les tarifs</a><a aria-current="page" class="on" href="/fr/engineering.html">Ingénierie</a></nav>
+<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/fr/about.html">Qui nous sommes</a><a href="/fr/work.html">Ce que nous faisons</a><a aria-current="page" class="on" href="/fr/engineering.html">How we work?</a><a href="/fr/approach.html">Méthode en phases</a><a href="/fr/capabilities.html">Neuf expertises</a><a href="/fr/pricing.html">Voir les tarifs</a></nav>
 <a class="navcta" href="/fr/index.html#climax"><span class="cta-long">Engager la conversation</span><span class="cta-short">Contact</span></a>
 </div>
 </header>
@@ -441,14 +441,20 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <p class="ch">Ingénierie &amp; gouvernance de l’IA</p>
 <h1>La plupart des pilotes n’échouent pas sur le modèle. Ils s’arrêtent à <em>cinq couches</em>.</h1>
-<p class="lede">Une démo répond à des questions. Un système en production doit y répondre pour des personnes autorisées à les poser, à partir de données à jour, et dire quelque chose d’utile lorsqu’il ne sait pas — tout en laissant une trace que quelqu’un puisse auditer. Cette page suit trois problèmes travaillés à travers les couches où ce travail s’arrête réellement, puis énonce les décisions de gouvernance que chacun impose.</p>
+<p class="lede">A demo proves that something can work. Production proves that it
+can work safely, reliably and repeatedly. That means answering the right users
+from current data, knowing when not to guess, and leaving a trail that can be
+audited. This page walks through three examples and the governance decisions
+each one brings with it.</p>
 </div>
 </section>
 <section>
 <div class="wrap">
 <p class="ch">01 · Quatre décisions</p>
 <h2>Every one of them closed off an easier <em>option</em>.</h2>
-<p>Un principe que personne n’a payé est un slogan. Ces quatre-là s’appliquent à ce site, chacun a fermé une option plus facile, et le raisonnement est la partie qui mérite d’être lue.</p>
+<p>Principles are easy to state. They matter when they force a harder choice.
+These four did exactly that — and the reasoning behind those decisions is what
+this page is really about.</p>
 <div class="decisions">
 <div class="dec">
 <span class="n">01</span>
@@ -476,8 +482,11 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 </div>
 </div>
 <div class="note">
-<p><strong>Une exception, nommée plutôt que dissimulée.</strong> Les trois polices sont chargées depuis Google Fonts, ce qui est indiqué dans notre
-<a href="/privacy.html" style="color:var(--copper-lt);border-bottom:1px solid rgba(233,160,99,.3)">politique de confidentialité</a> avec sa base légale. Chaque police dispose d’une pile de repli locale complète, de sorte que si cette requête est bloquée la page se compose correctement — elle se compose simplement dans une police système.</p>
+<p><strong>One exception, made explicit.</strong> The site uses three typefaces
+from Google Fonts, as explained in our
+<a href="/privacy.html" style="color:var(--copper-lt);border-bottom:1px solid rgba(233,160,99,.3)">politique de confidentialité</a> along with the relevant legal basis. Each font also has a complete
+local fallback stack, so if the external request is blocked, the site still
+displays correctly using system fonts.</p>
 </div>
 </div>
 </section>
@@ -485,7 +494,8 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <p class="ch">02 · Le contrôle</p>
 <h2>Ce qui doit réellement <em>passer</em>.</h2>
-<p>Neuf étapes. Ce sont les vrais noms et les vrais décomptes, relevés lors de la dernière exécution — pas une description de ce qu’une suite de tests pourrait faire.</p>
+<p>Nine stages, with names and counts taken from the latest run. What you see
+here reflects an actual execution, not a hypothetical test scenario.</p>
 <div class="gate"><div class="tw"><table>
 <caption class="mono" style="caption-side:bottom;text-align:left;padding:13px 16px;color:var(--t3);font-size:.72rem;letter-spacing:.06em">L’étape 6 est délibérément suspendue pendant la finalisation des pages anglaises. L’étape 4b reste ouverte aujourd’hui, pour deux lignes à renseigner dans les mentions légales.</caption>
 <thead><tr><th scope="col">Étape</th><th scope="col">Ce qu’elle prouve</th></tr></thead>
@@ -546,8 +556,12 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <p class="ch">04 · Du problème à l’architecture</p>
 <h2>Where a pilot actually <em>stops</em>.</h2>
 <span class="illus">Illustratif — pas une mission client</span>
-<p>Ceci est un exemple travaillé, pas une étude de cas. Il décrit la forme du problème pour lequel on nous appelle et la façon dont nous le décomposons, à partir d’un composite du type de système qui s’enlise. Aucun client, aucun chiffre, rien qui soit arrivé à quelqu’un en particulier.</p>
-<p><strong>Le contexte :</strong> un assistant de recherche documentaire qui répond aux questions du personnel à partir de la documentation interne. Il fonctionne dans le notebook. Huit mois plus tard, il est toujours dans le notebook.</p>
+<p>This is a worked example, not a case study. It shows the shape of a problem
+we often encounter and how we approach it, using a representative composite
+rather than a named client engagement.</p>
+<p><strong>Le contexte :</strong> an internal retrieval assistant that answers
+staff questions from company documentation. It works in the notebook. Eight
+months later, it still has not reached production.</p>
 <figure class="fig">
 <p class="figlab">Une requête rencontre une couche qui n’a jamais été construite</p>
 <canvas aria-hidden="true" id="figLayers"></canvas>

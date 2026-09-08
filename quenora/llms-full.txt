@@ -113,11 +113,11 @@ Engagements are described by the shape of the problem rather than by client name
 
 ## Most pilots don’t fail at the model. They stop at five layers.
 
-A demo answers questions. A production system has to answer them for people who are allowed to ask, from data that is current, and say something useful when it does not know — while leaving a trail somebody can audit. This page walks three worked problems through the layers where that work actually stops, then sets out the governance decisions each one forces.
+A demo proves that something can work. Production proves that it can work safely, reliably and repeatedly. That means answering the right users from current data, knowing when not to guess, and leaving a trail that can be audited. This page walks through three examples and the governance decisions each one brings with it.
 
 ## Every one of them closed off an easier option.
 
-A principle nobody paid for is a slogan. These four are on this site, they each closed off an easier option, and the reasoning is the part worth reading.
+Principles are easy to state. They matter when they force a harder choice. These four did exactly that — and the reasoning behind those decisions is what this page is really about.
 
 ## No third-party JavaScript
 
@@ -138,11 +138,11 @@ What it cost. It rules out a lot of attractive low-contrast typography, and it c
 
 A release gate runs before every push. It is not advisory. A failing stage returns a non-zero exit code and the build is blocked.
 What it cost. It is holding this site’s own release today, over two lines still to be filled in a legal page. We would rather take the extra day than ship something incomplete — the same trade we ask you to let us make on your work.
-One exception, named rather than hidden. The three typefaces load from Google Fonts, which is disclosed in our privacy notice with its legal basis. Every face has a full local fallback stack, so if that request is blocked the page still sets correctly — it simply sets in a system font.
+One exception, made explicit. The site uses three typefaces from Google Fonts, as explained in our privacy notice along with the relevant legal basis. Each font also has a complete local fallback stack, so if the external request is blocked, the site still displays correctly using system fonts.
 
 ## What actually has to pass.
 
-Nine stages. These are the real names and the real counts, taken from the last run — not a description of what a test suite might do.
+Nine stages, with names and counts taken from the latest run. What you see here reflects an actual execution, not a hypothetical test scenario.
 Syntax and structure. Every inline script parses; section, div and main tags balance.
 Hit-testing, 180 cases. The nine spheres in the hero across four viewports and five rotations — the right one lights every time, zero mis-picks.
 Smoke test, 118 assertions. A headless DOM executes the real page JavaScript and checks what a visitor can actually do.
@@ -180,8 +180,8 @@ The measure of a design is whether the team inheriting it can change it safely. 
 
 ## Where a pilot actually stops.
 
-This is a worked example, not a case study. It describes the shape of the problem we are called into and how we take it apart, using a composite of the kind of system that stalls. No client, no numbers, nothing that happened to anybody in particular.
-The setup: a retrieval assistant that answers staff questions from internal documentation. It works in the notebook. Eight months later it is still in the notebook.
+This is a worked example, not a case study. It shows the shape of a problem we often encounter and how we approach it, using a representative composite rather than a named client engagement.
+The setup: an internal retrieval assistant that answers staff questions from company documentation. It works in the notebook. Eight months later, it still has not reached production.
 A request has to clear all five to reach an answer. A pilot typically builds the first and the last, so requests stop at whichever of the middle three was skipped — and the failure looks like a bad model rather than a missing layer. Illustrative.
 
 ## Access

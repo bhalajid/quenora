@@ -432,7 +432,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <a aria-label="Quenora home" class="brand" href="/de/index.html"><img alt="Quenora" class="brandimg" decoding="async" height="590" src="/assets/brand/quenora-primary.svg?v=2259865b" width="1421"/></a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menü" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
-<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/de/about.html">Wer wir sind</a><a href="/de/work.html">Was wir tun</a><a href="/de/approach.html">Vorgehen in Phasen</a><a href="/de/capabilities.html">Neun Leistungen</a><a href="/de/pricing.html">Preise ansehen</a><a aria-current="page" class="on" href="/de/engineering.html">KI-Engineering</a></nav>
+<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/de/about.html">Wer wir sind</a><a href="/de/work.html">Was wir tun</a><a aria-current="page" class="on" href="/de/engineering.html">How we work?</a><a href="/de/approach.html">Vorgehen in Phasen</a><a href="/de/capabilities.html">Neun Leistungen</a><a href="/de/pricing.html">Preise ansehen</a></nav>
 <a class="navcta" href="/de/index.html#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a>
 </div>
 </header>
@@ -441,14 +441,20 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <p class="ch">KI-Engineering &amp; Governance</p>
 <h1>Die meisten Piloten scheitern nicht am Modell. Sie bleiben stehen an <em>fünf Ebenen</em>.</h1>
-<p class="lede">Eine Demo beantwortet Fragen. Ein Produktivsystem muss sie für Menschen beantworten, die fragen dürfen, aus Daten, die aktuell sind, und muss etwas Brauchbares sagen, wenn es etwas nicht weiß — und dabei eine Spur hinterlassen, die jemand prüfen kann. Diese Seite führt drei durchgearbeitete Probleme durch die Ebenen, an denen diese Arbeit tatsächlich stehen bleibt, und benennt anschließend die Governance-Entscheidungen, die jedes davon erzwingt.</p>
+<p class="lede">A demo proves that something can work. Production proves that it
+can work safely, reliably and repeatedly. That means answering the right users
+from current data, knowing when not to guess, and leaving a trail that can be
+audited. This page walks through three examples and the governance decisions
+each one brings with it.</p>
 </div>
 </section>
 <section>
 <div class="wrap">
 <p class="ch">01 · Vier Entscheidungen</p>
 <h2>Every one of them closed off an easier <em>option</em>.</h2>
-<p>Ein Prinzip, für das niemand bezahlt hat, ist ein Slogan. Diese vier gelten auf dieser Website, jedes davon hat eine bequemere Möglichkeit ausgeschlossen, und die Begründung ist der Teil, der sich zu lesen lohnt.</p>
+<p>Principles are easy to state. They matter when they force a harder choice.
+These four did exactly that — and the reasoning behind those decisions is what
+this page is really about.</p>
 <div class="decisions">
 <div class="dec">
 <span class="n">01</span>
@@ -476,8 +482,11 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 </div>
 </div>
 <div class="note">
-<p><strong>Eine Ausnahme, benannt statt versteckt.</strong> Die drei Schriftarten werden von Google Fonts geladen, was in unserer
-<a href="/privacy.html" style="color:var(--copper-lt);border-bottom:1px solid rgba(233,160,99,.3)">Datenschutzerklärung</a> mit ihrer Rechtsgrundlage offengelegt ist. Jede Schrift hat einen vollständigen lokalen Fallback-Stack, sodass die Seite auch bei blockierter Anfrage korrekt gesetzt wird — sie wird dann eben in einer Systemschrift gesetzt.</p>
+<p><strong>One exception, made explicit.</strong> The site uses three typefaces
+from Google Fonts, as explained in our
+<a href="/privacy.html" style="color:var(--copper-lt);border-bottom:1px solid rgba(233,160,99,.3)">Datenschutzerklärung</a> along with the relevant legal basis. Each font also has a complete
+local fallback stack, so if the external request is blocked, the site still
+displays correctly using system fonts.</p>
 </div>
 </div>
 </section>
@@ -485,7 +494,8 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <p class="ch">02 · Das Gate</p>
 <h2>What actually has to <em>pass</em>.</h2>
-<p>Neun Stufen. Das sind die echten Namen und die echten Zahlen aus dem letzten Lauf — keine Beschreibung dessen, was eine Testsuite tun könnte.</p>
+<p>Nine stages, with names and counts taken from the latest run. What you see
+here reflects an actual execution, not a hypothetical test scenario.</p>
 <div class="gate"><div class="tw"><table>
 <caption class="mono" style="caption-side:bottom;text-align:left;padding:13px 16px;color:var(--t3);font-size:.72rem;letter-spacing:.06em">Stufe 6 ist bewusst zurückgestellt, solange die englischen Seiten finalisiert werden. Stufe 4b ist heute noch offen, wegen zweier Zeilen, die im Impressum auszufüllen sind.</caption>
 <thead><tr><th scope="col">Stufe</th><th scope="col">Was sie belegt</th></tr></thead>
@@ -546,8 +556,12 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <p class="ch">04 · Vom Problem zur Architektur</p>
 <h2>Where a pilot actually <em>stops</em>.</h2>
 <span class="illus">Illustrativ — kein Kundenprojekt</span>
-<p>Das ist ein durchgearbeitetes Beispiel, keine Fallstudie. Es beschreibt die Gestalt des Problems, zu dem wir gerufen werden, und wie wir es zerlegen, anhand eines Komposits der Art von System, die stehen bleibt. Kein Kunde, keine Zahlen, nichts, was jemandem im Besonderen passiert ist.</p>
-<p><strong>Der Aufbau:</strong> ein Retrieval-Assistent, der Fragen von Mitarbeitenden aus interner Dokumentation beantwortet. Im Notebook funktioniert er. Acht Monate später steckt er immer noch im Notebook.</p>
+<p>This is a worked example, not a case study. It shows the shape of a problem
+we often encounter and how we approach it, using a representative composite
+rather than a named client engagement.</p>
+<p><strong>Der Aufbau:</strong> an internal retrieval assistant that answers
+staff questions from company documentation. It works in the notebook. Eight
+months later, it still has not reached production.</p>
 <figure class="fig">
 <p class="figlab">Eine Anfrage trifft auf eine Ebene, die nie gebaut wurde</p>
 <canvas aria-hidden="true" id="figLayers"></canvas>

@@ -432,7 +432,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <a aria-label="Quenora home" class="brand" href="index.html"><img alt="Quenora" class="brandimg" decoding="async" height="590" src="/assets/brand/quenora-primary.svg?v=2259865b" width="1421"/></a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menu" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
-<nav aria-label="Main" class="navlinks" id="navLinks"><a href="about.html">Who are we?</a><a href="work.html">What work we do?</a><a href="approach.html">Phased Approach</a><a href="capabilities.html">Nine Capabilities</a><a href="pricing.html">View Pricing</a><a aria-current="page" class="on" href="engineering.html">Engineering</a></nav>
+<nav aria-label="Main" class="navlinks" id="navLinks"><a href="about.html">Who are we?</a><a href="work.html">What work we do?</a><a aria-current="page" class="on" href="engineering.html">How we work?</a><a href="approach.html">Phased Approach</a><a href="capabilities.html">Nine Capabilities</a><a href="pricing.html">View Pricing</a></nav>
 <a class="navcta" href="index.html#climax"><span class="cta-long">Start a conversation</span><span class="cta-short">Contact</span></a>
 </div>
 </header>
@@ -441,19 +441,20 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <p class="ch">AI engineering &amp; governance</p>
 <h1>Most pilots don’t fail at the model. They stop at <em>five layers</em>.</h1>
-<p class="lede">A demo answers questions. A production system has to answer them
-for people who are allowed to ask, from data that is current, and say something
-useful when it does not know — while leaving a trail somebody can audit. This
-page walks three worked problems through the layers where that work actually
-stops, then sets out the governance decisions each one forces.</p>
+<p class="lede">A demo proves that something can work. Production proves that it
+can work safely, reliably and repeatedly. That means answering the right users
+from current data, knowing when not to guess, and leaving a trail that can be
+audited. This page walks through three examples and the governance decisions
+each one brings with it.</p>
 </div>
 </section>
 <section>
 <div class="wrap">
 <p class="ch">01 · Four decisions</p>
 <h2>Every one of them closed off an easier <em>option</em>.</h2>
-<p>A principle nobody paid for is a slogan. These four are on this site, they
-each closed off an easier option, and the reasoning is the part worth reading.</p>
+<p>Principles are easy to state. They matter when they force a harder choice.
+These four did exactly that — and the reasoning behind those decisions is what
+this page is really about.</p>
 <div class="decisions">
 <div class="dec">
 <span class="n">01</span>
@@ -500,12 +501,12 @@ ask you to let us make on your work.</p>
 </div>
 </div>
 <div class="note">
-<p><strong>One exception, named rather than hidden.</strong> The three typefaces
-load from Google Fonts, which is disclosed in our
+<p><strong>One exception, made explicit.</strong> The site uses three typefaces
+from Google Fonts, as explained in our
 <a href="privacy.html" style="color:var(--copper-lt);border-bottom:1px solid rgba(233,160,99,.3)">privacy
-notice</a> with its legal basis. Every face has a full local fallback stack, so
-if that request is blocked the page still sets correctly — it simply sets in a
-system font.</p>
+notice</a> along with the relevant legal basis. Each font also has a complete
+local fallback stack, so if the external request is blocked, the site still
+displays correctly using system fonts.</p>
 </div>
 </div>
 </section>
@@ -513,8 +514,8 @@ system font.</p>
 <div class="wrap">
 <p class="ch">02 · The gate</p>
 <h2>What actually has to <em>pass</em>.</h2>
-<p>Nine stages. These are the real names and the real counts, taken from the
-last run — not a description of what a test suite might do.</p>
+<p>Nine stages, with names and counts taken from the latest run. What you see
+here reflects an actual execution, not a hypothetical test scenario.</p>
 <div class="gate"><div class="tw"><table>
 <caption class="mono" style="caption-side:bottom;text-align:left;padding:13px 16px;color:var(--t3);font-size:.72rem;letter-spacing:.06em">Stage 6 is held deliberately while the English pages are being finalised. Stage 4b is still open today, over two lines to be filled in the Impressum.</caption>
 <thead><tr><th scope="col">Stage</th><th scope="col">What it proves</th></tr></thead>
@@ -591,13 +592,12 @@ you.</p>
 <p class="ch">04 · Problem to architecture</p>
 <h2>Where a pilot actually <em>stops</em>.</h2>
 <span class="illus">Illustrative — not a client engagement</span>
-<p>This is a worked example, not a case study. It describes the shape of the
-problem we are called into and how we take it apart, using a composite of the
-kind of system that stalls. No client, no numbers, nothing that happened to
-anybody in particular.</p>
-<p><strong>The setup:</strong> a retrieval assistant that answers staff
-questions from internal documentation. It works in the notebook. Eight months
-later it is still in the notebook.</p>
+<p>This is a worked example, not a case study. It shows the shape of a problem
+we often encounter and how we approach it, using a representative composite
+rather than a named client engagement.</p>
+<p><strong>The setup:</strong> an internal retrieval assistant that answers
+staff questions from company documentation. It works in the notebook. Eight
+months later, it still has not reached production.</p>
 <figure class="fig">
 <p class="figlab">A request meeting a layer that was never built</p>
 <canvas aria-hidden="true" id="figLayers"></canvas>

@@ -177,7 +177,10 @@
     heilbronn:['friedrichshall','deutschland','sitz'],
     seid:['quenora','firma'], sitzt:['friedrichshall','deutschland','sitz'],
     sitz:['friedrichshall','deutschland'], standort:['friedrichshall','deutschland','sitz'],
-    kostet:['kosten','gekostet','zusammensetzt'], kosten:['kostet','gekostet'],
+    /* 'gekostet' was the German for the heading "What it cost.", which left
+       the site with the removed gate section, so both synonyms pointed at a
+       word no longer in the index. Each still has a live target. */
+    kostet:['kosten','zusammensetzt'], kosten:['kostet'],
     lange:['wochen','phasen','vierzehn','dauert'],
     dauer:['wochen','phasen','dauert'], dauert:['wochen','phasen'],
     team:['firma','inhabergefuhrt'], gehort:['ubergabe','ihnen'],

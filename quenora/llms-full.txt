@@ -103,89 +103,22 @@ Stated here rather than after three meetings, because finding out late wastes yo
 One focused conversation about where intelligence can remove friction or risk and add confidence in your operations. No deck. No discovery invoice. Scroll below and reach out to us.
 If you’re on your laptop, just scan the QR. If you’re on your mobile, tap Save the contact.
 
-## Who you’re actually hiring.
+## Who does the work.
 
-One principal. The person who scopes the work is the person who builds it, and everything built is handed over so it does not depend on him.
-
-## One pair of hands, and everything written down.
-
-Quenora is a one-principal firm. That is a decision rather than a stage to grow out of: the person who scopes your engagement is the person who builds it, and there is nobody in between to lose the thread.
-It puts a hard limit on how much work the firm carries at once, and the limit is the point. The work happens inside production constraints from the first conversation — access, data residency, change control, and the systems you already run — because those are what decide whether a pilot ever reaches the work.
-The fair question about a firm this size is what happens if it stops being available. The answer is the same as the answer to lock-in, and it is built into every engagement rather than promised here: you keep the code, the documentation and the evaluation harness, and the handover phase exists so your own team can run what was built without Quenora in the room. Nothing is designed to need one person to keep going.
-Founded in 2025 and based in Bad Friedrichshall, working with clients internationally, in German, French and English. There are no published case studies yet and none will be invented; before you commit, a call with a reference can be arranged instead.
-Engagements are described by shape rather than by client name, the way the rest of this site describes them.
+Quenora is built around a focused team of experienced specialists. The people who scope your engagement stay involved in delivering it, so context is not lost between sales, planning and execution.
+That model naturally limits how much work we take on at once, and that is deliberate. From the first conversation, the work is shaped around real production constraints — access, data residency, change control, and the systems you already run — because those are often what determine whether a pilot makes it into day-to-day use.
+A fair question for any specialist firm is what happens if individual team members are unavailable. We address that in the way we work. You keep the code, documentation and evaluation assets, and every engagement includes a structured handover so your own team can operate what has been built without depending on Quenora being in the room.
+Founded in 2025 and based in Bad Friedrichshall, Quenora works with clients internationally in German, French and English. We do not yet publish case studies, and we will not manufacture them. Where appropriate, a reference conversation can be arranged before you commit.
+Engagements are described by the shape of the problem rather than by client name, in the same way the rest of this site describes our work.
 
 ## Most pilots don’t fail at the model. They stop at five layers.
 
-A demo answers questions. A production system has to answer them for people who are allowed to ask, from data that is current, and say something useful when it does not know — while leaving a trail somebody can audit. This page walks three worked problems through the layers where that work actually stops, then sets out the governance decisions each one forces.
-
-## Every one of them closed off an easier option.
-
-A principle nobody paid for is a slogan. These four are on this site, they each closed off an easier option, and the reasoning is the part worth reading.
-
-## No third-party JavaScript
-
-No framework, no bundler, no build step, and not one line of script from anyone else’s server. Every page is one file: markup, styles and behaviour together.
-What it cost. The hero was originally built on two well-known animation libraries served from a public CDN. On locked-down corporate networks — the exact networks our buyers sit behind — both were blocked, and the page arrived blank. Everything was rewritten against native canvas and CSS. It is the reason we are sceptical of any architecture whose first failure mode is somebody else’s uptime.
-
-## It reads without JavaScript
-
-Turn scripting off and the argument is still there: every section, every answer, every link. Animation is enhancement, never the delivery mechanism.
-What it cost. Reveal-on-scroll has to be written twice — once as the enhanced path and once as a default that is already visible. The one-line version is quicker to write, and leaves a blank page for anyone whose browser does not run it.
-
-## Contrast is a build failure, not a preference
-
-Every text colour is checked against the surface behind it for WCAG AA. A pair that fails does not get discussed; it stops the release.
-What it cost. It rules out a lot of attractive low-contrast typography, and it caught a header button rendering at 1.49:1 — which looked fine to us and would have been unreadable to a good number of readers.
-
-## Nothing ships unless the checks pass
-
-A release gate runs before every push. It is not advisory. A failing stage returns a non-zero exit code and the build is blocked.
-What it cost. It is holding this site’s own release today, over two lines still to be filled in a legal page. We would rather take the extra day than ship something incomplete — the same trade we ask you to let us make on your work.
-One exception, named rather than hidden. The three typefaces load from Google Fonts, which is disclosed in our privacy notice with its legal basis. Every face has a full local fallback stack, so if that request is blocked the page still sets correctly — it simply sets in a system font.
-
-## What actually has to pass.
-
-Nine stages. These are the real names and the real counts, taken from the last run — not a description of what a test suite might do.
-Syntax and structure. Every inline script parses; section, div and main tags balance.
-Hit-testing, 180 cases. The nine spheres in the hero across four viewports and five rotations — the right one lights every time, zero mis-picks.
-Smoke test, 118 assertions. A headless DOM executes the real page JavaScript and checks what a visitor can actually do.
-Accessibility and SEO. Landmarks, skip link, focus styles, reduced motion, canvas hidden from screen readers, no broken links.
-Legal completeness. Blocks the build on any unfilled placeholder in the Impressum or privacy notice.
-Contrast, 54 token pairs. Every text colour against its ground, WCAG AA.
-Hero geometry, 8 viewports. The constellation is measured against the page’s own grid; if it drifts off the lines it is built on, the build fails.
-Proofreading and technical writing, 87 checks. British spelling, banned filler vocabulary, sentence length, heading case, meta descriptions.
-Stage 7 is the one worth explaining, because it is the least conventional and the most revealing. The hero constellation is constructed against the page’s own six-column grid and the measured height of the headline. A test asserts that relationship at eight viewport sizes and fails the build if it breaks.
-Nobody would notice a few pixels of drift. That is the point: the check exists because the alternative is a thing that is nearly right, and nearly right is how systems decay. We would rather encode the intent than rely on somebody remembering it in six months.
-
-## Five, and what each one is tied to.
-
-Principles are cheap to list. Each of these is attached to something specific in how an engagement runs, so you can hold us to it.
-
-## It has to end
-
-Every phase carries an exit condition written into the statement of work. The last one is that your team runs the system without us.
-
-## It has to be measurable
-
-A number is agreed in Phase 01. Phase 05 measures against that number in writing. If it did not move, we say so.
-
-## You keep everything
-
-The code, the documentation and the evaluation harness are yours regardless of how the engagement ends. There is no scenario where you finish with nothing to show for it.
-
-## It has to run on your estate
-
-Production means the systems you already have, with the permissions they already enforce. A capability that only works in a clean room has not reached the work.
-
-## Simple enough to hand over
-
-The measure of a design is whether the team inheriting it can change it safely. A design only its author can maintain is a cost we would be handing you.
+A demo proves that something can work. Production proves that it can work safely, reliably and repeatedly. That means answering the right users from current data, knowing when not to guess, and leaving a trail that can be audited. This page walks through three examples and the governance decisions each one brings with it.
 
 ## Where a pilot actually stops.
 
-This is a worked example, not a case study. It describes the shape of the problem we are called into and how we take it apart, using a composite of the kind of system that stalls. No client, no numbers, nothing that happened to anybody in particular.
-The setup: a retrieval assistant that answers staff questions from internal documentation. It works in the notebook. Eight months later it is still in the notebook.
+This is a worked example, not a case study. It shows the shape of a problem we often encounter and how we approach it, using a representative composite rather than a named client engagement.
+The setup: an internal retrieval assistant that answers staff questions from company documentation. It works in the notebook. Eight months later, it still has not reached production.
 A request has to clear all five to reach an answer. A pilot typically builds the first and the last, so requests stop at whichever of the middle three was skipped — and the failure looks like a bad model rather than a missing layer. Illustrative.
 
 ## Access
@@ -213,11 +146,42 @@ What the system does when it does not know — abstain, escalate to a person, or
 It runs on somebody’s account, deploys from somebody’s laptop, and has no owner in the on-call rota. This is the layer that ends most pilots, and it is not a technical problem.
 Which existing team owns it, what their runbook says, and what the alert means at three in the morning. If no team will take it, that is a finding worth more than the system.
 Note what is not on that list. Which model, which vector store, which framework. Those are real decisions and they take an afternoon. The five above take the engagement, and getting them wrong is why a working demo is still a demo eight months later.
-This is also why Phase 02 — the unglamorous layer — is six weeks and not one. Access, ground truth and freshness are the foundation; everything after them is comparatively cheap.
+This is also why Approach Phase 02 — the unglamorous layer — is six weeks and not one. Access, ground truth and freshness are the foundation; everything after them is comparatively cheap.
+
+## The part most proposals leave out.
+
+Every dot is one answer scored against a test set. Without an agreed threshold the spread is just a cloud and any reading of it is defensible. With one, the same cloud splits into shipped, held and escalated — and the argument about whether it worked has a number in it. Illustrative.
+“The model is 92% accurate” is not a finding, it is a claim. It becomes a finding when someone else can re-run it next quarter, on new data, and get a number they can compare.
+So a Quenora engagement produces a harness alongside the system: the test set, the metric, the thresholds and the script that runs them. It is what Phase 05 measures against, and it is handed over with the code — because the question that matters is not whether the system worked on the day we left, but whether your team can tell six months later that it still does.
+It is also the honest answer to a fair objection. A firm with no case studies is asking you to trust an assertion. A firm that hands you the means to check its own work is asking for something much smaller.
+
+## Five principles, and what each one is tied to.
+
+Principles are cheap to list. Each of these is attached to something specific in how an engagement runs, so you can hold us to it.
+
+## It has to end
+
+Every phase carries an exit condition written into the statement of work. The last one is that your team runs the system without us.
+
+## It has to be measurable
+
+A number is agreed in Phase 01. Phase 05 measures against that number in writing. If it did not move, we say so.
+
+## You keep everything
+
+The code, the documentation and the evaluation harness are yours regardless of how the engagement ends. There is no scenario where you finish with nothing to show for it.
+
+## It has to run on your estate
+
+Production means the systems you already have, with the permissions they already enforce. A capability that only works in a clean room has not reached the work.
+
+## Simple enough to hand over
+
+The measure of a design is whether the team inheriting it can change it safely. A design only its author can maintain is a cost we would be handing you.
 
 ## Governance is a set of decisions, not a document.
 
-Most governance material describes a policy. What a production system needs is a set of answers wired into the build, because each one changes the architecture. These are the questions we settle before anything ships, and where in the six phases each one gets settled.
+Most governance material describes a policy. What a production system needs is a set of answers wired into the build, because each one changes the architecture. These are the questions we settle before anything ships, and where in the six Governance Phases each one gets settled.
 
 ## Who is allowed to see what
 
@@ -250,14 +214,6 @@ A named owner, the runbooks, the decision records and the evaluation harness —
 Governance that depends on the firm that built the system is not governance. It is a dependency.
 What this page does not claim. Quenora holds no ISO 27001 or SOC 2 certification today, and this page will not imply one. The six decisions above describe how the work is engineered. Attestations, a data processing agreement, subprocessor list and insurance evidence are supplied on request during procurement — ask for them in the first conversation rather than the third.
 Recognise your own system in any of those five layers? That is the conversation — two paragraphs on which one is stuck.
-
-## The part most proposals leave out.
-
-Every dot is one answer scored against a test set. Without an agreed threshold the spread is just a cloud and any reading of it is defensible. With one, the same cloud splits into shipped, held and escalated — and the argument about whether it worked has a number in it. Illustrative.
-“The model is 92% accurate” is not a finding, it is a claim. It becomes a finding when someone else can re-run it next quarter, on new data, and get a number they can compare.
-So a Quenora engagement produces a harness alongside the system: the test set, the metric, the thresholds and the script that runs them. It is what Phase 05 measures against, and it is handed over with the code — because the question that matters is not whether the system worked on the day we left, but whether your team can tell six months later that it still does.
-It is also the honest answer to a fair objection. A firm with no case studies is asking you to trust an assertion. A firm that hands you the means to check its own work is asking for something much smaller.
-Want to see the shape of this against your own problem? Two paragraphs on what is stuck is enough to start.
 
 ## Nine capabilities. One team behind all of them.
 
@@ -299,7 +255,7 @@ Monitoring, retraining, incident response, and ongoing support after go-live. Mo
 
 Training, documentation, and adoption support so the people who have to live with the system actually use it. The most common cause of a failed AI rollout is not technical. It is a team that was never brought along and quietly routed around the new thing.
 
-## Not sure which of these you actually need?
+## Not sure which of these you actually need ?
 
 That is a reasonable place to start. Most engagements begin with a conversation about the problem, not a shopping list of capabilities.
 
@@ -307,9 +263,10 @@ That is a reasonable place to start. Most engagements begin with a conversation 
 
 Quenora Consulting is a founder-led firm in its early chapter. Rather than fabricate a client roster or borrow logos we have no right to, the below describes the shape of the work — the structures, the constraints, and the kinds of outcomes these engagements are built to produce.
 
-## The space is wide. These three recur.
+## How the work takes shape.
 
-Nine capabilities, and no fixed list of what they can be pointed at. The map below is the shape of that space; the three engagements written up underneath it are the patterns we are called into most often, not the limit of what the method covers. Figures are illustrative of the pattern rather than audited results from a named client.
+Our capabilities can be applied across a wide range of operational and technical problems. The map shows that breadth; the three examples below show what it can look like in practice.
+These are illustrative scenarios, not limits on the work we take on, and the figures shown are not audited client results.
 Every point is somewhere this work has a shape. The signal travels the same nine-circle arc the mark is built on, and each capability opens into the problems it reaches. Three of them are written up below — the rest are the reason a scope conversation starts with your problem rather than our catalogue. Illustrative.
 
 ## Invoice processing across three ERP instances
@@ -323,11 +280,12 @@ A manufacturer whose service desk was routing tickets by hand and losing institu
 ## Legacy modernisation and predictive scheduling
 
 A logistics operator running scheduling on a system older than most of its staff. Rather than a rewrite, we built an integration and data layer that let modern predictive models reach the legacy core safely.
-Every consultancy site you will compare us against shows client logos. Some of them earned those; some licensed a stock badge or list a company they ran one workshop for. We would rather show you the structure of the work now and replace this page with named, signed-off case studies as engagements complete. If you want references before that, ask in a briefing and we will arrange direct conversations.
+As a young firm, we do not yet publish named client case studies. Rather than fill that gap with vague or overstated claims, we have chosen to show the structure of the work, the problems we address, and the way we approach delivery.
+As engagements are completed and approved for publication, this page will evolve to include named case studies. Where appropriate, reference conversations can also be arranged during the briefing process.
 
-## The same question, answered twice
+## Plausible is not the same as correct
 
-Four questions people actually put to an internal assistant. The left panel is never a straw man: every answer it gives is fluent, specific and entirely plausible. That is the problem. The dashed figures are the ones it invented.
+Four questions someone might reasonably ask an internal AI assistant. In each example, both answers sound fluent and plausible. The difference is that one is grounded in the available information, while the other quietly invents details that are not there.
 “Invoice INV-88214, €48,900 from Rehder GmbH. It doesn’t match the PO. Can I post it?”
 
 ## Governed
@@ -340,7 +298,7 @@ Organisations large enough to have real system complexity, small enough that a g
 Teams that ran an AI pilot, saw it work in a demo, and cannot get it into production because the platform underneath was never built.
 Finance, healthcare, logistics and manufacturing, where governance and auditability are engineering requirements rather than paperwork.
 
-## Have a problem that looks like one of these?
+## Have a problem that looks like one of these ?
 
 And if it does not, that is the usual case rather than a problem — the map above is wider than the three written up here.
 “Invoice INV-88214, €48,900 from Rehder GmbH. It doesn’t match the PO. Can I post it?”
@@ -405,7 +363,7 @@ The people in the room during scoping are the people writing the code. The indus
 If your deadline is not achievable we say so before the contract is signed. It costs us work in the short term and saves both sides a failed programme in the long term.
 Success is your team running the system without us. We would rather be recommended than retained indefinitely, and the commercial model is built that way on purpose.
 
-## Want to test this against your actual problem?
+## Want to test this against your actual problem ?
 
 
 ## What it costs, and when you find out.

@@ -88,10 +88,10 @@ PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html",
 HEADER = [
     ("Who are we?",       "about.html"),
     ("What work we do?",  "work.html"),
+    ("How we work?",      "engineering.html"),
     ("Phased Approach",   "approach.html"),
     ("Nine Capabilities", "capabilities.html"),
     ("View Pricing",      "pricing.html"),
-    ("Engineering",       "engineering.html"),
 ]
 
 DEST_HOME = {
@@ -106,15 +106,13 @@ DEST_INNER = {
     "Home": "index.html",
 }
 
-CURRENT = {
-    "approach.html":     "Phased Approach",
-    "capabilities.html": "Nine Capabilities",
-    "engineering.html":  "Engineering",
-    "pricing.html":      "View Pricing",
-    "work.html":         "What work we do?",
-    "contact.html":      "Contact",
-    "about.html":        "Who are we?",
-}
+# Derived from HEADER rather than restated. This map held its own copy of every
+# label, so renaming "Engineering" to "How we work?" in HEADER left this one
+# looking for a label that no longer existed and engineering.html shipped with
+# no current-page marker — caught by 4j, not by anything earlier. One list owns
+# the labels now. contact.html is not in the header but is still marked.
+CURRENT = {href: label for label, href in HEADER}
+CURRENT["contact.html"] = "Contact"
 
 CSS_M = ("/*NAV:CSS*/", "/*/NAV:CSS*/")
 JS_M  = ("<!--NAV:JS-->", "<!--/NAV:JS-->")

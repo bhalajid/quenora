@@ -187,7 +187,10 @@ h2{font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.028em;line-
 #team h2{max-width:24ch}
 #team p{margin-top:18px;color:var(--grey);font-size:16.5px;font-weight:300;
   line-height:1.78;max-width:66ch}
-#team p.lede{margin-top:24px;color:var(--white);font-size:17.5px;line-height:1.75}
+/* --grey, not --white: the four paragraphs of this section read as one
+   block and the client asked for one colour across them. The lede keeps
+   its larger size; only the colour is levelled. */
+#team p.lede{margin-top:24px;color:var(--grey);font-size:17.5px;line-height:1.75}
 #team p.mono{margin-top:30px;font-family:var(--mono);font-size:12.5px;
   letter-spacing:.04em;color:var(--grey-d);max-width:62ch}
 .section-head{max-width:680px;margin-bottom:60px}
@@ -257,7 +260,8 @@ footer nav{display:block}
   .wrap{padding:0 24px}
   .section-pad{padding:80px 0}
   .card{padding:28px 24px;min-height:auto}
-  .phero{padding:140px 0 70px}
+  .phero{padding:140px 0 34px}
+  #team{padding-top:48px}
   .phero p{font-size:15.5px}
   #pCanvas{opacity:.85}
   .svc-detail{padding:32px 0}
@@ -267,7 +271,11 @@ footer nav{display:block}
   .contact-side{padding:26px}
   .qr-mini{flex-direction:column;align-items:flex-start}
 }
-.phero{padding:190px 0 90px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+/* This hero is a kicker and an h1 with no lede under them, so the 90px
+   below and the section's 120px above stacked into 210px of empty page.
+   Tightened here rather than in the shared rule. */
+.phero{padding:190px 0 44px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#team{padding-top:64px}
 .phero::before{content:"";position:absolute;top:-50%;right:-15%;width:70%;height:200%;
   background:radial-gradient(circle,rgba(201,122,60,.09),transparent 62%);pointer-events:none}
 .phero h1{font-size:clamp(36px,4.6vw,62px);max-width:19ch}
@@ -532,7 +540,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <nav>
 <a class="brand" href="/es/index.html"><img alt="Quenora" class="brandimg" decoding="async" height="590" src="/assets/brand/quenora-primary.svg?v=2259865b" width="1421"/></a>
-<div class="navlinks" id="navLinks"><a aria-current="page" class="on" href="/es/about.html">Who are we?</a><a href="/es/work.html">What work we do?</a><a href="/es/approach.html">Phased Approach</a><a href="/es/capabilities.html">Nine Capabilities</a><a href="/es/pricing.html">View Pricing</a><a href="/es/engineering.html">Engineering</a></div>
+<div class="navlinks" id="navLinks"><a aria-current="page" class="on" href="/es/about.html">Who are we?</a><a href="/es/work.html">What work we do?</a><a href="/es/engineering.html">How we work?</a><a href="/es/approach.html">Phased Approach</a><a href="/es/capabilities.html">Nine Capabilities</a><a href="/es/pricing.html">View Pricing</a></div>
 <a class="btn btn-primary navcta" href="/es/index.html#climax"><span class="cta-long">Iniciar una conversación</span><span class="cta-short">Contacto</span></a>
 <button aria-expanded="false" aria-label="Menú" class="burger" id="burger">
 <i></i><i></i><i></i>
@@ -540,7 +548,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 </nav>
 </div>
 </header>
-<main id="main"><section class="phero"><div class="wrap"><div class="kicker">About</div><h1 class="rv" data-d="1">Who you’re actually <em>hiring</em>.</h1><p class="lede">One principal. The person who scopes the work is the person who builds it, and everything built is handed over so it does not depend on him.</p></div></section><section class="section-pad"><div class="wrap"><dl class="ab-facts"><dt class="mono">Founded</dt><dd>2025</dd><dt class="mono">Based</dt><dd>Bad Friedrichshall, Germany</dd><dt class="mono">Working</dt><dd>Internationally</dd><dt class="mono">Principal</dt><dd>Founder-led</dd><dt class="mono">Languages</dt><dd>German · French · English</dd></dl></div></section><section class="section-pad" id="team"><div class="wrap"><div class="kicker">The principal</div><h2>One pair of hands, and everything written <em>down</em>.</h2><p class="lede">Quenora is a one-principal firm. That is a decision rather than a stage to grow out of: the person who scopes your engagement is the person who builds it, and there is nobody in between to lose the thread.</p><p>It puts a hard limit on how much work the firm carries at once, and the limit is the point. The work happens inside production constraints from the first conversation — access, data residency, change control, and the systems you already run — because those are what decide whether a pilot ever reaches the work.</p><p>The fair question about a firm this size is what happens if it stops being available. The answer is the same as the answer to lock-in, and it is built into every engagement rather than promised here: you keep the code, the documentation and the evaluation harness, and the handover phase exists so your own team can run what was built without Quenora in the room. Nothing is designed to need one person to keep going.</p><p>Founded in 2025 and based in Bad Friedrichshall, working with clients internationally, in German, French and English. There are no published case studies yet and none will be invented; before you commit, a call with a reference can be arranged instead.</p><p class="mono">Engagements are described by shape rather than by client name, the way the rest of this site describes them.</p></div></section></main>
+<main id="main"><section class="phero"><div class="wrap"><div class="kicker">About</div><h1 class="rv" data-d="1">Who does the <em>work</em>.</h1><p class="lede rv" data-d="2">The same people, from scope to delivery.</p></div></section><section class="section-pad" id="team"><div class="wrap"><p class="lede">Quenora is built around a focused team of experienced specialists. The people who scope your engagement stay involved in delivering it, so context is not lost between sales, planning and execution.</p><p>That model naturally limits how much work we take on at once, and that is deliberate. From the first conversation, the work is shaped around real production constraints — access, data residency, change control, and the systems you already run — because those are often what determine whether a pilot makes it into day-to-day use.</p><p>A fair question for any specialist firm is what happens if individual team members are unavailable. We address that in the way we work. You keep the code, documentation and evaluation assets, and every engagement includes a structured handover so your own team can operate what has been built without depending on Quenora being in the room.</p><p>Founded in 2025 and based in Bad Friedrichshall, Quenora works with clients internationally in German, French and English. We do not yet publish case studies, and we will not manufacture them. Where appropriate, a reference conversation can be arranged before you commit.</p><p class="mono">Engagements are described by the shape of the problem rather than by client name, in the same way the rest of this site describes our work.</p></div></section></main>
 <footer>
 <div class="wrap">
 <div class="foot-row f-grid">

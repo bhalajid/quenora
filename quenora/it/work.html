@@ -391,8 +391,11 @@ footer nav{display:block}
   padding:14px 26px;transition:background .2s}
 .gd-run:hover{background:var(--copper-lt)}
 .gd-run[disabled]{opacity:.4;cursor:default;background:var(--white)}
+/* stretch, not start: align-items:start let each panel size to its own
+   content past the 520px floor, so whichever side produced more output
+   ended up taller than the other mid-run. */
 .gd-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;
-  align-items:start;text-align:left}
+  align-items:stretch;text-align:left}
 @media(max-width:880px){.gd-pair{grid-template-columns:minmax(0,1fr)}}
 .gd-panel{border:1px solid var(--line);background:var(--surface);border-radius:3px;
   padding:22px;display:flex;flex-direction:column;min-height:520px}
@@ -614,7 +617,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <nav>
 <a class="brand" href="/it/index.html"><img alt="Quenora" class="brandimg" decoding="async" height="590" src="/assets/brand/quenora-primary.svg?v=2259865b" width="1421"/></a>
-<div class="navlinks" id="navLinks"><a href="/it/about.html">Who are we?</a><a aria-current="page" class="on" href="/it/work.html">What work we do?</a><a href="/it/approach.html">Phased Approach</a><a href="/it/capabilities.html">Nine Capabilities</a><a href="/it/pricing.html">View Pricing</a><a href="/it/engineering.html">Engineering</a></div>
+<div class="navlinks" id="navLinks"><a href="/it/about.html">Who are we?</a><a aria-current="page" class="on" href="/it/work.html">What work we do?</a><a href="/it/engineering.html">How we work?</a><a href="/it/approach.html">Phased Approach</a><a href="/it/capabilities.html">Nine Capabilities</a><a href="/it/pricing.html">View Pricing</a></div>
 <a class="btn btn-primary navcta" href="/it/index.html#climax"><span class="cta-long">Iniziamo a parlarne</span><span class="cta-short">Contatti</span></a>
 <button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <i></i><i></i><i></i>
@@ -634,12 +637,12 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">The problem space</div>
-<h2>The space is wide. These <em>three</em> recur.</h2>
-<p>Nine capabilities, and no fixed list of what they can be pointed at. The map
-      below is the shape of that space; the three engagements written up underneath
-      it are the patterns we are called into most often, not the limit of what the
-      method covers. Figures are illustrative of the pattern rather than audited
-      results from a named client.</p>
+<h2>How the work takes <em>shape</em>.</h2>
+<p>Our capabilities can be applied across a wide range of operational and technical
+      problems. The map shows that breadth; the three examples below show what it can
+      look like in practice.</p>
+<p>These are illustrative scenarios, not limits on the work we take on, and the
+      figures shown are not audited client results.</p>
 </div>
 <figure class="fig rv">
 <p class="figlab">Nine capabilities, and the places the work lands</p>
@@ -669,12 +672,13 @@ catalogue. Illustrative.</figcaption>
 <div class="metrics"><div><b>0</b><span>Sistemi sostituiti</span></div><div><b>≈ 3 h</b><span>Riconciliazione eliminata</span></div><div><b>6 sett.</b><span>Fino al primo pilota</span></div></div>
 </div>
 <div class="placeholder-note rv">
-<h4>Una nota voluta su questa pagina</h4>
-<p>Tutti i siti di consulenza con cui ci confronterete mostrano loghi di clienti. Alcuni se li sono
-      guadagnati; altri hanno acquistato un bollino su licenza o citano un'azienda per cui hanno tenuto
-      un solo workshop. Preferiamo mostrarvi ora la struttura del lavoro e sostituire questa pagina con casi
-      studio con nome e approvati man mano che i progetti si concludono. Se desiderate referenze prima di
-      allora, chiedetele in un incontro e organizzeremo colloqui diretti.</p>
+<h4>Why this page looks different</h4>
+<p>As a young firm, we do not yet publish named client case studies. Rather than fill
+      that gap with vague or overstated claims, we have chosen to show the structure of the
+      work, the problems we address, and the way we approach delivery.</p>
+<p>As engagements are completed and approved for publication, this page will evolve to
+      include named case studies. Where appropriate, reference conversations can also be
+      arranged during the briefing process.</p>
 </div>
 </div>
 </section>
@@ -688,11 +692,13 @@ catalogue. Illustrative.</figcaption>
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">See it, rather than take our word</div>
-<h2>The same question, answered twice</h2>
-<p style="max-width:64ch;margin:18px auto 0">Four questions people actually put to
-an internal assistant. The left panel is never a straw man: every answer it gives is
-fluent, specific and entirely plausible. That is the problem. The dashed figures are
-the ones it invented.</p>
+<h2>Plausible is not the same as <em>correct</em></h2>
+<p style="max-width:64ch;margin:18px auto 0">Four questions someone might reasonably
+ask an internal AI assistant. In each example, both answers sound fluent and plausible.
+The difference is that one is grounded in the available information, while the other
+quietly invents details that are not there.</p>
+<p style="max-width:64ch;margin:10px auto 0">The dashed figures highlight the
+fabricated values.</p>
 </div>
 <div aria-label="Scenario" class="gd-picker rv" role="tablist">
 <button aria-controls="gdAsk" aria-selected="true" class="gd-tab" role="tab" type="button">Finance · invoice</button>
@@ -735,7 +741,7 @@ here are worked examples; nothing on this page claims to be a real client.</p>
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">Con chi lavoriamo</div>
-<h2>Dove si inserisce</h2>
+<h2>Where this <em>fits</em></h2>
 </div>
 <div class="grid-3 rv">
 <div class="card"><div class="num">01</div><h4>Aziende di medie dimensioni</h4>
@@ -753,7 +759,7 @@ here are worked examples; nothing on this page claims to be a real client.</p>
 <div class="wrap"><div class="divider"><i></i></div></div>
 <section class="section-pad" style="text-align:center">
 <div class="wrap rv">
-<h2 style="max-width:19ch;margin:0 auto">Ha un problema simile a uno di questi?</h2>
+<h2 style="max-width:19ch;margin:0 auto">Have a problem that looks like one of <em>these</em>?</h2>
 <p style="max-width:52ch;margin:18px auto 0">And if it does not, that is the usual case
       rather than a problem — the map above is wider than the three written up here.</p>
 <!-- One button, on purpose. The ghost pair that used to sit here argued Work
@@ -761,7 +767,7 @@ here are worked examples; nothing on this page claims to be a real client.</p>
      Capabilities lost theirs too, and both are reachable from the header nav
      and the footer site map on every page. Closing sections make one offer. -->
 <div style="display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap">
-<a class="btn btn-primary" href="/it/index.html#talk">Iniziamo a parlarne</a>
+<a class="btn btn-primary" href="/it/index.html#climax">Iniziamo a parlarne</a>
 </div>
 </div>
 </section>

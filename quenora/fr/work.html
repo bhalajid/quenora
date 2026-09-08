@@ -391,8 +391,11 @@ footer nav{display:block}
   padding:14px 26px;transition:background .2s}
 .gd-run:hover{background:var(--copper-lt)}
 .gd-run[disabled]{opacity:.4;cursor:default;background:var(--white)}
+/* stretch, not start: align-items:start let each panel size to its own
+   content past the 520px floor, so whichever side produced more output
+   ended up taller than the other mid-run. */
 .gd-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;
-  align-items:start;text-align:left}
+  align-items:stretch;text-align:left}
 @media(max-width:880px){.gd-pair{grid-template-columns:minmax(0,1fr)}}
 .gd-panel{border:1px solid var(--line);background:var(--surface);border-radius:3px;
   padding:22px;display:flex;flex-direction:column;min-height:520px}
@@ -614,7 +617,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <nav>
 <a class="brand" href="/fr/index.html"><img alt="Quenora" class="brandimg" decoding="async" height="590" src="/assets/brand/quenora-primary.svg?v=2259865b" width="1421"/></a>
-<div class="navlinks" id="navLinks"><a href="/fr/about.html">Qui nous sommes</a><a aria-current="page" class="on" href="/fr/work.html">Ce que nous faisons</a><a href="/fr/approach.html">Méthode en phases</a><a href="/fr/capabilities.html">Neuf expertises</a><a href="/fr/pricing.html">Voir les tarifs</a><a href="/fr/engineering.html">Ingénierie</a></div>
+<div class="navlinks" id="navLinks"><a href="/fr/about.html">Qui nous sommes</a><a aria-current="page" class="on" href="/fr/work.html">Ce que nous faisons</a><a href="/fr/engineering.html">How we work?</a><a href="/fr/approach.html">Méthode en phases</a><a href="/fr/capabilities.html">Neuf expertises</a><a href="/fr/pricing.html">Voir les tarifs</a></div>
 <a class="btn btn-primary navcta" href="/fr/index.html#climax"><span class="cta-long">Engager la conversation</span><span class="cta-short">Contact</span></a>
 <button aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <i></i><i></i><i></i>
@@ -634,8 +637,12 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">L’espace du problème</div>
-<h2>L’espace est vaste. Ces <em>trois</em> reviennent.</h2>
-<p>Neuf expertises, et aucune liste figée de ce sur quoi elles peuvent porter. La carte ci-dessous montre la forme de cet espace ; les trois missions détaillées en dessous sont les schémas pour lesquels on nous appelle le plus souvent, et non la limite de ce que la méthode couvre. Les chiffres illustrent le schéma et ne sont pas des résultats audités d’un client nommé.</p>
+<h2>How the work takes <em>shape</em>.</h2>
+<p>Our capabilities can be applied across a wide range of operational and technical
+      problems. The map shows that breadth; the three examples below show what it can
+      look like in practice.</p>
+<p>These are illustrative scenarios, not limits on the work we take on, and the
+      figures shown are not audited client results.</p>
 </div>
 <figure class="fig rv">
 <p class="figlab">Neuf expertises, et les endroits où le travail se pose</p>
@@ -661,12 +668,13 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="metrics"><div><b>0</b><span>Systèmes remplacés</span></div><div><b>≈ 3 h</b><span>Rapprochement supprimé</span></div><div><b>6 sem.</b><span>Jusqu'au premier pilote</span></div></div>
 </div>
 <div class="placeholder-note rv">
-<h4>Une remarque volontaire sur cette page</h4>
-<p>Tous les sites de cabinets auxquels vous nous comparerez affichent des logos de clients. Certains les ont
-      mérités ; d'autres ont acheté une pastille sous licence ou citent une entreprise pour laquelle ils ont animé
-      un seul atelier. Nous préférons vous montrer dès maintenant la structure du travail et remplacer cette page
-      par des études de cas nommées et validées à mesure que les missions s'achèvent. Si vous souhaitez des
-      références avant cela, demandez-les lors d'un échange et nous organiserons des conversations directes.</p>
+<h4>Why this page looks different</h4>
+<p>As a young firm, we do not yet publish named client case studies. Rather than fill
+      that gap with vague or overstated claims, we have chosen to show the structure of the
+      work, the problems we address, and the way we approach delivery.</p>
+<p>As engagements are completed and approved for publication, this page will evolve to
+      include named case studies. Where appropriate, reference conversations can also be
+      arranged during the briefing process.</p>
 </div>
 </div>
 </section>
@@ -680,8 +688,13 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">Voyez plutôt que de nous croire</div>
-<h2>La même question, répondue deux fois</h2>
-<p style="max-width:64ch;margin:18px auto 0">Quatre questions que l’on pose réellement à un assistant interne. Le panneau de gauche n’est jamais un homme de paille : chacune de ses réponses est fluide, précise et parfaitement plausible. C’est là le problème. Les chiffres soulignés en pointillés sont ceux qu’il a inventés.</p>
+<h2>Plausible is not the same as <em>correct</em></h2>
+<p style="max-width:64ch;margin:18px auto 0">Four questions someone might reasonably
+ask an internal AI assistant. In each example, both answers sound fluent and plausible.
+The difference is that one is grounded in the available information, while the other
+quietly invents details that are not there.</p>
+<p style="max-width:64ch;margin:10px auto 0">The dashed figures highlight the
+fabricated values.</p>
 </div>
 <div aria-label="Scénario" class="gd-picker rv" role="tablist">
 <button aria-controls="gdAsk" aria-selected="true" class="gd-tab" role="tab" type="button">Finance · facture</button>
@@ -722,7 +735,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">Avec qui nous travaillons</div>
-<h2>Où cela s'inscrit</h2>
+<h2>Où cela <em>s'inscrit</em></h2>
 </div>
 <div class="grid-3 rv">
 <div class="card"><div class="num">01</div><h4>Entreprises de taille intermédiaire</h4>
@@ -740,14 +753,14 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap"><div class="divider"><i></i></div></div>
 <section class="section-pad" style="text-align:center">
 <div class="wrap rv">
-<h2 style="max-width:19ch;margin:0 auto">Vous avez un problème qui ressemble à l'un de ceux-là ?</h2>
+<h2 style="max-width:19ch;margin:0 auto">Vous avez un problème qui ressemble à l'un de <em>ceux-là</em>?</h2>
 <p style="max-width:52ch;margin:18px auto 0">Et si ce n’est pas le cas, c’est le cas habituel et non un problème — la carte ci-dessus est plus vaste que les trois détaillés ici.</p>
 <!-- One button, on purpose. The ghost pair that used to sit here argued Work
      was a dead end without them; that stopped being true when Approach and
      Capabilities lost theirs too, and both are reachable from the header nav
      and the footer site map on every page. Closing sections make one offer. -->
 <div style="display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap">
-<a class="btn btn-primary" href="/fr/index.html#talk">Engager la conversation</a>
+<a class="btn btn-primary" href="/fr/index.html#climax">Engager la conversation</a>
 </div>
 </div>
 </section>

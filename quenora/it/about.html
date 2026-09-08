@@ -257,7 +257,8 @@ footer nav{display:block}
   .wrap{padding:0 24px}
   .section-pad{padding:80px 0}
   .card{padding:28px 24px;min-height:auto}
-  .phero{padding:140px 0 70px}
+  .phero{padding:140px 0 34px}
+  #team{padding-top:48px}
   .phero p{font-size:15.5px}
   #pCanvas{opacity:.85}
   .svc-detail{padding:32px 0}
@@ -267,7 +268,11 @@ footer nav{display:block}
   .contact-side{padding:26px}
   .qr-mini{flex-direction:column;align-items:flex-start}
 }
-.phero{padding:190px 0 90px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+/* This hero is a kicker and an h1 with no lede under them, so the 90px
+   below and the section's 120px above stacked into 210px of empty page.
+   Tightened here rather than in the shared rule. */
+.phero{padding:190px 0 44px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#team{padding-top:64px}
 .phero::before{content:"";position:absolute;top:-50%;right:-15%;width:70%;height:200%;
   background:radial-gradient(circle,rgba(201,122,60,.09),transparent 62%);pointer-events:none}
 .phero h1{font-size:clamp(36px,4.6vw,62px);max-width:19ch}

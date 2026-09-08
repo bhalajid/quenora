@@ -391,8 +391,11 @@ footer nav{display:block}
   padding:14px 26px;transition:background .2s}
 .gd-run:hover{background:var(--copper-lt)}
 .gd-run[disabled]{opacity:.4;cursor:default;background:var(--white)}
+/* stretch, not start: align-items:start let each panel size to its own
+   content past the 520px floor, so whichever side produced more output
+   ended up taller than the other mid-run. */
 .gd-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;
-  align-items:start;text-align:left}
+  align-items:stretch;text-align:left}
 @media(max-width:880px){.gd-pair{grid-template-columns:minmax(0,1fr)}}
 .gd-panel{border:1px solid var(--line);background:var(--surface);border-radius:3px;
   padding:22px;display:flex;flex-direction:column;min-height:520px}
@@ -634,8 +637,12 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">Der Problemraum</div>
-<h2>Der Raum ist weit. Diese <em>drei</em> kehren wieder.</h2>
-<p>Neun Fähigkeiten, und keine feste Liste dessen, worauf sie gerichtet werden können. Die Karte unten zeigt die Gestalt dieses Raums; die drei darunter beschriebenen Projekte sind die Muster, in die wir am häufigsten gerufen werden — nicht die Grenze dessen, was die Methode abdeckt. Die Zahlen sind illustrativ für das Muster und keine geprüften Ergebnisse eines namentlich genannten Kunden.</p>
+<h2>How the work takes <em>shape</em>.</h2>
+<p>Our capabilities can be applied across a wide range of operational and technical
+      problems. The map shows that breadth; the three examples below show what it can
+      look like in practice.</p>
+<p>These are illustrative scenarios, not limits on the work we take on, and the
+      figures shown are not audited client results.</p>
 </div>
 <figure class="fig rv">
 <p class="figlab">Neun Fähigkeiten und die Stellen, an denen die Arbeit landet</p>
@@ -661,13 +668,13 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="metrics"><div><b>0</b><span>Ersetzte Systeme</span></div><div><b>ca. 3 Std.</b><span>Entfallener Abgleich</span></div><div><b>6 Wo.</b><span>Bis zum ersten Piloten</span></div></div>
 </div>
 <div class="placeholder-note rv">
-<h4>Eine bewusste Anmerkung zu dieser Seite</h4>
-<p>Jede Beratungswebsite, mit der Sie uns vergleichen werden, zeigt Kundenlogos. Manche haben
-      sie sich verdient; manche haben ein Stock-Siegel lizenziert oder führen ein Unternehmen auf,
-      für das sie einen einzigen Workshop gehalten haben. Wir zeigen Ihnen lieber jetzt die Struktur
-      der Arbeit und ersetzen diese Seite durch namentliche, freigegebene Fallstudien, sobald Projekte
-      abgeschlossen sind. Wenn Sie vorher Referenzen möchten, fragen Sie im Briefing danach — wir
-      vermitteln direkte Gespräche.</p>
+<h4>Why this page looks different</h4>
+<p>As a young firm, we do not yet publish named client case studies. Rather than fill
+      that gap with vague or overstated claims, we have chosen to show the structure of the
+      work, the problems we address, and the way we approach delivery.</p>
+<p>As engagements are completed and approved for publication, this page will evolve to
+      include named case studies. Where appropriate, reference conversations can also be
+      arranged during the briefing process.</p>
 </div>
 </div>
 </section>
@@ -681,8 +688,13 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">Sehen, statt uns zu glauben</div>
-<h2>Dieselbe Frage, zweimal beantwortet</h2>
-<p style="max-width:64ch;margin:18px auto 0">Vier Fragen, die Menschen einem internen Assistenten tatsächlich stellen. Die linke Seite ist nie ein Strohmann: Jede Antwort dort ist flüssig, konkret und vollkommen plausibel. Genau das ist das Problem. Die gestrichelt unterstrichenen Zahlen sind die erfundenen.</p>
+<h2>Plausible is not the same as <em>correct</em></h2>
+<p style="max-width:64ch;margin:18px auto 0">Four questions someone might reasonably
+ask an internal AI assistant. In each example, both answers sound fluent and plausible.
+The difference is that one is grounded in the available information, while the other
+quietly invents details that are not there.</p>
+<p style="max-width:64ch;margin:10px auto 0">The dashed figures highlight the
+fabricated values.</p>
 </div>
 <div aria-label="Szenario" class="gd-picker rv" role="tablist">
 <button aria-controls="gdAsk" aria-selected="true" class="gd-tab" role="tab" type="button">Finanzen · Rechnung</button>
@@ -723,7 +735,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">Mit wem wir arbeiten</div>
-<h2>Wo das hineinpasst</h2>
+<h2>Wo das <em>hineinpasst</em></h2>
 </div>
 <div class="grid-3 rv">
 <div class="card"><div class="num">01</div><h4>Mittelständische Unternehmen</h4>
@@ -741,14 +753,14 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap"><div class="divider"><i></i></div></div>
 <section class="section-pad" style="text-align:center">
 <div class="wrap rv">
-<h2 style="max-width:19ch;margin:0 auto">Haben Sie ein Problem, das einem davon ähnelt?</h2>
+<h2 style="max-width:19ch;margin:0 auto">Have a problem that looks like one of <em>these</em>?</h2>
 <p style="max-width:52ch;margin:18px auto 0">Und wenn nicht, ist das der Normalfall und kein Problem — die Karte oben ist weiter als die drei, die hier beschrieben sind.</p>
 <!-- One button, on purpose. The ghost pair that used to sit here argued Work
      was a dead end without them; that stopped being true when Approach and
      Capabilities lost theirs too, and both are reachable from the header nav
      and the footer site map on every page. Closing sections make one offer. -->
 <div style="display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap">
-<a class="btn btn-primary" href="/de/index.html#talk">Gespräch beginnen</a>
+<a class="btn btn-primary" href="/de/index.html#climax">Gespräch beginnen</a>
 </div>
 </div>
 </section>

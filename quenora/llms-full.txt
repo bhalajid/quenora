@@ -295,7 +295,7 @@ Monitoring, retraining, incident response, and ongoing support after go-live. Mo
 
 Training, documentation, and adoption support so the people who have to live with the system actually use it. The most common cause of a failed AI rollout is not technical. It is a team that was never brought along and quietly routed around the new thing.
 
-## Not sure which of these you actually need?
+## Not sure which of these you actually need ?
 
 That is a reasonable place to start. Most engagements begin with a conversation about the problem, not a shopping list of capabilities.
 
@@ -303,9 +303,10 @@ That is a reasonable place to start. Most engagements begin with a conversation 
 
 Quenora Consulting is a founder-led firm in its early chapter. Rather than fabricate a client roster or borrow logos we have no right to, the below describes the shape of the work — the structures, the constraints, and the kinds of outcomes these engagements are built to produce.
 
-## The space is wide. These three recur.
+## How the work takes shape.
 
-Nine capabilities, and no fixed list of what they can be pointed at. The map below is the shape of that space; the three engagements written up underneath it are the patterns we are called into most often, not the limit of what the method covers. Figures are illustrative of the pattern rather than audited results from a named client.
+Our capabilities can be applied across a wide range of operational and technical problems. The map shows that breadth; the three examples below show what it can look like in practice.
+These are illustrative scenarios, not limits on the work we take on, and the figures shown are not audited client results.
 Every point is somewhere this work has a shape. The signal travels the same nine-circle arc the mark is built on, and each capability opens into the problems it reaches. Three of them are written up below — the rest are the reason a scope conversation starts with your problem rather than our catalogue. Illustrative.
 
 ## Invoice processing across three ERP instances
@@ -319,11 +320,12 @@ A manufacturer whose service desk was routing tickets by hand and losing institu
 ## Legacy modernisation and predictive scheduling
 
 A logistics operator running scheduling on a system older than most of its staff. Rather than a rewrite, we built an integration and data layer that let modern predictive models reach the legacy core safely.
-Every consultancy site you will compare us against shows client logos. Some of them earned those; some licensed a stock badge or list a company they ran one workshop for. We would rather show you the structure of the work now and replace this page with named, signed-off case studies as engagements complete. If you want references before that, ask in a briefing and we will arrange direct conversations.
+As a young firm, we do not yet publish named client case studies. Rather than fill that gap with vague or overstated claims, we have chosen to show the structure of the work, the problems we address, and the way we approach delivery.
+As engagements are completed and approved for publication, this page will evolve to include named case studies. Where appropriate, reference conversations can also be arranged during the briefing process.
 
-## The same question, answered twice
+## Plausible is not the same as correct
 
-Four questions people actually put to an internal assistant. The left panel is never a straw man: every answer it gives is fluent, specific and entirely plausible. That is the problem. The dashed figures are the ones it invented.
+Four questions someone might reasonably ask an internal AI assistant. In each example, both answers sound fluent and plausible. The difference is that one is grounded in the available information, while the other quietly invents details that are not there.
 “Invoice INV-88214, €48,900 from Rehder GmbH. It doesn’t match the PO. Can I post it?”
 
 ## Governed
@@ -336,7 +338,7 @@ Organisations large enough to have real system complexity, small enough that a g
 Teams that ran an AI pilot, saw it work in a demo, and cannot get it into production because the platform underneath was never built.
 Finance, healthcare, logistics and manufacturing, where governance and auditability are engineering requirements rather than paperwork.
 
-## Have a problem that looks like one of these?
+## Have a problem that looks like one of these ?
 
 And if it does not, that is the usual case rather than a problem — the map above is wider than the three written up here.
 “Invoice INV-88214, €48,900 from Rehder GmbH. It doesn’t match the PO. Can I post it?”
@@ -401,7 +403,7 @@ The people in the room during scoping are the people writing the code. The indus
 If your deadline is not achievable we say so before the contract is signed. It costs us work in the short term and saves both sides a failed programme in the long term.
 Success is your team running the system without us. We would rather be recommended than retained indefinitely, and the commercial model is built that way on purpose.
 
-## Want to test this against your actual problem?
+## Want to test this against your actual problem ?
 
 
 ## What it costs, and when you find out.

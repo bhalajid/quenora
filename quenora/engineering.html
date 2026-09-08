@@ -450,146 +450,7 @@ each one brings with it.</p>
 </section>
 <section>
 <div class="wrap">
-<p class="ch">01 · Four decisions</p>
-<h2>Every one of them closed off an easier <em>option</em>.</h2>
-<p>Principles are easy to state. They matter when they force a harder choice.
-These four did exactly that — and the reasoning behind those decisions is what
-this page is really about.</p>
-<div class="decisions">
-<div class="dec">
-<span class="n">01</span>
-<h3>No third-party JavaScript</h3>
-<p>No framework, no bundler, no build step, and not one line of script from
-anyone else’s server. Every page is one file: markup, styles and behaviour
-together.</p>
-<p class="why"><strong>What it cost.</strong> The hero was originally built on
-two well-known animation libraries served from a public CDN. On locked-down
-corporate networks — the exact networks our buyers sit behind — both were
-blocked, and the page arrived blank. Everything was rewritten against native
-canvas and CSS. It is the reason we are sceptical of any architecture whose
-first failure mode is somebody else’s uptime.</p>
-</div>
-<div class="dec">
-<span class="n">02</span>
-<h3>It reads without JavaScript</h3>
-<p>Turn scripting off and the argument is still there: every section, every
-answer, every link. Animation is enhancement, never the delivery mechanism.</p>
-<p class="why"><strong>What it cost.</strong> Reveal-on-scroll has to be written
-twice — once as the enhanced path and once as a default that is already
-visible. The one-line version is quicker to write, and leaves a blank page for
-anyone whose browser does not run it.</p>
-</div>
-<div class="dec">
-<span class="n">03</span>
-<h3>Contrast is a build failure, not a preference</h3>
-<p>Every text colour is checked against the surface behind it for WCAG AA. A
-pair that fails does not get discussed; it stops the release.</p>
-<p class="why"><strong>What it cost.</strong> It rules out a lot of attractive
-low-contrast typography, and it caught a header button rendering at 1.49:1 —
-which looked fine to us and would have been unreadable to a good number of
-readers.</p>
-</div>
-<div class="dec">
-<span class="n">04</span>
-<h3>Nothing ships unless the checks pass</h3>
-<p>A release gate runs before every push. It is not advisory. A failing stage
-returns a non-zero exit code and the build is blocked.</p>
-<p class="why"><strong>What it cost.</strong> It is holding this site’s own
-release today, over two lines still to be filled in a legal page. We would
-rather take the extra day than ship something incomplete — the same trade we
-ask you to let us make on your work.</p>
-</div>
-</div>
-<div class="note">
-<p><strong>One exception, made explicit.</strong> The site uses three typefaces
-from Google Fonts, as explained in our
-<a href="privacy.html" style="color:var(--copper-lt);border-bottom:1px solid rgba(233,160,99,.3)">privacy
-notice</a> along with the relevant legal basis. Each font also has a complete
-local fallback stack, so if the external request is blocked, the site still
-displays correctly using system fonts.</p>
-</div>
-</div>
-</section>
-<section>
-<div class="wrap">
-<p class="ch">02 · The gate</p>
-<h2>What actually has to <em>pass</em>.</h2>
-<p>Nine stages, with names and counts taken from the latest run. What you see
-here reflects an actual execution, not a hypothetical test scenario.</p>
-<div class="gate"><div class="tw"><table>
-<caption class="mono" style="caption-side:bottom;text-align:left;padding:13px 16px;color:var(--t3);font-size:.72rem;letter-spacing:.06em">Stage 6 is held deliberately while the English pages are being finalised. Stage 4b is still open today, over two lines to be filled in the Impressum.</caption>
-<thead><tr><th scope="col">Stage</th><th scope="col">What it proves</th></tr></thead>
-<tbody>
-<tr><td>1</td><td><strong>Syntax and structure.</strong> Every inline script parses; section, div and main tags balance.</td></tr>
-<tr><td>2</td><td><strong>Hit-testing, 180 cases.</strong> The nine spheres in the hero across four viewports and five rotations — the right one lights every time, zero mis-picks.</td></tr>
-<tr><td>3</td><td><strong>Smoke test, 118 assertions.</strong> A headless DOM executes the real page JavaScript and checks what a visitor can actually do.</td></tr>
-<tr><td>4</td><td><strong>Accessibility and SEO.</strong> Landmarks, skip link, focus styles, reduced motion, canvas hidden from screen readers, no broken links.</td></tr>
-<tr><td>4b</td><td><strong>Legal completeness.</strong> Blocks the build on any unfilled placeholder in the Impressum or privacy notice.</td></tr>
-<tr><td>5</td><td><strong>Contrast, 54 token pairs.</strong> Every text colour against its ground, WCAG AA.</td></tr>
-<tr><td>6</td><td><strong>Translations.</strong> Coverage across the localised builds.</td></tr>
-<tr><td>7</td><td><strong>Hero geometry, 8 viewports.</strong> The constellation is measured against the page’s own grid; if it drifts off the lines it is built on, the build fails.</td></tr>
-<tr><td>8</td><td><strong>Proofreading and technical writing, 87 checks.</strong> British spelling, banned filler vocabulary, sentence length, heading case, meta descriptions.</td></tr>
-</tbody>
-</table></div></div>
-<div class="note">
-<p><strong>Stage 7 is the one worth explaining,</strong> because it is the least
-conventional and the most revealing. The hero constellation is constructed
-against the page’s own six-column grid and the measured height of the headline.
-A test asserts that relationship at eight viewport sizes and fails the build if
-it breaks.</p>
-<p>Nobody would notice a few pixels of drift. That is the point: the check exists
-because the alternative is a thing that is <em>nearly</em> right, and nearly right
-is how systems decay. We would rather encode the intent than rely on somebody
-remembering it in six months.</p>
-</div>
-</div>
-</section>
-<section>
-<div class="wrap">
-<p class="ch">03 · Principles</p>
-<h2><em>Five</em>, and what each one is tied to.</h2>
-<p>Principles are cheap to list. Each of these is attached to something specific
-in how an engagement runs, so you can hold us to it.</p>
-<div class="prin">
-<div class="pr">
-<h3>It has to end</h3>
-<p>Every phase carries an exit condition written into the statement of work.
-The last one is that your team runs the system without us.</p>
-<span class="tie">Tied to · phase 06, handover</span>
-</div>
-<div class="pr">
-<h3>It has to be measurable</h3>
-<p>A number is agreed in Phase 01. Phase 05 measures against that number in
-writing. If it did not move, we say so.</p>
-<span class="tie">Tied to · phases 01 and 05</span>
-</div>
-<div class="pr">
-<h3>You keep everything</h3>
-<p>The code, the documentation and the evaluation harness are yours regardless
-of how the engagement ends. There is no scenario where you finish with nothing
-to show for it.</p>
-<span class="tie">Tied to · every engagement</span>
-</div>
-<div class="pr">
-<h3>It has to run on your estate</h3>
-<p>Production means the systems you already have, with the permissions they
-already enforce. A capability that only works in a clean room has not reached
-the work.</p>
-<span class="tie">Tied to · phases 03 and 04</span>
-</div>
-<div class="pr">
-<h3>Simple enough to hand over</h3>
-<p>The measure of a design is whether the team inheriting it can change it
-safely. A design only its author can maintain is a cost we would be handing
-you.</p>
-<span class="tie">Tied to · phase 06</span>
-</div>
-</div>
-</div>
-</section>
-<section>
-<div class="wrap">
-<p class="ch">04 · Problem to architecture</p>
+<p class="ch">01 · Problem to architecture</p>
 <h2>Where a pilot actually <em>stops</em>.</h2>
 <span class="illus">Illustrative — not a client engagement</span>
 <p>This is a worked example, not a case study. It shows the shape of a problem
@@ -658,18 +519,88 @@ take it, that is a finding worth more than the system.</p></div>
 store, which framework. Those are real decisions and they take an afternoon.
 The five above take the engagement, and getting them wrong is why a working
 demo is still a demo eight months later.</p>
-<p>This is also why Phase 02 — the unglamorous layer — is six weeks and not
+<p>This is also why Approach Phase 02 — the unglamorous layer — is six weeks and not
 one. Access, ground truth and freshness are the foundation; everything after
 them is comparatively cheap.</p>
 </div>
+</div>
+</section>
 <section>
 <div class="wrap">
-<p class="ch">06 · Governance</p>
+<p class="ch">02 · The evaluation harness</p>
+<h2>The <em>part</em> most proposals leave out.</h2>
+<figure class="fig">
+<p class="figlab">What a threshold does to a spread of answers</p>
+<canvas aria-hidden="true" id="figEval"></canvas>
+<figcaption>Every dot is one answer scored against a test set. Without an
+agreed threshold the spread is just a cloud and any reading of it is
+defensible. With one, the same cloud splits into shipped, held and escalated —
+and the argument about whether it worked has a number in it. Illustrative.</figcaption>
+</figure>
+<p>“The model is 92% accurate” is not a finding, it is a claim. It becomes a
+finding when someone else can re-run it next quarter, on new data, and get a
+number they can compare.</p>
+<p>So a Quenora engagement produces a harness alongside the system: the test
+set, the metric, the thresholds and the script that runs them. It is what
+Phase 05 measures against, and it is <strong>handed over with the code</strong> —
+because the question that matters is not whether the system worked on the day
+we left, but whether your team can tell six months later that it still does.</p>
+<p>It is also the honest answer to a fair objection. A firm with no case studies
+is asking you to trust an assertion. A firm that hands you the means to check
+its own work is asking for something much smaller.</p>
+</div>
+</section>
+<section>
+<div class="wrap">
+<p class="ch">03 · Principles</p>
+<h2><em>Five</em> principles, and what each one is tied to.</h2>
+<p>Principles are cheap to list. Each of these is attached to something specific
+in how an engagement runs, so you can hold us to it.</p>
+<div class="prin">
+<div class="pr">
+<h3>It has to end</h3>
+<p>Every phase carries an exit condition written into the statement of work.
+The last one is that your team runs the system without us.</p>
+<span class="tie">Tied to · Approach Phase 06, handover</span>
+</div>
+<div class="pr">
+<h3>It has to be measurable</h3>
+<p>A number is agreed in Phase 01. Phase 05 measures against that number in
+writing. If it did not move, we say so.</p>
+<span class="tie">Tied to · Approach Phases 01 and 05</span>
+</div>
+<div class="pr">
+<h3>You keep everything</h3>
+<p>The code, the documentation and the evaluation harness are yours regardless
+of how the engagement ends. There is no scenario where you finish with nothing
+to show for it.</p>
+<span class="tie">Tied to · every engagement</span>
+</div>
+<div class="pr">
+<h3>It has to run on your estate</h3>
+<p>Production means the systems you already have, with the permissions they
+already enforce. A capability that only works in a clean room has not reached
+the work.</p>
+<span class="tie">Tied to · Approach Phases 03 and 04</span>
+</div>
+<div class="pr">
+<h3>Simple enough to hand over</h3>
+<p>The measure of a design is whether the team inheriting it can change it
+safely. A design only its author can maintain is a cost we would be handing
+you.</p>
+<span class="tie">Tied to · Approach Phase 06</span>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="wrap">
+<p class="ch">04 · Governance</p>
 <h2>Governance is a set of decisions, not a <em>document</em>.</h2>
 <p>Most governance material describes a policy. What a production system needs
 is a set of answers wired into the build, because each one changes the
 architecture. These are the questions we settle before anything ships, and
-where in the six phases each one gets settled.</p>
+where in the six Governance Phases each one gets settled.</p>
 <div class="decisions c3">
 <div class="dec">
 <span class="n">01</span>
@@ -737,41 +668,9 @@ processing agreement, subprocessor list and insurance evidence are supplied on
 request during procurement — ask for them in the first conversation rather than
 the third.</p>
 </div>
-</div>
-</section>
 <div class="cta-inline">
 <p><strong>Recognise your own system in any of those five layers?</strong>
 That is the conversation — two paragraphs on which one is stuck.</p>
-<a href="index.html#climax">Start a conversation</a>
-</div>
-</div>
-</section>
-<section>
-<div class="wrap">
-<p class="ch">05 · The evaluation harness</p>
-<h2>The <em>part</em> most proposals leave out.</h2>
-<figure class="fig">
-<p class="figlab">What a threshold does to a spread of answers</p>
-<canvas aria-hidden="true" id="figEval"></canvas>
-<figcaption>Every dot is one answer scored against a test set. Without an
-agreed threshold the spread is just a cloud and any reading of it is
-defensible. With one, the same cloud splits into shipped, held and escalated —
-and the argument about whether it worked has a number in it. Illustrative.</figcaption>
-</figure>
-<p>“The model is 92% accurate” is not a finding, it is a claim. It becomes a
-finding when someone else can re-run it next quarter, on new data, and get a
-number they can compare.</p>
-<p>So a Quenora engagement produces a harness alongside the system: the test
-set, the metric, the thresholds and the script that runs them. It is what
-Phase 05 measures against, and it is <strong>handed over with the code</strong> —
-because the question that matters is not whether the system worked on the day
-we left, but whether your team can tell six months later that it still does.</p>
-<p>It is also the honest answer to a fair objection. A firm with no case studies
-is asking you to trust an assertion. A firm that hands you the means to check
-its own work is asking for something much smaller.</p>
-<div class="cta-inline">
-<p><strong>Want to see the shape of this against your own problem?</strong>
-Two paragraphs on what is stuck is enough to start.</p>
 <a href="index.html#climax">Start a conversation</a>
 </div>
 </div>

@@ -152,13 +152,22 @@ NAV_CSS = """/* ── one header, on every page ──────────�
     margin-inline:auto;padding-left:40px;padding-right:40px}
 }
 
-@media(min-width:881px){
+/* 1181px, not 881px. The header needs 1146px for brand, six nav links, the
+   call to action and the language button, and .wrap only offers the viewport
+   less 80px of padding — so between 881px and about 1226px the links were
+   squeezed and each label wrapped inside itself: "Who are / we?". The mobile
+   header now takes over at 1180px instead, and this block starts where the
+   desktop row genuinely fits. The gaps below are tightened from 26px so that
+   threshold lands under the breakpoint rather than above it. */
+@media(min-width:1181px){
   /* The header's own flex container: a div.wrap on the home page and inner
      engineering, a nav on the rest. Their gaps were 24px and 30px, and with
      three items to the right of the links that is a 12px difference in where
      the links end — the last of the movement between pages. */
-  header > .wrap, header nav{gap:26px}
-  .navlinks{gap:26px;align-items:center}
+  header > .wrap, header nav{gap:18px}
+  .navlinks{gap:18px;align-items:center}
+  /* the labels are short; none of them should ever break in half */
+  .navlinks a,.navlinks>a{white-space:nowrap}
   .navlinks a,.navlinks>a{font-size:14px;padding:4px 0;border-bottom:0}
   .navcta{padding:9px 16px;font-size:12.5px}
 }

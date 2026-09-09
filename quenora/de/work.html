@@ -351,23 +351,7 @@ footer nav{display:block}
 .qr-mini p{font-size:12.5px;color:var(--grey-d);font-weight:300;line-height:1.65}
 .form-note{margin-top:16px;font-size:12.5px;color:var(--grey-d)}
 
-.langsel{position:relative;margin-left:14px}
-.langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
-  padding:0 12px;background:transparent;border:1px solid var(--line);
-  border-radius:3px;color:var(--grey);font:inherit;font-size:12px;
-  letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
-.langsel>button:hover{border-color:var(--copper);color:var(--white)}
-.langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
-  margin:0;padding:6px;list-style:none;background:var(--ink-2);
-  border:1px solid var(--line);border-radius:4px;display:none;z-index:120;
-  box-shadow:0 18px 44px rgba(0,0,0,.5)}
-.langmenu.open{display:block}
-.langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
-  color:var(--grey);transition:background .2s,color .2s}
-.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white)}
-.langmenu a[aria-current=true]{color:var(--copper-lt)}
-@media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
-  .langsel>button span{display:none}}
+
 /* ══ Governed vs ungoverned demo ═══════════════════════════════════════
    Every class is prefixed gd- because this page already has .card, .num
    and .step, and a collision here would be invisible until it was live.
@@ -588,6 +572,25 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 .backto .arw{transition:transform .25s ease}
 .backto:hover .arw{transform:translateX(-3px)}
 /*/BACKTO:CSS*/
+/*LANGSEL:CSS*/
+.langsel{position:relative;margin-left:14px;order:9}
+.langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
+  padding:0 12px;background:transparent;border:1px solid var(--line);
+  border-radius:8px;color:var(--grey, var(--t2));font:inherit;font-size:12px;
+  letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
+.langsel>button:hover{border-color:var(--copper);color:var(--white, var(--t1))}
+.langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
+  margin:0;padding:6px;list-style:none;background:var(--ink-2, var(--sf2));
+  border:1px solid var(--line);border-radius:8px;display:none;z-index:120;
+  box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.langmenu.open{display:block}
+.langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
+  color:var(--grey, var(--t2));transition:background .2s,color .2s}
+.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white, var(--t1))}
+.langmenu a[aria-current=true]{color:var(--copper-lt)}
+@media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
+  .langsel>button span{display:none}}
+/*/LANGSEL:CSS*/
 </style>
 <meta content="de_DE" property="og:locale"/>
 <link href="/assets/brand/favicon.ico?v=a035e93d" rel="icon" sizes="any"/>
@@ -596,7 +599,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <link href="/assets/brand/quenora-icon-180.png?v=4c79984a" rel="apple-touch-icon"/>
 <link href="/assets/brand/quenora-icon-192.png?v=df84842a" rel="icon" sizes="192x192" type="image/png"/>
 <link href="/assets/brand/quenora-icon-512.png?v=aa1f72d0" rel="icon" sizes="512x512" type="image/png"/><link href="/assets/logo.css?v=f69c52df" rel="stylesheet"/><link href="/assets/nora.css" rel="stylesheet"/>
-<link href="https://quenora.ai/de/work" rel="canonical"/><link href="https://quenora.ai/work" hreflang="en" rel="alternate"/><link href="https://quenora.ai/work" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","address":{"@type":"PostalAddress","streetAddress":"Kleiststr. 12","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de/work#page","url":"https://quenora.ai/de/work","name":"Projektmuster, ehrlich benannt.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Projektmuster und die Branchen, in denen Quenora Consulting arbeitet.","breadcrumb":{"@id":"https://quenora.ai/de/work#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/de/work#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://quenora.ai/de"},{"@type":"ListItem","position":2,"name":"Projektmuster, ehrlich benannt.","item":"https://quenora.ai/de/work"}]}]}</script></head>
+<link href="https://quenora.ai/de/work" rel="canonical"/><link href="https://quenora.ai/work" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de/work" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr/work" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/work" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","address":{"@type":"PostalAddress","streetAddress":"Kleiststr. 12","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de/work#page","url":"https://quenora.ai/de/work","name":"Projektmuster, ehrlich benannt.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Projektmuster und die Branchen, in denen Quenora Consulting arbeitet.","breadcrumb":{"@id":"https://quenora.ai/de/work#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/de/work#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://quenora.ai/de"},{"@type":"ListItem","position":2,"name":"Projektmuster, ehrlich benannt.","item":"https://quenora.ai/de/work"}]}]}</script></head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0">
 <symbol id="mark9" viewbox="0 0 187.71 174.29">
@@ -617,8 +620,8 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <nav>
 <a class="brand" href="/de/index.html"><img alt="Quenora" class="brandimg" decoding="async" height="590" src="/assets/brand/quenora-primary.svg?v=2259865b" width="1421"/></a>
-<div class="navlinks" id="navLinks"><a href="/de/about.html">Wer wir sind</a><a aria-current="page" class="on" href="/de/work.html">Was wir tun</a><a href="/de/engineering.html">How we work?</a><a href="/de/approach.html">Vorgehen in Phasen</a><a href="/de/capabilities.html">Neun Leistungen</a><a href="/de/pricing.html">Preise ansehen</a></div>
-<a class="btn btn-primary navcta" href="/de/index.html#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a>
+<div class="navlinks" id="navLinks"><a href="/de/about.html">Wer wir sind</a><a aria-current="page" class="on" href="/de/work.html">Was wir tun</a><a href="/de/engineering.html">Wie wir arbeiten?</a><a href="/de/approach.html">Vorgehen in Phasen</a><a href="/de/capabilities.html">Neun Leistungen</a><a href="/de/pricing.html">Preise ansehen</a></div>
+<a class="btn btn-primary navcta" href="/de/index.html#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Sprache wählen" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>DE</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/work.html" hreflang="en" lang="en">English</a></li><li><a aria-current="true" href="/de/work.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/work.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 <button aria-expanded="false" aria-label="Menü" class="burger" id="burger">
 <i></i><i></i><i></i>
 </button>
@@ -637,12 +640,9 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">Der Problemraum</div>
-<h2>How the work takes <em>shape</em>.</h2>
-<p>Our capabilities can be applied across a wide range of operational and technical
-      problems. The map shows that breadth; the three examples below show what it can
-      look like in practice.</p>
-<p>These are illustrative scenarios, not limits on the work we take on, and the
-      figures shown are not audited client results.</p>
+<h2>Wie die Arbeit ihre <em>Form findet</em>.</h2>
+<p>Unsere Fähigkeiten lassen sich auf ein breites Feld operativer und technischer Probleme richten. Die Karte zeigt diese Breite; die drei Beispiele darunter zeigen, wie das in der Praxis aussehen kann.</p>
+<p>Das sind illustrative Szenarien, keine Grenze dessen, was wir annehmen, und die gezeigten Zahlen sind keine geprüften Kundenergebnisse.</p>
 </div>
 <figure class="fig rv">
 <p class="figlab">Neun Fähigkeiten und die Stellen, an denen die Arbeit landet</p>
@@ -668,13 +668,9 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="metrics"><div><b>0</b><span>Ersetzte Systeme</span></div><div><b>ca. 3 Std.</b><span>Entfallener Abgleich</span></div><div><b>6 Wo.</b><span>Bis zum ersten Piloten</span></div></div>
 </div>
 <div class="placeholder-note rv">
-<h4>Why this page looks different</h4>
-<p>As a young firm, we do not yet publish named client case studies. Rather than fill
-      that gap with vague or overstated claims, we have chosen to show the structure of the
-      work, the problems we address, and the way we approach delivery.</p>
-<p>As engagements are completed and approved for publication, this page will evolve to
-      include named case studies. Where appropriate, reference conversations can also be
-      arranged during the briefing process.</p>
+<h4>Warum diese Seite anders aussieht</h4>
+<p>Als junge Firma veröffentlichen wir noch keine namentlichen Fallstudien. Statt diese Lücke mit vagen oder überzogenen Behauptungen zu füllen, zeigen wir die Struktur der Arbeit, die Probleme, die wir angehen, und die Art, wie wir liefern.</p>
+<p>Sobald Projekte abgeschlossen und zur Veröffentlichung freigegeben sind, wird diese Seite um namentliche Fallstudien erweitert. Wo es passt, lassen sich auch Referenzgespräche während des Briefings arrangieren.</p>
 </div>
 </div>
 </section>
@@ -688,13 +684,9 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <div class="section-head rv">
 <div class="kicker">Sehen, statt uns zu glauben</div>
-<h2>Plausible is not the same as <em>correct</em></h2>
-<p style="max-width:64ch;margin:18px auto 0">Four questions someone might reasonably
-ask an internal AI assistant. In each example, both answers sound fluent and plausible.
-The difference is that one is grounded in the available information, while the other
-quietly invents details that are not there.</p>
-<p style="max-width:64ch;margin:10px auto 0">The dashed figures highlight the
-fabricated values.</p>
+<h2>Plausibel ist nicht dasselbe wie <em>richtig</em></h2>
+<p style="max-width:64ch;margin:18px auto 0">Vier Fragen, die jemand einem internen KI-Assistenten durchaus stellen könnte. In beiden Beispielen klingen die Antworten flüssig und plausibel. Der Unterschied ist, dass die eine auf den vorhandenen Informationen beruht, während die andere still Details erfindet, die es nicht gibt.</p>
+<p style="max-width:64ch;margin:10px auto 0">Die gestrichelten Zahlen markieren die erfundenen Werte.</p>
 </div>
 <div aria-label="Szenario" class="gd-picker rv" role="tablist">
 <button aria-controls="gdAsk" aria-selected="true" class="gd-tab" role="tab" type="button">Finanzen · Rechnung</button>
@@ -753,7 +745,7 @@ fabricated values.</p>
 <div class="wrap"><div class="divider"><i></i></div></div>
 <section class="section-pad" style="text-align:center">
 <div class="wrap rv">
-<h2 style="max-width:19ch;margin:0 auto">Have a problem that looks like one of <em>these</em>?</h2>
+<h2 style="max-width:19ch;margin:0 auto">Kennen Sie ein Problem wie eines von <em>diesen</em>?</h2>
 <p style="max-width:52ch;margin:18px auto 0">Und wenn nicht, ist das der Normalfall und kein Problem — die Karte oben ist weiter als die drei, die hier beschrieben sind.</p>
 <!-- One button, on purpose. The ghost pair that used to sit here argued Work
      was a dead end without them; that stopped being true when Approach and
@@ -1759,5 +1751,23 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
 <div aria-hidden="true" id="qtrail"></div>
 <script defer="" src="/assets/logo.js?v=530ee0cf"></script>
 <script defer="" src="/assets/eggs.js?v=a2e2564d"></script>
+<script data-generated="langsel">
+(function(){
+  var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
+  if(!b||!m)return;
+  b.addEventListener('click',function(e){
+    e.stopPropagation();
+    var o=m.classList.toggle('open');
+    b.setAttribute('aria-expanded',o?'true':'false');
+  });
+  document.addEventListener('click',function(){
+    m.classList.remove('open');b.setAttribute('aria-expanded','false');
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){m.classList.remove('open');
+      b.setAttribute('aria-expanded','false');}
+  });
+})();
+</script>
 </body>
 </html>

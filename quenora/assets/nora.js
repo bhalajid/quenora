@@ -408,4 +408,36 @@
       fab.focus();
     }
   });
+
+  /* Keep the launcher above the footer's bottom bar.
+
+     It is position:fixed, so at the end of a page it came to rest on top of
+     the legal line. On a tablet that put it directly over the Privacy link and
+     the button took the tap instead — a legally required page unreachable
+     behind a chat bubble. Rather than move the button somewhere worse on every
+     page, it lifts only while that bar is on screen.
+
+     --ai-lift is read by .ai-fab and .ai-panel in the stylesheet. It stays 0
+     until the bar rises into the bottom of the viewport, so nothing moves for
+     the whole of a normal scroll. */
+  (function(){
+    var bar = document.querySelector('footer .f-bot');
+    if(!bar) return;
+    var GAP = 18, queued = false;
+    function place(){
+      queued = false;
+      var base = matchMedia('(max-width:560px)').matches ? 18 : 26;
+      var risen = innerHeight - bar.getBoundingClientRect().top;
+      var lift = Math.max(0, Math.round(risen - base + GAP));
+      document.documentElement.style.setProperty('--ai-lift', lift + 'px');
+    }
+    function queue(){
+      if(queued) return;
+      queued = true;
+      requestAnimationFrame(place);
+    }
+    addEventListener('scroll', queue, {passive:true});
+    addEventListener('resize', queue);
+    place();
+  })();
 })();

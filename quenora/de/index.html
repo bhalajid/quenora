@@ -417,7 +417,6 @@ body.clg .cur::after{opacity:1}
 #nineArc.live circle{opacity:.16}
 #nineArc.live circle.on{opacity:1;transform:scale(1.06)}
 #nineArc .wires line{stroke:var(--copper);stroke-opacity:.22;stroke-width:.9}
-.ninefoot{margin-top:var(--sp3);color:var(--t3)}
 
 .ninelist{list-style:none;margin:0;padding:0;
   border-top:1px solid var(--line2)}
@@ -802,22 +801,7 @@ footer nav a:hover{color:var(--ember);transform:translateX(5px)}
   .phase{flex:1 1 100%;height:auto;max-height:none;padding:var(--sp5) var(--sp4)}
 }
 
-.langsel{position:relative;margin-left:14px}
-.langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
-  padding:0 12px;background:transparent;border:1px solid var(--line);
-  border-radius:3px;color:var(--grey, var(--t2));font:inherit;font-size:12px;
-  letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
-.langsel>button:hover{border-color:var(--copper);color:var(--white, var(--t1))}
-.langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
-  margin:0;padding:6px;list-style:none;background:var(--ink-2, var(--sf2));
-  border:1px solid var(--line);border-radius:4px;display:none;z-index:120;
-  box-shadow:0 18px 44px rgba(0,0,0,.5)}
-.langmenu.open{display:block}
-.langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
-  color:var(--grey, var(--t2));transition:background .2s,color .2s}
-.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white, var(--t1))}
-.langmenu a[aria-current=true]{color:var(--copper-lt)}
-@media(max-width:900px){.langsel>button span{display:none}}
+
 /* Below 880px the CTA leaves the collapsing panel and is positioned
    absolutely at a fixed distance from the right edge. The language button was
    still in flow with margin-left:auto, so it was pushed to that same right
@@ -1480,6 +1464,25 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 .backto .arw{transition:transform .25s ease}
 .backto:hover .arw{transform:translateX(-3px)}
 /*/BACKTO:CSS*/
+/*LANGSEL:CSS*/
+.langsel{position:relative;margin-left:14px;order:9}
+.langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
+  padding:0 12px;background:transparent;border:1px solid var(--line);
+  border-radius:8px;color:var(--grey, var(--t2));font:inherit;font-size:12px;
+  letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
+.langsel>button:hover{border-color:var(--copper);color:var(--white, var(--t1))}
+.langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
+  margin:0;padding:6px;list-style:none;background:var(--ink-2, var(--sf2));
+  border:1px solid var(--line);border-radius:8px;display:none;z-index:120;
+  box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.langmenu.open{display:block}
+.langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
+  color:var(--grey, var(--t2));transition:background .2s,color .2s}
+.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white, var(--t1))}
+.langmenu a[aria-current=true]{color:var(--copper-lt)}
+@media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
+  .langsel>button span{display:none}}
+/*/LANGSEL:CSS*/
 </style>
 <meta content="de_DE" property="og:locale"/>
 <link href="/assets/brand/favicon.ico?v=a035e93d" rel="icon" sizes="any"/>
@@ -1488,7 +1491,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <link href="/assets/brand/quenora-icon-180.png?v=4c79984a" rel="apple-touch-icon"/>
 <link href="/assets/brand/quenora-icon-192.png?v=df84842a" rel="icon" sizes="192x192" type="image/png"/>
 <link href="/assets/brand/quenora-icon-512.png?v=aa1f72d0" rel="icon" sizes="512x512" type="image/png"/><link href="/assets/logo.css?v=f69c52df" rel="stylesheet"/><link href="/assets/nora.css" rel="stylesheet"/>
-<link href="https://quenora.ai/de" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><meta content="noindex, follow" name="robots"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","address":{"@type":"PostalAddress","streetAddress":"Kleiststr. 12","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de#page","url":"https://quenora.ai/de","name":"Die meiste Unternehmens-KI erreicht nie die Arbeit.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Quenora ist eine Enterprise-KI-Beratung in Bad Friedrichshall. Wir bauen KI in die Plattformen und Arbeitsabläufe ein, die Sie bereits betreiben, und übergeben Ihrem Team anschließend die Schlüssel."},{"@type":"FAQPage","@id":"https://quenora.ai/de#faq","mainEntity":[{"@type":"Question","name":"Warum keine große Beratung?","acceptedAnswer":{"@type":"Answer","text":"Für ein mehrjähriges Programm über mehrere Länder mit tausend Beteiligten sollten Sie eine nehmen — dafür sind sie gebaut und wir nicht. Für ein einzelnes System, das dieses Jahr in den Produktivbetrieb muss, kostet ihr Projektmodell mehr als das Problem und bewegt sich langsamer als Ihr Geschäft. Und die Menschen, die es verkaufen, sind selten die, die es bauen."}},{"@type":"Question","name":"Warum nicht selbst bauen?","acceptedAnswer":{"@type":"Answer","text":"Oft sollten Sie das, und wir sagen es Ihnen auch. Holen Sie uns dann, wenn Ihr Team das Fachwissen hat, aber nicht die Plattformerfahrung — oder wenn es bereits vollständig durch die Systeme gebunden ist, die das Geschäft am Laufen halten. Die Übergabephase gibt es genau deshalb, damit am Ende die eigene Mannschaft die Antwort ist."}},{"@type":"Question","name":"Warum nicht einfach eine Anbieterplattform kaufen?","acceptedAnswer":{"@type":"Answer","text":"Wenn ein Produkt Ihren Fall wirklich abdeckt, kaufen Sie es — das ist günstiger als alles, was wir bauen würden. Wir werden für das gerufen, was danach übrig bleibt: dieses Produkt an Systeme anzubinden, für die es nie gedacht war, und die Governance-Nachweise zu erzeugen, die der Anbieter nicht liefert."}},{"@type":"Question","name":"Sie haben keine veröffentlichten Fallstudien.","acceptedAnswer":{"@type":"Answer","text":"Richtig, und wir erfinden auch keine. Quenora ist ein inhabergeführtes Unternehmen in seinem frühen Kapitel. Was wir tun: Wir vermitteln Ihnen vor einer Zusage ein direktes Gespräch mit einer Referenz und zeigen Ihnen im ersten Termin die tatsächliche Architektur und den Evaluationsansatz statt einer Verkaufspräsentation."}},{"@type":"Question","name":"Was passiert, wenn es nicht funktioniert?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 ist dafür da, das schriftlich zu beantworten, gemessen an der in Phase 01 vereinbarten Zahl. Hat sie sich nicht bewegt, sagen wir das. Der Code, die Dokumentation und das Evaluations-Harness bleiben in jedem Fall bei Ihnen — es gibt kein Szenario, in dem Sie ein Projekt ohne vorzeigbares Ergebnis beenden."}}]}]}</script></head>
+<link href="https://quenora.ai/de" rel="canonical"/><link href="https://quenora.ai/" hreflang="en" rel="alternate"/><link href="https://quenora.ai/de" hreflang="de" rel="alternate"/><link href="https://quenora.ai/fr" hreflang="fr" rel="alternate"/><link href="https://quenora.ai/" hreflang="x-default" rel="alternate"/><script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","address":{"@type":"PostalAddress","streetAddress":"Kleiststr. 12","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE"},{"@type":"WebPage","@id":"https://quenora.ai/de#page","url":"https://quenora.ai/de","name":"Die meiste Unternehmens-KI erreicht nie die Arbeit.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"de-DE","description":"Quenora ist eine Enterprise-KI-Beratung in Bad Friedrichshall. Wir bauen KI in die Plattformen und Arbeitsabläufe ein, die Sie bereits betreiben, und übergeben Ihrem Team anschließend die Schlüssel."},{"@type":"FAQPage","@id":"https://quenora.ai/de#faq","mainEntity":[{"@type":"Question","name":"Warum keine große Beratung?","acceptedAnswer":{"@type":"Answer","text":"Für ein mehrjähriges Programm über mehrere Länder mit tausend Beteiligten sollten Sie eine nehmen — dafür sind sie gebaut und wir nicht. Für ein einzelnes System, das dieses Jahr in den Produktivbetrieb muss, kostet ihr Projektmodell mehr als das Problem und bewegt sich langsamer als Ihr Geschäft. Und die Menschen, die es verkaufen, sind selten die, die es bauen."}},{"@type":"Question","name":"Warum nicht selbst bauen?","acceptedAnswer":{"@type":"Answer","text":"Oft sollten Sie das, und wir sagen es Ihnen auch. Holen Sie uns dann, wenn Ihr Team das Fachwissen hat, aber nicht die Plattformerfahrung — oder wenn es bereits vollständig durch die Systeme gebunden ist, die das Geschäft am Laufen halten. Die Übergabephase gibt es genau deshalb, damit am Ende die eigene Mannschaft die Antwort ist."}},{"@type":"Question","name":"Warum nicht einfach eine Anbieterplattform kaufen?","acceptedAnswer":{"@type":"Answer","text":"Wenn ein Produkt Ihren Fall wirklich abdeckt, kaufen Sie es — das ist günstiger als alles, was wir bauen würden. Wir werden für das gerufen, was danach übrig bleibt: dieses Produkt an Systeme anzubinden, für die es nie gedacht war, und die Governance-Nachweise zu erzeugen, die der Anbieter nicht liefert."}},{"@type":"Question","name":"Sie haben keine veröffentlichten Fallstudien.","acceptedAnswer":{"@type":"Answer","text":"Richtig, und wir erfinden auch keine. Quenora ist ein inhabergeführtes Unternehmen in seinem frühen Kapitel. Was wir tun: Wir vermitteln Ihnen vor einer Zusage ein direktes Gespräch mit einer Referenz und zeigen Ihnen im ersten Termin die tatsächliche Architektur und den Evaluationsansatz statt einer Verkaufspräsentation."}},{"@type":"Question","name":"Was passiert, wenn es nicht funktioniert?","acceptedAnswer":{"@type":"Answer","text":"Phase 05 ist dafür da, das schriftlich zu beantworten, gemessen an der in Phase 01 vereinbarten Zahl. Hat sie sich nicht bewegt, sagen wir das. Der Code, die Dokumentation und das Evaluations-Harness bleiben in jedem Fall bei Ihnen — es gibt kein Szenario, in dem Sie ein Projekt ohne vorzeigbares Ergebnis beenden."}}]}]}</script></head>
 <body class="no-js">
 <a class="skip" href="#main">Zum Inhalt springen</a>
 <div aria-hidden="true" id="ld"><div class="n">01</div><div class="bar"></div></div>
@@ -1500,8 +1503,8 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="wrap">
 <a aria-label="Quenora home" class="brand" href="/de/index.html"><img alt="Quenora" class="brandimg" decoding="async" height="590" src="/assets/brand/quenora-primary.svg?v=2259865b" width="1421"/></a>
 <button aria-controls="navLinks" aria-expanded="false" aria-label="Menü" class="burger" id="burger" type="button"><i></i><i></i><i></i></button>
-<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/de/about.html">Wer wir sind</a><a href="/de/work.html">Was wir tun</a><a href="/de/engineering.html">How we work?</a><a href="/de/approach.html">Vorgehen in Phasen</a><a href="/de/capabilities.html">Neun Leistungen</a><a href="/de/pricing.html">Preise ansehen</a></nav>
-<a class="navcta" href="#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a>
+<nav aria-label="Main" class="navlinks" id="navLinks"><a href="/de/about.html">Wer wir sind</a><a href="/de/work.html">Was wir tun</a><a href="/de/engineering.html">Wie wir arbeiten?</a><a href="/de/approach.html">Vorgehen in Phasen</a><a href="/de/capabilities.html">Neun Leistungen</a><a href="/de/pricing.html">Preise ansehen</a></nav>
+<a class="navcta" href="#climax"><span class="cta-long">Gespräch beginnen</span><span class="cta-short">Kontakt</span></a><div class="langsel"><button aria-controls="langMenu" aria-expanded="false" aria-label="Sprache wählen" id="langBtn" type="button"><svg aria-hidden="true" fill="none" height="15" viewbox="0 0 16 16" width="15"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.6 8h12.8M8 1.6a11 11 0 0 1 0 12.8A11 11 0 0 1 8 1.6" stroke="currentColor" stroke-width="1.3"></path></svg><span>DE</span></button><ul class="langmenu" id="langMenu" role="menu"><li><a href="/index.html" hreflang="en" lang="en">English</a></li><li><a aria-current="true" href="/de/index.html" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/index.html" hreflang="fr" lang="fr">Français</a></li></ul></div>
 </div>
 </header>
 <main id="main">
@@ -1568,9 +1571,8 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <div class="cnum"><span class="clabel">Kapitel · Projekte</span>02</div>
 <div>
 <h2>Situationen, in die wir <em>oft</em> gerufen werden.</h2>
-<p class="lede">Not a fixed list, and not a boundary around what we do. These are
-simply a few examples of the problems we’re often asked to help solve.</p>
-<a class="more" href="/de/engineering.html">Quenora way of work · in detail</a>
+<p class="lede">Keine feste Liste und keine Grenze dessen, was wir tun. Das sind schlicht einige Beispiele für Probleme, bei denen wir oft um Hilfe gebeten werden.</p>
+<a class="more" href="/de/engineering.html">Die Arbeitsweise von Quenora · im Detail</a>
 </div>
 </div>
 <div class="ch3 wrap rv"><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="10" cy="12" r="5.5"></circle><line x1="19" x2="19" y1="5" y2="19"></line></svg><span class="ch-eyebrow mono">Situation 01</span><h3 class="ch-title">Der Pilot, der stecken blieb</h3><p class="ch-body">In der Demo hat es funktioniert. Sechs Monate später ist es immer noch eine Demo, weil die Plattform darunter nie gebaut wurde und niemand die Lücke verantwortet.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><circle cx="14.6" cy="12" r="2.4"></circle></svg><span class="ch-eyebrow mono">Situation 02</span><h3 class="ch-title">Retrieval, das lügt</h3><p class="ch-body">Der Assistent antwortet souverän und liegt oft genug falsch, dass ihm niemand mehr vertraut. Das Modell ist in Ordnung. Der Datenvertrag nicht.</p></div><div class="ch-card"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><line x1="12" x2="12" y1="12" y2="7.6"></line><line x1="12" x2="15.6" y1="12" y2="14"></line></svg><span class="ch-eyebrow mono">Situation 03</span><h3 class="ch-title">Governance kommt zu spät</h3><p class="ch-body">Etwas ist live, Einkauf oder Risikomanagement stellen Fragen, und die Nachweise zur Beantwortung wurden nie erfasst.</p></div></div>
@@ -1583,9 +1585,9 @@ simply a few examples of the problems we’re often asked to help solve.</p>
 <div>
 <h2>Der Raum ist weit. Wenige Formen, die <em>wiederkehren</em>.</h2>
 <p class="lede">Keine Kundenliste und keine Speisekarte. Neun Fähigkeiten lassen sich auf mehr Probleme richten, als eine Seite auflisten könnte. Es folgen daher drei Formen, in die wir am häufigsten gerufen werden — beschrieben über ihre Gestalt und nicht darüber, wessen Logo darauf steht. Ist Ihre nicht dabei, ist das kein Zuschnittproblem; das ist der Normalfall.</p>
-<a class="more" href="/de/work.html">Work · wider scope with higher numbers</a>
+<a class="more" href="/de/work.html">Arbeit · größerer Umfang, höhere Zahlen</a>
 <div><a class="livelink" href="/de/work.html#governed"><span class="dot"></span>
-Try it · same problem, ungoverned and governed</a></div>
+Ausprobieren · dasselbe Problem, ungeregelt und geregelt</a></div>
 </div>
 </div>
 <div class="ch3 wrap rv"><a class="ch-card ch-link" href="/de/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="7" cy="9" r="3"></circle><circle cx="17" cy="9" r="3"></circle><circle cx="12" cy="16" r="3"></circle></svg><p class="ch-eyebrow mono">Muster 01 · Finanzdienstleistungen</p><h3 class="ch-title">Rechnungsverarbeitung über drei ERP-Instanzen</h3></a><a class="ch-card ch-link" href="/de/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="12" cy="10" r="4"></circle><line x1="6" x2="18" y1="18" y2="18"></line></svg><p class="ch-eyebrow mono">Muster 02 · Fertigung</p><h3 class="ch-title">Support-Triage und Wissensabruf</h3></a><a class="ch-card ch-link" href="/de/work.html"><svg aria-hidden="true" class="ch-mark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" viewbox="0 0 24 24"><circle cx="9" cy="12" r="5"></circle><line x1="14" x2="20" y1="12" y2="12"></line><circle cx="20" cy="12" fill="currentColor" r="1.6" stroke="none"></circle></svg><p class="ch-eyebrow mono">Muster 03 · Logistik</p><h3 class="ch-title">Modernisierung von Altsystemen und vorausschauende Einsatzplanung</h3></a></div>
@@ -1693,7 +1695,6 @@ Try it · same problem, ungoverned and governed</a></div>
 <circle cx="127.81" cy="84.89" data-i="7" r="20.52"></circle>
 <circle cx="151.71" cy="36" data-i="8" r="27"></circle>
 </svg>
-<p class="mono ninefoot">9 Kreise · 90°-Bogen · ×9 Wachstum · Verhältnis 1,3161</p>
 </div>
 <ol class="ninelist" id="nineList">
 <li data-i="0"><span class="n">01</span><span aria-hidden="true" class="d" style="--r:3"></span><div><h3>Vertrauenswürdig</h3><p>Das Fundament, auf dem alles andere steht.</p></div></li>
@@ -3861,5 +3862,23 @@ Am Handy: tippen Sie auf <a href="/c">Kontakt speichern</a>.</p>
 <div aria-hidden="true" id="qtrail"></div>
 <script defer="" src="/assets/logo.js?v=530ee0cf"></script>
 <script defer="" src="/assets/eggs.js?v=a2e2564d"></script>
+<script data-generated="langsel">
+(function(){
+  var b=document.getElementById('langBtn'),m=document.getElementById('langMenu');
+  if(!b||!m)return;
+  b.addEventListener('click',function(e){
+    e.stopPropagation();
+    var o=m.classList.toggle('open');
+    b.setAttribute('aria-expanded',o?'true':'false');
+  });
+  document.addEventListener('click',function(){
+    m.classList.remove('open');b.setAttribute('aria-expanded','false');
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){m.classList.remove('open');
+      b.setAttribute('aria-expanded','false');}
+  });
+})();
+</script>
 </body>
 </html>

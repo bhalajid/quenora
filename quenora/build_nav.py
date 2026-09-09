@@ -152,24 +152,37 @@ NAV_CSS = """/* ── one header, on every page ──────────�
     margin-inline:auto;padding-left:40px;padding-right:40px}
 }
 
-/* 1181px, not 881px. The header needs 1146px for brand, six nav links, the
+/* 1240px, not 881px. The header needs 1146px for brand, six nav links, the
    call to action and the language button, and .wrap only offers the viewport
    less 80px of padding — so between 881px and about 1226px the links were
    squeezed and each label wrapped inside itself: "Who are / we?". The mobile
    header now takes over at 1180px instead, and this block starts where the
    desktop row genuinely fits. The gaps below are tightened from 26px so that
    threshold lands under the breakpoint rather than above it. */
-@media(min-width:1181px){
+@media(min-width:1240px){
   /* The header's own flex container: a div.wrap on the home page and inner
      engineering, a nav on the rest. Their gaps were 24px and 30px, and with
      three items to the right of the links that is a 12px difference in where
      the links end — the last of the movement between pages. */
-  header > .wrap, header nav{gap:18px}
+  /* .nav .wrap is two classes and outranks `header > .wrap`, so the home
+     page kept its own 24px gap and its header ran 10px past the wrap.
+     Named here so the tie is broken by order instead — this block is
+     appended after the page's own stylesheet. */
+  header > .wrap, .nav .wrap, header nav{gap:18px}
   .navlinks{gap:18px;align-items:center}
   /* the labels are short; none of them should ever break in half */
   .navlinks a,.navlinks>a{white-space:nowrap}
   .navlinks a,.navlinks>a{font-size:14px;padding:4px 0;border-bottom:0}
   .navcta{padding:9px 16px;font-size:12.5px}
+  /* French runs long. Its six labels plus the button and the language
+     control measure 1307px, and .wrap caps its content at 1160px at any
+     screen width, so the French row could never fit at the shared size.
+     A little less type and a little less gap, for that language only,
+     rather than inventing shorter French than the page was given. */
+  html[lang^="fr"] .navlinks{gap:9px}
+  html[lang^="fr"] .navlinks a,html[lang^="fr"] .navlinks>a{font-size:12px}
+  html[lang^="fr"] header > .wrap,html[lang^="fr"] .nav .wrap{gap:14px}
+  html[lang^="fr"] .navcta{padding:9px 13px;font-size:12px}
 }
 
 /* The current page: white, over a copper rule. Drawn as a background image

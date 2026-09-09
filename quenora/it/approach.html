@@ -343,23 +343,7 @@ footer nav{display:block}
 .qr-mini p{font-size:12.5px;color:var(--grey-d);font-weight:300;line-height:1.65}
 .form-note{margin-top:16px;font-size:12.5px;color:var(--grey-d)}
 
-.langsel{position:relative;margin-left:14px}
-.langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
-  padding:0 12px;background:transparent;border:1px solid var(--line);
-  border-radius:3px;color:var(--grey);font:inherit;font-size:12px;
-  letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
-.langsel>button:hover{border-color:var(--copper);color:var(--white)}
-.langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
-  margin:0;padding:6px;list-style:none;background:var(--ink-2);
-  border:1px solid var(--line);border-radius:4px;display:none;z-index:120;
-  box-shadow:0 18px 44px rgba(0,0,0,.5)}
-.langmenu.open{display:block}
-.langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
-  color:var(--grey);transition:background .2s,color .2s}
-.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white)}
-.langmenu a[aria-current=true]{color:var(--copper-lt)}
-@media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
-  .langsel>button span{display:none}}
+
 /*WIDGET:CSS*/
 
 /*/WIDGET:CSS*/
@@ -547,6 +531,25 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 .backto .arw{transition:transform .25s ease}
 .backto:hover .arw{transform:translateX(-3px)}
 /*/BACKTO:CSS*/
+/*LANGSEL:CSS*/
+.langsel{position:relative;margin-left:14px;order:9}
+.langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
+  padding:0 12px;background:transparent;border:1px solid var(--line);
+  border-radius:8px;color:var(--grey, var(--t2));font:inherit;font-size:12px;
+  letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
+.langsel>button:hover{border-color:var(--copper);color:var(--white, var(--t1))}
+.langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
+  margin:0;padding:6px;list-style:none;background:var(--ink-2, var(--sf2));
+  border:1px solid var(--line);border-radius:8px;display:none;z-index:120;
+  box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.langmenu.open{display:block}
+.langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
+  color:var(--grey, var(--t2));transition:background .2s,color .2s}
+.langmenu a:hover{background:rgba(201,122,60,.12);color:var(--white, var(--t1))}
+.langmenu a[aria-current=true]{color:var(--copper-lt)}
+@media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
+  .langsel>button span{display:none}}
+/*/LANGSEL:CSS*/
 </style>
 <meta content="it_IT" property="og:locale"/>
 <script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","address":{"@type":"PostalAddress","streetAddress":"Kleiststr. 12","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/approach#page","url":"https://quenora.ai/approach","name":"A method built to end, not to renew itself.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"A six-phase engagement method designed to end with your team running the system.","breadcrumb":{"@id":"https://quenora.ai/approach#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/approach#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"A method built to end, not to renew itself.","item":"https://quenora.ai/approach"}]}]}</script><link href="/assets/brand/favicon.ico?v=a035e93d" rel="icon" sizes="any"/>

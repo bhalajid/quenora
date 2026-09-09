@@ -217,15 +217,16 @@ def switcher(lang, page):
 
 
 LANG_CSS = """
+/*LANGSEL:CSS*/
 .langsel{position:relative;margin-left:14px;order:9}
 .langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
   padding:0 12px;background:transparent;border:1px solid var(--line);
-  border-radius:3px;color:var(--grey, var(--t2));font:inherit;font-size:12px;
+  border-radius:8px;color:var(--grey, var(--t2));font:inherit;font-size:12px;
   letter-spacing:.06em;cursor:pointer;transition:border-color .25s,color .25s}
 .langsel>button:hover{border-color:var(--copper);color:var(--white, var(--t1))}
 .langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:160px;
   margin:0;padding:6px;list-style:none;background:var(--ink-2, var(--sf2));
-  border:1px solid var(--line);border-radius:4px;display:none;z-index:120;
+  border:1px solid var(--line);border-radius:8px;display:none;z-index:120;
   box-shadow:0 18px 44px rgba(0,0,0,.5)}
 .langmenu.open{display:block}
 .langmenu a{display:block;padding:9px 12px;border-radius:2px;font-size:13.5px;
@@ -234,6 +235,7 @@ LANG_CSS = """
 .langmenu a[aria-current=true]{color:var(--copper-lt)}
 @media(max-width:900px){.langsel{margin-left:auto;margin-right:8px}
   .langsel>button span{display:none}}
+/*/LANGSEL:CSS*/
 """
 
 LANG_JS = """
@@ -372,8 +374,8 @@ def build_lang(lang):
 
         # language switcher into the header, before the nav links
         st = soup.find("style")
-        if st and "langsel" not in st.text:
-            st.string = st.text + LANG_CSS
+        if st:
+            st.string = _swap_lang_css(st.text)
         # The English source already carries a switcher, put there by
         # build_en_switcher(). The old condition was "insert one only if the
         # page has none", which was therefore never true — so every localised
@@ -412,6 +414,26 @@ def build_lang(lang):
     return lang, cov, stats
 
 
+def _swap_lang_css(css):
+    """Replace the switcher CSS rather than skip it when already present.
+
+    The guard here used to be `if "langsel" not in st.text`, so the block
+    was written once and never updated again: editing LANG_CSS changed
+    nothing on any page that already had a copy. Changing the button's
+    corner radius appeared to do nothing at all until this was found.
+    Same shape as the nora.css link and the qtrail element before it.
+
+    Marked copies are replaced by marker. A copy written before the markers
+    existed is matched from its first rule to its last and removed, so no
+    page is left carrying two.
+    """
+    css = re.sub(r'/\*LANGSEL:CSS\*/.*?/\*/LANGSEL:CSS\*/',
+                 '', css, flags=re.S)
+    css = re.sub(r'\.langsel{position:relative.*?\.langsel>button span{display:none}}',
+                 '', css, flags=re.S)
+    return css.rstrip() + LANG_CSS
+
+
 def build_en_switcher():
     """Add the same switcher to the English pages."""
     for page in PAGES:
@@ -421,8 +443,8 @@ def build_en_switcher():
         if old:
             old.decompose()          # always rebuild: hrefs may have changed
         st = soup.find("style")
-        if st and "langsel" not in st.text:
-            st.string = st.text + LANG_CSS
+        if st:
+            st.string = _swap_lang_css(st.text)
         # Drop the previously appended switcher script before re-adding it,
         # otherwise every rebuild leaves another copy behind — and two copies
         # means two click handlers, both toggling, so the menu opens and closes

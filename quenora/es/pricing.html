@@ -115,7 +115,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:30px}
 .burger.open i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .burger.open i:nth-child(2){opacity:0}
 .burger.open i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-@media(max-width:880px){
+@media(max-width:1180px){
   .burger{display:flex}
   nav{flex-wrap:wrap}
   .navlinks{order:3;flex-basis:100%;flex-direction:column;gap:0;
@@ -378,13 +378,22 @@ footer nav{display:block}
     margin-inline:auto;padding-left:40px;padding-right:40px}
 }
 
-@media(min-width:881px){
+/* 1181px, not 881px. The header needs 1146px for brand, six nav links, the
+   call to action and the language button, and .wrap only offers the viewport
+   less 80px of padding — so between 881px and about 1226px the links were
+   squeezed and each label wrapped inside itself: "Who are / we?". The mobile
+   header now takes over at 1180px instead, and this block starts where the
+   desktop row genuinely fits. The gaps below are tightened from 26px so that
+   threshold lands under the breakpoint rather than above it. */
+@media(min-width:1181px){
   /* The header's own flex container: a div.wrap on the home page and inner
      engineering, a nav on the rest. Their gaps were 24px and 30px, and with
      three items to the right of the links that is a 12px difference in where
      the links end — the last of the movement between pages. */
-  header > .wrap, header nav{gap:26px}
-  .navlinks{gap:26px;align-items:center}
+  header > .wrap, header nav{gap:18px}
+  .navlinks{gap:18px;align-items:center}
+  /* the labels are short; none of them should ever break in half */
+  .navlinks a,.navlinks>a{white-space:nowrap}
   .navlinks a,.navlinks>a{font-size:14px;padding:4px 0;border-bottom:0}
   .navcta{padding:9px 16px;font-size:12.5px}
 }
@@ -535,7 +544,7 @@ main .section-pad p.lede{margin-bottom:22px}
 /*/LANGSEL:CSS*/
 </style>
 <meta content="es_ES" property="og:locale"/>
-<link href="/assets/nora.css?v=a7ad4ee0" rel="stylesheet"/>
+<link href="/assets/nora.css?v=91ff33ca" rel="stylesheet"/>
 <script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","address":{"@type":"PostalAddress","streetAddress":"Kleiststr. 12","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/pricing#page","url":"https://quenora.ai/pricing","name":"What it costs, and when you find out.","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"How Quenora prices: a fixed fee to frame, fixed scope to build, handover included. Scoped to outcomes rather than day rates.","breadcrumb":{"@id":"https://quenora.ai/pricing#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/pricing#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"What it costs, and when you find out.","item":"https://quenora.ai/pricing"}]}]}</script><link href="/assets/brand/favicon.ico?v=a035e93d" rel="icon" sizes="any"/>
 <link href="/assets/brand/quenora-icon.svg?v=878ec304" rel="icon" type="image/svg+xml"/>
 <link href="/assets/brand/quenora-icon-32.png?v=2a9eb619" rel="icon" sizes="32x32" type="image/png"/>
@@ -797,7 +806,7 @@ document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
 </div>
 <!--/WIDGET:HTML-->
 <!--WIDGET:JS-->
-<script defer="" src="/assets/nora.js?v=738b364e"></script>
+<script defer="" src="/assets/nora.js?v=797bd619"></script>
 <!--/WIDGET:JS-->
 <!--NAV:JS-->
 <script>

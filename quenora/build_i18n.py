@@ -218,7 +218,14 @@ def switcher(lang, page):
 
 LANG_CSS = """
 /*LANGSEL:CSS*/
-.langsel{position:relative;margin-left:14px;order:9}
+/* order and margin are desktop-only. The mobile header gives .navlinks
+   flex-basis:100% to force a line break, so anything ordered after it
+   lands on a row of its own — order:9 put the switcher under the header
+   at every width below 1181px, and margin-left:14px overrode the
+   margin-left:auto that holds it against the right edge there. Below the
+   breakpoint the page's own .langsel{order:1;margin-left:auto} governs. */
+.langsel{position:relative}
+@media(min-width:1240px){.langsel{margin-left:14px;order:9}}
 .langsel>button{display:inline-flex;align-items:center;gap:7px;min-height:38px;
   padding:0 12px;background:transparent;border:1px solid var(--line);
   border-radius:8px;color:var(--grey, var(--t2));font:inherit;font-size:12px;

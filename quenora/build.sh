@@ -71,10 +71,16 @@ echo "  build interpreter: $PY"
 "$PY" build_logo_motion.py
 # ...and the four easter eggs last, so they sit after every other script.
 "$PY" build_easter_eggs.py
-# ...and versioning last of all: vercel.json caches /assets/ for a year as
-# `immutable`, so a changed file only reaches a returning visitor if its URL
-# changed too. This must run after every generator that writes one.
-"$PY" build_asset_versions.py
+# build_widget writes assets/nora.js and assets/nora.css and the tags that
+# point at them, so it has to come BEFORE the versioner. It used to sit after
+# it and got away with it only because its old guard inserted a tag just once
+# and left the stamped URL alone on later builds. Once that guard became a
+# strip-and-reinsert — needed, because the old one could never update a tag —
+# every build replaced the stamped tag with an unstamped one, after the
+# stamping step had already run. The result: /assets/nora.js served with no
+# ?v=, and vercel.json caches /assets/ for a year as `immutable`, so returning
+# visitors were pinned to whatever copy they first downloaded. An iPad kept
+# serving a nora.js from before the launcher learned to avoid the footer.
 "$PY" build_widget.py
 # build_footer owns the three footer link columns and must run BEFORE
 # build_nav, which re-points header and footer links from one map and
@@ -82,6 +88,12 @@ echo "  build interpreter: $PY"
 # thrown away on every build.
 "$PY" build_footer.py
 "$PY" build_nav.py
+# Versioning after every generator that writes an asset URL, and before
+# build_i18n so the localised pages inherit the stamped ones. vercel.json
+# caches /assets/ for a year as `immutable`, so a changed file only reaches a
+# returning visitor if its URL changed too. build_footer writes the footer
+# lockup's <img src>, which is why this cannot sit above it.
+"$PY" build_asset_versions.py
 "$PY" build_i18n.py
 "$PY" build_assistant.py
 "$PY" build_seo.py

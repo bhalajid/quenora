@@ -66,7 +66,9 @@ else
 fi
 
 sect "clean URLs serve directly, without a redirect hop"
-for p in "" "engineering" "services" "work" "approach" "de" "de/work" "fr/services"; do
+# services was renamed to capabilities; vercel.json keeps the old path alive
+# as a 308, so asking for a 200 on /services tested the redirect, not the page.
+for p in "" "engineering" "capabilities" "work" "approach" "de" "de/work" "fr/capabilities"; do
   c=$(code "https://$LIVE/$p")
   [ "$c" = "200" ] && ok "/$p -> 200" || no "/$p -> $c"
 done
@@ -105,11 +107,11 @@ bad=$(printf '%s' "$sm" | grep -c 'vercel\.app\|\.html</loc>' || true)
 [ "$n" -gt 0 ] && ok "sitemap reachable, $n url(s) on $DECLARES" || no "sitemap missing or empty"
 [ "$bad" = "0" ] && ok "no deployment host and no .html in the sitemap" || no "$bad bad sitemap entry(ies)"
 
-can=$(curl -sS --max-time 8 "https://$LIVE/services" 2>/dev/null \
+can=$(curl -sS --max-time 8 "https://$LIVE/capabilities" 2>/dev/null \
         | grep -o '<link[^>]*rel="canonical"[^>]*>' | head -1)
 case "$can" in
-  *"https://$DECLARES/services\""*) ok "canonical on /services is the live clean URL" ;;
-  *) no "canonical on /services is: ${can:-not found}" ;;
+  *"https://$DECLARES/capabilities\""*) ok "canonical on /capabilities is the live clean URL" ;;
+  *) no "canonical on /capabilities is: ${can:-not found}" ;;
 esac
 
 sect "security headers survived the domain change"

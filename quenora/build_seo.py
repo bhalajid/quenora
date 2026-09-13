@@ -205,9 +205,16 @@ def graph_for(lang, page, soup):
     title, desc, h1 = page_meta(soup)
     loc = LOCALE[lang]
 
+    # alternateName disambiguates the brand. "Quenora" alone is already an
+    # entity in Google's graph — a musician with a Spotify profile, Chartmetric
+    # and Gaana all agreeing — so the bare word does not identify this firm.
+    # The alternates are the names that do not collide. They must DIFFER from
+    # "name": a value equal to it is read as no alternate at all.
     g = [organisation(lang),
          {"@type": "WebSite", "@id": DOMAIN + "/#site", "url": DOMAIN + "/",
-          "name": "Quenora", "publisher": {"@id": DOMAIN + "/#org"},
+          "name": "Quenora",
+          "alternateName": ["Quenora Consulting", "Quenora AI"],
+          "publisher": {"@id": DOMAIN + "/#org"},
           "inLanguage": loc}]
 
     webpage = {"@type": "WebPage", "@id": url + "#page", "url": url,

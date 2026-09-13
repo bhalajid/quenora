@@ -54,8 +54,13 @@ from bs4 import BeautifulSoup as BS
 ROOT   = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://quenora.ai"
 
+# Every page that carries a generated @graph belongs here. about.html was
+# missing, so its @graph was whatever an older run left behind — an
+# Organization with no street and no postcode, contradicting the one the home
+# page publishes under the same @id. Grep ^PAGES across build_*.py when adding
+# a page; a list is the one place a page goes stale without anything failing.
 PAGES = ["index.html", "engineering.html", "capabilities.html", "products.html", "pricing.html",
-         "approach.html", "work.html", "contact.html"]
+         "approach.html", "work.html", "contact.html", "about.html"]
 EN_ONLY   = ["impressum.html", "privacy.html"]
 UNLISTED  = {"products.html"}
 LANGS     = ["en", "de", "fr"]

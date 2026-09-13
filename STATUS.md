@@ -1,29 +1,44 @@
 # Quenora — status and handover
 
-Updated 8 September 2026. Read this first; it is written so a fresh
+Updated 13 September 2026. Read this first; it is written so a fresh
 conversation needs nothing else.
 
 ---
 
-## 1 · Blocking launch — both yours
+## 1 · Live, and nothing is blocking
 
-1. **`{{TODO:STREET_AND_NUMBER}}`**, once each in `impressum.html` and
-   `privacy.html`. Postcode and town are in (74117 Bad Friedrichshall); §5 TMG
-   needs the street. **The only red stage in the gate.** One commit once sent.
-2. **DNS.** Checked today: `quenora.ai` still on the parking IP
-   192.64.119.248, HTTPS not answering. `quenora.vercel.app` is live at 200.
-   The redirect is deliberately **not** in the repo — adding it before the
-   domain answers takes the site down. Block to paste is in `LAUNCH.md`;
-   `test/launch_check.sh` runs 20 live assertions afterwards.
+The site is up on **https://quenora.ai** and both former blockers are closed.
+
+1. **The address landed** (`1fc9ef1`). `Kleiststr. 12, 74117 Bad
+   Friedrichshall` is in `impressum.html`, `privacy.html` and the JSON-LD on
+   all 47 pages. The gate has no red stage.
+2. **DNS is routed and the apex is primary.** `quenora.ai` serves 200;
+   `www.quenora.ai` and `quenora.vercel.app` both 308 to it, paths preserved.
+   This was backwards until 13 September — the apex redirected to `www` while
+   every canonical, `og:url` and all 26 sitemap URLs declared the apex, so
+   Google was being sent to a canonical that refused to serve. It is a Vercel
+   dashboard setting, not repo state. `test/launch_check.sh` is **23/23**.
+
+**Indexing.** Google Search Console ownership is verified by DNS TXT and the
+sitemap has been submitted. Bing has the IndexNow key at
+`/db0e6932619b44a8bcdbfac2be94364c.txt` and a submission has been sent.
+Ranking for the bare word "quenora" is contested by an unrelated musician who
+already holds that entity in Google's graph; `alternateName` now carries
+"Quenora Consulting" and "Quenora AI", which are the names that do not
+collide. Google Business Profile is the strongest remaining lever and is
+not yet created.
 
 ---
 
 ## 2 · What this is
 
 Static marketing site for Quenora Consulting, launching on **quenora.ai**,
-deployed from `main`. **English only** — `build_i18n.UNLISTED_LANGS = {de, fr,
-es, it}`; all four trees still build and are gate-checked, nothing links them,
-`index.html` declares only `hreflang="en"`. Reversing that is one line.
+deployed from `main`. **English, German and French are offered** — `/de` and
+`/fr` serve 200 and `index.html` declares `hreflang` for all three plus
+`x-default`. `es/` and `it/` still build and are gate-checked but nothing
+links them. **Neither DE nor FR has been read by a native speaker**
+(`reviewed_by_native_speaker: false` in `i18n/de.json` and `i18n/fr.json`);
+that was moot while they were unlisted and is not moot now.
 
 Eleven English pages: `index` `approach` `capabilities` `engineering` `work`
 `pricing` `about` `contact` · `products` (unlisted, noindex) · `impressum`
@@ -118,6 +133,16 @@ page scripts against a DOM stub where `getElementById` returns something truthy
 with no methods and `matchMedia`/`location`/`addEventListener` may be absent.
 Five scripts caught.
 
+**Generated markup does not keep a hand edit.** Anything inside
+`<script data-generated="ld">` is written by `build_seo.py`. A field added to
+`index.html` by hand was deleted by the next build and leaked into `es/` and
+`it/`, which mirror the English page. Edit the generator.
+
+**`build_i18n` mirrors English before `build_seo` writes it**, so a change to
+a page's `@graph` lands in `es/` and `it/` one build late. `build.sh`
+converges on the second run and is idempotent after it — verified over 57
+files. A single build after touching `PAGES` is not enough.
+
 **Read the whole gate output.** Filtering with `head -25` hid a failing size
 budget for three commits, each reported green.
 
@@ -164,23 +189,39 @@ assistant, guarded against form fields) · `?grid` (draws the six columns).
 ## 6 · Open
 
 **Mine.** Self-host the fonts (Lighthouse: 2,050 ms render-blocking, the
-largest perf item) · `browser_audit.js` still misses `about`, `impressum`,
-`privacy`, `pricing` and the whole tablet band between 1280 and 375 — a
-widening was written and lost in a rebase, and needs redoing English-only ·
-`build_about.py` builds an older page than the one shipped (does **not**
-clobber it — verified — but is stale) · Nora's twelve canned fallbacks are
-English in all languages · 15–16 links per inner page are 22px tall on mobile,
-under WCAG 2.2 AA 2.5.8's 24×24.
+largest perf item, and the last third-party runtime dependency on a site whose
+architecture rule is not to have one) · **the container disagrees at 768px**
+— `index` renders header and body at 728 where all eight other pages render
+768, so the logo sits at x=20 on the home page and x=40 everywhere else, and
+jumps the moment you navigate off it on an iPad; `engineering` has the logo at
+20 with a full-width container, which is a second variant. Found by the
+widened audit, not fixed: fixing it changes rendering · Nora's twelve canned
+fallbacks are English in all languages, which now reaches real DE/FR visitors
+· 15–16 links per inner page are 22px tall on mobile, under WCAG 2.2 AA
+2.5.8's 24×24 · `build_about.py` builds an older page than the one shipped
+(does **not** clobber it — verified — but is stale).
 
-**Yours.** **The name** — "Quenora" against **Quora** is closer than any logo
-question and no logo change addresses it; worth a professional EU word-mark
-search · DE/FR never read by a native speaker (`reviewed_by_native_speaker:
-false`; moot while unlisted, blocking if offered) · Apple Wallet cert ·
-"chatbot" appears once, as a negation, so a buyer searching their own word
-finds a refusal · which AI work you actually take on, needed before the work
-page can claim breadth · ToS and accessibility statement · the hidden `#build`
-section — two chapters both claim 06, invisible only because `#build` carries
-`hidden`; renumber 06–09 → 07–10 in the same change.
+**Yours.** **DE/FR have never been read by a native speaker** and are now
+offered to visitors — by this file's own earlier standard that moved from moot
+to blocking · **the name** — "Quenora" against **Quora** is closer than any
+logo question and no logo change addresses it; a EUIPO clearance search
+through a German Markenanwalt is the only item here that can force a rename,
+so it should not keep waiting · **Google Business Profile**, not yet created,
+and the strongest entity signal available against the musician who holds
+"Quenora" in Google's graph · Apple Wallet cert ($99/yr, optional — the Google
+pass works) · **an accessibility statement**, required of commercial sites in
+Germany under the BFSG since June 2025, and absent · ToS · which AI work you
+actually take on, needed before the work page can claim breadth · "chatbot"
+appears once, as a negation, so a buyer searching their own word finds a
+refusal.
+
+**Closed since the last revision.** The street · DNS and the apex/www
+direction · `about.html` missing from `build_seo.PAGES`, which left 19 pages
+on a stale `@graph` with a partial address · `launch_check.sh` asserting 200
+on `/services` after the rename to `/capabilities` · `browser_audit.js`
+widened from 7 pages × 3 viewports to 11 × 7, 63 → 203 loads, with the legal
+pages exempted from the marketing-shell rules rather than left uncovered · the
+`?v=` hashes, which had gone stale on all five first-party assets.
 
 ---
 

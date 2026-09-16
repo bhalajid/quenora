@@ -16,7 +16,9 @@ Also rewrites, per language:
 Run:  python3 build_i18n.py
 """
 import json
+import datetime
 import os
+import subprocess
 import re
 import shutil
 import sys
@@ -487,6 +489,35 @@ def build_en_switcher():
         open(p, "w", encoding="utf-8").write(str(soup))
 
 
+_LASTMOD_CACHE = {}
+
+
+def last_modified(lang, page):
+    """The date the page itself last changed, from git.
+
+    Build time is the tempting value and the wrong one: it stamps all 26 URLs
+    as modified on every build, which is a claim that is false most of the time,
+    and a sitemap that cries wolf is one a crawler stops believing. The commit
+    date is stable across rebuilds and true.
+    """
+    rel = os.path.join(lang, page) if lang != "en" else page
+    if rel in _LASTMOD_CACHE:
+        return _LASTMOD_CACHE[rel]
+    date = None
+    try:
+        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", rel],
+                             cwd=ROOT, capture_output=True, text=True, timeout=10)
+        date = out.stdout.strip() or None
+    except Exception:
+        date = None
+    if not date:                       # untracked, or no git — fall back to mtime
+        f = os.path.join(ROOT, rel)
+        if os.path.exists(f):
+            date = datetime.date.fromtimestamp(os.path.getmtime(f)).isoformat()
+    _LASTMOD_CACHE[rel] = date
+    return date
+
+
 def sitemap():
     urls = []
     for lang in ["en"] + LISTED_LANGS:
@@ -497,16 +528,21 @@ def sitemap():
                 '\n    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>'
                 % (c, served(c, page))
                 for c in ["en"] + LISTED_LANGS)
+            lm = last_modified(lang, page)
             urls.append(
-                '  <url>\n    <loc>%s</loc>%s\n    <priority>%s</priority>\n  </url>'
-                % (served(lang, page), alts,
+                '  <url>\n    <loc>%s</loc>%s%s\n    <priority>%s</priority>\n  </url>'
+                % (served(lang, page),
+                   ('\n    <lastmod>%s</lastmod>' % lm) if lm else '',
+                   alts,
                    "1.0" if page == "index.html" else "0.8"))
     # English-only pages: no hreflang alternates, low priority, but they must be
     # indexable — an Impressum that search engines cannot find is not published.
     for page in sorted(EN_ONLY_PAGES):
+        lm = last_modified("en", page)
         urls.append(
-            '  <url>\n    <loc>%s</loc>\n    <priority>0.3</priority>\n  </url>'
-            % served("en", page))
+            '  <url>\n    <loc>%s</loc>%s\n    <priority>0.3</priority>\n  </url>'
+            % (served("en", page),
+               ('\n    <lastmod>%s</lastmod>' % lm) if lm else ''))
     open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'

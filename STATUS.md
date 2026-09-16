@@ -1,6 +1,6 @@
 # Quenora — status and handover
 
-Updated 13 September 2026. Read this first; it is written so a fresh
+Updated 16 September 2026. Read this first; it is written so a fresh
 conversation needs nothing else.
 
 ---
@@ -46,7 +46,8 @@ Eleven English pages: `index` `approach` `capabilities` `engineering` `work`
 
 **The architectural rule: no third-party runtime dependency.** Pages are
 self-contained apart from four first-party files they serve themselves —
-`/assets/nora.js`, `nora.css`, `logo.js`, `eggs.js`. An earlier version loaded
+`/assets/nora.js`, `nora.css`, `logo.js`, `eggs.js`, `lang-offer.js`,
+`lang-offer.css`. An earlier version loaded
 GSAP and Three.js from a CDN and the hero was dead on locked-down corporate
 networks, which is exactly the audience. Same-origin is fine and always was.
 Google Fonts is the one exception, and an open item.
@@ -133,6 +134,22 @@ page scripts against a DOM stub where `getElementById` returns something truthy
 with no methods and `matchMedia`/`location`/`addEventListener` may be absent.
 Five scripts caught.
 
+**Strip by what the markup IS, not by what you wrote.** BeautifulSoup runs
+over these pages and normalises `defer` to `defer=""` and reorders attributes.
+A strip-then-insert-once regex anchored to the generator's own spelling misses
+on the second build and appends a duplicate — which is how Nora's stylesheet
+reached nine copies on one page, and `build_lang_offer` reproduced it on its
+first run. Match `<script\b[^>]*?/assets/NAME\.js...>`, not the exact tag.
+
+**A `hreflang` alternate is an absolute URL.** Following one verbatim from
+client-side code sends a visitor on a preview or staging host to production,
+and drops any cookie on the wrong origin. Take `.pathname` from it.
+
+**A click handler on an anchor races its own navigation.** Writing a cookie in
+`click` and letting the link proceed loses the write; the document unloads
+first. `pointerdown` lands early enough and still leaves the anchor a real
+link, so middle-click and open-in-new-tab keep working.
+
 **Generated markup does not keep a hand edit.** Anything inside
 `<script data-generated="ld">` is written by `build_seo.py`. A field added to
 `index.html` by hand was deleted by the next build and leaked into `es/` and
@@ -215,13 +232,40 @@ actually take on, needed before the work page can claim breadth · "chatbot"
 appears once, as a negation, so a buyer searching their own word finds a
 refusal.
 
+**New.** The language offer ships on all 47 pages: it reads
+`navigator.language`, never redirects, and writes one cookie — `q_lang` —
+only on a click. Crawlers never see it, because it needs a click or a cookie
+they do not have, so `/de` and `/fr` stay independently crawlable and hreflang
+keeps doing its job. It hides itself after 12s, pausing on hover and focus,
+and a timeout is not recorded as an answer. `privacy.html` now discloses all
+three storage entries with the §25(2) no. 2 TDDDG basis — **that wording has
+not been read by a lawyer, and should be.**
+
+**Geo, deliberately not built.** Country was the wrong signal for a *language*
+offer — `navigator.language` gets a German speaker abroad right, needs no
+middleware and no automatically-set cookie, and so carries no consent
+question. A Vercel edge `middleware.ts` returning `request.geo.country` is the
+right tool when the thing that differs is *content* — pricing, legal entity,
+currency — not language. A draft sits unused in the session scratchpad.
+
+**Next.js, considered and declined.** The site already serves 177 KB of
+visible text with no JavaScript required, at 194 ms TTFB — the state Next.js
+exists to reach. A rewrite would invalidate the 19-stage gate and the 203-load
+browser audit, add a React runtime to a site whose architectural rule is no
+third-party runtime, and do it mid-indexing. Revisit when a CMS, an
+authenticated area, or per-user content actually arrives — and then as a
+separate app, not a rewrite of eleven pages.
+
 **Closed since the last revision.** The street · DNS and the apex/www
 direction · `about.html` missing from `build_seo.PAGES`, which left 19 pages
 on a stale `@graph` with a partial address · `launch_check.sh` asserting 200
 on `/services` after the rename to `/capabilities` · `browser_audit.js`
 widened from 7 pages × 3 viewports to 11 × 7, 63 → 203 loads, with the legal
 pages exempted from the marketing-shell rules rather than left uncovered · the
-`?v=` hashes, which had gone stale on all five first-party assets.
+`?v=` hashes, which had gone stale on all five first-party assets · `<lastmod>`
+in the sitemap, from git commit dates rather than the build clock · **the
+privacy page's claim of “no session or local storage”, which was false — all
+nine index pages have always used `sessionStorage` for `qn:restore`.**
 
 ---
 

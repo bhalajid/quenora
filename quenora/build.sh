@@ -88,6 +88,10 @@ echo "  build interpreter: $PY"
 # thrown away on every build.
 "$PY" build_footer.py
 "$PY" build_nav.py
+# The language offer. Must sit above build_asset_versions, which stamps the
+# two /assets/ URLs it writes, and therefore above build_i18n, which copies
+# the stamped English pages into de/ fr/ es/ it/.
+"$PY" build_lang_offer.py
 # Versioning after every generator that writes an asset URL, and before
 # build_i18n so the localised pages inherit the stamped ones. vercel.json
 # caches /assets/ for a year as `immutable`, so a changed file only reaches a

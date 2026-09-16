@@ -547,6 +547,7 @@ footer .f-bot{display:flex;flex-wrap:wrap;gap:10px 24px;
 <link href="/assets/brand/quenora-icon-180.png?v=4c79984a" rel="apple-touch-icon"/>
 <link href="/assets/brand/quenora-icon-192.png?v=df84842a" rel="icon" sizes="192x192" type="image/png"/>
 <link href="/assets/brand/quenora-icon-512.png?v=aa1f72d0" rel="icon" sizes="512x512" type="image/png"/><link href="/assets/logo.css?v=80752641" rel="stylesheet"/><link href="/assets/nora.css?v=dda51ac7" rel="stylesheet"/>
+<link href="/assets/lang-offer.css?v=47e469c4" rel="stylesheet"/>
 <script data-generated="ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quenora.ai/#org","name":"Quenora Consulting","url":"https://quenora.ai/","email":"info@quenora.ai","telephone":["+49 152 3392 7436","+49 152 5643 3329"],"sameAs":["https://www.linkedin.com/company/quenora","https://www.facebook.com/people/Quenora-Consulting/61593930577480/","https://www.youtube.com/@quenora-ai","https://x.com/quenora_ai","https://www.instagram.com/quenora.ai/"],"logo":"https://quenora.ai/assets/og-quenora.jpg","image":"https://quenora.ai/assets/og-quenora.jpg","description":"Quenora engineers enterprise AI into the systems a business already runs, then hands the client's own team the keys.","foundingDate":"2025","address":{"@type":"PostalAddress","streetAddress":"Kleiststr. 12","postalCode":"74117","addressLocality":"Bad Friedrichshall","addressRegion":"Baden-Wurttemberg","addressCountry":"DE"},"areaServed":[{"@type":"Place","name":"Europe"}],"availableLanguage":["en","de","fr"],"knowsAbout":["Enterprise AI integration","Platform engineering","MLOps","AI governance","Data foundations","Process automation","Retrieval-augmented generation"]},{"@type":"WebSite","@id":"https://quenora.ai/#site","url":"https://quenora.ai/","name":"Quenora","alternateName":["Quenora Consulting","Quenora AI"],"publisher":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://quenora.ai/privacy#page","url":"https://quenora.ai/privacy","name":"Privacy notice","isPartOf":{"@id":"https://quenora.ai/#site"},"about":{"@id":"https://quenora.ai/#org"},"inLanguage":"en-GB","description":"What quenora.ai collects, why, for how long, who it reaches, and the rights you hold under the GDPR.","breadcrumb":{"@id":"https://quenora.ai/privacy#crumb"}},{"@type":"BreadcrumbList","@id":"https://quenora.ai/privacy#crumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quenora.ai/"},{"@type":"ListItem","position":2,"name":"Privacy notice","item":"https://quenora.ai/privacy"}]}]}</script></head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0">
@@ -600,7 +601,16 @@ Baden-Württemberg, Germany<br/>
 <p>We have not appointed a data protection officer, because we are not required to under Article 37 GDPR or § 38 BDSG. Data protection questions go to the address above and are answered by the controller directly.</p>
 <h2>What this site does not do</h2>
 <div class="note">
-<p>This site sets <strong>no cookies</strong>. It runs <strong>no analytics</strong>, no tag manager, no advertising or social media pixels, and no session or local storage. There is no consent banner because there is nothing to consent to.</p>
+<p>This site sets <strong>no tracking cookies</strong>. It runs <strong>no analytics</strong>, no tag manager, and no advertising or social media pixels. Nothing here profiles you, follows you between sites, or builds a record of your visit. There is no consent banner because there is nothing to consent to.</p>
+<p>It does use your browser’s own storage for three small things, each of which exists only so the site behaves the way you asked it to:</p>
+<ul>
+<li><code>qn:restore</code> — session storage. The position on the page you navigated away from, so that returning puts you back where you were. Deleted the moment it is read, and in any case when you close the tab.</li>
+<li><code>q_lang</code> — a cookie, twelve months. Your language choice: the letters <code>de</code>, <code>fr</code> or <code>en</code>, and nothing else. It is written <strong>only if you click one of the buttons</strong> on the language offer. Ignore the offer, or let it close itself, and nothing is stored.</li>
+<li><code>q_lang_seen</code> — session storage. That the language offer has already been shown once, so it does not reappear on every page. Gone when you close the tab.</li>
+</ul>
+<p>None of these contains an identifier. None is transmitted to us or to anyone else — they are read only by your own browser. Clearing cookies and site data for this domain removes all three; the site works normally without them.</p>
+<p><strong>Language.</strong> The site reads your browser’s own language setting to decide whether to offer you a German or French version. That setting is read in your browser and is neither stored nor transmitted. You are never redirected automatically — you are offered the choice, and you may ignore it.</p>
+<p><strong>Legal basis.</strong> These entries are strictly necessary to provide functionality you requested, under § 25 (2) no. 2 TDDDG, and storing your language choice follows from your own click. No consent is required for them.</p>
 <p>You will not be tracked across sites, profiled, or subjected to automated decision-making of any kind, including profiling within the meaning of Article 22 GDPR.</p>
 </div>
 <h2>Server log data</h2>
@@ -868,5 +878,6 @@ addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40));
 <div aria-hidden="true" id="qtrail"></div>
 <script defer="" src="/assets/logo.js?v=fc9bd214"></script>
 <script defer="" src="/assets/eggs.js?v=e633520f"></script>
+<script defer="" src="/assets/lang-offer.js?v=3bac5bf0"></script>
 </body>
 </html>

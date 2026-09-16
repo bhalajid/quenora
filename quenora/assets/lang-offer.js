@@ -90,7 +90,7 @@
   var timer = null;
   function dismiss(persist) {
     if (timer) { w.clearTimeout(timer); timer = null; }
-    if (persist) remember(persist); else quietForNow();
+    if (persist) remember(persist);   /* already marked seen on display */
     bar.classList.remove('in');
     w.setTimeout(function () { if (bar.parentNode) bar.parentNode.removeChild(bar); }, 280);
   }
@@ -115,6 +115,11 @@
   bar.addEventListener('focusout', arm);
 
   d.body.appendChild(bar);
+  /* Mark it seen the moment it is SHOWN, not when it hides. Marking on hide
+     meant a reader moving faster than the 12s timer outran it and met the bar
+     again on every page — the exact nuisance this was built to avoid. Once
+     per tab, whatever speed they read at. */
+  quietForNow();
   w.requestAnimationFrame(function () {
     w.requestAnimationFrame(function () { bar.classList.add('in'); arm(); });
   });

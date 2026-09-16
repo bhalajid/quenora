@@ -214,8 +214,7 @@ jumps the moment you navigate off it on an iPad; `engineering` has the logo at
 20 with a full-width container, which is a second variant. Found by the
 widened audit, not fixed: fixing it changes rendering · Nora's twelve canned
 fallbacks are English in all languages, which now reaches real DE/FR visitors
-· 15–16 links per inner page are 22px tall on mobile, under WCAG 2.2 AA
-2.5.8's 24×24 · `build_about.py` builds an older page than the one shipped
+· `build_about.py` builds an older page than the one shipped
 (does **not** clobber it — verified — but is stale).
 
 **Yours.** **DE/FR have never been read by a native speaker** and are now
@@ -255,6 +254,30 @@ browser audit, add a React runtime to a site whose architectural rule is no
 third-party runtime, and do it mid-indexing. Revisit when a CMS, an
 authenticated area, or per-user content actually arrives — and then as a
 separate app, not a rewrite of eleven pages.
+
+**Measured and found not to be a defect.** Tap targets. An earlier entry here
+claimed 15–16 links per inner page fail WCAG 2.2 AA 2.5.8 at 22px. They do not.
+88 of 391 interactive targets are under 24×24 at 390px, and **all 88 are
+exempt**: 31 under Inline (the target sits in a line of text) and 57 under
+Spacing (a 24px circle centred on the target intersects nothing else) — tested
+under the strict reading, circle-against-circle for undersized pairs rather
+than circle-against-box. **0 failing.** The old claim counted raw pixel size
+and never applied the two exceptions the criterion itself provides. Fixing it
+would have added padding to nav and footer links, made the footer taller, and
+corrected nothing.
+
+Measured at the same time, all passing: visible focus on 8/8 keyboard tab
+stops · 0 images without `alt` · 0 interactive elements without an accessible
+name (an earlier count of 27 was a crude check that ignored `aria-labelledby`,
+nested `img[alt]` and `svg title`) · landmarks, `lang`, one `<h1>` and a skip
+link on every page · `prefers-reduced-motion` honoured · colour contrast AA
+across 77 token pairs.
+
+**BFSG probably does not apply**, contrary to an earlier note here. It covers
+services in electronic commerce aimed at consumers; this is B2B consultancy
+with no consumer checkout. § 3 (3) BFSG also exempts micro-enterprises
+providing services — fewer than 10 employees and ≤ €2m turnover. An
+accessibility statement would be voluntary, not required. Not legal advice.
 
 **Closed since the last revision.** The street · DNS and the apex/www
 direction · `about.html` missing from `build_seo.PAGES`, which left 19 pages

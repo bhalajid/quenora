@@ -42,10 +42,25 @@
     try { return w.sessionStorage.getItem('q_lang_seen') === '1'; } catch (e) { return false; }
   }
 
-  if (cookie('q_lang') || alreadyQuiet()) return;
+  var previewing = false;
+  try {
+    previewing = new w.URLSearchParams(w.location.search).has('lang-offer');
+  } catch (e) {}
+  if (!previewing && (cookie('q_lang') || alreadyQuiet())) return;
+
+  /* ?lang-offer=de forces the bar for one page load, whatever the browser is
+     set to. There is no other way to see this on an English-language machine,
+     which is every machine the people who build the site are using. It only
+     forces the DISPLAY — the cookie is still written on a click and nothing
+     else, so previewing it changes nothing permanent. */
+  var forced = '';
+  try {
+    forced = (new w.URLSearchParams(w.location.search).get('lang-offer') || '')
+               .toLowerCase();
+  } catch (e) {}
 
   /* "de-AT" -> "de". Only the primary subtag decides. */
-  var want = String(w.navigator.language).toLowerCase().split('-')[0];
+  var want = forced || String(w.navigator.language).toLowerCase().split('-')[0];
   if (!COPY[want]) return;
 
   /* Already reading that language, or this page has no such translation. */

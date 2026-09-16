@@ -114,6 +114,19 @@
   bar.addEventListener('focusin', hold);
   bar.addEventListener('focusout', arm);
 
+  /* Say so, loudly, when this is a preview. The override ignores the
+     once-per-session rule by design — otherwise it could preview the bar
+     exactly once, which is no use for checking it. Without this line the two
+     facts look like a contradiction: "it shows once per session" and "it
+     shows every time I load my test URL". */
+  if (previewing && w.console && typeof w.console.info === 'function') {
+    w.console.info(
+      '%cQuenora%c lang-offer=' + want + ' — PREVIEW. The once-per-session ' +
+      'limit is bypassed while this parameter is in the URL. Drop it to see ' +
+      'what a real visitor gets.',
+      'color:#C97A3C;font-weight:700', 'color:inherit');
+  }
+
   d.body.appendChild(bar);
   /* Mark it seen the moment it is SHOWN, not when it hides. Marking on hide
      meant a reader moving faster than the 12s timer outran it and met the bar
